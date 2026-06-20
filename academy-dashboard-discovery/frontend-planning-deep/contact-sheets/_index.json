@@ -1,0 +1,679 @@
+{
+ "full": [
+  {
+   "file": "full__admin__Assignments-Homework.png",
+   "role": "admin",
+   "module": "Assignments / Homework",
+   "slugs": [
+    "management-tickets"
+   ]
+  },
+  {
+   "file": "full__admin__Certificates.png",
+   "role": "admin",
+   "module": "Certificates",
+   "slugs": [
+    "management-certificate-requests",
+    "management-pdf",
+    "management-pdf-create"
+   ]
+  },
+  {
+   "file": "full__admin__Classes-Live_Sessions.png",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "slugs": [
+    "management-class-feedback",
+    "management-class-feedback-feedback",
+    "management-group-index",
+    "management-groups-create",
+    "management-salary-class-report",
+    "management-schedule-sessions-response",
+    "management-session-class-room-mq-3",
+    "management-sessions-analysis"
+   ]
+  },
+  {
+   "file": "full__admin__Content-Materials-Library.png",
+   "role": "admin",
+   "module": "Content / Materials / Library",
+   "slugs": [
+    "management-library",
+    "management-materials",
+    "management-materials-1-edit",
+    "management-materials-create"
+   ]
+  },
+  {
+   "file": "full__admin__Courses__1.png",
+   "role": "admin",
+   "module": "Courses",
+   "slugs": [
+    "management-courses",
+    "management-courses-1",
+    "management-courses-1-create",
+    "management-courses-1-create-free",
+    "management-courses-1-edit",
+    "management-courses-2-create",
+    "management-courses-2-create-free",
+    "management-courses-create-new-copy-1",
+    "management-courses-status-0-0",
+    "management-courses-status-0-1",
+    "management-courses-status-0-2",
+    "management-courses-status-0-3",
+    "management-courses-status-0-4",
+    "management-courses-status-0-5",
+    "management-courses-type-no-invoices",
+    "management-courses-type-no-invoices-status-0-0",
+    "management-courses-type-no-invoices-status-0-1",
+    "management-courses-type-no-invoices-status-0-2",
+    "management-courses-type-no-invoices-status-0-3",
+    "management-courses-type-no-invoices-status-0-4"
+   ]
+  },
+  {
+   "file": "full__admin__Courses__2.png",
+   "role": "admin",
+   "module": "Courses",
+   "slugs": [
+    "management-courses-type-no-invoices-status-0-5"
+   ]
+  },
+  {
+   "file": "full__admin__Dashboard-Home__1.png",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "slugs": [
+    "management-banks",
+    "management-banks-create",
+    "management-courseclasses-1",
+    "management-courseclasses-2",
+    "management-courseclasses-3",
+    "management-courseclasses-4",
+    "management-courseclasses-5",
+    "management-courseclasses-6",
+    "management-family-feedback-categories-create",
+    "management-home",
+    "management-home-helper-1",
+    "management-home-status",
+    "management-home-status-1",
+    "management-home-status-2-10",
+    "management-home-status-3-4",
+    "management-home-status-5-6-7",
+    "management-home-status-8",
+    "management-home-trial-0",
+    "management-new-requests-create",
+    "management-total-queues"
+   ]
+  },
+  {
+   "file": "full__admin__Dashboard-Home__2.png",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "slugs": [
+    "teacher-home"
+   ]
+  },
+  {
+   "file": "full__admin__General-Unknown.png",
+   "role": "admin",
+   "module": "General / Unknown",
+   "slugs": [
+    "management-courseclasses-default-member-course-details-1",
+    "management-export-course",
+    "management-families-feedback-family-1",
+    "management-heads",
+    "management-new-requests-requests-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-scheduled-trials-index-status-3-4-date-2026-06-01-to-202",
+    "management-new-requests-scheduled-trials-index-status-5-7-6-date-2026-06-01-to-2",
+    "management-scheduled-actions",
+    "management-scheduled-actions-create",
+    "management-settings-customisation-message-builder",
+    "management-teachers-1-monthly-classes",
+    "management-time-convertor"
+   ]
+  },
+  {
+   "file": "full__admin__Messages-Notifications.png",
+   "role": "admin",
+   "module": "Messages / Notifications",
+   "slugs": [
+    "management-chat",
+    "management-public-advertisement",
+    "management-settings-notification"
+   ]
+  },
+  {
+   "file": "full__admin__Parents-Guardians-Families__1.png",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "slugs": [
+    "management-categories-families",
+    "management-categories-families-2-assign",
+    "management-categories-families-2-edit",
+    "management-categories-families-3-assign",
+    "management-categories-families-3-edit",
+    "management-categories-families-create",
+    "management-families",
+    "management-families-1",
+    "management-families-1-edit",
+    "management-families-2",
+    "management-families-2-edit",
+    "management-families-create",
+    "management-families-feedback",
+    "management-families-feedback-family-2",
+    "management-families-feedback-students",
+    "management-families-feedback-students-status-active",
+    "management-families-feedback-students-status-inactive",
+    "management-families-feedback-students-status-incomplete",
+    "management-families-feedback-students-status-suspended",
+    "management-families-feedback-students-status-trial"
+   ]
+  },
+  {
+   "file": "full__admin__Parents-Guardians-Families__2.png",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "slugs": [
+    "management-families-index-filter-payment-methods-0-1",
+    "management-families-status-active",
+    "management-families-status-deleted",
+    "management-families-status-inactive",
+    "management-families-status-incomplete",
+    "management-families-status-stopped",
+    "management-families-status-suspended",
+    "management-families-status-trial",
+    "management-family-feedback-categories",
+    "management-settings-integrations-whatsapp-families-insights"
+   ]
+  },
+  {
+   "file": "full__admin__Payments-Invoices__1.png",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "slugs": [
+    "management-accounting-transaction-invoices",
+    "management-accounting-transaction-salary",
+    "management-accounting-transaction-session",
+    "management-accounting-transaction-session-status-attend",
+    "management-accounting-transaction-session-status-student-absent",
+    "management-accounting-transaction-session-status-teacher-absent",
+    "management-analysis-invoices",
+    "management-downlaod",
+    "management-downlaod-date-2026-06-01-to-2026-06-30",
+    "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-date-payment-status",
+    "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-due-date-status-unpa",
+    "management-downlaod-status-all",
+    "management-downlaod-status-paid",
+    "management-downlaod-status-softdelete",
+    "management-downlaod-status-unpaid",
+    "management-invoices",
+    "management-invoices-create-parent-invoice-1",
+    "management-invoices-create-parent-invoice-2",
+    "management-invoices-date-2026-06-01-to-2026-06-30",
+    "management-invoices-date-2026-06-01-to-2026-06-30-status-paid-date-type-date-pay"
+   ]
+  },
+  {
+   "file": "full__admin__Payments-Invoices__2.png",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "slugs": [
+    "management-invoices-date-2026-06-01-to-2026-06-30-status-unpaid-date-type-due-da",
+    "management-invoices-status-all",
+    "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type",
+    "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-date-paym",
+    "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-due-date",
+    "management-invoices-status-paid",
+    "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type",
+    "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type-due-date",
+    "management-invoices-status-softdelete",
+    "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type",
+    "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-da",
+    "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-du",
+    "management-invoices-status-unpaid",
+    "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type",
+    "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type-date-p",
+    "management-monthly-invoices",
+    "management-settings-payments-1-edit",
+    "management-settings-payments-create-payment-method-1",
+    "management-settings-payments-create-payment-method-2",
+    "management-settings-payments-create-payment-method-3"
+   ]
+  },
+  {
+   "file": "full__admin__Payments-Invoices__3.png",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "slugs": [
+    "management-settings-payments-create-payment-method-4",
+    "management-settings-payments-create-payment-method-5",
+    "management-settings-payments-create-payment-method-6",
+    "management-settings-payments-create-payment-method-7"
+   ]
+  },
+  {
+   "file": "full__admin__Profile-Account.png",
+   "role": "admin",
+   "module": "Profile / Account",
+   "slugs": [
+    "management-profile-edit",
+    "management-profile-show",
+    "management-settings-security-data",
+    "management-settings-security-policy"
+   ]
+  },
+  {
+   "file": "full__admin__Reports-Analytics.png",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "slugs": [
+    "management-forms",
+    "management-forms-create",
+    "management-new-requests",
+    "management-new-requests-filter-contacting-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-filter-duplicat-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-filter-no-response-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-filter-pending-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-filter-qualified-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-filter-trial-missed-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-filter-trial-taken-date-range-2026-06-01-to-2026-06-30",
+    "management-teacher-feedback-feedback-teacher-id-1-year-2026"
+   ]
+  },
+  {
+   "file": "full__admin__Roles-Permissions.png",
+   "role": "admin",
+   "module": "Roles / Permissions",
+   "slugs": [
+    "management-admins-permission-6",
+    "management-admins-permission-7"
+   ]
+  },
+  {
+   "file": "full__admin__Settings.png",
+   "role": "admin",
+   "module": "Settings",
+   "slugs": [
+    "management-settings-customisation-personalisation",
+    "management-settings-general",
+    "management-settings-integrations",
+    "management-settings-integrations-1-configure",
+    "management-settings-integrations-10-configure",
+    "management-settings-integrations-11-configure",
+    "management-settings-integrations-2-configure",
+    "management-settings-integrations-3-configure",
+    "management-settings-integrations-4-configure",
+    "management-settings-integrations-5-configure",
+    "management-settings-integrations-6-configure",
+    "management-settings-integrations-7-configure",
+    "management-settings-integrations-8-configure",
+    "management-settings-integrations-9-configure",
+    "management-settings-security-data-backup-send"
+   ]
+  },
+  {
+   "file": "full__admin__Students.png",
+   "role": "admin",
+   "module": "Students",
+   "slugs": [
+    "management-analysis-course",
+    "management-analysis-student",
+    "management-forms-students",
+    "management-student",
+    "management-student-1",
+    "management-student-1-create",
+    "management-student-1-edit",
+    "management-student-1-trial-create",
+    "management-student-2",
+    "management-student-2-create",
+    "management-student-2-edit",
+    "management-student-2-trial-create",
+    "management-student-status-0",
+    "management-student-status-1",
+    "management-student-status-2",
+    "management-student-status-3",
+    "management-student-status-4",
+    "management-student-status-6",
+    "management-student-status-softdelete"
+   ]
+  },
+  {
+   "file": "full__admin__Teachers__1.png",
+   "role": "admin",
+   "module": "Teachers",
+   "slugs": [
+    "management-admins",
+    "management-admins-6-edit",
+    "management-admins-7-edit",
+    "management-admins-appear-6",
+    "management-admins-appear-7",
+    "management-admins-categories-6",
+    "management-admins-categories-7",
+    "management-admins-create",
+    "management-admins-duplicate-6",
+    "management-admins-duplicate-7",
+    "management-all-teachers-timetable",
+    "management-class-feedback-feedback-teacher-id-1-date-range-2026-06-01-to-2026-06",
+    "management-new-requests-filter-teacher-date-range-2026-06-01-to-2026-06-30",
+    "management-new-requests-scheduled-trials-completed-date-2026-06-01-to-2026-06-30",
+    "management-new-requests-scheduled-trials-completed-status-8-date-2026-06-01-to-2",
+    "management-public-holiday",
+    "management-settings-integrations-whatsapp-teachers-insights",
+    "management-teacher-categories",
+    "management-teacher-categories-1-create-members",
+    "management-teacher-categories-1-edit"
+   ]
+  },
+  {
+   "file": "full__admin__Teachers__2.png",
+   "role": "admin",
+   "module": "Teachers",
+   "slugs": [
+    "management-teacher-categories-create",
+    "management-teacher-feedback",
+    "management-teachers",
+    "management-teachers-1",
+    "management-teachers-1-compensations-1",
+    "management-teachers-1-compensations-1-edit",
+    "management-teachers-1-compensations-2",
+    "management-teachers-1-compensations-2-edit",
+    "management-teachers-1-compensations-3",
+    "management-teachers-1-compensations-3-edit",
+    "management-teachers-1-compensations-create",
+    "management-teachers-1-edit",
+    "management-teachers-create",
+    "management-teachers-details",
+    "management-teachers-scope-active",
+    "management-teachers-scope-active-sort-by-country-sort-direction-asc-page-1",
+    "management-teachers-scope-active-sort-by-created-at-sort-direction-asc-page-1",
+    "management-teachers-scope-active-sort-by-first-name-sort-direction-desc-page-1",
+    "management-teachers-scope-active-sort-by-phone-sort-direction-asc-page-1",
+    "management-teachers-scope-active-sort-by-status-sort-direction-asc-page-1"
+   ]
+  },
+  {
+   "file": "full__admin__Teachers__3.png",
+   "role": "admin",
+   "module": "Teachers",
+   "slugs": [
+    "management-teachers-scope-active-sort-by-students-count-sort-direction-asc-page",
+    "management-teachers-scope-active-sort-by-total-hours-sum-sort-direction-asc-page",
+    "management-teachers-scope-deleted",
+    "management-teachers-scope-deleted-sort-by-country-sort-direction-asc-page-1",
+    "management-teachers-scope-deleted-sort-by-created-at-sort-direction-asc-page-1",
+    "management-teachers-scope-deleted-sort-by-first-name-sort-direction-desc-page-1",
+    "management-teachers-scope-deleted-sort-by-phone-sort-direction-asc-page-1",
+    "management-teachers-scope-deleted-sort-by-status-sort-direction-asc-page-1",
+    "management-teachers-scope-deleted-sort-by-students-count-sort-direction-asc-page",
+    "management-teachers-scope-deleted-sort-by-total-hours-sum-sort-direction-asc-pag",
+    "management-teachers-scope-inactive",
+    "management-teachers-scope-inactive-sort-by-country-sort-direction-asc-page-1",
+    "management-teachers-scope-inactive-sort-by-created-at-sort-direction-asc-page-1",
+    "management-teachers-scope-inactive-sort-by-first-name-sort-direction-desc-page-1",
+    "management-teachers-scope-inactive-sort-by-phone-sort-direction-asc-page-1",
+    "management-teachers-scope-inactive-sort-by-status-sort-direction-asc-page-1",
+    "management-teachers-scope-inactive-sort-by-students-count-sort-direction-asc-pag",
+    "management-teachers-scope-inactive-sort-by-total-hours-sum-sort-direction-asc-pa",
+    "management-teachers-scope-incomplete",
+    "management-teachers-scope-incomplete-sort-by-country-sort-direction-asc-page-1"
+   ]
+  },
+  {
+   "file": "full__admin__Teachers__4.png",
+   "role": "admin",
+   "module": "Teachers",
+   "slugs": [
+    "management-teachers-scope-incomplete-sort-by-created-at-sort-direction-asc-page",
+    "management-teachers-scope-incomplete-sort-by-first-name-sort-direction-desc-page",
+    "management-teachers-scope-incomplete-sort-by-phone-sort-direction-asc-page-1",
+    "management-teachers-scope-incomplete-sort-by-status-sort-direction-asc-page-1",
+    "management-teachers-scope-incomplete-sort-by-students-count-sort-direction-asc-p",
+    "management-teachers-scope-incomplete-sort-by-total-hours-sum-sort-direction-asc",
+    "management-teachers-scope-unconfirmed",
+    "management-teachers-scope-unconfirmed-sort-by-country-sort-direction-asc-page-1",
+    "management-teachers-scope-unconfirmed-sort-by-created-at-sort-direction-asc-page",
+    "management-teachers-scope-unconfirmed-sort-by-first-name-sort-direction-desc-pag",
+    "management-teachers-scope-unconfirmed-sort-by-phone-sort-direction-asc-page-1",
+    "management-teachers-scope-unconfirmed-sort-by-status-sort-direction-asc-page-1",
+    "management-teachers-scope-unconfirmed-sort-by-students-count-sort-direction-asc",
+    "management-teachers-scope-unconfirmed-sort-by-total-hours-sum-sort-direction-asc",
+    "management-teachers-sort-by-country-sort-direction-asc-page-1",
+    "management-teachers-sort-by-country-sort-direction-desc-page-1",
+    "management-teachers-sort-by-created-at-sort-direction-asc-page-1",
+    "management-teachers-sort-by-created-at-sort-direction-desc-page-1",
+    "management-teachers-sort-by-first-name-sort-direction-asc-page-1",
+    "management-teachers-sort-by-first-name-sort-direction-desc-page-1"
+   ]
+  },
+  {
+   "file": "full__admin__Teachers__5.png",
+   "role": "admin",
+   "module": "Teachers",
+   "slugs": [
+    "management-teachers-sort-by-phone-sort-direction-asc-page-1",
+    "management-teachers-sort-by-phone-sort-direction-desc-page-1",
+    "management-teachers-sort-by-status-sort-direction-asc-page-1",
+    "management-teachers-sort-by-status-sort-direction-desc-page-1",
+    "management-teachers-sort-by-students-count-sort-direction-asc-page-1",
+    "management-teachers-sort-by-students-count-sort-direction-desc-page-1",
+    "management-teachers-sort-by-total-hours-sum-sort-direction-asc-page-1",
+    "management-teachers-sort-by-total-hours-sum-sort-direction-desc-page-1"
+   ]
+  },
+  {
+   "file": "full__admin__Timetable-Schedule.png",
+   "role": "admin",
+   "module": "Timetable / Schedule",
+   "slugs": [
+    "management-request-schedule-1-1",
+    "management-request-schedule-2-2",
+    "management-schedule-trials-response",
+    "management-search-schedule"
+   ]
+  },
+  {
+   "file": "full__admin__Wallet-Finance.png",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "slugs": [
+    "management-accounting",
+    "management-analysis-expenses",
+    "management-expense",
+    "management-payout-providers",
+    "management-payout-providers-6-edit",
+    "management-payout-providers-7-edit",
+    "management-payouts",
+    "management-payouts-all-1",
+    "management-salaries",
+    "management-staff-salaries"
+   ]
+  },
+  {
+   "file": "full__teacher__Assignments-Homework.png",
+   "role": "teacher",
+   "module": "Assignments / Homework",
+   "slugs": [
+    "teacher-tickets"
+   ]
+  },
+  {
+   "file": "full__teacher__Classes-Live_Sessions.png",
+   "role": "teacher",
+   "module": "Classes / Live Sessions",
+   "slugs": [
+    "teacher-course-history-1-class",
+    "teacher-course-history-2-class",
+    "teacher-salary-class-report",
+    "teacher-session-class-room-mq-2"
+   ]
+  },
+  {
+   "file": "full__teacher__Content-Materials-Library.png",
+   "role": "teacher",
+   "module": "Content / Materials / Library",
+   "slugs": [
+    "teacher-library"
+   ]
+  },
+  {
+   "file": "full__teacher__Dashboard-Home.png",
+   "role": "teacher",
+   "module": "Dashboard / Home",
+   "slugs": [
+    "management-home",
+    "teacher-home"
+   ]
+  },
+  {
+   "file": "full__teacher__General-Unknown.png",
+   "role": "teacher",
+   "module": "General / Unknown",
+   "slugs": [
+    "main-index-html",
+    "teacher-course-history-main-index-html",
+    "teacher-main-index-html",
+    "teacher-monthly-plans-main-index-html",
+    "teacher-profile"
+   ]
+  },
+  {
+   "file": "full__teacher__Messages-Notifications.png",
+   "role": "teacher",
+   "module": "Messages / Notifications",
+   "slugs": [
+    "teacher-chat"
+   ]
+  },
+  {
+   "file": "full__teacher__Profile-Account.png",
+   "role": "teacher",
+   "module": "Profile / Account",
+   "slugs": [
+    "teacher-profile-edit"
+   ]
+  },
+  {
+   "file": "full__teacher__Students.png",
+   "role": "teacher",
+   "module": "Students",
+   "slugs": [
+    "management-student-1",
+    "teacher-students",
+    "teacher-studentslist",
+    "teacher-update-result-date-range-2026-06-01-to-2026-06-30-filter-student"
+   ]
+  },
+  {
+   "file": "full__teacher__Teachers.png",
+   "role": "teacher",
+   "module": "Teachers",
+   "slugs": [
+    "teacher-course-history-1",
+    "teacher-monthly-plans",
+    "teacher-monthly-plans-mq-show",
+    "teacher-teacher-history-1",
+    "teacher-teacher-history-1-d861d6e"
+   ]
+  },
+  {
+   "file": "full__teacher__Timetable-Schedule.png",
+   "role": "teacher",
+   "module": "Timetable / Schedule",
+   "slugs": [
+    "teacher-timetable"
+   ]
+  },
+  {
+   "file": "full__teacher__Wallet-Finance.png",
+   "role": "teacher",
+   "module": "Wallet / Finance",
+   "slugs": [
+    "teacher-salary"
+   ]
+  },
+  {
+   "file": "full__family__Classes-Live_Sessions.png",
+   "role": "family",
+   "module": "Classes / Live Sessions",
+   "slugs": [
+    "student-today-sessions"
+   ]
+  },
+  {
+   "file": "full__family__Content-Materials-Library.png",
+   "role": "family",
+   "module": "Content / Materials / Library",
+   "slugs": [
+    "student-library"
+   ]
+  },
+  {
+   "file": "full__family__Dashboard-Home.png",
+   "role": "family",
+   "module": "Dashboard / Home",
+   "slugs": [
+    "management-home",
+    "student-home"
+   ]
+  },
+  {
+   "file": "full__family__General-Unknown.png",
+   "role": "family",
+   "module": "General / Unknown",
+   "slugs": [
+    "main-index-html",
+    "student-profile"
+   ]
+  },
+  {
+   "file": "full__family__Payments-Invoices.png",
+   "role": "family",
+   "module": "Payments / Invoices",
+   "slugs": [
+    "student-billing"
+   ]
+  },
+  {
+   "file": "full__family__Profile-Account.png",
+   "role": "family",
+   "module": "Profile / Account",
+   "slugs": [
+    "student-profile-edit"
+   ]
+  },
+  {
+   "file": "full__family__Students.png",
+   "role": "family",
+   "module": "Students",
+   "slugs": [
+    "student-feedbacks",
+    "student-request-trial",
+    "student-student-history-fillter-2",
+    "student-studentslist"
+   ]
+  },
+  {
+   "file": "full__family__Timetable-Schedule.png",
+   "role": "family",
+   "module": "Timetable / Schedule",
+   "slugs": [
+    "student-timetable"
+   ]
+  }
+ ],
+ "modals": [
+  {
+   "file": "modals__1.png",
+   "count": 20
+  },
+  {
+   "file": "modals__2.png",
+   "count": 20
+  },
+  {
+   "file": "modals__3.png",
+   "count": 7
+  }
+ ]
+}

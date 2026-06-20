@@ -1,0 +1,15 @@
+output/roles/admin/pages/management-settings-customisation-personalisation.md
+output/roles/admin/pages/management-settings-general.md
+output/roles/admin/pages/management-settings-integrations.md
+output/roles/admin/pages/management-settings-integrations-1-configure.md
+output/roles/admin/pages/management-settings-integrations-10-configure.md
+output/roles/admin/pages/management-settings-integrations-11-configure.md
+output/roles/admin/pages/management-settings-integrations-2-configure.md
+output/roles/admin/pages/management-settings-integrations-3-configure.md
+output/roles/admin/pages/management-settings-integrations-4-configure.md
+output/roles/admin/pages/management-settings-integrations-5-configure.md
+output/roles/admin/pages/management-settings-integrations-6-configure.md
+output/roles/admin/pages/management-settings-integrations-7-configure.md
+output/roles/admin/pages/management-settings-integrations-8-configure.md
+output/roles/admin/pages/management-settings-integrations-9-configure.md
+output/roles/admin/pages/management-settings-security-data-backup-send.md

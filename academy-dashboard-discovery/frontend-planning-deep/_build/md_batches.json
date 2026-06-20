@@ -1,0 +1,811 @@
+[
+ {
+  "idx": 0,
+  "role": "admin",
+  "module": "Assignments / Homework",
+  "label": "admin:Assignments / Homework",
+  "listFile": "frontend-planning-deep/_build/batches/batch_00.txt",
+  "count": 1,
+  "slugs": [
+   "management-tickets"
+  ]
+ },
+ {
+  "idx": 1,
+  "role": "admin",
+  "module": "Certificates",
+  "label": "admin:Certificates",
+  "listFile": "frontend-planning-deep/_build/batches/batch_01.txt",
+  "count": 3,
+  "slugs": [
+   "management-certificate-requests",
+   "management-pdf",
+   "management-pdf-create"
+  ]
+ },
+ {
+  "idx": 2,
+  "role": "admin",
+  "module": "Classes / Live Sessions",
+  "label": "admin:Classes / Live Sessions",
+  "listFile": "frontend-planning-deep/_build/batches/batch_02.txt",
+  "count": 8,
+  "slugs": [
+   "management-class-feedback",
+   "management-class-feedback-feedback",
+   "management-group-index",
+   "management-groups-create",
+   "management-salary-class-report",
+   "management-schedule-sessions-response",
+   "management-session-class-room-mq-3",
+   "management-sessions-analysis"
+  ]
+ },
+ {
+  "idx": 3,
+  "role": "admin",
+  "module": "Content / Materials / Library",
+  "label": "admin:Content / Materials / Library",
+  "listFile": "frontend-planning-deep/_build/batches/batch_03.txt",
+  "count": 4,
+  "slugs": [
+   "management-library",
+   "management-materials",
+   "management-materials-1-edit",
+   "management-materials-create"
+  ]
+ },
+ {
+  "idx": 4,
+  "role": "admin",
+  "module": "Courses",
+  "label": "admin:Courses [1/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_04.txt",
+  "count": 18,
+  "slugs": [
+   "management-courses",
+   "management-courses-1",
+   "management-courses-1-create",
+   "management-courses-1-create-free",
+   "management-courses-1-edit",
+   "management-courses-2-create",
+   "management-courses-2-create-free",
+   "management-courses-create-new-copy-1",
+   "management-courses-status-0-0",
+   "management-courses-status-0-1",
+   "management-courses-status-0-2",
+   "management-courses-status-0-3",
+   "management-courses-status-0-4",
+   "management-courses-status-0-5",
+   "management-courses-type-no-invoices",
+   "management-courses-type-no-invoices-status-0-0",
+   "management-courses-type-no-invoices-status-0-1",
+   "management-courses-type-no-invoices-status-0-2"
+  ]
+ },
+ {
+  "idx": 5,
+  "role": "admin",
+  "module": "Courses",
+  "label": "admin:Courses [2/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_05.txt",
+  "count": 3,
+  "slugs": [
+   "management-courses-type-no-invoices-status-0-3",
+   "management-courses-type-no-invoices-status-0-4",
+   "management-courses-type-no-invoices-status-0-5"
+  ]
+ },
+ {
+  "idx": 6,
+  "role": "admin",
+  "module": "Dashboard / Home",
+  "label": "admin:Dashboard / Home [1/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_06.txt",
+  "count": 18,
+  "slugs": [
+   "management-banks",
+   "management-banks-create",
+   "management-courseclasses-1",
+   "management-courseclasses-2",
+   "management-courseclasses-3",
+   "management-courseclasses-4",
+   "management-courseclasses-5",
+   "management-courseclasses-6",
+   "management-family-feedback-categories-create",
+   "management-home",
+   "management-home-helper-1",
+   "management-home-status",
+   "management-home-status-1",
+   "management-home-status-2-10",
+   "management-home-status-3-4",
+   "management-home-status-5-6-7",
+   "management-home-status-8",
+   "management-home-trial-0"
+  ]
+ },
+ {
+  "idx": 7,
+  "role": "admin",
+  "module": "Dashboard / Home",
+  "label": "admin:Dashboard / Home [2/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_07.txt",
+  "count": 3,
+  "slugs": [
+   "management-new-requests-create",
+   "management-total-queues",
+   "teacher-home"
+  ]
+ },
+ {
+  "idx": 8,
+  "role": "admin",
+  "module": "General / Unknown",
+  "label": "admin:General / Unknown",
+  "listFile": "frontend-planning-deep/_build/batches/batch_08.txt",
+  "count": 12,
+  "slugs": [
+   "management-courseclasses-default-member-course-details-1",
+   "management-export-course",
+   "management-families-feedback-family-1",
+   "management-heads",
+   "management-new-requests-requests-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-scheduled-trials-index-status-3-4-date-2026-06-01-to-202",
+   "management-new-requests-scheduled-trials-index-status-5-7-6-date-2026-06-01-to-2",
+   "management-scheduled-actions",
+   "management-scheduled-actions-create",
+   "management-settings-customisation-message-builder",
+   "management-teachers-1-monthly-classes",
+   "management-time-convertor"
+  ]
+ },
+ {
+  "idx": 9,
+  "role": "admin",
+  "module": "Messages / Notifications",
+  "label": "admin:Messages / Notifications",
+  "listFile": "frontend-planning-deep/_build/batches/batch_09.txt",
+  "count": 3,
+  "slugs": [
+   "management-chat",
+   "management-public-advertisement",
+   "management-settings-notification"
+  ]
+ },
+ {
+  "idx": 10,
+  "role": "admin",
+  "module": "Parents / Guardians / Families",
+  "label": "admin:Parents / Guardians / Families [1/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_10.txt",
+  "count": 18,
+  "slugs": [
+   "management-categories-families",
+   "management-categories-families-2-assign",
+   "management-categories-families-2-edit",
+   "management-categories-families-3-assign",
+   "management-categories-families-3-edit",
+   "management-categories-families-create",
+   "management-families",
+   "management-families-1",
+   "management-families-1-edit",
+   "management-families-2",
+   "management-families-2-edit",
+   "management-families-create",
+   "management-families-feedback",
+   "management-families-feedback-family-2",
+   "management-families-feedback-students",
+   "management-families-feedback-students-status-active",
+   "management-families-feedback-students-status-inactive",
+   "management-families-feedback-students-status-incomplete"
+  ]
+ },
+ {
+  "idx": 11,
+  "role": "admin",
+  "module": "Parents / Guardians / Families",
+  "label": "admin:Parents / Guardians / Families [2/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_11.txt",
+  "count": 12,
+  "slugs": [
+   "management-families-feedback-students-status-suspended",
+   "management-families-feedback-students-status-trial",
+   "management-families-index-filter-payment-methods-0-1",
+   "management-families-status-active",
+   "management-families-status-deleted",
+   "management-families-status-inactive",
+   "management-families-status-incomplete",
+   "management-families-status-stopped",
+   "management-families-status-suspended",
+   "management-families-status-trial",
+   "management-family-feedback-categories",
+   "management-settings-integrations-whatsapp-families-insights"
+  ]
+ },
+ {
+  "idx": 12,
+  "role": "admin",
+  "module": "Payments / Invoices",
+  "label": "admin:Payments / Invoices [1/3]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_12.txt",
+  "count": 18,
+  "slugs": [
+   "management-accounting-transaction-invoices",
+   "management-accounting-transaction-salary",
+   "management-accounting-transaction-session",
+   "management-accounting-transaction-session-status-attend",
+   "management-accounting-transaction-session-status-student-absent",
+   "management-accounting-transaction-session-status-teacher-absent",
+   "management-analysis-invoices",
+   "management-downlaod",
+   "management-downlaod-date-2026-06-01-to-2026-06-30",
+   "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-date-payment-status",
+   "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-due-date-status-unpa",
+   "management-downlaod-status-all",
+   "management-downlaod-status-paid",
+   "management-downlaod-status-softdelete",
+   "management-downlaod-status-unpaid",
+   "management-invoices",
+   "management-invoices-create-parent-invoice-1",
+   "management-invoices-create-parent-invoice-2"
+  ]
+ },
+ {
+  "idx": 13,
+  "role": "admin",
+  "module": "Payments / Invoices",
+  "label": "admin:Payments / Invoices [2/3]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_13.txt",
+  "count": 18,
+  "slugs": [
+   "management-invoices-date-2026-06-01-to-2026-06-30",
+   "management-invoices-date-2026-06-01-to-2026-06-30-status-paid-date-type-date-pay",
+   "management-invoices-date-2026-06-01-to-2026-06-30-status-unpaid-date-type-due-da",
+   "management-invoices-status-all",
+   "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-date-paym",
+   "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-due-date",
+   "management-invoices-status-paid",
+   "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type-due-date",
+   "management-invoices-status-softdelete",
+   "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-da",
+   "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-du",
+   "management-invoices-status-unpaid",
+   "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type-date-p",
+   "management-monthly-invoices"
+  ]
+ },
+ {
+  "idx": 14,
+  "role": "admin",
+  "module": "Payments / Invoices",
+  "label": "admin:Payments / Invoices [3/3]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_14.txt",
+  "count": 8,
+  "slugs": [
+   "management-settings-payments-1-edit",
+   "management-settings-payments-create-payment-method-1",
+   "management-settings-payments-create-payment-method-2",
+   "management-settings-payments-create-payment-method-3",
+   "management-settings-payments-create-payment-method-4",
+   "management-settings-payments-create-payment-method-5",
+   "management-settings-payments-create-payment-method-6",
+   "management-settings-payments-create-payment-method-7"
+  ]
+ },
+ {
+  "idx": 15,
+  "role": "admin",
+  "module": "Profile / Account",
+  "label": "admin:Profile / Account",
+  "listFile": "frontend-planning-deep/_build/batches/batch_15.txt",
+  "count": 4,
+  "slugs": [
+   "management-profile-edit",
+   "management-profile-show",
+   "management-settings-security-data",
+   "management-settings-security-policy"
+  ]
+ },
+ {
+  "idx": 16,
+  "role": "admin",
+  "module": "Reports / Analytics",
+  "label": "admin:Reports / Analytics",
+  "listFile": "frontend-planning-deep/_build/batches/batch_16.txt",
+  "count": 11,
+  "slugs": [
+   "management-forms",
+   "management-forms-create",
+   "management-new-requests",
+   "management-new-requests-filter-contacting-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-filter-duplicat-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-filter-no-response-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-filter-pending-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-filter-qualified-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-filter-trial-missed-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-filter-trial-taken-date-range-2026-06-01-to-2026-06-30",
+   "management-teacher-feedback-feedback-teacher-id-1-year-2026"
+  ]
+ },
+ {
+  "idx": 17,
+  "role": "admin",
+  "module": "Roles / Permissions",
+  "label": "admin:Roles / Permissions",
+  "listFile": "frontend-planning-deep/_build/batches/batch_17.txt",
+  "count": 2,
+  "slugs": [
+   "management-admins-permission-6",
+   "management-admins-permission-7"
+  ]
+ },
+ {
+  "idx": 18,
+  "role": "admin",
+  "module": "Settings",
+  "label": "admin:Settings",
+  "listFile": "frontend-planning-deep/_build/batches/batch_18.txt",
+  "count": 15,
+  "slugs": [
+   "management-settings-customisation-personalisation",
+   "management-settings-general",
+   "management-settings-integrations",
+   "management-settings-integrations-1-configure",
+   "management-settings-integrations-10-configure",
+   "management-settings-integrations-11-configure",
+   "management-settings-integrations-2-configure",
+   "management-settings-integrations-3-configure",
+   "management-settings-integrations-4-configure",
+   "management-settings-integrations-5-configure",
+   "management-settings-integrations-6-configure",
+   "management-settings-integrations-7-configure",
+   "management-settings-integrations-8-configure",
+   "management-settings-integrations-9-configure",
+   "management-settings-security-data-backup-send"
+  ]
+ },
+ {
+  "idx": 19,
+  "role": "admin",
+  "module": "Students",
+  "label": "admin:Students [1/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_19.txt",
+  "count": 18,
+  "slugs": [
+   "management-analysis-course",
+   "management-analysis-student",
+   "management-forms-students",
+   "management-student",
+   "management-student-1",
+   "management-student-1-create",
+   "management-student-1-edit",
+   "management-student-1-trial-create",
+   "management-student-2",
+   "management-student-2-create",
+   "management-student-2-edit",
+   "management-student-2-trial-create",
+   "management-student-status-0",
+   "management-student-status-1",
+   "management-student-status-2",
+   "management-student-status-3",
+   "management-student-status-4",
+   "management-student-status-6"
+  ]
+ },
+ {
+  "idx": 20,
+  "role": "admin",
+  "module": "Students",
+  "label": "admin:Students [2/2]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_20.txt",
+  "count": 1,
+  "slugs": [
+   "management-student-status-softdelete"
+  ]
+ },
+ {
+  "idx": 21,
+  "role": "admin",
+  "module": "Teachers",
+  "label": "admin:Teachers [1/5]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_21.txt",
+  "count": 18,
+  "slugs": [
+   "management-admins",
+   "management-admins-6-edit",
+   "management-admins-7-edit",
+   "management-admins-appear-6",
+   "management-admins-appear-7",
+   "management-admins-categories-6",
+   "management-admins-categories-7",
+   "management-admins-create",
+   "management-admins-duplicate-6",
+   "management-admins-duplicate-7",
+   "management-all-teachers-timetable",
+   "management-class-feedback-feedback-teacher-id-1-date-range-2026-06-01-to-2026-06",
+   "management-new-requests-filter-teacher-date-range-2026-06-01-to-2026-06-30",
+   "management-new-requests-scheduled-trials-completed-date-2026-06-01-to-2026-06-30",
+   "management-new-requests-scheduled-trials-completed-status-8-date-2026-06-01-to-2",
+   "management-public-holiday",
+   "management-settings-integrations-whatsapp-teachers-insights",
+   "management-teacher-categories"
+  ]
+ },
+ {
+  "idx": 22,
+  "role": "admin",
+  "module": "Teachers",
+  "label": "admin:Teachers [2/5]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_22.txt",
+  "count": 18,
+  "slugs": [
+   "management-teacher-categories-1-create-members",
+   "management-teacher-categories-1-edit",
+   "management-teacher-categories-create",
+   "management-teacher-feedback",
+   "management-teachers",
+   "management-teachers-1",
+   "management-teachers-1-compensations-1",
+   "management-teachers-1-compensations-1-edit",
+   "management-teachers-1-compensations-2",
+   "management-teachers-1-compensations-2-edit",
+   "management-teachers-1-compensations-3",
+   "management-teachers-1-compensations-3-edit",
+   "management-teachers-1-compensations-create",
+   "management-teachers-1-edit",
+   "management-teachers-create",
+   "management-teachers-details",
+   "management-teachers-scope-active",
+   "management-teachers-scope-active-sort-by-country-sort-direction-asc-page-1"
+  ]
+ },
+ {
+  "idx": 23,
+  "role": "admin",
+  "module": "Teachers",
+  "label": "admin:Teachers [3/5]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_23.txt",
+  "count": 18,
+  "slugs": [
+   "management-teachers-scope-active-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-scope-active-sort-by-first-name-sort-direction-desc-page-1",
+   "management-teachers-scope-active-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-active-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-active-sort-by-students-count-sort-direction-asc-page",
+   "management-teachers-scope-active-sort-by-total-hours-sum-sort-direction-asc-page",
+   "management-teachers-scope-deleted",
+   "management-teachers-scope-deleted-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-first-name-sort-direction-desc-page-1",
+   "management-teachers-scope-deleted-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-students-count-sort-direction-asc-page",
+   "management-teachers-scope-deleted-sort-by-total-hours-sum-sort-direction-asc-pag",
+   "management-teachers-scope-inactive",
+   "management-teachers-scope-inactive-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-first-name-sort-direction-desc-page-1"
+  ]
+ },
+ {
+  "idx": 24,
+  "role": "admin",
+  "module": "Teachers",
+  "label": "admin:Teachers [4/5]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_24.txt",
+  "count": 18,
+  "slugs": [
+   "management-teachers-scope-inactive-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-students-count-sort-direction-asc-pag",
+   "management-teachers-scope-inactive-sort-by-total-hours-sum-sort-direction-asc-pa",
+   "management-teachers-scope-incomplete",
+   "management-teachers-scope-incomplete-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-incomplete-sort-by-created-at-sort-direction-asc-page",
+   "management-teachers-scope-incomplete-sort-by-first-name-sort-direction-desc-page",
+   "management-teachers-scope-incomplete-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-incomplete-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-incomplete-sort-by-students-count-sort-direction-asc-p",
+   "management-teachers-scope-incomplete-sort-by-total-hours-sum-sort-direction-asc",
+   "management-teachers-scope-unconfirmed",
+   "management-teachers-scope-unconfirmed-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-unconfirmed-sort-by-created-at-sort-direction-asc-page",
+   "management-teachers-scope-unconfirmed-sort-by-first-name-sort-direction-desc-pag",
+   "management-teachers-scope-unconfirmed-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-unconfirmed-sort-by-status-sort-direction-asc-page-1"
+  ]
+ },
+ {
+  "idx": 25,
+  "role": "admin",
+  "module": "Teachers",
+  "label": "admin:Teachers [5/5]",
+  "listFile": "frontend-planning-deep/_build/batches/batch_25.txt",
+  "count": 16,
+  "slugs": [
+   "management-teachers-scope-unconfirmed-sort-by-students-count-sort-direction-asc",
+   "management-teachers-scope-unconfirmed-sort-by-total-hours-sum-sort-direction-asc",
+   "management-teachers-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-sort-by-country-sort-direction-desc-page-1",
+   "management-teachers-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-sort-by-created-at-sort-direction-desc-page-1",
+   "management-teachers-sort-by-first-name-sort-direction-asc-page-1",
+   "management-teachers-sort-by-first-name-sort-direction-desc-page-1",
+   "management-teachers-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-sort-by-phone-sort-direction-desc-page-1",
+   "management-teachers-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-sort-by-status-sort-direction-desc-page-1",
+   "management-teachers-sort-by-students-count-sort-direction-asc-page-1",
+   "management-teachers-sort-by-students-count-sort-direction-desc-page-1",
+   "management-teachers-sort-by-total-hours-sum-sort-direction-asc-page-1",
+   "management-teachers-sort-by-total-hours-sum-sort-direction-desc-page-1"
+  ]
+ },
+ {
+  "idx": 26,
+  "role": "admin",
+  "module": "Timetable / Schedule",
+  "label": "admin:Timetable / Schedule",
+  "listFile": "frontend-planning-deep/_build/batches/batch_26.txt",
+  "count": 4,
+  "slugs": [
+   "management-request-schedule-1-1",
+   "management-request-schedule-2-2",
+   "management-schedule-trials-response",
+   "management-search-schedule"
+  ]
+ },
+ {
+  "idx": 27,
+  "role": "admin",
+  "module": "Wallet / Finance",
+  "label": "admin:Wallet / Finance",
+  "listFile": "frontend-planning-deep/_build/batches/batch_27.txt",
+  "count": 10,
+  "slugs": [
+   "management-accounting",
+   "management-analysis-expenses",
+   "management-expense",
+   "management-payout-providers",
+   "management-payout-providers-6-edit",
+   "management-payout-providers-7-edit",
+   "management-payouts",
+   "management-payouts-all-1",
+   "management-salaries",
+   "management-staff-salaries"
+  ]
+ },
+ {
+  "idx": 28,
+  "role": "teacher",
+  "module": "Assignments / Homework",
+  "label": "teacher:Assignments / Homework",
+  "listFile": "frontend-planning-deep/_build/batches/batch_28.txt",
+  "count": 1,
+  "slugs": [
+   "teacher-tickets"
+  ]
+ },
+ {
+  "idx": 29,
+  "role": "teacher",
+  "module": "Classes / Live Sessions",
+  "label": "teacher:Classes / Live Sessions",
+  "listFile": "frontend-planning-deep/_build/batches/batch_29.txt",
+  "count": 4,
+  "slugs": [
+   "teacher-course-history-1-class",
+   "teacher-course-history-2-class",
+   "teacher-salary-class-report",
+   "teacher-session-class-room-mq-2"
+  ]
+ },
+ {
+  "idx": 30,
+  "role": "teacher",
+  "module": "Content / Materials / Library",
+  "label": "teacher:Content / Materials / Library",
+  "listFile": "frontend-planning-deep/_build/batches/batch_30.txt",
+  "count": 1,
+  "slugs": [
+   "teacher-library"
+  ]
+ },
+ {
+  "idx": 31,
+  "role": "teacher",
+  "module": "Dashboard / Home",
+  "label": "teacher:Dashboard / Home",
+  "listFile": "frontend-planning-deep/_build/batches/batch_31.txt",
+  "count": 2,
+  "slugs": [
+   "management-home",
+   "teacher-home"
+  ]
+ },
+ {
+  "idx": 32,
+  "role": "teacher",
+  "module": "General / Unknown",
+  "label": "teacher:General / Unknown",
+  "listFile": "frontend-planning-deep/_build/batches/batch_32.txt",
+  "count": 5,
+  "slugs": [
+   "main-index-html",
+   "teacher-course-history-main-index-html",
+   "teacher-main-index-html",
+   "teacher-monthly-plans-main-index-html",
+   "teacher-profile"
+  ]
+ },
+ {
+  "idx": 33,
+  "role": "teacher",
+  "module": "Messages / Notifications",
+  "label": "teacher:Messages / Notifications",
+  "listFile": "frontend-planning-deep/_build/batches/batch_33.txt",
+  "count": 1,
+  "slugs": [
+   "teacher-chat"
+  ]
+ },
+ {
+  "idx": 34,
+  "role": "teacher",
+  "module": "Profile / Account",
+  "label": "teacher:Profile / Account",
+  "listFile": "frontend-planning-deep/_build/batches/batch_34.txt",
+  "count": 1,
+  "slugs": [
+   "teacher-profile-edit"
+  ]
+ },
+ {
+  "idx": 35,
+  "role": "teacher",
+  "module": "Students",
+  "label": "teacher:Students",
+  "listFile": "frontend-planning-deep/_build/batches/batch_35.txt",
+  "count": 4,
+  "slugs": [
+   "management-student-1",
+   "teacher-students",
+   "teacher-studentslist",
+   "teacher-update-result-date-range-2026-06-01-to-2026-06-30-filter-student"
+  ]
+ },
+ {
+  "idx": 36,
+  "role": "teacher",
+  "module": "Teachers",
+  "label": "teacher:Teachers",
+  "listFile": "frontend-planning-deep/_build/batches/batch_36.txt",
+  "count": 5,
+  "slugs": [
+   "teacher-course-history-1",
+   "teacher-monthly-plans",
+   "teacher-monthly-plans-mq-show",
+   "teacher-teacher-history-1",
+   "teacher-teacher-history-1-d861d6e"
+  ]
+ },
+ {
+  "idx": 37,
+  "role": "teacher",
+  "module": "Timetable / Schedule",
+  "label": "teacher:Timetable / Schedule",
+  "listFile": "frontend-planning-deep/_build/batches/batch_37.txt",
+  "count": 1,
+  "slugs": [
+   "teacher-timetable"
+  ]
+ },
+ {
+  "idx": 38,
+  "role": "teacher",
+  "module": "Wallet / Finance",
+  "label": "teacher:Wallet / Finance",
+  "listFile": "frontend-planning-deep/_build/batches/batch_38.txt",
+  "count": 1,
+  "slugs": [
+   "teacher-salary"
+  ]
+ },
+ {
+  "idx": 39,
+  "role": "family",
+  "module": "Classes / Live Sessions",
+  "label": "family:Classes / Live Sessions",
+  "listFile": "frontend-planning-deep/_build/batches/batch_39.txt",
+  "count": 1,
+  "slugs": [
+   "student-today-sessions"
+  ]
+ },
+ {
+  "idx": 40,
+  "role": "family",
+  "module": "Content / Materials / Library",
+  "label": "family:Content / Materials / Library",
+  "listFile": "frontend-planning-deep/_build/batches/batch_40.txt",
+  "count": 1,
+  "slugs": [
+   "student-library"
+  ]
+ },
+ {
+  "idx": 41,
+  "role": "family",
+  "module": "Dashboard / Home",
+  "label": "family:Dashboard / Home",
+  "listFile": "frontend-planning-deep/_build/batches/batch_41.txt",
+  "count": 2,
+  "slugs": [
+   "management-home",
+   "student-home"
+  ]
+ },
+ {
+  "idx": 42,
+  "role": "family",
+  "module": "General / Unknown",
+  "label": "family:General / Unknown",
+  "listFile": "frontend-planning-deep/_build/batches/batch_42.txt",
+  "count": 2,
+  "slugs": [
+   "main-index-html",
+   "student-profile"
+  ]
+ },
+ {
+  "idx": 43,
+  "role": "family",
+  "module": "Payments / Invoices",
+  "label": "family:Payments / Invoices",
+  "listFile": "frontend-planning-deep/_build/batches/batch_43.txt",
+  "count": 1,
+  "slugs": [
+   "student-billing"
+  ]
+ },
+ {
+  "idx": 44,
+  "role": "family",
+  "module": "Profile / Account",
+  "label": "family:Profile / Account",
+  "listFile": "frontend-planning-deep/_build/batches/batch_44.txt",
+  "count": 1,
+  "slugs": [
+   "student-profile-edit"
+  ]
+ },
+ {
+  "idx": 45,
+  "role": "family",
+  "module": "Students",
+  "label": "family:Students",
+  "listFile": "frontend-planning-deep/_build/batches/batch_45.txt",
+  "count": 4,
+  "slugs": [
+   "student-feedbacks",
+   "student-request-trial",
+   "student-student-history-fillter-2",
+   "student-studentslist"
+  ]
+ },
+ {
+  "idx": 46,
+  "role": "family",
+  "module": "Timetable / Schedule",
+  "label": "family:Timetable / Schedule",
+  "listFile": "frontend-planning-deep/_build/batches/batch_46.txt",
+  "count": 1,
+  "slugs": [
+   "student-timetable"
+  ]
+ }
+]

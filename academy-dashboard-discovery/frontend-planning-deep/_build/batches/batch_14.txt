@@ -1,0 +1,8 @@
+output/roles/admin/pages/management-settings-payments-1-edit.md
+output/roles/admin/pages/management-settings-payments-create-payment-method-1.md
+output/roles/admin/pages/management-settings-payments-create-payment-method-2.md
+output/roles/admin/pages/management-settings-payments-create-payment-method-3.md
+output/roles/admin/pages/management-settings-payments-create-payment-method-4.md
+output/roles/admin/pages/management-settings-payments-create-payment-method-5.md
+output/roles/admin/pages/management-settings-payments-create-payment-method-6.md
+output/roles/admin/pages/management-settings-payments-create-payment-method-7.md

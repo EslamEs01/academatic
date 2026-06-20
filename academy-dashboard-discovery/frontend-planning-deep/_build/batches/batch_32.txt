@@ -1,0 +1,5 @@
+output/roles/teacher/pages/main-index-html.md
+output/roles/teacher/pages/teacher-course-history-main-index-html.md
+output/roles/teacher/pages/teacher-main-index-html.md
+output/roles/teacher/pages/teacher-monthly-plans-main-index-html.md
+output/roles/teacher/pages/teacher-profile.md

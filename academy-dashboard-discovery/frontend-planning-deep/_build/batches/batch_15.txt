@@ -1,0 +1,4 @@
+output/roles/admin/pages/management-profile-edit.md
+output/roles/admin/pages/management-profile-show.md
+output/roles/admin/pages/management-settings-security-data.md
+output/roles/admin/pages/management-settings-security-policy.md

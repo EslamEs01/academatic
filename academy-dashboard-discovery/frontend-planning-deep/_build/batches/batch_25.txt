@@ -1,0 +1,16 @@
+output/roles/admin/pages/management-teachers-scope-unconfirmed-sort-by-students-count-sort-direction-asc.md
+output/roles/admin/pages/management-teachers-scope-unconfirmed-sort-by-total-hours-sum-sort-direction-asc.md
+output/roles/admin/pages/management-teachers-sort-by-country-sort-direction-asc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-country-sort-direction-desc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-created-at-sort-direction-asc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-created-at-sort-direction-desc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-first-name-sort-direction-asc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-first-name-sort-direction-desc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-phone-sort-direction-asc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-phone-sort-direction-desc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-status-sort-direction-asc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-status-sort-direction-desc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-students-count-sort-direction-asc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-students-count-sort-direction-desc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-total-hours-sum-sort-direction-asc-page-1.md
+output/roles/admin/pages/management-teachers-sort-by-total-hours-sum-sort-direction-desc-page-1.md

@@ -1,0 +1,3903 @@
+{
+ "specCounts": {
+  "S007": 56,
+  "S004": 109,
+  "S005": 16,
+  "S002": 34,
+  "S003": 49,
+  "S006": 7,
+  "S008": 2,
+  "S011": 27,
+  "S009": 26,
+  "S010": 13
+ },
+ "unassigned": [],
+ "pages": [
+  {
+   "slug": "management-accounting",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-accounting-transaction-invoices",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-accounting-transaction-salary",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-accounting-transaction-session",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-accounting-transaction-session-status-attend",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-accounting-transaction-session` (route /management/accounting/transaction/session)"
+  },
+  {
+   "slug": "management-accounting-transaction-session-status-student-absent",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-accounting-transaction-session` (route /management/accounting/transaction/session)"
+  },
+  {
+   "slug": "management-accounting-transaction-session-status-teacher-absent",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-accounting-transaction-session` (route /management/accounting/transaction/session)"
+  },
+  {
+   "slug": "management-admins",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-admins-6-edit",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-admins-7-edit",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-admins-6-edit` (route /management/admins/{id}/edit)"
+  },
+  {
+   "slug": "management-admins-appear-6",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-admins-appear-7",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-admins-appear-6` (route /management/admins/appear/{id})"
+  },
+  {
+   "slug": "management-admins-categories-6",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-admins-categories-7",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-admins-categories-6` (route /management/admins/categories/{id})"
+  },
+  {
+   "slug": "management-admins-create",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-admins-duplicate-6",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-admins-duplicate-7",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-admins-duplicate-6` (route /management/admins/duplicate/{id})"
+  },
+  {
+   "slug": "management-admins-permission-6",
+   "role": "admin",
+   "module": "Roles / Permissions",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-admins-permission-7",
+   "role": "admin",
+   "module": "Roles / Permissions",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-admins-permission-6` (route /management/admins/permission/{id})"
+  },
+  {
+   "slug": "management-all-teachers-timetable",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-analysis-course",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-analysis-expenses",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-analysis-invoices",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-analysis-student",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-banks",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-banks-create",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-categories-families",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-categories-families-2-assign",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-categories-families-2-edit",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-categories-families-3-assign",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-categories-families-2-assign` (route /management/categories/families/{id}/assign)"
+  },
+  {
+   "slug": "management-categories-families-3-edit",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-categories-families-2-edit` (route /management/categories/families/{id}/edit)"
+  },
+  {
+   "slug": "management-categories-families-create",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-certificate-requests",
+   "role": "admin",
+   "module": "Certificates",
+   "spec": "S006",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-chat",
+   "role": "admin",
+   "module": "Messages / Notifications",
+   "spec": "S008",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-class-feedback",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-class-feedback-feedback",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-class-feedback-feedback-teacher-id-1-date-range-2026-06-01-to-2026-06",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-class-feedback-feedback` (route /management/class-feedback/feedback)"
+  },
+  {
+   "slug": "management-courseclasses-1",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courseclasses-2",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S005",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courseclasses-1` (route /management/courseclasses/{id})"
+  },
+  {
+   "slug": "management-courseclasses-3",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S005",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courseclasses-1` (route /management/courseclasses/{id})"
+  },
+  {
+   "slug": "management-courseclasses-4",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S005",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courseclasses-1` (route /management/courseclasses/{id})"
+  },
+  {
+   "slug": "management-courseclasses-5",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S005",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courseclasses-1` (route /management/courseclasses/{id})"
+  },
+  {
+   "slug": "management-courseclasses-6",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S005",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courseclasses-1` (route /management/courseclasses/{id})"
+  },
+  {
+   "slug": "management-courseclasses-default-member-course-details-1",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courses",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courses-1",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courses-1-create",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courses-1-create-free",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courses-1-edit",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courses-2-create",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses-1-create` (route /management/courses/{id}/create)"
+  },
+  {
+   "slug": "management-courses-2-create-free",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses-1-create-free` (route /management/courses/{id}/create_free)"
+  },
+  {
+   "slug": "management-courses-create-new-copy-1",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-courses-status-0-0",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-status-0-1",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-status-0-2",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-status-0-3",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-status-0-4",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-status-0-5",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-type-no-invoices",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-type-no-invoices-status-0-0",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-type-no-invoices-status-0-1",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-type-no-invoices-status-0-2",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-type-no-invoices-status-0-3",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-type-no-invoices-status-0-4",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-courses-type-no-invoices-status-0-5",
+   "role": "admin",
+   "module": "Courses",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-courses` (route /management/courses)"
+  },
+  {
+   "slug": "management-downlaod",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-downlaod-date-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-downlaod` (route /management/downlaod)"
+  },
+  {
+   "slug": "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-date-payment-status",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-downlaod` (route /management/downlaod)"
+  },
+  {
+   "slug": "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-due-date-status-unpa",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-downlaod` (route /management/downlaod)"
+  },
+  {
+   "slug": "management-downlaod-status-all",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-downlaod` (route /management/downlaod)"
+  },
+  {
+   "slug": "management-downlaod-status-paid",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-downlaod` (route /management/downlaod)"
+  },
+  {
+   "slug": "management-downlaod-status-softdelete",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-downlaod` (route /management/downlaod)"
+  },
+  {
+   "slug": "management-downlaod-status-unpaid",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-downlaod` (route /management/downlaod)"
+  },
+  {
+   "slug": "management-expense",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-export-course",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S011",
+   "variant": false,
+   "http": 500,
+   "note": "BROKEN 500 \u2192 error-state in S011"
+  },
+  {
+   "slug": "management-families",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-1",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-1-edit",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-2",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-1` (route /management/families/{id})"
+  },
+  {
+   "slug": "management-families-2-edit",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-1-edit` (route /management/families/{id}/edit)"
+  },
+  {
+   "slug": "management-families-create",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-feedback",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-feedback-family-1",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S003",
+   "variant": false,
+   "http": 500,
+   "note": "BROKEN 500 \u2192 error-state in S003"
+  },
+  {
+   "slug": "management-families-feedback-family-2",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-feedback-family-1` (route /management/families/feedback/family/{id})"
+  },
+  {
+   "slug": "management-families-feedback-students",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-feedback-students-status-active",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-feedback-students` (route /management/families/feedback/students)"
+  },
+  {
+   "slug": "management-families-feedback-students-status-inactive",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-feedback-students` (route /management/families/feedback/students)"
+  },
+  {
+   "slug": "management-families-feedback-students-status-incomplete",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-feedback-students` (route /management/families/feedback/students)"
+  },
+  {
+   "slug": "management-families-feedback-students-status-suspended",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-feedback-students` (route /management/families/feedback/students)"
+  },
+  {
+   "slug": "management-families-feedback-students-status-trial",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-families-feedback-students` (route /management/families/feedback/students)"
+  },
+  {
+   "slug": "management-families-index-filter-payment-methods-0-1",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-status-active",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-status-deleted",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-status-inactive",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-status-incomplete",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-status-stopped",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-status-suspended",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-families-status-trial",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-family-feedback-categories",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-family-feedback-categories-create",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-forms",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S006",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-forms-create",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S006",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-forms-students",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S006",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-group-index",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-groups-create",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-heads",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-home",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-home-helper-1",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-home-status",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-home-status-1",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-home-status-2-10",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-home-status-3-4",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-home-status-5-6-7",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-home-status-8",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-home-trial-0",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-home` (route /management/home)"
+  },
+  {
+   "slug": "management-invoices",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-invoices-create-parent-invoice-1",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-invoices-create-parent-invoice-2",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices-create-parent-invoice-1` (route /management/invoices/create-parent-invoice/{id})"
+  },
+  {
+   "slug": "management-invoices-date-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-date-2026-06-01-to-2026-06-30-status-paid-date-type-date-pay",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-date-2026-06-01-to-2026-06-30-status-unpaid-date-type-due-da",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-all",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-date-paym",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-due-date",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-paid",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type-due-date",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-softdelete",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-da",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-du",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-unpaid",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type-date-p",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-invoices` (route /management/invoices)"
+  },
+  {
+   "slug": "management-library",
+   "role": "admin",
+   "module": "Content / Materials / Library",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-materials",
+   "role": "admin",
+   "module": "Content / Materials / Library",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-materials-1-edit",
+   "role": "admin",
+   "module": "Content / Materials / Library",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-materials-create",
+   "role": "admin",
+   "module": "Content / Materials / Library",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-monthly-invoices",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-create",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-contacting-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-duplicat-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-no-response-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-pending-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-qualified-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-teacher-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-trial-missed-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-filter-trial-taken-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-requests-date-range-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-scheduled-trials-completed-date-2026-06-01-to-2026-06-30",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-new-requests-scheduled-trials-completed-status-8-date-2026-06-01-to-2",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S002",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-new-requests-scheduled-trials-completed-date-2026-06-01-to-2026-06-30` (route /management/new-requests/scheduled-trials/completed)"
+  },
+  {
+   "slug": "management-new-requests-scheduled-trials-index-status-3-4-date-2026-06-01-to-202",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S002",
+   "variant": false,
+   "http": 500,
+   "note": "BROKEN 500 \u2192 error-state in S002"
+  },
+  {
+   "slug": "management-new-requests-scheduled-trials-index-status-5-7-6-date-2026-06-01-to-2",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S002",
+   "variant": true,
+   "http": 500,
+   "note": "BROKEN 500 \u2192 error-state in S002; variant of `management-new-requests-scheduled-trials-index-status-3-4-date-2026-06-01-to-202` (route /management/new-requests/scheduled-trials/index)"
+  },
+  {
+   "slug": "management-payout-providers",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-payout-providers-6-edit",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-payout-providers-7-edit",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-payout-providers-6-edit` (route /management/payout-providers/{id}/edit)"
+  },
+  {
+   "slug": "management-payouts",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-payouts-all-1",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-payouts` (route /management/payouts)"
+  },
+  {
+   "slug": "management-pdf",
+   "role": "admin",
+   "module": "Certificates",
+   "spec": "S006",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-pdf-create",
+   "role": "admin",
+   "module": "Certificates",
+   "spec": "S006",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-profile-edit",
+   "role": "admin",
+   "module": "Profile / Account",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-profile-show",
+   "role": "admin",
+   "module": "Profile / Account",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-public-advertisement",
+   "role": "admin",
+   "module": "Messages / Notifications",
+   "spec": "S008",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-public-holiday",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-request-schedule-1-1",
+   "role": "admin",
+   "module": "Timetable / Schedule",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-request-schedule-2-2",
+   "role": "admin",
+   "module": "Timetable / Schedule",
+   "spec": "S005",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-request-schedule-1-1` (route /management/request-schedule/{id}/{id})"
+  },
+  {
+   "slug": "management-salaries",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-salary-class-report",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-schedule-sessions-response",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-schedule-trials-response",
+   "role": "admin",
+   "module": "Timetable / Schedule",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-scheduled-actions",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-scheduled-actions-create",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-search-schedule",
+   "role": "admin",
+   "module": "Timetable / Schedule",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-session-class-room-mq-3",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S005",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-sessions-analysis",
+   "role": "admin",
+   "module": "Classes / Live Sessions",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-customisation-message-builder",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S011",
+   "variant": false,
+   "http": 504,
+   "note": "BROKEN 504 \u2192 error-state in S011"
+  },
+  {
+   "slug": "management-settings-customisation-personalisation",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-general",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-integrations",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-integrations-1-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-integrations-10-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-11-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-2-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-3-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-4-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-5-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-6-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-7-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-8-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-9-configure",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-integrations-1-configure` (route /management/settings/integrations/{id}/configure)"
+  },
+  {
+   "slug": "management-settings-integrations-whatsapp-families-insights",
+   "role": "admin",
+   "module": "Parents / Guardians / Families",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-integrations-whatsapp-teachers-insights",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-notification",
+   "role": "admin",
+   "module": "Messages / Notifications",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-payments-1-edit",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-payments-create-payment-method-1",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-payments-create-payment-method-2",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-payments-create-payment-method-1` (route /management/settings/payments/create)"
+  },
+  {
+   "slug": "management-settings-payments-create-payment-method-3",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-payments-create-payment-method-1` (route /management/settings/payments/create)"
+  },
+  {
+   "slug": "management-settings-payments-create-payment-method-4",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-payments-create-payment-method-1` (route /management/settings/payments/create)"
+  },
+  {
+   "slug": "management-settings-payments-create-payment-method-5",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-payments-create-payment-method-1` (route /management/settings/payments/create)"
+  },
+  {
+   "slug": "management-settings-payments-create-payment-method-6",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-payments-create-payment-method-1` (route /management/settings/payments/create)"
+  },
+  {
+   "slug": "management-settings-payments-create-payment-method-7",
+   "role": "admin",
+   "module": "Payments / Invoices",
+   "spec": "S007",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-settings-payments-create-payment-method-1` (route /management/settings/payments/create)"
+  },
+  {
+   "slug": "management-settings-security-data",
+   "role": "admin",
+   "module": "Profile / Account",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-security-data-backup-send",
+   "role": "admin",
+   "module": "Settings",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-settings-security-policy",
+   "role": "admin",
+   "module": "Profile / Account",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-staff-salaries",
+   "role": "admin",
+   "module": "Wallet / Finance",
+   "spec": "S007",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student-1",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student-1-create",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student-1-edit",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student-1-trial-create",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student-2",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-1` (route /management/student/{id})"
+  },
+  {
+   "slug": "management-student-2-create",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-1-create` (route /management/student/{id}/create)"
+  },
+  {
+   "slug": "management-student-2-edit",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-1-edit` (route /management/student/{id}/edit)"
+  },
+  {
+   "slug": "management-student-2-trial-create",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-1-trial-create` (route /management/student/{id}/trial/create)"
+  },
+  {
+   "slug": "management-student-status-0",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student-status-1",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-status-0` (route /management/student/status/{id})"
+  },
+  {
+   "slug": "management-student-status-2",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-status-0` (route /management/student/status/{id})"
+  },
+  {
+   "slug": "management-student-status-3",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-status-0` (route /management/student/status/{id})"
+  },
+  {
+   "slug": "management-student-status-4",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-status-0` (route /management/student/status/{id})"
+  },
+  {
+   "slug": "management-student-status-6",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-student-status-0` (route /management/student/status/{id})"
+  },
+  {
+   "slug": "management-student-status-softdelete",
+   "role": "admin",
+   "module": "Students",
+   "spec": "S003",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teacher-categories",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teacher-categories-1-create-members",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teacher-categories-1-edit",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teacher-categories-create",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teacher-feedback",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teacher-feedback-feedback-teacher-id-1-year-2026",
+   "role": "admin",
+   "module": "Reports / Analytics",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-1-compensations-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-1-compensations-1-edit",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-1-compensations-2",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-1-compensations-1` (route /management/teachers/{id}/compensations/{id})"
+  },
+  {
+   "slug": "management-teachers-1-compensations-2-edit",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-1-compensations-1-edit` (route /management/teachers/{id}/compensations/{id}/edit)"
+  },
+  {
+   "slug": "management-teachers-1-compensations-3",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-1-compensations-1` (route /management/teachers/{id}/compensations/{id})"
+  },
+  {
+   "slug": "management-teachers-1-compensations-3-edit",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-1-compensations-1-edit` (route /management/teachers/{id}/compensations/{id}/edit)"
+  },
+  {
+   "slug": "management-teachers-1-compensations-create",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-1-edit",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-1-monthly-classes",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S004",
+   "variant": false,
+   "http": 500,
+   "note": "BROKEN 500 \u2192 error-state in S004"
+  },
+  {
+   "slug": "management-teachers-create",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-details",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-scope-active",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-scope-active-sort-by-country-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-active` (route /management/teachers/scope/active)"
+  },
+  {
+   "slug": "management-teachers-scope-active-sort-by-created-at-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-active` (route /management/teachers/scope/active)"
+  },
+  {
+   "slug": "management-teachers-scope-active-sort-by-first-name-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-active` (route /management/teachers/scope/active)"
+  },
+  {
+   "slug": "management-teachers-scope-active-sort-by-phone-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-active` (route /management/teachers/scope/active)"
+  },
+  {
+   "slug": "management-teachers-scope-active-sort-by-status-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-active` (route /management/teachers/scope/active)"
+  },
+  {
+   "slug": "management-teachers-scope-active-sort-by-students-count-sort-direction-asc-page",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-active` (route /management/teachers/scope/active)"
+  },
+  {
+   "slug": "management-teachers-scope-active-sort-by-total-hours-sum-sort-direction-asc-page",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-active` (route /management/teachers/scope/active)"
+  },
+  {
+   "slug": "management-teachers-scope-deleted",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-scope-deleted-sort-by-country-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-deleted` (route /management/teachers/scope/deleted)"
+  },
+  {
+   "slug": "management-teachers-scope-deleted-sort-by-created-at-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-deleted` (route /management/teachers/scope/deleted)"
+  },
+  {
+   "slug": "management-teachers-scope-deleted-sort-by-first-name-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-deleted` (route /management/teachers/scope/deleted)"
+  },
+  {
+   "slug": "management-teachers-scope-deleted-sort-by-phone-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-deleted` (route /management/teachers/scope/deleted)"
+  },
+  {
+   "slug": "management-teachers-scope-deleted-sort-by-status-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-deleted` (route /management/teachers/scope/deleted)"
+  },
+  {
+   "slug": "management-teachers-scope-deleted-sort-by-students-count-sort-direction-asc-page",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-deleted` (route /management/teachers/scope/deleted)"
+  },
+  {
+   "slug": "management-teachers-scope-deleted-sort-by-total-hours-sum-sort-direction-asc-pag",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-deleted` (route /management/teachers/scope/deleted)"
+  },
+  {
+   "slug": "management-teachers-scope-inactive",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-scope-inactive-sort-by-country-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-inactive` (route /management/teachers/scope/inactive)"
+  },
+  {
+   "slug": "management-teachers-scope-inactive-sort-by-created-at-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-inactive` (route /management/teachers/scope/inactive)"
+  },
+  {
+   "slug": "management-teachers-scope-inactive-sort-by-first-name-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-inactive` (route /management/teachers/scope/inactive)"
+  },
+  {
+   "slug": "management-teachers-scope-inactive-sort-by-phone-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-inactive` (route /management/teachers/scope/inactive)"
+  },
+  {
+   "slug": "management-teachers-scope-inactive-sort-by-status-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-inactive` (route /management/teachers/scope/inactive)"
+  },
+  {
+   "slug": "management-teachers-scope-inactive-sort-by-students-count-sort-direction-asc-pag",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-inactive` (route /management/teachers/scope/inactive)"
+  },
+  {
+   "slug": "management-teachers-scope-inactive-sort-by-total-hours-sum-sort-direction-asc-pa",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-inactive` (route /management/teachers/scope/inactive)"
+  },
+  {
+   "slug": "management-teachers-scope-incomplete",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-scope-incomplete-sort-by-country-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-incomplete` (route /management/teachers/scope/incomplete)"
+  },
+  {
+   "slug": "management-teachers-scope-incomplete-sort-by-created-at-sort-direction-asc-page",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-incomplete` (route /management/teachers/scope/incomplete)"
+  },
+  {
+   "slug": "management-teachers-scope-incomplete-sort-by-first-name-sort-direction-desc-page",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-incomplete` (route /management/teachers/scope/incomplete)"
+  },
+  {
+   "slug": "management-teachers-scope-incomplete-sort-by-phone-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-incomplete` (route /management/teachers/scope/incomplete)"
+  },
+  {
+   "slug": "management-teachers-scope-incomplete-sort-by-status-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-incomplete` (route /management/teachers/scope/incomplete)"
+  },
+  {
+   "slug": "management-teachers-scope-incomplete-sort-by-students-count-sort-direction-asc-p",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-incomplete` (route /management/teachers/scope/incomplete)"
+  },
+  {
+   "slug": "management-teachers-scope-incomplete-sort-by-total-hours-sum-sort-direction-asc",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-incomplete` (route /management/teachers/scope/incomplete)"
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed-sort-by-country-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-unconfirmed` (route /management/teachers/scope/unconfirmed)"
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed-sort-by-created-at-sort-direction-asc-page",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-unconfirmed` (route /management/teachers/scope/unconfirmed)"
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed-sort-by-first-name-sort-direction-desc-pag",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-unconfirmed` (route /management/teachers/scope/unconfirmed)"
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed-sort-by-phone-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-unconfirmed` (route /management/teachers/scope/unconfirmed)"
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed-sort-by-status-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-unconfirmed` (route /management/teachers/scope/unconfirmed)"
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed-sort-by-students-count-sort-direction-asc",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-unconfirmed` (route /management/teachers/scope/unconfirmed)"
+  },
+  {
+   "slug": "management-teachers-scope-unconfirmed-sort-by-total-hours-sum-sort-direction-asc",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers-scope-unconfirmed` (route /management/teachers/scope/unconfirmed)"
+  },
+  {
+   "slug": "management-teachers-sort-by-country-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-country-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-created-at-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-created-at-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-first-name-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-first-name-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-phone-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-phone-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-status-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-status-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-students-count-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-students-count-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-total-hours-sum-sort-direction-asc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-teachers-sort-by-total-hours-sum-sort-direction-desc-page-1",
+   "role": "admin",
+   "module": "Teachers",
+   "spec": "S004",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `management-teachers` (route /management/teachers)"
+  },
+  {
+   "slug": "management-tickets",
+   "role": "admin",
+   "module": "Assignments / Homework",
+   "spec": "S006",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-time-convertor",
+   "role": "admin",
+   "module": "General / Unknown",
+   "spec": "S011",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-total-queues",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-home",
+   "role": "admin",
+   "module": "Dashboard / Home",
+   "spec": "S002",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "main-index-html",
+   "role": "teacher",
+   "module": "General / Unknown",
+   "spec": "S009",
+   "variant": false,
+   "http": 404,
+   "note": "BROKEN 404 \u2192 error-state in S009"
+  },
+  {
+   "slug": "management-home",
+   "role": "teacher",
+   "module": "Dashboard / Home",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "management-student-1",
+   "role": "teacher",
+   "module": "Students",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-chat",
+   "role": "teacher",
+   "module": "Messages / Notifications",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-course-history-1",
+   "role": "teacher",
+   "module": "Teachers",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-course-history-1-class",
+   "role": "teacher",
+   "module": "Classes / Live Sessions",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-course-history-2-class",
+   "role": "teacher",
+   "module": "Classes / Live Sessions",
+   "spec": "S009",
+   "variant": true,
+   "http": 200,
+   "note": "variant of `teacher-course-history-1-class` (route /teacher/course-history/{id}/class)"
+  },
+  {
+   "slug": "teacher-course-history-main-index-html",
+   "role": "teacher",
+   "module": "General / Unknown",
+   "spec": "S009",
+   "variant": false,
+   "http": 404,
+   "note": "BROKEN 404 \u2192 error-state in S009"
+  },
+  {
+   "slug": "teacher-home",
+   "role": "teacher",
+   "module": "Dashboard / Home",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-library",
+   "role": "teacher",
+   "module": "Content / Materials / Library",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-main-index-html",
+   "role": "teacher",
+   "module": "General / Unknown",
+   "spec": "S009",
+   "variant": false,
+   "http": 404,
+   "note": "BROKEN 404 \u2192 error-state in S009"
+  },
+  {
+   "slug": "teacher-monthly-plans",
+   "role": "teacher",
+   "module": "Teachers",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-monthly-plans-main-index-html",
+   "role": "teacher",
+   "module": "General / Unknown",
+   "spec": "S009",
+   "variant": false,
+   "http": 404,
+   "note": "BROKEN 404 \u2192 error-state in S009"
+  },
+  {
+   "slug": "teacher-monthly-plans-mq-show",
+   "role": "teacher",
+   "module": "Teachers",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-profile",
+   "role": "teacher",
+   "module": "General / Unknown",
+   "spec": "S009",
+   "variant": false,
+   "http": 500,
+   "note": "BROKEN 500 \u2192 error-state in S009"
+  },
+  {
+   "slug": "teacher-profile-edit",
+   "role": "teacher",
+   "module": "Profile / Account",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-salary",
+   "role": "teacher",
+   "module": "Wallet / Finance",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-salary-class-report",
+   "role": "teacher",
+   "module": "Classes / Live Sessions",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-session-class-room-mq-2",
+   "role": "teacher",
+   "module": "Classes / Live Sessions",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-students",
+   "role": "teacher",
+   "module": "Students",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-studentslist",
+   "role": "teacher",
+   "module": "Students",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-teacher-history-1",
+   "role": "teacher",
+   "module": "Teachers",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-teacher-history-1-d861d6e",
+   "role": "teacher",
+   "module": "Teachers",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-tickets",
+   "role": "teacher",
+   "module": "Assignments / Homework",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-timetable",
+   "role": "teacher",
+   "module": "Timetable / Schedule",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "teacher-update-result-date-range-2026-06-01-to-2026-06-30-filter-student",
+   "role": "teacher",
+   "module": "Students",
+   "spec": "S009",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "main-index-html",
+   "role": "family",
+   "module": "General / Unknown",
+   "spec": "S010",
+   "variant": false,
+   "http": 404,
+   "note": "BROKEN 404 \u2192 error-state in S010"
+  },
+  {
+   "slug": "management-home",
+   "role": "family",
+   "module": "Dashboard / Home",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-billing",
+   "role": "family",
+   "module": "Payments / Invoices",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-feedbacks",
+   "role": "family",
+   "module": "Students",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-home",
+   "role": "family",
+   "module": "Dashboard / Home",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-library",
+   "role": "family",
+   "module": "Content / Materials / Library",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-profile",
+   "role": "family",
+   "module": "General / Unknown",
+   "spec": "S010",
+   "variant": false,
+   "http": 500,
+   "note": "BROKEN 500 \u2192 error-state in S010"
+  },
+  {
+   "slug": "student-profile-edit",
+   "role": "family",
+   "module": "Profile / Account",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-request-trial",
+   "role": "family",
+   "module": "Students",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-student-history-fillter-2",
+   "role": "family",
+   "module": "Students",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-studentslist",
+   "role": "family",
+   "module": "Students",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-timetable",
+   "role": "family",
+   "module": "Timetable / Schedule",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  },
+  {
+   "slug": "student-today-sessions",
+   "role": "family",
+   "module": "Classes / Live Sessions",
+   "spec": "S010",
+   "variant": false,
+   "http": 200,
+   "note": ""
+  }
+ ],
+ "modals": [
+  {
+   "title": "(untitled)",
+   "count": 343,
+   "roles": [
+    "admin",
+    "family",
+    "teacher"
+   ],
+   "spec": "S001"
+  },
+  {
+   "title": "Add shortcuts",
+   "count": 315,
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "spec": "S001"
+  },
+  {
+   "title": "Recent Searches",
+   "count": 294,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S001"
+  },
+  {
+   "title": "New Transaction",
+   "count": 28,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Edit Class",
+   "count": 24,
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Student Timetable",
+   "count": 23,
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Add Feedback",
+   "count": 22,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Add Quick Queue",
+   "count": 20,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Mark as attend",
+   "count": 20,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Send Whatsapp Message",
+   "count": 20,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Mark As Absent",
+   "count": 20,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Cancel Class",
+   "count": 20,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Add Lesson Student Timezone",
+   "count": 19,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "All Invoice For This Parent",
+   "count": 17,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Change Course Status",
+   "count": 17,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Schedule Cancel Classes",
+   "count": 11,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Settings",
+   "count": 11,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Add Notes",
+   "count": 10,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Update Suspension",
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Details",
+   "count": 9,
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "New Requests",
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Notes List",
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Change Status",
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Currency Rates",
+   "count": 7,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Direct Links for Sessions",
+   "count": 6,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Total Queues",
+   "count": 6,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Send Report",
+   "count": 5,
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Request Cancel",
+   "count": 5,
+   "roles": [
+    "family",
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Student Details",
+   "count": 5,
+   "roles": [
+    "family",
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "End class",
+   "count": 4,
+   "roles": [
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Mark class as absent",
+   "count": 4,
+   "roles": [
+    "teacher"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Approve",
+   "count": 3,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Edit",
+   "count": 3,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Chats",
+   "count": 2,
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "spec": "S008"
+  },
+  {
+   "title": "Suspended Family",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Schedule Stop Family",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Stop Family",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Activate",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Teacher Report",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Teachers You Sent",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Accepted Teachers",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Certificate Details",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S006"
+  },
+  {
+   "title": "Schedule Stop Student",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Stop Student",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Suspend Student",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S003"
+  },
+  {
+   "title": "Certificate Information",
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S006"
+  },
+  {
+   "title": "Create Group",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S008"
+  },
+  {
+   "title": "Add Member",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S008"
+  },
+  {
+   "title": "Course History",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S004"
+  },
+  {
+   "title": "Expense Details",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Expense Edit",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Add Report \u2014",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "schema color",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Add Head",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Category Details",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Add Material",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Teacher Salary",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Salary",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Salary Month",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S007"
+  },
+  {
+   "title": "Country List",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Generate salaries",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Deactive Categories",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Add Location",
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Request Certificate",
+   "count": 1,
+   "roles": [
+    "teacher"
+   ],
+   "spec": "S006"
+  },
+  {
+   "title": "Feedback about your teacher",
+   "count": 1,
+   "roles": [
+    "family"
+   ],
+   "spec": "S005"
+  },
+  {
+   "title": "Upload File:",
+   "count": 1,
+   "roles": [
+    "family"
+   ],
+   "spec": "S005"
+  }
+ ],
+ "templateGroups": {
+  "/management/accounting/transaction/session": [
+   "management-accounting-transaction-session",
+   "management-accounting-transaction-session-status-attend",
+   "management-accounting-transaction-session-status-student-absent",
+   "management-accounting-transaction-session-status-teacher-absent"
+  ],
+  "/management/admins/{id}/edit": [
+   "management-admins-6-edit",
+   "management-admins-7-edit"
+  ],
+  "/management/admins/appear/{id}": [
+   "management-admins-appear-6",
+   "management-admins-appear-7"
+  ],
+  "/management/admins/categories/{id}": [
+   "management-admins-categories-6",
+   "management-admins-categories-7"
+  ],
+  "/management/admins/duplicate/{id}": [
+   "management-admins-duplicate-6",
+   "management-admins-duplicate-7"
+  ],
+  "/management/admins/permission/{id}": [
+   "management-admins-permission-6",
+   "management-admins-permission-7"
+  ],
+  "/management/categories/families/{id}/assign": [
+   "management-categories-families-2-assign",
+   "management-categories-families-3-assign"
+  ],
+  "/management/categories/families/{id}/edit": [
+   "management-categories-families-2-edit",
+   "management-categories-families-3-edit"
+  ],
+  "/management/class-feedback/feedback": [
+   "management-class-feedback-feedback",
+   "management-class-feedback-feedback-teacher-id-1-date-range-2026-06-01-to-2026-06"
+  ],
+  "/management/courseclasses/{id}": [
+   "management-courseclasses-1",
+   "management-courseclasses-2",
+   "management-courseclasses-3",
+   "management-courseclasses-4",
+   "management-courseclasses-5",
+   "management-courseclasses-6"
+  ],
+  "/management/courses": [
+   "management-courses",
+   "management-courses-status-0-0",
+   "management-courses-status-0-1",
+   "management-courses-status-0-2",
+   "management-courses-status-0-3",
+   "management-courses-status-0-4",
+   "management-courses-status-0-5",
+   "management-courses-type-no-invoices",
+   "management-courses-type-no-invoices-status-0-0",
+   "management-courses-type-no-invoices-status-0-1",
+   "management-courses-type-no-invoices-status-0-2",
+   "management-courses-type-no-invoices-status-0-3",
+   "management-courses-type-no-invoices-status-0-4",
+   "management-courses-type-no-invoices-status-0-5"
+  ],
+  "/management/courses/{id}/create": [
+   "management-courses-1-create",
+   "management-courses-2-create"
+  ],
+  "/management/courses/{id}/create_free": [
+   "management-courses-1-create-free",
+   "management-courses-2-create-free"
+  ],
+  "/management/downlaod": [
+   "management-downlaod",
+   "management-downlaod-date-2026-06-01-to-2026-06-30",
+   "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-date-payment-status",
+   "management-downlaod-date-2026-06-01-to-2026-06-30-date-type-due-date-status-unpa",
+   "management-downlaod-status-all",
+   "management-downlaod-status-paid",
+   "management-downlaod-status-softdelete",
+   "management-downlaod-status-unpaid"
+  ],
+  "/management/families/{id}": [
+   "management-families-1",
+   "management-families-2"
+  ],
+  "/management/families/{id}/edit": [
+   "management-families-1-edit",
+   "management-families-2-edit"
+  ],
+  "/management/families/feedback/family/{id}": [
+   "management-families-feedback-family-1",
+   "management-families-feedback-family-2"
+  ],
+  "/management/families/feedback/students": [
+   "management-families-feedback-students",
+   "management-families-feedback-students-status-active",
+   "management-families-feedback-students-status-inactive",
+   "management-families-feedback-students-status-incomplete",
+   "management-families-feedback-students-status-suspended",
+   "management-families-feedback-students-status-trial"
+  ],
+  "/management/home": [
+   "management-home",
+   "management-home-helper-1",
+   "management-home-status",
+   "management-home-status-1",
+   "management-home-status-2-10",
+   "management-home-status-3-4",
+   "management-home-status-5-6-7",
+   "management-home-status-8",
+   "management-home-trial-0",
+   "management-home",
+   "management-home"
+  ],
+  "/management/invoices": [
+   "management-invoices",
+   "management-invoices-date-2026-06-01-to-2026-06-30",
+   "management-invoices-date-2026-06-01-to-2026-06-30-status-paid-date-type-date-pay",
+   "management-invoices-date-2026-06-01-to-2026-06-30-status-unpaid-date-type-due-da",
+   "management-invoices-status-all",
+   "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-date-paym",
+   "management-invoices-status-all-date-2026-06-01-to-2026-06-30-date-type-due-date",
+   "management-invoices-status-paid",
+   "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-paid-date-2026-06-01-to-2026-06-30-date-type-due-date",
+   "management-invoices-status-softdelete",
+   "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-da",
+   "management-invoices-status-softdelete-date-2026-06-01-to-2026-06-30-date-type-du",
+   "management-invoices-status-unpaid",
+   "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type",
+   "management-invoices-status-unpaid-date-2026-06-01-to-2026-06-30-date-type-date-p"
+  ],
+  "/management/invoices/create-parent-invoice/{id}": [
+   "management-invoices-create-parent-invoice-1",
+   "management-invoices-create-parent-invoice-2"
+  ],
+  "/management/new-requests/scheduled-trials/completed": [
+   "management-new-requests-scheduled-trials-completed-date-2026-06-01-to-2026-06-30",
+   "management-new-requests-scheduled-trials-completed-status-8-date-2026-06-01-to-2"
+  ],
+  "/management/new-requests/scheduled-trials/index": [
+   "management-new-requests-scheduled-trials-index-status-3-4-date-2026-06-01-to-202",
+   "management-new-requests-scheduled-trials-index-status-5-7-6-date-2026-06-01-to-2"
+  ],
+  "/management/payout-providers/{id}/edit": [
+   "management-payout-providers-6-edit",
+   "management-payout-providers-7-edit"
+  ],
+  "/management/payouts": [
+   "management-payouts",
+   "management-payouts-all-1"
+  ],
+  "/management/request-schedule/{id}/{id}": [
+   "management-request-schedule-1-1",
+   "management-request-schedule-2-2"
+  ],
+  "/management/settings/integrations/{id}/configure": [
+   "management-settings-integrations-1-configure",
+   "management-settings-integrations-10-configure",
+   "management-settings-integrations-11-configure",
+   "management-settings-integrations-2-configure",
+   "management-settings-integrations-3-configure",
+   "management-settings-integrations-4-configure",
+   "management-settings-integrations-5-configure",
+   "management-settings-integrations-6-configure",
+   "management-settings-integrations-7-configure",
+   "management-settings-integrations-8-configure",
+   "management-settings-integrations-9-configure"
+  ],
+  "/management/settings/payments/create": [
+   "management-settings-payments-create-payment-method-1",
+   "management-settings-payments-create-payment-method-2",
+   "management-settings-payments-create-payment-method-3",
+   "management-settings-payments-create-payment-method-4",
+   "management-settings-payments-create-payment-method-5",
+   "management-settings-payments-create-payment-method-6",
+   "management-settings-payments-create-payment-method-7"
+  ],
+  "/management/student/{id}": [
+   "management-student-1",
+   "management-student-2",
+   "management-student-1"
+  ],
+  "/management/student/{id}/create": [
+   "management-student-1-create",
+   "management-student-2-create"
+  ],
+  "/management/student/{id}/edit": [
+   "management-student-1-edit",
+   "management-student-2-edit"
+  ],
+  "/management/student/{id}/trial/create": [
+   "management-student-1-trial-create",
+   "management-student-2-trial-create"
+  ],
+  "/management/student/status/{id}": [
+   "management-student-status-0",
+   "management-student-status-1",
+   "management-student-status-2",
+   "management-student-status-3",
+   "management-student-status-4",
+   "management-student-status-6"
+  ],
+  "/management/teachers": [
+   "management-teachers",
+   "management-teachers-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-sort-by-country-sort-direction-desc-page-1",
+   "management-teachers-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-sort-by-created-at-sort-direction-desc-page-1",
+   "management-teachers-sort-by-first-name-sort-direction-asc-page-1",
+   "management-teachers-sort-by-first-name-sort-direction-desc-page-1",
+   "management-teachers-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-sort-by-phone-sort-direction-desc-page-1",
+   "management-teachers-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-sort-by-status-sort-direction-desc-page-1",
+   "management-teachers-sort-by-students-count-sort-direction-asc-page-1",
+   "management-teachers-sort-by-students-count-sort-direction-desc-page-1",
+   "management-teachers-sort-by-total-hours-sum-sort-direction-asc-page-1",
+   "management-teachers-sort-by-total-hours-sum-sort-direction-desc-page-1"
+  ],
+  "/management/teachers/{id}/compensations/{id}": [
+   "management-teachers-1-compensations-1",
+   "management-teachers-1-compensations-2",
+   "management-teachers-1-compensations-3"
+  ],
+  "/management/teachers/{id}/compensations/{id}/edit": [
+   "management-teachers-1-compensations-1-edit",
+   "management-teachers-1-compensations-2-edit",
+   "management-teachers-1-compensations-3-edit"
+  ],
+  "/management/teachers/scope/active": [
+   "management-teachers-scope-active",
+   "management-teachers-scope-active-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-active-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-scope-active-sort-by-first-name-sort-direction-desc-page-1",
+   "management-teachers-scope-active-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-active-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-active-sort-by-students-count-sort-direction-asc-page",
+   "management-teachers-scope-active-sort-by-total-hours-sum-sort-direction-asc-page"
+  ],
+  "/management/teachers/scope/deleted": [
+   "management-teachers-scope-deleted",
+   "management-teachers-scope-deleted-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-first-name-sort-direction-desc-page-1",
+   "management-teachers-scope-deleted-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-deleted-sort-by-students-count-sort-direction-asc-page",
+   "management-teachers-scope-deleted-sort-by-total-hours-sum-sort-direction-asc-pag"
+  ],
+  "/management/teachers/scope/inactive": [
+   "management-teachers-scope-inactive",
+   "management-teachers-scope-inactive-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-created-at-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-first-name-sort-direction-desc-page-1",
+   "management-teachers-scope-inactive-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-inactive-sort-by-students-count-sort-direction-asc-pag",
+   "management-teachers-scope-inactive-sort-by-total-hours-sum-sort-direction-asc-pa"
+  ],
+  "/management/teachers/scope/incomplete": [
+   "management-teachers-scope-incomplete",
+   "management-teachers-scope-incomplete-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-incomplete-sort-by-created-at-sort-direction-asc-page",
+   "management-teachers-scope-incomplete-sort-by-first-name-sort-direction-desc-page",
+   "management-teachers-scope-incomplete-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-incomplete-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-incomplete-sort-by-students-count-sort-direction-asc-p",
+   "management-teachers-scope-incomplete-sort-by-total-hours-sum-sort-direction-asc"
+  ],
+  "/management/teachers/scope/unconfirmed": [
+   "management-teachers-scope-unconfirmed",
+   "management-teachers-scope-unconfirmed-sort-by-country-sort-direction-asc-page-1",
+   "management-teachers-scope-unconfirmed-sort-by-created-at-sort-direction-asc-page",
+   "management-teachers-scope-unconfirmed-sort-by-first-name-sort-direction-desc-pag",
+   "management-teachers-scope-unconfirmed-sort-by-phone-sort-direction-asc-page-1",
+   "management-teachers-scope-unconfirmed-sort-by-status-sort-direction-asc-page-1",
+   "management-teachers-scope-unconfirmed-sort-by-students-count-sort-direction-asc",
+   "management-teachers-scope-unconfirmed-sort-by-total-hours-sum-sort-direction-asc"
+  ],
+  "/teacher/home": [
+   "teacher-home",
+   "teacher-home"
+  ],
+  "/main/index.html": [
+   "main-index-html",
+   "main-index-html"
+  ],
+  "/teacher/course-history/{id}/class": [
+   "teacher-course-history-1-class",
+   "teacher-course-history-2-class"
+  ]
+ }
+}

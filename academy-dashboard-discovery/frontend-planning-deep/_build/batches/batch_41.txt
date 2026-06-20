@@ -1,0 +1,2 @@
+output/roles/family/pages/management-home.md
+output/roles/family/pages/student-home.md

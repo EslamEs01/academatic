@@ -1,0 +1,8 @@
+output/roles/admin/pages/management-class-feedback.md
+output/roles/admin/pages/management-class-feedback-feedback.md
+output/roles/admin/pages/management-group-index.md
+output/roles/admin/pages/management-groups-create.md
+output/roles/admin/pages/management-salary-class-report.md
+output/roles/admin/pages/management-schedule-sessions-response.md
+output/roles/admin/pages/management-session-class-room-mq-3.md
+output/roles/admin/pages/management-sessions-analysis.md

@@ -1,0 +1,3 @@
+output/roles/admin/pages/management-new-requests-create.md
+output/roles/admin/pages/management-total-queues.md
+output/roles/admin/pages/teacher-home.md

@@ -1,0 +1,4 @@
+output/roles/admin/pages/management-request-schedule-1-1.md
+output/roles/admin/pages/management-request-schedule-2-2.md
+output/roles/admin/pages/management-schedule-trials-response.md
+output/roles/admin/pages/management-search-schedule.md

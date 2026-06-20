@@ -1,0 +1,2 @@
+output/roles/family/pages/main-index-html.md
+output/roles/family/pages/student-profile.md

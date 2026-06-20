@@ -1,0 +1,4 @@
+output/roles/teacher/pages/teacher-course-history-1-class.md
+output/roles/teacher/pages/teacher-course-history-2-class.md
+output/roles/teacher/pages/teacher-salary-class-report.md
+output/roles/teacher/pages/teacher-session-class-room-mq-2.md

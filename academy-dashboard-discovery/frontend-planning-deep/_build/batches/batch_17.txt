@@ -1,0 +1,2 @@
+output/roles/admin/pages/management-admins-permission-6.md
+output/roles/admin/pages/management-admins-permission-7.md

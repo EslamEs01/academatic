@@ -1,0 +1,12694 @@
+{
+ "aggregates": {
+  "moduleCounts": {
+   "Teachers": 109,
+   "Payments / Invoices": 53,
+   "Students": 39,
+   "Dashboard / Home": 36,
+   "Parents / Guardians / Families": 31,
+   "Settings": 27,
+   "Courses": 26,
+   "Wallet / Finance": 19,
+   "General / Unknown": 19,
+   "Classes / Live Sessions": 17,
+   "Reports / Analytics": 17,
+   "Timetable / Schedule": 8,
+   "Profile / Account": 7,
+   "Content / Materials / Library": 6,
+   "Messages / Notifications": 5,
+   "Certificates": 3,
+   "Roles / Permissions": 2,
+   "Exams / Quizzes": 2,
+   "Assignments / Homework": 2
+  },
+  "discoveryStatusCounts": {
+   "visited": 339
+  },
+  "httpStatusCounts": {
+   "200": 326,
+   "500": 7,
+   "504": 1,
+   "404": 5
+  },
+  "errorPages": [
+   {
+    "role": "admin",
+    "slug": "management-export-course",
+    "httpStatus": 500,
+    "display": "Export Course",
+    "url": "https://academatic.online/management/export-course"
+   },
+   {
+    "role": "admin",
+    "slug": "management-families-feedback-family-1",
+    "httpStatus": 500,
+    "display": "Families Feedback Family 1",
+    "url": "https://academatic.online/management/families/feedback/family/1"
+   },
+   {
+    "role": "admin",
+    "slug": "management-new-requests-scheduled-trials-index-status-3-4-date-2026-06-01-to-202",
+    "httpStatus": 500,
+    "display": "New Requests Scheduled Trials Index Status 3 4 Date 2026 06 01 To 202",
+    "url": "https://academatic.online/management/new-requests/scheduled-trials/index?status=3,4&date=2026-06-01%20to%202026-06-30"
+   },
+   {
+    "role": "admin",
+    "slug": "management-new-requests-scheduled-trials-index-status-5-7-6-date-2026-06-01-to-2",
+    "httpStatus": 500,
+    "display": "New Requests Scheduled Trials Index Status 5 7 6 Date 2026 06 01 To 2",
+    "url": "https://academatic.online/management/new-requests/scheduled-trials/index?status=5,7,6&date=2026-06-01%20to%202026-06-30"
+   },
+   {
+    "role": "admin",
+    "slug": "management-settings-customisation-message-builder",
+    "httpStatus": 504,
+    "display": "Gateway Timeout",
+    "url": "https://academatic.online/management/settings/customisation/message-builder"
+   },
+   {
+    "role": "admin",
+    "slug": "management-teachers-1-monthly-classes",
+    "httpStatus": 500,
+    "display": "Teachers 1 Monthly Classes",
+    "url": "https://academatic.online/management/teachers/1/monthly-classes"
+   },
+   {
+    "role": "teacher",
+    "slug": "main-index-html",
+    "httpStatus": 404,
+    "display": "Opps!!!",
+    "url": "https://academatic.online/main/index.html"
+   },
+   {
+    "role": "teacher",
+    "slug": "teacher-course-history-main-index-html",
+    "httpStatus": 404,
+    "display": "Opps!!!",
+    "url": "https://academatic.online/teacher/course-history/main/index.html"
+   },
+   {
+    "role": "teacher",
+    "slug": "teacher-main-index-html",
+    "httpStatus": 404,
+    "display": "Opps!!!",
+    "url": "https://academatic.online/teacher/main/index.html"
+   },
+   {
+    "role": "teacher",
+    "slug": "teacher-monthly-plans-main-index-html",
+    "httpStatus": 404,
+    "display": "Opps!!!",
+    "url": "https://academatic.online/teacher/monthly-plans/main/index.html"
+   },
+   {
+    "role": "teacher",
+    "slug": "teacher-profile",
+    "httpStatus": 500,
+    "display": "Teacher Profile",
+    "url": "https://academatic.online/teacher/profile"
+   },
+   {
+    "role": "family",
+    "slug": "main-index-html",
+    "httpStatus": 404,
+    "display": "Opps!!!",
+    "url": "https://academatic.online/main/index.html"
+   },
+   {
+    "role": "family",
+    "slug": "student-profile",
+    "httpStatus": 500,
+    "display": "Student Profile",
+    "url": "https://academatic.online/student/profile"
+   }
+  ],
+  "interactionTypes": {
+   "dropdown_or_menu": 551,
+   "modal_or_dialog": 47,
+   "accordion_expand": 104,
+   "navigation": 59,
+   "no_visible_change": 11,
+   "inline_state_change": 5,
+   "tab_change": 8
+  },
+  "buttonCategories": {
+   "mutating": 1541,
+   "navigation": 956,
+   "open_ui": 2715,
+   "submit": 393,
+   "logout": 1
+  },
+  "topUnsafeActions": {
+   "Save": 345,
+   "See All Notifications": 326,
+   "Add shortcuts": 315,
+   "Submit": 212,
+   "Save changes": 178,
+   "Cancel": 57,
+   "Add Teacher": 55,
+   "Add to Credit": 40,
+   "Send Notification": 40,
+   "Mark as attend (no class details will se": 20,
+   "Don't send": 20,
+   "Send Default Message": 20,
+   "Send Custom Message": 20,
+   "Create": 18,
+   "Update": 16,
+   "Delete": 14,
+   "Delete Fine": 13,
+   "Remove": 13,
+   "Edit": 13,
+   "Add": 12,
+   "Payment Methods 1": 9,
+   "update status": 9,
+   "Send": 7,
+   "Add Payment": 7,
+   "Add Schedule": 6,
+   "Show Details": 6,
+   "\u00d7": 5,
+   "Add Course": 5,
+   "Upload": 5,
+   "remove tag": 4,
+   "Add Meeting Date": 4,
+   "Save Family Feedback": 4,
+   "Edit course": 3,
+   "Approve": 3,
+   "Send Reset Password": 3,
+   "Create category": 2,
+   "Confirm": 2,
+   "Suspend": 2,
+   "Add New Child": 2,
+   "Create Invoice": 2,
+   "Add New Adjustment": 2,
+   "Activate": 2,
+   "Add Item": 2,
+   "Submit Invoice": 2,
+   "Download Report": 2,
+   "Add /Edit Family Feedback": 2,
+   "Edit Feedback": 2,
+   "Approve selected (0)": 2,
+   "Send Request": 2,
+   "Add Account": 2,
+   "Add Email Account": 2,
+   "Add trial": 2,
+   "Add Sibling": 2,
+   "Add Category": 2,
+   "Filter": 1,
+   "Add Member": 1,
+   "Add Bank": 1,
+   "Update Course": 1,
+   "@media (min-width: 992px) { .btn-collaps": 1,
+   "Add Expenses": 1,
+   "Login as abdo ahmed": 1,
+   "Login as \u0627\u0644\u0637\u0627\u0644\u0628\u0629 \u0644\u0645\u0627\u0631 \u062d\u0633\u0646": 1,
+   "Delete Report": 1,
+   "Create Form": 1,
+   "Remove option": 1,
+   "Add Option": 1,
+   "Add Question": 1,
+   "Create Group": 1,
+   "Add Head": 1,
+   "Add Material": 1,
+   "Save Settings": 1,
+   "Submit Public holiday": 1,
+   "Request payouts (0)": 1,
+   "Create Scheduled Action": 1,
+   "Search": 1,
+   "Apply for me": 1,
+   "Reset": 1,
+   "Reset to Default": 1,
+   "Start Setup": 1,
+   "Logout": 1
+  },
+  "filtersByName": {
+   "Month": 278,
+   "material_id": 63,
+   "category_id": 56,
+   "duration": 54,
+   "teacher_id": 51,
+   "status": 49,
+   "accounting_statement": 45,
+   "currency": 38,
+   "currancy": 28,
+   "getway": 28,
+   "date_type": 26,
+   "gateway": 26,
+   "date_payment": 26,
+   "remark": 24,
+   "student_id": 22,
+   "level": 21,
+   "absent_by": 20,
+   "cancel_by": 20,
+   "teacher": 20,
+   "type": 20,
+   "invoice": 18,
+   "Search": 18,
+   "credit": 17,
+   "family_id": 16,
+   "name": 15,
+   "has_invoice": 14,
+   "gender": 11,
+   "month": 11,
+   "timeType": 11,
+   "user_id": 10,
+   "schedule[0][duration]": 9,
+   "returned_at": 9,
+   "language": 9,
+   "member_id[]": 8,
+   "country_id": 8,
+   "filter": 7,
+   "schedule[0][value]": 6,
+   "student_cancel": 6,
+   "teacher_cancel": 6,
+   "timezone": 6,
+   "role": 5,
+   "enable": 5,
+   "schedule[1][duration]": 5,
+   "schedule[2][duration]": 5,
+   "city_id": 5,
+   "course_id": 5,
+   "mode": 4,
+   "year": 4,
+   "pw_reset_method": 3,
+   "whatsapp_private": 3,
+   "can_chat": 3,
+   "can_see_library": 3,
+   "is_recurring": 3,
+   "auto_invoice": 3,
+   "is_post_payment": 3,
+   "payment_method": 3,
+   "cost_type": 3,
+   "schedule[3][duration]": 3,
+   "schedule[4][duration]": 3,
+   "schedule[5][duration]": 3,
+   "schedule[6][duration]": 3,
+   "category_selected[]": 3,
+   "students[]": 2,
+   "schedule[1][value]": 2,
+   "schedule[2][value]": 2,
+   "is_income": 2,
+   "auto_add_credit_to_invoice": 2,
+   "renew_unpaid_courses": 2,
+   "send_invoice": 2,
+   "Add Course": 2,
+   "adjustment_type": 2,
+   "paymentMethod": 2,
+   "source": 2,
+   "month_name": 2,
+   "action_type": 2,
+   "smtp_encryption": 2,
+   "pdfcertificat_id": 2,
+   "material": 2,
+   "course_id[]": 2,
+   "payout_method": 2,
+   "paymob_issuer": 2,
+   "paymob_bank_code": 2,
+   "query": 2,
+   "staff[]": 1,
+   "teachers[]": 1,
+   "staffMember[]": 1,
+   "teachersMember[]": 1,
+   "studentsMembers[]": 1,
+   "head_id": 1,
+   "writer_id": 1,
+   "day": 1,
+   "fields[1][type]": 1,
+   "has_report": 1,
+   "student_category_selected[]": 1,
+   "hours": 1,
+   "family_target_id": 1,
+   "student_target_id": 1,
+   "cancel_classes_student_id": 1,
+   "criteria[teacher_id]": 1,
+   "criteria[material_id]": 1,
+   "activate_family_target_id": 1,
+   "activate_student_target_id": 1,
+   "city": 1,
+   "salary_period_type": 1,
+   "salary_period_day": 1,
+   "new_course_status": 1,
+   "renew": 1,
+   "auto_makeup": 1,
+   "classes_not_closed": 1,
+   "teacher_can_edit_class": 1,
+   "send_group": 1,
+   "teacher_course_updates": 1,
+   "student_course_updates": 1,
+   "teacher_class_updates_type": 1,
+   "student_class_updates_type": 1,
+   "teacher_reminder_type": 1,
+   "student_reminder_type": 1,
+   "invoice_reminder": 1,
+   "salaries": 1,
+   "family_status": 1,
+   "date_month": 1,
+   "can_edit_schedule": 1,
+   "can_edit_class": 1,
+   "course": 1,
+   "student": 1,
+   "see_hear": 1
+  },
+  "tabsByText": {
+   "Auto Make-up class": 80,
+   "No Make-up": 40,
+   "Reschedule class to another time": 40,
+   "Add to Credit Auto Make-up class Using S": 40,
+   "Add to Credit": 40,
+   "Using Student Timezone Using Teacher Tim": 40,
+   "Sessions invoices Salary": 6,
+   "Family Members Add New Child Student Sta": 4,
+   "Add Email Account # Email Address Defaul": 4,
+   "Settings": 3,
+   "General Student Statistics Course Statis": 2,
+   "Profit and Losses invoices": 2,
+   "Children": 2,
+   "Billing": 2,
+   "Credits": 2,
+   "Profile Activity": 2,
+   "Student Feedback": 2,
+   "Billings & Invoices Create Invoice Payme": 2,
+   "Invoice Adjustments Add New Adjustment #": 2,
+   "Credits 00:00 (0) session Student Teache": 2,
+   "Update Location Student Country* Choose ": 2,
+   "Student Feedback Show More # Meeting Dat": 2,
+   "General Company Name Arabic Company Name": 2,
+   "Accounts Add Account Mail Settings": 2,
+   "Accounts": 2,
+   "Add Account": 2,
+   "Mail Settings": 2,
+   "Email Address * SMTP Username * SMTP Pas": 2,
+   "SMTP Host * SMTP Port * SMTP Encryption ": 2,
+   "Courses Trials Siblings monthly plan": 2,
+   "Courses": 2,
+   "Trials": 2,
+   "Siblings": 2,
+   "monthly plan": 2,
+   "List of Courses Serial Start Date Teache": 2,
+   "Family Members Add Sibling Student Statu": 2,
+   "Total Report # Month Teacher Name Course": 2,
+   "Certificate Details # certificate Option": 2,
+   "List of Students Student Name Status Cou": 2,
+   "World Time Zone Converter Compare times ": 2,
+   "Children Billing Invoice Adjustments 1 C": 1,
+   "Invoice Adjustments 1": 1,
+   "Profile Activity 18th June 2026 02:30 PM": 1,
+   "Children Billing Invoice Adjustments Cre": 1,
+   "Invoice Adjustments": 1,
+   "Profile Activity 19th June 2026 06:35 PM": 1,
+   "General Teachers Courses & Classes Acces": 1,
+   "General": 1,
+   "Teachers": 1,
+   "Courses & Classes": 1,
+   "Accessibility": 1,
+   "Hour Rates Control how teachers performa": 1,
+   "Courses Control courses behaviours & set": 1,
+   "Accessibility Define the accessibility s": 1,
+   "current step: 1 Phone number": 1,
+   "2 Pairing Code": 1,
+   "3 Finishing Setup": 1,
+   "4 Success!": 1,
+   "List of Trials Date & Time (Student time": 1,
+   "Home Monthly Classes Schedule Compensati": 1
+  },
+  "badgesByText": {
+   "5 new": 326,
+   "0 New": 305,
+   "1 New": 294,
+   "Pre": 294,
+   "1": 294,
+   "Active": 51,
+   "Teacher Timezone": 22,
+   "New": 21,
+   "Using Student Timezone": 20,
+   "Using Teacher Timezone": 20,
+   "Student Timezone": 19,
+   "Active & unpaid": 18,
+   "Waiting": 18,
+   "Inactive": 17,
+   "According to the teacher": 17,
+   "Stopped": 14,
+   "Suspended": 14,
+   "Indebted": 14,
+   "Completed": 14,
+   "Free": 14,
+   "Teacher": 13,
+   "0": 13,
+   "2026-06-20": 11,
+   "Pending": 10,
+   "2": 10,
+   "(3.00 Fine)": 10,
+   "Trial": 9,
+   "Admin Cancel": 9,
+   "Student": 9,
+   "4": 9,
+   "16": 9,
+   "Update Suspension": 9,
+   "AED": 7,
+   "AUD": 7,
+   "CAD": 7,
+   "EGP": 7,
+   "EUR": 7,
+   "GBP": 7,
+   "KWD": 7,
+   "MAD": 7,
+   "PKR": 7,
+   "QAR": 7,
+   "RUB": 7,
+   "RWF": 7,
+   "SAR": 7,
+   "TRY": 7,
+   "USD": 7,
+   "YER": 7,
+   "Paid": 7,
+   "Sessions": 6,
+   "Change Status": 6,
+   "Schedule Cancel Classes": 6,
+   "Monthly": 6,
+   "Show Course": 5,
+   "60 min": 5,
+   "Not added": 5,
+   "0.00%": 4,
+   "T Difference (Localtime): +08:00": 4,
+   "messages.3": 4,
+   "June 2026": 4,
+   "Estimated: 1,537.00": 4,
+   "Fines: 1,003.00": 4,
+   "Bonus 2,000.00": 4,
+   "(30) m": 4,
+   "30 m": 4,
+   "alaashapan1996": 3,
+   "Courses Hours Count: 5": 3,
+   "Monthly Subscription": 3,
+   "arabic": 3,
+   "5 H": 3,
+   "Fine": 3,
+   "\u0645\u062d\u0645\u062f \u0627\u062d\u0645\u062f": 3,
+   "30m": 3,
+   "60m": 3,
+   "(30 m)": 3,
+   "(60 m)": 3,
+   "Manager": 2,
+   "alaashapan1997": 2,
+   "abdo": 2,
+   "\u0627\u0644\u0645\u0639\u0644\u0645 \u0645\u062d\u0645\u062f \u0635\u0627\u062f\u0642": 2,
+   "ahmed": 2,
+   "\u0635\u0627\u062f\u0642": 2,
+   "abdo123": 2,
+   "msadeqx9": 2,
+   "201049875642": 2,
+   "201278910727": 2,
+   ".": 2,
+   "https://chat.whatsapp.com/HNeGQ2J7HDzJAH": 2,
+   "\u0639\u0628\u062f\u0648": 2,
+   "\u0627\u0644\u0645\u0639\u0644\u0645 \u0645\u062d\u0645\u062f": 2,
+   "\u0627\u062d\u0645\u062f": 2,
+   "220": 2,
+   "240": 2,
+   "3986": 2,
+   "4746": 2,
+   "Asia/Dushanbe": 2,
+   "Pacific/Efate": 2,
+   "en": 2,
+   "ar": 2,
+   "Show Dashboard": 2,
+   "14 / 14": 2,
+   "Show New Requests": 2,
+   "6 / 6": 2,
+   "Show Families": 2,
+   "24 / 24": 2,
+   "Show Students List": 2,
+   "21 / 21": 2,
+   "Show Teachers": 2,
+   "17 / 17": 2,
+   "Search Teacher Schedule": 2,
+   "1 / 1": 2,
+   "Show Reports": 2,
+   "20 / 20": 2,
+   "View Invoices List": 2,
+   "15 / 15": 2,
+   "Show Payment Methods": 2,
+   "3 / 3": 2,
+   "Show Locations": 2,
+   "Show Material": 2,
+   "Show Library": 2
+  },
+  "domTagTotals": {
+   "links": 39834,
+   "images": 9678,
+   "headings": 7649,
+   "inputs": 7273,
+   "buttons": 4509,
+   "forms": 1713,
+   "selects": 1284,
+   "tables": 345
+  },
+  "modals_distinct_count": 66,
+  "forms_distinct_count": 141,
+  "tables_distinct_count": 104,
+  "endpoints_distinct_count": 195
+ },
+ "modals_distinct": [
+  {
+   "title": "(untitled)",
+   "count": 343,
+   "kinds": [
+    "modal",
+    "offcanvas"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin",
+    "family",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "date",
+     6
+    ],
+    [
+     "user_id",
+     6
+    ],
+    [
+     "type",
+     2
+    ],
+    [
+     "amount",
+     2
+    ],
+    [
+     "count",
+     2
+    ],
+    [
+     "note",
+     2
+    ],
+    [
+     "From time",
+     2
+    ],
+    [
+     "group-name",
+     1
+    ],
+    [
+     "group-bio",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     307
+    ],
+    [
+     "Add",
+     8
+    ],
+    [
+     "\u2715",
+     4
+    ],
+    [
+     "Edit course",
+     3
+    ],
+    [
+     "Save",
+     3
+    ],
+    [
+     "Show Details",
+     2
+    ],
+    [
+     "Show Student",
+     2
+    ],
+    [
+     "Leave Group",
+     2
+    ]
+   ],
+   "pageCount": 322
+  },
+  {
+   "title": "Add shortcuts",
+   "count": 315,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "shortcut_title",
+     315
+    ],
+    [
+     "shortcut_link",
+     315
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     315
+    ],
+    [
+     "Save",
+     315
+    ]
+   ],
+   "pageCount": 312
+  },
+  {
+   "title": "Recent Searches",
+   "count": 294,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "query",
+     294
+    ]
+   ],
+   "buttons": [],
+   "pageCount": 294
+  },
+  {
+   "title": "New Transaction",
+   "count": 28,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "transaction_id",
+     28
+    ],
+    [
+     "date_payment",
+     28
+    ],
+    [
+     "basic",
+     28
+    ],
+    [
+     "additional",
+     28
+    ],
+    [
+     "taxes",
+     28
+    ],
+    [
+     "total",
+     28
+    ],
+    [
+     "currancy",
+     28
+    ],
+    [
+     "getway",
+     28
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     28
+    ],
+    [
+     "Submit",
+     28
+    ],
+    [
+     "Cancel",
+     28
+    ]
+   ],
+   "pageCount": 28
+  },
+  {
+   "title": "Edit Class",
+   "count": 24,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "date",
+     24
+    ],
+    [
+     "time",
+     24
+    ],
+    [
+     "sendMessage",
+     24
+    ],
+    [
+     "duration",
+     24
+    ],
+    [
+     "Hour",
+     22
+    ],
+    [
+     "Minute",
+     22
+    ],
+    [
+     "teacher_id",
+     20
+    ],
+    [
+     "accounting_statement",
+     20
+    ],
+    [
+     "Month",
+     4
+    ],
+    [
+     "Year",
+     4
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     24
+    ],
+    [
+     "Save changes",
+     24
+    ],
+    [
+     "Send Notification",
+     20
+    ]
+   ],
+   "pageCount": 21
+  },
+  {
+   "title": "Student Timetable",
+   "count": 23,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static",
+    "static+opened"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     23
+    ]
+   ],
+   "pageCount": 23
+  },
+  {
+   "title": "Add Feedback",
+   "count": 22,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static",
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "feedback_note",
+     18
+    ],
+    [
+     "feedback_files[]",
+     17
+    ],
+    [
+     "name",
+     1
+    ],
+    [
+     "description",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     22
+    ],
+    [
+     "Save changes",
+     21
+    ],
+    [
+     "Save",
+     1
+    ]
+   ],
+   "pageCount": 21
+  },
+  {
+   "title": "Add Quick Queue",
+   "count": 20,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "level",
+     20
+    ],
+    [
+     "text",
+     20
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     20
+    ],
+    [
+     "Save changes",
+     20
+    ]
+   ],
+   "pageCount": 20
+  },
+  {
+   "title": "Mark as attend",
+   "count": 20,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "markAsAttend",
+     40
+    ],
+    [
+     "remark",
+     20
+    ],
+    [
+     "summary",
+     20
+    ],
+    [
+     "homework",
+     20
+    ],
+    [
+     "notes",
+     20
+    ],
+    [
+     "images[]",
+     20
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     20
+    ],
+    [
+     "Mark as attend (no class detai",
+     20
+    ],
+    [
+     "Mark as attend (with class det",
+     20
+    ],
+    [
+     "Save changes",
+     20
+    ]
+   ],
+   "pageCount": 20
+  },
+  {
+   "title": "Send Whatsapp Message",
+   "count": 20,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "wa_message",
+     20
+    ],
+    [
+     "send_teacher",
+     20
+    ],
+    [
+     "send_student",
+     20
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     20
+    ],
+    [
+     "Teacher",
+     20
+    ],
+    [
+     "Student(s)",
+     20
+    ],
+    [
+     "Save changes",
+     20
+    ]
+   ],
+   "pageCount": 20
+  },
+  {
+   "title": "Mark As Absent",
+   "count": 20,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "sendMessage",
+     60
+    ],
+    [
+     "cancelTzType",
+     40
+    ],
+    [
+     "absent_by",
+     20
+    ],
+    [
+     "note",
+     20
+    ],
+    [
+     "message",
+     20
+    ],
+    [
+     "add_to_credit",
+     20
+    ],
+    [
+     "date",
+     20
+    ],
+    [
+     "time",
+     20
+    ],
+    [
+     "Hour",
+     18
+    ],
+    [
+     "Minute",
+     18
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     20
+    ],
+    [
+     "Don't send",
+     20
+    ],
+    [
+     "Send Default Message",
+     20
+    ],
+    [
+     "Send Custom Message",
+     20
+    ],
+    [
+     "No Make-up",
+     20
+    ],
+    [
+     "Auto Make-up class",
+     20
+    ],
+    [
+     "Reschedule class to another ti",
+     20
+    ],
+    [
+     "Add to Credit",
+     20
+    ]
+   ],
+   "pageCount": 20
+  },
+  {
+   "title": "Cancel Class",
+   "count": 20,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "cancelTzType",
+     40
+    ],
+    [
+     "cancel_by",
+     20
+    ],
+    [
+     "note",
+     20
+    ],
+    [
+     "sendMessage",
+     20
+    ],
+    [
+     "add_to_credit",
+     20
+    ],
+    [
+     "date",
+     20
+    ],
+    [
+     "time",
+     20
+    ],
+    [
+     "Hour",
+     18
+    ],
+    [
+     "Minute",
+     18
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     20
+    ],
+    [
+     "Send Notification",
+     20
+    ],
+    [
+     "No Make-up",
+     20
+    ],
+    [
+     "Auto Make-up class",
+     20
+    ],
+    [
+     "Reschedule class to another ti",
+     20
+    ],
+    [
+     "Add to Credit",
+     20
+    ],
+    [
+     "Save changes",
+     20
+    ]
+   ],
+   "pageCount": 20
+  },
+  {
+   "title": "Add Lesson Student Timezone",
+   "count": 19,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     19
+    ],
+    [
+     "time",
+     19
+    ],
+    [
+     "duration",
+     19
+    ],
+    [
+     "teacher",
+     19
+    ],
+    [
+     "accounting_statement",
+     19
+    ],
+    [
+     "credit",
+     17
+    ],
+    [
+     "Hour",
+     1
+    ],
+    [
+     "Minute",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     19
+    ],
+    [
+     "Submit",
+     19
+    ]
+   ],
+   "pageCount": 17
+  },
+  {
+   "title": "All Invoice For This Parent",
+   "count": 17,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "invoice",
+     17
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     17
+    ],
+    [
+     "Submit",
+     17
+    ]
+   ],
+   "pageCount": 17
+  },
+  {
+   "title": "Change Course Status",
+   "count": 17,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "status",
+     17
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     17
+    ],
+    [
+     "Submit",
+     17
+    ]
+   ],
+   "pageCount": 17
+  },
+  {
+   "title": "Schedule Cancel Classes",
+   "count": 11,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "criteria[cancel_type]",
+     33
+    ],
+    [
+     "scheduled_date",
+     11
+    ],
+    [
+     "criteria[reschedule_date]",
+     11
+    ],
+    [
+     "criteria[reschedule_time]",
+     11
+    ],
+    [
+     "criteria[add_to_credit]",
+     11
+    ],
+    [
+     "note",
+     11
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     11
+    ],
+    [
+     "Submit",
+     11
+    ]
+   ],
+   "pageCount": 6
+  },
+  {
+   "title": "Settings",
+   "count": 11,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static",
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "timeType",
+     11
+    ],
+    [
+     "groupByTime",
+     11
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     11
+    ],
+    [
+     "Save changes",
+     11
+    ]
+   ],
+   "pageCount": 11
+  },
+  {
+   "title": "Add Notes",
+   "count": 10,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "note",
+     9
+    ],
+    [
+     "feedback",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Save",
+     10
+    ],
+    [
+     "Cancel",
+     9
+    ],
+    [
+     "Close",
+     1
+    ]
+   ],
+   "pageCount": 10
+  },
+  {
+   "title": "Update Suspension",
+   "count": 9,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "returned_at",
+     9
+    ],
+    [
+     "note",
+     9
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     9
+    ],
+    [
+     "Submit",
+     9
+    ]
+   ],
+   "pageCount": 9
+  },
+  {
+   "title": "Details",
+   "count": 9,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     9
+    ]
+   ],
+   "pageCount": 7
+  },
+  {
+   "title": "New Requests",
+   "count": 9,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     9
+    ]
+   ],
+   "pageCount": 9
+  },
+  {
+   "title": "Notes List",
+   "count": 9,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     9
+    ]
+   ],
+   "pageCount": 9
+  },
+  {
+   "title": "Change Status",
+   "count": 9,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "status",
+     9
+    ]
+   ],
+   "buttons": [
+    [
+     "Cancel",
+     9
+    ],
+    [
+     "update status",
+     9
+    ]
+   ],
+   "pageCount": 9
+  },
+  {
+   "title": "Currency Rates",
+   "count": 7,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static",
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     7
+    ],
+    [
+     "Save",
+     7
+    ]
+   ],
+   "pageCount": 7
+  },
+  {
+   "title": "Direct Links for Sessions",
+   "count": 6,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     6
+    ]
+   ],
+   "pageCount": 6
+  },
+  {
+   "title": "Total Queues",
+   "count": 6,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     6
+    ]
+   ],
+   "pageCount": 6
+  },
+  {
+   "title": "Send Report",
+   "count": 5,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static",
+    "static+opened"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "learning_progress",
+     20
+    ],
+    [
+     "focus",
+     20
+    ],
+    [
+     "homework_completion",
+     20
+    ],
+    [
+     "punctuality",
+     20
+    ],
+    [
+     "rescheduled_sessions",
+     20
+    ],
+    [
+     "month",
+     5
+    ],
+    [
+     "achievements",
+     5
+    ],
+    [
+     "additional_support",
+     5
+    ],
+    [
+     "learning_objectives",
+     5
+    ]
+   ],
+   "buttons": [
+    [
+     "Submit",
+     5
+    ]
+   ],
+   "pageCount": 5
+  },
+  {
+   "title": "Request Cancel",
+   "count": 5,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "family",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "type",
+     10
+    ],
+    [
+     "date",
+     5
+    ],
+    [
+     "time",
+     5
+    ],
+    [
+     "Hour",
+     5
+    ],
+    [
+     "Minute",
+     5
+    ],
+    [
+     "Month",
+     4
+    ],
+    [
+     "Year",
+     4
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     5
+    ],
+    [
+     "Send",
+     5
+    ]
+   ],
+   "pageCount": 5
+  },
+  {
+   "title": "Student Details",
+   "count": 5,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "family",
+    "teacher"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     5
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "title": "End class",
+   "count": 4,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "remark",
+     4
+    ],
+    [
+     "summary",
+     4
+    ],
+    [
+     "homework",
+     4
+    ],
+    [
+     "notes",
+     4
+    ],
+    [
+     "images[]",
+     4
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     4
+    ],
+    [
+     "Submit",
+     4
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "title": "Mark class as absent",
+   "count": 4,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "video",
+     4
+    ],
+    [
+     "notes",
+     4
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     4
+    ],
+    [
+     "Submit",
+     4
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "title": "Approve",
+   "count": 3,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "YYYY-MM-DD",
+     3
+    ],
+    [
+     "Write notes: date,notes and etc",
+     3
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     3
+    ],
+    [
+     "Preview",
+     3
+    ],
+    [
+     "Cancel",
+     3
+    ],
+    [
+     "Approve",
+     3
+    ]
+   ],
+   "pageCount": 3
+  },
+  {
+   "title": "Edit",
+   "count": 3,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     2
+    ],
+    [
+     "name",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     3
+    ],
+    [
+     "Save",
+     2
+    ],
+    [
+     "Save changes",
+     1
+    ]
+   ],
+   "pageCount": 3
+  },
+  {
+   "title": "Chats",
+   "count": 2,
+   "kinds": [
+    "offcanvas"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "Search Contact",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Suspended Family",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     2
+    ],
+    [
+     "schedule_return",
+     2
+    ],
+    [
+     "note",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Submit",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Schedule Stop Family",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "scheduled_date",
+     2
+    ],
+    [
+     "returned_at",
+     2
+    ],
+    [
+     "schedule_auto_return",
+     2
+    ],
+    [
+     "note",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Submit",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Stop Family",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "note",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Submit",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Activate",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Activate",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Teacher Report",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Teachers You Sent",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Accepted Teachers",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Certificate Details",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Schedule Stop Student",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "scheduled_date",
+     2
+    ],
+    [
+     "returned_at",
+     2
+    ],
+    [
+     "schedule_auto_return",
+     2
+    ],
+    [
+     "note",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Submit",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Stop Student",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "note",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Submit",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Suspend Student",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     2
+    ],
+    [
+     "schedule_return",
+     2
+    ],
+    [
+     "note",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Submit",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Certificate Information",
+   "count": 2,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "student_name",
+     2
+    ],
+    [
+     "teacher_name",
+     2
+    ],
+    [
+     "description",
+     2
+    ],
+    [
+     "date_certificate",
+     2
+    ],
+    [
+     "pdfcertificat_id",
+     2
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     2
+    ],
+    [
+     "Submit",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "title": "Create Group",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "bio",
+     1
+    ],
+    [
+     "image",
+     1
+    ],
+    [
+     "staff[]",
+     1
+    ],
+    [
+     "teachers[]",
+     1
+    ],
+    [
+     "students[]",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Submit",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Add Member",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "staffMember[]",
+     1
+    ],
+    [
+     "teachersMember[]",
+     1
+    ],
+    [
+     "studentsMembers[]",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Submit",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Course History",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Expense Details",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "head_id",
+     1
+    ],
+    [
+     "user_id",
+     1
+    ],
+    [
+     "is_income",
+     1
+    ],
+    [
+     "description",
+     1
+    ],
+    [
+     "reason",
+     1
+    ],
+    [
+     "amount",
+     1
+    ],
+    [
+     "currency",
+     1
+    ],
+    [
+     "date",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Save changes",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Expense Edit",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "writer_id",
+     1
+    ],
+    [
+     "is_income",
+     1
+    ],
+    [
+     "description",
+     1
+    ],
+    [
+     "reason",
+     1
+    ],
+    [
+     "amount",
+     1
+    ],
+    [
+     "currency",
+     1
+    ],
+    [
+     "date",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Save changes",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Add Report \u2014",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "curriculum",
+     1
+    ],
+    [
+     "expected",
+     1
+    ],
+    [
+     "level",
+     1
+    ],
+    [
+     "achievements",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Save",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "schema color",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Save",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Add Head",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Save changes",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Category Details",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Edit",
+     1
+    ],
+    [
+     "Save changes",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Add Material",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "type",
+     1
+    ],
+    [
+     "category_id",
+     1
+    ],
+    [
+     "file",
+     1
+    ],
+    [
+     "thumbnail",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Save changes",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Teacher Salary",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Salary",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Download",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Salary Month",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "month",
+     1
+    ],
+    [
+     "date_range",
+     1
+    ],
+    [
+     "generateteacher",
+     1
+    ],
+    [
+     "allteachers",
+     1
+    ],
+    [
+     "teachers[]",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Submit",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Country List",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Copy",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Generate salaries",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "staff_members[]",
+     3
+    ],
+    [
+     "month",
+     1
+    ],
+    [
+     "date_range",
+     1
+    ],
+    [
+     "generatestaff",
+     1
+    ],
+    [
+     "allstaff",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Submit",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Deactive Categories",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "buttons": [
+    [
+     "Close",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Add Location",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "Search cities or timezones...",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "All Regions",
+     1
+    ],
+    [
+     "Americas",
+     1
+    ],
+    [
+     "Europe",
+     1
+    ],
+    [
+     "Asia",
+     1
+    ],
+    [
+     "Africa",
+     1
+    ],
+    [
+     "Oceania",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Request Certificate",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static+opened"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "description",
+     1
+    ],
+    [
+     "date_certificate",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Submit",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Feedback about your teacher",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "see_hear",
+     1
+    ],
+    [
+     "like_teacher",
+     1
+    ],
+    [
+     "complain",
+     1
+    ],
+    [
+     "additional_comment",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Submit",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "title": "Upload File:",
+   "count": 1,
+   "kinds": [
+    "modal"
+   ],
+   "sources": [
+    "static"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "files[]",
+     1
+    ]
+   ],
+   "buttons": [
+    [
+     "Close",
+     1
+    ],
+    [
+     "Start",
+     1
+    ],
+    [
+     "Upload",
+     1
+    ]
+   ],
+   "pageCount": 1
+  }
+ ],
+ "forms_distinct": [
+  {
+   "action": "/management/logout",
+   "count": 294,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "id",
+     294
+    ]
+   ],
+   "pageCount": 294
+  },
+  {
+   "action": "/management/search",
+   "count": 294,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "query",
+     294
+    ]
+   ],
+   "pageCount": 294
+  },
+  {
+   "action": "/management/shortcuts",
+   "count": 294,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "shortcut_title",
+     294
+    ],
+    [
+     "shortcut_link",
+     294
+    ]
+   ],
+   "pageCount": 294
+  },
+  {
+   "action": "/",
+   "count": 100,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "class_id",
+     80
+    ],
+    [
+     "sendMessage",
+     80
+    ],
+    [
+     "cancelTzType",
+     80
+    ],
+    [
+     "markAsAttend",
+     40
+    ],
+    [
+     "note",
+     40
+    ],
+    [
+     "makupclass",
+     40
+    ],
+    [
+     "add_to_credit",
+     40
+    ],
+    [
+     "date",
+     40
+    ],
+    [
+     "time",
+     40
+    ],
+    [
+     "level",
+     20
+    ],
+    [
+     "text",
+     20
+    ],
+    [
+     "remark",
+     20
+    ],
+    [
+     "summary",
+     20
+    ],
+    [
+     "homework",
+     20
+    ],
+    [
+     "notes",
+     20
+    ],
+    [
+     "images[]",
+     20
+    ],
+    [
+     "wa_message",
+     20
+    ],
+    [
+     "send_teacher",
+     20
+    ],
+    [
+     "send_student",
+     20
+    ],
+    [
+     "class_type",
+     20
+    ],
+    [
+     "course_type",
+     20
+    ],
+    [
+     "absent_by",
+     20
+    ],
+    [
+     "message",
+     20
+    ],
+    [
+     "session_id",
+     20
+    ],
+    [
+     "teacher_id",
+     20
+    ]
+   ],
+   "pageCount": 20
+  },
+  {
+   "action": "#",
+   "count": 61,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin",
+    "family",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "date",
+     14
+    ],
+    [
+     "status",
+     14
+    ],
+    [
+     "type",
+     10
+    ],
+    [
+     "note",
+     9
+    ],
+    [
+     "class_id",
+     7
+    ],
+    [
+     "time",
+     5
+    ],
+    [
+     "content",
+     4
+    ],
+    [
+     "family_id",
+     4
+    ],
+    [
+     "name",
+     3
+    ],
+    [
+     "filter",
+     3
+    ],
+    [
+     "level",
+     2
+    ],
+    [
+     "rating",
+     2
+    ],
+    [
+     "source",
+     2
+    ],
+    [
+     "month_name",
+     2
+    ],
+    [
+     "year",
+     2
+    ],
+    [
+     "query",
+     2
+    ],
+    [
+     "admin_id",
+     1
+    ],
+    [
+     "bio",
+     1
+    ],
+    [
+     "image",
+     1
+    ],
+    [
+     "staff[]",
+     1
+    ],
+    [
+     "teachers[]",
+     1
+    ],
+    [
+     "students[]",
+     1
+    ],
+    [
+     "staffMember[]",
+     1
+    ],
+    [
+     "teachersMember[]",
+     1
+    ],
+    [
+     "studentsMembers[]",
+     1
+    ]
+   ],
+   "pageCount": 36
+  },
+  {
+   "action": "/management/teachers",
+   "count": 56,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "material_id",
+     55
+    ],
+    [
+     "category_id",
+     55
+    ],
+    [
+     "sort_by",
+     49
+    ],
+    [
+     "sort_direction",
+     49
+    ],
+    [
+     "page",
+     49
+    ],
+    [
+     "level[]",
+     3
+    ],
+    [
+     "age_student[]",
+     3
+    ],
+    [
+     "salary_type",
+     2
+    ],
+    [
+     "send_info",
+     1
+    ],
+    [
+     "first_name",
+     1
+    ],
+    [
+     "last_name",
+     1
+    ],
+    [
+     "first_name_ar",
+     1
+    ],
+    [
+     "last_name_ar",
+     1
+    ],
+    [
+     "email",
+     1
+    ],
+    [
+     "password",
+     1
+    ],
+    [
+     "user_name",
+     1
+    ],
+    [
+     "national_id",
+     1
+    ],
+    [
+     "phone",
+     1
+    ],
+    [
+     "alt_phone",
+     1
+    ],
+    [
+     "member_id[]",
+     1
+    ],
+    [
+     "birth_date",
+     1
+    ],
+    [
+     "gender",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "group_name",
+     1
+    ],
+    [
+     "country_id",
+     1
+    ]
+   ],
+   "pageCount": 56
+  },
+  {
+   "action": "/management/teachers/{id}",
+   "count": 50,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "level[]",
+     3
+    ],
+    [
+     "age_student[]",
+     3
+    ],
+    [
+     "salary_type",
+     2
+    ],
+    [
+     "type",
+     1
+    ],
+    [
+     "date_range",
+     1
+    ],
+    [
+     "send_info",
+     1
+    ],
+    [
+     "first_name",
+     1
+    ],
+    [
+     "last_name",
+     1
+    ],
+    [
+     "first_name_ar",
+     1
+    ],
+    [
+     "last_name_ar",
+     1
+    ],
+    [
+     "email",
+     1
+    ],
+    [
+     "password",
+     1
+    ],
+    [
+     "user_name",
+     1
+    ],
+    [
+     "national_id",
+     1
+    ],
+    [
+     "phone",
+     1
+    ],
+    [
+     "alt_phone",
+     1
+    ],
+    [
+     "member_id[]",
+     1
+    ],
+    [
+     "birth_date",
+     1
+    ],
+    [
+     "gender",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "group_name",
+     1
+    ],
+    [
+     "currency",
+     1
+    ],
+    [
+     "fixed_salary",
+     1
+    ],
+    [
+     "hour_rate",
+     1
+    ],
+    [
+     "fine_per_hour",
+     1
+    ]
+   ],
+   "pageCount": 26
+  },
+  {
+   "action": "/management/invoices",
+   "count": 28,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "status",
+     26
+    ],
+    [
+     "date",
+     26
+    ],
+    [
+     "date_type",
+     26
+    ],
+    [
+     "currency",
+     26
+    ],
+    [
+     "gateway",
+     26
+    ],
+    [
+     "redirect_to",
+     2
+    ],
+    [
+     "serial",
+     2
+    ],
+    [
+     "due_date",
+     2
+    ],
+    [
+     "family_id",
+     2
+    ],
+    [
+     "price",
+     2
+    ],
+    [
+     "discount",
+     2
+    ],
+    [
+     "fees",
+     2
+    ],
+    [
+     "additional",
+     2
+    ],
+    [
+     "adjustment_type",
+     2
+    ],
+    [
+     "adjustment_value",
+     2
+    ],
+    [
+     "adjustment_count",
+     2
+    ],
+    [
+     "note",
+     2
+    ],
+    [
+     "paymentMethod",
+     2
+    ],
+    [
+     "sendMessage",
+     2
+    ],
+    [
+     "course_id[]",
+     1
+    ]
+   ],
+   "pageCount": 28
+  },
+  {
+   "action": "/management/accountant/store-transaction",
+   "count": 28,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "transaction_id",
+     28
+    ],
+    [
+     "date_payment",
+     28
+    ],
+    [
+     "invoiceID",
+     28
+    ],
+    [
+     "basic",
+     28
+    ],
+    [
+     "additional",
+     28
+    ],
+    [
+     "taxes",
+     28
+    ],
+    [
+     "total",
+     28
+    ],
+    [
+     "currancy",
+     28
+    ],
+    [
+     "getway",
+     28
+    ]
+   ],
+   "pageCount": 28
+  },
+  {
+   "action": "/management/teachers/{id}/compensations/{id}",
+   "count": 22,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "redirect_to",
+     6
+    ],
+    [
+     "type",
+     3
+    ],
+    [
+     "amount",
+     3
+    ],
+    [
+     "month",
+     3
+    ],
+    [
+     "year",
+     3
+    ],
+    [
+     "description",
+     3
+    ]
+   ],
+   "pageCount": 11
+  },
+  {
+   "action": "/management/home",
+   "count": 22,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     11
+    ],
+    [
+     "from_time",
+     11
+    ],
+    [
+     "to_time",
+     11
+    ],
+    [
+     "teacher_id",
+     11
+    ],
+    [
+     "family_id",
+     11
+    ],
+    [
+     "student_id",
+     11
+    ],
+    [
+     "type",
+     11
+    ],
+    [
+     "timeType",
+     11
+    ],
+    [
+     "groupByTime",
+     11
+    ],
+    [
+     "status",
+     5
+    ],
+    [
+     "helper",
+     1
+    ],
+    [
+     "trial",
+     1
+    ]
+   ],
+   "pageCount": 11
+  },
+  {
+   "action": "/management/class-feedback",
+   "count": 21,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "class_id",
+     20
+    ],
+    [
+     "feedback_note",
+     17
+    ],
+    [
+     "feedback_files[]",
+     17
+    ],
+    [
+     "teachers[]",
+     1
+    ],
+    [
+     "date_range",
+     1
+    ],
+    [
+     "user_id",
+     1
+    ]
+   ],
+   "pageCount": 21
+  },
+  {
+   "action": "/teacher/logout",
+   "count": 21,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "id",
+     21
+    ]
+   ],
+   "pageCount": 21
+  },
+  {
+   "action": "/teacher/shortcuts",
+   "count": 21,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "shortcut_title",
+     21
+    ],
+    [
+     "shortcut_link",
+     21
+    ]
+   ],
+   "pageCount": 21
+  },
+  {
+   "action": "/management/courseClasses/edit-class",
+   "count": 20,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "session_id",
+     20
+    ],
+    [
+     "family_id",
+     20
+    ],
+    [
+     "date",
+     20
+    ],
+    [
+     "time",
+     20
+    ],
+    [
+     "sendMessage",
+     20
+    ],
+    [
+     "duration",
+     20
+    ],
+    [
+     "teacher_id",
+     20
+    ],
+    [
+     "accounting_statement",
+     20
+    ]
+   ],
+   "pageCount": 20
+  },
+  {
+   "action": "/management/courseClasses/add-classes",
+   "count": 19,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "course_id",
+     19
+    ],
+    [
+     "date",
+     19
+    ],
+    [
+     "time",
+     19
+    ],
+    [
+     "duration",
+     19
+    ],
+    [
+     "teacher",
+     19
+    ],
+    [
+     "accounting_statement",
+     19
+    ],
+    [
+     "credit",
+     17
+    ]
+   ],
+   "pageCount": 17
+  },
+  {
+   "action": "/management/management/members/invoice",
+   "count": 17,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "course_id",
+     17
+    ],
+    [
+     "invoice",
+     17
+    ]
+   ],
+   "pageCount": 17
+  },
+  {
+   "action": "/management/courses/{id}/update_status",
+   "count": 17,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "course_id",
+     17
+    ],
+    [
+     "status",
+     17
+    ]
+   ],
+   "pageCount": 17
+  },
+  {
+   "action": "/management/scheduled-actions",
+   "count": 16,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "criteria[cancel_type]",
+     36
+    ],
+    [
+     "action_type",
+     16
+    ],
+    [
+     "target_id",
+     16
+    ],
+    [
+     "scheduled_date",
+     16
+    ],
+    [
+     "note",
+     16
+    ],
+    [
+     "back",
+     15
+    ],
+    [
+     "criteria[teacher_id]",
+     12
+    ],
+    [
+     "criteria[material_id]",
+     12
+    ],
+    [
+     "criteria[reschedule_date]",
+     12
+    ],
+    [
+     "criteria[reschedule_time]",
+     12
+    ],
+    [
+     "criteria[add_to_credit]",
+     12
+    ],
+    [
+     "returned_at",
+     6
+    ],
+    [
+     "schedule_auto_return",
+     4
+    ],
+    [
+     "family_target_id",
+     1
+    ],
+    [
+     "student_target_id",
+     1
+    ],
+    [
+     "cancel_classes_student_id",
+     1
+    ],
+    [
+     "activate_family_target_id",
+     1
+    ],
+    [
+     "activate_student_target_id",
+     1
+    ]
+   ],
+   "pageCount": 10
+  },
+  {
+   "action": "/management/families/{id}",
+   "count": 16,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "course_type",
+     8
+    ],
+    [
+     "send_info",
+     2
+    ],
+    [
+     "first_name",
+     2
+    ],
+    [
+     "last_name",
+     2
+    ],
+    [
+     "user_name",
+     2
+    ],
+    [
+     "first_name_ar",
+     2
+    ],
+    [
+     "last_name_ar",
+     2
+    ],
+    [
+     "password",
+     2
+    ],
+    [
+     "member_id[]",
+     2
+    ],
+    [
+     "emails",
+     2
+    ],
+    [
+     "phones",
+     2
+    ],
+    [
+     "birth_date",
+     2
+    ],
+    [
+     "join_at",
+     2
+    ],
+    [
+     "gender",
+     2
+    ],
+    [
+     "status",
+     2
+    ],
+    [
+     "group_name",
+     2
+    ],
+    [
+     "is_recurring",
+     2
+    ],
+    [
+     "auto_invoice",
+     2
+    ],
+    [
+     "is_post_payment",
+     2
+    ],
+    [
+     "payment_method",
+     2
+    ],
+    [
+     "currency",
+     2
+    ],
+    [
+     "hour_rate",
+     2
+    ],
+    [
+     "total_hours",
+     2
+    ],
+    [
+     "fees",
+     2
+    ],
+    [
+     "invoice_day",
+     2
+    ]
+   ],
+   "pageCount": 7
+  },
+  {
+   "action": "/management/courseClasses/{id}",
+   "count": 15,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "course_id",
+     15
+    ],
+    [
+     "session_id",
+     15
+    ]
+   ],
+   "pageCount": 6
+  },
+  {
+   "action": "/management/courses",
+   "count": 14,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "status[]",
+     112
+    ],
+    [
+     "type",
+     98
+    ],
+    [
+     "name",
+     14
+    ],
+    [
+     "date_range",
+     14
+    ],
+    [
+     "has_invoice",
+     14
+    ]
+   ],
+   "pageCount": 14
+  },
+  {
+   "action": "/management/courses/{id}/delete",
+   "count": 12,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 7
+  },
+  {
+   "action": "/management/export-aa",
+   "count": 11,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 11
+  },
+  {
+   "action": "/student/logout",
+   "count": 11,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "id",
+     11
+    ]
+   ],
+   "pageCount": 11
+  },
+  {
+   "action": "/management/student/{id}/delete",
+   "count": 10,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 6
+  },
+  {
+   "action": "/management/families/index/filter",
+   "count": 9,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "currency[]",
+     144
+    ],
+    [
+     "course_types[]",
+     36
+    ],
+    [
+     "is_post[]",
+     18
+    ],
+    [
+     "cost_type[]",
+     18
+    ],
+    [
+     "hour_rate_operator",
+     9
+    ],
+    [
+     "hour_rate",
+     9
+    ],
+    [
+     "children_no_operator",
+     9
+    ],
+    [
+     "children_no",
+     9
+    ],
+    [
+     "payment_methods[]",
+     9
+    ]
+   ],
+   "pageCount": 9
+  },
+  {
+   "action": "/management/update-returning",
+   "count": 9,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "id",
+     9
+    ],
+    [
+     "returned_at",
+     9
+    ],
+    [
+     "note",
+     9
+    ]
+   ],
+   "pageCount": 9
+  },
+  {
+   "action": "/management/families/feedback",
+   "count": 7,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     7
+    ],
+    [
+     "family_id",
+     6
+    ],
+    [
+     "user_id",
+     6
+    ]
+   ],
+   "pageCount": 7
+  },
+  {
+   "action": "/management/settings/payments",
+   "count": 7,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "xpay_url",
+     10
+    ],
+    [
+     "payment_method",
+     7
+    ],
+    [
+     "name",
+     7
+    ],
+    [
+     "key1",
+     7
+    ],
+    [
+     "key2",
+     5
+    ],
+    [
+     "xpay_method[]",
+     4
+    ],
+    [
+     "key3",
+     2
+    ],
+    [
+     "key4",
+     1
+    ],
+    [
+     "settings[api_key]",
+     1
+    ]
+   ],
+   "pageCount": 7
+  },
+  {
+   "action": "/management/admins/{id}",
+   "count": 6,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     2
+    ],
+    [
+     "email",
+     2
+    ],
+    [
+     "username",
+     2
+    ],
+    [
+     "phone",
+     2
+    ],
+    [
+     "password",
+     2
+    ],
+    [
+     "salary",
+     2
+    ],
+    [
+     "currency",
+     2
+    ],
+    [
+     "role",
+     2
+    ],
+    [
+     "status",
+     2
+    ],
+    [
+     "enable",
+     2
+    ]
+   ],
+   "pageCount": 3
+  },
+  {
+   "action": "/management/families/feedback/students",
+   "count": 6,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "search",
+     6
+    ],
+    [
+     "status",
+     5
+    ]
+   ],
+   "pageCount": 6
+  },
+  {
+   "action": "/teacher/student-progress",
+   "count": 5,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "learning_progress",
+     20
+    ],
+    [
+     "focus",
+     20
+    ],
+    [
+     "homework_completion",
+     20
+    ],
+    [
+     "punctuality",
+     20
+    ],
+    [
+     "rescheduled_sessions",
+     20
+    ],
+    [
+     "month",
+     5
+    ],
+    [
+     "achievements",
+     5
+    ],
+    [
+     "additional_support",
+     5
+    ],
+    [
+     "learning_objectives",
+     5
+    ],
+    [
+     "student_id",
+     5
+    ],
+    [
+     "course_id",
+     5
+    ],
+    [
+     "teacher_id",
+     5
+    ],
+    [
+     "course_name",
+     5
+    ],
+    [
+     "action",
+     5
+    ]
+   ],
+   "pageCount": 5
+  },
+  {
+   "action": "/management/accounting/transaction/session",
+   "count": 4,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "filter",
+     4
+    ],
+    [
+     "date",
+     4
+    ],
+    [
+     "teacher_id",
+     4
+    ],
+    [
+     "student_id",
+     4
+    ],
+    [
+     "family_id",
+     4
+    ],
+    [
+     "duration",
+     4
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "action": "/management/admins/appear/{id}",
+   "count": 4,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "action",
+     4
+    ],
+    [
+     "type",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/categories/families/{id}/delete",
+   "count": 4,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/payout-providers/{id}",
+   "count": 4,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "mode",
+     4
+    ],
+    [
+     "is_active",
+     4
+    ],
+    [
+     "key1",
+     4
+    ],
+    [
+     "key2",
+     4
+    ],
+    [
+     "key3",
+     4
+    ],
+    [
+     "key4",
+     2
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "action": "/management/settings/security/data/import",
+   "count": 4,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "type",
+     4
+    ],
+    [
+     "file",
+     4
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/student/{id}/stop",
+   "count": 4,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "note",
+     4
+    ],
+    [
+     "date",
+     2
+    ],
+    [
+     "schedule_return",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/teacher/classes-end",
+   "count": 4,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "class_id",
+     4
+    ],
+    [
+     "remark",
+     4
+    ],
+    [
+     "summary",
+     4
+    ],
+    [
+     "homework",
+     4
+    ],
+    [
+     "notes",
+     4
+    ],
+    [
+     "images[]",
+     4
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "action": "/teacher/classes-absent",
+   "count": 4,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "class_id",
+     4
+    ],
+    [
+     "video",
+     4
+    ],
+    [
+     "notes",
+     4
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "action": "/teacher/edit-class",
+   "count": 4,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "session_id",
+     4
+    ],
+    [
+     "parent_id",
+     4
+    ],
+    [
+     "teacher_id",
+     4
+    ],
+    [
+     "date",
+     4
+    ],
+    [
+     "time",
+     4
+    ],
+    [
+     "sendMessage",
+     4
+    ],
+    [
+     "duration",
+     4
+    ]
+   ],
+   "pageCount": 4
+  },
+  {
+   "action": "/management/admins",
+   "count": 3,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     3
+    ],
+    [
+     "email",
+     3
+    ],
+    [
+     "username",
+     3
+    ],
+    [
+     "phone",
+     3
+    ],
+    [
+     "password",
+     3
+    ],
+    [
+     "salary",
+     3
+    ],
+    [
+     "currency",
+     3
+    ],
+    [
+     "role",
+     3
+    ],
+    [
+     "status",
+     3
+    ],
+    [
+     "enable",
+     3
+    ],
+    [
+     "source_id",
+     2
+    ]
+   ],
+   "pageCount": 3
+  },
+  {
+   "action": "/management/courses/{id}/store",
+   "count": 3,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "family_hour_rate_type",
+     6
+    ],
+    [
+     "teacher_hour_rate_type",
+     6
+    ],
+    [
+     "material_id",
+     3
+    ],
+    [
+     "teacher_id",
+     3
+    ],
+    [
+     "start_date",
+     3
+    ],
+    [
+     "schedule[0][value]",
+     3
+    ],
+    [
+     "schedule[0][time]",
+     3
+    ],
+    [
+     "schedule[0][duration]",
+     3
+    ],
+    [
+     "family_hour_rate",
+     3
+    ],
+    [
+     "teacher_hour_rate",
+     3
+    ],
+    [
+     "student_cancel",
+     3
+    ],
+    [
+     "teacher_cancel",
+     3
+    ],
+    [
+     "schedule[1][value]",
+     1
+    ],
+    [
+     "schedule[1][time]",
+     1
+    ],
+    [
+     "schedule[1][duration]",
+     1
+    ],
+    [
+     "schedule[2][value]",
+     1
+    ],
+    [
+     "schedule[2][time]",
+     1
+    ],
+    [
+     "schedule[2][duration]",
+     1
+    ],
+    [
+     "update_current",
+     1
+    ],
+    [
+     "update_default",
+     1
+    ]
+   ],
+   "pageCount": 3
+  },
+  {
+   "action": "/management/materials/{id}",
+   "count": 3,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "name_ar",
+     1
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/teacher-categories/{id}",
+   "count": 3,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "description",
+     1
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/admins/categories/{id}",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "categories[]",
+     6
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/admins/permission/store",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "permisions[]",
+     340
+    ],
+    [
+     "userID",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/categories/families/{id}/assign-family",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "member_id[]",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/categories/families/{id}/update",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     2
+    ],
+    [
+     "status",
+     2
+    ],
+    [
+     "description",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/class-feedback/feedback",
+   "count": 2,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "teacher_id",
+     2
+    ],
+    [
+     "student_id",
+     2
+    ],
+    [
+     "user_id",
+     2
+    ],
+    [
+     "date_range",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/courses/{id}/store_free",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "teacher_hour_rate_type",
+     4
+    ],
+    [
+     "material_id",
+     2
+    ],
+    [
+     "teacher_id",
+     2
+    ],
+    [
+     "start_date",
+     2
+    ],
+    [
+     "schedule[0][value]",
+     2
+    ],
+    [
+     "schedule[0][time]",
+     2
+    ],
+    [
+     "schedule[0][duration]",
+     2
+    ],
+    [
+     "teacher_hour_rate",
+     2
+    ],
+    [
+     "student_cancel",
+     2
+    ],
+    [
+     "teacher_cancel",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/deactivate",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/invoice-adjustments/{id}",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/families/{id}/invoice-adjustments",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "type",
+     2
+    ],
+    [
+     "amount",
+     2
+    ],
+    [
+     "count",
+     2
+    ],
+    [
+     "note",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/location/update",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "country_id",
+     2
+    ],
+    [
+     "city_id",
+     2
+    ],
+    [
+     "type",
+     2
+    ],
+    [
+     "timezone",
+     2
+    ],
+    [
+     "timezone_diff",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/preferences/update",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "language",
+     2
+    ],
+    [
+     "auto_add_credit_to_invoice",
+     2
+    ],
+    [
+     "pw_reset_method",
+     2
+    ],
+    [
+     "whatsapp_private",
+     2
+    ],
+    [
+     "renew_unpaid_courses",
+     2
+    ],
+    [
+     "send_invoice",
+     2
+    ],
+    [
+     "stop_after",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/capabilities/update",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "can_chat",
+     2
+    ],
+    [
+     "can_see_library",
+     2
+    ],
+    [
+     "id",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/store-notifications",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "invoice_by_whatsapp",
+     4
+    ],
+    [
+     "invoice_by_email",
+     4
+    ],
+    [
+     "invoice_reminders_by_whatsapp",
+     4
+    ],
+    [
+     "invoice_reminders_by_email",
+     4
+    ],
+    [
+     "class_reminders_by_whatsapp",
+     4
+    ],
+    [
+     "class_reminders_by_email",
+     4
+    ],
+    [
+     "class_updates_by_whatsapp",
+     4
+    ],
+    [
+     "class_updates_by_email",
+     4
+    ],
+    [
+     "course_updates_by_whatsapp",
+     4
+    ],
+    [
+     "course_updates_by_email",
+     4
+    ],
+    [
+     "certificate_by_whatsapp",
+     4
+    ],
+    [
+     "certificate_by_email",
+     4
+    ],
+    [
+     "family_status_by_whatsapp",
+     4
+    ],
+    [
+     "family_status_by_email",
+     4
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/suspend",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     2
+    ],
+    [
+     "schedule_return",
+     2
+    ],
+    [
+     "note",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/stop",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "note",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/families/{id}/activate",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/library",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     2
+    ],
+    [
+     "type_id",
+     2
+    ],
+    [
+     "cat_id",
+     1
+    ],
+    [
+     "type",
+     1
+    ],
+    [
+     "category_id",
+     1
+    ],
+    [
+     "file",
+     1
+    ],
+    [
+     "thumbnail",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests",
+   "count": 2,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "first_name",
+     1
+    ],
+    [
+     "last_name",
+     1
+    ],
+    [
+     "email",
+     1
+    ],
+    [
+     "phone",
+     1
+    ],
+    [
+     "friends_number",
+     1
+    ],
+    [
+     "classes_Duration",
+     1
+    ],
+    [
+     "hear_from",
+     1
+    ],
+    [
+     "classes_count",
+     1
+    ],
+    [
+     "gender",
+     1
+    ],
+    [
+     "age",
+     1
+    ],
+    [
+     "parent_age",
+     1
+    ],
+    [
+     "language",
+     1
+    ],
+    [
+     "timezone",
+     1
+    ],
+    [
+     "trial_date",
+     1
+    ],
+    [
+     "trial_time",
+     1
+    ],
+    [
+     "coupone_code",
+     1
+    ],
+    [
+     "country_id",
+     1
+    ],
+    [
+     "course_name",
+     1
+    ],
+    [
+     "note",
+     1
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/new-requests/scheduled-trials/completed",
+   "count": 2,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/payouts/approve",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/store-request-schedule",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "student_id",
+     4
+    ],
+    [
+     "request_type",
+     4
+    ],
+    [
+     "course_id",
+     4
+    ],
+    [
+     "parent_id",
+     2
+    ],
+    [
+     "family_id",
+     2
+    ],
+    [
+     "duration",
+     2
+    ],
+    [
+     "accounting_statement",
+     2
+    ],
+    [
+     "date",
+     2
+    ],
+    [
+     "time",
+     2
+    ],
+    [
+     "total_hours",
+     2
+    ],
+    [
+     "start_date",
+     2
+    ],
+    [
+     "schedule[0][value]",
+     2
+    ],
+    [
+     "schedule[0][time]",
+     2
+    ],
+    [
+     "schedule[0][duration]",
+     2
+    ],
+    [
+     "schedule[1][value]",
+     2
+    ],
+    [
+     "schedule[1][time]",
+     2
+    ],
+    [
+     "schedule[1][duration]",
+     2
+    ],
+    [
+     "schedule[2][value]",
+     2
+    ],
+    [
+     "schedule[2][time]",
+     2
+    ],
+    [
+     "schedule[2][duration]",
+     2
+    ],
+    [
+     "schedule[3][value]",
+     2
+    ],
+    [
+     "schedule[3][time]",
+     2
+    ],
+    [
+     "schedule[3][duration]",
+     2
+    ],
+    [
+     "schedule[4][value]",
+     2
+    ],
+    [
+     "schedule[4][time]",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/settings/payments/{id}",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "payment_method",
+     1
+    ],
+    [
+     "name",
+     1
+    ],
+    [
+     "key1",
+     1
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/settings/email-accounts",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "is_active",
+     4
+    ],
+    [
+     "is_default",
+     4
+    ],
+    [
+     "smtp_host",
+     2
+    ],
+    [
+     "smtp_port",
+     2
+    ],
+    [
+     "smtp_encryption",
+     2
+    ],
+    [
+     "email_address",
+     2
+    ],
+    [
+     "smtp_username",
+     2
+    ],
+    [
+     "smtp_password",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/settings/email-accounts/settings",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "smtp_host",
+     2
+    ],
+    [
+     "smtp_port",
+     2
+    ],
+    [
+     "smtp_encryption",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/upload-certificate",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "fileInput",
+     2
+    ],
+    [
+     "student_id",
+     2
+    ],
+    [
+     "course_id",
+     2
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/create-certificate",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "teacher_id",
+     2
+    ],
+    [
+     "student_id",
+     2
+    ],
+    [
+     "course_id",
+     2
+    ],
+    [
+     "student_name",
+     2
+    ],
+    [
+     "teacher_name",
+     2
+    ],
+    [
+     "description",
+     2
+    ],
+    [
+     "date_certificate",
+     2
+    ],
+    [
+     "pdfcertificat_id",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/student/{id}/store",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     2
+    ],
+    [
+     "name_ar",
+     2
+    ],
+    [
+     "language",
+     2
+    ],
+    [
+     "gender",
+     2
+    ],
+    [
+     "birth_date",
+     2
+    ],
+    [
+     "teacher_note",
+     2
+    ],
+    [
+     "admin_note",
+     2
+    ],
+    [
+     "hasTrial",
+     2
+    ],
+    [
+     "material",
+     2
+    ],
+    [
+     "teacher_id",
+     2
+    ],
+    [
+     "duration",
+     2
+    ],
+    [
+     "accounting_statement",
+     2
+    ],
+    [
+     "date",
+     2
+    ],
+    [
+     "time",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/student/{id}/update",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     2
+    ],
+    [
+     "name_ar",
+     2
+    ],
+    [
+     "language",
+     2
+    ],
+    [
+     "gender",
+     2
+    ],
+    [
+     "birth_date",
+     2
+    ],
+    [
+     "teacher_note",
+     2
+    ],
+    [
+     "admin_note",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/student/{id}/trial/store",
+   "count": 2,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "studies_ages",
+     6
+    ],
+    [
+     "student_id",
+     2
+    ],
+    [
+     "material_id",
+     2
+    ],
+    [
+     "duration",
+     2
+    ],
+    [
+     "accounting_statement",
+     2
+    ],
+    [
+     "date",
+     2
+    ],
+    [
+     "time",
+     2
+    ],
+    [
+     "teacher_id",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/teacher-feedback",
+   "count": 2,
+   "methods": [
+    "get",
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "teachers[]",
+     1
+    ],
+    [
+     "date_month",
+     1
+    ],
+    [
+     "date_year",
+     1
+    ],
+    [
+     "date",
+     1
+    ],
+    [
+     "teacher_id",
+     1
+    ],
+    [
+     "feedback_note",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/teacher/update-result",
+   "count": 2,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     2
+    ],
+    [
+     "filter",
+     2
+    ]
+   ],
+   "pageCount": 2
+  },
+  {
+   "action": "/management/accounting",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/accounting/transaction/invoices",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "family_id",
+     1
+    ],
+    [
+     "date",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/accounting/transaction/salary",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/analysis-invoices",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "status[]",
+     3
+    ],
+    [
+     "date",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/banks",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/categories/families/store",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "description",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/courses/{id}/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "family_hour_rate_type",
+     2
+    ],
+    [
+     "teacher_hour_rate_type",
+     2
+    ],
+    [
+     "material_id",
+     1
+    ],
+    [
+     "teacher_id",
+     1
+    ],
+    [
+     "start_date",
+     1
+    ],
+    [
+     "delete_old_sessions",
+     1
+    ],
+    [
+     "schedule[0][value]",
+     1
+    ],
+    [
+     "schedule[0][time]",
+     1
+    ],
+    [
+     "schedule[0][duration]",
+     1
+    ],
+    [
+     "schedule[1][value]",
+     1
+    ],
+    [
+     "schedule[1][time]",
+     1
+    ],
+    [
+     "schedule[1][duration]",
+     1
+    ],
+    [
+     "schedule[2][value]",
+     1
+    ],
+    [
+     "schedule[2][time]",
+     1
+    ],
+    [
+     "schedule[2][duration]",
+     1
+    ],
+    [
+     "family_hour_rate",
+     1
+    ],
+    [
+     "teacher_hour_rate",
+     1
+    ],
+    [
+     "update_current",
+     1
+    ],
+    [
+     "update_default",
+     1
+    ],
+    [
+     "student_cancel",
+     1
+    ],
+    [
+     "teacher_cancel",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/expense",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "head_id",
+     1
+    ],
+    [
+     "user_id",
+     1
+    ],
+    [
+     "is_income",
+     1
+    ],
+    [
+     "description",
+     1
+    ],
+    [
+     "reason",
+     1
+    ],
+    [
+     "amount",
+     1
+    ],
+    [
+     "currency",
+     1
+    ],
+    [
+     "date",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/families",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "course_type",
+     4
+    ],
+    [
+     "send_info",
+     1
+    ],
+    [
+     "first_name",
+     1
+    ],
+    [
+     "last_name",
+     1
+    ],
+    [
+     "user_name",
+     1
+    ],
+    [
+     "first_name_ar",
+     1
+    ],
+    [
+     "last_name_ar",
+     1
+    ],
+    [
+     "password",
+     1
+    ],
+    [
+     "member_id[]",
+     1
+    ],
+    [
+     "emails",
+     1
+    ],
+    [
+     "phones",
+     1
+    ],
+    [
+     "birth_date",
+     1
+    ],
+    [
+     "join_at",
+     1
+    ],
+    [
+     "gender",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "group_name",
+     1
+    ],
+    [
+     "country_id",
+     1
+    ],
+    [
+     "city_id",
+     1
+    ],
+    [
+     "timezone",
+     1
+    ],
+    [
+     "timezone_offset",
+     1
+    ],
+    [
+     "is_recurring",
+     1
+    ],
+    [
+     "auto_invoice",
+     1
+    ],
+    [
+     "is_post_payment",
+     1
+    ],
+    [
+     "payment_method",
+     1
+    ],
+    [
+     "currency",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/family/feedback-categories",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "description",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/forms/colors/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "form_id",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/forms",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "fields[1][is_required]",
+     2
+    ],
+    [
+     "form_name",
+     1
+    ],
+    [
+     "day",
+     1
+    ],
+    [
+     "fields[1][label]",
+     1
+    ],
+    [
+     "fields[1][type]",
+     1
+    ],
+    [
+     "fields[1][options][]",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/forms/students",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "teacher_id",
+     1
+    ],
+    [
+     "student_id",
+     1
+    ],
+    [
+     "has_report",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/groups",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "start_date",
+     1
+    ],
+    [
+     "teacher",
+     1
+    ],
+    [
+     "t_hour_rate",
+     1
+    ],
+    [
+     "students[]",
+     1
+    ],
+    [
+     "s_hour_rate",
+     1
+    ],
+    [
+     "course_id",
+     1
+    ],
+    [
+     "suggested_total_hours",
+     1
+    ],
+    [
+     "schedule[0][value]",
+     1
+    ],
+    [
+     "schedule[0][time]",
+     1
+    ],
+    [
+     "schedule[0][duration]",
+     1
+    ],
+    [
+     "schedule[1][value]",
+     1
+    ],
+    [
+     "schedule[1][time]",
+     1
+    ],
+    [
+     "schedule[1][duration]",
+     1
+    ],
+    [
+     "schedule[2][value]",
+     1
+    ],
+    [
+     "schedule[2][time]",
+     1
+    ],
+    [
+     "schedule[2][duration]",
+     1
+    ],
+    [
+     "schedule[3][value]",
+     1
+    ],
+    [
+     "schedule[3][time]",
+     1
+    ],
+    [
+     "schedule[3][duration]",
+     1
+    ],
+    [
+     "schedule[4][value]",
+     1
+    ],
+    [
+     "schedule[4][time]",
+     1
+    ],
+    [
+     "schedule[4][duration]",
+     1
+    ],
+    [
+     "schedule[5][value]",
+     1
+    ],
+    [
+     "schedule[5][time]",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/heads",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/materials",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "name_ar",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/CONTACTING",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/DUPLICAT",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/NO_RESPONSE",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/PENDING",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/QUALIFIED",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/TEACHER",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/TRIAL_MISSED",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/filter/TRIAL_TAKEN",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/new-requests/requests",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/pdf",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "textAlign",
+     4
+    ],
+    [
+     "json_data",
+     1
+    ],
+    [
+     "name",
+     1
+    ],
+    [
+     "background",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/profile/edit",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "onlineImage",
+     1
+    ],
+    [
+     "image",
+     1
+    ],
+    [
+     "name",
+     1
+    ],
+    [
+     "email",
+     1
+    ],
+    [
+     "username",
+     1
+    ],
+    [
+     "password",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/profile/show",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "email",
+     1
+    ],
+    [
+     "username",
+     1
+    ],
+    [
+     "password",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/public-advertisement-submit",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "type[]",
+     2
+    ],
+    [
+     "private",
+     1
+    ],
+    [
+     "message",
+     1
+    ],
+    [
+     "media[]",
+     1
+    ],
+    [
+     "expire_at",
+     1
+    ],
+    [
+     "category_selected[]",
+     1
+    ],
+    [
+     "student_category_selected[]",
+     1
+    ],
+    [
+     "country_id",
+     1
+    ],
+    [
+     "hours",
+     1
+    ],
+    [
+     "language",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/public-holiday-submit",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "from_date",
+     1
+    ],
+    [
+     "from_time",
+     1
+    ],
+    [
+     "to_date",
+     1
+    ],
+    [
+     "to_time",
+     1
+    ],
+    [
+     "category_selected[]",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/payouts",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/salaries",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "month",
+     1
+    ],
+    [
+     "date_range",
+     1
+    ],
+    [
+     "generateteacher",
+     1
+    ],
+    [
+     "allteachers",
+     1
+    ],
+    [
+     "teachers[]",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/update-result",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "filter",
+     1
+    ],
+    [
+     "teacher_id",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/search-available-teacher",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "from",
+     1
+    ],
+    [
+     "to",
+     1
+    ],
+    [
+     "category_selected[]",
+     1
+    ],
+    [
+     "filter_by_available",
+     1
+    ],
+    [
+     "filter_by_courses",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/sessions_analysis",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "from_time",
+     1
+    ],
+    [
+     "to_time",
+     1
+    ],
+    [
+     "teacher_id",
+     1
+    ],
+    [
+     "student_id",
+     1
+    ],
+    [
+     "type",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/settings/customisation/personalisation",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "theme",
+     3
+    ],
+    [
+     "container_layout",
+     2
+    ],
+    [
+     "sidebar_type",
+     2
+    ],
+    [
+     "card_style",
+     2
+    ],
+    [
+     "color_scheme",
+     1
+    ],
+    [
+     "secondary_color_scheme",
+     1
+    ],
+    [
+     "class_statuses_colors[pending]",
+     1
+    ],
+    [
+     "class_statuses_colors[waiting]",
+     1
+    ],
+    [
+     "class_statuses_colors[teacher-absent]",
+     1
+    ],
+    [
+     "class_statuses_colors[student-absent]",
+     1
+    ],
+    [
+     "class_statuses_colors[teacher-cancel]",
+     1
+    ],
+    [
+     "class_statuses_colors[student-cancel]",
+     1
+    ],
+    [
+     "class_statuses_colors[admin-cancel]",
+     1
+    ],
+    [
+     "class_statuses_colors[attend]",
+     1
+    ],
+    [
+     "class_statuses_colors[reschedule]",
+     1
+    ],
+    [
+     "class_statuses_colors[running]",
+     1
+    ],
+    [
+     "class_statuses_colors[makeup]",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/settings/general/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "company_name",
+     1
+    ],
+    [
+     "company_name_ar",
+     1
+    ],
+    [
+     "domain",
+     1
+    ],
+    [
+     "email_info",
+     1
+    ],
+    [
+     "phone",
+     1
+    ],
+    [
+     "whatsapp",
+     1
+    ],
+    [
+     "logo",
+     1
+    ],
+    [
+     "country_id",
+     1
+    ],
+    [
+     "city",
+     1
+    ],
+    [
+     "timezone",
+     1
+    ],
+    [
+     "address",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/settings/general/teachers/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "settings_data[1]",
+     1
+    ],
+    [
+     "salary_period_type",
+     1
+    ],
+    [
+     "salary_period_day",
+     1
+    ],
+    [
+     "applayFins",
+     1
+    ],
+    [
+     "fin[10]",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/settings/general/courses-classes/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "send_plan_report",
+     2
+    ],
+    [
+     "new_course_status",
+     1
+    ],
+    [
+     "renew",
+     1
+    ],
+    [
+     "stop_after",
+     1
+    ],
+    [
+     "teacher_cancel_enable",
+     1
+    ],
+    [
+     "student_cancel_enable",
+     1
+    ],
+    [
+     "auto_makeup",
+     1
+    ],
+    [
+     "auto_add_makeup_to_credit",
+     1
+    ],
+    [
+     "auto_add_no_makeup_to_credit",
+     1
+    ],
+    [
+     "classes_not_closed",
+     1
+    ],
+    [
+     "classes_not_closed_hours",
+     1
+    ],
+    [
+     "teacher_cancel_before_class",
+     1
+    ],
+    [
+     "student_cancel_before_class",
+     1
+    ],
+    [
+     "teacher_absent_student",
+     1
+    ],
+    [
+     "rate_student_absent",
+     1
+    ],
+    [
+     "show_enter_btn",
+     1
+    ],
+    [
+     "teacher_can_edit_class",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/settings/general/accessibility/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "tfa",
+     1
+    ],
+    [
+     "otp",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/settings/notification/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "teacher_class_update_statuses[]",
+     9
+    ],
+    [
+     "student_class_update_statuses[]",
+     9
+    ],
+    [
+     "student_course_updates_statuses[]",
+     3
+    ],
+    [
+     "teacher_course_updates_statuses[]",
+     2
+    ],
+    [
+     "system_notifications",
+     1
+    ],
+    [
+     "appnotifiy",
+     1
+    ],
+    [
+     "course_updates",
+     1
+    ],
+    [
+     "teacher_course_updates",
+     1
+    ],
+    [
+     "student_course_updates",
+     1
+    ],
+    [
+     "class_updates",
+     1
+    ],
+    [
+     "teacher_class_updates_type",
+     1
+    ],
+    [
+     "student_class_updates_type",
+     1
+    ],
+    [
+     "class_reminder",
+     1
+    ],
+    [
+     "teacher_reminder_type",
+     1
+    ],
+    [
+     "hours_to_reminder_teacher",
+     1
+    ],
+    [
+     "teacher_daily_class_reminder",
+     1
+    ],
+    [
+     "teacher_delay_reminder",
+     1
+    ],
+    [
+     "teacher_reminder",
+     1
+    ],
+    [
+     "student_reminder_type",
+     1
+    ],
+    [
+     "hours_to_reminder_student",
+     1
+    ],
+    [
+     "student_send_reschedule_reminders",
+     1
+    ],
+    [
+     "teacher_send_manual_reminder",
+     1
+    ],
+    [
+     "student_reminder",
+     1
+    ],
+    [
+     "invoice",
+     1
+    ],
+    [
+     "invoice_reminder",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/staff-salaries",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "staff_members[]",
+     3
+    ],
+    [
+     "month",
+     1
+    ],
+    [
+     "date_range",
+     1
+    ],
+    [
+     "generatestaff",
+     1
+    ],
+    [
+     "allstaff",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teacher-categories/{id}/store-members",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "member_id[]",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teacher-categories",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "name",
+     1
+    ],
+    [
+     "status",
+     1
+    ],
+    [
+     "description",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teacher-feedback/category",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "category_id",
+     1
+    ],
+    [
+     "name",
+     1
+    ],
+    [
+     "description",
+     1
+    ],
+    [
+     "status",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teacher-feedback/feedback",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "teacher_id",
+     1
+    ],
+    [
+     "year",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teacher-on-vacation/{id}",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teachers/{id}/deactivate",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "fragment_id",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teachers/{id}/location/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "country_id",
+     1
+    ],
+    [
+     "city_id",
+     1
+    ],
+    [
+     "type",
+     1
+    ],
+    [
+     "timezone",
+     1
+    ],
+    [
+     "timezone_diff",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teachers/{id}/preferences/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "language",
+     1
+    ],
+    [
+     "pw_reset_method",
+     1
+    ],
+    [
+     "whatsapp_private",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teachers/{id}/capabilities/update",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "can_chat",
+     1
+    ],
+    [
+     "can_see_library",
+     1
+    ],
+    [
+     "can_edit_schedule",
+     1
+    ],
+    [
+     "can_edit_class",
+     1
+    ],
+    [
+     "id",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teacher/teacher-notifications/{id}",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "course_updates_by_whatsapp",
+     2
+    ],
+    [
+     "course_updates_by_email",
+     2
+    ],
+    [
+     "class_reminders_by_whatsapp",
+     2
+    ],
+    [
+     "class_reminders_by_email",
+     2
+    ],
+    [
+     "class_updates_by_whatsapp",
+     2
+    ],
+    [
+     "class_updates_by_email",
+     2
+    ],
+    [
+     "salary_by_whatsapp",
+     2
+    ],
+    [
+     "salary_by_email",
+     2
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teachers/{id}/compensations",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "type",
+     1
+    ],
+    [
+     "amount",
+     1
+    ],
+    [
+     "month",
+     1
+    ],
+    [
+     "year",
+     1
+    ],
+    [
+     "description",
+     1
+    ],
+    [
+     "redirect_to",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/management/teachers_details",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "topFields": [
+    [
+     "date_range",
+     1
+    ],
+    [
+     "sort_by",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/teacher/profile-edit",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "onlineImage",
+     1
+    ],
+    [
+     "image",
+     1
+    ],
+    [
+     "first_name",
+     1
+    ],
+    [
+     "last_name",
+     1
+    ],
+    [
+     "email",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/teacher/update-teacher-password",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "old_password",
+     1
+    ],
+    [
+     "new_password",
+     1
+    ],
+    [
+     "confirm_password",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/teacher/certificate-request",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "course_id",
+     1
+    ],
+    [
+     "description",
+     1
+    ],
+    [
+     "date_certificate",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/teacher/timetable",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "topFields": [
+    [
+     "course_id",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/student/profile-edit",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "onlineImage",
+     1
+    ],
+    [
+     "image",
+     1
+    ],
+    [
+     "first_name",
+     1
+    ],
+    [
+     "last_name",
+     1
+    ],
+    [
+     "email",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/student/update-password",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "old_password",
+     1
+    ],
+    [
+     "new_password",
+     1
+    ],
+    [
+     "confirm_password",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/student/request-trial",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "request_type",
+     2
+    ],
+    [
+     "name",
+     1
+    ],
+    [
+     "age",
+     1
+    ],
+    [
+     "language",
+     1
+    ],
+    [
+     "gender",
+     1
+    ],
+    [
+     "student_id",
+     1
+    ],
+    [
+     "date",
+     1
+    ],
+    [
+     "time",
+     1
+    ],
+    [
+     "duration",
+     1
+    ],
+    [
+     "course",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/student/student-history-fillter",
+   "count": 1,
+   "methods": [
+    "get"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "filter",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/student/feedback",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "student_name",
+     1
+    ],
+    [
+     "teacher_name",
+     1
+    ],
+    [
+     "teacher_rating",
+     1
+    ],
+    [
+     "class_interactive",
+     1
+    ],
+    [
+     "see_hear",
+     1
+    ],
+    [
+     "like_teacher",
+     1
+    ],
+    [
+     "complain",
+     1
+    ],
+    [
+     "additional_comment",
+     1
+    ]
+   ],
+   "pageCount": 1
+  },
+  {
+   "action": "/student/upload-files",
+   "count": 1,
+   "methods": [
+    "post"
+   ],
+   "roles": [
+    "family"
+   ],
+   "topFields": [
+    [
+     "session_id",
+     1
+    ],
+    [
+     "files[]",
+     1
+    ],
+    [
+     "audio",
+     1
+    ]
+   ],
+   "pageCount": 1
+  }
+ ],
+ "tables_distinct": [
+  {
+   "columns": [
+    "#",
+    "Teacher Name",
+    "Status",
+    "All students has course",
+    "Total Hours",
+    "Phone number",
+    "Schedule",
+    "Country",
+    "Created at",
+    "Settings"
+   ],
+   "count": 55,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 55
+  },
+  {
+   "columns": [
+    "#",
+    "Ordered Number",
+    "Due Date",
+    "Parent",
+    "Payment Date",
+    "Payment Id",
+    "Total Price",
+    "Total: (AED)",
+    "Status",
+    "Actions"
+   ],
+   "count": 26,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 26
+  },
+  {
+   "columns": [
+    "Category",
+    "Percentage"
+   ],
+   "count": 18,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 18
+  },
+  {
+   "columns": [
+    "Student",
+    "Teacher",
+    "Duration",
+    "Week Days",
+    "Time",
+    "Week Days",
+    "Time"
+   ],
+   "count": 18,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 18
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Teacher Name",
+    "Date",
+    "Total Hours",
+    "Status",
+    "Invoice",
+    "Price",
+    "Actions"
+   ],
+   "count": 14,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 14
+  },
+  {
+   "columns": [
+    "#",
+    "Class Time",
+    "Student/Group Name",
+    "Teacher Name",
+    "Course Details",
+    "Left hours",
+    "Class Status",
+    "Actions"
+   ],
+   "count": 11,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 11
+  },
+  {
+   "columns": [
+    "#",
+    "Family name",
+    "Phone number",
+    "Join Date",
+    "User Name",
+    "Course Type",
+    "No. Children",
+    "Country",
+    "Hour Rate",
+    "Total Hours",
+    "Returned date",
+    "Actions"
+   ],
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 9
+  },
+  {
+   "columns": [
+    "#",
+    "Date",
+    "Parent name",
+    "E-mail",
+    "Phone number",
+    "Status",
+    "Actions"
+   ],
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 9
+  },
+  {
+   "columns": [
+    "Name",
+    "Age"
+   ],
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 9
+  },
+  {
+   "columns": [
+    "#",
+    "Date",
+    "Users",
+    "All Notes"
+   ],
+   "count": 9,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 9
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Parent name",
+    "Timezone",
+    "Whatsapp Group",
+    "Language",
+    "Gender",
+    "Age",
+    ""
+   ],
+   "count": 8,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 8
+  },
+  {
+   "columns": [
+    "Currency",
+    "Code",
+    "Rate"
+   ],
+   "count": 7,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 7
+  },
+  {
+   "columns": [
+    "#",
+    "Account",
+    "Link"
+   ],
+   "count": 6,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 6
+  },
+  {
+   "columns": [
+    "#",
+    "Added by",
+    "Level",
+    "Text",
+    "Status",
+    "Created at"
+   ],
+   "count": 6,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 6
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "Status",
+    "Last Feedback",
+    "Next Meeting",
+    "Meeting Manager",
+    "Actions"
+   ],
+   "count": 6,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 6
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "Number Of Family",
+    "Key 1",
+    "Key 2",
+    "Settings"
+   ],
+   "count": 6,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 6
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Family",
+    "Teacher Name",
+    "Admin Date",
+    "Duration",
+    "Student",
+    "Teacher",
+    "Profit",
+    "Status"
+   ],
+   "count": 4,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 4
+  },
+  {
+   "columns": [
+    "Student",
+    "Status",
+    "Teacher Name",
+    "course details",
+    "Subscription",
+    "Options"
+   ],
+   "count": 4,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 4
+  },
+  {
+   "columns": [
+    "#",
+    "Select All",
+    "Teacher Name"
+   ],
+   "count": 4,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 4
+  },
+  {
+   "columns": [
+    "Column Name",
+    "Format / Example"
+   ],
+   "count": 4,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Class Time",
+    "Student Name",
+    "Course Name",
+    "Class Status",
+    "History",
+    "Action"
+   ],
+   "count": 4,
+   "roles": [
+    "teacher"
+   ],
+   "pageCount": 4
+  },
+  {
+   "columns": [
+    "Class Date & Time",
+    "Teacher Name",
+    "Show"
+   ],
+   "count": 4,
+   "roles": [
+    "family",
+    "teacher"
+   ],
+   "pageCount": 4
+  },
+  {
+   "columns": [
+    "Categorization",
+    "WhatsApp",
+    "E-mail"
+   ],
+   "count": 3,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 3
+  },
+  {
+   "columns": [
+    "#",
+    "Day",
+    "Date",
+    "Time Student Timezone",
+    "Duration",
+    "Status"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "Payment Id",
+    "Payment Date",
+    "Due Date",
+    "Amount",
+    "Status",
+    "Actions"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "Biller Name",
+    "Serial",
+    "Amount",
+    "Status",
+    "Actions"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "value",
+    "invoices_count",
+    "Type",
+    "invoices",
+    "Note",
+    "Actions"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "session",
+    "Student",
+    "Teacher",
+    "Duration",
+    "Actions"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Meeting Date",
+    "Meeting Time",
+    "Meeting Manager",
+    "Family Members",
+    "Status",
+    "Action"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "Description",
+    "Status",
+    "Settings"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "Start Date",
+    "Serial",
+    "Item",
+    "Student",
+    "Price",
+    ""
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "Teacher",
+    "Date",
+    "Duration",
+    "Status",
+    "Actions"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "Rank",
+    "Teacher",
+    "Trials"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "",
+    "#",
+    "Teacher",
+    "Amount",
+    "Method",
+    "Status",
+    "Month",
+    "Requested at",
+    ""
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Teacher Name"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Teacher Name",
+    "Message from teacher",
+    "Options"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Email Address",
+    "Default",
+    "Status",
+    "Settings"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Family name",
+    "Phone number",
+    "Group Name",
+    "Status"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "certificate",
+    "Options"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Month",
+    "Teacher Name",
+    "Course Name",
+    "View",
+    "Delete",
+    "Edit",
+    "Approve"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "Student Name",
+    "Status",
+    "Course Name",
+    "Course Status",
+    "Teacher"
+   ],
+   "count": 2,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Name",
+    "Total:",
+    "Pending",
+    "Overdue",
+    "Completed",
+    "Average"
+   ],
+   "count": 2,
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "No Teachers"
+   ],
+   "count": 2,
+   "roles": [
+    "family"
+   ],
+   "pageCount": 2
+  },
+  {
+   "columns": [
+    "#",
+    "Serial",
+    "Invoice Date",
+    "Total Net Price",
+    "Total Additions",
+    "Discount Value",
+    "Fees Value",
+    "Other Effects",
+    "Final Total Price",
+    "Paid At",
+    "Family"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Month",
+    "Teachers Total Salary",
+    "Staff Total Salary"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Name",
+    "User Name",
+    "Phone number",
+    "Role",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Month",
+    "Expected Revenue",
+    "Actual Revenue",
+    "Expected Net Profit",
+    "Actual Net Profit",
+    "Teachers Salaries",
+    "Staff Salaries",
+    "Expenses",
+    "Total Expenses"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Family name",
+    "Paid",
+    "Due",
+    "Overdue"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Bank Name",
+    "Settings"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "Description",
+    "Status",
+    "Count",
+    "Settings"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Course Name",
+    "Teacher Name",
+    "Description",
+    "Date",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Teacher Name",
+    "Percentage",
+    "session count"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Student Name",
+    "\u0645\u062d\u0645\u062f \u0627\u062d\u0645\u062f",
+    "Parent name",
+    "abdo ahmed"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Serial Number",
+    "Eg91718"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Class Date & Time Student",
+    "Teacher Name",
+    "Duration Price",
+    "Course Details",
+    "Status",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Name of Income or Outcome",
+    "Value",
+    "Currency",
+    "Description",
+    "Date",
+    "Reason",
+    "Name of Executor",
+    "Transaction Type",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Parents",
+    "Manager",
+    "Meeting Date",
+    "Meeting Time",
+    "Meeting Manager",
+    "Status",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Student:",
+    ""
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Manager",
+    "\u2014"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Student",
+    "Teacher"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Form Title",
+    "Questions",
+    "Responses",
+    "Default",
+    "Status",
+    "Created at",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Parent name",
+    "Teacher",
+    "has report"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Start Date",
+    "Group Name",
+    "Teacher Name",
+    "Teacher rate",
+    "Student rate",
+    "Schedule",
+    "Status",
+    "Options"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "Status",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Total Due:",
+    "EUR 30.90"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Total Due:",
+    "GBP 0.00"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Book Name",
+    "Category",
+    "Published at",
+    "Views",
+    "Downloads",
+    "Status",
+    "View",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Category name",
+    "Total of material",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "name_ar",
+    "Settings"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Parent",
+    "Status"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Method",
+    "Mode",
+    "Active",
+    "Webhook URL",
+    ""
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Certificate Name",
+    "Background",
+    "Certificates",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Select All",
+    "Student Name"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "",
+    "#",
+    "Teacher Name",
+    "Cash Number",
+    "Fixed",
+    "plus",
+    "minus",
+    "Fine",
+    "Gift",
+    "Hour Rate",
+    "Total:",
+    "Total: (EUR)",
+    "Salary Type",
+    "Status",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Name",
+    "",
+    "Hours",
+    "",
+    "Hour Rate",
+    ""
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Student",
+    "Parent",
+    "Course Name",
+    "Schedule",
+    "Status",
+    "Requests",
+    ""
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Student",
+    "Parent",
+    "Course Name",
+    "Date",
+    "Time",
+    "Duration",
+    "Status",
+    "Requests",
+    ""
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Action Type",
+    "Target",
+    "Scheduled Date",
+    "Status",
+    "Created by",
+    "Executed At",
+    "Result",
+    "Note",
+    "Settings"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "Number Of Family",
+    "Client ID",
+    "Client Secret",
+    "Settings"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Country Code",
+    "Country Name"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Name",
+    "Cash Number",
+    "Fine",
+    "Gift",
+    "Total:",
+    "Total: (EUR)",
+    "Status",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Serial",
+    "Start Date",
+    "Teacher",
+    "Material",
+    "Total Hours",
+    "Status",
+    "Certificates",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Date & Time (Student time)",
+    "Teacher Name",
+    "Course Name/Dur",
+    "Status",
+    "History",
+    "Settings"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Teacher Name",
+    "Percentage",
+    "Note",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Student Name",
+    "Status",
+    "Course Name",
+    "Course Status",
+    "Subscription"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Date & Time",
+    "Student",
+    "Course & Duration",
+    "Paid",
+    "Status"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Month",
+    "Year",
+    "Amount",
+    "Type",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Date",
+    "Amount",
+    "Type",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Date",
+    "Fixed",
+    "Classes",
+    "Hours",
+    "Fine",
+    "Gift",
+    "Total:",
+    "Status",
+    "Actions"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Teacher Name",
+    "Cancel",
+    "Absent",
+    "Attend"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Time Zone",
+    "Affected Accounts",
+    "Next Change Date",
+    "Current Offset (UTC)",
+    "Upcoming Offset (UTC)",
+    "Offset System"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Added by",
+    "Level",
+    "Text",
+    "Class",
+    "Status",
+    "Created at",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "admin"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Course Name",
+    "History",
+    "Schedule",
+    "Report For Student",
+    "all plans",
+    "monthly plan"
+   ],
+   "count": 1,
+   "roles": [
+    "teacher"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Month",
+    "Parent name",
+    "Student Name",
+    "Course Name",
+    "View",
+    "Approve"
+   ],
+   "count": 1,
+   "roles": [
+    "teacher"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Fixed",
+    "Attended",
+    "Student Absent",
+    "Teacher Absent",
+    "Trials Attended",
+    "Trials Student Absent",
+    "Trials Teacher Absent",
+    "Fine",
+    "Gift",
+    "Hour Rate",
+    "Total:",
+    "Status"
+   ],
+   "count": 1,
+   "roles": [
+    "teacher"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Country",
+    "Report For Student"
+   ],
+   "count": 1,
+   "roles": [
+    "teacher"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Country",
+    "Course Name",
+    "History",
+    "Schedule",
+    "Report For Student",
+    "all plans",
+    "certificate"
+   ],
+   "count": 1,
+   "roles": [
+    "teacher"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Pending",
+    "Attended",
+    "Absent",
+    "Cancel",
+    "Paid Duration",
+    "Price",
+    "session",
+    "Trial",
+    "Student",
+    "Teacher",
+    "Student",
+    "Teacher",
+    "Normal",
+    "Custom",
+    "Normal",
+    "Custom",
+    "Absent",
+    "Total:",
+    "Paid",
+    "Paid if continue",
+    "Free"
+   ],
+   "count": 1,
+   "roles": [
+    "teacher"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Serial No",
+    "Month-Year",
+    "Due Date",
+    "Course",
+    "Amount",
+    "Status",
+    ""
+   ],
+   "count": 1,
+   "roles": [
+    "family"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Meeting Date",
+    "Meeting Time",
+    "Meeting Manager",
+    "Family Members",
+    "Action"
+   ],
+   "count": 1,
+   "roles": [
+    "family"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Student Name",
+    "Status",
+    "Teacher Name",
+    "Course Name",
+    "Subscription",
+    "History",
+    "Feedback About Course"
+   ],
+   "count": 1,
+   "roles": [
+    "family"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "#",
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+   ],
+   "count": 1,
+   "roles": [
+    "family"
+   ],
+   "pageCount": 1
+  },
+  {
+   "columns": [
+    "Class Date",
+    "Class Time",
+    "Student Name",
+    "Teacher Name",
+    "Course Name",
+    "Subscription",
+    "Class Status",
+    "History",
+    "Files",
+    ""
+   ],
+   "count": 1,
+   "roles": [
+    "family"
+   ],
+   "pageCount": 1
+  }
+ ],
+ "endpoints_distinct": [
+  {
+   "method": "GET",
+   "path": "/",
+   "count": 2,
+   "statuses": [
+    "302"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/broadcasting/auth",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/fonts/Inter/Inter-Italic.ttf",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "font"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/fonts/Inter/Inter-Variable.ttf",
+   "count": 3,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin",
+    "family",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "font"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/livewire/livewire.min.js",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "script"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/login",
+   "count": 3,
+   "statuses": [
+    "302"
+   ],
+   "roles": [
+    "admin",
+    "family",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/main/index.html",
+   "count": 2,
+   "statuses": [
+    "404"
+   ],
+   "roles": [
+    "family",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/accounting",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/accounting/transaction/invoices",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/accounting/transaction/salary",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/accounting/transaction/session",
+   "count": 4,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/admins",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/admins/appear/{id}",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/admins/categories/{id}",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/admins/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/admins/duplicate/{id}",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/admins/permission/{id}",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/admins/{id}/edit",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/all/teachers/timetable",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/analysis-course",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/analysis-expenses",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/analysis-invoices",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/analysis-student",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/banks",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/banks/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/categories/families",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/categories/families/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/categories/families/{id}/assign",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/categories/families/{id}/edit",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/certificate-requests",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/chat",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/management/chat/loadMoreChats",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/class-feedback",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/class-feedback/feedback",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courseClasses/default-member-course-details/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courseClasses/export-class/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courseClasses/{id}",
+   "count": 6,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courses",
+   "count": 14,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courses/create_new_copy/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courses/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courses/{id}/create",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courses/{id}/create_free",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/courses/{id}/edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/downlaod",
+   "count": 8,
+   "statuses": [
+    "302"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/expense",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/export-course",
+   "count": 1,
+   "statuses": [
+    "500"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/feedback",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/feedback/family/{id}",
+   "count": 2,
+   "statuses": [
+    "200",
+    "500"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/feedback/students",
+   "count": 6,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/index/filter",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/status/Active",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/status/Deleted",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/status/Inactive",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/status/Incomplete",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/status/Stopped",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/status/Suspended",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/status/Trial",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/{id}",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/families/{id}/edit",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/family/feedback-categories",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/family/feedback-categories/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/forms",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/forms/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/forms/students",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/get-course-schedule/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/get-course-schedules/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/get-helper-data",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/group/index",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/groups/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/heads",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/home",
+   "count": 11,
+   "statuses": [
+    "200",
+    "302"
+   ],
+   "roles": [
+    "admin",
+    "family",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/invoices",
+   "count": 21,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/invoices/create-parent-invoice/{id}",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/invoicesexportData",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/library",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/materials",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/materials/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/materials/{id}/edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/monthly-invoices",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/CONTACTING",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/DUPLICAT",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/NO_RESPONSE",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/PENDING",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/QUALIFIED",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/TEACHER",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/TRIAL_MISSED",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/filter/TRIAL_TAKEN",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/requests",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/scheduled-trials/completed",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/new-requests/scheduled-trials/index",
+   "count": 2,
+   "statuses": [
+    "500"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/payout-providers",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/payout-providers/{id}/edit",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/payouts",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/pdf",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/pdf/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/profile/edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/profile/show",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/public-advertisement",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/public-holiday",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/request-schedule/{id}/{id}",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/salaries",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/salary-class-report",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/schedule-sessions-response",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/schedule-trials-response",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/scheduled-actions",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/scheduled-actions/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/search-schedule",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/session-class-room/{enc}/{id}",
+   "count": 1,
+   "statuses": [
+    "302"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/sessions_analysis",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/customisation/message-builder",
+   "count": 1,
+   "statuses": [
+    "504"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/customisation/personalisation",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/general",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/integrations",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/integrations/whatsapp/families/insights",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/integrations/whatsapp/teachers/insights",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/integrations/{id}/configure",
+   "count": 11,
+   "statuses": [
+    "200",
+    "302"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/notification",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/payments/create",
+   "count": 7,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/payments/{id}/edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/security/data",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/security/data/backup/send",
+   "count": 1,
+   "statuses": [
+    "302"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/settings/security/policy",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/staff-salaries",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/student",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/student/status/SoftDelete",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/student/status/{id}",
+   "count": 6,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/student/{id}",
+   "count": 3,
+   "statuses": [
+    "200",
+    "302"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/student/{id}/create",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/student/{id}/edit",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/student/{id}/trial/create",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teacher-categories",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teacher-categories/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teacher-categories/{id}/create-members",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teacher-categories/{id}/edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teacher-feedback",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teacher-feedback/feedback",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers",
+   "count": 15,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/scope/Active",
+   "count": 8,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/scope/Deleted",
+   "count": 8,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/scope/Inactive",
+   "count": 8,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/scope/Incomplete",
+   "count": 8,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/scope/Unconfirmed",
+   "count": 8,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/{id}/compensations/create",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/{id}/compensations/{id}",
+   "count": 3,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/{id}/compensations/{id}/edit",
+   "count": 3,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/{id}/edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers/{id}/monthly-classes",
+   "count": 1,
+   "statuses": [
+    "500"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/teachers_details",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/tickets",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/time-convertor",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/management/total-queues",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "admin"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/socket.io",
+   "count": 1,
+   "statuses": [
+    "404"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/socket.io/",
+   "count": 1,
+   "statuses": [
+    "301"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/billing",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/feedbacks",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/home",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/library",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/nullvendor/css/rtl/core.css",
+   "count": 1,
+   "statuses": [
+    "404"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "stylesheet"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/profile",
+   "count": 1,
+   "statuses": [
+    "500"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/profile-edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/request-trial",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/student-history-fillter",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/studentslist",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/timetable",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/student/today-sessions",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "family"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/chat",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/teacher/chat/loadMoreChats",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/course-history/main/index.html",
+   "count": 1,
+   "statuses": [
+    "404"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/course-history/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/course-history/{id}/class",
+   "count": 2,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "POST",
+   "path": "/teacher/get-schedual",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "xhr"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/home",
+   "count": 2,
+   "statuses": [
+    "200",
+    "302"
+   ],
+   "roles": [
+    "admin",
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/library",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/main/index.html",
+   "count": 1,
+   "statuses": [
+    "404"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/monthly-plans",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/monthly-plans/main/index.html",
+   "count": 1,
+   "statuses": [
+    "404"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/monthly-plans/{enc}/show",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/profile",
+   "count": 1,
+   "statuses": [
+    "500"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/profile-edit",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/salary",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/salary-class-report",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/session-class-room/{enc}/{id}",
+   "count": 1,
+   "statuses": [
+    "302"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/students",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/studentslist",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/teacher-history/1-",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/teacher-history/{id}",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/tickets",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/timetable",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  },
+  {
+   "method": "GET",
+   "path": "/teacher/update-result",
+   "count": 1,
+   "statuses": [
+    "200"
+   ],
+   "roles": [
+    "teacher"
+   ],
+   "resourceTypes": [
+    "document"
+   ]
+  }
+ ]
+}

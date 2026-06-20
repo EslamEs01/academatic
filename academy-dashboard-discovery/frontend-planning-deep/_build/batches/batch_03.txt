@@ -1,0 +1,4 @@
+output/roles/admin/pages/management-library.md
+output/roles/admin/pages/management-materials.md
+output/roles/admin/pages/management-materials-1-edit.md
+output/roles/admin/pages/management-materials-create.md

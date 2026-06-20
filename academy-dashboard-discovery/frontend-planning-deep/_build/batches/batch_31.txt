@@ -1,0 +1,2 @@
+output/roles/teacher/pages/management-home.md
+output/roles/teacher/pages/teacher-home.md

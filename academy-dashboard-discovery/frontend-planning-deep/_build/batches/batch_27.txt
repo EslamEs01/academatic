@@ -1,0 +1,10 @@
+output/roles/admin/pages/management-accounting.md
+output/roles/admin/pages/management-analysis-expenses.md
+output/roles/admin/pages/management-expense.md
+output/roles/admin/pages/management-payout-providers.md
+output/roles/admin/pages/management-payout-providers-6-edit.md
+output/roles/admin/pages/management-payout-providers-7-edit.md
+output/roles/admin/pages/management-payouts.md
+output/roles/admin/pages/management-payouts-all-1.md
+output/roles/admin/pages/management-salaries.md
+output/roles/admin/pages/management-staff-salaries.md

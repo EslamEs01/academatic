@@ -1,0 +1,5 @@
+output/roles/teacher/pages/teacher-course-history-1.md
+output/roles/teacher/pages/teacher-monthly-plans.md
+output/roles/teacher/pages/teacher-monthly-plans-mq-show.md
+output/roles/teacher/pages/teacher-teacher-history-1.md
+output/roles/teacher/pages/teacher-teacher-history-1-d861d6e.md
