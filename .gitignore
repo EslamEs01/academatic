@@ -1,0 +1,15 @@
+# Authenticated session — NEVER commit this (contains your login cookies)
+auth-state.json
+
+# Crawl artifacts (regenerate with `npm run crawl`)
+output/
+
+# Node
+node_modules/
+npm-debug.log*
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

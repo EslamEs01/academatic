@@ -1,0 +1,29 @@
+{
+  "name": "academy-dashboard-discovery",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Discovery and documentation crawler for the Academatic admin dashboard. Logs in via Playwright, navigates read-only, and produces structured reports, snapshots, and LLM-ready docs.",
+  "license": "MIT",
+  "main": "crawl-all-roles.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "save-auth:admin": "node save-auth.js admin",
+    "save-auth:teacher": "node save-auth.js teacher",
+    "save-auth:family": "node save-auth.js family",
+    "crawl:admin": "node crawl-role.js admin",
+    "crawl:teacher": "node crawl-role.js teacher",
+    "crawl:family": "node crawl-role.js family",
+    "crawl:all": "node crawl-all-roles.js",
+    "audit": "node coverage-audit.js",
+    "report": "node build-report.js",
+    "full": "node crawl-all-roles.js && node coverage-audit.js && node build-report.js",
+    "install:browser": "playwright install chromium"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "playwright": "^1.49.0"
+  }
+}

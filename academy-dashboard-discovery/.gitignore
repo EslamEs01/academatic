@@ -1,0 +1,26 @@
+# Academy Dashboard Discovery Crawler — git ignore rules
+# Credentials, captured auth sessions, crawler output, and local artifacts.
+
+# Environment file with real credentials (keep .env.crawler.example tracked)
+.env.crawler
+
+# Playwright auth state files (captured login sessions)
+auth-state-*.json
+storage-state.json
+
+# Crawler output directory (large; regenerate by running the crawler)
+# output/.gitkeep is NOT ignored — add it explicitly to track the empty dir
+output/*
+!output/.gitkeep
+
+# HAR network capture files
+*.har
+
+# Node dependencies
+node_modules/
+
+# Log files
+*.log
+
+# macOS metadata
+.DS_Store

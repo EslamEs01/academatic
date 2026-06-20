@@ -1,0 +1,58 @@
+{
+  "roles": [
+    {
+      "key": "admin",
+      "label": "Administrator",
+      "usernameEnv": "ADMIN_USERNAME",
+      "passwordEnv": "ADMIN_PASSWORD",
+      "loginUrl": "https://academatic.online/login",
+      "startUrls": [
+        "https://academatic.online/management/home"
+      ],
+      "authStateFile": "auth-state-admin.json",
+      "outputDir": "output/roles/admin"
+    },
+    {
+      "key": "teacher",
+      "label": "Teacher",
+      "usernameEnv": "TEACHER_USERNAME",
+      "passwordEnv": "TEACHER_PASSWORD",
+      "loginUrl": "https://academatic.online/login",
+      "startUrls": [
+        "https://academatic.online/management/home"
+      ],
+      "authStateFile": "auth-state-teacher.json",
+      "outputDir": "output/roles/teacher"
+    },
+    {
+      "key": "family",
+      "label": "Family / Guardian",
+      "usernameEnv": "FAMILY_USERNAME",
+      "passwordEnv": "FAMILY_PASSWORD",
+      "loginUrl": "https://academatic.online/login",
+      "startUrls": [
+        "https://academatic.online/management/home"
+      ],
+      "authStateFile": "auth-state-family.json",
+      "outputDir": "output/roles/family"
+    }
+  ],
+  "supportedFutureRoles": [
+    "student",
+    "manager",
+    "director",
+    "staff",
+    "guardian"
+  ],
+  "futureRoleTemplate": {
+    "_comment": "To add a new role: copy this template into the 'roles' array, set a unique 'key', fill all fields, add the corresponding environment variables (usernameEnv / passwordEnv) to .env.crawler, then run the crawler with --role=<key>. The authStateFile and outputDir are relative to the PROJECT_ROOT (academy-dashboard-discovery/).",
+    "key": "",
+    "label": "",
+    "usernameEnv": "",
+    "passwordEnv": "",
+    "loginUrl": "https://academatic.online/login",
+    "startUrls": [],
+    "authStateFile": "",
+    "outputDir": ""
+  }
+}
