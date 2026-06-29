@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم · أكاديمية مشكاة</title>
+  <script>(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();</script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body data-page-lang="ar">
+  <a href="#page" class="sr-only">تخطَّ إلى المحتوى</a>
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-graduation-cap" viewBox="0 0 24 24" fill="none"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></symbol>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+<symbol id="i-sessions" viewBox="0 0 24 24" fill="none"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+  <path d="M8 14h.01" />
+  <path d="M12 14h.01" />
+  <path d="M16 14h.01" />
+  <path d="M8 18h.01" />
+  <path d="M12 18h.01" />
+  <path d="M16 18h.01" /></symbol>
+<symbol id="i-schedule" viewBox="0 0 24 24" fill="none"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+  <path d="M16 2v4" />
+  <path d="M8 2v4" />
+  <path d="M3 10h5" />
+  <path d="M17.5 17.5 16 16.3V14" />
+  <circle cx="16" cy="16" r="6" /></symbol>
+<symbol id="i-students" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
+<symbol id="i-trainers" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="5" />
+  <path d="M20 21a8 8 0 0 0-16 0" /></symbol>
+<symbol id="i-curricula" viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></symbol>
+<symbol id="i-reports" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" /></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24" fill="none"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+  <circle cx="12" cy="12" r="3" /></symbol>
+<symbol id="i-help" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="m4.93 4.93 4.24 4.24" />
+  <path d="m14.83 9.17 4.24-4.24" />
+  <path d="m14.83 14.83 4.24 4.24" />
+  <path d="m9.17 14.83-4.24 4.24" />
+  <circle cx="12" cy="12" r="4" /></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.3-4.3" /></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24" fill="none"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+  <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24" fill="none"><rect width="20" height="14" x="2" y="3" rx="2" />
+  <line x1="8" x2="16" y1="21" y2="21" />
+  <line x1="12" x2="12" y1="17" y2="21" /></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" /></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none"><line x1="4" x2="20" y1="12" y2="12" />
+  <line x1="4" x2="20" y1="6" y2="6" />
+  <line x1="4" x2="20" y1="18" y2="18" /></symbol>
+<symbol id="i-user" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="5" />
+  <path d="M20 21a8 8 0 0 0-16 0" /></symbol>
+<symbol id="i-log-out" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+  <polyline points="16 17 21 12 16 7" />
+  <line x1="21" x2="9" y1="12" y2="12" /></symbol>
+<symbol id="i-chevronStart" viewBox="0 0 24 24" fill="none"><path d="m9 18 6-6-6-6" /></symbol>
+<symbol id="i-chevronEnd" viewBox="0 0 24 24" fill="none"><path d="m15 18-6-6 6-6" /></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" /></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none"><path d="M5 12h14" />
+  <path d="M12 5v14" /></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24" fill="none"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+  <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="m9 12 2 2 4-4" /></symbol>
+<symbol id="i-trending-up" viewBox="0 0 24 24" fill="none"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+  <polyline points="16 7 22 7 22 13" /></symbol>
+<symbol id="i-user-check" viewBox="0 0 24 24" fill="none"><path d="M2 21a8 8 0 0 1 13.292-6" />
+  <circle cx="10" cy="8" r="5" />
+  <path d="m16 19 2 2 4-4" /></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+  <path d="M8 14h.01" />
+  <path d="M12 14h.01" />
+  <path d="M16 14h.01" />
+  <path d="M8 18h.01" />
+  <path d="M12 18h.01" />
+  <path d="M16 18h.01" /></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <polyline points="12 6 12 12 16 14" /></symbol>
+<symbol id="i-play" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <polygon points="10 8 16 12 10 16 10 8" /></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" /></symbol>
+<symbol id="i-x-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="m15 9-6 6" />
+  <path d="m9 9 6 6" /></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol>
+<symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="1" />
+  <circle cx="19" cy="12" r="1" />
+  <circle cx="5" cy="12" r="1" /></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24" fill="none"><line x1="21" x2="14" y1="4" y2="4" />
+  <line x1="10" x2="3" y1="4" y2="4" />
+  <line x1="21" x2="12" y1="12" y2="12" />
+  <line x1="8" x2="3" y1="12" y2="12" />
+  <line x1="21" x2="16" y1="20" y2="20" />
+  <line x1="12" x2="3" y1="20" y2="20" />
+  <line x1="14" x2="14" y1="2" y2="6" />
+  <line x1="8" x2="8" y1="10" y2="14" />
+  <line x1="16" x2="16" y1="18" y2="22" /></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+  <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol>
+<symbol id="i-alert-triangle" viewBox="0 0 24 24" fill="none"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol>
+<symbol id="i-retry" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+  <path d="M21 3v5h-5" />
+  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+  <path d="M8 16H3v5" /></symbol>
+<symbol id="i-calendar-plus" viewBox="0 0 24 24" fill="none"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" />
+  <path d="M3 10h18" />
+  <path d="M16 19h6" />
+  <path d="M19 16v6" /></symbol>
+<symbol id="i-inbox" viewBox="0 0 24 24" fill="none"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+  <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" /></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24" fill="none"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+  <path d="M20 3v4" />
+  <path d="M22 5h-4" />
+  <path d="M4 17v2" />
+  <path d="M5 18H3" /></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none"><path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" /></symbol>
+<symbol id="i-tasks" viewBox="0 0 24 24" fill="none"><path d="m3 17 2 2 4-4" />
+  <path d="m3 7 2 2 4-4" />
+  <path d="M13 6h8" />
+  <path d="M13 12h8" />
+  <path d="M13 18h8" /></symbol>
+<symbol id="i-messages" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol>
+<symbol id="i-families" viewBox="0 0 24 24" fill="none"><path d="M16 18a4 4 0 0 0-8 0" />
+  <circle cx="12" cy="11" r="3" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <line x1="8" x2="8" y1="2" y2="4" />
+  <line x1="16" x2="16" y1="2" y2="4" /></symbol>
+<symbol id="i-materials" viewBox="0 0 24 24" fill="none"><path d="m16 6 4 14" />
+  <path d="M12 6v14" />
+  <path d="M8 8v12" />
+  <path d="M4 4v16" /></symbol>
+<symbol id="i-certificates" viewBox="0 0 24 24" fill="none"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
+  <circle cx="12" cy="8" r="6" /></symbol>
+<symbol id="i-staff" viewBox="0 0 24 24" fill="none"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24" fill="none"><path d="m3 11 18-5v12L3 14v-3z" />
+  <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+  <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+  <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" /></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24" fill="none"><rect width="7" height="7" x="3" y="3" rx="1" />
+  <rect width="7" height="7" x="14" y="3" rx="1" />
+  <rect width="7" height="7" x="14" y="14" rx="1" />
+  <rect width="7" height="7" x="3" y="14" rx="1" /></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24" fill="none"><path d="M2 21a8 8 0 0 1 13.292-6" />
+  <circle cx="10" cy="8" r="5" />
+  <path d="M19 16v6" />
+  <path d="M22 19h-6" /></symbol>
+</svg>
+
+  <div class="app-shell" id="shell" data-rail="false" data-shell>
+    <aside class="sidebar" aria-label="القائمة الجانبية">
+    <div class="nav-rail">
+      <button type="button" class="rail-toggle" data-action="toggle-rail" aria-controls="nav-panel" aria-expanded="true" aria-label="طيّ القائمة">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
+      </button>
+      <div class="rail-cats" role="tablist" aria-orientation="vertical" aria-label="فئات التنقّل" data-nav-rail>
+        <button type="button" class="rail-cat is-active" role="tab" id="railcat-control" aria-controls="catpanel-control" aria-selected="true" data-nav-category="control" aria-label="لوحة التحكم" title="لوحة التحكم" tabindex="0">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-layers"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-families" aria-controls="catpanel-families" aria-selected="false" data-nav-category="families" aria-label="العائلات" title="العائلات" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-teachers" aria-controls="catpanel-teachers" aria-selected="false" data-nav-category="teachers" aria-label="المعلمون" title="المعلمون" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-reports" aria-controls="catpanel-reports" aria-selected="false" data-nav-category="reports" aria-label="التقارير" title="التقارير" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-admin" aria-controls="catpanel-admin" aria-selected="false" data-nav-category="admin" aria-label="الإدارة" title="الإدارة" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-settings" aria-controls="catpanel-settings" aria-selected="false" data-nav-category="settings" aria-label="الإعدادات" title="الإعدادات" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg>
+  </button>
+      </div>
+      <button type="button" class="rail-foot" data-action="profile-menu" aria-haspopup="menu" aria-label="قائمة الحساب">
+        <span class="avatar avatar-sm av-violet" aria-hidden="true">ن</span>
+      </button>
+    </div>
+    <div class="nav-panel" id="nav-panel">
+      <div class="brand">
+        <span class="medallion m-grad tone-violet-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
+        <div class="brand-text"><div class="brand-name">أكاديمية مشكاة</div></div>
+      </div>
+      <div class="cat-panel" id="catpanel-control" role="tabpanel" tabindex="-1" aria-labelledby="railcat-control" data-nav-panel="control">
+    <div class="cat-title">لوحة التحكم</div>
+    <nav class="panel-nav" aria-label="لوحة التحكم">
+      <div class="space-y-1"><a href="dashboard.html" class="nav-item is-active" data-nav="home" data-nav-status="implemented" aria-current="page">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-home"></use></svg><span class="label">الرئيسية</span>
+  </a><a href="sessions.html" class="nav-item" data-nav="sessions" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg><span class="label">الجلسات</span><span class="badge nav-badge tabular">24</span>
+  </a><a href="schedule.html" class="nav-item" data-nav="schedule" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span class="label">الجدول الدراسي</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="sessionsAnalysis" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">تحليل الجلسات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">المحادثات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">الطلبات الجديدة</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">المهام</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">الإعلانات والإشعارات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">محوّل الوقت</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="publicHoliday" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">العطلات الرسمية</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="scheduledActions" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">الإجراءات المجدولة</span><span class="nav-soon">قريبًا</span>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-families" role="tabpanel" tabindex="-1" aria-labelledby="railcat-families" data-nav-panel="families" hidden>
+    <div class="cat-title">العائلات</div>
+    <nav class="panel-nav" aria-label="العائلات">
+      <div class="space-y-1"><button type="button" class="nav-item is-planned" data-nav="families" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span class="label">العائلات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="addFamily" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span class="label">إضافة عائلة</span><span class="nav-soon">قريبًا</span>
+    </button><a href="students.html" class="nav-item" data-nav="students" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">الطلاب</span>
+  </a><a href="courses.html" class="nav-item" data-nav="courses" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">الدورات</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="familyCategories" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span class="label">فئات العائلات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="groups" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">المجموعات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="scheduleSearch" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span class="label">بحث الجدول</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="studentResult" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span class="label">نتائج الطلاب</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="studentEvaluation" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span class="label">تقييم الطلاب</span><span class="nav-soon">قريبًا</span>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-teachers" role="tabpanel" tabindex="-1" aria-labelledby="railcat-teachers" data-nav-panel="teachers" hidden>
+    <div class="cat-title">المعلمون</div>
+    <nav class="panel-nav" aria-label="المعلمون">
+      <div class="space-y-1"><a href="teachers.html" class="nav-item" data-nav="teachers" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg><span class="label">المعلمون</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="addTeacher" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span class="label">إضافة معلم</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="teacherCategories" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span class="label">فئات المعلمين</span><span class="nav-soon">قريبًا</span>
+    </button></div>
+      
+    <div class="nav-subsection">
+      <div class="nav-subsection-label">مؤشرات الأداء</div>
+      <div class="space-y-1"><button type="button" class="nav-item is-planned" data-nav="teacherKpi" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">مؤشرات أداء المعلمين</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="sessionsKpi" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">مؤشر أداء الحصص</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="monthlyPerf" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">الأداء الشهري</span><span class="nav-soon">قريبًا</span>
+    </button></div>
+    </div>
+    </nav>
+  </div><div class="cat-panel" id="catpanel-reports" role="tabpanel" tabindex="-1" aria-labelledby="railcat-reports" data-nav-panel="reports" hidden>
+    <div class="cat-title">التقارير</div>
+    <nav class="panel-nav" aria-label="التقارير">
+      <div class="space-y-1"><a href="reports.html" class="nav-item" data-nav="reports" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">التقارير</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="monthlyReports" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">التقارير الشهرية</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="dataAnalysis" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">تحليل البيانات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-disabled" data-nav="invoices" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="الفواتير — تتطلب وحدة الفوترة (خارج النطاق الحالي).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">الفواتير</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="monthlyInvoices" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="الفواتير الشهرية — تتطلب وحدة الفوترة (خارج النطاق الحالي).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">الفواتير الشهرية</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="salaries" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="الرواتب — تتطلب وحدة الفوترة (خارج النطاق الحالي).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">الرواتب</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="staffSalaries" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="رواتب الموظفين — تتطلب وحدة الفوترة (خارج النطاق الحالي).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">رواتب الموظفين</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="payments" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="المدفوعات — تتطلب وحدة الفوترة (خارج النطاق الحالي).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">المدفوعات</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="classSalaryReport" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="تقرير رواتب الفصول — تتطلب وحدة الفوترة (خارج النطاق الحالي).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">تقرير رواتب الفصول</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-admin" role="tabpanel" tabindex="-1" aria-labelledby="railcat-admin" data-nav-panel="admin" hidden>
+    <div class="cat-title">الإدارة</div>
+    <nav class="panel-nav" aria-label="الإدارة">
+      <div class="space-y-1"><button type="button" class="nav-item is-planned" data-nav="staff" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span class="label">الفريق والصلاحيات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="materials" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span class="label">المواد التعليمية</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="books" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">المكتبة</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="certificates" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">الشهادات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="certificateRequests" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">طلبات الشهادات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-disabled" data-nav="banks" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="البنوك — تتطلب وحدة الفوترة (خارج النطاق الحالي).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">البنوك</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-settings" role="tabpanel" tabindex="-1" aria-labelledby="railcat-settings" data-nav-panel="settings" hidden>
+    <div class="cat-title">الإعدادات</div>
+    <nav class="panel-nav" aria-label="الإعدادات">
+      <div class="space-y-1"><a href="settings.html" class="nav-item" data-nav="settings" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span class="label">الإعدادات</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="settingsGeneral" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span class="label">عام</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsIntegrations" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span class="label">التكاملات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsCustomization" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span class="label">التخصيص</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsNotifications" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span class="label">الإشعارات</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsSecurity" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span class="label">الأمان</span><span class="nav-soon">قريبًا</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsUsers" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span class="label">المستخدمون والموظفون</span><span class="nav-soon">قريبًا</span>
+    </button></div>
+      
+    </nav>
+  </div>
+    </div>
+  </aside>
+    <div class="main-col">
+      <header class="topbar">
+    <button type="button" class="icon-btn menu-toggle" data-action="open-drawer" aria-label="فتح القائمة">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
+    </button>
+    <div class="hidden md:block leading-tight">
+      <div class="crumb">الرئيسية · لوحة التحكم</div>
+      <div class="topbar-title">لوحة التحكم</div>
+    </div>
+
+    <div class="topbar-search">
+      <div class="input-wrap w-full">
+        <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+        <input class="input" type="search" placeholder="ابحث عن طالب، جلسة، معلم…" aria-label="ابحث عن طالب، جلسة، معلم…" data-action="command-palette" aria-haspopup="menu" />
+        <span class="kbd-hint"><kbd class="kbd" dir="ltr">⌘K</kbd></span>
+      </div>
+    </div>
+
+    <div class="util-cluster">
+      <button type="button" class="icon-btn" data-action="apps-grid" aria-label="الوصول السريع" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg>
+      </button>
+      <button type="button" class="icon-btn" data-action="quick-actions" aria-label="إجراءات سريعة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg>
+      </button>
+      <button type="button" class="icon-btn" data-action="notifications" aria-label="الإشعارات" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span class="dot"></span>
+      </button>
+      <button type="button" class="icon-btn" data-action="theme-menu" aria-label="تبديل السمة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-monitor"></use></svg>
+      </button>
+      <button type="button" class="icon-btn" data-action="lang-menu" aria-label="تغيير اللغة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-globe"></use></svg>
+      </button>
+      <div class="w-px h-6 mx-1" style="background:var(--c-line)"></div>
+      <button type="button" class="profile-chip" data-action="profile-menu" aria-label="قائمة الحساب" aria-haspopup="menu">
+        <span class="avatar avatar-sm av-violet" aria-hidden="true">ن</span>
+        <span class="hidden sm:block text-start">
+          <span class="profile-name block">نورة العتيبي</span>
+          <span class="profile-role block">مديرة الأكاديمية</span>
+        </span>
+        <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+      </button>
+    </div>
+  </header>
+      <main class="page-scroll" id="page" tabindex="-1">
+        <div class="page-pad" id="page-body">
+    <div class="grid gap-4 grid-cols-1 lg:grid-cols-[1.15fr_1fr] mb-7">
+    <div class="relative overflow-hidden rounded-card p-6 md:p-7" style="background:var(--g-hero);color:#fff;box-shadow:0 10px 24px rgba(60,50,166,.35)">
+    <svg viewBox="0 0 24 24" class="absolute" style="inset-inline-end:-12px;inset-block-start:-6px;width:190px;height:190px;opacity:.13;color:#fff" aria-hidden="true"><use href="#i-graduation-cap"></use></svg>
+    <div class="relative">
+      <p class="text-[12.5px] font-medium mb-2" style="color:rgba(255,255,255,.82)">الأحد، ٢٨ يونيو ٢٠٢٦ · ٩:٤٢ ص</p>
+      <h1 class="font-bold mb-2" style="font-size:26px;letter-spacing:-.6px">صباح الخير، نورة 👋</h1>
+      <p class="text-[13.5px] mb-5 max-w-md" style="color:rgba(255,255,255,.9)">لديك ٢٤ جلسة اليوم، و٣ جلسات جارية الآن. كل شيء يسير بسلاسة.</p>
+      <div class="flex flex-wrap gap-2.5">
+        <button type="button" class="btn btn-on-grad"   data-action="new-session"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>جلسة جديدة</span></button>
+        <a href="./schedule.html#view=timetable" class="btn btn-ghost-grad" ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span>عرض الجدول</span></a>
+      </div>
+    </div>
+  </div>
+    <div class="grid gap-4 grid-rows-[auto_auto] content-start">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="card p-4 flex flex-col justify-between" style="min-height:104px">
+    <div class="flex items-center gap-1.5 text-[12.5px] font-bold" style="color:var(--c-ink-3)"><span>قادمة اليوم</span></div>
+    <div class="kpi-value tabular" style="font-size:34px">٦</div>
+  </div>
+        <div class="card p-4 flex flex-col justify-between" style="min-height:104px">
+    <div class="flex items-center gap-1.5 text-[12.5px] font-bold" style="color:var(--c-ink-3)"><span class="live-dot" style="background:var(--c-teal);width:8px;height:8px;border-radius:999px;display:inline-block;animation:livepulse 2s var(--ease) infinite"></span><span>جارية الآن</span></div>
+    <div class="kpi-value tabular" style="font-size:34px">٣</div>
+  </div>
+      </div>
+      <div class="card p-4 flex items-center justify-between gap-3">
+    <div>
+      <div class="text-[13px] font-bold text-ink mb-0.5">نسبة الحضور</div>
+      <div class="text-[12px]" style="color:var(--c-ink-3)">أعلى من المعدل الأسبوعي</div>
+    </div>
+    <div class="relative grid place-items-center shrink-0">
+      <svg width="66" height="66" viewBox="0 0 66 66" aria-hidden="true" class="att-ring">
+    <circle cx="33" cy="33" r="29.5" fill="none" stroke="var(--c-surface-2)" stroke-width="7"/>
+    <circle cx="33" cy="33" r="29.5" fill="none" stroke="var(--c-success)" stroke-width="7" stroke-linecap="round"
+      stroke-dasharray="185.4" stroke-dashoffset="13.0" transform="rotate(-90 33 33)"/>
+  </svg>
+      <span class="absolute font-bold tabular text-ink" style="font-size:15px">٩٣%</span>
+    </div>
+  </div>
+    </div>
+  </div>
+
+    <section class="mb-7">
+      <div class="flex items-center justify-between mb-3.5">
+    <h2 class="section-title">نظرة عامة</h2><a href="#" class="link-more">عرض كل المؤشرات <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a></div>
+      <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+    <div class="kpi tone-primary">
+    <div class="kpi-glow"></div>
+    <div class="flex items-start justify-between mb-3">
+      <span class="trend-pill trend-up tabular">12% ↑</span>
+      <span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg></span>
+    </div>
+    <div class="kpi-value">٢٤</div>
+    <div class="kpi-label mb-2.5">جلسات اليوم</div>
+    <div class="-mx-1 -mb-1 pt-1"><svg class="spark" viewBox="0 0 120 36" width="100%" height="36" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="sg-primary-24" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--c-primary)" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="var(--c-primary)" stop-opacity="0"/>
+    </linearGradient></defs>
+    <path d="M3.0,36 L3.0,33.0 L15.7,27.0 L28.3,30.0 L41.0,21.0 L53.7,24.0 L66.3,18.0 L79.0,21.0 L91.7,12.0 L104.3,9.0 L117.0,3.0 L117.0,36 Z" fill="url(#sg-primary-24)" />
+    <polyline points="3.0,33.0 15.7,27.0 28.3,30.0 41.0,21.0 53.7,24.0 66.3,18.0 79.0,21.0 91.7,12.0 104.3,9.0 117.0,3.0" fill="none" stroke="var(--c-primary)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+  </div><div class="kpi tone-teal">
+    <div class="kpi-glow"></div>
+    <div class="flex items-start justify-between mb-3">
+      <span class="trend-pill trend-up tabular">4% ↑</span>
+      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span>
+    </div>
+    <div class="kpi-value">١٬٢٨٤</div>
+    <div class="kpi-label mb-2.5">الطلاب النشطون</div>
+    <div class="-mx-1 -mb-1 pt-1"><svg class="spark" viewBox="0 0 120 36" width="100%" height="36" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="sg-teal-17" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--c-teal)" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="var(--c-teal)" stop-opacity="0"/>
+    </linearGradient></defs>
+    <path d="M3.0,36 L3.0,33.0 L15.7,28.0 L28.3,28.0 L41.0,23.0 L53.7,28.0 L66.3,18.0 L79.0,13.0 L91.7,18.0 L104.3,8.0 L117.0,3.0 L117.0,36 Z" fill="url(#sg-teal-17)" />
+    <polyline points="3.0,33.0 15.7,28.0 28.3,28.0 41.0,23.0 53.7,28.0 66.3,18.0 79.0,13.0 91.7,18.0 104.3,8.0 117.0,3.0" fill="none" stroke="var(--c-teal)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+  </div><div class="kpi tone-success">
+    <div class="kpi-glow"></div>
+    <div class="flex items-start justify-between mb-3">
+      <span class="trend-pill trend-up tabular">3% ↑</span>
+      <span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span>
+    </div>
+    <div class="kpi-value">٩٢%</div>
+    <div class="kpi-label mb-2.5">نسبة الحضور</div>
+    <div class="pt-1"><div class="progress-track" role="img" aria-hidden="true"><div class="progress-fill" style="width:92%;background:var(--c-success)"></div></div></div>
+  </div><div class="kpi tone-amber">
+    <div class="kpi-glow"></div>
+    <div class="flex items-start justify-between mb-3">
+      <span class="trend-pill trend-up tabular">8% ↑</span>
+      <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg></span>
+    </div>
+    <div class="kpi-value">٤٨٬٢٠٠ <span class="text-[14px] font-bold" style="color:var(--c-ink-2)">ريال</span></div>
+    <div class="kpi-label mb-2.5">الإيرادات الشهرية</div>
+    <div class="-mx-1 -mb-1 pt-1"><svg class="spark" viewBox="0 0 120 36" width="100%" height="36" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="sg-amber-48" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--c-amber)" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="var(--c-amber)" stop-opacity="0"/>
+    </linearGradient></defs>
+    <path d="M3.0,36 L3.0,31.6 L15.7,28.7 L28.3,33.0 L41.0,24.4 L53.7,27.3 L66.3,20.1 L79.0,23.0 L91.7,14.4 L104.3,8.7 L117.0,3.0 L117.0,36 Z" fill="url(#sg-amber-48)" />
+    <polyline points="3.0,31.6 15.7,28.7 28.3,33.0 41.0,24.4 53.7,27.3 66.3,20.1 79.0,23.0 91.7,14.4 104.3,8.7 117.0,3.0" fill="none" stroke="var(--c-amber)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg></div>
+  </div>
+  </div>
+    </section>
+
+    <section class="mb-6">
+      <section class="card overflow-hidden">
+    <div class="flex items-center justify-between gap-3 p-4 pb-3">
+      <div class="flex items-center gap-3">
+        <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+        <div>
+          <h2 class="text-[15.5px] font-bold text-ink">جلسات اليوم</h2>
+          <p class="text-[12px]" style="color:var(--c-ink-3)">٢٤ جلسة · آخر تحديث قبل دقيقتين</p>
+        </div>
+      </div>
+    </div>
+    <div class="px-4"><div class="flex flex-wrap items-center gap-2.5 mb-4">
+    <div class="flex items-center gap-2.5">
+      <button type="button" class="btn btn-primary btn-sm"   data-action="new-session"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>جلسة جديدة</span></button>
+      <button type="button" class="chip tone-upcoming" data-action="clear-filter" style="height:32px">
+        <span>فلتر نشط: اليوم</span> <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg>
+      </button>
+    </div>
+    <div class="flex flex-wrap items-center gap-2.5 ms-auto">
+      <div class="input-wrap" style="min-width:190px">
+        <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+        <input class="input" type="search" placeholder="ابحث في الجلسات…" aria-label="ابحث في الجلسات…" />
+      </div>
+      <button type="button" class="select-btn gap-2">
+    <span class="inline-flex items-center gap-1.5"><span>المادة: الكل</span></span>
+    <svg class="chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+  </button>
+      <button type="button" class="select-btn gap-2">
+    <span class="inline-flex items-center gap-1.5"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg> <span>٢٨ يونيو</span></span>
+    <svg class="chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+  </button>
+      <button type="button" class="select-btn gap-2">
+    <span class="inline-flex items-center gap-1.5"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg> <span>أي وقت</span></span>
+    <svg class="chev" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+  </button>
+      <button type="button" class="btn btn-dark btn-sm"   data-action="apply-filter"><span>تطبيق</span></button>
+    </div>
+  </div></div>
+    <div class="overflow-x-auto">
+      <table class="tbl">
+        <thead><tr>
+          <th>الوقت</th>
+          <th>الجلسة</th>
+          <th>المعلم</th>
+          <th>القاعة</th>
+          <th>الطلاب</th>
+          <th>الحالة</th>
+          <th class="text-end"><span class="sr-only">إجراءات الجلسة</span></th>
+        </tr></thead>
+        <tbody><tr>
+    <td>
+      <div class="font-bold tabular text-ink">09:00</div>
+      <div class="micro" style="color:var(--c-ink-3)">٦٠ دقيقة</div>
+    </td>
+    <td>
+      <div class="font-bold text-ink">أساسيات الرياضيات</div>
+      <div class="text-[12px]" style="color:var(--c-ink-3)">المستوى الثالث</div>
+    </td>
+    <td>
+      <div class="flex items-center gap-2.5">
+        <span class="avatar avatar-sm av-violet" aria-hidden="true">س</span>
+        <span class="font-medium text-[13px] text-ink">سارة القحطاني</span>
+      </div>
+    </td>
+    <td><span class="text-[13px]" style="color:var(--c-ink-2)">قاعة أ</span></td>
+    <td><span class="tabular">١٨ / ٢٠</span></td>
+    <td><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></td>
+    <td class="text-end">
+      <button type="button" class="icon-btn" data-row-menu="s1" aria-label="إجراءات الجلسة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg>
+      </button>
+    </td>
+  </tr><tr>
+    <td>
+      <div class="font-bold tabular text-ink">10:30</div>
+      <div class="micro" style="color:var(--c-ink-3)">٤٥ دقيقة</div>
+    </td>
+    <td>
+      <div class="font-bold text-ink">قواعد اللغة العربية</div>
+      <div class="text-[12px]" style="color:var(--c-ink-3)">المستوى الثاني</div>
+    </td>
+    <td>
+      <div class="flex items-center gap-2.5">
+        <span class="avatar avatar-sm av-amber" aria-hidden="true">م</span>
+        <span class="font-medium text-[13px] text-ink">محمد الدوسري</span>
+      </div>
+    </td>
+    <td><span class="text-[13px]" style="color:var(--c-ink-2)">قاعة ج</span></td>
+    <td><span class="tabular">٢٢ / ٢٥</span></td>
+    <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></td>
+    <td class="text-end">
+      <button type="button" class="icon-btn" data-row-menu="s2" aria-label="إجراءات الجلسة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg>
+      </button>
+    </td>
+  </tr><tr>
+    <td>
+      <div class="font-bold tabular text-ink">08:00</div>
+      <div class="micro" style="color:var(--c-ink-3)">٦٠ دقيقة</div>
+    </td>
+    <td>
+      <div class="font-bold text-ink">مقدمة في البرمجة</div>
+      <div class="text-[12px]" style="color:var(--c-ink-3)">المستوى الأول</div>
+    </td>
+    <td>
+      <div class="flex items-center gap-2.5">
+        <span class="avatar avatar-sm av-teal" aria-hidden="true">ل</span>
+        <span class="font-medium text-[13px] text-ink">ليان الشمري</span>
+      </div>
+    </td>
+    <td><span class="text-[13px]" style="color:var(--c-ink-2)">معمل ١</span></td>
+    <td><span class="tabular">١٥ / ١٦</span></td>
+    <td><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></td>
+    <td class="text-end">
+      <button type="button" class="icon-btn" data-row-menu="s3" aria-label="إجراءات الجلسة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg>
+      </button>
+    </td>
+  </tr><tr>
+    <td>
+      <div class="font-bold tabular text-ink">11:45</div>
+      <div class="micro" style="color:var(--c-ink-3)">٣٠ دقيقة</div>
+    </td>
+    <td>
+      <div class="font-bold text-ink">حلقة تقوية فيزياء</div>
+      <div class="text-[12px]" style="color:var(--c-ink-3)">المستوى الرابع</div>
+    </td>
+    <td>
+      <div class="flex items-center gap-2.5">
+        <span class="avatar avatar-sm av-success" aria-hidden="true">ع</span>
+        <span class="font-medium text-[13px] text-ink">عبدالله الحربي</span>
+      </div>
+    </td>
+    <td><span class="text-[13px]" style="color:var(--c-ink-2)">قاعة ب</span></td>
+    <td><span class="tabular" style="color:var(--c-ink-3)">—</span></td>
+    <td><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>ملغاة</span></span></td>
+    <td class="text-end">
+      <button type="button" class="icon-btn" data-row-menu="s4" aria-label="إجراءات الجلسة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg>
+      </button>
+    </td>
+  </tr><tr>
+    <td>
+      <div class="font-bold tabular text-ink">13:15</div>
+      <div class="micro" style="color:var(--c-ink-3)">٥٠ دقيقة</div>
+    </td>
+    <td>
+      <div class="font-bold text-ink">مهارات التواصل</div>
+      <div class="text-[12px]" style="color:var(--c-ink-3)">برنامج مسائي</div>
+    </td>
+    <td>
+      <div class="flex items-center gap-2.5">
+        <span class="avatar avatar-sm av-sky" aria-hidden="true">ر</span>
+        <span class="font-medium text-[13px] text-ink">ريم المطيري</span>
+      </div>
+    </td>
+    <td><span class="text-[13px]" style="color:var(--c-ink-2)">قاعة د</span></td>
+    <td><span class="tabular">٩ / ٢٠</span></td>
+    <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></td>
+    <td class="text-end">
+      <button type="button" class="icon-btn" data-row-menu="s5" aria-label="إجراءات الجلسة" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg>
+      </button>
+    </td>
+  </tr></tbody>
+      </table>
+    </div>
+    <div class="border-t" style="border-color:var(--c-line)"><div class="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+    <span class="text-[12.5px]" style="color:var(--c-ink-3)">
+      عرض ٥ من ٢٤ جلسة
+    </span>
+    <div class="flex items-center gap-1.5" role="navigation" aria-label="pagination">
+      <button type="button" class="pager">٣</button>
+      <button type="button" class="pager">٢</button>
+      <button type="button" class="pager is-current" aria-current="page">١</button>
+    </div>
+  </div></div>
+  </section>
+    </section>
+
+    <section class="mb-8">
+    <div class="flex items-center justify-between gap-3 mb-3.5">
+      <h2 class="section-title">القادم هذا الأسبوع</h2>
+      <div class="flex items-center gap-2.5">
+        <a href="./schedule.html#view=timetable" class="chip tone-amber" style="text-decoration:none"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>٢ تحتاج انتباه</span></a>
+        <a href="./schedule.html#view=timetable" class="link-more">عرض الجدول <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a>
+      </div>
+    </div>
+    <div class="agenda"><a class="sched-block tone-live" href="./schedule.html#view=timetable" style="text-decoration:none">
+      <div class="sched-time"><div class="t1">10:30</div><div class="t2 tabular">11:15</div></div>
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-ink text-[13.5px] truncate">قواعد اللغة العربية</div>
+        <div class="text-[12px] truncate" style="color:var(--c-ink-3)">محمد الدوسري · قاعة ج</div>
+      </div>
+      <span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span>
+    </a><a class="sched-block tone-live" href="./schedule.html#view=timetable" style="text-decoration:none">
+      <div class="sched-time"><div class="t1">12:30</div><div class="t2 tabular">13:15</div></div>
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-ink text-[13.5px] truncate">محادثة إنجليزية</div>
+        <div class="text-[12px] truncate" style="color:var(--c-ink-3)">نورة الزهراني · قاعة هـ</div>
+      </div>
+      <span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span>
+    </a><a class="sched-block tone-upcoming" href="./schedule.html#view=timetable" style="text-decoration:none">
+      <div class="sched-time"><div class="t1">09:00</div><div class="t2 tabular">10:00</div></div>
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-ink text-[13.5px] truncate">أساسيات الرياضيات</div>
+        <div class="text-[12px] truncate" style="color:var(--c-ink-3)">سارة القحطاني · قاعة أ</div>
+      </div>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
+    </a><a class="sched-block tone-upcoming" href="./schedule.html#view=timetable" style="text-decoration:none">
+      <div class="sched-time"><div class="t1">11:00</div><div class="t2 tabular">11:45</div></div>
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-ink text-[13.5px] truncate">أساسيات الكيمياء</div>
+        <div class="text-[12px] truncate" style="color:var(--c-ink-3)">خالد العنزي · معمل ٢</div>
+      </div>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
+    </a></div>
+  </section>
+
+    <section class="mb-8">
+      <div class="grid-status"><div class="tile tone-cancelled">
+    <div>
+      <div class="count">١</div>
+      <div class="tile-label">ملغاة</div>
+    </div>
+    <span class="tile-ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg></span>
+  </div><div class="tile tone-upcoming">
+    <div>
+      <div class="count">٦</div>
+      <div class="tile-label">قادمة</div>
+    </div>
+    <span class="tile-ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg></span>
+  </div><div class="tile tone-live">
+    <div>
+      <div class="count">٣</div>
+      <div class="tile-label">جارية الآن</div>
+    </div>
+    <span class="tile-ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>
+  </div><div class="tile tone-completed">
+    <div>
+      <div class="count">١٤</div>
+      <div class="tile-label">مكتملة</div>
+    </div>
+    <span class="tile-ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span>
+  </div></div>
+    </section>
+
+    <section class="mb-8">
+      <div class="flex items-center justify-between mb-3.5">
+    <h2 class="section-title">التقارير</h2><a href="reports.html" class="link-more">مركز التقارير <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a></div>
+      <div class="grid-reports"><div class="report-card is-disabled" aria-disabled="true" title="يتطلب صلاحية مدير الأكاديمية.">
+    <div class="flex items-start justify-between">
+      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg></span>
+      
+    </div>
+    <div>
+      <h3 class="text-[14.5px] font-bold text-ink mb-1">تقرير المعلمين</h3>
+      <p class="text-[12.5px] leading-relaxed" style="color:var(--c-ink-3)">يتطلب صلاحية مدير الأكاديمية.</p>
+    </div>
+    <span class="badge mt-1" style="background:var(--c-amber-weak);color:var(--c-amber-ink)">صلاحية مطلوبة</span></div><a href="#" class="report-card" data-report="revenue">
+    <div class="flex items-start justify-between">
+      <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg></span>
+      <span class="report-chevron"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></span>
+    </div>
+    <div>
+      <h3 class="text-[14.5px] font-bold text-ink mb-1">تقرير الإيرادات</h3>
+      <p class="text-[12.5px] leading-relaxed" style="color:var(--c-ink-3)">الاشتراكات والمدفوعات الشهرية.</p>
+    </div>
+    </a><a href="#" class="report-card" data-report="studentPerf">
+    <div class="flex items-start justify-between">
+      <span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
+      <span class="report-chevron"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></span>
+    </div>
+    <div>
+      <h3 class="text-[14.5px] font-bold text-ink mb-1">أداء الطلاب</h3>
+      <p class="text-[12.5px] leading-relaxed" style="color:var(--c-ink-3)">تطوّر الدرجات والمشاركة عبر الفصل.</p>
+    </div>
+    </a><a href="#" class="report-card" data-report="attendanceMonthly">
+    <div class="flex items-start justify-between">
+      <span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span>
+      <span class="report-chevron"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></span>
+    </div>
+    <div>
+      <h3 class="text-[14.5px] font-bold text-ink mb-1">تقرير الحضور الشهري</h3>
+      <p class="text-[12.5px] leading-relaxed" style="color:var(--c-ink-3)">نِسب الحضور والغياب لكل مادة ومستوى.</p>
+    </div>
+    </a></div>
+    </section>
+
+    <section class="mb-2">
+      <div class="flex items-center justify-between mb-3.5">
+    <h2 class="section-title">حالات الواجهة</h2></div>
+      <div class="grid gap-4 grid-cols-1 md:grid-cols-3 items-start">
+        <div class="card p-5" role="status" aria-label="جارٍ التحميل…">
+    <div class="flex items-center justify-between mb-4">
+      <div class="skeleton" style="height:13px;width:120px"></div>
+      <div class="skeleton" style="height:24px;width:60px;border-radius:999px"></div>
+    </div>
+    <div class="space-y-4"><div class="flex items-center gap-3">
+      <div class="skeleton" style="height:40px;width:40px;border-radius:11px"></div>
+      <div class="flex-1 space-y-2"><div class="skeleton" style="height:12px;width:70%"></div><div class="skeleton" style="height:12px;width:45%"></div></div>
+    </div><div class="flex items-center gap-3">
+      <div class="skeleton" style="height:40px;width:40px;border-radius:11px"></div>
+      <div class="flex-1 space-y-2"><div class="skeleton" style="height:12px;width:70%"></div><div class="skeleton" style="height:12px;width:45%"></div></div>
+    </div><div class="flex items-center gap-3">
+      <div class="skeleton" style="height:40px;width:40px;border-radius:11px"></div>
+      <div class="flex-1 space-y-2"><div class="skeleton" style="height:12px;width:70%"></div><div class="skeleton" style="height:12px;width:45%"></div></div>
+    </div></div>
+  </div>
+        <div class="card p-6 text-center flex flex-col items-center gap-3">
+    <span class="medallion m-soft tone-coral medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg></span>
+    <div>
+      <h3 class="text-[15px] font-bold text-ink mb-1">تعذّر تحميل البيانات</h3>
+      <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">حدث خطأ مؤقت في الاتصال. تحقّق من الشبكة وحاول مجددًا.</p>
+    </div>
+    <button type="button" class="btn btn-secondary btn-sm"   data-action="retry"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>إعادة المحاولة</span></button>
+  </div>
+        <div class="card p-6 text-center flex flex-col items-center gap-3">
+    <span class="medallion m-soft tone-primary medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar-plus"></use></svg></span>
+    <div>
+      <h3 class="text-[15px] font-bold text-ink mb-1">لا توجد جلسات بعد</h3>
+      <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">ابدأ بإضافة أول جلسة لهذا اليوم وستظهر هنا مباشرة.</p>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm"   data-action="add-session"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة جلسة</span></button>
+  </div>
+      </div>
+    </section>
+
+    <template data-preview="s1">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">أساسيات الرياضيات</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">09:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">سارة القحطاني</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٨ / ٢٠</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">المستوى الثالث</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة أ</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
+    </div>
+  </template><template data-preview="s2">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">قواعد اللغة العربية</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">10:30</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٤٥ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">محمد الدوسري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٢٢ / ٢٥</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">المستوى الثاني</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ج</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
+    </div>
+  </template><template data-preview="s3">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">مقدمة في البرمجة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">08:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">ليان الشمري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٥ / ١٦</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">المستوى الأول</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">معمل ١</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
+    </div>
+  </template><template data-preview="s4">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">حلقة تقوية فيزياء</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>ملغاة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">11:45</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٣٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">عبدالله الحربي</span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">المستوى الرابع</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ب</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag att-cancelled" data-attention="cancelled"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>ملغاة</span></span></span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
+    </div>
+  </template><template data-preview="s5">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">مهارات التواصل</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">13:15</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٥٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">ريم المطيري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٩ / ٢٠</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">برنامج مسائي</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة د</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
+    </div>
+  </template>
+  </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="./assets/js/enhance.js"></script>
+</body>
+</html>

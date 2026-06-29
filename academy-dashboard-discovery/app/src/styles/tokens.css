@@ -1,0 +1,161 @@
+/* ============================================================================
+   Design tokens — extracted verbatim from the approved design
+   (design-references/approved-dashboard/academy-dashboard.html).
+   See contracts/tokens-contract.md.
+
+   Theme model:
+   - :root                         → light (default)
+   - [data-theme="dark"]           → explicit dark
+   - prefers-color-scheme: dark    → applies dark ONLY when no explicit theme set
+     (i.e. "system" mode follows the OS; explicit light/dark always win)
+   ========================================================================== */
+
+:root {
+  /* surfaces */
+  --c-canvas: #FAF6EF;
+  --c-canvas-2: #F1EADC;
+  --c-surface: #FFFFFF;
+  --c-surface-2: #F7F1E7;
+  /* text */
+  --c-ink: #211D33;
+  --c-ink-2: #544F66;
+  --c-ink-3: #645C76;
+  /* lines */
+  --c-line: #E7DECF;
+  --c-line-2: #F1EADD;
+  /* primary (violet/indigo) */
+  --c-primary: #5145CD;
+  --c-primary-2: #6E63E0;
+  --c-primary-weak: #EAE7FB;
+  /* filled-button violet — white text meets AA (≥4.5:1) in BOTH themes
+     (the brighter dark --c-primary #9486F4 fails as a button fill) */
+  --c-primary-btn: var(--c-primary);
+  --c-primary-btn-hover: #6E63E0;
+  /* dark sidebar */
+  --c-sidebar: #1F1B38;
+  --c-sidebar-2: #2B2650;
+  --c-sb-ink: rgba(255, 255, 255, 0.95);
+  --c-sb-ink-2: rgba(206, 202, 232, 0.72);
+  --c-sb-line: rgba(255, 255, 255, 0.10);
+  --c-sb-active: rgba(148, 134, 244, 0.22);
+  /* nav shell — slim icon rail + light nav panel (per sidebar-reference.png).
+     Most derive from surface/ink tokens so they re-theme automatically; only
+     --c-nav-rail is given an explicit deep value in dark. */
+  --c-nav-panel: var(--c-surface);
+  --c-nav-rail: var(--c-canvas-2);
+  --c-nav-line: var(--c-line);
+  --c-nav-ink: var(--c-ink);
+  --c-nav-ink-muted: var(--c-ink-3);
+  --c-nav-hover: var(--c-surface-2);
+  /* accents (+ weak tints) */
+  --c-teal: #0E8C7E;        --c-teal-weak: #D3EEEA;
+  --c-success: #1B8E59;     --c-success-weak: #D2ECDC;
+  --c-sky: #2774BC;         --c-sky-weak: #D6E6F6;
+  --c-amber: #C9781F;       --c-amber-weak: #F7E5C9;
+  --c-coral: #D7503A;       --c-coral-weak: #F8DAD2;
+  /* AA-compliant text-on-weak-tint variants (chips, tile labels, trend pills) */
+  --c-teal-ink: #0B6E62;    --c-success-ink: #15724A;  --c-sky-ink: #1C5C99;
+  --c-amber-ink: #98590F;   --c-coral-ink: #B23A28;
+
+  /* radii */
+  --r-pill: 999px;
+  --r-card: 20px;
+  --r-tile: 13px;
+  --r-field: 11px;
+  --r-xs: 6px;
+
+  /* elevation — warm-tinted */
+  --sh-xs: 0 1px 2px rgba(40, 33, 60, 0.07);
+  --sh-sm: 0 5px 18px rgba(40, 33, 60, 0.08);
+  --sh-md: 0 16px 40px rgba(40, 33, 60, 0.11);
+  --sh-lg: 0 30px 66px rgba(40, 33, 60, 0.17);
+
+  /* gradients */
+  --g-hero: linear-gradient(135deg, #3C32A6 0%, #5145CD 52%, #0E8C7E 132%);
+  --g-violet-teal: linear-gradient(150deg, #6E63E0, #0E8C7E);
+  --g-teal-sky: linear-gradient(150deg, #0E8C7E, #2774BC);
+  --g-violet-sky: linear-gradient(150deg, #5145CD, #2774BC);
+  --g-amber-coral: linear-gradient(150deg, #C9781F, #D7503A);
+  --g-violet: linear-gradient(150deg, #7B70EC, #3C32A6);
+
+  /* motion */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --dur: 200ms;
+
+  color-scheme: light;
+}
+
+/* dark token values, reused by explicit dark + system-dark */
+[data-theme="dark"] {
+  --c-canvas: #141220;
+  --c-canvas-2: #1B1828;
+  --c-surface: #221F31;
+  --c-surface-2: #2A2640;
+  --c-ink: #F3F0FB;
+  --c-ink-2: #C2BDD4;
+  --c-ink-3: #928CA8;
+  --c-line: #363046;
+  --c-line-2: #2A2639;
+  --c-primary: #9486F4;
+  --c-primary-2: #B0A4FA; --c-primary-btn: #5F53D6;
+  --c-primary-weak: #2D2850;
+  --c-sidebar: #0E0C18;
+  --c-sidebar-2: #1B1830;
+  --c-sb-ink: rgba(255, 255, 255, 0.94);
+  --c-sb-ink-2: rgba(206, 202, 230, 0.84);
+  --c-sb-line: rgba(255, 255, 255, 0.08);
+  --c-sb-active: rgba(140, 125, 242, 0.20);
+  --c-nav-rail: #0E0C18; /* deepest plane so the rail reads premium beside the dark panel */
+  --c-teal: #34C9B6;        --c-teal-weak: #163833;
+  --c-success: #3FBE7E;     --c-success-weak: #173329;
+  --c-sky: #62A6E6;         --c-sky-weak: #16283D;
+  --c-amber: #EAA94F;       --c-amber-weak: #3D2F18;
+  --c-coral: #F2876F;       --c-coral-weak: #3D231D;
+  /* on dark weak-tints the bright accents already meet AA */
+  --c-teal-ink: #34C9B6;    --c-success-ink: #3FBE7E;  --c-sky-ink: #62A6E6;
+  --c-amber-ink: #EAA94F;   --c-coral-ink: #F2876F;
+
+  --sh-xs: 0 1px 2px rgba(0, 0, 0, 0.34);
+  --sh-sm: 0 5px 18px rgba(0, 0, 0, 0.36);
+  --sh-md: 0 16px 40px rgba(0, 0, 0, 0.44);
+  --sh-lg: 0 30px 66px rgba(0, 0, 0, 0.54);
+
+  color-scheme: dark;
+}
+
+/* system mode: no explicit [data-theme] attribute → follow the OS */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --c-canvas: #141220;
+    --c-canvas-2: #1B1828;
+    --c-surface: #221F31;
+    --c-surface-2: #2A2640;
+    --c-ink: #F3F0FB;
+    --c-ink-2: #C2BDD4;
+    --c-ink-3: #928CA8;
+    --c-line: #363046;
+    --c-line-2: #2A2639;
+    --c-primary: #9486F4;
+    --c-primary-2: #B0A4FA; --c-primary-btn: #5F53D6;
+    --c-primary-weak: #2D2850;
+    --c-sidebar: #0E0C18;
+    --c-sidebar-2: #1B1830;
+    --c-sb-ink: rgba(255, 255, 255, 0.94);
+    --c-sb-ink-2: rgba(206, 202, 230, 0.84);
+    --c-sb-line: rgba(255, 255, 255, 0.08);
+    --c-sb-active: rgba(140, 125, 242, 0.20);
+    --c-nav-rail: #0E0C18; /* deepest plane so the rail reads premium beside the dark panel */
+    --c-teal: #34C9B6;        --c-teal-weak: #163833;
+    --c-success: #3FBE7E;     --c-success-weak: #173329;
+    --c-sky: #62A6E6;         --c-sky-weak: #16283D;
+    --c-amber: #EAA94F;       --c-amber-weak: #3D2F18;
+    --c-coral: #F2876F;       --c-coral-weak: #3D231D;
+    --c-teal-ink: #34C9B6;    --c-success-ink: #3FBE7E;  --c-sky-ink: #62A6E6;
+    --c-amber-ink: #EAA94F;   --c-coral-ink: #F2876F;
+    --sh-xs: 0 1px 2px rgba(0, 0, 0, 0.34);
+    --sh-sm: 0 5px 18px rgba(0, 0, 0, 0.36);
+    --sh-md: 0 16px 40px rgba(0, 0, 0, 0.44);
+    --sh-lg: 0 30px 66px rgba(0, 0, 0, 0.54);
+    color-scheme: dark;
+  }
+}

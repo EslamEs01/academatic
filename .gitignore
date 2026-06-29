@@ -4,6 +4,10 @@ auth-state.json
 # Crawl artifacts (regenerate with `npm run crawl`)
 output/
 
+# Reference import archives + their extractions (analysis only — never product code)
+academy-dashboard-discovery/*.zip
+academy-dashboard-discovery/reference-imports/
+
 # Node
 node_modules/
 npm-debug.log*
