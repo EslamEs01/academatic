@@ -432,7 +432,7 @@
     </div>
     <span class="tile-ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span>
   </div></div></div>
-    <form class="filterbar" data-filter-form data-target="#sessions-table">
+    <form class="filterbar" data-filter-form data-target="#sessions-views">
     <div class="input-wrap" style="flex:1 1 220px;min-width:180px">
       <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
       <input class="input" type="search" data-filter="search" placeholder="ابحث في الجلسات…" aria-label="ابحث في الجلسات…" />
@@ -450,11 +450,16 @@
     </div>
     <span class="w-full text-[12px]" style="color:var(--c-ink-3)" data-filter-count></span>
   </form>
-    <section class="card overflow-hidden" id="sessions-table" data-table>
+    <div id="sessions-views"><div class="tabs-wrap" data-tabs="sessions">
+    <div class="tabs" role="tablist" aria-label="طرق عرض الجلسات">
+      <button class="tab is-active" role="tab" id="tab-sessions-list" data-tab="list" aria-controls="tabpanel-sessions-list" aria-selected="true" tabindex="0"><span>القائمة</span></button>
+      <button class="tab" role="tab" id="tab-sessions-timetable" data-tab="timetable" aria-controls="tabpanel-sessions-timetable" aria-selected="false" tabindex="-1"><span>الجدول الأسبوعي</span></button>
+    </div>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-sessions-list" data-tabpanel="list" aria-labelledby="tab-sessions-list"><section class="card overflow-hidden" id="sessions-table" data-table>
     <div class="overflow-x-auto">
       <table class="tbl">
         <thead><tr><th class="">الوقت</th><th class="">الجلسة</th><th class="">المعلم</th><th class="">القاعة</th><th class="">الطلاب</th><th class="">الحالة</th><th class="text-end"><span class="sr-only">إجراءات الجلسة</span></th></tr></thead>
-        <tbody><tr data-row data-status="completed" data-subject="programming" data-search="مقدمة في البرمجة ليان الشمري معمل ١ البرمجة">
+        <tbody><tr data-block="s1" data-row data-status="completed" data-subject="programming" data-teacher="layan" data-search="مقدمة في البرمجة ليان الشمري معمل ١ البرمجة">
     <td><div class="font-bold tabular text-ink">08:00</div>
       <div class="micro" style="color:var(--c-ink-3)">٦٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">مقدمة في البرمجة</div>
@@ -465,7 +470,7 @@
     <td><span class="tabular">١٥ / ١٦</span></td>
     <td><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s1" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="live" data-subject="math" data-search="أساسيات الرياضيات سارة القحطاني قاعة أ الرياضيات">
+  </tr><tr data-block="s2" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="أساسيات الرياضيات سارة القحطاني قاعة أ الرياضيات">
     <td><div class="font-bold tabular text-ink">09:00</div>
       <div class="micro" style="color:var(--c-ink-3)">٦٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">أساسيات الرياضيات</div>
@@ -476,7 +481,7 @@
     <td><span class="tabular">١٨ / ٢٠</span></td>
     <td><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s2" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="live" data-subject="math" data-search="نادي الرياضيات سارة القحطاني قاعة ج الرياضيات">
+  </tr><tr data-block="s3" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="نادي الرياضيات سارة القحطاني قاعة ج الرياضيات">
     <td><div class="font-bold tabular text-ink">09:30</div>
       <div class="micro" style="color:var(--c-ink-3)">٥٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">نادي الرياضيات</div>
@@ -487,7 +492,7 @@
     <td><span class="tabular">٨ / ١٢</span></td>
     <td><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s3" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="arabic" data-search="قواعد اللغة العربية محمد الدوسري قاعة ج اللغة العربية">
+  </tr><tr data-block="s4" data-row data-status="upcoming" data-subject="arabic" data-teacher="mohammed" data-search="قواعد اللغة العربية محمد الدوسري قاعة ج اللغة العربية">
     <td><div class="font-bold tabular text-ink">10:30</div>
       <div class="micro" style="color:var(--c-ink-3)">٤٥ دقيقة</div></td>
     <td><div class="font-bold text-ink">قواعد اللغة العربية</div>
@@ -498,7 +503,7 @@
     <td><span class="tabular">٢٢ / ٢٥</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s4" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="science" data-search="أساسيات الكيمياء خالد العنزي معمل ٢ العلوم">
+  </tr><tr data-block="s5" data-row data-status="upcoming" data-subject="science" data-teacher="khalid" data-search="أساسيات الكيمياء خالد العنزي معمل ٢ العلوم">
     <td><div class="font-bold tabular text-ink">11:00</div>
       <div class="micro" style="color:var(--c-ink-3)">٦٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">أساسيات الكيمياء</div>
@@ -509,7 +514,7 @@
     <td><span class="tabular">١٧ / ٢٠</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s5" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="cancelled" data-subject="physics" data-search="حلقة تقوية فيزياء عبدالله الحربي قاعة ب الفيزياء">
+  </tr><tr data-block="s6" data-row data-status="cancelled" data-subject="physics" data-teacher="abdullah" data-search="حلقة تقوية فيزياء عبدالله الحربي قاعة ب الفيزياء">
     <td><div class="font-bold tabular text-ink">11:45</div>
       <div class="micro" style="color:var(--c-ink-3)">٣٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">حلقة تقوية فيزياء</div>
@@ -520,7 +525,7 @@
     <td><span class="tabular" style="color:var(--c-ink-3)">—</span></td>
     <td><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>ملغاة</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s6" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="completed" data-subject="english" data-search="محادثة إنجليزية نورة الزهراني قاعة هـ الإنجليزية">
+  </tr><tr data-block="s7" data-row data-status="completed" data-subject="english" data-teacher="nora" data-search="محادثة إنجليزية نورة الزهراني قاعة هـ الإنجليزية">
     <td><div class="font-bold tabular text-ink">12:30</div>
       <div class="micro" style="color:var(--c-ink-3)">٤٥ دقيقة</div></td>
     <td><div class="font-bold text-ink">محادثة إنجليزية</div>
@@ -531,7 +536,7 @@
     <td><span class="tabular">١٢ / ١٥</span></td>
     <td><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s7" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="arabic" data-search="مهارات التواصل ريم المطيري قاعة د اللغة العربية">
+  </tr><tr data-block="s8" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="مهارات التواصل ريم المطيري قاعة د اللغة العربية">
     <td><div class="font-bold tabular text-ink">13:15</div>
       <div class="micro" style="color:var(--c-ink-3)">٥٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">مهارات التواصل</div>
@@ -542,7 +547,7 @@
     <td><span class="tabular">٩ / ٢٠</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s8" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="arabic" data-search="الكتابة الإبداعية ريم المطيري قاعة د اللغة العربية">
+  </tr><tr data-block="s9" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="الكتابة الإبداعية ريم المطيري قاعة د اللغة العربية">
     <td><div class="font-bold tabular text-ink">14:00</div>
       <div class="micro" style="color:var(--c-ink-3)">٦٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">الكتابة الإبداعية</div>
@@ -553,7 +558,7 @@
     <td><span class="tabular">١٤ / ١٨</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s9" aria-label="إجراءات الجلسة" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="completed" data-subject="physics" data-search="مراجعة الفيزياء عبدالله الحربي قاعة ب الفيزياء">
+  </tr><tr data-block="s10" data-row data-status="completed" data-subject="physics" data-teacher="abdullah" data-search="مراجعة الفيزياء عبدالله الحربي قاعة ب الفيزياء">
     <td><div class="font-bold tabular text-ink">15:00</div>
       <div class="micro" style="color:var(--c-ink-3)">٦٠ دقيقة</div></td>
     <td><div class="font-bold text-ink">مراجعة الفيزياء</div>
@@ -575,7 +580,129 @@
       <button type="button" class="pager is-current" aria-current="page">١</button>
     </div>
   </div></div>
-  </section>
+  </section></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-sessions-timetable" data-tabpanel="timetable" aria-labelledby="tab-sessions-timetable" hidden><div class="agenda" data-agenda><div class="sched-block tone-completed" data-block="s1" data-row data-status="completed" data-subject="programming" data-teacher="layan" data-search="مقدمة في البرمجة ليان الشمري معمل ١">
+    <div class="sched-time"><div class="t1">08:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">مقدمة في البرمجة</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى الأول · معمل ١</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-teal" aria-hidden="true">ل</span>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s1" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-live" data-block="s2" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="أساسيات الرياضيات سارة القحطاني قاعة أ">
+    <div class="sched-time"><div class="t1">09:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">أساسيات الرياضيات</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى الثالث · قاعة أ</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-violet" aria-hidden="true">س</span>
+      <span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span>
+      <button type="button" class="icon-btn" data-drawer="s2" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-live" data-block="s3" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="نادي الرياضيات سارة القحطاني قاعة ج">
+    <div class="sched-time"><div class="t1">09:30</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">نادي الرياضيات</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">إثرائي · قاعة ج</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-violet" aria-hidden="true">س</span>
+      <span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span>
+      <button type="button" class="icon-btn" data-drawer="s3" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s4" data-row data-status="upcoming" data-subject="arabic" data-teacher="mohammed" data-search="قواعد اللغة العربية محمد الدوسري قاعة ج">
+    <div class="sched-time"><div class="t1">10:30</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">قواعد اللغة العربية</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى الثاني · قاعة ج</div>
+      <div class="mt-1"><span class="attention-flag att-delayed" data-attention="delayed"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قد تتأخر</span></span></div>
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-amber" aria-hidden="true">م</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s4" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s5" data-row data-status="upcoming" data-subject="science" data-teacher="khalid" data-search="أساسيات الكيمياء خالد العنزي معمل ٢">
+    <div class="sched-time"><div class="t1">11:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">أساسيات الكيمياء</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى الأول · معمل ٢</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-sky" aria-hidden="true">خ</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s5" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-cancelled" data-block="s6" data-row data-status="cancelled" data-subject="physics" data-teacher="abdullah" data-search="حلقة تقوية فيزياء عبدالله الحربي قاعة ب">
+    <div class="sched-time"><div class="t1">11:45</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">حلقة تقوية فيزياء</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى الرابع · قاعة ب</div>
+      <div class="mt-1"><span class="attention-flag att-conflict" data-attention="conflict"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>تعارض محتمل</span></span></div>
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-success" aria-hidden="true">ع</span>
+      <span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>ملغاة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s6" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-completed" data-block="s7" data-row data-status="completed" data-subject="english" data-teacher="nora" data-search="محادثة إنجليزية نورة الزهراني قاعة هـ">
+    <div class="sched-time"><div class="t1">12:30</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">محادثة إنجليزية</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى المتوسط · قاعة هـ</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-coral" aria-hidden="true">ن</span>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s7" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s8" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="مهارات التواصل ريم المطيري قاعة د">
+    <div class="sched-time"><div class="t1">13:15</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">مهارات التواصل</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">برنامج مسائي · قاعة د</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-sky" aria-hidden="true">ر</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s8" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s9" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="الكتابة الإبداعية ريم المطيري قاعة د">
+    <div class="sched-time"><div class="t1">14:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">الكتابة الإبداعية</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى الثالث · قاعة د</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-sky" aria-hidden="true">ر</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s9" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-completed" data-block="s10" data-row data-status="completed" data-subject="physics" data-teacher="abdullah" data-search="مراجعة الفيزياء عبدالله الحربي قاعة ب">
+    <div class="sched-time"><div class="t1">15:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">مراجعة الفيزياء</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">المستوى الرابع · قاعة ب</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-success" aria-hidden="true">ع</span>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span>
+      <button type="button" class="icon-btn" data-drawer="s10" aria-label="معاينة الجلسة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div></div></section>
+  </div></div>
     <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
     <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
     <div>
@@ -588,181 +715,111 @@
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">مقدمة في البرمجة</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">08:00 · ٦٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">ليان الشمري</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">البرمجة</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">معمل ١</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٥ / ١٦</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">08:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">ليان الشمري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٥ / ١٦</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">البرمجة</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">معمل ١</span></div><div class="sheet-row"><span class="k">رابط الجلسة</span><span class="v"><button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="appt.joinReason" title="يتوفر الرابط بعد ربط الجلسات المباشرة (خارج النطاق الحالي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg><span>انضمام</span></button><p class="text-[12px] mt-1" style="color:var(--c-ink-3)">الأوقات معروضة بتوقيت الأكاديمية.</p></span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s2">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">أساسيات الرياضيات</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">09:00 · ٦٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">سارة القحطاني</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">الرياضيات</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة أ</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٨ / ٢٠</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">09:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">سارة القحطاني</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٨ / ٢٠</span></span></div><div class="sheet-row"><span class="k">العائلة</span><span class="v">أبو سلمان</span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">الرياضيات</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة أ</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s3">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">نادي الرياضيات</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">09:30 · ٥٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">سارة القحطاني</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">الرياضيات</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ج</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٨ / ١٢</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">09:30</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٥٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">سارة القحطاني</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٨ / ١٢</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">الرياضيات</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ج</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s4">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">قواعد اللغة العربية</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">10:30 · ٤٥ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">محمد الدوسري</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">اللغة العربية</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ج</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٢٢ / ٢٥</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">10:30</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٤٥ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">محمد الدوسري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٢٢ / ٢٥</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">اللغة العربية</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ج</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag att-delayed" data-attention="delayed"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قد تتأخر</span></span></span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s5">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">أساسيات الكيمياء</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">11:00 · ٦٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">خالد العنزي</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">العلوم</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">معمل ٢</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٧ / ٢٠</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">11:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">خالد العنزي</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٧ / ٢٠</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">العلوم</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">معمل ٢</span></div><div class="sheet-row"><span class="k">رابط الجلسة</span><span class="v"><button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="appt.joinReason" title="يتوفر الرابط بعد ربط الجلسات المباشرة (خارج النطاق الحالي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg><span>انضمام</span></button><p class="text-[12px] mt-1" style="color:var(--c-ink-3)">الأوقات معروضة بتوقيت الأكاديمية.</p></span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s6">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">حلقة تقوية فيزياء</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>ملغاة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">11:45 · ٣٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">عبدالله الحربي</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">الفيزياء</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ب</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">—</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>ملغاة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">11:45</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٣٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">عبدالله الحربي</span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">الفيزياء</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ب</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag att-conflict" data-attention="conflict"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>تعارض محتمل</span></span></span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s7">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">محادثة إنجليزية</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">12:30 · ٤٥ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">نورة الزهراني</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">الإنجليزية</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة هـ</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٢ / ١٥</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">12:30</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٤٥ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">نورة الزهراني</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٢ / ١٥</span></span></div><div class="sheet-row"><span class="k">العائلة</span><span class="v">أم جوري</span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">الإنجليزية</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة هـ</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s8">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">مهارات التواصل</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">13:15 · ٥٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">ريم المطيري</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">اللغة العربية</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة د</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٩ / ٢٠</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">13:15</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٥٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">ريم المطيري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٩ / ٢٠</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">اللغة العربية</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة د</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s9">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">الكتابة الإبداعية</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">14:00 · ٦٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">ريم المطيري</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">اللغة العربية</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة د</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٤ / ١٨</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">14:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">ريم المطيري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٤ / ١٨</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">اللغة العربية</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة د</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template><template data-preview="s10">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">مراجعة الفيزياء</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div>
-    <div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">15:00 · ٦٠ دقيقة</span></span></div>
-    <div class="sheet-row"><span class="k">المعلم</span><span class="v">عبدالله الحربي</span></div>
-    <div class="sheet-row"><span class="k">المادة</span><span class="v">الفيزياء</span></div>
-    <div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ب</span></div>
-    <div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٦ / ١٦</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">15:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">عبدالله الحربي</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">١٦ / ١٦</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">الفيزياء</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة ب</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم فتح التعديل (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
     </div>
   </template>
   </div>

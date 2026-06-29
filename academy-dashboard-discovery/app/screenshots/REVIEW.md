@@ -109,3 +109,24 @@ Corrected the sidebar to the **two-level category rail** of `sidebar-reference.p
 **Core requirement met:** the sidebar **no longer shows all links at once** — only the selected category's links are visible, and clicking a rail category switches the panel (smoke-asserted: 6 category tabs · exactly ONE visible panel · switching to families works).
 
 **Automated:** build clean · smoke PASS (+ category-switch + single-visible-panel + 6-tabs assertions) · axe **critical=0 / serious=0** · 26 screenshots, 0 console errors. New icons: layers/grid/user-plus (52 total, 0 missing).
+
+## Timetable & Scheduling Experience — Spec 003 (2026-06-29)
+
+Evolved the Schedule + Sessions surfaces into a tabbed timetable experience: **List/Agenda** + a NEW **hand-rolled weekly Timetable grid** (days × cropped working hours, status-colored blocks, today column, overlap lanes, attention flags — **no calendar library**). Clicking any block opens ONE shared **appointment drawer** (progressive disclosure + demo/disabled actions). Filters (teacher / subject / status / search) narrow BOTH views; an admin **teacher-timetable lens** scopes the grid. Sessions gains a today Timetable/agenda tab; the Dashboard gains a minimal fixture-backed impact (deep-links + shared drawer + "up next" strip + attention chip). Reviewed against the old-system *All Teachers Timetable* (product reference only) + the Spec 001/002 approved direction. Arabic label **`الجدول الدراسي`** / English **`Timetable`**.
+
+| # | Scenario | File | Verdict |
+|---|----------|------|---------|
+| 1 | Schedule · **List tab** · AR Light | `schedule__ar__light__desktop__list.png` | ✅ PASS — calm day-grouped blocks kept; attention flags + teacher facet added; not a plain table |
+| 2 | Schedule · **Timetable tab** · AR Light | `schedule__ar__light__desktop__timetable.png` | ✅ PASS — readable weekly grid (Sat-first RTL, axis 08–16 cropped), today (الأحد) violet + live teal blocks, attention flags (تعارض/قد تتأخر/ملغاة line-through), Tue overlap side-by-side |
+| 3 | Schedule · Timetable · AR **Dark** | `schedule__ar__dark__desktop__timetable.png` | ✅ PASS — true-dark surfaces, blocks legible (ink-2), live tint + today subtle; contrast fixed (axe clean) |
+| 4 | Schedule · Timetable · **EN LTR** | `schedule__en__light__desktop__timetable.png` | ✅ PASS — fully mirrored (Sat→Thu left-to-right, axis left), English labels (Timetable/List/Possible conflict/May run late/Cancelled), LTR times |
+| 5 | Schedule · **Teacher lens** · AR Light | `schedule__ar__light__desktop__teacher.png` | ✅ PASS — teacher filter (سارة القحطاني) scopes grid to her 3 sessions, "عرض ٣ من ١١" — admin display only, no portal |
+| 6 | **Appointment drawer** · AR Light | `schedule__ar__light__desktop__drawer.png` | ✅ PASS — status/date/time(LTR)/teacher/students/subject/room/notes + actions (edit·notify·cancel-danger); scrim + focus trap |
+| 7 | **Dashboard** schedule impact · AR Light | `dashboard__ar__light__desktop__schedule-impact.png` | ✅ PASS — hero "عرض الجدول" deep-link + "القادم هذا الأسبوع" strip + "⚠ ٢ تحتاج انتباه" chip; rows open shared drawer; stays calm (no new stat wall) |
+| 8 | **Mobile agenda** fallback · AR Light | `schedule__ar__light__mobile__agenda.png` | ✅ PASS — grid reflows to stacked day-grouped agenda via source order (no duplicate markup), attention flags kept |
+| 9 | **Tablet** Timetable · AR Light | `schedule__ar__light__tablet__timetable.png` | ✅ PASS — grid readable at 834px |
+| 10 | **Sessions** Timetable/agenda tab · AR Light | `sessions__ar__light__desktop__timetable.png` | ✅ PASS — status tiles kept; today's sessions as time-ordered agenda; shared drawer chevrons; table still the List tab |
+
+**§A4 failure conditions:** none — the schedule is **not** a plain table (calendar/timetable tab present), the detail **drawer** is present, time blocks are readable (cropped axis, generous height, 3 tidy lines), filters are strong (teacher lens + facets, visible feedback), dark mode is good, RTL/LTR correct (times never mirrored), it is static HTML-first (no `#app`, the grid is **baked** — block `grid-row`/`--col` placement computed at build, not runtime), relative paths only, **no calendar library**, Django-mappable (`{% for day %}{% for block %}`). Resembles the analyzed system's weekly-timetable idea but cleaner/calmer — not a legacy copy, not invented.
+
+**Automated (accompanying):** build clean (18 pages, 52 icons / 0 missing) · smoke PASS (18 loads + NEW Spec 003 assertions: ≥2 content tabs · exactly ONE visible tabpanel · baked timetable grid · tab-switch shows only the grid · timetable block opens the drawer · teacher lens narrows the grid) · axe **critical=0 / serious=0** (incl. `#view=timetable` scans) · 35 screenshots, **0 console errors**. No new dependencies.

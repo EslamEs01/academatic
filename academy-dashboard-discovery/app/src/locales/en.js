@@ -13,7 +13,7 @@ export default {
     soon: 'Soon', comingSoon: 'This page is being prepared and will be available soon.',
     reason: { finance: 'Requires the billing module (out of current scope).' },
     // control
-    home: 'Home', sessions: 'Sessions', schedule: 'Schedule',
+    home: 'Home', sessions: 'Sessions', schedule: 'Timetable',
     sessionsAnalysis: 'Sessions analysis', messages: 'Messages', leads: 'New Requests', tasks: 'Tasks',
     announcements: 'Announcements', timeConverter: 'Time converter', publicHoliday: 'Public holidays', scheduledActions: 'Scheduled actions',
     // families

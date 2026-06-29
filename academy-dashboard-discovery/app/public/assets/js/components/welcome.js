@@ -30,7 +30,7 @@ export function welcomeZone(w) {
       <p class="text-[13.5px] mb-5 max-w-md" style="color:rgba(255,255,255,.9)">${t('welcome.summary', { today: num(w.todaySessions), live: num(w.liveNow) })}</p>
       <div class="flex flex-wrap gap-2.5">
         ${button({ labelKey: w.primaryActionKey, variant: 'on-grad', icon: 'plus', attrs: 'data-action="new-session"' })}
-        ${button({ labelKey: w.secondaryActionKey, variant: 'ghost-grad', icon: 'calendar', attrs: 'data-action="view-schedule"' })}
+        ${button({ labelKey: w.secondaryActionKey, variant: 'ghost-grad', icon: 'calendar', href: (getLang() === 'en' ? './schedule.en.html#view=timetable' : './schedule.html#view=timetable') })}
       </div>
     </div>
   </div>`;

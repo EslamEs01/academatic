@@ -171,6 +171,55 @@ function langUrl(lang) {
   return lang === 'en' ? `${base}.en.html` : `${base}.html`;
 }
 
+/* ---- content tabs (List / Timetable) — toggles baked panels only ---- */
+const SCHED_VIEW_KEY = 'academy.schedView.';
+function selectTab(group, id, { persist = true, focus = false } = {}) {
+  const wrap = document.querySelector(`[data-tabs="${CSS.escape(group)}"]`);
+  if (!wrap || !wrap.querySelector(`[data-tab="${CSS.escape(id)}"]`)) return;
+  wrap.querySelectorAll('[data-tab]').forEach((tb) => {
+    const on = tb.getAttribute('data-tab') === id;
+    tb.classList.toggle('is-active', on);
+    tb.setAttribute('aria-selected', String(on));
+    tb.setAttribute('tabindex', on ? '0' : '-1');
+    if (on && focus) tb.focus();
+  });
+  wrap.querySelectorAll('[data-tabpanel]').forEach((p) => { p.hidden = p.getAttribute('data-tabpanel') !== id; });
+  if (persist) {
+    try { localStorage.setItem(SCHED_VIEW_KEY + group, id); } catch (e) { /* ignore */ }
+    if (history.replaceState) { try { history.replaceState(null, '', '#view=' + id); } catch (e) { /* ignore */ } }
+  }
+}
+/* on load: URL hash (#view=) wins, else the stored view, else the baked default */
+(function initTabs() {
+  const wraps = document.querySelectorAll('[data-tabs]');
+  if (!wraps.length) return;
+  const hashView = (location.hash.match(/view=([a-z0-9-]+)/i) || [])[1];
+  wraps.forEach((wrap) => {
+    const group = wrap.getAttribute('data-tabs');
+    const has = (id) => id && wrap.querySelector(`[data-tab="${CSS.escape(id)}"]`);
+    let want = hashView && has(hashView) ? hashView : null;
+    if (!want) { try { const stored = localStorage.getItem(SCHED_VIEW_KEY + group); if (has(stored)) want = stored; } catch (e) { /* storage blocked */ } }
+    if (want) selectTab(group, want, { persist: false });
+  });
+})();
+/* roving-tabindex keyboard nav for the tablist */
+document.addEventListener('keydown', (e) => {
+  const tab = e.target.closest && e.target.closest('[data-tab]');
+  const list = tab && tab.closest('[role="tablist"]');
+  if (!list) return;
+  const tabs = Array.from(list.querySelectorAll('[data-tab]'));
+  const i = tabs.indexOf(tab);
+  let j = -1;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % tabs.length;
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+  else if (e.key === 'Home') j = 0;
+  else if (e.key === 'End') j = tabs.length - 1;
+  else return;
+  e.preventDefault();
+  const wrap = list.closest('[data-tabs]');
+  if (wrap) selectTab(wrap.getAttribute('data-tabs'), tabs[j].getAttribute('data-tab'), { focus: true });
+});
+
 /* ---- generic right-side panel (focus trap, scrim, Esc, return focus) ---- */
 let panel, scrim, lastFocus, keyHandler;
 function openPanel(node, { wide = false } = {}, trigger) {
@@ -297,8 +346,13 @@ function applyFilter(form) {
   if (target) target.querySelectorAll('.day-group').forEach((g) => {
     g.hidden = !g.querySelector('[data-row]:not([hidden])');
   });
+  // count unique items (the schedule renders each block in BOTH the list and
+  // timetable panels with a shared data-block id, so dedupe before reporting)
+  const key = (r) => r.getAttribute('data-block') || r;
+  const totalN = new Set(rows.map(key)).size;
+  const shownN = new Set(rows.filter((r) => !r.hidden).map(key)).size;
   const cnt = form.querySelector('[data-filter-count]');
-  if (cnt) cnt.textContent = shown === rows.length ? '' : t('filter.count', { shown: num(shown), total: num(rows.length) });
+  if (cnt) cnt.textContent = shownN === totalN ? '' : t('filter.count', { shown: num(shownN), total: num(totalN) });
   const nr = document.querySelector('[data-no-results]');
   if (nr) nr.classList.toggle('hidden', shown !== 0);
   if (target) target.classList.toggle('hidden', shown === 0);
@@ -322,6 +376,10 @@ document.addEventListener('click', (e) => {
   if (th) { setTheme(th.getAttribute('data-set-theme')); updateThemeIcon(); return closeMenu(); }
   const lg = e.target.closest('[data-set-lang]');
   if (lg) { const l = lg.getAttribute('data-set-lang'); closeMenu(); if (l !== getLang()) location.href = langUrl(l); return; }
+
+  // content tabs (List / Timetable) — switch the visible baked panel
+  const tabBtn = e.target.closest('[data-tab]');
+  if (tabBtn) { const wrap = tabBtn.closest('[data-tabs]'); if (wrap) { selectTab(wrap.getAttribute('data-tabs'), tabBtn.getAttribute('data-tab')); return; } }
 
   // category rail: swap the expanded panel to the clicked category (no navigation)
   const ncat = e.target.closest('[data-nav-category]');

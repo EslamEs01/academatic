@@ -24,6 +24,7 @@ export default {
     fSubject: 'المادة', fStatus: 'الحالة', fTrainer: 'المدرب',
     colSubject: 'المادة', empty: { title: 'لا توجد جلسات بعد', msg: 'ابدأ بإضافة أول جلسة لهذا اليوم وستظهر هنا مباشرة.' },
     note: 'تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.', detailsTitle: 'تفاصيل الجلسة',
+    agendaEmpty: 'لا جلسات اليوم', tablistAria: 'طرق عرض الجلسات', today: 'اليوم',
   },
 
   /* ---- Schedule page ---- */
@@ -31,7 +32,8 @@ export default {
     title: 'الجدول الدراسي', sub: 'نظرة هادئة على جلسات الأسبوع مرتّبة حسب اليوم.',
     blockPreview: 'معاينة الجلسة', searchPh: 'ابحث في الجدول…',
     empty: { title: 'لا توجد جلسات مجدولة', msg: 'ستظهر جلسات الأسبوع هنا فور إضافتها.' },
-    day: { sun: 'الأحد', mon: 'الإثنين', tue: 'الثلاثاء', wed: 'الأربعاء', thu: 'الخميس' },
+    day: { sun: 'الأحد', mon: 'الإثنين', tue: 'الثلاثاء', wed: 'الأربعاء', thu: 'الخميس', sat: 'السبت' },
+    tablistAria: 'طرق عرض الجدول', timetableEmpty: 'لا توجد جلسات مطابقة في الجدول',
   },
 
   /* ---- Students page ---- */
@@ -93,6 +95,38 @@ export default {
       view: 'عرض', manage: 'إدارة', create: 'إنشاء', export: 'تصدير',
       roleAdmin: 'مدير الأكاديمية', roleStaff: 'موظّف',
     },
+  },
+
+  /* ---- Spec 003 — Timetable / Appointment drawer ---- */
+  tab: { list: 'القائمة', timetable: 'الجدول الأسبوعي' },
+
+  tt: {
+    allTeachers: 'كل المعلمين', teacherLabel: 'المعلم', weekLabel: 'هذا الأسبوع', today: 'اليوم',
+    emptyDay: 'لا جلسات', emptyWeek: 'لا توجد جلسات هذا الأسبوع',
+    tablistAria: 'طرق عرض الجدول', gridAria: 'جدول الأسبوع',
+  },
+
+  attention: {
+    conflict: 'تعارض محتمل', delayed: 'قد تتأخر', cancelled: 'ملغاة',
+    emptyDay: 'يوم فارغ', label: 'تحتاج انتباه',
+  },
+
+  appt: {
+    date: 'التاريخ', time: 'الوقت', duration: 'المدة', teacher: 'المعلم',
+    students: 'الطلاب', family: 'العائلة', subject: 'المادة', room: 'القاعة',
+    onlineLink: 'رابط الجلسة', join: 'انضمام',
+    joinReason: 'يتوفر الرابط بعد ربط الجلسات المباشرة (خارج النطاق الحالي).',
+    tzHint: 'الأوقات معروضة بتوقيت الأكاديمية.',
+    notes: 'ملاحظات', materials: 'المواد', edit: 'تعديل / إعادة جدولة', notify: 'تنبيه',
+    cancel: 'إلغاء الجلسة', cancelTitle: 'إلغاء هذه الجلسة؟',
+    cancelMsg: 'إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية.',
+    cancelCta: 'إلغاء الجلسة', cancelToast: 'تم الإلغاء (تجريبي).',
+    editedToast: 'تم فتح التعديل (تجريبي).', notifiedToast: 'تم إرسال التنبيه (تجريبي).',
+    attentionLabel: 'تنبيه',
+  },
+
+  dash: {
+    upNext: 'القادم هذا الأسبوع', viewTimetable: 'عرض الجدول', attention: '{n} تحتاج انتباه',
   },
 
   /* ============ fixture content ============ */

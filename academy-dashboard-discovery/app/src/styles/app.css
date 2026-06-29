@@ -397,6 +397,82 @@
   .sched-time .t1 { @apply font-bold text-ink text-[13.5px]; }
   .sched-time .t2 { @apply text-[11.5px]; color: var(--c-ink-3); }
 
+  /* ============ Spec 003 — Timetable & Scheduling ============ */
+  /* ---- tab panels (the .tabs/.tab pill list above is reused) --------- */
+  .tabs-wrap > .tabs { margin-bottom: 16px; }
+  .tab { gap: 6px; }
+  .tab:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
+  .tabpanel[hidden] { display: none; }
+
+  /* ---- fixture-only attention indicator (icon + label, never color-only) */
+  .attention-flag { @apply inline-flex items-center gap-1 rounded-pill px-2 text-[10.5px] font-bold; height: 18px; white-space: nowrap; background: var(--c-amber-weak); color: var(--c-amber-ink); }
+  .attention-flag .ico { width: 12px; height: 12px; }
+  .attention-flag.att-conflict { background: var(--c-amber-weak); color: var(--c-amber-ink); }
+  .attention-flag.att-delayed  { background: var(--c-sky-weak);   color: var(--c-sky-ink); }
+  .attention-flag.att-cancelled{ background: var(--c-coral-weak); color: var(--c-coral-ink); }
+
+  /* ---- single-day agenda (Sessions "today" tab; reuses .sched-block) -- */
+  .agenda { display: flex; flex-direction: column; }
+  .agenda-empty { @apply card p-6 text-center text-[13px]; color: var(--c-ink-3); }
+
+  /* ---- weekly timetable grid — hand-rolled, NO calendar library ------- */
+  /* Blocks are placed by BUILD-TIME custom props (--col / --r1 / --r2 /
+     --cols / --colidx); runtime JS never lays this out. On mobile the same
+     markup reflows to a stacked agenda purely via source order + CSS. */
+  .timetable-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .timetable {
+    --axis-w: 56px; --head-h: 42px; --slot-h: 36px;
+    display: grid;
+    grid-template-columns: var(--axis-w) repeat(var(--days, 6), minmax(118px, 1fr));
+    grid-template-rows: var(--head-h) repeat(var(--slots, 18), var(--slot-h));
+    min-width: 660px; position: relative;
+    border: 1px solid var(--c-line); border-radius: var(--r-card); background: var(--c-surface);
+    background-image: repeating-linear-gradient(to bottom,
+      transparent 0, transparent calc(var(--slot-h) * 2 - 1px),
+      var(--c-line-2) calc(var(--slot-h) * 2 - 1px), var(--c-line-2) calc(var(--slot-h) * 2));
+    background-position: 0 var(--head-h); background-repeat: no-repeat;
+    background-size: 100% calc(100% - var(--head-h));
+    overflow: hidden;
+  }
+  .tt-corner { grid-row: 1; grid-column: 1; background: var(--c-surface); border-bottom: 1px solid var(--c-line); border-end-start-radius: 0; }
+  .tt-day-head {
+    grid-row: 1; grid-column: var(--col);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;
+    background: var(--c-surface); border-bottom: 1px solid var(--c-line); border-inline-start: 1px solid var(--c-line-2);
+  }
+  .tt-day-head .d-name { @apply font-bold text-ink text-[12.5px]; }
+  .tt-day-head .d-date { @apply text-[11px] tabular; color: var(--c-ink-3); }
+  .tt-day-head.is-today { background: var(--c-primary-weak); }
+  .tt-day-head.is-today .d-name { color: var(--c-primary); }
+  .tt-axis-label { grid-column: 1; align-self: start; padding-inline-end: 7px; text-align: end; transform: translateY(-7px); font-size: 10.5px; color: var(--c-ink-3); }
+  .tt-axis-label.tabular { font-variant-numeric: tabular-nums; }
+  .tt-colguide { grid-column: var(--col); grid-row: 2 / -1; border-inline-start: 1px solid var(--c-line-2); pointer-events: none; }
+  .tt-colguide.is-today { background: color-mix(in srgb, var(--c-primary-weak) 38%, transparent); }
+  .tt-block {
+    grid-column: var(--col); grid-row: var(--r1) / var(--r2); z-index: 1;
+    width: calc((100% - 5px) / var(--cols, 1));
+    margin-inline-start: calc((100% / var(--cols, 1)) * var(--colidx, 0));
+    margin-block: 2px; padding: 5px 8px; overflow: hidden;
+    display: flex; flex-direction: column; gap: 1px; text-align: start;
+    border-radius: 10px; cursor: pointer;
+    background: var(--c-surface); border: 1px solid var(--c-line); border-inline-start: 3px solid var(--c-line);
+    box-shadow: var(--sh-xs); transition: box-shadow .15s var(--ease), transform .15s var(--ease);
+  }
+  .tt-block:hover { box-shadow: var(--sh-md); transform: translateY(-1px); z-index: 4; }
+  .tt-block:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 1px; z-index: 4; }
+  .tt-block .tt-time { font-size: 10px; line-height: 1.1; font-weight: 700; color: var(--c-ink-2); font-variant-numeric: tabular-nums; }
+  .tt-block .tt-title { @apply text-[12px] font-bold text-ink; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tt-block .tt-meta { font-size: 10.5px; line-height: 1.2; color: var(--c-ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tt-block .attention-flag { margin-top: 2px; align-self: flex-start; }
+  .tt-block.tone-live { border-inline-start-color: var(--c-teal); background: var(--c-teal-weak); }
+  .tt-block.tone-upcoming { border-inline-start-color: var(--c-sky); }
+  .tt-block.tone-completed { border-inline-start-color: var(--c-success); }
+  /* cancelled: coral edge + the attention flag convey state — no opacity dim
+     (dimming the whole block would drop the flag text below AA contrast) */
+  .tt-block.tone-cancelled { border-inline-start-color: var(--c-coral); }
+  .tt-block.tone-cancelled .tt-title { text-decoration: line-through; text-decoration-color: var(--c-coral); }
+  .tt-block[hidden] { display: none; }
+
   /* ---- settings ------------------------------------------------------- */
   .set-section { @apply card p-5 mb-4; }
   .set-row { @apply flex flex-wrap items-center justify-between gap-3 py-3.5; border-top: 1px solid var(--c-line-2); }
@@ -427,4 +503,26 @@
 /* schedule + directory reflow on small screens */
 @media (max-width: 640px) {
   .sched-block { flex-wrap: wrap; }
+
+  /* timetable grid reflows to a stacked single-day agenda — same markup,
+     ordered day-head → that day's blocks → next day; grid placement dropped. */
+  .timetable {
+    display: block; min-width: 0; border: 0; border-radius: 0;
+    background-image: none; padding: 0; overflow: visible;
+  }
+  .timetable .tt-corner,
+  .timetable .tt-axis-label,
+  .timetable .tt-colguide { display: none; }
+  .timetable .tt-day-head {
+    flex-direction: row; align-items: center; justify-content: flex-start; gap: 8px;
+    margin: 16px 0 9px; padding: 0; border: 0; background: none; position: static;
+  }
+  .timetable .tt-day-head.is-today { background: none; }
+  .timetable .tt-day-head .d-date { margin-inline-start: 2px; }
+  .timetable .tt-block {
+    width: 100% !important; margin: 0 0 9px !important;
+    flex-direction: row !important; align-items: center; gap: 10px;
+    padding: 11px 12px;
+  }
+  .timetable .tt-block .tt-title { white-space: normal; }
 }

@@ -221,7 +221,7 @@
   </a><a href="sessions.en.html" class="nav-item is-active" data-nav="sessions" data-nav-status="implemented" aria-current="page">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg><span class="label">Sessions</span><span class="badge nav-badge tabular">24</span>
   </a><a href="schedule.en.html" class="nav-item" data-nav="schedule" data-nav-status="implemented">
-    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span class="label">Schedule</span>
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span class="label">Timetable</span>
   </a><button type="button" class="nav-item is-planned" data-nav="sessionsAnalysis" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Sessions analysis</span><span class="nav-soon">Soon</span>
     </button><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
@@ -432,7 +432,7 @@
     </div>
     <span class="tile-ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span>
   </div></div></div>
-    <form class="filterbar" data-filter-form data-target="#sessions-table">
+    <form class="filterbar" data-filter-form data-target="#sessions-views">
     <div class="input-wrap" style="flex:1 1 220px;min-width:180px">
       <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
       <input class="input" type="search" data-filter="search" placeholder="Search sessions…" aria-label="Search sessions…" />
@@ -450,11 +450,16 @@
     </div>
     <span class="w-full text-[12px]" style="color:var(--c-ink-3)" data-filter-count></span>
   </form>
-    <section class="card overflow-hidden" id="sessions-table" data-table>
+    <div id="sessions-views"><div class="tabs-wrap" data-tabs="sessions">
+    <div class="tabs" role="tablist" aria-label="Sessions views">
+      <button class="tab is-active" role="tab" id="tab-sessions-list" data-tab="list" aria-controls="tabpanel-sessions-list" aria-selected="true" tabindex="0"><span>List</span></button>
+      <button class="tab" role="tab" id="tab-sessions-timetable" data-tab="timetable" aria-controls="tabpanel-sessions-timetable" aria-selected="false" tabindex="-1"><span>Timetable</span></button>
+    </div>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-sessions-list" data-tabpanel="list" aria-labelledby="tab-sessions-list"><section class="card overflow-hidden" id="sessions-table" data-table>
     <div class="overflow-x-auto">
       <table class="tbl">
         <thead><tr><th class="">Time</th><th class="">Session</th><th class="">Teacher</th><th class="">Room</th><th class="">Students</th><th class="">Status</th><th class="text-end"><span class="sr-only">Session actions</span></th></tr></thead>
-        <tbody><tr data-row data-status="completed" data-subject="programming" data-search="intro to programming layan al-shamri lab 1 programming">
+        <tbody><tr data-block="s1" data-row data-status="completed" data-subject="programming" data-teacher="layan" data-search="intro to programming layan al-shamri lab 1 programming">
     <td><div class="font-bold tabular text-ink">08:00</div>
       <div class="micro" style="color:var(--c-ink-3)">60 min</div></td>
     <td><div class="font-bold text-ink">Intro to Programming</div>
@@ -465,7 +470,7 @@
     <td><span class="tabular">15 / 16</span></td>
     <td><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s1" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="live" data-subject="math" data-search="mathematics foundations sara al-qahtani hall a mathematics">
+  </tr><tr data-block="s2" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="mathematics foundations sara al-qahtani hall a mathematics">
     <td><div class="font-bold tabular text-ink">09:00</div>
       <div class="micro" style="color:var(--c-ink-3)">60 min</div></td>
     <td><div class="font-bold text-ink">Mathematics Foundations</div>
@@ -476,7 +481,7 @@
     <td><span class="tabular">18 / 20</span></td>
     <td><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s2" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="live" data-subject="math" data-search="math club sara al-qahtani hall c mathematics">
+  </tr><tr data-block="s3" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="math club sara al-qahtani hall c mathematics">
     <td><div class="font-bold tabular text-ink">09:30</div>
       <div class="micro" style="color:var(--c-ink-3)">50 min</div></td>
     <td><div class="font-bold text-ink">Math Club</div>
@@ -487,7 +492,7 @@
     <td><span class="tabular">8 / 12</span></td>
     <td><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s3" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="arabic" data-search="arabic grammar mohammed al-dosari hall c arabic">
+  </tr><tr data-block="s4" data-row data-status="upcoming" data-subject="arabic" data-teacher="mohammed" data-search="arabic grammar mohammed al-dosari hall c arabic">
     <td><div class="font-bold tabular text-ink">10:30</div>
       <div class="micro" style="color:var(--c-ink-3)">45 min</div></td>
     <td><div class="font-bold text-ink">Arabic Grammar</div>
@@ -498,7 +503,7 @@
     <td><span class="tabular">22 / 25</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s4" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="science" data-search="chemistry basics khalid al-anazi lab 2 science">
+  </tr><tr data-block="s5" data-row data-status="upcoming" data-subject="science" data-teacher="khalid" data-search="chemistry basics khalid al-anazi lab 2 science">
     <td><div class="font-bold tabular text-ink">11:00</div>
       <div class="micro" style="color:var(--c-ink-3)">60 min</div></td>
     <td><div class="font-bold text-ink">Chemistry Basics</div>
@@ -509,7 +514,7 @@
     <td><span class="tabular">17 / 20</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s5" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="cancelled" data-subject="physics" data-search="physics booster circle abdullah al-harbi hall b physics">
+  </tr><tr data-block="s6" data-row data-status="cancelled" data-subject="physics" data-teacher="abdullah" data-search="physics booster circle abdullah al-harbi hall b physics">
     <td><div class="font-bold tabular text-ink">11:45</div>
       <div class="micro" style="color:var(--c-ink-3)">30 min</div></td>
     <td><div class="font-bold text-ink">Physics Booster Circle</div>
@@ -520,7 +525,7 @@
     <td><span class="tabular" style="color:var(--c-ink-3)">—</span></td>
     <td><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancelled</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s6" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="completed" data-subject="english" data-search="english conversation noura al-zahrani hall e english">
+  </tr><tr data-block="s7" data-row data-status="completed" data-subject="english" data-teacher="nora" data-search="english conversation noura al-zahrani hall e english">
     <td><div class="font-bold tabular text-ink">12:30</div>
       <div class="micro" style="color:var(--c-ink-3)">45 min</div></td>
     <td><div class="font-bold text-ink">English Conversation</div>
@@ -531,7 +536,7 @@
     <td><span class="tabular">12 / 15</span></td>
     <td><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s7" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="arabic" data-search="communication skills reem al-mutairi hall d arabic">
+  </tr><tr data-block="s8" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="communication skills reem al-mutairi hall d arabic">
     <td><div class="font-bold tabular text-ink">13:15</div>
       <div class="micro" style="color:var(--c-ink-3)">50 min</div></td>
     <td><div class="font-bold text-ink">Communication Skills</div>
@@ -542,7 +547,7 @@
     <td><span class="tabular">9 / 20</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s8" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="upcoming" data-subject="arabic" data-search="creative writing reem al-mutairi hall d arabic">
+  </tr><tr data-block="s9" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="creative writing reem al-mutairi hall d arabic">
     <td><div class="font-bold tabular text-ink">14:00</div>
       <div class="micro" style="color:var(--c-ink-3)">60 min</div></td>
     <td><div class="font-bold text-ink">Creative Writing</div>
@@ -553,7 +558,7 @@
     <td><span class="tabular">14 / 18</span></td>
     <td><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="s9" aria-label="Session actions" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button></td>
-  </tr><tr data-row data-status="completed" data-subject="physics" data-search="physics review abdullah al-harbi hall b physics">
+  </tr><tr data-block="s10" data-row data-status="completed" data-subject="physics" data-teacher="abdullah" data-search="physics review abdullah al-harbi hall b physics">
     <td><div class="font-bold tabular text-ink">15:00</div>
       <div class="micro" style="color:var(--c-ink-3)">60 min</div></td>
     <td><div class="font-bold text-ink">Physics Review</div>
@@ -575,7 +580,129 @@
       <button type="button" class="pager is-current" aria-current="page">1</button>
     </div>
   </div></div>
-  </section>
+  </section></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-sessions-timetable" data-tabpanel="timetable" aria-labelledby="tab-sessions-timetable" hidden><div class="agenda" data-agenda><div class="sched-block tone-completed" data-block="s1" data-row data-status="completed" data-subject="programming" data-teacher="layan" data-search="intro to programming layan al-shamri lab 1">
+    <div class="sched-time"><div class="t1">08:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Intro to Programming</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Level 1 · Lab 1</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-teal" aria-hidden="true">L</span>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span>
+      <button type="button" class="icon-btn" data-drawer="s1" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-live" data-block="s2" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="mathematics foundations sara al-qahtani hall a">
+    <div class="sched-time"><div class="t1">09:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Mathematics Foundations</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Level 3 · Hall A</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-violet" aria-hidden="true">S</span>
+      <span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span>
+      <button type="button" class="icon-btn" data-drawer="s2" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-live" data-block="s3" data-row data-status="live" data-subject="math" data-teacher="sara" data-search="math club sara al-qahtani hall c">
+    <div class="sched-time"><div class="t1">09:30</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Math Club</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Enrichment · Hall C</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-violet" aria-hidden="true">S</span>
+      <span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span>
+      <button type="button" class="icon-btn" data-drawer="s3" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s4" data-row data-status="upcoming" data-subject="arabic" data-teacher="mohammed" data-search="arabic grammar mohammed al-dosari hall c">
+    <div class="sched-time"><div class="t1">10:30</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Arabic Grammar</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Level 2 · Hall C</div>
+      <div class="mt-1"><span class="attention-flag att-delayed" data-attention="delayed"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>May run late</span></span></div>
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-amber" aria-hidden="true">M</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span>
+      <button type="button" class="icon-btn" data-drawer="s4" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s5" data-row data-status="upcoming" data-subject="science" data-teacher="khalid" data-search="chemistry basics khalid al-anazi lab 2">
+    <div class="sched-time"><div class="t1">11:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Chemistry Basics</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Level 1 · Lab 2</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-sky" aria-hidden="true">K</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span>
+      <button type="button" class="icon-btn" data-drawer="s5" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-cancelled" data-block="s6" data-row data-status="cancelled" data-subject="physics" data-teacher="abdullah" data-search="physics booster circle abdullah al-harbi hall b">
+    <div class="sched-time"><div class="t1">11:45</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Physics Booster Circle</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Level 4 · Hall B</div>
+      <div class="mt-1"><span class="attention-flag att-conflict" data-attention="conflict"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>Possible conflict</span></span></div>
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-success" aria-hidden="true">A</span>
+      <span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancelled</span></span>
+      <button type="button" class="icon-btn" data-drawer="s6" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-completed" data-block="s7" data-row data-status="completed" data-subject="english" data-teacher="nora" data-search="english conversation noura al-zahrani hall e">
+    <div class="sched-time"><div class="t1">12:30</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">English Conversation</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Intermediate · Hall E</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-coral" aria-hidden="true">N</span>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span>
+      <button type="button" class="icon-btn" data-drawer="s7" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s8" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="communication skills reem al-mutairi hall d">
+    <div class="sched-time"><div class="t1">13:15</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Communication Skills</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Evening program · Hall D</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-sky" aria-hidden="true">R</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span>
+      <button type="button" class="icon-btn" data-drawer="s8" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-upcoming" data-block="s9" data-row data-status="upcoming" data-subject="arabic" data-teacher="reem" data-search="creative writing reem al-mutairi hall d">
+    <div class="sched-time"><div class="t1">14:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Creative Writing</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Level 3 · Hall D</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-sky" aria-hidden="true">R</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span>
+      <button type="button" class="icon-btn" data-drawer="s9" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div><div class="sched-block tone-completed" data-block="s10" data-row data-status="completed" data-subject="physics" data-teacher="abdullah" data-search="physics review abdullah al-harbi hall b">
+    <div class="sched-time"><div class="t1">15:00</div><div class="t2 tabular"></div></div>
+    <div class="flex-1 min-w-0">
+      <div class="font-bold text-ink text-[13.5px] truncate">Physics Review</div>
+      <div class="text-[12px] truncate" style="color:var(--c-ink-3)">Level 4 · Hall B</div>
+      
+    </div>
+    <div class="flex items-center gap-2.5 shrink-0">
+      <span class="avatar avatar-sm av-success" aria-hidden="true">A</span>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span>
+      <button type="button" class="icon-btn" data-drawer="s10" aria-label="Session preview"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button>
+    </div>
+  </div></div></section>
+  </div></div>
     <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
     <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
     <div>
@@ -588,181 +715,111 @@
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Intro to Programming</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">08:00 · 60 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Layan Al-Shamri</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Programming</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Lab 1</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">15 / 16</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">08:00</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">60 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Layan Al-Shamri</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">15 / 16</span></span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Programming</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Lab 1</span></div><div class="sheet-row"><span class="k">Session link</span><span class="v"><button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="appt.joinReason" title="Live-session links arrive once live sessions are connected (out of current scope)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg><span>Join</span></button><p class="text-[12px] mt-1" style="color:var(--c-ink-3)">Times shown in the academy timezone.</p></span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s2">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Mathematics Foundations</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">09:00 · 60 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Sara Al-Qahtani</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Mathematics</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall A</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">18 / 20</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">09:00</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">60 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Sara Al-Qahtani</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">18 / 20</span></span></div><div class="sheet-row"><span class="k">Family</span><span class="v">Abu Salman</span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Mathematics</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall A</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s3">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Math Club</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">09:30 · 50 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Sara Al-Qahtani</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Mathematics</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall C</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">8 / 12</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">09:30</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">50 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Sara Al-Qahtani</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">8 / 12</span></span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Mathematics</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall C</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s4">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Arabic Grammar</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">10:30 · 45 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Mohammed Al-Dosari</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Arabic</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall C</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">22 / 25</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">10:30</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">45 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Mohammed Al-Dosari</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">22 / 25</span></span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Arabic</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall C</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag att-delayed" data-attention="delayed"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>May run late</span></span></span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s5">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Chemistry Basics</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">11:00 · 60 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Khalid Al-Anazi</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Science</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Lab 2</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">17 / 20</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">11:00</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">60 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Khalid Al-Anazi</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">17 / 20</span></span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Science</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Lab 2</span></div><div class="sheet-row"><span class="k">Session link</span><span class="v"><button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="appt.joinReason" title="Live-session links arrive once live sessions are connected (out of current scope)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg><span>Join</span></button><p class="text-[12px] mt-1" style="color:var(--c-ink-3)">Times shown in the academy timezone.</p></span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s6">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Physics Booster Circle</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancelled</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">11:45 · 30 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Abdullah Al-Harbi</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Physics</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall B</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">—</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancelled</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">11:45</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">30 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Abdullah Al-Harbi</span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Physics</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall B</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag att-conflict" data-attention="conflict"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>Possible conflict</span></span></span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s7">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">English Conversation</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">12:30 · 45 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Noura Al-Zahrani</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">English</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall E</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">12 / 15</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">12:30</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">45 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Noura Al-Zahrani</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">12 / 15</span></span></div><div class="sheet-row"><span class="k">Family</span><span class="v">Umm Joury</span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">English</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall E</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s8">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Communication Skills</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">13:15 · 50 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Reem Al-Mutairi</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Arabic</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall D</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">9 / 20</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">13:15</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">50 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Reem Al-Mutairi</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">9 / 20</span></span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Arabic</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall D</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s9">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Creative Writing</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">14:00 · 60 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Reem Al-Mutairi</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Arabic</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall D</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">14 / 18</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Upcoming</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">14:00</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">60 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Reem Al-Mutairi</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">14 / 18</span></span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Arabic</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall D</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template><template data-preview="s10">
     <div class="sheet-card">
       <div class="sheet-head">
         <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span>
           <h2 class="text-[15px] font-bold text-ink">Physics Review</h2>
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body">
-    <div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></div>
-    <div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">15:00 · 60 min</span></span></div>
-    <div class="sheet-row"><span class="k">Teacher</span><span class="v">Abdullah Al-Harbi</span></div>
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Physics</span></div>
-    <div class="sheet-row"><span class="k">Room</span><span class="v">Hall B</span></div>
-    <div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">16 / 16</span></span></div>
-    <p class="text-[12.5px] mt-4" style="color:var(--c-ink-3)">This session runs per the academy’s approved schedule.</p></div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Completed</span></span></div><div class="sheet-row"><span class="k">Date</span><span class="v">Today</span></div><div class="sheet-row"><span class="k">Time</span><span class="v"><span class="tabular">15:00</span></span></div><div class="sheet-row"><span class="k">Duration</span><span class="v">60 min</span></div><div class="sheet-row"><span class="k">Teacher</span><span class="v">Abdullah Al-Harbi</span></div><div class="sheet-row"><span class="k">Students</span><span class="v"><span class="tabular">16 / 16</span></span></div><div class="sheet-row"><span class="k">Subject</span><span class="v">Physics</span></div><div class="sheet-row"><span class="k">Room</span><span class="v">Hall B</span></div><div class="sheet-row"><span class="k">Notes</span><span class="v">This session runs per the academy’s approved schedule.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Edit opened (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>Edit / Reschedule</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="Notification sent (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>Notify</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="Cancel this session?" data-confirm-msg="A front-end demo only — it does not affect any real data." data-confirm-cta="Cancel session" data-confirm-toast="Cancelled (demo)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Cancel session</span></button></div></div>
     </div>
   </template>
   </div>

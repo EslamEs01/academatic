@@ -21,6 +21,11 @@ const MATRIX = [
   { page: 'teachers', lang: 'ar', theme: 'light' },
   { page: 'courses', lang: 'ar', theme: 'light' },
   { page: 'settings', lang: 'ar', theme: 'light' },
+  // Spec 003 — scan the VISIBLE timetable view (hash activates the Timetable tab on load)
+  { page: 'schedule', lang: 'ar', theme: 'light', hash: '#view=timetable' },
+  { page: 'schedule', lang: 'ar', theme: 'dark', hash: '#view=timetable' },
+  { page: 'schedule', lang: 'en', theme: 'light', hash: '#view=timetable' },
+  { page: 'sessions', lang: 'ar', theme: 'light', hash: '#view=timetable' },
   // new shell coverage: dashboard dark + collapsed-rail are checked via dashboard rows above
   { page: 'dashboard', lang: 'en', theme: 'dark' },
 ];
@@ -34,7 +39,7 @@ const MATRIX = [
     await ctx.addInitScript((theme) => { localStorage.setItem('academy.theme', theme); }, s.theme);
     const p = await ctx.newPage();
     const file = s.lang === 'en' ? `${s.page}.en.html` : `${s.page}.html`;
-    await p.goto(`${BASE}/${file}`, { waitUntil: 'networkidle' });
+    await p.goto(`${BASE}/${file}${s.hash || ''}`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(250);
 
     const { violations } = await new AxeBuilder({ page: p })
@@ -44,7 +49,7 @@ const MATRIX = [
     const crit = violations.filter((v) => v.impact === 'critical');
     const ser = violations.filter((v) => v.impact === 'serious');
     critical += crit.length; serious += ser.length;
-    const tag = `${s.page}/${s.lang}/${s.theme}`;
+    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}`;
     if (crit.length) console.error(`  ✗ ${tag}: ${crit.length} CRITICAL — ${crit.map((v) => v.id).join(', ')}`);
     if (ser.length) console.warn(`  ⚠ ${tag}: ${ser.length} serious — ${ser.map((v) => v.id).join(', ')}`);
     if (!crit.length && !ser.length) console.log(`  ✓ ${tag}: clean`);

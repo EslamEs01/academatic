@@ -43,11 +43,15 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         // category rail: one tab per category; exactly ONE category panel visible at a time
         const railCats = document.querySelectorAll('.nav-rail .rail-cat[data-nav-category]').length;
         const visiblePanels = [...document.querySelectorAll('.nav-panel .cat-panel')].filter((pn) => !pn.hidden).length;
+        // Spec 003 content tabs (List / Timetable): baked panels, exactly one visible
+        const contentTabs = document.querySelectorAll('[data-tabs] [role="tab"][data-tab]').length;
+        const visibleTabpanels = [...document.querySelectorAll('[data-tabs] [data-tabpanel]')].filter((p) => !p.hidden).length;
+        const hasTimetable = !!document.querySelector('[data-tabpanel="timetable"] .timetable[aria-label]');
         // GitHub-Pages: asset refs must be relative
         const absAssets = [...document.querySelectorAll('link[href],script[src]')]
           .map((n) => n.getAttribute('href') || n.getAttribute('src'))
           .filter((u) => u && (u.startsWith('/') || /^https?:/.test(u)));
-        return { raw, disabledNoReason, focusables, hasAppMount, hasShell, hasRail, hasPanel, activeNav, deadNav, railCats, visiblePanels, absAssets };
+        return { raw, disabledNoReason, focusables, hasAppMount, hasShell, hasRail, hasPanel, activeNav, deadNav, railCats, visiblePanels, contentTabs, visibleTabpanels, hasTimetable, absAssets };
       });
 
       ok(info.raw.length === 0, `${page}/${lang}: raw i18n keys ${JSON.stringify(info.raw)}`);
@@ -64,6 +68,11 @@ const ok = (c, m) => { if (!c) fails.push(m); };
       ok(info.deadNav === 0, `${page}/${lang}: ${info.deadNav} dead nav item(s) — anchor without route or planned/disabled button without a hook`);
       ok(info.railCats >= 6, `${page}/${lang}: expected ≥6 category tabs in the rail, got ${info.railCats}`);
       ok(info.visiblePanels === 1, `${page}/${lang}: expected exactly ONE category panel visible (not all links at once), got ${info.visiblePanels}`);
+      // Spec 003: schedule + sessions carry baked List/Timetable content tabs; exactly one panel visible
+      const hasTabs = page === 'schedule' || page === 'sessions';
+      ok(!hasTabs || info.contentTabs >= 2, `${page}/${lang}: expected ≥2 content tabs (List/Timetable), got ${info.contentTabs}`);
+      ok(!hasTabs || info.visibleTabpanels === 1, `${page}/${lang}: expected exactly ONE visible tabpanel, got ${info.visibleTabpanels}`);
+      ok(page !== 'schedule' || info.hasTimetable, `${page}/${lang}: schedule is missing the baked timetable grid`);
       ok(info.absAssets.length === 0, `${page}/${lang}: non-relative asset paths ${JSON.stringify(info.absAssets)}`);
 
       // behavioral no-dead-button: a filter button and a pager must produce feedback
@@ -121,6 +130,28 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         const sheet = await p.evaluate(() => !!document.querySelector('.drawer.sheet'));
         ok(sheet, `${page}/${lang}: session preview drawer did not open`);
         await p.keyboard.press('Escape');
+      }
+
+      // behavioral: Schedule tabs (List↔Timetable), timetable block → drawer, teacher lens (Spec 003)
+      if (page === 'schedule') {
+        await p.click('[data-tab="timetable"]');
+        await p.waitForTimeout(170);
+        const ttOk = await p.evaluate(() => {
+          const vis = [...document.querySelectorAll('[data-tabs] [data-tabpanel]')].filter((x) => !x.hidden);
+          return vis.length === 1 && vis[0].getAttribute('data-tabpanel') === 'timetable' && !!vis[0].querySelector('.timetable .tt-block');
+        });
+        ok(ttOk, `${page}/${lang}: clicking the Timetable tab did not show ONLY the timetable grid`);
+        const blk = await p.$('[data-tabpanel="timetable"] .tt-block[data-drawer]');
+        if (blk) { await blk.click(); await p.waitForTimeout(240); }
+        const ttSheet = await p.evaluate(() => !!document.querySelector('.drawer.sheet'));
+        ok(ttSheet, `${page}/${lang}: clicking a timetable block did not open the appointment drawer`);
+        await p.keyboard.press('Escape');
+        await p.waitForTimeout(120);
+        const before = await p.$$eval('[data-tabpanel="timetable"] .tt-block', (els) => els.length);
+        await p.selectOption('select[data-filter="teacher"]', { index: 1 }).catch(() => {});
+        await p.waitForTimeout(170);
+        const after = await p.$$eval('[data-tabpanel="timetable"] .tt-block', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `${page}/${lang}: teacher lens did not narrow the timetable (${before} → ${after})`);
       }
       await ctx.close();
     }

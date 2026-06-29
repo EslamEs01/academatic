@@ -12,8 +12,8 @@ export default {
   dir: { viewProfile: 'View profile', viewDetails: 'View details' },
 
   topbar: {
-    title: { sessions: 'Sessions', schedule: 'Schedule', students: 'Students', teachers: 'Teachers', courses: 'Courses', settings: 'Settings' },
-    crumb: { sessions: 'Sessions', schedule: 'Schedule', students: 'Students', teachers: 'Teachers', courses: 'Courses', settings: 'Settings' },
+    title: { sessions: 'Sessions', schedule: 'Timetable', students: 'Students', teachers: 'Teachers', courses: 'Courses', settings: 'Settings' },
+    crumb: { sessions: 'Sessions', schedule: 'Timetable', students: 'Students', teachers: 'Teachers', courses: 'Courses', settings: 'Settings' },
   },
 
   sess: {
@@ -22,13 +22,15 @@ export default {
     fSubject: 'Subject', fStatus: 'Status', fTrainer: 'Trainer',
     colSubject: 'Subject', empty: { title: 'No sessions yet', msg: 'Add the first session for today and it will appear here instantly.' },
     note: 'This session runs per the academy’s approved schedule.', detailsTitle: 'Session details',
+    agendaEmpty: 'No sessions today', tablistAria: 'Sessions views', today: 'Today',
   },
 
   sch: {
-    title: 'Schedule', sub: 'A calm overview of this week’s sessions, grouped by day.',
+    title: 'Timetable', sub: 'A calm overview of this week’s sessions, grouped by day.',
     blockPreview: 'Session preview', searchPh: 'Search the schedule…',
     empty: { title: 'Nothing scheduled', msg: 'This week’s sessions will appear here once added.' },
-    day: { sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday' },
+    day: { sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', sat: 'Saturday' },
+    tablistAria: 'Schedule views', timetableEmpty: 'No matching sessions in the grid',
   },
 
   stu: {
@@ -86,6 +88,38 @@ export default {
       view: 'View', manage: 'Manage', create: 'Create', export: 'Export',
       roleAdmin: 'Academy manager', roleStaff: 'Staff',
     },
+  },
+
+  /* ---- Spec 003 — Timetable / Appointment drawer ---- */
+  tab: { list: 'List', timetable: 'Timetable' },
+
+  tt: {
+    allTeachers: 'All teachers', teacherLabel: 'Teacher', weekLabel: 'This week', today: 'Today',
+    emptyDay: 'No sessions', emptyWeek: 'No sessions this week',
+    tablistAria: 'Schedule views', gridAria: 'Week grid',
+  },
+
+  attention: {
+    conflict: 'Possible conflict', delayed: 'May run late', cancelled: 'Cancelled',
+    emptyDay: 'Empty day', label: 'Needs attention',
+  },
+
+  appt: {
+    date: 'Date', time: 'Time', duration: 'Duration', teacher: 'Teacher',
+    students: 'Students', family: 'Family', subject: 'Subject', room: 'Room',
+    onlineLink: 'Session link', join: 'Join',
+    joinReason: 'Live-session links arrive once live sessions are connected (out of current scope).',
+    tzHint: 'Times shown in the academy timezone.',
+    notes: 'Notes', materials: 'Materials', edit: 'Edit / Reschedule', notify: 'Notify',
+    cancel: 'Cancel session', cancelTitle: 'Cancel this session?',
+    cancelMsg: 'A front-end demo only — it does not affect any real data.',
+    cancelCta: 'Cancel session', cancelToast: 'Cancelled (demo).',
+    editedToast: 'Edit opened (demo).', notifiedToast: 'Notification sent (demo).',
+    attentionLabel: 'Attention',
+  },
+
+  dash: {
+    upNext: 'Up next this week', viewTimetable: 'View timetable', attention: '{n} need attention',
   },
 
   data: {
