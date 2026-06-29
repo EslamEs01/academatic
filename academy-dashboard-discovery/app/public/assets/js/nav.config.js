@@ -21,6 +21,7 @@ export const NAV_CATEGORIES = [
       item({ id: 'home', labelKey: 'nav.home', icon: 'home', route: 'dashboard.html' }),
       item({ id: 'sessions', labelKey: 'nav.sessions', icon: 'sessions', route: 'sessions.html', badge: 24 }),
       item({ id: 'schedule', labelKey: 'nav.schedule', icon: 'schedule', route: 'schedule.html' }),
+      item({ id: 'attendance', labelKey: 'nav.attendance', icon: 'clipboard-check', route: 'attendance.html' }),
       item({ id: 'sessionsAnalysis', labelKey: 'nav.sessionsAnalysis', icon: 'trending-up', status: 'planned' }),
       item({ id: 'messages', labelKey: 'nav.messages', icon: 'messages', status: 'planned' }),
       item({ id: 'leads', labelKey: 'nav.leads', icon: 'inbox', status: 'planned' }),
@@ -123,7 +124,7 @@ export const FUTURE_ROLE = [
 /* intended routes when a planned item is promoted (NI9 / NI12) */
 export const FUTURE_ROUTES = {
   sessionsAnalysis: 'sessions-analysis.html', messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
-  announcements: 'announcements.html', groups: 'groups.html', studentResult: 'student-results.html',
+  announcements: 'announcements.html', attendance: 'attendance.html', groups: 'groups.html', studentResult: 'student-results.html',
   studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html', teacherKpi: 'teacher-performance.html',
   materials: 'materials.html', books: 'library.html', certificates: 'certificates.html', staff: 'staff.html',
   dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',

@@ -7,6 +7,8 @@ import arX from '../locales/ar.extra.js';
 import enX from '../locales/en.extra.js';
 import arF from '../locales/ar.fam.js';
 import enF from '../locales/en.fam.js';
+import arA from '../locales/ar.att.js';
+import enA from '../locales/en.att.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -23,6 +25,8 @@ deepMerge(ar, arX);
 deepMerge(en, enX);
 deepMerge(ar, arF);
 deepMerge(en, enF);
+deepMerge(ar, arA);
+deepMerge(en, enA);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

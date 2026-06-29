@@ -394,7 +394,10 @@ function applyFilter(form) {
     for (const s of selects) {
       const v = (s.value || '').toLowerCase();
       if (ok && v && v !== 'all') {
-        if ((r.getAttribute('data-' + s.getAttribute('data-filter')) || '') !== v) ok = false;
+        const rowVal = (r.getAttribute('data-' + s.getAttribute('data-filter')) || '').toLowerCase();
+        // a "+"-joined value (e.g. cancelled+rescheduled) matches any of its members (OR)
+        const accept = v.includes('+') ? v.split('+').includes(rowVal) : rowVal === v;
+        if (!accept) ok = false;
       }
     }
     r.hidden = !ok;
@@ -483,6 +486,19 @@ document.addEventListener('click', (e) => {
   if (fa) { const form = fa.closest('[data-filter-form]'); if (form) applyFilter(form); return; }
   const fr = e.target.closest('[data-filter-reset]');
   if (fr) { const form = fr.closest('[data-filter-form]'); if (form) resetFilter(form); return; }
+
+  // summary tile → set a filter facet + re-apply (Spec 005 — the only new hook)
+  const fset = e.target.closest('[data-filter-set]');
+  if (fset) {
+    const parts = (fset.getAttribute('data-filter-set') || '').split(':');
+    const facet = parts[0], value = parts[1];
+    const form = document.querySelector('[data-filter-form]');
+    if (form && facet && value != null) {
+      const sel = form.querySelector(`select[data-filter="${CSS.escape(facet)}"]`);
+      if (sel) { sel.value = value; applyFilter(form); }
+    }
+    return;
+  }
 
   const noop = e.target.closest('.popover [data-action="noop"]');
   if (noop) { const m = acknowledge(noop); closeMenu(); return toast(m); }

@@ -635,3 +635,39 @@
   .wiz-grid { grid-template-columns: 1fr; }
   .result-course .rc-bar { flex-basis: 84px; }
 }
+
+/* ============================================================================
+   Spec 005 — Attendance & Session Outcomes
+   ========================================================================== */
+@layer components {
+  /* ---- outcome summary tiles (double as filters via data-filter-set) ---- */
+  .outcome-tiles { @apply grid gap-3 mb-5; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .outcome-tile { @apply card flex items-center gap-3 p-3.5 text-start transition-all w-full; cursor: pointer; }
+  .outcome-tile:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+  .outcome-tile:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
+  .outcome-tile .ot-v { @apply font-bold tabular text-ink; font-size: 21px; line-height: 1; }
+  .outcome-tile .ot-l { @apply text-[12px] mt-1; color: var(--c-ink-3); }
+
+  /* ---- outcome row (the airy list/card hybrid) ----------------------- */
+  .outcome-row { @apply card flex items-center gap-3 p-3.5 mb-2.5 transition-all; }
+  .outcome-row.is-hoverable:hover { box-shadow: var(--sh-md); transform: translateY(-1px); }
+  .outcome-row .or-when { @apply text-center shrink-0 tabular; min-width: 60px; }
+  .outcome-row .or-when .t1 { @apply font-bold text-ink text-[13px]; }
+  .outcome-row .or-when .t2 { @apply text-[11px]; color: var(--c-ink-3); }
+  .outcome-row .or-body { @apply min-w-0 flex-1; }
+  .outcome-row .or-title { @apply font-bold text-ink text-[13.5px] truncate; }
+  .outcome-row .or-sub { @apply text-[12px] truncate; color: var(--c-ink-3); }
+  .outcome-row .or-meta { @apply flex flex-wrap items-center gap-2 mt-1.5; }
+  .outcome-row .or-end { @apply flex items-center gap-2 shrink-0; }
+  /* a chip-styled link to a student/family profile */
+  .link-chip { @apply inline-flex items-center gap-1.5 rounded-pill px-2.5 text-[12px] font-bold transition-colors; height: 26px; white-space: nowrap; background: var(--c-surface-2); color: var(--c-ink-2); }
+  a.link-chip:hover { background: var(--c-primary-weak); color: var(--c-primary); }
+  .link-chip .ico { width: 14px; height: 14px; }
+}
+
+@media (max-width: 640px) {
+  .outcome-row { flex-wrap: wrap; }
+  .outcome-row .or-when { min-width: 48px; }
+  .outcome-row .or-body { flex-basis: calc(100% - 60px); }
+  .outcome-row .or-end { flex-basis: 100%; justify-content: flex-start; margin-top: 4px; }
+}

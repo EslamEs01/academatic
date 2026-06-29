@@ -6,7 +6,7 @@ const { PORT } = require('../../scripts/serve.cjs');
 
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
-  'families', 'add-family', 'family', 'student'];
+  'families', 'add-family', 'family', 'student', 'attendance'];
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -245,6 +245,58 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         if (saveBtn) { await saveBtn.click(); await p.waitForTimeout(160); }
         const toasted = await p.evaluate(() => !!document.querySelector('.toast'));
         ok(toasted, `${page}/${lang}: wizard Save did not show a demo toast`);
+        await p.keyboard.press('Escape');
+      }
+
+      // Spec 005 — Attendance: tiles-as-filters · outcome rows · labeled chips · canonical drawer · links
+      if (page === 'attendance') {
+        const a = await p.evaluate(() => {
+          const tiles = [...document.querySelectorAll('.outcome-tile[data-filter-set]')];
+          const rows = [...document.querySelectorAll('#attendance-list .outcome-row[data-row]')];
+          const chips = [...document.querySelectorAll('#attendance-list .outcome-row .or-meta .chip')];
+          const navAtt = document.querySelector('.nav-panel .nav-item[data-nav="attendance"]');
+          // the labeled OUTCOME chip text for a given outcome (to prove absence types are distinct)
+          const chipText = (oid) => { const row = document.querySelector(`#attendance-list .outcome-row[data-outcome="${oid.toLowerCase()}"]`); const ch = row && row.querySelector('.or-meta .chip'); return ch ? ch.textContent.trim() : ''; };
+          return {
+            tiles: tiles.length, rows: rows.length, chipsTotal: chips.length,
+            // EVERY outcome chip must be labeled (icon + text) — never color-only
+            labeledChips: chips.filter((c) => c.querySelector('svg') && c.textContent.trim().length > 0).length,
+            studentAbsentChip: chipText('studentAbsent'), teacherAbsentChip: chipText('teacherAbsent'),
+            navAttOk: !!(navAtt && navAtt.tagName === 'A' && /attendance\.(en\.)?html/.test(navAtt.getAttribute('href') || '')),
+            studentLink: !!document.querySelector('#attendance-list a[href*="student"]'),
+            familyLink: !!document.querySelector('#attendance-list a[href*="family"]'),
+            drawers: document.querySelectorAll('template[data-preview]').length,
+          };
+        });
+        ok(a.tiles === 5, `${page}/${lang}: expected 5 filter tiles, got ${a.tiles}`);
+        ok(a.rows >= 12, `${page}/${lang}: expected ≥12 outcome rows, got ${a.rows}`);
+        ok(a.chipsTotal >= 12 && a.labeledChips === a.chipsTotal, `${page}/${lang}: not all outcome chips are labeled icon+text (${a.labeledChips}/${a.chipsTotal})`);
+        // US4: student-absent and teacher-absent must be textually distinct (not color-only)
+        ok(a.studentAbsentChip && a.teacherAbsentChip && a.studentAbsentChip !== a.teacherAbsentChip,
+          `${page}/${lang}: studentAbsent vs teacherAbsent chips not distinct ("${a.studentAbsentChip}" / "${a.teacherAbsentChip}")`);
+        ok(a.navAttOk, `${page}/${lang}: attendance nav is not a real <a> to attendance.html`);
+        ok(a.studentLink && a.familyLink, `${page}/${lang}: outcome rows missing student/family links`);
+        ok(a.drawers >= 12, `${page}/${lang}: outcome drawer templates not baked`);
+        // a summary tile sets the outcome filter + narrows the rows
+        const before = await p.$$eval('#attendance-list .outcome-row', (els) => els.filter((e) => !e.hidden).length);
+        await p.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]').catch(() => {});
+        await p.waitForTimeout(170);
+        const after = await p.$$eval('#attendance-list .outcome-row', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `${page}/${lang}: tile filter did not narrow rows (${before} → ${after})`);
+        // the kebab "view" opens the canonical outcome drawer with the Outcome section.
+        // The app shell scrolls inside an `.page-scroll` overflow container; give this
+        // interaction a tall viewport so the row + kebab + anchored popover all fit, then
+        // seat each target before clicking (robustness only — same real kebab/menu/drawer).
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        const kebab = await p.$('#attendance-list .outcome-row:not([hidden]) [data-row-menu]');
+        if (kebab) {
+          await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150);
+          const v = await p.$('.popover [data-drawer]');
+          if (v) { await v.scrollIntoViewIfNeeded(); await v.click(); await p.waitForTimeout(240); }
+        }
+        const drawer = await p.evaluate(() => { const d = document.querySelector('.drawer.sheet'); return d ? { open: true, hasOutcome: /النتيجة|Outcome/.test(d.textContent) } : { open: false }; });
+        ok(drawer.open, `${page}/${lang}: the outcome drawer did not open from a row`);
+        ok(drawer.hasOutcome, `${page}/${lang}: the outcome drawer is missing the Outcome section`);
         await p.keyboard.press('Escape');
       }
       await ctx.close();

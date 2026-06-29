@@ -1,32 +1,39 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 004 — Families and Student Academic Profiles**
+Active feature: **Spec 005 — Attendance and Session Outcomes**
 (branch `feature/001-approved-dashboard-design`).
 
 For technologies, project structure, shell commands, design decisions, contracts,
 and acceptance, read the current plan and its artifacts:
-`academy-dashboard-discovery/specs/004-family-student-profiles/plan.md`
+`academy-dashboard-discovery/specs/005-attendance-session-outcomes/plan.md`
 (see also `research.md`, `data-model.md`, `quickstart.md`, and `contracts/`).
 
-Spec 004 EXTENDS the implemented Spec 001/002/003 app (`academy-dashboard-discovery/app/`)
-with the admin Families & Students academic experience — grounded in the family-centric
-reference (**Family = the guardian/parent account; students are children nested under one
-family**, linked `Family.studentIds[]` ↔ `Student.familyId`). Adds five surfaces: a **Families
-directory** `families.html` (family **cards** grouping each family's children), a **Family
-profile** `family.html` (baked **tabs**: Overview/Students/Schedule/Plan&Billing/Notes), an
-**Add-Family wizard** `add-family.html` (a **baked multi-step stepper** — all steps static
-HTML, JS toggles step visibility via data-step-next/prev, Save = demo toast, no persistence),
-an enriched **Students** `students.html` (real `familyId` + family facet + profile link), and
-a **Student academic profile** `student.html` (baked **tabs**: Overview/Courses/Timetable/
-Results/Evaluation/Family/Notes). **Results = fixture-only** progress + certificates + summary;
-**Evaluation = a fixture-only monthly progress-report rubric** (criteria + rating pills +
-narrative + approve-demo) — **NOT a gradebook** (the reference has none). Timetable sections
-reuse Spec 003 `scheduleAgenda` + the shared appointment drawer + a `schedule.html#view=timetable`
-deep-link. Nav: promote `families`/`addFamily` (NI12); `family.html`/`student.html` are profile
-templates (not nav items; `activeId` = families/students); the rest of the families category
-stays planned. Prior plans: `…/003-timetable-scheduling/plan.md`, `…/002-admin-core-operations/plan.md`,
+Spec 005 EXTENDS the implemented Spec 001/002/003/004 app (`academy-dashboard-discovery/app/`)
+with the admin **Attendance & Session Outcomes** experience — the daily post-session review
+board, grounded in the academy reference (the "Classes Of {date}" outcomes board + the ONE
+canonical Mark-Attend / Mark-Absent("who") / Cancel("who") / make-up-credit action family,
+status-gated) but calmer/cleaner and Arabic-RTL-first. Adds ONE surface: an **Attendance /
+Outcomes page** `attendance.html` (title «الحضور ونتائج الجلسات» / "Attendance & Session
+Outcomes", nav «الحضور» / "Attendance") — outcome **summary tiles that double as filters** (a
+tiny NEW `data-filter-set` hook over the existing `applyFilter`) + a persistent filter bar + an
+airy **`.outcome-row` list/card hybrid**. A NEW labeled **OUTCOME status map** (`outcome-status.js`:
+attended / studentAbsent / teacherAbsent / cancelled / rescheduled / upcoming / live + flags
+makeUpSuggested / needsFollowUp — icon+label, **never numeric/color-only**) collapses the legacy
+11-state + numeric codes; distinct from the session + lifecycle maps. ONE **canonical outcome
+drawer** `outcome-details.js` (`outcomeTemplate` = a SUPERSET of the Spec 003 appointment drawer
+via a shared `appointmentRows` helper + an outcome section: chip + who-absent/who-cancelled
+attribution + present/capacity + make-up/credit **DISPLAY hint** + follow-up + a **status-gated
+DEMO action cluster** attend/absent/cancel/reschedule/notify/feedback/reverse — demo / confirm→demo /
+disabled-with-reason, **no mutation**). Outcome PRIMARY on Attendance; session status PRIMARY +
+outcome SECONDARY on Sessions (no double-encoding). New fixture `attendance.js` `SESSION_OUTCOMES`
+(reuse the session shape; resolve `studentId`→students + `familyId`→families). Light fixture-only
+integration: Sessions (secondary chip + drawer + "View attendance" link), Student + Family profiles
+(a recent-outcomes / follow-up hint + deep-link, NO new tab), Dashboard (ONE follow-up chip folded
+into the people-signal card). Nav: promote ONE new `attendance` item (NI12) in the **control**
+category; `sessionsAnalysis` + the rest stay planned. Prior plans: `…/004-family-student-profiles/plan.md`,
+`…/003-timetable-scheduling/plan.md`, `…/002-admin-core-operations/plan.md`,
 `…/001-approved-dashboard-foundation/plan.md`.
 
-Hard constraints (Spec 001 + 002 + 003 + 004): continue the approved design (Spec 001 is the
+Hard constraints (Spec 001 + 002 + 003 + 004 + 005): continue the approved design (Spec 001 is the
 visual target); **static HTML-first** — pages pre-rendered to complete `public/*.html`, NO
 whole-page `<div id="app">` mount, **all family cards / profile tabs / wizard steps /
 `<template data-preview>` drawers are baked at build time** (runtime JS builds no page DOM),

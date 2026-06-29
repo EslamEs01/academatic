@@ -6,6 +6,7 @@
  * One representative family is baked (Django later → family/<id>). */
 import { FAMILIES, FAMILY_CATEGORIES, familyOf } from '../fixtures/families.js';
 import { studentsOfFamily } from '../fixtures/students.js';
+import { outcomesOfFamily } from '../fixtures/attendance.js';
 import { SCHEDULE_WEEK } from '../fixtures/schedule.js';
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
@@ -67,7 +68,17 @@ function overviewPanel(fam) {
         <div class="ic-title">${icon('alert-triangle', 'ico')}<span>${t('fam.ov.attentionTitle')}</span></div>
         ${attentionFlag(fam.attention)}
       </div>` : '';
-  return `<div class="grid gap-4 sm:grid-cols-2">${contact}${details}</div>${attn}`;
+  // Spec 005 — a calm fixture children follow-up hint + deep-link (no finance/credit claim)
+  const fFollow = outcomesOfFamily(fam.id).filter((o) => o.followUp).length;
+  const attHref = getLang() === 'en' ? 'attendance.en.html' : 'attendance.html';
+  const attHint = `<div class="info-card" style="margin-top:16px">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="ic-title" style="margin-bottom:0">${icon('clipboard-check', 'ico')}<span>${t('att.familySignalTitle')}</span></div>
+      <a href="${attHref}" class="link-more">${t('att.viewAttendance')} ${icon('arrow-left', 'ico ico-sm')}</a>
+    </div>
+    <p class="text-[13px] mt-2" style="color:var(--c-ink-2)">${fFollow ? t('att.familySignal', { k: num(fFollow) }) : t('att.familyNone')}</p>
+  </div>`;
+  return `<div class="grid gap-4 sm:grid-cols-2">${contact}${details}</div>${attHint}${attn}`;
 }
 
 function studentsPanel(kids) {

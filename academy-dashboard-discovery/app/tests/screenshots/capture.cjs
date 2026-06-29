@@ -70,6 +70,18 @@ const MATRIX = [
   { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'evaluation' },
   { page: 'student', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'family-impact' },
+  // Spec 005 — Attendance & Session Outcomes (acceptance matrix, 11 frames)
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'attendance', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'attendance', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', outcomeDrawer: true, variant: 'drawer' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', confirm: true, variant: 'confirm' },
+  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'outcome' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'attendance' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'attendance' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'outcome-impact' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'mobile', outcomeDrawer: true, variant: 'drawer' },
 ];
 
 (async () => {
@@ -105,9 +117,16 @@ const MATRIX = [
     if (s.tab) { await page.click(`[data-tab="${s.tab}"]`).catch(() => {}); await page.waitForTimeout(220); }
     if (s.teacher != null) { await page.selectOption('select[data-filter="teacher"]', { index: s.teacher }).catch(() => {}); await page.waitForTimeout(220); }
     if (s.sheet) { await page.click('[data-tabpanel="timetable"]:not([hidden]) .tt-block[data-drawer]').catch(() => {}); await page.waitForTimeout(420); }
+    // Spec 005 — open the canonical outcome drawer (kebab → view), optionally a confirm modal
+    if (s.outcomeDrawer || s.confirm) {
+      const rowSel = s.confirm ? '#attendance-list .outcome-row:nth-child(8) [data-row-menu]' : '#attendance-list .outcome-row:not([hidden]) [data-row-menu]';
+      await page.click(rowSel).catch(() => {}); await page.waitForTimeout(240);
+      await page.click('.popover [data-drawer]').catch(() => {}); await page.waitForTimeout(460);
+      if (s.confirm) { await page.click('.drawer.sheet [data-confirm]').catch(() => {}); await page.waitForTimeout(340); }
+    }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
-    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet });
+    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm });
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
     else console.log(`  ✓ ${name}`);

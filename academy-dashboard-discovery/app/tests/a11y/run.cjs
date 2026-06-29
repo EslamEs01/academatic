@@ -42,6 +42,10 @@ const MATRIX = [
   { page: 'student', lang: 'ar', theme: 'light', hash: '#view=results' },
   { page: 'student', lang: 'ar', theme: 'light', hash: '#view=evaluation' },
   { page: 'student', lang: 'en', theme: 'light' },
+  // Spec 005 — attendance & session outcomes (AR light + dark + EN)
+  { page: 'attendance', lang: 'ar', theme: 'light' },
+  { page: 'attendance', lang: 'ar', theme: 'dark' },
+  { page: 'attendance', lang: 'en', theme: 'light' },
 ];
 
 (async () => {

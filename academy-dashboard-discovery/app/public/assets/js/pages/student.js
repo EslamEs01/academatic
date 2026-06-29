@@ -7,6 +7,7 @@
  * (no gradebook, no workflow). One representative student is baked (Django → student/<id>). */
 import { STUDENTS, STUDENT_BY_ID, studentsOfFamily, GROUP_BY_ID } from '../fixtures/students.js';
 import { familyOf } from '../fixtures/families.js';
+import { outcomesOfStudent } from '../fixtures/attendance.js';
 import { SCHEDULE_WEEK } from '../fixtures/schedule.js';
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
@@ -86,7 +87,19 @@ function overviewPanel(st, fam, blocks) {
   const attn = st.attention
     ? `<div class="info-card" style="margin-top:16px"><div class="ic-title">${icon('alert-triangle', 'ico')}<span>${t('sp.ov.attentionTitle')}</span></div>${attentionFlag(st.attention)}</div>`
     : '';
-  return `<div class="grid gap-4 sm:grid-cols-2">${facts}${progress}</div>${attn}`;
+  // Spec 005 — a calm fixture recent-attendance/outcome hint + deep-link (no engine, no metric)
+  const outs = outcomesOfStudent(st.id);
+  const attended = outs.filter((o) => o.outcomeId === 'attended').length;
+  const follow = outs.filter((o) => o.followUp).length;
+  const attHref = getLang() === 'en' ? 'attendance.en.html' : 'attendance.html';
+  const attHint = `<div class="info-card" style="margin-top:16px">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="ic-title" style="margin-bottom:0">${icon('clipboard-check', 'ico')}<span>${t('att.studentSignalTitle')}</span></div>
+      <a href="${attHref}" class="link-more">${t('att.viewAttendance')} ${icon('arrow-left', 'ico ico-sm')}</a>
+    </div>
+    <p class="text-[13px] mt-2" style="color:var(--c-ink-2)">${t('att.studentSignal', { a: num(attended), m: num(outs.length) })}${follow ? ` · <span style="color:var(--c-amber-ink)">${t('att.studentFollowUp', { k: num(follow) })}</span>` : ''}</p>
+  </div>`;
+  return `<div class="grid gap-4 sm:grid-cols-2">${facts}${progress}</div>${attHint}${attn}`;
 }
 
 function coursesPanel(st) {

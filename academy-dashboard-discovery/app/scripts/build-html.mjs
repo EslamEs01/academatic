@@ -25,6 +25,7 @@ import { renderFamilies } from '../src/js/pages/families.js';
 import { renderFamily } from '../src/js/pages/family.js';
 import { renderAddFamily } from '../src/js/pages/add-family.js';
 import { renderStudent } from '../src/js/pages/student.js';
+import { renderAttendance } from '../src/js/pages/attendance.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -54,6 +55,8 @@ const PAGES = [
   { base: 'add-family', activeId: 'addFamily', titleKey: 'topbar.title.addFamily', crumbKey: 'topbar.crumb.addFamily', render: renderAddFamily },
   { base: 'family', activeId: 'families', titleKey: 'topbar.title.family', crumbKey: 'topbar.crumb.family', render: renderFamily },
   { base: 'student', activeId: 'students', titleKey: 'topbar.title.student', crumbKey: 'topbar.crumb.student', render: renderStudent },
+  // Spec 005 — attendance & session outcomes (control category)
+  { base: 'attendance', activeId: 'attendance', titleKey: 'topbar.title.attendance', crumbKey: 'topbar.crumb.attendance', render: renderAttendance },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

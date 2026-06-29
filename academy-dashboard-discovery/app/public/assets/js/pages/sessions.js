@@ -2,7 +2,7 @@
  * a modern List (table) and a today Timetable/agenda; both open the SHARED
  * appointment drawer. Reuses Spec 001/002 table/chips/tiles. */
 import { SESSIONS_FULL } from '../fixtures/sessions.js';
-import { t, num } from '../i18n.js';
+import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc, facetAttrs } from '../dom.js';
 import { pageHeader } from '../components/page-header.js';
@@ -10,7 +10,8 @@ import { filterBar } from '../components/filter-bar.js';
 import { tabs } from '../components/tabs.js';
 import { dataTable, tableFooter } from '../components/data-table.js';
 import { scheduleAgenda } from '../components/schedule-agenda.js';
-import { appointmentTemplate } from '../components/appointment-details.js';
+import { outcomeTemplate } from '../components/outcome-details.js';
+import { outcomeChip } from '../components/outcome-status.js';
 import { statusChip } from '../components/status-chip.js';
 import { statusTile } from '../components/status-tile.js';
 import { noResults } from '../components/states.js';
@@ -40,13 +41,15 @@ function row(s) {
       <span class="font-medium text-[13px] text-ink">${t(s.trainer.nameKey)}</span></div></td>
     <td><span class="text-[13px]" style="color:var(--c-ink-2)">${t(s.roomKey)}</span></td>
     <td>${students}</td>
-    <td>${statusChip(s.statusId)}</td>
+    <td>${statusChip(s.statusId)}${(s.statusId === 'completed' || s.statusId === 'cancelled') ? `<div class="mt-1">${outcomeChip(s.statusId === 'completed' ? 'attended' : 'cancelled')}</div>` : ''}</td>
     <td class="text-end"><button type="button" class="icon-btn" data-row-menu="${s.id}" aria-label="${t('sessions.rowMenu')}" aria-haspopup="menu">${icon('ellipsis', 'ico')}</button></td>
   </tr>`;
 }
 
-/* normalize a session row → the shared appointment-drawer shape (present → students) */
-const apptItem = (s) => ({ ...s, students: s.present });
+/* normalize a session row → the canonical outcome-drawer shape (present → students;
+ * scheduling status → a light review outcome so the drawer carries the outcome section) */
+const SESSION_OUTCOME = { completed: 'attended', cancelled: 'cancelled', live: 'live', upcoming: 'upcoming' };
+const apptItem = (s) => ({ ...s, students: s.present, outcomeId: SESSION_OUTCOME[s.statusId] || null });
 
 export function renderSessions() {
   const data = SESSIONS_FULL;
@@ -71,10 +74,11 @@ export function renderSessions() {
     items: [{ id: 'list', labelKey: 'tab.list' }, { id: 'timetable', labelKey: 'tab.timetable' }],
     panels: { list: table, timetable: scheduleAgenda(data.rows, { emptyKey: 'sess.agendaEmpty' }) },
   });
-  const templates = data.rows.map((s) => appointmentTemplate(apptItem(s))).join('');
+  const templates = data.rows.map((s) => outcomeTemplate(apptItem(s))).join('');
+  const attHref = getLang() === 'en' ? 'attendance.en.html' : 'attendance.html';
 
   return `
-    ${pageHeader({ titleKey: 'sess.title', subKey: 'sess.sub', primary: button({ labelKey: 'sess.newSession', variant: 'primary', icon: 'plus', attrs: 'data-demo-action' }), summaryHTML: summary(data.rows) })}
+    ${pageHeader({ titleKey: 'sess.title', subKey: 'sess.sub', secondary: button({ labelKey: 'att.viewAttendance', variant: 'secondary', icon: 'clipboard-check', href: attHref }), primary: button({ labelKey: 'sess.newSession', variant: 'primary', icon: 'plus', attrs: 'data-demo-action' }), summaryHTML: summary(data.rows) })}
     ${filters}
     <div id="sessions-views">${views}</div>
     ${noResults()}

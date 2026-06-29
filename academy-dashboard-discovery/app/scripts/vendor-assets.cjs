@@ -93,6 +93,11 @@ const ICONS = {
   target: ['target'],
   award: ['award', 'badge-check'],
   'book-open': ['book-open', 'book'],
+  /* Spec 005 — attendance & session outcomes (outcome status map + nav) */
+  'user-x': ['user-x', 'user-round-x'],
+  'calendar-clock': ['calendar-clock'],
+  'rotate-cw': ['rotate-cw', 'refresh-cw'],
+  'clipboard-check': ['clipboard-check', 'clipboard-list'],
 };
 
 function innerSvg(name) {

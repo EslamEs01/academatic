@@ -60,5 +60,9 @@
   "edit",
   "target",
   "award",
-  "book-open"
+  "book-open",
+  "user-x",
+  "calendar-clock",
+  "rotate-cw",
+  "clipboard-check"
 ]
