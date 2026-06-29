@@ -21,6 +21,10 @@ import { renderStudents } from '../src/js/pages/students.js';
 import { renderTeachers } from '../src/js/pages/teachers.js';
 import { renderCourses } from '../src/js/pages/courses.js';
 import { renderSettings } from '../src/js/pages/settings.js';
+import { renderFamilies } from '../src/js/pages/families.js';
+import { renderFamily } from '../src/js/pages/family.js';
+import { renderAddFamily } from '../src/js/pages/add-family.js';
+import { renderStudent } from '../src/js/pages/student.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -45,6 +49,11 @@ const PAGES = [
   { base: 'teachers', activeId: 'teachers', titleKey: 'topbar.title.teachers', crumbKey: 'topbar.crumb.teachers', render: renderTeachers },
   { base: 'courses', activeId: 'courses', titleKey: 'topbar.title.courses', crumbKey: 'topbar.crumb.courses', render: renderCourses },
   { base: 'settings', activeId: 'settings', titleKey: 'topbar.title.settings', crumbKey: 'topbar.crumb.settings', render: renderSettings },
+  // Spec 004 — families & student academic profiles (family/student = profile templates, not nav items)
+  { base: 'families', activeId: 'families', titleKey: 'topbar.title.families', crumbKey: 'topbar.crumb.families', render: renderFamilies },
+  { base: 'add-family', activeId: 'addFamily', titleKey: 'topbar.title.addFamily', crumbKey: 'topbar.crumb.addFamily', render: renderAddFamily },
+  { base: 'family', activeId: 'families', titleKey: 'topbar.title.family', crumbKey: 'topbar.crumb.family', render: renderFamily },
+  { base: 'student', activeId: 'students', titleKey: 'topbar.title.student', crumbKey: 'topbar.crumb.student', render: renderStudent },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

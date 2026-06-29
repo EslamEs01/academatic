@@ -5,7 +5,8 @@ const { chromium } = require('playwright');
 const { PORT } = require('../../scripts/serve.cjs');
 
 const BASE = `http://localhost:${PORT}`;
-const PAGES = ['dashboard', 'reports', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings'];
+const PAGES = ['dashboard', 'reports', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
+  'families', 'add-family', 'family', 'student'];
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -51,7 +52,10 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         const absAssets = [...document.querySelectorAll('link[href],script[src]')]
           .map((n) => n.getAttribute('href') || n.getAttribute('src'))
           .filter((u) => u && (u.startsWith('/') || /^https?:/.test(u)));
-        return { raw, disabledNoReason, focusables, hasAppMount, hasShell, hasRail, hasPanel, activeNav, deadNav, railCats, visiblePanels, contentTabs, visibleTabpanels, hasTimetable, absAssets };
+        // future-role portals must NEVER be rendered (admin app only)
+        const portals = ['teacher-portal', 'family-portal', 'student-portal']
+          .filter((id) => document.getElementById(id) || document.querySelector(`[data-nav="${id}"]`)).length;
+        return { raw, disabledNoReason, focusables, hasAppMount, hasShell, hasRail, hasPanel, activeNav, deadNav, railCats, visiblePanels, contentTabs, visibleTabpanels, hasTimetable, absAssets, portals };
       });
 
       ok(info.raw.length === 0, `${page}/${lang}: raw i18n keys ${JSON.stringify(info.raw)}`);
@@ -74,6 +78,7 @@ const ok = (c, m) => { if (!c) fails.push(m); };
       ok(!hasTabs || info.visibleTabpanels === 1, `${page}/${lang}: expected exactly ONE visible tabpanel, got ${info.visibleTabpanels}`);
       ok(page !== 'schedule' || info.hasTimetable, `${page}/${lang}: schedule is missing the baked timetable grid`);
       ok(info.absAssets.length === 0, `${page}/${lang}: non-relative asset paths ${JSON.stringify(info.absAssets)}`);
+      ok(info.portals === 0, `${page}/${lang}: a future-role portal is rendered in the DOM`);
 
       // behavioral no-dead-button: a filter button and a pager must produce feedback
       if (page === 'dashboard') {
@@ -152,6 +157,95 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         await p.waitForTimeout(170);
         const after = await p.$$eval('[data-tabpanel="timetable"] .tt-block', (els) => els.filter((e) => !e.hidden).length);
         ok(after > 0 && after < before, `${page}/${lang}: teacher lens did not narrow the timetable (${before} → ${after})`);
+      }
+
+      // Spec 004 — Families directory: cards group children · promoted nav · view-profile · filter
+      if (page === 'families') {
+        const fam = await p.evaluate(() => {
+          const cards = [...document.querySelectorAll('.family-card')];
+          const navFam = document.querySelector('.nav-panel .nav-item[data-nav="families"]');
+          const navAdd = document.querySelector('.nav-panel .nav-item[data-nav="addFamily"]');
+          return {
+            cards: cards.length,
+            withKids: cards.filter((c) => c.querySelector('.fam-avatars')).length,
+            navFamOk: !!(navFam && navFam.tagName === 'A' && /families\.(en\.)?html/.test(navFam.getAttribute('href') || '')),
+            navAddOk: !!(navAdd && navAdd.tagName === 'A' && /add-family\.(en\.)?html/.test(navAdd.getAttribute('href') || '')),
+            viewProfile: !!document.querySelector('.family-card a[href*="family"]'),
+          };
+        });
+        ok(fam.cards >= 8, `${page}/${lang}: expected ≥8 family cards, got ${fam.cards}`);
+        ok(fam.withKids >= 1, `${page}/${lang}: family cards do not group children (.fam-avatars)`);
+        ok(fam.navFamOk, `${page}/${lang}: families nav is not a real <a> to families.html`);
+        ok(fam.navAddOk, `${page}/${lang}: addFamily nav is not a real <a> to add-family.html`);
+        ok(fam.viewProfile, `${page}/${lang}: family card missing a view-profile link to family.html`);
+        const before = await p.$$eval('#families-grid .family-card', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="status"]', 'active').catch(() => {});
+        await p.waitForTimeout(160);
+        const after = await p.$$eval('#families-grid .family-card', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `${page}/${lang}: status filter did not narrow family cards (${before} → ${after})`);
+      }
+
+      // Spec 004 — family/student profile: baked tabs (one visible) · switch · cross links
+      if (page === 'family' || page === 'student') {
+        const minTabs = page === 'student' ? 7 : 5;
+        const prof = await p.evaluate((g) => {
+          const wrap = document.querySelector(`[data-tabs="${g}"]`);
+          return {
+            tabsN: wrap ? wrap.querySelectorAll('[role="tab"][data-tab]').length : 0,
+            vis: wrap ? [...wrap.querySelectorAll('[data-tabpanel]')].filter((x) => !x.hidden).length : 0,
+            statusChip: !!document.querySelector('.profile-banner .chip'),
+          };
+        }, page);
+        ok(prof.tabsN >= minTabs, `${page}/${lang}: expected ≥${minTabs} profile tabs, got ${prof.tabsN}`);
+        ok(prof.vis === 1, `${page}/${lang}: expected exactly ONE visible tabpanel, got ${prof.vis}`);
+        ok(prof.statusChip, `${page}/${lang}: profile banner missing a status chip`);
+        const target = page === 'student' ? 'results' : 'students';
+        await p.click(`[data-tabs="${page}"] [data-tab="${target}"]`).catch(() => {});
+        await p.waitForTimeout(160);
+        const switched = await p.evaluate(({ g, tgt }) => {
+          const wrap = document.querySelector(`[data-tabs="${g}"]`);
+          const vis = [...wrap.querySelectorAll('[data-tabpanel]')].filter((x) => !x.hidden);
+          return vis.length === 1 && vis[0].getAttribute('data-tabpanel') === tgt;
+        }, { g: page, tgt: target });
+        ok(switched, `${page}/${lang}: clicking the ${target} tab did not show only it`);
+        const links = await p.evaluate(() => ({
+          student: !!document.querySelector('a[href*="student"]'),
+          family: !!document.querySelector('a[href*="family"]'),
+          sched: !!document.querySelector('a[href*="schedule"][href*="view=timetable"]'),
+        }));
+        if (page === 'family') ok(links.student, `${page}/${lang}: family profile has no link to a student profile`);
+        if (page === 'student') {
+          ok(links.family, `${page}/${lang}: student profile has no family link`);
+          ok(links.sched, `${page}/${lang}: student profile missing the schedule deep-link`);
+        }
+      }
+
+      // Spec 004 — add-family wizard: 5 baked steps · labeled fields · Next/Back · Save toasts
+      if (page === 'add-family') {
+        const wiz = await p.evaluate(() => {
+          const steps = [...document.querySelectorAll('[data-wizard] [data-step]')];
+          const fields = [...document.querySelectorAll('[data-wizard] input, [data-wizard] select, [data-wizard] textarea')];
+          const unlabeled = fields.filter((f) => !f.id || !document.querySelector(`label[for="${f.id}"]`)).length;
+          return { steps: steps.length, vis: steps.filter((s) => !s.hidden).length, fields: fields.length, unlabeled };
+        });
+        ok(wiz.steps === 5, `${page}/${lang}: expected 5 baked wizard steps, got ${wiz.steps}`);
+        ok(wiz.vis === 1, `${page}/${lang}: expected exactly ONE visible step, got ${wiz.vis}`);
+        ok(wiz.fields > 0 && wiz.unlabeled === 0, `${page}/${lang}: ${wiz.unlabeled} unlabeled wizard fields`);
+        await p.click('[data-step]:not([hidden]) [data-step-next]').catch(() => {});
+        await p.waitForTimeout(130);
+        const adv = await p.evaluate(() => { const v = [...document.querySelectorAll('[data-wizard] [data-step]')].filter((s) => !s.hidden); return v.length === 1 && v[0].getAttribute('data-step') === 'contact'; });
+        ok(adv, `${page}/${lang}: data-step-next did not advance to the contact step`);
+        await p.click('[data-step]:not([hidden]) [data-step-prev]').catch(() => {});
+        await p.waitForTimeout(130);
+        const ret = await p.evaluate(() => { const v = [...document.querySelectorAll('[data-wizard] [data-step]')].filter((s) => !s.hidden); return v.length === 1 && v[0].getAttribute('data-step') === 'identity'; });
+        ok(ret, `${page}/${lang}: data-step-prev did not return to the identity step`);
+        await p.click('[data-step-go="review"]').catch(() => {});
+        await p.waitForTimeout(130);
+        const saveBtn = await p.$('[data-step="review"] [data-demo-action]');
+        if (saveBtn) { await saveBtn.click(); await p.waitForTimeout(160); }
+        const toasted = await p.evaluate(() => !!document.querySelector('.toast'));
+        ok(toasted, `${page}/${lang}: wizard Save did not show a demo toast`);
+        await p.keyboard.press('Escape');
       }
       await ctx.close();
     }

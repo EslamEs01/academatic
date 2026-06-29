@@ -50,5 +50,15 @@
   "megaphone",
   "layers",
   "grid",
-  "user-plus"
+  "user-plus",
+  "phone",
+  "mail",
+  "map-pin",
+  "message-circle",
+  "pause-circle",
+  "file-text",
+  "edit",
+  "target",
+  "award",
+  "book-open"
 ]

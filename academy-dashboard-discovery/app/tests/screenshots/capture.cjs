@@ -56,6 +56,20 @@ const MATRIX = [
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'admin' },
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'settings' },
   { page: 'dashboard', lang: 'en', theme: 'light', vp: 'desktop', cat: 'families' },
+  // Spec 004 — Families & Student Academic Profiles (acceptance matrix, min 13)
+  { page: 'families', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'families', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'families', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'families', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', view: 'students', variant: 'students' },
+  { page: 'add-family', lang: 'ar', theme: 'light', vp: 'desktop', step: 'children', variant: 'wizard-step3' },
+  { page: 'students', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'results', variant: 'results' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'evaluation' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'family-impact' },
 ];
 
 (async () => {
@@ -77,7 +91,8 @@ const MATRIX = [
     page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 
     const file = s.lang === 'en' ? `${s.page}.en.html` : `${s.page}.html`;
-    await page.goto(`${BASE}/${file}${s.view ? '#view=' + s.view : ''}`, { waitUntil: 'networkidle' });
+    const hash = s.step ? '#step=' + s.step : (s.view ? '#view=' + s.view : '');
+    await page.goto(`${BASE}/${file}${hash}`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => {
       const b = document.querySelector('#page-body');
       return b && b.children.length > 0;

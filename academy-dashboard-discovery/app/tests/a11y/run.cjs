@@ -28,6 +28,20 @@ const MATRIX = [
   { page: 'sessions', lang: 'ar', theme: 'light', hash: '#view=timetable' },
   // new shell coverage: dashboard dark + collapsed-rail are checked via dashboard rows above
   { page: 'dashboard', lang: 'en', theme: 'dark' },
+  // Spec 004 — families & student academic profiles (AR light + dark + EN + tab/step states)
+  { page: 'families', lang: 'ar', theme: 'light' },
+  { page: 'families', lang: 'ar', theme: 'dark' },
+  { page: 'families', lang: 'en', theme: 'light' },
+  { page: 'family', lang: 'ar', theme: 'light' },
+  { page: 'family', lang: 'ar', theme: 'light', hash: '#view=students' },
+  { page: 'add-family', lang: 'ar', theme: 'light' },
+  { page: 'add-family', lang: 'ar', theme: 'light', hash: '#step=children' },
+  { page: 'students', lang: 'ar', theme: 'dark' },
+  { page: 'student', lang: 'ar', theme: 'light' },
+  { page: 'student', lang: 'ar', theme: 'dark' },
+  { page: 'student', lang: 'ar', theme: 'light', hash: '#view=results' },
+  { page: 'student', lang: 'ar', theme: 'light', hash: '#view=evaluation' },
+  { page: 'student', lang: 'en', theme: 'light' },
 ];
 
 (async () => {
