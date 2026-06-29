@@ -70,6 +70,18 @@ const ICONS = {
   inbox: ['inbox'],
   sparkles: ['sparkles'],
   'arrow-left': ['arrow-left'],
+  /* Navigation IA — planned/future admin areas (sidebar items + quick actions) */
+  tasks: ['list-checks', 'square-check-big', 'clipboard-check'],
+  messages: ['message-square', 'message-circle'],
+  families: ['contact-round', 'users-round'],
+  materials: ['library', 'book-marked'],
+  certificates: ['award', 'badge-check'],
+  staff: ['shield-check', 'shield'],
+  megaphone: ['megaphone', 'volume-2'],
+  /* category-rail icons + apps launcher */
+  layers: ['layers', 'layers-3'],
+  grid: ['layout-grid', 'grid-3x3', 'grid'],
+  'user-plus': ['user-round-plus', 'user-plus'],
 };
 
 function innerSvg(name) {

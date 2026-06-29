@@ -23,11 +23,12 @@ Spec: `../specs/001-approved-dashboard-foundation/`. Visual target: `../design-r
 - **Authoring** lives in `src/` (styles, components, fixtures, locales).
 - A **static-site generator** (`scripts/build-html.mjs`) pre-renders each page to
   **complete static HTML** in `public/` — the shipped `.html` files contain the full
-  shell + sections (sidebar, topbar, KPI cards, sessions table, tiles, reports,
-  states). No page DOM is created at runtime.
+  shell + sections (slim icon rail + light nav panel + topbar, KPI cards, sessions
+  table, tiles, reports, states). No page DOM is created at runtime.
 - The browser loads `public/assets/js/enhance.js`, which **only enhances** the
-  existing markup: theme switch, language switch, sidebar rail/drawer, dropdowns,
-  modal, filter/table demo feedback, and the no-dead-button catch-all.
+  existing markup: theme switch, language switch, icon-rail collapse + off-canvas
+  nav drawer, dropdowns, modal, filter/table demo feedback, and the no-dead-button
+  catch-all.
 - **i18n**: one pre-rendered page per language — `dashboard.html` (Arabic, default)
   and `dashboard.en.html` (English). The language toggle navigates between them;
   theme persists across the switch.
@@ -77,7 +78,9 @@ See `screenshots/REVIEW.md` and `../specs/.../contracts/screenshot-acceptance.md
 The generated pages map straight to Django templates:
 
 - `public/dashboard.html` → `templates/admin/dashboard.html`, `public/reports.html` → `templates/admin/reports.html`.
-- The shell (sidebar + topbar) is one markup block → extract to `{% include "admin/_sidebar.html" %}` / `_topbar.html`.
+- **Spec 002 admin pages** (same mapping): `sessions.html`, `schedule.html`, `students.html`, `teachers.html`, `courses.html`, `settings.html` (+ each `.en.html`) → `templates/admin/<page>.html`. Their lists (session rows, schedule blocks, student/teacher/course cards, settings rows, preview `<template>`s) become `{% for %}` loops; filters/drawers/modals stay client-side over the same `data-*` hooks; fixtures (`src/js/fixtures/*`) → Django view context.
+- The shell (slim **category icon rail** + light **category panel** + topbar) is three markup blocks → extract to `{% include "admin/_nav_rail.html" %}` / `_nav_panel.html` / `_topbar.html`. Each of the six category panels maps to a Django **partial** (or a `{% if cat == "control" %}…{% endif %}` block); the rail is a loop over the six categories.
+- **Navigation is a two-level category rail**, data-driven from `src/js/nav.config.js` (`NAV_CATEGORIES`): a slim rail of **six category tabs** (control / families / teachers / reports / admin / settings) beside a panel that shows **ONLY the selected category's links** — never all categories at once. Each item carries a `status` — `implemented` (real `<a href>` page), `planned` (a «قريبًا/Soon» button, no route, no dead link), `disabled` (locked, disabled-with-reason), `future-role` (portals — never rendered), or `hidden` (documented, not shown). All six category panels are **baked into the static HTML**; client-side, only the selected category renders (the rest carry `hidden`) — swapped purely via the `data-nav-category` (rail tab) / `data-nav-panel` (panel) hooks, no navigation. In Django this maps cleanly: `implemented`/`planned`/`disabled` are emitted server-side, with planned/disabled gated as `{% if perms %}` blocks or **disabled partials** carrying the same `data-*` hooks (`data-coming-soon`, `data-disabled-reason`); `future-role`/`hidden` are simply not emitted. See `../specs/002-admin-core-operations/contracts/navigation-ia-contract.md` for the authoritative categories, items, statuses, the category-switching behavior, and the no-dead-link rule.
 - `src/styles` → Django **static** CSS; `src/js` → Django **static** JS (enhancement only, attaches to the same markup via `data-*` hooks).
 - Build-time **fixtures** (`src/js/fixtures/`) map to Django **view context**; the per-row markup (KPI/table/report loops) maps to `{% for %}`.
 - Behavior hooks are `data-*` attributes (`data-action`, `data-row-menu`, `data-shell`, `data-nav`, …) — reproducible from Django with no JS-generated IDs.

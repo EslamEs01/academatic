@@ -6,7 +6,7 @@
  * Django mapping: each generated page maps to a Django template (e.g.
  * public/dashboard.html → templates/admin/dashboard.html); the shell/sidebar/
  * topbar markup extracts into partials; fixtures become template context. */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -15,11 +15,23 @@ import { shellMarkup } from '../src/js/components/shell-markup.js';
 import { renderDashboard } from '../src/js/pages/dashboard.js';
 import { renderReports } from '../src/js/pages/reports.js';
 import { renderGallery } from '../src/js/pages/gallery.js';
+import { renderSessions } from '../src/js/pages/sessions.js';
+import { renderSchedule } from '../src/js/pages/schedule.js';
+import { renderStudents } from '../src/js/pages/students.js';
+import { renderTeachers } from '../src/js/pages/teachers.js';
+import { renderCourses } from '../src/js/pages/courses.js';
+import { renderSettings } from '../src/js/pages/settings.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
 const OUT = resolve(ROOT, 'public');
 mkdirSync(OUT, { recursive: true });
+
+// clean stale pre-rendered pages so renamed/removed routes never linger in public/
+// (assets in public/assets/ are managed by build:assets and left untouched)
+for (const f of readdirSync(OUT)) {
+  if (f.endsWith('.html')) rmSync(resolve(OUT, f));
+}
 
 const sprite = readFileSync(resolve(ROOT, 'src/icons/sprite.svg'), 'utf8');
 
@@ -27,6 +39,12 @@ const PAGES = [
   { base: 'dashboard', activeId: 'home', titleKey: 'topbar.title.dashboard', crumbKey: 'topbar.crumb.dashboard', render: renderDashboard },
   { base: 'reports', activeId: 'reports', titleKey: 'topbar.title.reports', crumbKey: 'topbar.crumb.reports', render: renderReports },
   { base: 'gallery', activeId: null, titleKey: 'topbar.title.gallery', crumbKey: 'topbar.crumb.gallery', render: renderGallery },
+  { base: 'sessions', activeId: 'sessions', titleKey: 'topbar.title.sessions', crumbKey: 'topbar.crumb.sessions', render: renderSessions },
+  { base: 'schedule', activeId: 'schedule', titleKey: 'topbar.title.schedule', crumbKey: 'topbar.crumb.schedule', render: renderSchedule },
+  { base: 'students', activeId: 'students', titleKey: 'topbar.title.students', crumbKey: 'topbar.crumb.students', render: renderStudents },
+  { base: 'teachers', activeId: 'teachers', titleKey: 'topbar.title.teachers', crumbKey: 'topbar.crumb.teachers', render: renderTeachers },
+  { base: 'courses', activeId: 'courses', titleKey: 'topbar.title.courses', crumbKey: 'topbar.crumb.courses', render: renderCourses },
+  { base: 'settings', activeId: 'settings', titleKey: 'topbar.title.settings', crumbKey: 'topbar.crumb.settings', render: renderSettings },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

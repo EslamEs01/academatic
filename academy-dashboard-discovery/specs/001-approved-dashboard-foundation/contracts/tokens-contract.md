@@ -1,6 +1,6 @@
 # Contract: Design Tokens
 
-**Status**: Binding · **Source**: extracted verbatim from `design-references/approved-dashboard/academy-dashboard.html`
+**Status**: Binding · **Source**: body/content values extracted verbatim from `design-references/approved-dashboard/academy-dashboard.html`; the nav-shell tokens (`--c-nav-*`) additionally follow `sidebar-reference.png` (the rail + light nav panel shell).
 
 All visual values come from this single token set. **No component may hard-code a color, shadow, or radius** — it consumes tokens (CSS custom properties, optionally surfaced as Tailwind theme keys). Theme switches by swapping token values under `[data-theme]`; structure does not change.
 
@@ -23,12 +23,20 @@ Defined on `:root` (light) and overridden under `[data-theme="dark"]`. "System" 
 | `--c-primary` | `#5145CD` | violet primary |
 | `--c-primary-2` | `#6E63E0` | primary hover/secondary |
 | `--c-primary-weak` | `#EAE7FB` | primary tint surface |
-| `--c-sidebar` | `#1F1B38` | dark sidebar base |
-| `--c-sidebar-2` | `#2B2650` | sidebar raised |
-| `--c-sb-ink` | `rgba(255,255,255,.95)` | sidebar text |
-| `--c-sb-ink-2` | `rgba(206,202,232,.72)` | sidebar muted text |
-| `--c-sb-line` | `rgba(255,255,255,.10)` | sidebar divider |
-| `--c-sb-active` | `rgba(148,134,244,.22)` | active-pill fill base |
+| `--c-primary-btn` | `var(--c-primary)` → `#5145CD` | filled-button violet fill — guarantees AA (≥4.5:1) **white** button text in BOTH themes (the bright dark `--c-primary` `#9486F4` fails as a button fill) |
+| `--c-primary-btn-hover` | `#6E63E0` | filled-button hover fill |
+| `--c-nav-panel` | `var(--c-surface)` → `#FFFFFF` | light nav-panel surface (dark → `#221F31`) |
+| `--c-nav-rail` | `var(--c-canvas-2)` → `#F1EADC` | warm icon-rail plane (dark → `#0E0C18`, deepest plane) |
+| `--c-nav-line` | `var(--c-line)` | nav dividers |
+| `--c-nav-ink` | `var(--c-ink)` | nav text/icons |
+| `--c-nav-ink-muted` | `var(--c-ink-3)` | nav muted labels/headings |
+| `--c-nav-hover` | `var(--c-surface-2)` | nav hover wash |
+| `--c-sidebar` | `#1F1B38` | **legacy** dark-sidebar base — now reused only as the dark `--c-nav-rail` value (`#0E0C18`); the active pill/square use `--g-violet` |
+| `--c-sidebar-2` | `#2B2650` | **legacy — now unused** |
+| `--c-sb-ink` | `rgba(255,255,255,.95)` | **legacy — now unused** |
+| `--c-sb-ink-2` | `rgba(206,202,232,.72)` | **legacy — now unused** |
+| `--c-sb-line` | `rgba(255,255,255,.10)` | **legacy — now unused** |
+| `--c-sb-active` | `rgba(148,134,244,.22)` | **legacy — now unused** (active state now uses `--g-violet`) |
 | `--c-teal` / `--c-teal-weak` | `#0E8C7E` / `#D3EEEA` | accent (live) |
 | `--c-success` / `--c-success-weak` | `#1B8E59` / `#D2ECDC` | success (completed) |
 | `--c-sky` / `--c-sky-weak` | `#2774BC` / `#D6E6F6` | info (upcoming) |
@@ -43,7 +51,9 @@ Defined on `:root` (light) and overridden under `[data-theme="dark"]`. "System" 
 | `--c-ink` / `--c-ink-2` / `--c-ink-3` | `#F3F0FB` / `#C2BDD4` / `#928CA8` |
 | `--c-line` / `--c-line-2` | `#363046` / `#2A2639` |
 | `--c-primary` / `--c-primary-2` / `--c-primary-weak` | `#9486F4` / `#B0A4FA` / `#2D2850` |
-| `--c-sidebar` / `--c-sidebar-2` | `#0E0C18` / `#1B1830` |
+| `--c-primary-btn` | `#5F53D6` (darker than `--c-primary` so white button text keeps AA) |
+| `--c-nav-panel` (= `--c-surface`) / `--c-nav-rail` | `#221F31` / `#0E0C18` (the rail is the deepest plane beside the dark panel) |
+| `--c-sidebar` / `--c-sidebar-2` | `#0E0C18` / `#1B1830` (**legacy**; only `--c-sidebar`'s `#0E0C18` is reused, as the dark `--c-nav-rail`) |
 | `--c-teal` / `--c-success` / `--c-sky` / `--c-amber` / `--c-coral` | `#34C9B6` / `#3FBE7E` / `#62A6E6` / `#EAA94F` / `#F2876F` |
 
 Dark surfaces are **true dark, not pure black** (`#141220` canvas). Every token has a dark value; nothing falls back to an undefined variable.

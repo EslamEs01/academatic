@@ -24,6 +24,28 @@ const MATRIX = [
   { page: 'gallery', lang: 'ar', theme: 'dark', vp: 'desktop' },
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'tablet' },
+  // Spec 002 — admin operation pages
+  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'sessions', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'sessions', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'schedule', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'courses', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'schedule', lang: 'ar', theme: 'light', vp: 'tablet' },
+  // new shell: collapsed icon-rail (light panel hidden) — proves the rail-only state
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', rail: '1' },
+  // mobile off-canvas drawer OPEN — proves the full-IA panel inside the drawer
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'mobile', drawer: true },
+  // category switching — clicking a rail category shows ONLY that category's panel
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'families' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'teachers' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'reports' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'admin' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'settings' },
+  { page: 'dashboard', lang: 'en', theme: 'light', vp: 'desktop', cat: 'families' },
 ];
 
 (async () => {
@@ -37,7 +59,7 @@ const MATRIX = [
       viewport: VIEWPORTS[s.vp],
       deviceScaleFactor: s.vp === 'mobile' ? 2 : 1.5,
     });
-    await ctx.addInitScript((theme) => { localStorage.setItem('academy.theme', theme); }, s.theme);
+    await ctx.addInitScript(({ theme, rail }) => { localStorage.setItem('academy.theme', theme); if (rail) localStorage.setItem('academy.rail', rail); }, { theme: s.theme, rail: s.rail });
 
     const page = await ctx.newPage();
     const errors = [];
@@ -52,9 +74,11 @@ const MATRIX = [
     }, { timeout: 8000 }).catch(() => {});
     await page.evaluate(() => document.fonts && document.fonts.ready).catch(() => {});
     await page.waitForTimeout(350);
+    if (s.drawer) { await page.click('[data-action="open-drawer"]').catch(() => {}); await page.waitForTimeout(380); }
+    if (s.cat) { await page.click(`[data-nav-category="${s.cat}"]`).catch(() => {}); await page.waitForTimeout(260); }
 
-    const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}.png`;
-    await page.screenshot({ path: path.join(OUT, name), fullPage: true });
+    const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
+    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer });
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
     else console.log(`  ✓ ${name}`);

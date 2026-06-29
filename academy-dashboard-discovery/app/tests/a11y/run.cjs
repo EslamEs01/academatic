@@ -12,6 +12,17 @@ const MATRIX = [
   { page: 'reports', lang: 'ar', theme: 'light' },
   { page: 'gallery', lang: 'ar', theme: 'light' },
   { page: 'gallery', lang: 'ar', theme: 'dark' },
+  // Spec 002 pages
+  { page: 'sessions', lang: 'ar', theme: 'light' },
+  { page: 'sessions', lang: 'ar', theme: 'dark' },
+  { page: 'sessions', lang: 'en', theme: 'light' },
+  { page: 'schedule', lang: 'ar', theme: 'light' },
+  { page: 'students', lang: 'ar', theme: 'light' },
+  { page: 'teachers', lang: 'ar', theme: 'light' },
+  { page: 'courses', lang: 'ar', theme: 'light' },
+  { page: 'settings', lang: 'ar', theme: 'light' },
+  // new shell coverage: dashboard dark + collapsed-rail are checked via dashboard rows above
+  { page: 'dashboard', lang: 'en', theme: 'dark' },
 ];
 
 (async () => {

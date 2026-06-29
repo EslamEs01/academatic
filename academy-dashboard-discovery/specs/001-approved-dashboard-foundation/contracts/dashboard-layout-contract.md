@@ -25,7 +25,7 @@ Order is described in **RTL reading order** (start = right). All zones consume t
 
 - **Header**: title "جلسات اليوم", subtitle "٢٤ جلسة · آخر تحديث قبل دقيقتين", calendar icon.
 - **Integrated action/filter bar** (one row, wraps on small screens): primary "+ جلسة جديدة" button; an **active-filter chip** ("فلتر نشط: اليوم ✕"); controls for time ("أي وقت"), date ("٢٨ يونيو"), subject ("المادة: الكل"), an in-table search ("ابحث في الجلسات…"), and an "تطبيق" apply button. Controls are real inputs (focusable), not dead buttons.
-- **Sessions table** (modern, not a spreadsheet) — columns in RTL order: الوقت (time + duration) · الجلسة (title + level) · المدرب (avatar + name) · القاعة (room) · الطلاب (present/capacity) · الحالة (status chip) · actions ("…" menu).
+- **Sessions table** (modern, not a spreadsheet) — columns in RTL order: الوقت (time + duration) · الجلسة (title + level) · المعلم (avatar + name) · القاعة (room) · الطلاب (present/capacity) · الحالة (status chip) · actions ("…" menu).
   - ≥5 fixture rows spanning live / upcoming / completed / cancelled; status chips resolve via the status map (live=teal, upcoming=sky, completed=success, cancelled=coral) with icon+label.
   - Row actions are a **menu**, never a row of colored pill buttons.
   - **Pagination** + "عرض ٥ من ٢٤ جلسة" summary, readable in RTL.
@@ -39,7 +39,7 @@ Order is described in **RTL reading order** (start = right). All zones consume t
 
 - Section header "التقارير" with "مركز التقارير ←" link.
 - **Report entry cards** (`report-card`) with icon medallion, title, description, and a navigation chevron:
-  - تقرير المدربين — **disabled** (lock medallion) with reason badge "صلاحية مطلوبة" / "يتطلب صلاحية مدير الأكاديمية"; action not clickable.
+  - تقرير المعلمين — **disabled** (lock medallion) with reason badge "صلاحية مطلوبة" / "يتطلب صلاحية مدير الأكاديمية"; action not clickable.
   - تقرير الإيرادات (amber) · أداء الطلاب (success) · تقرير الحضور الشهري (violet).
 - Cards must look like **real product areas**, not placeholders.
 

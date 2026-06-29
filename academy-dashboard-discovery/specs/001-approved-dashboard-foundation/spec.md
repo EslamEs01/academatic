@@ -15,8 +15,8 @@ This specification is **grounded in inspected reference artifacts**, not invente
 **Approved visual target (PRIMARY — the design this product must look like):**
 
 - `design-references/approved-dashboard/academy-dashboard.html` — a complete, single-page approved dashboard mockup carrying a full CSS custom-property token system with **paired light/dark values**, theme switching via `[data-theme="light"|"dark"]`, and an `Tajawal` Arabic-first typeface.
-- `design-references/approved-dashboard/academy-dashboard.png` — the rendered approved admin dashboard (Arabic RTL, light theme): warm cream canvas, dark indigo right sidebar, topbar, welcome hero, KPI cards, sessions module + table, status tiles, reports cards, and explicit empty/loading/error states.
-- `design-references/approved-dashboard/sidebar-reference.png` — a sidebar pattern reference showing a **slim icon rail + expanded navigation panel**, a strong purple/violet active pill, an academy brand block, and a bottom avatar.
+- `design-references/approved-dashboard/academy-dashboard.png` — the rendered approved admin dashboard (Arabic RTL, light theme), now the **BODY/content visual target**: warm cream canvas, topbar, welcome hero, KPI cards, sessions module + table, status tiles, reports cards, and explicit empty/loading/error states. (Its original dark right sidebar is superseded as the shell by `sidebar-reference.png`.)
+- `design-references/approved-dashboard/sidebar-reference.png` — **the SHELL source of truth**: a two-part navigation showing a **slim icon rail + expanded light nav panel**, a strong purple/violet active pill, a brand medallion + wordmark, and a bottom profile avatar.
 
 **Old academy system (PRODUCT/UX REFERENCE ONLY — visuals must NOT be copied):**
 
@@ -28,9 +28,9 @@ This specification is **grounded in inspected reference artifacts**, not invente
 
 ### What was found (visual & product patterns)
 
-- The approved design is a **premium, calm, colorful EduTech admin shell** with a warm cream canvas (`#FAF6EF`), white rounded cards (10–20px radii), soft warm-tinted depth, a dark indigo right sidebar (`#1F1B38`), a violet/indigo primary (`#5145CD`), and a 5-accent semantic palette (teal, green, sky, amber, coral) — each with a "weak" tint and a dark-theme variant.
-- Layout (RTL): right sidebar → topbar → compact welcome hero (violet→teal gradient) with two small stat cards → "نظرة عامة" KPI row of 4 cards with icon medallions, trend pills, large numerals, and mini sparklines/progress → "جلسات اليوم" sessions module (integrated filter/action bar + modern table) → 4 colored status summary tiles → "التقارير" reports cards (including a permission-locked disabled card) → "حالات الواجهة" loading/error/empty state demonstrations.
-- The approved sidebar uses a **simpler 3-group navigation** (عام / الأكاديمية / الإدارة) than the old system's 40-item flat list; the active item is a strong filled violet pill; a "مركز المساعدة" help card sits at the bottom.
+- The approved design is a **premium, calm, colorful EduTech admin shell** with a warm cream canvas (`#FAF6EF`), white rounded cards (10–20px radii), soft warm-tinted depth, a two-part navigation shell (slim icon rail + light nav panel, per `sidebar-reference.png`), a violet/indigo primary (`#5145CD`), and a 5-accent semantic palette (teal, green, sky, amber, coral) — each with a "weak" tint and a dark-theme variant.
+- Layout (RTL): right nav shell (icon rail + light panel) → topbar → compact welcome hero (violet→teal gradient) with two small stat cards → "نظرة عامة" KPI row of 4 cards with icon medallions, trend pills, large numerals, and mini sparklines/progress → "جلسات اليوم" sessions module (integrated filter/action bar + modern table) → 4 colored status summary tiles → "التقارير" reports cards (including a permission-locked disabled card) → "حالات الواجهة" loading/error/empty state demonstrations.
+- The nav shell uses a **simpler 3-group navigation** (عام / الأكاديمية / الإدارة) than the old system's 40-item flat list; in the light panel the active item is a large rounded violet pill (and its rail icon a filled violet rounded square); a circular profile avatar sits at the bottom of the rail (replacing any bottom help card).
 
 ### Old-system ideas reused as PRODUCT reference only (not visuals)
 
@@ -61,7 +61,7 @@ None. All reference files named in the request were located and inspected. No re
 
 1. A frontend **scaffold/foundation** (app structure, local build pipeline, local fonts/icons/assets policy).
 2. A **design-token system** derived from the approved design (color, typography, spacing, radius, shadow, motion), with light/dark/system support and RTL/LTR.
-3. The **application shell**: right sidebar + topbar + content region.
+3. The **application shell**: icon rail + light nav panel (inline-start) + topbar + content region.
 4. The **base UI component set** required by the dashboard (see Key Entities / FRs).
 5. The **Admin Dashboard page** reproducing the approved layout with fixture (static) data.
 6. A **Reports Overview page** — a real second route used to prove navigation and shell behavior (entry cards only; no report detail pages).
@@ -89,7 +89,7 @@ As an academy administrator, when I open the dashboard for the first time, it lo
 
 **Acceptance Scenarios**:
 
-1. **Given** the Admin Dashboard is opened in Arabic RTL light theme, **When** it finishes loading, **Then** it shows the warm cream canvas, dark indigo right sidebar, topbar, welcome hero, KPI cards, sessions module, status tiles, and reports cards in the approved arrangement.
+1. **Given** the Admin Dashboard is opened in Arabic RTL light theme, **When** it finishes loading, **Then** it shows the warm cream canvas, icon rail + light nav panel, topbar, welcome hero, KPI cards, sessions module, status tiles, and reports cards in the approved arrangement.
 2. **Given** a reviewer compares the rendered screenshot to the approved reference, **When** they assess premium-ness, **Then** the result reads as "global SaaS/EduTech quality" and does **not** read as generic/flat/pale/default-Tailwind.
 3. **Given** the dashboard is rendered, **When** the reviewer inspects color, depth, rounding, and spacing, **Then** they match the approved token system (warm canvas, violet primary, soft depth, rounded cards, icon medallions).
 
@@ -105,8 +105,8 @@ As an administrator, I navigate via a sidebar and topbar that feel like a real S
 
 **Acceptance Scenarios**:
 
-1. **Given** the right sidebar, **When** it renders, **Then** it shows a dark premium surface, an academy brand block at top, grouped navigation (عام / الأكاديمية / الإدارة), a strong rounded violet active pill, clear icons, readable labels, comfortable spacing, and a bottom help/support card.
-2. **Given** the sidebar, **When** the admin collapses it, **Then** it becomes a slim icon rail (per the sidebar reference) and expands back without layout breakage.
+1. **Given** the nav shell, **When** it renders, **Then** it shows a slim icon rail (hamburger collapse control at top, icon-only items with a filled-violet active rounded square, a circular profile avatar pinned at the bottom) beside a light nav panel (brand medallion + wordmark at top, a small section label, grouped navigation عام / الأكاديمية / الإدارة, a large rounded violet active pill, clear icons, readable labels, comfortable spacing) — and no bottom help/support card.
+2. **Given** the nav shell, **When** the admin collapses it (`data-rail="true"`), **Then** the light nav panel hides and only the slim icon rail remains (per `sidebar-reference.png`), and expanding restores the panel without layout breakage.
 3. **Given** the topbar, **When** it renders, **Then** search, profile, notifications, language, and theme controls are organized and grouped — never a row of random tiny buttons.
 4. **Given** the admin clicks a navigation item, **When** the route changes, **Then** the active pill moves and the content region updates without a full visual reset of the shell.
 
@@ -139,7 +139,7 @@ As an administrator, I can view a static/fixture sessions table with an integrat
 **Acceptance Scenarios**:
 
 1. **Given** the sessions module, **When** it renders, **Then** it has a header (title + count + last-updated context), an integrated bar with a primary "new session" action, an active-filter chip, and search/subject/date/time controls plus an apply action.
-2. **Given** the sessions table, **When** it renders, **Then** it shows readable rows with trainer avatar+name, session title+level, room, students count, a clear status chip (live / upcoming / completed / cancelled), time+duration, and a per-row actions menu — not a row of colored pill buttons.
+2. **Given** the sessions table, **When** it renders, **Then** it shows readable rows with teacher avatar+name, session title+level, room, students count, a clear status chip (live / upcoming / completed / cancelled), time+duration, and a per-row actions menu — not a row of colored pill buttons.
 3. **Given** more rows than one page, **When** the table renders, **Then** pagination and a "showing X of N" summary appear and read clearly in RTL.
 4. **Given** the table is judged visually, **When** reviewed, **Then** it does not look like a bare spreadsheet (it has depth, spacing, status color, and clear hierarchy).
 
@@ -202,7 +202,7 @@ As any user, the foundation remains strong across Arabic RTL, English LTR, Light
 - **Loading**: While data would load, a skeleton/shimmer placeholder appears (matching the approved "حالات الواجهة" loading card), not a bare "Loading…" string.
 - **Error**: A connection/load failure shows a friendly error state with a cause and a retry action (matching the approved error card), not a stack trace or raw 500.
 - **Disabled-with-reason**: A control the fixture user is not permitted to use is visibly disabled and states why; it is never silently dead.
-- **Long content**: Long Arabic/English session titles, trainer names, and numbers truncate or wrap gracefully without breaking card or row layout in either direction.
+- **Long content**: Long Arabic/English session titles, teacher names, and numbers truncate or wrap gracefully without breaking card or row layout in either direction.
 - **Theme switch mid-session**: Switching Light↔Dark↔System re-themes all surfaces instantly with no flash of unstyled or mismatched colors.
 - **Direction switch**: Switching Arabic↔English re-mirrors the entire shell and content without layout breakage or clipped controls.
 - **Mixed bidi content**: A Latin name or number inside Arabic text (and vice versa) stays correctly isolated and readable.
@@ -214,7 +214,7 @@ As any user, the foundation remains strong across Arabic RTL, English LTR, Light
 ### Functional Requirements — Design Foundation & Tokens
 
 - **FR-001**: The system MUST define a single source-of-truth design-token set derived from the approved design, covering color, typography, spacing, radius, shadow/elevation, and motion, with every component consuming tokens (no hard-coded colors or directions).
-- **FR-002**: The color tokens MUST reproduce the approved palette: warm cream canvas, white card surfaces, a violet/indigo primary, and a 5-accent semantic set (teal, green/success, sky/info, amber/warning, coral/danger), each with a "weak" tint, plus dark-sidebar tokens. (Reference values in Appendix A.)
+- **FR-002**: The color tokens MUST reproduce the approved palette: warm cream canvas, white card surfaces, a violet/indigo primary, and a 5-accent semantic set (teal, green/success, sky/info, amber/warning, coral/danger), each with a "weak" tint, plus navigation-shell tokens (light nav panel + icon rail) and AA-contrast primary-button fill tokens. (Reference values in Appendix A.)
 - **FR-003**: The system MUST provide Light, Dark, and System theme modes; Dark MUST use true dark (not pure black) surfaces; System MUST follow the operating-system preference; and every component MUST be legible in all three.
 - **FR-004**: The system MUST support Arabic RTL as the first-class default direction and English LTR as a supported direction, mirroring layout, navigation side, and directional icons while never mirroring numbers, times, or currency.
 - **FR-005**: Typography MUST use a single self-hosted Arabic-first + Latin UI typeface matching the approved design's character (the approved reference uses **Tajawal**), with a defined type scale, tabular numerals for KPI/table numbers, and weights that remain legible in Arabic (avoid hairline weights).
@@ -222,10 +222,10 @@ As any user, the foundation remains strong across Arabic RTL, English LTR, Light
 
 ### Functional Requirements — Application Shell & Sidebar
 
-- **FR-007**: The system MUST provide an application shell composed of a right sidebar (in RTL), a topbar, and a content region, reused across all pages in this spec.
-- **FR-008**: The sidebar MUST be a dark premium surface with: an academy brand block at the top (brand mark + plan/context badge), grouped navigation, a strong rounded violet active pill on the current item, clear icons, readable labels, comfortable spacing, and a bottom help/support card.
+- **FR-007**: The system MUST provide an application shell composed of an icon rail + light nav panel (inline-start; right in RTL), a topbar, and a content region, reused across all pages in this spec. The outer `<aside class="sidebar">` is a transparent flex-row wrapper holding the rail + panel.
+- **FR-008**: The nav shell MUST be a **two-part navigation**: (a) a slim **icon rail** (`.nav-rail`) pinned to the inline-start screen edge — a hamburger collapse control (`data-action="toggle-rail"`) at the top, a vertical stack of icon-only links (`.rail-item`) whose active item shows its icon inside a **filled violet rounded square**, and a circular profile avatar (`.rail-foot`, `data-action="profile-menu"`) pinned at the bottom; and (b) an expanded **light nav panel** (`.nav-panel`, `id="nav-panel"`) beside the rail — a brand medallion (teal/violet gradient) + wordmark at the top, a small section label (`.nav-section-label`), grouped navigation, and a **large rounded violet active pill** (`.nav-item.is-active`, white text + white icon) on the current item with dark-ink inactive items. This REPLACES the previous single dark sidebar; there is **no** bottom help/support card.
 - **FR-009**: The sidebar MUST be data-driven from a navigation configuration (groups → items with label, icon, optional badge/count, route) so future role apps can supply their own navigation.
-- **FR-010**: The sidebar MUST support a collapsed **slim icon-rail** state and an expanded state (per the sidebar reference), toggling without layout breakage; on small screens it MUST become an off-canvas drawer.
+- **FR-010**: The nav shell MUST support a collapsed state (`data-rail="true"`) that **hides the light nav panel and keeps the slim icon rail**, and an expanded state showing both (per `sidebar-reference.png`), toggling without layout breakage; on small screens it MUST become an off-canvas drawer that shows the panel full-width (rail hidden).
 - **FR-011**: The sidebar MUST NOT be a weak plain list; it MUST read as a real SaaS product shell.
 
 ### Functional Requirements — Topbar
@@ -239,7 +239,7 @@ As any user, the foundation remains strong across Arabic RTL, English LTR, Light
 - **FR-015**: The dashboard MUST include a **compact welcome zone** with a greeting, current date/context, an at-a-glance summary line, primary and secondary action buttons, and a small educational motif — and MUST NOT be a giant empty hero.
 - **FR-016**: The dashboard MUST include a **KPI/stat card row** where each card has a soft colored surface, an icon medallion, a large readable number, a supporting label, a trend indicator, and a mini sparkline/progress visual implemented without any chart library.
 - **FR-017**: The dashboard MUST include a **sessions module** with an integrated action/filter bar (primary "new session" action, active-filter chip, search, subject, date, and time controls plus an apply action) and a modern sessions table.
-- **FR-018**: The sessions table MUST display readable rows with: time + duration, session title + level, trainer (avatar + name), room, students count, a clear status chip, and a per-row actions menu; it MUST provide pagination and a "showing X of N" summary; and it MUST NOT look like a bare spreadsheet or use a row of colored pill buttons.
+- **FR-018**: The sessions table MUST display readable rows with: time + duration, session title + level, teacher (avatar + name), room, students count, a clear status chip, and a per-row actions menu; it MUST provide pagination and a "showing X of N" summary; and it MUST NOT look like a bare spreadsheet or use a row of colored pill buttons.
 - **FR-019**: The dashboard MUST include a **status summary** of compact colored tiles (e.g., cancelled / upcoming / live now / completed), each with a count, status icon, and label — never gray flat pills.
 - **FR-020**: The dashboard MUST include a **reports area** of report entry cards, each with an icon medallion, clear title and description, and a navigation affordance; at least one card MUST demonstrate a disabled "permission required" state with a visible reason; cards MUST NOT look like placeholders.
 - **FR-021**: The dashboard MUST demonstrate **empty, loading, and error** interface states with warm, helpful, human microcopy and a clear next step (CTA or retry), matching the approved "حالات الواجهة" patterns.
@@ -272,7 +272,7 @@ As any user, the foundation remains strong across Arabic RTL, English LTR, Light
 
 - **Navigation Item**: A sidebar entry — group, label (localized), icon, optional badge/count, target route, active state.
 - **KPI / Stat**: A headline metric — label, large value, unit, trend direction/percentage, accent color, and a mini visual (sparkline/progress).
-- **Session (fixture)**: A scheduled class row — time, duration, title, level, trainer (name + avatar), room, students count/capacity, and status.
+- **Session (fixture)**: A scheduled class row — time, duration, title, level, teacher (name + avatar), room, students count/capacity, and status.
 - **Session Status**: A status value mapped to color + icon + localized label (e.g., live now, upcoming, completed, cancelled).
 - **Status Summary Tile**: An aggregate count per status — count, status, icon, accent color, label.
 - **Report Entry**: A report area card — title, description, icon, accent, navigation target, and an optional disabled/permission-required reason.
@@ -284,7 +284,7 @@ As any user, the foundation remains strong across Arabic RTL, English LTR, Light
 
 ### Measurable Outcomes
 
-- **SC-001**: In a side-by-side review of the Admin Dashboard (Arabic RTL, light) against the approved reference, an independent reviewer confirms it visibly matches the approved direction (warm canvas, dark right sidebar, KPI cards, sessions table, status tiles, reports cards) on **first load with zero interaction**.
+- **SC-001**: In a side-by-side review of the Admin Dashboard (Arabic RTL, light) against the approved reference, an independent reviewer confirms it visibly matches the approved direction (warm canvas, icon rail + light nav panel, KPI cards, sessions table, status tiles, reports cards) on **first load with zero interaction**.
 - **SC-002**: A reviewer unfamiliar with the project, shown the dashboard for 10 seconds, can correctly state today's session count, the live-now count, the attendance figure, and the number of pending/cancelled sessions — confirming at-a-glance scannability.
 - **SC-003**: 100% of the required screenshot matrix (Visual Acceptance below) is captured and judged to match the approved direction; **zero** screenshots trigger a stated failure condition.
 - **SC-004**: 100% of interactive controls are either functional or disabled-with-reason (no dead buttons), and **zero** raw i18n keys appear in any captured screenshot or page.
@@ -309,7 +309,7 @@ Automated tests alone are insufficient. Final acceptance REQUIRES a screenshot r
 **A screenshot review FAILS if any of the following are true:**
 
 - It looks like a generic Tailwind admin template.
-- The sidebar is weak or a plain list.
+- The nav shell (icon rail + light panel) is weak or a plain list.
 - The dashboard is empty, flat, or pale.
 - The topbar icons feel random or ungrouped.
 - The KPI cards look basic (no medallion / no depth / no visual indicator).
@@ -364,14 +364,14 @@ These values were read directly from `design-references/approved-dashboard/acade
 - Canvas: `#FAF6EF` · Canvas-2: `#F1EADC` · Surface (cards): `#FFFFFF` · Surface-2: `#F7F1E7`
 - Ink (text): `#211D33` · Ink-2: `#544F66` · Ink-3: `#7C7790` · Lines: `#E7DECF` / `#F1EADD`
 - Primary (violet): `#5145CD` · Primary-2: `#6E63E0` · Primary-weak: `#EAE7FB`
-- Sidebar: `#1F1B38` · Sidebar-2: `#2B2650` · Sidebar active pill: `rgba(148,134,244,.22)`
+- Nav shell (per `sidebar-reference.png`): Nav panel `--c-nav-panel` `#FFFFFF` · Nav rail `--c-nav-rail` warm `#F1EADC` · plus `--c-nav-line` / `--c-nav-ink` / `--c-nav-ink-muted` / `--c-nav-hover` (derived from the warm-canvas inks); the active nav pill (panel) + active icon square (rail) use the `--g-violet` gradient. Primary-button fill: `--c-primary-btn` (`#5145CD`) / `--c-primary-btn-hover` (`#6E63E0`) — AA-contrast white text. Legacy `--c-sidebar-2` / `--c-sb-*` are now mostly unused; `--c-sidebar` (`#1F1B38`) is reused only as the dark rail value.
 - Accents: teal `#0E8C7E` (weak `#D3EEEA`) · success `#1B8E59` (weak `#D2ECDC`) · sky `#2774BC` (weak `#D6E6F6`) · amber `#C9781F` (weak `#F7E5C9`) · coral `#D7503A` (weak `#F8DAD2`)
 
 **Dark theme**
 
 - Canvas: `#141220` · Canvas-2: `#1B1828` · Surface: `#221F31` · Surface-2: `#2A2640`
 - Ink: `#F3F0FB` · Ink-2: `#C2BDD4` · Ink-3: `#928CA8` · Lines: `#363046` / `#2A2639`
-- Primary: `#9486F4` · Primary-2: `#B0A4FA` · Sidebar: `#0E0C18` / `#1B1830`
+- Primary: `#9486F4` · Primary-2: `#B0A4FA` · Nav panel `--c-nav-panel`: `#221F31` · Nav rail `--c-nav-rail`: `#0E0C18` (deepest plane) · Primary-button fill `--c-primary-btn` / `--c-primary-btn-hover` (AA white text — the bright `#9486F4` primary failed 4.5:1 as a button fill).
 - Accents (brighter): teal `#34C9B6` · success `#3FBE7E` · sky `#62A6E6` · amber `#EAA94F` · coral `#F2876F`
 
 **Shape, depth & motion**

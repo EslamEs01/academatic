@@ -71,13 +71,13 @@ Earliest demo = US2 + US3 (a real shell with a scannable dashboard top). Full fi
 
 ## Phase 3: User Story 2 - Real product shell (Priority: P1) 🏗️ built first
 
-**Goal**: A right-side RTL dark premium sidebar + organized topbar that feel like a real SaaS shell, reused by every page.
+**Goal**: A right-side (RTL) two-part nav shell — slim icon rail + light nav panel — plus an organized topbar that feel like a real SaaS shell, reused by every page.
 
 **Independent Test**: Operate the shell across all 3 pages — collapse to slim rail and back, open the mobile drawer, open profile/notifications menus, switch theme and language — and confirm it re-themes/re-mirrors with no breakage and the active pill tracks the page.
 
-- [x] T023 [P] [US2] Implement Sidebar (brand block + plan badge, grouped nav from `nav.config`, strong violet active pill, bottom help card) in `src/js/components/sidebar.js`, per sidebar-shell-contract S1–S2
-- [x] T024 [US2] Add sidebar collapse → **slim icon-rail** state with hover labels + persist `sidebarCollapsed` in `src/js/components/sidebar.js` (depends T023), per S3
-- [x] T025 [US2] Implement Drawer and wire the sidebar mobile/tablet off-canvas drawer (scrim, focus trap, Esc) in `src/js/components/drawer.js` (depends T023)
+- [x] T023 [P] [US2] Implement the nav shell — slim icon rail (`.nav-rail`: hamburger `toggle-rail` at top, icon-only `.rail-item`s with a filled-violet active rounded square, bottom profile avatar `.rail-foot`) + light nav panel (`.nav-panel`: brand medallion + wordmark, `.nav-section-label`, grouped nav from `nav.config`, large rounded violet active pill `.nav-item.is-active`) — in `src/js/components/sidebar.js`, per sidebar-shell-contract S1–S2
+- [x] T024 [US2] Add collapse (`data-action="toggle-rail"` → `data-rail="true"`) that **hides the light nav panel and keeps the slim icon rail** + persist the collapsed state in `src/js/components/sidebar.js` (depends T023), per S3
+- [x] T025 [US2] Implement Drawer and wire the mobile/tablet off-canvas drawer that shows the nav panel full-width (rail hidden; scrim, focus trap, Esc) in `src/js/components/drawer.js` (depends T023)
 - [x] T026 [P] [US2] Implement Topbar (breadcrumb/title, centered global search, grouped utility cluster) in `src/js/components/topbar.js`, per S4
 - [x] T027 [US2] Implement Dropdown/Menu and wire profile + notifications + language menus into the topbar in `src/js/components/dropdown.js` (depends T026)
 - [x] T028 [US2] Wire topbar theme + language switches to `theme.js`/`i18n.js` so the whole shell re-themes/re-mirrors in `src/js/components/topbar.js` (depends T011, T012, T026)
@@ -300,3 +300,11 @@ After the initial build, the delivery model was changed (per stakeholder require
 - i18n = per-language pre-rendered pages (`*.html` Arabic / `*.en.html` English); the language toggle navigates, theme switches in place.
 
 Affected tasks were re-satisfied under this model: T007 (serve `public/`), T021–T022 (page scaffolds/bootstrap → SSG `build-html.mjs` + enhancement `enhance.js`; obsolete `src/pages/*.html`, `main.js`, `shell.js` removed), plus new build/deploy scripts (`build-html.mjs`, `build-assets.mjs`, `deploy-pages.mjs`). Re-verified: build clean · smoke PASS · axe critical=0/serious=0 · 8/8 screenshots pixel-identical to the approved-matching set. Details in `quickstart.md`, `app/README.md`, and `contracts/scope-guard.md` + `contracts/screenshot-acceptance.md`.
+
+---
+
+## Alignment (Pre-003)
+
+The shell was **corrected to `design-references/approved-dashboard/sidebar-reference.png`** (now the SHELL source of truth; `academy-dashboard.png` remains the BODY/content target). The previous single dark indigo sidebar (`#1F1B38`) was replaced by a **two-part nav shell**: a slim icon rail (`.nav-rail` — hamburger `toggle-rail`, icon-only `.rail-item`s with a filled-violet active square, bottom profile avatar `.rail-foot`) + a light nav panel (`.nav-panel` — brand medallion + wordmark, `.nav-section-label`, grouped nav, large rounded violet active pill `.nav-item.is-active`). Collapsing (`data-rail="true"`) hides the panel and keeps the rail; mobile shows the panel as a full-width off-canvas drawer; the bottom help card is gone (rail avatar replaces it). New tokens `--c-nav-panel` / `--c-nav-rail` / `--c-nav-line` / `--c-nav-ink` / `--c-nav-ink-muted` / `--c-nav-hover` + AA-contrast `--c-primary-btn` / `--c-primary-btn-hover`; legacy `--c-sidebar-2` / `--c-sb-*` are now mostly unused. Django partials: `_nav_rail.html` / `_nav_panel.html` / `_topbar.html`.
+
+Nav naming was aligned to the analyzed academy system: **Trainers → Teachers** (`teachers.html`, nav id `teachers`, المعلمون); **Curricula → Courses** (`courses.html`, nav id `courses`, الدورات); **Schedule** keeps its English label + `schedule.html` but its Arabic label changed الجدول الزمني → الجدول الدراسي; the Sessions table "trainer" column now renders **teacher** (المعلم). The dev gallery page stays out of the product nav.

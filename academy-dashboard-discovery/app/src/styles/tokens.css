@@ -27,6 +27,10 @@
   --c-primary: #5145CD;
   --c-primary-2: #6E63E0;
   --c-primary-weak: #EAE7FB;
+  /* filled-button violet — white text meets AA (≥4.5:1) in BOTH themes
+     (the brighter dark --c-primary #9486F4 fails as a button fill) */
+  --c-primary-btn: var(--c-primary);
+  --c-primary-btn-hover: #6E63E0;
   /* dark sidebar */
   --c-sidebar: #1F1B38;
   --c-sidebar-2: #2B2650;
@@ -34,6 +38,15 @@
   --c-sb-ink-2: rgba(206, 202, 232, 0.72);
   --c-sb-line: rgba(255, 255, 255, 0.10);
   --c-sb-active: rgba(148, 134, 244, 0.22);
+  /* nav shell — slim icon rail + light nav panel (per sidebar-reference.png).
+     Most derive from surface/ink tokens so they re-theme automatically; only
+     --c-nav-rail is given an explicit deep value in dark. */
+  --c-nav-panel: var(--c-surface);
+  --c-nav-rail: var(--c-canvas-2);
+  --c-nav-line: var(--c-line);
+  --c-nav-ink: var(--c-ink);
+  --c-nav-ink-muted: var(--c-ink-3);
+  --c-nav-hover: var(--c-surface-2);
   /* accents (+ weak tints) */
   --c-teal: #0E8C7E;        --c-teal-weak: #D3EEEA;
   --c-success: #1B8E59;     --c-success-weak: #D2ECDC;
@@ -84,7 +97,7 @@
   --c-line: #363046;
   --c-line-2: #2A2639;
   --c-primary: #9486F4;
-  --c-primary-2: #B0A4FA;
+  --c-primary-2: #B0A4FA; --c-primary-btn: #5F53D6;
   --c-primary-weak: #2D2850;
   --c-sidebar: #0E0C18;
   --c-sidebar-2: #1B1830;
@@ -92,6 +105,7 @@
   --c-sb-ink-2: rgba(206, 202, 230, 0.84);
   --c-sb-line: rgba(255, 255, 255, 0.08);
   --c-sb-active: rgba(140, 125, 242, 0.20);
+  --c-nav-rail: #0E0C18; /* deepest plane so the rail reads premium beside the dark panel */
   --c-teal: #34C9B6;        --c-teal-weak: #163833;
   --c-success: #3FBE7E;     --c-success-weak: #173329;
   --c-sky: #62A6E6;         --c-sky-weak: #16283D;
@@ -122,7 +136,7 @@
     --c-line: #363046;
     --c-line-2: #2A2639;
     --c-primary: #9486F4;
-    --c-primary-2: #B0A4FA;
+    --c-primary-2: #B0A4FA; --c-primary-btn: #5F53D6;
     --c-primary-weak: #2D2850;
     --c-sidebar: #0E0C18;
     --c-sidebar-2: #1B1830;
@@ -130,6 +144,7 @@
     --c-sb-ink-2: rgba(206, 202, 230, 0.84);
     --c-sb-line: rgba(255, 255, 255, 0.08);
     --c-sb-active: rgba(140, 125, 242, 0.20);
+    --c-nav-rail: #0E0C18; /* deepest plane so the rail reads premium beside the dark panel */
     --c-teal: #34C9B6;        --c-teal-weak: #163833;
     --c-success: #3FBE7E;     --c-success-weak: #173329;
     --c-sky: #62A6E6;         --c-sky-weak: #16283D;
