@@ -1,0 +1,35 @@
+{
+  "name": "academy-dashboard-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Approved Academy Dashboard Visual Foundation (Spec 001) — static, fixture-driven admin dashboard. Arabic RTL first, English LTR, Light/Dark/System. Local Tailwind/PostCSS, native ES modules, no CDN, no framework.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "vendor:assets": "node scripts/vendor-assets.cjs",
+    "build:css": "tailwindcss -i ./src/styles/app.css -o ./public/assets/app.css --minify",
+    "build:assets": "node scripts/build-assets.mjs",
+    "build:html": "node scripts/build-html.mjs",
+    "build": "node scripts/vendor-assets.cjs && node scripts/build-assets.mjs && tailwindcss -i ./src/styles/app.css -o ./public/assets/app.css --minify && node scripts/build-html.mjs",
+    "serve": "node scripts/serve.cjs",
+    "preview": "node scripts/serve.cjs",
+    "dev": "npm run build && node scripts/serve.cjs",
+    "deploy:pages": "node scripts/deploy-pages.mjs",
+    "screenshots": "node tests/screenshots/capture.cjs",
+    "test:smoke": "node tests/smoke/run.cjs",
+    "test:a11y": "node tests/a11y/run.cjs",
+    "test": "node tests/smoke/run.cjs && node tests/a11y/run.cjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@fontsource/tajawal": "^5.1.0",
+    "autoprefixer": "^10.4.20",
+    "lucide-static": "^0.408.0",
+    "playwright": "^1.61.0",
+    "postcss": "^8.4.47",
+    "postcss-import": "^16.1.1",
+    "tailwindcss": "^3.4.14"
+  }
+}
