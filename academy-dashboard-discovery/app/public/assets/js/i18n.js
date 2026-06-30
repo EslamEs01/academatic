@@ -9,6 +9,8 @@ import arF from '../locales/ar.fam.js';
 import enF from '../locales/en.fam.js';
 import arA from '../locales/ar.att.js';
 import enA from '../locales/en.att.js';
+import arC from '../locales/ar.crs.js';
+import enC from '../locales/en.crs.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -27,6 +29,9 @@ deepMerge(ar, arF);
 deepMerge(en, enF);
 deepMerge(ar, arA);
 deepMerge(en, enA);
+// Spec 006 keys live in *.crs.js (courses/groups/learning-paths)
+deepMerge(ar, arC);
+deepMerge(en, enC);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

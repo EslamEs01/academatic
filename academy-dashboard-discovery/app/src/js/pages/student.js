@@ -5,9 +5,11 @@
  * Notes. Timetable reuses scheduleAgenda + the shared appointment drawer + a
  * deep-link to schedule.html#view=timetable. Results/Evaluation are FIXTURE-ONLY
  * (no gradebook, no workflow). One representative student is baked (Django → student/<id>). */
-import { STUDENTS, STUDENT_BY_ID, studentsOfFamily, GROUP_BY_ID } from '../fixtures/students.js';
+import { STUDENTS, STUDENT_BY_ID, studentsOfFamily } from '../fixtures/students.js';
+import { GROUP_BY_ID } from '../fixtures/groups.js';
 import { familyOf } from '../fixtures/families.js';
 import { outcomesOfStudent } from '../fixtures/attendance.js';
+import { enrollmentStatusChip } from '../components/enrollment-status.js';
 import { SCHEDULE_WEEK } from '../fixtures/schedule.js';
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
@@ -31,13 +33,8 @@ const ptone = (p) => (p >= 70 ? 'success' : p >= 40 ? 'sky' : 'amber');
 const schedHref = () => (getLang() === 'en' ? 'schedule.en.html#view=timetable' : 'schedule.html#view=timetable');
 const familyHref = () => (getLang() === 'en' ? 'family.en.html' : 'family.html');
 const studentHref = () => (getLang() === 'en' ? 'student.en.html' : 'student.html');
-
-const COURSE_STATUS = {
-  active: { tone: 'live', icon: 'play', labelKey: 'sp.courseStatus.active' },
-  completed: { tone: 'completed', icon: 'check-circle', labelKey: 'sp.courseStatus.completed' },
-  paused: { tone: 'amber', icon: 'pause-circle', labelKey: 'sp.courseStatus.paused' },
-};
-const courseStatusChip = (id) => { const s = COURSE_STATUS[id] || COURSE_STATUS.active; return chip({ labelKey: s.labelKey, tone: s.tone, icon: s.icon }); };
+const courseHref = () => (getLang() === 'en' ? 'course.en.html' : 'course.html');
+const groupHref = () => (getLang() === 'en' ? 'group.en.html' : 'group.html');
 
 function apptItem(b, st, fam) {
   return {
@@ -105,17 +102,18 @@ function overviewPanel(st, fam, blocks) {
 function coursesPanel(st) {
   if (!st.enrollments || !st.enrollments.length) return `<div class="empty-row">${t('sp.courses.none')}</div>`;
   const cards = st.enrollments.map((e) => {
+    const grp = e.groupId ? GROUP_BY_ID[e.groupId] : null;
     const tags = [
-      e.groupId ? chip({ labelKey: GROUP_BY_ID[e.groupId] && GROUP_BY_ID[e.groupId].nameKey, tone: 'neutral', icon: 'students' }) : '',
+      grp ? `<a href="${groupHref()}" class="link-chip">${icon('students', 'ico')}<span>${t(grp.nameKey)}</span></a>` : '',
       e.certificateKey ? chip({ labelKey: 'sp.courses.cert', tone: 'completed', icon: 'award' }) : '',
     ].join('');
     return `<div class="course-card">
       <div class="cc-head">
         <div class="min-w-0">
-          <h3 class="font-bold text-ink text-[14px] truncate">${t(e.courseTitleKey)}</h3>
+          <a href="${courseHref()}" class="font-bold text-ink text-[14px] truncate" style="display:block;text-decoration:none">${t(e.courseTitleKey)}</a>
           <div class="flex items-center gap-2 mt-1">${avatar({ nameKey: e.teacherNameKey, accent: e.accent, size: 'sm' })}<span class="text-[12px] truncate" style="color:var(--c-ink-3)">${t(e.teacherNameKey)}</span></div>
         </div>
-        ${courseStatusChip(e.statusId)}
+        ${enrollmentStatusChip(e.statusId)}
       </div>
       <div class="flex items-center gap-2">${progressBar(e.progress, ptone(e.progress))}<span class="text-[12px] tabular" style="color:var(--c-ink-3)">${num(e.progress)}%</span></div>
       ${tags ? `<div class="flex flex-wrap gap-1.5">${tags}</div>` : ''}

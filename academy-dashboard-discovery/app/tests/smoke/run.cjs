@@ -6,7 +6,7 @@ const { PORT } = require('../../scripts/serve.cjs');
 
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
-  'families', 'add-family', 'family', 'student', 'attendance'];
+  'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group'];
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -298,6 +298,111 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         ok(drawer.open, `${page}/${lang}: the outcome drawer did not open from a row`);
         ok(drawer.hasOutcome, `${page}/${lang}: the outcome drawer is missing the Outcome section`);
         await p.keyboard.press('Escape');
+      }
+
+      // Spec 006 — Groups directory: promoted nav · EVERY row a labeled group-status chip · rows → group.html · tiles/filters
+      if (page === 'groups') {
+        const a = await p.evaluate(() => {
+          const rows = [...document.querySelectorAll('#groups-list .group-row')];
+          const chips = rows.map((r) => r.querySelector('.gr-meta .chip')); // one per row (null if a row has none)
+          const navG = document.querySelector('.nav-panel .nav-item[data-nav="groups"]');
+          const titles = [...document.querySelectorAll('#groups-list a.gr-title')];
+          return {
+            rows: rows.length,
+            chipsPresent: chips.filter(Boolean).length,
+            chipsLabeled: chips.filter((c) => c && c.querySelector('svg') && c.textContent.trim().length > 0).length,
+            navOk: !!(navG && navG.tagName === 'A' && /(^|\/)groups\.(en\.)?html$/.test(navG.getAttribute('href') || '')),
+            groupLinks: titles.length > 0 && titles.every((x) => /(^|\/)group\.(en\.)?html$/.test(x.getAttribute('href') || '')),
+            tiles: document.querySelectorAll('.outcome-tile[data-filter-set]').length,
+          };
+        });
+        ok(a.rows >= 6, `${page}/${lang}: expected ≥6 group rows, got ${a.rows}`);
+        // EVERY row must carry a labeled status chip (tie to row count so a chip-less row fails, not just ≥1)
+        ok(a.chipsPresent === a.rows && a.chipsLabeled === a.rows, `${page}/${lang}: not every group row has a labeled status chip (${a.chipsLabeled} labeled / ${a.chipsPresent} present / ${a.rows} rows)`);
+        ok(a.navOk, `${page}/${lang}: groups nav is not a real <a> to groups.html`);
+        ok(a.groupLinks, `${page}/${lang}: group rows missing group.html links (exact)`);
+        ok(a.tiles === 3, `${page}/${lang}: expected 3 group tiles, got ${a.tiles}`);
+        const before = await p.$$eval('#groups-list .group-row', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="status"]', 'active').catch(() => {});
+        await p.waitForTimeout(150);
+        const after = await p.$$eval('#groups-list .group-row', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `${page}/${lang}: status filter did not narrow groups (${before} → ${after})`);
+      }
+
+      // Spec 006 — Course/Group profiles: labeled banner chip · baked tabs · a REAL named-tab switch · reused canonical drawer
+      if (page === 'course' || page === 'group') {
+        const switchTab = page === 'course' ? 'groups' : 'students'; // a named tab whose activation we verify
+        const outTab = page === 'course' ? 'outcomes' : 'sessions';
+        const a = await p.evaluate(() => {
+          const wrap = document.querySelector('[data-tabs]');
+          const panels = wrap ? [...wrap.querySelectorAll('[data-tabpanel]')] : [];
+          return {
+            bannerLabeled: [...document.querySelectorAll('.profile-banner .chip')].some((c) => c.querySelector('svg') && c.textContent.trim().length > 0),
+            tabsN: wrap ? wrap.querySelectorAll('[role="tab"][data-tab]').length : 0,
+            panels: panels.length, visible: panels.filter((pn) => !pn.hidden).length,
+            drawers: document.querySelectorAll('template[data-preview]').length,
+          };
+        });
+        ok(a.bannerLabeled, `${page}/${lang}: profile banner missing a labeled status chip (icon + text)`);
+        ok(a.tabsN >= 7 && a.panels === a.tabsN, `${page}/${lang}: profile tabs not baked (${a.tabsN} tabs / ${a.panels} panels)`);
+        ok(a.visible === 1, `${page}/${lang}: expected exactly one visible tab panel, got ${a.visible}`);
+        ok(a.drawers >= 4, `${page}/${lang}: reused appointment/outcome drawer templates not baked (${a.drawers})`);
+        // SWITCH: click a NAMED tab and assert THAT panel is the (only) visible one — proves the switch handler works
+        await p.click(`[data-tabs] [role="tab"][data-tab="${switchTab}"]`).catch(() => {});
+        await p.waitForTimeout(150);
+        const sw = await p.evaluate(() => { const v = [...document.querySelectorAll('[data-tabpanel]')].filter((pn) => !pn.hidden); return { count: v.length, id: v[0] ? v[0].getAttribute('data-tabpanel') : null }; });
+        ok(sw.count === 1 && sw.id === switchTab, `${page}/${lang}: named tab switch did not activate '${switchTab}' (visible=${sw.count}, id=${sw.id})`);
+        // profile BODY cross-links — scoped to #page-body (NOT the sidebar nav) and matched to EXACT target files
+        const links = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const has = (re) => [...body.querySelectorAll('a[href]')].some((x) => re.test(x.getAttribute('href') || ''));
+          return {
+            group: has(/(^|\/)group\.(en\.)?html/), course: has(/(^|\/)course\.(en\.)?html/),
+            student: has(/(^|\/)student\.(en\.)?html/), family: has(/(^|\/)family\.(en\.)?html/),
+            ladder: document.querySelectorAll('.level-ladder .level-step').length,
+          };
+        });
+        if (page === 'course') {
+          ok(links.group && links.student, `${page}/${lang}: course profile body missing group.html/student.html links`);
+          ok(links.ladder >= 4, `${page}/${lang}: learning-path ladder not baked (${links.ladder} steps, expected ≥4)`);
+        } else {
+          ok(links.student && links.family && links.course, `${page}/${lang}: group profile body missing student/family/course links`);
+        }
+        // the CANONICAL Spec 005 outcome drawer must open from the Outcomes/Sessions tab (reuse, not bespoke)
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        await p.click(`[data-tabs] [role="tab"][data-tab="${outTab}"]`).catch(() => {});
+        await p.waitForTimeout(160);
+        const kebab = await p.$(`[data-tabpanel="${outTab}"] .outcome-row [data-row-menu]`);
+        if (kebab) {
+          await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150);
+          const v = await p.$('.popover [data-drawer]');
+          if (v) { await v.scrollIntoViewIfNeeded(); await v.click(); await p.waitForTimeout(240); }
+        }
+        const drawer = await p.evaluate(() => { const d = document.querySelector('.drawer.sheet'); return d ? { open: true, hasOutcome: /النتيجة|Outcome/.test(d.textContent) } : { open: false }; });
+        ok(drawer.open, `${page}/${lang}: the canonical outcome drawer did not open from the '${outTab}' tab`);
+        ok(drawer.hasOutcome, `${page}/${lang}: the '${outTab}'-tab drawer is missing the Outcome section (bespoke drawer?)`);
+        await p.keyboard.press('Escape');
+      }
+
+      // Spec 006 — Student/Family course-group integration (US9), scoped + exact files
+      if (page === 'student') {
+        await p.click('[data-tabs] [role="tab"][data-tab="courses"]').catch(() => {});
+        await p.waitForTimeout(150);
+        const a = await p.evaluate(() => {
+          const panel = document.querySelector('[data-tabpanel="courses"]');
+          if (!panel) return { course: false, group: false };
+          const has = (re) => [...panel.querySelectorAll('a[href]')].some((x) => re.test(x.getAttribute('href') || ''));
+          return { course: has(/(^|\/)course\.(en\.)?html/), group: has(/(^|\/)group\.(en\.)?html/) };
+        });
+        ok(a.course && a.group, `${page}/${lang}: student Courses tab missing course.html/group.html links`);
+      }
+      if (page === 'family') {
+        const a = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const has = (re) => [...body.querySelectorAll('a[href]')].some((x) => re.test(x.getAttribute('href') || ''));
+          return { courses: has(/(^|\/)courses\.(en\.)?html/), groups: has(/(^|\/)groups\.(en\.)?html/) };
+        });
+        ok(a.courses && a.groups, `${page}/${lang}: family profile missing courses/groups deep-links`);
       }
       await ctx.close();
     }

@@ -294,9 +294,9 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">Courses</span>
   </a><button type="button" class="nav-item is-planned" data-nav="familyCategories" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span class="label">Family categories</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="groups" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">Groups</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="scheduleSearch" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+    </button><a href="groups.en.html" class="nav-item" data-nav="groups" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">Groups</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="scheduleSearch" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span class="label">Schedule search</span><span class="nav-soon">Soon</span>
     </button><button type="button" class="nav-item is-planned" data-nav="studentResult" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span class="label">Student results</span><span class="nav-soon">Soon</span>
@@ -445,7 +445,7 @@
         <h1 class="page-title">Courses</h1>
         <p class="page-sub">A structured overview of courses, levels, and their status.</p>
       </div>
-      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-demo-action><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New course</span></button></div>
+      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-demo-action data-toast="Add-course opened (demo) — nothing is saved."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New course</span></button></div>
     </div>
     <div class="mb-6"><div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
     <div class="card p-4 flex items-center gap-3">
@@ -476,7 +476,7 @@
       <option value="all">All</option><option value="foundation">Foundation</option><option value="l1">Level 1</option><option value="l2">Level 2</option><option value="l3">Level 3</option><option value="advanced">Advanced</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
     <select class="select-input" data-filter="status" aria-label="Status">
-      <option value="all">All</option><option value="active">Active</option><option value="draft">Draft</option><option value="archived">Archived</option>
+      <option value="all">All</option><option value="active">Active</option><option value="draft">Draft</option><option value="paused">Paused</option><option value="archived">Archived</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
     <div class="flex items-center gap-2 ms-auto">
       <button type="button" class="btn btn-ghost btn-sm"   data-filter-reset><span>Reset</span></button>
@@ -485,53 +485,77 @@
     <span class="w-full text-[12px]" style="color:var(--c-ink-3)" data-filter-count></span>
   </form>
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" id="courses-grid" data-grid><div class="dir-card is-hoverable" data-row data-subject="math" data-level="l2" data-status="active" data-search="mathematics">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span><span class="chip tone-completed"><span>Active</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">Mathematics</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">Mathematics · Level 2</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">142</b> enrolled</span>
-      <span><b class="text-ink tabular">38</b> sessions</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View details</span></button>
+    <div class="crs-counts">
+      <span><b>142</b> students</span>
+      <span><b>2</b> groups</span>
+      <span><b>2</b> teachers</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>6 upcoming sessions</span></div>
+    <span class="attention-flag att-attention" data-attention="attention"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>Needs follow-up</span></span>
+    <a href="course.en.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View course</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="arabic" data-level="l1" data-status="active" data-search="arabic language">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span><span class="chip tone-completed"><span>Active</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">Arabic Language</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">Arabic · Level 1</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">118</b> enrolled</span>
-      <span><b class="text-ink tabular">31</b> sessions</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c2"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View details</span></button>
+    <div class="crs-counts">
+      <span><b>118</b> students</span>
+      <span><b>2</b> groups</span>
+      <span><b>2</b> teachers</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>4 upcoming sessions</span></div>
+    
+    <a href="course.en.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View course</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="programming" data-level="l1" data-status="active" data-search="intro to programming">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span><span class="chip tone-completed"><span>Active</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">Intro to Programming</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">Programming · Level 1</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">96</b> enrolled</span>
-      <span><b class="text-ink tabular">27</b> sessions</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c3"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View details</span></button>
+    <div class="crs-counts">
+      <span><b>96</b> students</span>
+      <span><b>1</b> groups</span>
+      <span><b>1</b> teachers</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>3 upcoming sessions</span></div>
+    
+    <a href="course.en.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View course</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="physics" data-level="l3" data-status="draft" data-search="physics">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span><span class="chip tone-amber"><span>Draft</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>Draft</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">Physics</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">Physics · Level 3</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">0</b> enrolled</span>
-      <span><b class="text-ink tabular">0</b> sessions</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c4"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View details</span></button>
+    <div class="crs-counts">
+      <span><b>0</b> students</span>
+      <span><b>0</b> groups</span>
+      <span><b>1</b> teachers</span>
+    </div>
+    
+    
+    <a href="course.en.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View course</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="english" data-level="l2" data-status="active" data-search="english">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-coral "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span><span class="chip tone-completed"><span>Active</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-coral "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">English</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">English · Level 2</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">134</b> enrolled</span>
-      <span><b class="text-ink tabular">35</b> sessions</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c5"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View details</span></button>
+    <div class="crs-counts">
+      <span><b>134</b> students</span>
+      <span><b>1</b> groups</span>
+      <span><b>1</b> teachers</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>5 upcoming sessions</span></div>
+    
+    <a href="course.en.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View course</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="science" data-level="foundation" data-status="archived" data-search="general science">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span><span class="chip tone-neutral"><span>Archived</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>Archived</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">General Science</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">Science · Foundation</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">41</b> enrolled</span>
-      <span><b class="text-ink tabular">12</b> sessions</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c6"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View details</span></button>
+    <div class="crs-counts">
+      <span><b>41</b> students</span>
+      <span><b>1</b> groups</span>
+      <span><b>1</b> teachers</span>
+    </div>
+    
+    
+    <a href="course.en.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>View course</span></a>
   </div></div>
     <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
     <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
@@ -541,115 +565,6 @@
     </div>
     
   </div></div>
-    <template data-preview="c1">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Course details</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span>
-      <div><div class="font-bold text-ink">Mathematics</div><span class="chip tone-completed"><span>Active</span></span></div></div>
-    <div class="sheet-row"><span class="k">Field</span><span class="v">Mathematics</span></div>
-    <div class="sheet-row"><span class="k">enrolled</span><span class="v"><span class="tabular">142</span></span></div>
-    <div class="sheet-row"><span class="k">sessions</span><span class="v"><span class="tabular">38</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">Levels</div>
-    <div class="sheet-row"><span class="k">Foundation</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 1</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 2</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 3</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c2">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Course details</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span>
-      <div><div class="font-bold text-ink">Arabic Language</div><span class="chip tone-completed"><span>Active</span></span></div></div>
-    <div class="sheet-row"><span class="k">Field</span><span class="v">Arabic</span></div>
-    <div class="sheet-row"><span class="k">enrolled</span><span class="v"><span class="tabular">118</span></span></div>
-    <div class="sheet-row"><span class="k">sessions</span><span class="v"><span class="tabular">31</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">Levels</div>
-    <div class="sheet-row"><span class="k">Foundation</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 1</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 2</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c3">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Course details</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
-      <div><div class="font-bold text-ink">Intro to Programming</div><span class="chip tone-completed"><span>Active</span></span></div></div>
-    <div class="sheet-row"><span class="k">Field</span><span class="v">Programming</span></div>
-    <div class="sheet-row"><span class="k">enrolled</span><span class="v"><span class="tabular">96</span></span></div>
-    <div class="sheet-row"><span class="k">sessions</span><span class="v"><span class="tabular">27</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">Levels</div>
-    <div class="sheet-row"><span class="k">Level 1</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 2</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Advanced</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c4">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Course details</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
-      <div><div class="font-bold text-ink">Physics</div><span class="chip tone-amber"><span>Draft</span></span></div></div>
-    <div class="sheet-row"><span class="k">Field</span><span class="v">Physics</span></div>
-    <div class="sheet-row"><span class="k">enrolled</span><span class="v"><span class="tabular">0</span></span></div>
-    <div class="sheet-row"><span class="k">sessions</span><span class="v"><span class="tabular">0</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">Levels</div>
-    <div class="sheet-row"><span class="k">Level 3</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Advanced</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c5">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-coral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Course details</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-coral "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span>
-      <div><div class="font-bold text-ink">English</div><span class="chip tone-completed"><span>Active</span></span></div></div>
-    <div class="sheet-row"><span class="k">Field</span><span class="v">English</span></div>
-    <div class="sheet-row"><span class="k">enrolled</span><span class="v"><span class="tabular">134</span></span></div>
-    <div class="sheet-row"><span class="k">sessions</span><span class="v"><span class="tabular">35</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">Levels</div>
-    <div class="sheet-row"><span class="k">Foundation</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 1</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 2</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 3</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c6">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-success medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Course details</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-      <div><div class="font-bold text-ink">General Science</div><span class="chip tone-neutral"><span>Archived</span></span></div></div>
-    <div class="sheet-row"><span class="k">Field</span><span class="v">Science</span></div>
-    <div class="sheet-row"><span class="k">enrolled</span><span class="v"><span class="tabular">41</span></span></div>
-    <div class="sheet-row"><span class="k">sessions</span><span class="v"><span class="tabular">12</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">Levels</div>
-    <div class="sheet-row"><span class="k">Foundation</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">Level 1</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template>
   </div>
       </main>
     </div>

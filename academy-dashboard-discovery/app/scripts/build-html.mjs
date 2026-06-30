@@ -26,6 +26,9 @@ import { renderFamily } from '../src/js/pages/family.js';
 import { renderAddFamily } from '../src/js/pages/add-family.js';
 import { renderStudent } from '../src/js/pages/student.js';
 import { renderAttendance } from '../src/js/pages/attendance.js';
+import { renderGroups } from '../src/js/pages/groups.js';
+import { renderCourse } from '../src/js/pages/course.js';
+import { renderGroup } from '../src/js/pages/group.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -57,6 +60,10 @@ const PAGES = [
   { base: 'student', activeId: 'students', titleKey: 'topbar.title.student', crumbKey: 'topbar.crumb.student', render: renderStudent },
   // Spec 005 — attendance & session outcomes (control category)
   { base: 'attendance', activeId: 'attendance', titleKey: 'topbar.title.attendance', crumbKey: 'topbar.crumb.attendance', render: renderAttendance },
+  // Spec 006 — courses, groups & learning paths (groups = promoted nav item; course/group = profile templates)
+  { base: 'groups', activeId: 'groups', titleKey: 'topbar.title.groups', crumbKey: 'topbar.crumb.groups', render: renderGroups },
+  { base: 'course', activeId: 'courses', titleKey: 'topbar.title.course', crumbKey: 'topbar.crumb.course', render: renderCourse },
+  { base: 'group', activeId: 'groups', titleKey: 'topbar.title.group', crumbKey: 'topbar.crumb.group', render: renderGroup },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

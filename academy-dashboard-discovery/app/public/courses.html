@@ -294,9 +294,9 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">الدورات</span>
   </a><button type="button" class="nav-item is-planned" data-nav="familyCategories" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span class="label">فئات العائلات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="groups" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">المجموعات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="scheduleSearch" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+    </button><a href="groups.html" class="nav-item" data-nav="groups" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">المجموعات</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="scheduleSearch" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span class="label">بحث الجدول</span><span class="nav-soon">قريبًا</span>
     </button><button type="button" class="nav-item is-planned" data-nav="studentResult" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span class="label">نتائج الطلاب</span><span class="nav-soon">قريبًا</span>
@@ -445,7 +445,7 @@
         <h1 class="page-title">الدورات</h1>
         <p class="page-sub">نظرة منظّمة على الدورات والمستويات وحالتها.</p>
       </div>
-      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-demo-action><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>دورة جديدة</span></button></div>
+      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-demo-action data-toast="تم فتح إضافة الدورة (تجريبي) — لا يُحفظ شيء."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>دورة جديدة</span></button></div>
     </div>
     <div class="mb-6"><div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
     <div class="card p-4 flex items-center gap-3">
@@ -476,7 +476,7 @@
       <option value="all">الكل</option><option value="foundation">تأسيسي</option><option value="l1">المستوى الأول</option><option value="l2">المستوى الثاني</option><option value="l3">المستوى الثالث</option><option value="advanced">متقدّم</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
     <select class="select-input" data-filter="status" aria-label="الحالة">
-      <option value="all">الكل</option><option value="active">فعّالة</option><option value="draft">مسودّة</option><option value="archived">مؤرشفة</option>
+      <option value="all">الكل</option><option value="active">فعّالة</option><option value="draft">مسودّة</option><option value="paused">متوقّفة مؤقتًا</option><option value="archived">مؤرشفة</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
     <div class="flex items-center gap-2 ms-auto">
       <button type="button" class="btn btn-ghost btn-sm"   data-filter-reset><span>إعادة ضبط</span></button>
@@ -485,53 +485,77 @@
     <span class="w-full text-[12px]" style="color:var(--c-ink-3)" data-filter-count></span>
   </form>
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3" id="courses-grid" data-grid><div class="dir-card is-hoverable" data-row data-subject="math" data-level="l2" data-status="active" data-search="الرياضيات">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span><span class="chip tone-completed"><span>فعّالة</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>فعّالة</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">الرياضيات</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">الرياضيات · المستوى الثاني</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">١٤٢</b> مسجّل</span>
-      <span><b class="text-ink tabular">٣٨</b> جلسة</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض التفاصيل</span></button>
+    <div class="crs-counts">
+      <span><b>١٤٢</b> طلاب</span>
+      <span><b>٢</b> مجموعات</span>
+      <span><b>٢</b> معلمون</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>٦ جلسة قادمة</span></div>
+    <span class="attention-flag att-attention" data-attention="attention"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>تحتاج متابعة</span></span>
+    <a href="course.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض الدورة</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="arabic" data-level="l1" data-status="active" data-search="اللغة العربية">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span><span class="chip tone-completed"><span>فعّالة</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>فعّالة</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">اللغة العربية</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">اللغة العربية · المستوى الأول</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">١١٨</b> مسجّل</span>
-      <span><b class="text-ink tabular">٣١</b> جلسة</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c2"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض التفاصيل</span></button>
+    <div class="crs-counts">
+      <span><b>١١٨</b> طلاب</span>
+      <span><b>٢</b> مجموعات</span>
+      <span><b>٢</b> معلمون</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>٤ جلسة قادمة</span></div>
+    
+    <a href="course.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض الدورة</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="programming" data-level="l1" data-status="active" data-search="مقدمة في البرمجة">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span><span class="chip tone-completed"><span>فعّالة</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>فعّالة</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">مقدمة في البرمجة</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">البرمجة · المستوى الأول</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">٩٦</b> مسجّل</span>
-      <span><b class="text-ink tabular">٢٧</b> جلسة</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c3"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض التفاصيل</span></button>
+    <div class="crs-counts">
+      <span><b>٩٦</b> طلاب</span>
+      <span><b>١</b> مجموعات</span>
+      <span><b>١</b> معلمون</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>٣ جلسة قادمة</span></div>
+    
+    <a href="course.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض الدورة</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="physics" data-level="l3" data-status="draft" data-search="الفيزياء">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span><span class="chip tone-amber"><span>مسودّة</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>مسودّة</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">الفيزياء</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">الفيزياء · المستوى الثالث</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">٠</b> مسجّل</span>
-      <span><b class="text-ink tabular">٠</b> جلسة</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c4"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض التفاصيل</span></button>
+    <div class="crs-counts">
+      <span><b>٠</b> طلاب</span>
+      <span><b>٠</b> مجموعات</span>
+      <span><b>١</b> معلمون</span>
+    </div>
+    
+    
+    <a href="course.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض الدورة</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="english" data-level="l2" data-status="active" data-search="الإنجليزية">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-coral "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span><span class="chip tone-completed"><span>فعّالة</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-coral "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>فعّالة</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">الإنجليزية</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">الإنجليزية · المستوى الثاني</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">١٣٤</b> مسجّل</span>
-      <span><b class="text-ink tabular">٣٥</b> جلسة</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c5"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض التفاصيل</span></button>
+    <div class="crs-counts">
+      <span><b>١٣٤</b> طلاب</span>
+      <span><b>١</b> مجموعات</span>
+      <span><b>١</b> معلمون</span>
+    </div>
+    <div class="text-[12px] flex items-center gap-1.5" style="color:var(--c-ink-3)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>٥ جلسة قادمة</span></div>
+    
+    <a href="course.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض الدورة</span></a>
   </div><div class="dir-card is-hoverable" data-row data-subject="science" data-level="foundation" data-status="archived" data-search="العلوم العامة">
-    <div class="flex items-start justify-between"><span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span><span class="chip tone-neutral"><span>مؤرشفة</span></span></div>
+    <div class="flex items-start justify-between gap-2"><span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>مؤرشفة</span></span></div>
     <div><h3 class="font-bold text-ink text-[14.5px]">العلوم العامة</h3>
       <p class="text-[12.5px]" style="color:var(--c-ink-3)">العلوم · تأسيسي</p></div>
-    <div class="flex items-center gap-4 text-[12px]" style="color:var(--c-ink-3)">
-      <span><b class="text-ink tabular">٤١</b> مسجّل</span>
-      <span><b class="text-ink tabular">١٢</b> جلسة</span></div>
-    <button type="button" class="btn btn-secondary btn-sm w-full" data-drawer="c6"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض التفاصيل</span></button>
+    <div class="crs-counts">
+      <span><b>٤١</b> طلاب</span>
+      <span><b>١</b> مجموعات</span>
+      <span><b>١</b> معلمون</span>
+    </div>
+    
+    
+    <a href="course.html" class="btn btn-secondary btn-sm w-full" style="text-decoration:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>عرض الدورة</span></a>
   </div></div>
     <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
     <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
@@ -541,115 +565,6 @@
     </div>
     
   </div></div>
-    <template data-preview="c1">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الدورة</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span>
-      <div><div class="font-bold text-ink">الرياضيات</div><span class="chip tone-completed"><span>فعّالة</span></span></div></div>
-    <div class="sheet-row"><span class="k">المجال</span><span class="v">الرياضيات</span></div>
-    <div class="sheet-row"><span class="k">مسجّل</span><span class="v"><span class="tabular">١٤٢</span></span></div>
-    <div class="sheet-row"><span class="k">جلسة</span><span class="v"><span class="tabular">٣٨</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">المستويات</div>
-    <div class="sheet-row"><span class="k">تأسيسي</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الأول</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الثاني</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الثالث</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c2">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الدورة</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span>
-      <div><div class="font-bold text-ink">اللغة العربية</div><span class="chip tone-completed"><span>فعّالة</span></span></div></div>
-    <div class="sheet-row"><span class="k">المجال</span><span class="v">اللغة العربية</span></div>
-    <div class="sheet-row"><span class="k">مسجّل</span><span class="v"><span class="tabular">١١٨</span></span></div>
-    <div class="sheet-row"><span class="k">جلسة</span><span class="v"><span class="tabular">٣١</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">المستويات</div>
-    <div class="sheet-row"><span class="k">تأسيسي</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الأول</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الثاني</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c3">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الدورة</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
-      <div><div class="font-bold text-ink">مقدمة في البرمجة</div><span class="chip tone-completed"><span>فعّالة</span></span></div></div>
-    <div class="sheet-row"><span class="k">المجال</span><span class="v">البرمجة</span></div>
-    <div class="sheet-row"><span class="k">مسجّل</span><span class="v"><span class="tabular">٩٦</span></span></div>
-    <div class="sheet-row"><span class="k">جلسة</span><span class="v"><span class="tabular">٢٧</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">المستويات</div>
-    <div class="sheet-row"><span class="k">المستوى الأول</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الثاني</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">متقدّم</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c4">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الدورة</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
-      <div><div class="font-bold text-ink">الفيزياء</div><span class="chip tone-amber"><span>مسودّة</span></span></div></div>
-    <div class="sheet-row"><span class="k">المجال</span><span class="v">الفيزياء</span></div>
-    <div class="sheet-row"><span class="k">مسجّل</span><span class="v"><span class="tabular">٠</span></span></div>
-    <div class="sheet-row"><span class="k">جلسة</span><span class="v"><span class="tabular">٠</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">المستويات</div>
-    <div class="sheet-row"><span class="k">المستوى الثالث</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">متقدّم</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c5">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-coral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الدورة</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-coral "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span>
-      <div><div class="font-bold text-ink">الإنجليزية</div><span class="chip tone-completed"><span>فعّالة</span></span></div></div>
-    <div class="sheet-row"><span class="k">المجال</span><span class="v">الإنجليزية</span></div>
-    <div class="sheet-row"><span class="k">مسجّل</span><span class="v"><span class="tabular">١٣٤</span></span></div>
-    <div class="sheet-row"><span class="k">جلسة</span><span class="v"><span class="tabular">٣٥</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">المستويات</div>
-    <div class="sheet-row"><span class="k">تأسيسي</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الأول</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الثاني</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الثالث</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template><template data-preview="c6">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-success medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الدورة</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-      <div><div class="font-bold text-ink">العلوم العامة</div><span class="chip tone-neutral"><span>مؤرشفة</span></span></div></div>
-    <div class="sheet-row"><span class="k">المجال</span><span class="v">العلوم</span></div>
-    <div class="sheet-row"><span class="k">مسجّل</span><span class="v"><span class="tabular">٤١</span></span></div>
-    <div class="sheet-row"><span class="k">جلسة</span><span class="v"><span class="tabular">١٢</span></span></div>
-    <div class="text-[12px] font-bold mt-4 mb-1" style="color:var(--c-ink-3)">المستويات</div>
-    <div class="sheet-row"><span class="k">تأسيسي</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div><div class="sheet-row"><span class="k">المستوى الأول</span><span class="v"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span></div></div>
-    </div>
-  </template>
   </div>
       </main>
     </div>

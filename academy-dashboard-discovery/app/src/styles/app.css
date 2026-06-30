@@ -671,3 +671,39 @@
   .outcome-row .or-body { flex-basis: calc(100% - 60px); }
   .outcome-row .or-end { flex-basis: 100%; justify-content: flex-start; margin-top: 4px; }
 }
+
+/* ===== Spec 006 — Courses, Groups & Learning Paths ===== */
+@layer components {
+  /* enriched course card: a calm academic-counts row */
+  .crs-counts { @apply flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px]; color: var(--c-ink-3); }
+  .crs-counts b { @apply text-ink tabular; }
+
+  /* groups directory: an airy list/card-hybrid row */
+  .group-row { @apply card flex items-center gap-3 p-3.5 mb-2.5 transition-all; }
+  .group-row.is-hoverable:hover { box-shadow: var(--sh-md); transform: translateY(-1px); }
+  .group-row .gr-body { @apply min-w-0 flex-1; }
+  .group-row .gr-title { @apply font-bold text-ink text-[14px] truncate; display: block; text-decoration: none; }
+  a.gr-title:hover { color: var(--c-primary); }
+  .group-row .gr-sub { @apply text-[12px] truncate mt-0.5; color: var(--c-ink-3); }
+  .group-row .gr-meta { @apply flex flex-wrap items-center gap-2 mt-1.5; }
+  .group-row .gr-end { @apply text-end shrink-0; }
+  .group-row .gr-count { @apply text-[15px] leading-none; }
+  .group-row .gr-count-l { @apply text-[11px] mt-1; color: var(--c-ink-3); }
+
+  /* learning path — a display-only horizontal level ladder that wraps */
+  .level-ladder { @apply flex flex-wrap items-stretch gap-2.5; list-style: none; padding: 0; margin: 0; }
+  .level-step { @apply flex items-center gap-2.5 p-3 rounded-xl; flex: 1 1 160px; background: var(--c-surface-2); border: 1px solid var(--c-line); }
+  .level-step.is-current { border-color: var(--c-primary); background: var(--c-primary-weak); }
+  .level-step .ls-dot { @apply inline-flex items-center justify-center shrink-0 rounded-full; width: 32px; height: 32px; background: var(--c-surface); color: var(--c-ink-2); border: 1px solid var(--c-line); }
+  .level-step.is-current .ls-dot { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+  .level-step .ls-label { @apply font-bold text-ink text-[13px]; }
+  .level-step .ls-cur { @apply font-bold text-[11px]; color: var(--c-primary); }
+  .level-step .ls-count { @apply text-[12px] mt-0.5; color: var(--c-ink-3); }
+}
+
+@media (max-width: 640px) {
+  .group-row { flex-wrap: wrap; }
+  .group-row .gr-body { flex-basis: calc(100% - 52px); }
+  .group-row .gr-end { flex-basis: 100%; text-align: start; margin-top: 6px; }
+  .level-step { flex-basis: 100%; }
+}

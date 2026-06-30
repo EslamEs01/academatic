@@ -46,6 +46,17 @@ const MATRIX = [
   { page: 'attendance', lang: 'ar', theme: 'light' },
   { page: 'attendance', lang: 'ar', theme: 'dark' },
   { page: 'attendance', lang: 'en', theme: 'light' },
+  // Spec 006 — courses (enriched) + groups + course/group profiles
+  { page: 'courses', lang: 'ar', theme: 'dark' },
+  { page: 'courses', lang: 'en', theme: 'light' },
+  { page: 'groups', lang: 'ar', theme: 'light' },
+  { page: 'groups', lang: 'ar', theme: 'dark' },
+  { page: 'groups', lang: 'en', theme: 'light' },
+  { page: 'course', lang: 'ar', theme: 'light' },
+  { page: 'course', lang: 'ar', theme: 'light', hash: '#view=learningPath' },
+  { page: 'course', lang: 'en', theme: 'light' },
+  { page: 'group', lang: 'ar', theme: 'light' },
+  { page: 'group', lang: 'ar', theme: 'light', hash: '#view=sessions' },
 ];
 
 (async () => {

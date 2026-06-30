@@ -6,6 +6,7 @@
  * One representative family is baked (Django later → family/<id>). */
 import { FAMILIES, FAMILY_CATEGORIES, familyOf } from '../fixtures/families.js';
 import { studentsOfFamily } from '../fixtures/students.js';
+import { groupsOfStudent } from '../fixtures/groups.js';
 import { outcomesOfFamily } from '../fixtures/attendance.js';
 import { SCHEDULE_WEEK } from '../fixtures/schedule.js';
 import { t, num, getLang } from '../i18n.js';
@@ -78,7 +79,22 @@ function overviewPanel(fam) {
     </div>
     <p class="text-[13px] mt-2" style="color:var(--c-ink-2)">${fFollow ? t('att.familySignal', { k: num(fFollow) }) : t('att.familyNone')}</p>
   </div>`;
-  return `<div class="grid gap-4 sm:grid-cols-2">${contact}${details}</div>${attHint}${attn}`;
+  // Spec 006 — a calm fixture children's courses & groups hint + deep-links (no finance/enrolment claim)
+  const kids = studentsOfFamily(fam.id);
+  const groupCount = new Set(kids.flatMap((k) => groupsOfStudent(k.id).map((gr) => gr.id))).size;
+  const coursesHref = getLang() === 'en' ? 'courses.en.html' : 'courses.html';
+  const groupsHref = getLang() === 'en' ? 'groups.en.html' : 'groups.html';
+  const crsHint = `<div class="info-card" style="margin-top:16px">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="ic-title" style="margin-bottom:0">${icon('curricula', 'ico')}<span>${t('crs.familyTitle')}</span></div>
+      <div class="flex items-center gap-2.5">
+        <a href="${coursesHref}" class="link-more">${t('cur.title')} ${icon('arrow-left', 'ico ico-sm')}</a>
+        <a href="${groupsHref}" class="link-more">${t('grp.title')} ${icon('arrow-left', 'ico ico-sm')}</a>
+      </div>
+    </div>
+    <p class="text-[13px] mt-2" style="color:var(--c-ink-2)">${fam.activeCoursesCount ? t('crs.familyHint', { c: num(fam.activeCoursesCount), g: num(groupCount) }) : t('crs.familyNone')}</p>
+  </div>`;
+  return `<div class="grid gap-4 sm:grid-cols-2">${contact}${details}</div>${attHint}${crsHint}${attn}`;
 }
 
 function studentsPanel(kids) {

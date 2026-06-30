@@ -40,7 +40,7 @@ export const NAV_CATEGORIES = [
       item({ id: 'students', labelKey: 'nav.students', icon: 'students', route: 'students.html' }),
       item({ id: 'courses', labelKey: 'nav.courses', icon: 'curricula', route: 'courses.html' }),
       item({ id: 'familyCategories', labelKey: 'nav.familyCategories', icon: 'filter', status: 'planned' }),
-      item({ id: 'groups', labelKey: 'nav.groups', icon: 'students', status: 'planned' }),
+      item({ id: 'groups', labelKey: 'nav.groups', icon: 'students', route: 'groups.html' }),
       item({ id: 'scheduleSearch', labelKey: 'nav.scheduleSearch', icon: 'search', status: 'planned' }),
       item({ id: 'studentResult', labelKey: 'nav.studentResult', icon: 'check-circle', status: 'planned' }),
       item({ id: 'studentEvaluation', labelKey: 'nav.studentEvaluation', icon: 'sparkles', status: 'planned' }),

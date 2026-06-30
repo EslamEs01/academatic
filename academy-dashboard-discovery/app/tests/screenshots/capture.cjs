@@ -82,6 +82,22 @@ const MATRIX = [
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'outcome-impact' },
   { page: 'attendance', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'attendance', lang: 'ar', theme: 'light', vp: 'mobile', outcomeDrawer: true, variant: 'drawer' },
+  // Spec 006 — courses, groups & learning paths (acceptance matrix, 15 frames)
+  { page: 'courses', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'courses', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'courses', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', view: 'learningPath', variant: 'learning-path' },
+  { page: 'groups', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'groups', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', view: 'timetable', variant: 'timetable' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', view: 'sessions', variant: 'outcomes' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', variant: 'course-links' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'course-group' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'groups-impact' },
+  { page: 'groups', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'mobile' },
 ];
 
 (async () => {
