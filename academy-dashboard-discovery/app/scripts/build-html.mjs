@@ -21,6 +21,16 @@ import { renderStudents } from '../src/js/pages/students.js';
 import { renderTeachers } from '../src/js/pages/teachers.js';
 import { renderCourses } from '../src/js/pages/courses.js';
 import { renderSettings } from '../src/js/pages/settings.js';
+import { renderFamilies } from '../src/js/pages/families.js';
+import { renderFamily } from '../src/js/pages/family.js';
+import { renderAddFamily } from '../src/js/pages/add-family.js';
+import { renderStudent } from '../src/js/pages/student.js';
+import { renderAttendance } from '../src/js/pages/attendance.js';
+import { renderGroups } from '../src/js/pages/groups.js';
+import { renderCourse } from '../src/js/pages/course.js';
+import { renderGroup } from '../src/js/pages/group.js';
+import { renderTeacher } from '../src/js/pages/teacher.js';
+import { renderTeacherPerformance } from '../src/js/pages/teacher-performance.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -45,6 +55,20 @@ const PAGES = [
   { base: 'teachers', activeId: 'teachers', titleKey: 'topbar.title.teachers', crumbKey: 'topbar.crumb.teachers', render: renderTeachers },
   { base: 'courses', activeId: 'courses', titleKey: 'topbar.title.courses', crumbKey: 'topbar.crumb.courses', render: renderCourses },
   { base: 'settings', activeId: 'settings', titleKey: 'topbar.title.settings', crumbKey: 'topbar.crumb.settings', render: renderSettings },
+  // Spec 004 — families & student academic profiles (family/student = profile templates, not nav items)
+  { base: 'families', activeId: 'families', titleKey: 'topbar.title.families', crumbKey: 'topbar.crumb.families', render: renderFamilies },
+  { base: 'add-family', activeId: 'addFamily', titleKey: 'topbar.title.addFamily', crumbKey: 'topbar.crumb.addFamily', render: renderAddFamily },
+  { base: 'family', activeId: 'families', titleKey: 'topbar.title.family', crumbKey: 'topbar.crumb.family', render: renderFamily },
+  { base: 'student', activeId: 'students', titleKey: 'topbar.title.student', crumbKey: 'topbar.crumb.student', render: renderStudent },
+  // Spec 005 — attendance & session outcomes (control category)
+  { base: 'attendance', activeId: 'attendance', titleKey: 'topbar.title.attendance', crumbKey: 'topbar.crumb.attendance', render: renderAttendance },
+  // Spec 006 — courses, groups & learning paths (groups = promoted nav item; course/group = profile templates)
+  { base: 'groups', activeId: 'groups', titleKey: 'topbar.title.groups', crumbKey: 'topbar.crumb.groups', render: renderGroups },
+  { base: 'course', activeId: 'courses', titleKey: 'topbar.title.course', crumbKey: 'topbar.crumb.course', render: renderCourse },
+  { base: 'group', activeId: 'groups', titleKey: 'topbar.title.group', crumbKey: 'topbar.crumb.group', render: renderGroup },
+  // Spec 007 — teacher performance & academic KPIs (teacher = profile template; teacher-performance = promoted teacherKpi nav)
+  { base: 'teacher', activeId: 'teachers', titleKey: 'topbar.title.teacher', crumbKey: 'topbar.crumb.teacher', render: renderTeacher },
+  { base: 'teacher-performance', activeId: 'teacherKpi', titleKey: 'topbar.title.teacherPerf', crumbKey: 'topbar.crumb.teacherPerf', render: renderTeacherPerformance },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

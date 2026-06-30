@@ -6,6 +6,11 @@ import { WELCOME } from '../fixtures/welcome.js';
 import { KPIS } from '../fixtures/kpis.js';
 import { SESSIONS } from '../fixtures/sessions.js';
 import { SCHEDULE_WEEK } from '../fixtures/schedule.js';
+import { FAMILIES } from '../fixtures/families.js';
+import { STUDENTS } from '../fixtures/students.js';
+import { OUTCOME_SUMMARY } from '../fixtures/attendance.js';
+import { GROUP_SUMMARY } from '../fixtures/groups.js';
+import { TEACHERS_NEEDING_FOLLOWUP } from '../fixtures/teachers.js';
 import { STATUS_SUMMARY } from '../fixtures/status-summary.js';
 import { REPORTS } from '../fixtures/reports.js';
 import { PROFILE } from '../fixtures/profile.js';
@@ -52,6 +57,35 @@ function upNext() {
   </section>`;
 }
 
+/* minimal, fixture-backed families/students impact (R30): a deep-link to
+ * families.html + ONE "students needing attention" chip — no new stat wall. */
+function peopleSignal() {
+  const lang = getLang();
+  const famHref = lang === 'en' ? './families.en.html' : './families.html';
+  const stuHref = lang === 'en' ? './students.en.html' : './students.html';
+  const attHref = lang === 'en' ? './attendance.en.html' : './attendance.html';
+  const groupsHref = lang === 'en' ? './groups.en.html' : './groups.html';
+  const perfHref = lang === 'en' ? './teacher-performance.en.html' : './teacher-performance.html';
+  const attnFamilies = new Set(FAMILIES.rows.filter((f) => f.attention).map((f) => f.id));
+  const attn = STUDENTS.rows.filter((s) => attnFamilies.has(s.familyId) || s.statusId === 'suspended' || s.statusId === 'stopped').length;
+  return `<section class="mb-8">
+    <div class="card p-4 flex flex-wrap items-center gap-3">
+      <span class="medallion m-soft tone-primary">${icon('families', 'ico')}</span>
+      <div class="min-w-0">
+        <div class="font-bold text-ink text-[14px]">${t('dash.families')}</div>
+        <div class="text-[12.5px]" style="color:var(--c-ink-3)">${t('dash.familiesHint')}</div>
+      </div>
+      <div class="flex flex-wrap items-center gap-2.5 ms-auto">
+        <a href="${attHref}" class="chip tone-amber" style="text-decoration:none">${icon('clipboard-check', 'ico')}<span>${t('dash.outcomeFollowUp', { n: num(OUTCOME_SUMMARY.needsFollowUp) })}</span></a>
+        <a href="${groupsHref}" class="chip tone-amber" style="text-decoration:none">${icon('students', 'ico')}<span>${t('dash.groupsAttention', { n: num(GROUP_SUMMARY.needsAttention) })}</span></a>
+        <a href="${perfHref}" class="chip tone-amber" style="text-decoration:none">${icon('trainers', 'ico')}<span>${t('dash.teachersFollowup', { n: num(TEACHERS_NEEDING_FOLLOWUP) })}</span></a>
+        <a href="${stuHref}" class="chip tone-amber" style="text-decoration:none">${icon('alert-triangle', 'ico')}<span>${t('dash.studentsAttention', { n: num(attn) })}</span></a>
+        <a href="${famHref}" class="link-more">${t('dash.viewFamilies')} ${icon('arrow-left', 'ico ico-sm')}</a>
+      </div>
+    </div>
+  </section>`;
+}
+
 export function renderDashboard() {
   return `
     ${welcomeZone(WELCOME)}
@@ -66,6 +100,8 @@ export function renderDashboard() {
     </section>
 
     ${upNext()}
+
+    ${peopleSignal()}
 
     <section class="mb-8">
       <div class="grid-status">${STATUS_SUMMARY.map((s) => statusTile(s)).join('')}</div>

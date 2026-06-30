@@ -56,6 +56,61 @@ const MATRIX = [
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'admin' },
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'settings' },
   { page: 'dashboard', lang: 'en', theme: 'light', vp: 'desktop', cat: 'families' },
+  // Spec 004 — Families & Student Academic Profiles (acceptance matrix, min 13)
+  { page: 'families', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'families', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'families', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'families', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', view: 'students', variant: 'students' },
+  { page: 'add-family', lang: 'ar', theme: 'light', vp: 'desktop', step: 'children', variant: 'wizard-step3' },
+  { page: 'students', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'results', variant: 'results' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'evaluation' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'family-impact' },
+  // Spec 005 — Attendance & Session Outcomes (acceptance matrix, 11 frames)
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'attendance', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'attendance', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', outcomeDrawer: true, variant: 'drawer' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', confirm: true, variant: 'confirm' },
+  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'outcome' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'attendance' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'attendance' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'outcome-impact' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'mobile', outcomeDrawer: true, variant: 'drawer' },
+  // Spec 006 — courses, groups & learning paths (acceptance matrix, 15 frames)
+  { page: 'courses', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'courses', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'courses', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', view: 'learningPath', variant: 'learning-path' },
+  { page: 'groups', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'groups', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', view: 'timetable', variant: 'timetable' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', view: 'sessions', variant: 'outcomes' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', variant: 'course-links' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'course-group' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'groups-impact' },
+  { page: 'groups', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 007 — Teacher Performance & Academic KPIs (acceptance matrix, 12 frames)
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teachers', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'teachers', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'timetable', variant: 'timetable' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'sessions-outcomes', variant: 'outcomes' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', teacherConfirm: true, variant: 'confirm' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'students', variant: 'students' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'teachers-followup' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile' },
 ];
 
 (async () => {
@@ -77,7 +132,8 @@ const MATRIX = [
     page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 
     const file = s.lang === 'en' ? `${s.page}.en.html` : `${s.page}.html`;
-    await page.goto(`${BASE}/${file}${s.view ? '#view=' + s.view : ''}`, { waitUntil: 'networkidle' });
+    const hash = s.step ? '#step=' + s.step : (s.view ? '#view=' + s.view : '');
+    await page.goto(`${BASE}/${file}${hash}`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => {
       const b = document.querySelector('#page-body');
       return b && b.children.length > 0;
@@ -90,9 +146,18 @@ const MATRIX = [
     if (s.tab) { await page.click(`[data-tab="${s.tab}"]`).catch(() => {}); await page.waitForTimeout(220); }
     if (s.teacher != null) { await page.selectOption('select[data-filter="teacher"]', { index: s.teacher }).catch(() => {}); await page.waitForTimeout(220); }
     if (s.sheet) { await page.click('[data-tabpanel="timetable"]:not([hidden]) .tt-block[data-drawer]').catch(() => {}); await page.waitForTimeout(420); }
+    // Spec 005 — open the canonical outcome drawer (kebab → view), optionally a confirm modal
+    if (s.outcomeDrawer || s.confirm) {
+      const rowSel = s.confirm ? '#attendance-list .outcome-row:nth-child(8) [data-row-menu]' : '#attendance-list .outcome-row:not([hidden]) [data-row-menu]';
+      await page.click(rowSel).catch(() => {}); await page.waitForTimeout(240);
+      await page.click('.popover [data-drawer]').catch(() => {}); await page.waitForTimeout(460);
+      if (s.confirm) { await page.click('.drawer.sheet [data-confirm]').catch(() => {}); await page.waitForTimeout(340); }
+    }
+    // Spec 007 — open the teacher banner Notify-family confirm modal
+    if (s.teacherConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(380); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
-    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet });
+    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm });
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
     else console.log(`  ✓ ${name}`);

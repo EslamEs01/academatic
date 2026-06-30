@@ -99,6 +99,17 @@ function rowMenu(id) {
     <button class="menu-item" role="menuitem" data-demo-action style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('sessions.action.cancel')}</span></button>
   </div>`;
 }
+/* family-card kebab — "view profile" navigates; edit demos; suspend/stop confirm (Spec 004) */
+function familyMenu(id) {
+  const href = getLang() === 'en' ? 'family.en.html' : 'family.html';
+  return `<div>
+    <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('fam.card.viewProfile')}</span></a>
+    <button class="menu-item" role="menuitem" data-demo-action data-toast="${esc(t('fam.act.editToast'))}">${icon('edit', 'ico')}<span>${t('fam.act.edit')}</span></button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('fam.act.suspendTitle'))}" data-confirm-msg="${esc(t('fam.act.suspendMsg'))}" data-confirm-cta="${esc(t('fam.act.suspendCta'))}" data-confirm-toast="${esc(t('fam.act.suspendToast'))}">${icon('pause-circle', 'ico')}<span>${t('fam.act.suspend')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('fam.act.stopTitle'))}" data-confirm-msg="${esc(t('fam.act.stopMsg'))}" data-confirm-cta="${esc(t('fam.act.stopCta'))}" data-confirm-toast="${esc(t('fam.act.stopToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('fam.act.stop')}</span></button>
+  </div>`;
+}
 function acknowledge(el) {
   const label = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 36);
   return getLang() === 'en' ? `“${label}” — preview action` : `«${label}» — إجراء تجريبي`;
@@ -220,6 +231,53 @@ document.addEventListener('keydown', (e) => {
   if (wrap) selectTab(wrap.getAttribute('data-tabs'), tabs[j].getAttribute('data-tab'), { focus: true });
 });
 
+/* ---- add-family wizard stepper — toggles baked [data-step] panels only.
+ * Reuses the tab-visibility pattern; the step is TRANSIENT (URL hash only, never
+ * persisted). The ONLY new Spec 004 hooks: data-step-next/prev/go. ---- */
+const wizSteps = (wrap) => Array.from(wrap.querySelectorAll('[data-step]'));
+function selectStep(wrap, id, { focus = false } = {}) {
+  const steps = wizSteps(wrap);
+  if (!steps.some((s) => s.getAttribute('data-step') === id)) return;
+  steps.forEach((s) => { s.hidden = s.getAttribute('data-step') !== id; });
+  wrap.querySelectorAll('[data-step-go]').forEach((d) => {
+    const on = d.getAttribute('data-step-go') === id;
+    d.classList.toggle('is-active', on);
+    d.setAttribute('aria-selected', String(on));
+    d.setAttribute('aria-current', on ? 'step' : 'false');
+    d.setAttribute('tabindex', on ? '0' : '-1');
+    if (on && focus) d.focus();
+  });
+  if (history.replaceState) { try { history.replaceState(null, '', '#step=' + id); } catch (e) { /* ignore */ } }
+}
+function stepNeighbor(wrap, dir) {
+  const steps = wizSteps(wrap);
+  const cur = steps.findIndex((s) => !s.hidden);
+  const t2 = steps[Math.min(steps.length - 1, Math.max(0, (cur < 0 ? 0 : cur) + dir))];
+  return t2 && t2.getAttribute('data-step');
+}
+(function initWizard() {
+  const wrap = document.querySelector('[data-wizard]');
+  if (!wrap) return;
+  const want = (location.hash.match(/step=([a-z0-9-]+)/i) || [])[1];
+  if (want) selectStep(wrap, want);
+})();
+/* roving-tabindex keyboard for the wizard step indicator */
+document.addEventListener('keydown', (e) => {
+  const dot = e.target.closest && e.target.closest('[data-step-go]');
+  const wrap = dot && dot.closest('[data-wizard]');
+  if (!wrap) return;
+  const dots = Array.from(wrap.querySelectorAll('[data-step-go]'));
+  const i = dots.indexOf(dot);
+  let j = -1;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % dots.length;
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + dots.length) % dots.length;
+  else if (e.key === 'Home') j = 0;
+  else if (e.key === 'End') j = dots.length - 1;
+  else return;
+  e.preventDefault();
+  selectStep(wrap, dots[j].getAttribute('data-step-go'), { focus: true });
+});
+
 /* ---- generic right-side panel (focus trap, scrim, Esc, return focus) ---- */
 let panel, scrim, lastFocus, keyHandler;
 function openPanel(node, { wide = false } = {}, trigger) {
@@ -336,7 +394,10 @@ function applyFilter(form) {
     for (const s of selects) {
       const v = (s.value || '').toLowerCase();
       if (ok && v && v !== 'all') {
-        if ((r.getAttribute('data-' + s.getAttribute('data-filter')) || '') !== v) ok = false;
+        const rowVal = (r.getAttribute('data-' + s.getAttribute('data-filter')) || '').toLowerCase();
+        // a "+"-joined value (e.g. cancelled+rescheduled) matches any of its members (OR)
+        const accept = v.includes('+') ? v.split('+').includes(rowVal) : rowVal === v;
+        if (!accept) ok = false;
       }
     }
     r.hidden = !ok;
@@ -377,9 +438,17 @@ document.addEventListener('click', (e) => {
   const lg = e.target.closest('[data-set-lang]');
   if (lg) { const l = lg.getAttribute('data-set-lang'); closeMenu(); if (l !== getLang()) location.href = langUrl(l); return; }
 
-  // content tabs (List / Timetable) — switch the visible baked panel
+  // content / profile tabs — switch the visible baked panel
   const tabBtn = e.target.closest('[data-tab]');
   if (tabBtn) { const wrap = tabBtn.closest('[data-tabs]'); if (wrap) { selectTab(wrap.getAttribute('data-tabs'), tabBtn.getAttribute('data-tab')); return; } }
+
+  // add-family wizard — step indicator / Next / Back (baked panels, JS toggles visibility)
+  const stepGo = e.target.closest('[data-step-go]');
+  if (stepGo) { const w = stepGo.closest('[data-wizard]'); if (w) { selectStep(w, stepGo.getAttribute('data-step-go')); return; } }
+  const stepNext = e.target.closest('[data-step-next]');
+  if (stepNext) { const w = stepNext.closest('[data-wizard]'); if (w) { const id = stepNeighbor(w, 1); if (id) selectStep(w, id, { focus: true }); return; } }
+  const stepPrev = e.target.closest('[data-step-prev]:not([disabled])');
+  if (stepPrev) { const w = stepPrev.closest('[data-wizard]'); if (w) { const id = stepNeighbor(w, -1); if (id) selectStep(w, id, { focus: true }); return; } }
 
   // category rail: swap the expanded panel to the clicked category (no navigation)
   const ncat = e.target.closest('[data-nav-category]');
@@ -418,6 +487,19 @@ document.addEventListener('click', (e) => {
   const fr = e.target.closest('[data-filter-reset]');
   if (fr) { const form = fr.closest('[data-filter-form]'); if (form) resetFilter(form); return; }
 
+  // summary tile → set a filter facet + re-apply (Spec 005 — the only new hook)
+  const fset = e.target.closest('[data-filter-set]');
+  if (fset) {
+    const parts = (fset.getAttribute('data-filter-set') || '').split(':');
+    const facet = parts[0], value = parts[1];
+    const form = document.querySelector('[data-filter-form]');
+    if (form && facet && value != null) {
+      const sel = form.querySelector(`select[data-filter="${CSS.escape(facet)}"]`);
+      if (sel) { sel.value = value; applyFilter(form); }
+    }
+    return;
+  }
+
   const noop = e.target.closest('.popover [data-action="noop"]');
   if (noop) { const m = acknowledge(noop); closeMenu(); return toast(m); }
 
@@ -428,7 +510,7 @@ document.addEventListener('click', (e) => {
     return;
   }
   if (trg.matches('a[href="#"]')) e.preventDefault();
-  if (trg.hasAttribute('data-row-menu')) return void openPopover(trg, rowMenu(trg.getAttribute('data-row-menu')));
+  if (trg.hasAttribute('data-row-menu')) { const rid = trg.getAttribute('data-row-menu'); return void openPopover(trg, trg.getAttribute('data-row-menu-kind') === 'family' ? familyMenu(rid) : rowMenu(rid)); }
   if (trg.hasAttribute('data-modal-trigger')) return openModal();
   switch (trg.getAttribute('data-action')) {
     case 'theme-menu': return void openPopover(trg, themeMenu());

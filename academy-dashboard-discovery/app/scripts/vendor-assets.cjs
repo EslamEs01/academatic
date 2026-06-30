@@ -82,6 +82,22 @@ const ICONS = {
   layers: ['layers', 'layers-3'],
   grid: ['layout-grid', 'grid-3x3', 'grid'],
   'user-plus': ['user-round-plus', 'user-plus'],
+  /* Spec 004 — families & student academic profiles (contacts, notes, profile actions) */
+  phone: ['phone'],
+  mail: ['mail'],
+  'map-pin': ['map-pin', 'pin'],
+  'message-circle': ['message-circle', 'message-square'],
+  'pause-circle': ['circle-pause', 'pause-circle'],
+  'file-text': ['file-text', 'letter-text', 'file-lines'],
+  edit: ['square-pen', 'pen-square', 'pencil'],
+  target: ['target'],
+  award: ['award', 'badge-check'],
+  'book-open': ['book-open', 'book'],
+  /* Spec 005 — attendance & session outcomes (outcome status map + nav) */
+  'user-x': ['user-x', 'user-round-x'],
+  'calendar-clock': ['calendar-clock'],
+  'rotate-cw': ['rotate-cw', 'refresh-cw'],
+  'clipboard-check': ['clipboard-check', 'clipboard-list'],
 };
 
 function innerSvg(name) {

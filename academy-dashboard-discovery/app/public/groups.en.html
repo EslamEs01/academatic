@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groups · Mishkah Academy</title>
+  <script>(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();</script>
+  <link rel="stylesheet" href="./assets/app.css" />
+</head>
+<body data-page-lang="en">
+  <a href="#page" class="sr-only">Skip to content</a>
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-graduation-cap" viewBox="0 0 24 24" fill="none"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></symbol>
+<symbol id="i-home" viewBox="0 0 24 24" fill="none"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol>
+<symbol id="i-sessions" viewBox="0 0 24 24" fill="none"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+  <path d="M8 14h.01" />
+  <path d="M12 14h.01" />
+  <path d="M16 14h.01" />
+  <path d="M8 18h.01" />
+  <path d="M12 18h.01" />
+  <path d="M16 18h.01" /></symbol>
+<symbol id="i-schedule" viewBox="0 0 24 24" fill="none"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+  <path d="M16 2v4" />
+  <path d="M8 2v4" />
+  <path d="M3 10h5" />
+  <path d="M17.5 17.5 16 16.3V14" />
+  <circle cx="16" cy="16" r="6" /></symbol>
+<symbol id="i-students" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol>
+<symbol id="i-trainers" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="5" />
+  <path d="M20 21a8 8 0 0 0-16 0" /></symbol>
+<symbol id="i-curricula" viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></symbol>
+<symbol id="i-reports" viewBox="0 0 24 24" fill="none"><path d="M3 3v18h18" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" /></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24" fill="none"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+  <circle cx="12" cy="12" r="3" /></symbol>
+<symbol id="i-help" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="m4.93 4.93 4.24 4.24" />
+  <path d="m14.83 9.17 4.24-4.24" />
+  <path d="m14.83 14.83 4.24 4.24" />
+  <path d="m9.17 14.83-4.24 4.24" />
+  <circle cx="12" cy="12" r="4" /></symbol>
+<symbol id="i-search" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.3-4.3" /></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24" fill="none"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+  <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24" fill="none"><rect width="20" height="14" x="2" y="3" rx="2" />
+  <line x1="8" x2="16" y1="21" y2="21" />
+  <line x1="12" x2="12" y1="17" y2="21" /></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" /></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24" fill="none"><line x1="4" x2="20" y1="12" y2="12" />
+  <line x1="4" x2="20" y1="6" y2="6" />
+  <line x1="4" x2="20" y1="18" y2="18" /></symbol>
+<symbol id="i-user" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="5" />
+  <path d="M20 21a8 8 0 0 0-16 0" /></symbol>
+<symbol id="i-log-out" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+  <polyline points="16 17 21 12 16 7" />
+  <line x1="21" x2="9" y1="12" y2="12" /></symbol>
+<symbol id="i-chevronStart" viewBox="0 0 24 24" fill="none"><path d="m9 18 6-6-6-6" /></symbol>
+<symbol id="i-chevronEnd" viewBox="0 0 24 24" fill="none"><path d="m15 18-6-6 6-6" /></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" /></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none"><path d="M5 12h14" />
+  <path d="M12 5v14" /></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24" fill="none"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+  <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol>
+<symbol id="i-check-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="m9 12 2 2 4-4" /></symbol>
+<symbol id="i-trending-up" viewBox="0 0 24 24" fill="none"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+  <polyline points="16 7 22 7 22 13" /></symbol>
+<symbol id="i-user-check" viewBox="0 0 24 24" fill="none"><path d="M2 21a8 8 0 0 1 13.292-6" />
+  <circle cx="10" cy="8" r="5" />
+  <path d="m16 19 2 2 4-4" /></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+  <path d="M8 14h.01" />
+  <path d="M12 14h.01" />
+  <path d="M16 14h.01" />
+  <path d="M8 18h.01" />
+  <path d="M12 18h.01" />
+  <path d="M16 18h.01" /></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <polyline points="12 6 12 12 16 14" /></symbol>
+<symbol id="i-play" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <polygon points="10 8 16 12 10 16 10 8" /></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" /></symbol>
+<symbol id="i-x-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <path d="m15 9-6 6" />
+  <path d="m9 9 6 6" /></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol>
+<symbol id="i-ellipsis" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="1" />
+  <circle cx="19" cy="12" r="1" />
+  <circle cx="5" cy="12" r="1" /></symbol>
+<symbol id="i-filter" viewBox="0 0 24 24" fill="none"><line x1="21" x2="14" y1="4" y2="4" />
+  <line x1="10" x2="3" y1="4" y2="4" />
+  <line x1="21" x2="12" y1="12" y2="12" />
+  <line x1="8" x2="3" y1="12" y2="12" />
+  <line x1="21" x2="16" y1="20" y2="20" />
+  <line x1="12" x2="3" y1="20" y2="20" />
+  <line x1="14" x2="14" y1="2" y2="6" />
+  <line x1="8" x2="8" y1="10" y2="14" />
+  <line x1="16" x2="16" y1="18" y2="22" /></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+  <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol>
+<symbol id="i-alert-triangle" viewBox="0 0 24 24" fill="none"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol>
+<symbol id="i-retry" viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+  <path d="M21 3v5h-5" />
+  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+  <path d="M8 16H3v5" /></symbol>
+<symbol id="i-calendar-plus" viewBox="0 0 24 24" fill="none"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" />
+  <path d="M3 10h18" />
+  <path d="M16 19h6" />
+  <path d="M19 16v6" /></symbol>
+<symbol id="i-inbox" viewBox="0 0 24 24" fill="none"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+  <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" /></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24" fill="none"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+  <path d="M20 3v4" />
+  <path d="M22 5h-4" />
+  <path d="M4 17v2" />
+  <path d="M5 18H3" /></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none"><path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" /></symbol>
+<symbol id="i-tasks" viewBox="0 0 24 24" fill="none"><path d="m3 17 2 2 4-4" />
+  <path d="m3 7 2 2 4-4" />
+  <path d="M13 6h8" />
+  <path d="M13 12h8" />
+  <path d="M13 18h8" /></symbol>
+<symbol id="i-messages" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></symbol>
+<symbol id="i-families" viewBox="0 0 24 24" fill="none"><path d="M16 18a4 4 0 0 0-8 0" />
+  <circle cx="12" cy="11" r="3" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <line x1="8" x2="8" y1="2" y2="4" />
+  <line x1="16" x2="16" y1="2" y2="4" /></symbol>
+<symbol id="i-materials" viewBox="0 0 24 24" fill="none"><path d="m16 6 4 14" />
+  <path d="M12 6v14" />
+  <path d="M8 8v12" />
+  <path d="M4 4v16" /></symbol>
+<symbol id="i-certificates" viewBox="0 0 24 24" fill="none"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
+  <circle cx="12" cy="8" r="6" /></symbol>
+<symbol id="i-staff" viewBox="0 0 24 24" fill="none"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24" fill="none"><path d="m3 11 18-5v12L3 14v-3z" />
+  <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+  <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65" />
+  <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65" /></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24" fill="none"><rect width="7" height="7" x="3" y="3" rx="1" />
+  <rect width="7" height="7" x="14" y="3" rx="1" />
+  <rect width="7" height="7" x="14" y="14" rx="1" />
+  <rect width="7" height="7" x="3" y="14" rx="1" /></symbol>
+<symbol id="i-user-plus" viewBox="0 0 24 24" fill="none"><path d="M2 21a8 8 0 0 1 13.292-6" />
+  <circle cx="10" cy="8" r="5" />
+  <path d="M19 16v6" />
+  <path d="M22 19h-6" /></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24" fill="none"><rect width="20" height="16" x="2" y="4" rx="2" />
+  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></symbol>
+<symbol id="i-map-pin" viewBox="0 0 24 24" fill="none"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+  <circle cx="12" cy="10" r="3" /></symbol>
+<symbol id="i-message-circle" viewBox="0 0 24 24" fill="none"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></symbol>
+<symbol id="i-pause-circle" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <line x1="10" x2="10" y1="15" y2="9" />
+  <line x1="14" x2="14" y1="15" y2="9" /></symbol>
+<symbol id="i-file-text" viewBox="0 0 24 24" fill="none"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+  <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+  <path d="M10 9H8" />
+  <path d="M16 13H8" />
+  <path d="M16 17H8" /></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24" fill="none"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+  <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" /></symbol>
+<symbol id="i-award" viewBox="0 0 24 24" fill="none"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" />
+  <circle cx="12" cy="8" r="6" /></symbol>
+<symbol id="i-book-open" viewBox="0 0 24 24" fill="none"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" /></symbol>
+<symbol id="i-user-x" viewBox="0 0 24 24" fill="none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <line x1="17" x2="22" y1="8" y2="13" />
+  <line x1="22" x2="17" y1="8" y2="13" /></symbol>
+<symbol id="i-calendar-clock" viewBox="0 0 24 24" fill="none"><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+  <path d="M16 2v4" />
+  <path d="M8 2v4" />
+  <path d="M3 10h5" />
+  <path d="M17.5 17.5 16 16.3V14" />
+  <circle cx="16" cy="16" r="6" /></symbol>
+<symbol id="i-rotate-cw" viewBox="0 0 24 24" fill="none"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+  <path d="M21 3v5h-5" /></symbol>
+<symbol id="i-clipboard-check" viewBox="0 0 24 24" fill="none"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+  <path d="m9 14 2 2 4-4" /></symbol>
+</svg>
+
+  <div class="app-shell" id="shell" data-rail="false" data-shell>
+    <aside class="sidebar" aria-label="Sidebar">
+    <div class="nav-rail">
+      <button type="button" class="rail-toggle" data-action="toggle-rail" aria-controls="nav-panel" aria-expanded="true" aria-label="Collapse menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
+      </button>
+      <div class="rail-cats" role="tablist" aria-orientation="vertical" aria-label="Navigation categories" data-nav-rail>
+        <button type="button" class="rail-cat" role="tab" id="railcat-control" aria-controls="catpanel-control" aria-selected="false" data-nav-category="control" aria-label="Control panel" title="Control panel" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-layers"></use></svg>
+  </button><button type="button" class="rail-cat is-active" role="tab" id="railcat-families" aria-controls="catpanel-families" aria-selected="true" data-nav-category="families" aria-label="Families" title="Families" tabindex="0">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-teachers" aria-controls="catpanel-teachers" aria-selected="false" data-nav-category="teachers" aria-label="Teachers" title="Teachers" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-reports" aria-controls="catpanel-reports" aria-selected="false" data-nav-category="reports" aria-label="Reports" title="Reports" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-admin" aria-controls="catpanel-admin" aria-selected="false" data-nav-category="admin" aria-label="Administration" title="Administration" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg>
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-settings" aria-controls="catpanel-settings" aria-selected="false" data-nav-category="settings" aria-label="Settings" title="Settings" tabindex="-1">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg>
+  </button>
+      </div>
+      <button type="button" class="rail-foot" data-action="profile-menu" aria-haspopup="menu" aria-label="Account menu">
+        <span class="avatar avatar-sm av-violet" aria-hidden="true">N</span>
+      </button>
+    </div>
+    <div class="nav-panel" id="nav-panel">
+      <div class="brand">
+        <span class="medallion m-grad tone-violet-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
+        <div class="brand-text"><div class="brand-name">Mishkah Academy</div></div>
+      </div>
+      <div class="cat-panel" id="catpanel-control" role="tabpanel" tabindex="-1" aria-labelledby="railcat-control" data-nav-panel="control" hidden>
+    <div class="cat-title">Control panel</div>
+    <nav class="panel-nav" aria-label="Control panel">
+      <div class="space-y-1"><a href="dashboard.en.html" class="nav-item" data-nav="home" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-home"></use></svg><span class="label">Home</span>
+  </a><a href="sessions.en.html" class="nav-item" data-nav="sessions" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg><span class="label">Sessions</span><span class="badge nav-badge tabular">24</span>
+  </a><a href="schedule.en.html" class="nav-item" data-nav="schedule" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span class="label">Timetable</span>
+  </a><a href="attendance.en.html" class="nav-item" data-nav="attendance" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span class="label">Attendance</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="sessionsAnalysis" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Sessions analysis</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">Messages</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">New Requests</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Tasks</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">Announcements</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">Time converter</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="publicHoliday" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">Public holidays</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="scheduledActions" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Scheduled actions</span><span class="nav-soon">Soon</span>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-families" role="tabpanel" tabindex="-1" aria-labelledby="railcat-families" data-nav-panel="families">
+    <div class="cat-title">Families</div>
+    <nav class="panel-nav" aria-label="Families">
+      <div class="space-y-1"><a href="families.en.html" class="nav-item" data-nav="families" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span class="label">Families</span>
+  </a><a href="add-family.en.html" class="nav-item" data-nav="addFamily" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span class="label">Add family</span>
+  </a><a href="students.en.html" class="nav-item" data-nav="students" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">Students</span>
+  </a><a href="courses.en.html" class="nav-item" data-nav="courses" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">Courses</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="familyCategories" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span class="label">Family categories</span><span class="nav-soon">Soon</span>
+    </button><a href="groups.en.html" class="nav-item is-active" data-nav="groups" data-nav-status="implemented" aria-current="page">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span class="label">Groups</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="scheduleSearch" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span class="label">Schedule search</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="studentResult" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span class="label">Student results</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="studentEvaluation" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span class="label">Student evaluation</span><span class="nav-soon">Soon</span>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-teachers" role="tabpanel" tabindex="-1" aria-labelledby="railcat-teachers" data-nav-panel="teachers" hidden>
+    <div class="cat-title">Teachers</div>
+    <nav class="panel-nav" aria-label="Teachers">
+      <div class="space-y-1"><a href="teachers.en.html" class="nav-item" data-nav="teachers" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg><span class="label">Teachers</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="addTeacher" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span class="label">Add teacher</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="teacherCategories" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span class="label">Teacher categories</span><span class="nav-soon">Soon</span>
+    </button></div>
+      
+    <div class="nav-subsection">
+      <div class="nav-subsection-label">Performance</div>
+      <div class="space-y-1"><a href="teacher-performance.en.html" class="nav-item" data-nav="teacherKpi" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Teacher performance</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="sessionsKpi" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Sessions performance</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="monthlyPerf" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">Monthly performance</span><span class="nav-soon">Soon</span>
+    </button></div>
+    </div>
+    </nav>
+  </div><div class="cat-panel" id="catpanel-reports" role="tabpanel" tabindex="-1" aria-labelledby="railcat-reports" data-nav-panel="reports" hidden>
+    <div class="cat-title">Reports</div>
+    <nav class="panel-nav" aria-label="Reports">
+      <div class="space-y-1"><a href="reports.en.html" class="nav-item" data-nav="reports" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">Reports</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="monthlyReports" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">Monthly reports</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="dataAnalysis" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Data analysis</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-disabled" data-nav="invoices" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the billing module (out of current scope)." aria-label="Invoices — Requires the billing module (out of current scope).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Invoices</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="monthlyInvoices" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the billing module (out of current scope)." aria-label="Monthly invoices — Requires the billing module (out of current scope).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Monthly invoices</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="salaries" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the billing module (out of current scope)." aria-label="Salaries — Requires the billing module (out of current scope).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Salaries</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="staffSalaries" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the billing module (out of current scope)." aria-label="Staff salaries — Requires the billing module (out of current scope).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Staff salaries</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="payments" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the billing module (out of current scope)." aria-label="Payments — Requires the billing module (out of current scope).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Payments</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="classSalaryReport" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the billing module (out of current scope)." aria-label="Class salary report — Requires the billing module (out of current scope).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Class salary report</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-admin" role="tabpanel" tabindex="-1" aria-labelledby="railcat-admin" data-nav-panel="admin" hidden>
+    <div class="cat-title">Administration</div>
+    <nav class="panel-nav" aria-label="Administration">
+      <div class="space-y-1"><button type="button" class="nav-item is-planned" data-nav="staff" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span class="label">Staff & Roles</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="materials" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span class="label">Materials</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="books" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">Library</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="certificates" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">Certificates</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="certificateRequests" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">Certificate requests</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-disabled" data-nav="banks" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the billing module (out of current scope)." aria-label="Banks — Requires the billing module (out of current scope).">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Banks</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button></div>
+      
+    </nav>
+  </div><div class="cat-panel" id="catpanel-settings" role="tabpanel" tabindex="-1" aria-labelledby="railcat-settings" data-nav-panel="settings" hidden>
+    <div class="cat-title">Settings</div>
+    <nav class="panel-nav" aria-label="Settings">
+      <div class="space-y-1"><a href="settings.en.html" class="nav-item" data-nav="settings" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span class="label">Settings</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="settingsGeneral" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span class="label">General</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsIntegrations" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span class="label">Integrations</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsCustomization" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span class="label">Customization</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsNotifications" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span class="label">Notifications</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsSecurity" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span class="label">Security</span><span class="nav-soon">Soon</span>
+    </button><button type="button" class="nav-item is-planned" data-nav="settingsUsers" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span class="label">Users & staff</span><span class="nav-soon">Soon</span>
+    </button></div>
+      
+    </nav>
+  </div>
+    </div>
+  </aside>
+    <div class="main-col">
+      <header class="topbar">
+    <button type="button" class="icon-btn menu-toggle" data-action="open-drawer" aria-label="Open menu">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg>
+    </button>
+    <div class="hidden md:block leading-tight">
+      <div class="crumb">Home · Groups</div>
+      <div class="topbar-title">Groups</div>
+    </div>
+
+    <div class="topbar-search">
+      <div class="input-wrap w-full">
+        <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+        <input class="input" type="search" placeholder="Search students, sessions, teachers…" aria-label="Search students, sessions, teachers…" data-action="command-palette" aria-haspopup="menu" />
+        <span class="kbd-hint"><kbd class="kbd" dir="ltr">⌘K</kbd></span>
+      </div>
+    </div>
+
+    <div class="util-cluster">
+      <button type="button" class="icon-btn" data-action="apps-grid" aria-label="Quick launch" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg>
+      </button>
+      <button type="button" class="icon-btn" data-action="quick-actions" aria-label="Quick actions" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg>
+      </button>
+      <button type="button" class="icon-btn" data-action="notifications" aria-label="Notifications" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span class="dot"></span>
+      </button>
+      <button type="button" class="icon-btn" data-action="theme-menu" aria-label="Toggle theme" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-monitor"></use></svg>
+      </button>
+      <button type="button" class="icon-btn" data-action="lang-menu" aria-label="Change language" aria-haspopup="menu">
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-globe"></use></svg>
+      </button>
+      <div class="w-px h-6 mx-1" style="background:var(--c-line)"></div>
+      <button type="button" class="profile-chip" data-action="profile-menu" aria-label="Account menu" aria-haspopup="menu">
+        <span class="avatar avatar-sm av-violet" aria-hidden="true">ن</span>
+        <span class="hidden sm:block text-start">
+          <span class="profile-name block">Noura Al-Otaibi</span>
+          <span class="profile-role block">Academy Manager</span>
+        </span>
+        <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg>
+      </button>
+    </div>
+  </header>
+      <main class="page-scroll" id="page" tabindex="-1">
+        <div class="page-pad" id="page-body">
+    
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Groups</h1>
+        <p class="page-sub">Track classes and cohorts: course, teacher, students, schedule and outcomes.</p>
+      </div>
+      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-demo-action data-toast="Add-group opened (demo) — nothing is saved."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New group</span></button></div>
+    </div>
+    
+    <div class="outcome-tiles"><button type="button" class="outcome-tile" data-filter-set="status:active" data-target="#groups-list">
+    <span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span>
+    <div class="min-w-0"><div class="ot-v">3</div><div class="ot-l">Active groups</div></div>
+  </button><button type="button" class="outcome-tile" data-filter-set="status:trial" data-target="#groups-list">
+    <span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
+    <div class="min-w-0"><div class="ot-v">1</div><div class="ot-l">Trial groups</div></div>
+  </button><button type="button" class="outcome-tile" data-filter-set="attention:1" data-target="#groups-list">
+    <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg></span>
+    <div class="min-w-0"><div class="ot-v">2</div><div class="ot-l">Need follow-up</div></div>
+  </button></div>
+    <form class="filterbar" data-filter-form data-target="#groups-list">
+    <div class="input-wrap" style="flex:1 1 220px;min-width:180px">
+      <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+      <input class="input" type="search" data-filter="search" placeholder="Search groups…" aria-label="Search groups…" />
+    </div>
+    <span class="select-wrap">
+    <select class="select-input" data-filter="course" aria-label="Course">
+      <option value="all">All courses</option><option value="c1">Mathematics</option><option value="c3">Intro to Programming</option><option value="c5">English</option><option value="c2">Arabic Language</option><option value="c6">General Science</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
+    <select class="select-input" data-filter="teacher" aria-label="Teacher">
+      <option value="all">All teachers</option><option value="sara">Sara Al-Qahtani</option><option value="layan">Layan Al-Shamri</option><option value="nora">Noura Al-Zahrani</option><option value="mohammed">Mohammed Al-Dosari</option><option value="reem">Reem Al-Mutairi</option><option value="huda">Huda Al-Maliki</option><option value="khalid">Khalid Al-Anazi</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
+    <select class="select-input" data-filter="level" aria-label="Level">
+      <option value="all">All levels</option><option value="foundation">Foundation</option><option value="l1">Level 1</option><option value="l2">Level 2</option><option value="l3">Level 3</option><option value="advanced">Advanced</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
+    <select class="select-input" data-filter="day" aria-label="Day">
+      <option value="all">All days</option><option value="sun">Sunday</option><option value="mon">Monday</option><option value="sat">Saturday</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
+    <select class="select-input" data-filter="status" aria-label="Status">
+      <option value="all">All statuses</option><option value="active">Active</option><option value="trial">Trial</option><option value="full">Full</option><option value="paused">Paused</option><option value="completed">Completed</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
+    <select class="select-input" data-filter="attention" aria-label="Follow-up">
+      <option value="all">All</option><option value="1">Needs follow-up</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    <div class="flex items-center gap-2 ms-auto">
+      <button type="button" class="btn btn-ghost btn-sm"   data-filter-reset><span>Reset</span></button>
+      <button type="button" class="btn btn-dark btn-sm"   data-filter-apply><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>Apply</span></button>
+    </div>
+    <span class="w-full text-[12px]" style="color:var(--c-ink-3)" data-filter-count></span>
+  </form>
+    <div id="groups-list"><div class="group-row is-hoverable" data-row data-course="c1" data-teacher="sara" data-level="l2" data-day="sun" data-status="active" data-search="math group a mathematics sara al-qahtani">
+    <span class="avatar avatar-sm av-violet" aria-hidden="true">S</span>
+    <div class="gr-body">
+      <a href="group.en.html" class="gr-title">Math Group A</a>
+      <div class="gr-sub">Sara Al-Qahtani · Level 2 · Sunday · <span class="tabular" dir="ltr">09:00</span></div>
+      <div class="gr-meta"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span><a href="course.en.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>Mathematics</span></a></div>
+    </div>
+    <div class="gr-end">
+      <div class="gr-count"><b class="text-ink tabular">14</b><span style="color:var(--c-ink-3)"> / 16</span></div>
+      <div class="gr-count-l">students</div>
+    </div>
+  </div><div class="group-row is-hoverable" data-row data-course="c3" data-teacher="layan" data-level="l1" data-day="mon" data-status="active" data-attention="1" data-search="programming group b intro to programming layan al-shamri">
+    <span class="avatar avatar-sm av-teal" aria-hidden="true">L</span>
+    <div class="gr-body">
+      <a href="group.en.html" class="gr-title">Programming Group B</a>
+      <div class="gr-sub">Layan Al-Shamri · Level 1 · Monday · <span class="tabular" dir="ltr">08:00</span></div>
+      <div class="gr-meta"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span><a href="course.en.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>Intro to Programming</span></a><span class="attention-flag att-attention" data-attention="attention"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>Needs follow-up</span></span></div>
+    </div>
+    <div class="gr-end">
+      <div class="gr-count"><b class="text-ink tabular">13</b><span style="color:var(--c-ink-3)"> / 14</span></div>
+      <div class="gr-count-l">students</div>
+    </div>
+  </div><div class="group-row is-hoverable" data-row data-course="c5" data-teacher="nora" data-level="l2" data-day="sun" data-status="full" data-search="english club english noura al-zahrani">
+    <span class="avatar avatar-sm av-coral" aria-hidden="true">N</span>
+    <div class="gr-body">
+      <a href="group.en.html" class="gr-title">English Club</a>
+      <div class="gr-sub">Noura Al-Zahrani · Level 2 · Sunday · <span class="tabular" dir="ltr">12:30</span></div>
+      <div class="gr-meta"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span>Full</span></span><a href="course.en.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>English</span></a></div>
+    </div>
+    <div class="gr-end">
+      <div class="gr-count"><b class="text-ink tabular">16</b><span style="color:var(--c-ink-3)"> / 16</span></div>
+      <div class="gr-count-l">students</div>
+    </div>
+  </div><div class="group-row is-hoverable" data-row data-course="c2" data-teacher="mohammed" data-level="l1" data-day="sun" data-status="active" data-search="arabic group a arabic language mohammed al-dosari">
+    <span class="avatar avatar-sm av-amber" aria-hidden="true">M</span>
+    <div class="gr-body">
+      <a href="group.en.html" class="gr-title">Arabic Group A</a>
+      <div class="gr-sub">Mohammed Al-Dosari · Level 1 · Sunday · <span class="tabular" dir="ltr">10:30</span></div>
+      <div class="gr-meta"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span><a href="course.en.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>Arabic Language</span></a></div>
+    </div>
+    <div class="gr-end">
+      <div class="gr-count"><b class="text-ink tabular">22</b><span style="color:var(--c-ink-3)"> / 25</span></div>
+      <div class="gr-count-l">students</div>
+    </div>
+  </div><div class="group-row is-hoverable" data-row data-course="c2" data-teacher="reem" data-level="foundation" data-day="sat" data-status="trial" data-search="arabic — trial group arabic language reem al-mutairi">
+    <span class="avatar avatar-sm av-sky" aria-hidden="true">R</span>
+    <div class="gr-body">
+      <a href="group.en.html" class="gr-title">Arabic — Trial Group</a>
+      <div class="gr-sub">Reem Al-Mutairi · Foundation · Saturday · <span class="tabular" dir="ltr">14:00</span></div>
+      <div class="gr-meta"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>Trial</span></span><a href="course.en.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>Arabic Language</span></a></div>
+    </div>
+    <div class="gr-end">
+      <div class="gr-count"><b class="text-ink tabular">6</b><span style="color:var(--c-ink-3)"> / 12</span></div>
+      <div class="gr-count-l">students</div>
+    </div>
+  </div><div class="group-row is-hoverable" data-row data-course="c1" data-teacher="huda" data-level="l3" data-day="mon" data-status="paused" data-attention="1" data-search="advanced math group mathematics huda al-maliki">
+    <span class="avatar avatar-sm av-violet" aria-hidden="true">H</span>
+    <div class="gr-body">
+      <a href="group.en.html" class="gr-title">Advanced Math Group</a>
+      <div class="gr-sub">Huda Al-Maliki · Level 3 · Monday · <span class="tabular" dir="ltr">11:00</span></div>
+      <div class="gr-meta"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>Paused</span></span><a href="course.en.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>Mathematics</span></a><span class="attention-flag att-attention" data-attention="attention"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>Needs follow-up</span></span></div>
+    </div>
+    <div class="gr-end">
+      <div class="gr-count"><b class="text-ink tabular">5</b><span style="color:var(--c-ink-3)"> / 12</span></div>
+      <div class="gr-count-l">students</div>
+    </div>
+  </div><div class="group-row is-hoverable" data-row data-course="c6" data-teacher="khalid" data-level="foundation" data-day="mon" data-status="completed" data-search="science group general science khalid al-anazi">
+    <span class="avatar avatar-sm av-sky" aria-hidden="true">K</span>
+    <div class="gr-body">
+      <a href="group.en.html" class="gr-title">Science Group</a>
+      <div class="gr-sub">Khalid Al-Anazi · Foundation · Monday · <span class="tabular" dir="ltr">14:00</span></div>
+      <div class="gr-meta"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg><span>Completed</span></span><a href="course.en.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span>General Science</span></a></div>
+    </div>
+    <div class="gr-end">
+      <div class="gr-count"><b class="text-ink tabular">13</b><span style="color:var(--c-ink-3)"> / 13</span></div>
+      <div class="gr-count-l">students</div>
+    </div>
+  </div></div>
+    <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
+    <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
+    <div>
+      <h3 class="text-[15px] font-bold text-ink mb-1">No matching results</h3>
+      <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">Try adjusting your search or resetting the filters.</p>
+    </div>
+    
+  </div></div>
+  </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="./assets/js/enhance.js"></script>
+</body>
+</html>

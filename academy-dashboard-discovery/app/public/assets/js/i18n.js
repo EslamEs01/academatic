@@ -5,6 +5,14 @@ import ar from '../locales/ar.js';
 import en from '../locales/en.js';
 import arX from '../locales/ar.extra.js';
 import enX from '../locales/en.extra.js';
+import arF from '../locales/ar.fam.js';
+import enF from '../locales/en.fam.js';
+import arA from '../locales/ar.att.js';
+import enA from '../locales/en.att.js';
+import arC from '../locales/ar.crs.js';
+import enC from '../locales/en.crs.js';
+import arT from '../locales/ar.trn.js';
+import enT from '../locales/en.trn.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -15,9 +23,20 @@ function deepMerge(target, src) {
   }
   return target;
 }
-// Spec 002 keys live in *.extra.js and merge into the Spec 001 dictionaries
+// Spec 002/003 keys live in *.extra.js; Spec 004 keys live in *.fam.js —
+// both merge (deep) into the Spec 001 dictionaries (nested blocks extend, not clobber)
 deepMerge(ar, arX);
 deepMerge(en, enX);
+deepMerge(ar, arF);
+deepMerge(en, enF);
+deepMerge(ar, arA);
+deepMerge(en, enA);
+// Spec 006 keys live in *.crs.js (courses/groups/learning-paths)
+deepMerge(ar, arC);
+deepMerge(en, enC);
+// Spec 007 keys live in *.trn.js (teacher performance & academic KPIs)
+deepMerge(ar, arT);
+deepMerge(en, enT);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

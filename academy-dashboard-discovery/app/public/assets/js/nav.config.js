@@ -21,6 +21,7 @@ export const NAV_CATEGORIES = [
       item({ id: 'home', labelKey: 'nav.home', icon: 'home', route: 'dashboard.html' }),
       item({ id: 'sessions', labelKey: 'nav.sessions', icon: 'sessions', route: 'sessions.html', badge: 24 }),
       item({ id: 'schedule', labelKey: 'nav.schedule', icon: 'schedule', route: 'schedule.html' }),
+      item({ id: 'attendance', labelKey: 'nav.attendance', icon: 'clipboard-check', route: 'attendance.html' }),
       item({ id: 'sessionsAnalysis', labelKey: 'nav.sessionsAnalysis', icon: 'trending-up', status: 'planned' }),
       item({ id: 'messages', labelKey: 'nav.messages', icon: 'messages', status: 'planned' }),
       item({ id: 'leads', labelKey: 'nav.leads', icon: 'inbox', status: 'planned' }),
@@ -34,12 +35,12 @@ export const NAV_CATEGORIES = [
   {
     id: 'families', labelKey: 'cat.families', icon: 'families',
     items: [
-      item({ id: 'families', labelKey: 'nav.families', icon: 'families', status: 'planned' }),
-      item({ id: 'addFamily', labelKey: 'nav.addFamily', icon: 'user-plus', status: 'planned' }),
+      item({ id: 'families', labelKey: 'nav.families', icon: 'families', route: 'families.html' }),
+      item({ id: 'addFamily', labelKey: 'nav.addFamily', icon: 'user-plus', route: 'add-family.html' }),
       item({ id: 'students', labelKey: 'nav.students', icon: 'students', route: 'students.html' }),
       item({ id: 'courses', labelKey: 'nav.courses', icon: 'curricula', route: 'courses.html' }),
       item({ id: 'familyCategories', labelKey: 'nav.familyCategories', icon: 'filter', status: 'planned' }),
-      item({ id: 'groups', labelKey: 'nav.groups', icon: 'students', status: 'planned' }),
+      item({ id: 'groups', labelKey: 'nav.groups', icon: 'students', route: 'groups.html' }),
       item({ id: 'scheduleSearch', labelKey: 'nav.scheduleSearch', icon: 'search', status: 'planned' }),
       item({ id: 'studentResult', labelKey: 'nav.studentResult', icon: 'check-circle', status: 'planned' }),
       item({ id: 'studentEvaluation', labelKey: 'nav.studentEvaluation', icon: 'sparkles', status: 'planned' }),
@@ -56,7 +57,7 @@ export const NAV_CATEGORIES = [
       {
         titleKey: 'cat.teachersPerf',
         items: [
-          item({ id: 'teacherKpi', labelKey: 'nav.teacherKpi', icon: 'trending-up', status: 'planned' }),
+          item({ id: 'teacherKpi', labelKey: 'nav.teacherKpi', icon: 'trending-up', route: 'teacher-performance.html' }),
           item({ id: 'sessionsKpi', labelKey: 'nav.sessionsKpi', icon: 'trending-up', status: 'planned' }),
           item({ id: 'monthlyPerf', labelKey: 'nav.monthlyPerf', icon: 'reports', status: 'planned' }),
         ],
@@ -123,7 +124,7 @@ export const FUTURE_ROLE = [
 /* intended routes when a planned item is promoted (NI9 / NI12) */
 export const FUTURE_ROUTES = {
   sessionsAnalysis: 'sessions-analysis.html', messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
-  announcements: 'announcements.html', families: 'families.html', groups: 'groups.html', studentResult: 'student-results.html',
+  announcements: 'announcements.html', attendance: 'attendance.html', groups: 'groups.html', studentResult: 'student-results.html',
   studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html', teacherKpi: 'teacher-performance.html',
   materials: 'materials.html', books: 'library.html', certificates: 'certificates.html', staff: 'staff.html',
   dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',
