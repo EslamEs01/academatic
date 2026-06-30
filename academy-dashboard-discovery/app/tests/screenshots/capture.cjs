@@ -98,6 +98,19 @@ const MATRIX = [
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'groups-impact' },
   { page: 'groups', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'group', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 007 — Teacher Performance & Academic KPIs (acceptance matrix, 12 frames)
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teachers', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'teachers', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'timetable', variant: 'timetable' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'sessions-outcomes', variant: 'outcomes' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', teacherConfirm: true, variant: 'confirm' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'students', variant: 'students' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'teachers-followup' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile' },
 ];
 
 (async () => {
@@ -140,9 +153,11 @@ const MATRIX = [
       await page.click('.popover [data-drawer]').catch(() => {}); await page.waitForTimeout(460);
       if (s.confirm) { await page.click('.drawer.sheet [data-confirm]').catch(() => {}); await page.waitForTimeout(340); }
     }
+    // Spec 007 — open the teacher banner Notify-family confirm modal
+    if (s.teacherConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(380); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
-    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm });
+    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm });
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
     else console.log(`  ✓ ${name}`);

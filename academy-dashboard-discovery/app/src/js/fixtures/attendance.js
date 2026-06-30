@@ -60,6 +60,9 @@ export const SESSION_OUTCOMES = {
     o({ id: 'out12', s: 's6',  subject: 'english',     trainer: T.nora,     room: 'e',    time: '10:00', dur: 45, dayId: 'tue', statusId: 'cancelled', outcomeId: 'cancelled',     studentId: 'st13', familyId: 'fam1', present: 0,  capacity: 15, attribution: ATTR.cancelAdmin, followUp: FU.cancel }),
     o({ id: 'out13', s: 's3',  subject: 'programming', trainer: T.layan,    room: 'lab1', time: '11:30', dur: 60, dayId: 'tue', statusId: 'completed', outcomeId: 'attended',      studentId: 'st14', familyId: 'fam2', present: 14, capacity: 18 }),
     o({ id: 'out14', s: 's7',  subject: 'science',     trainer: T.khalid,   room: 'lab2', time: '13:00', dur: 60, dayId: 'tue', statusId: 'upcoming',  outcomeId: 'upcoming',      studentId: 'st12', familyId: 'fam1', present: 0,  capacity: 13 }),
+    /* Spec 007 — one studentAbsent in Sara's sessions so the baked teacher profile shows
+     * teacherAbsent (out4) AND studentAbsent distinctly (a real fixture row, not a metric). */
+    o({ id: 'out15', s: 's1',  subject: 'math',        trainer: T.sara,     room: 'a',    time: '13:30', dur: 60, dayId: 'tue', statusId: 'completed', outcomeId: 'studentAbsent', studentId: 'st11', familyId: 'fam1', present: 13, capacity: 16, attribution: ATTR.studentAbsent, makeup: MK.credit, followUp: FU.absence, feedbackKey: 'data.att.fb.support' }),
   ],
 };
 
@@ -78,3 +81,5 @@ export const OUTCOME_SUMMARY = {
 export const OUTCOME_BY_ID = Object.fromEntries(rows.map((r) => [r.id, r]));
 export const outcomesOfStudent = (studentId) => rows.filter((r) => r.studentId === studentId);
 export const outcomesOfFamily = (familyId) => rows.filter((r) => r.familyId === familyId);
+/* Spec 007 — the teacher's session outcomes, resolved by trainer id (display-only) */
+export const outcomesOfTeacher = (teacherId) => rows.filter((r) => r.trainer.id === teacherId);

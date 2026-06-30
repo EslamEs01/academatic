@@ -1,54 +1,63 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 006 — Courses, Groups and Learning Paths Deep Experience**
+Active feature: **Spec 007 — Teacher Performance and Academic KPIs**
 (branch `feature/001-approved-dashboard-design`).
 
 For technologies, project structure, shell commands, design decisions, contracts,
 and acceptance, read the current plan and its artifacts:
-`academy-dashboard-discovery/specs/006-courses-groups-learning-paths/plan.md`
+`academy-dashboard-discovery/specs/007-teacher-performance-kpis/plan.md`
 (see also `research.md`, `data-model.md`, `quickstart.md`, and `contracts/`).
 
-Spec 006 EXTENDS the implemented Spec 001/002/003/004/005 app (`academy-dashboard-discovery/app/`)
-with the admin **Courses, Groups & Learning Paths** experience — making the academy "academically
-complete" by unifying the course↔group↔student↔family↔teacher↔schedule↔attendance graph the legacy
-system scattered/dead-ended, calmer/cleaner and Arabic-RTL-first. Grounding decision: a **Course =
-a subject offering** (the app's improved framing; the legacy "course = enrollment" lives on the
-Spec 004 student `enrollments[]`), a **Group = a cohort/class** (one teacher + many students + a
-shared schedule delivering a course — the genuine new depth), and **Learning Paths are display-only**
-(NO curriculum engine is reference-backed). Surfaces: **ENRICH** `courses.html` (counts active-students/
-groups/teachers + a course-profile link); add **`course.html`** profile (banner + baked tabs Overview/
-Groups/Students/Teachers/Timetable/Outcomes/Learning-Path/Notes); **promote `groups` planned→implemented**
-(NI12) and add **`groups.html`** directory (filter bar course/teacher/level/day/status/attention +
-optional `data-filter-set` tiles + a `.group-row` list/card hybrid); add **`group.html`** profile
-(banner + tabs Overview/Students/Timetable/Sessions&Outcomes/Teacher/Course/Notes). `course.html`/
-`group.html` are **profile templates** (activeId `courses`/`groups`, NOT nav items). NEW labeled
-**group-status** map (`group-status.js`: active/trial/full/paused/completed + a `needsAttention` flag),
-**EXTENDED** course-status (+`paused`), and a relocated **enrollment-status** (active/paused/completed) —
-three DISTINCT labeled maps, never numeric/color-only. NEW fixture `groups.js` (`GROUPS` resolving
-`courseId`→courses + `teacherId`→teachers + `studentIds`→students + `scheduleBlockIds`→schedule +
-`outcomeIds`→Spec 005 outcomes) + EXTENDED `courses.js` (groupIds/teacherIds/levels/counts/attention).
-**REUSE, never duplicate**: Spec 003 `scheduleAgenda` (+`schedule.html#view=timetable`) for the Timetable
-tabs; Spec 005 `outcomeRow`/`outcomeTemplate` (the canonical drawer, +`attendance.html`) for the
-Outcomes tabs — NO new outcome-drawer/timetable/filter engine. Light fixture-only integration: Student
-Courses-tab links to course/group, Family Overview gets ONE courses/groups hint, Dashboard gets ONE
-"groups needing attention" chip folded into the people-signal card. **Learning Path** = a display-only
-level ladder (foundation→l1→l2→l3→advanced + counts + certificates hint) inside `course.html`. Prior
-plans: `…/005-attendance-session-outcomes/plan.md`, `…/004-family-student-profiles/plan.md`,
-`…/003-timetable-scheduling/plan.md`, `…/002-admin-core-operations/plan.md`,
-`…/001-approved-dashboard-foundation/plan.md`.
+Spec 007 EXTENDS the implemented Spec 001–006 app (`academy-dashboard-discovery/app/`) with the admin
+**Teacher Performance & Academic KPIs** experience — turning the flat teacher directory into a unified
+academic hub (teacher↔course↔group↔students↔family↔schedule↔outcomes↔absence↔follow-up) and giving admins
+one calm board to review/compare/follow-up teacher delivery. **Grounding spine** (legacy + current-app
+passes): the legacy system **NEVER** had a computed teacher score/rank/leaderboard — "performance" was
+scattered **raw counts** (Teachers-Details Cancel/Absent/Attend, a single feedback %, a system-wide
+Sessions-Analysis with a `teacher_id` filter but no per-teacher drill-down) + a `View KPIs` nav group with
+no destination page; and the legacy 56-button teacher profile **mixed academic data with FINANCE**
+(Compensations/Salary/Payouts). So Spec 007 is a **DISPLAY of fixture-backed raw counts + labeled signals
+— NEVER a computed score/rank/analytics engine**, and **ALL finance (salary/payroll/compensation/payout)
+is explicitly OUT of scope** (a future finance spec). Surfaces: **ENRICH** `teachers.html` (status chip +
+counts courses/groups/students + upcoming hint + workload hint + conditional follow-up flag + a
+profile link); add **`teacher.html`** profile (banner + baked tabs Overview/Courses/Groups/Timetable/
+Sessions&Outcomes/Students/Follow-up/Notes — bake `sara`); **promote `teacherKpi` planned→implemented**
+and add **`teacher-performance.html`** board (KPI tiles + a per-teacher comparison list + a follow-up
+queue — display-only counts, no score/rank/chart/salary). `teacher.html` is a **profile template**
+(activeId `teachers`, NOT a nav item); `teacher-performance.html` is the promoted nav page (activeId
+`teacherKpi`). `sessionsKpi`/`monthlyPerf`/`addTeacher`/`teacherCategories` stay planned. THREE NEW
+labeled maps: **teacher-status** (`teacher-status.js`: active/paused/inactive), **workload**
+(`teacher-signals.js`: light/balanced/high), **follow-up signal** (`teacher-signals.js`:
+strongDelivery/stable/needsFollowUp/attentionRisk) — distinct from the six existing maps, never
+numeric/color-only; **REUSE** availability (`TEACHER_AVAIL` available/busy/off). EXTEND `fixtures/teachers.js`
+(+statusId/workload/followUp/notes + derived counts — **NO finance fields**); add the only new resolver
+**`outcomesOfTeacher(id)`** (`SESSION_OUTCOMES` filter by `trainer.id`) in `attendance.js`; new actions
+cluster `teacherActions()` (`teacher-actions.js`). **REUSE, never duplicate**: Spec 003 `scheduleAgenda`
+(+`schedule.html#view=timetable`) for Timetable tabs; Spec 005 `outcomeRow`/`outcomeTemplate` (the
+canonical drawer, +`attendance.html`) for Sessions&Outcomes — **teacherAbsent vs studentAbsent stay two
+DISTINCT labeled chips, never one "absences"**; Spec 006 `cohort-panels`/`profileBanner`/`tabs`,
+`directoryCard`/`filterBar`/`summaryCards`. Light integration: teacher→student/family/course/group
+deep-links; Dashboard gets ONE "teachers needing follow-up" chip folded into the people-signal card →
+`teacher-performance.html`. New locale overlay `ar.trn.js`/`en.trn.js` (`trn.*`). Prior plans:
+`…/006-courses-groups-learning-paths/plan.md`, `…/005-attendance-session-outcomes/plan.md`,
+`…/004-family-student-profiles/plan.md`, `…/003-timetable-scheduling/plan.md`,
+`…/002-admin-core-operations/plan.md`, `…/001-approved-dashboard-foundation/plan.md`.
 
-Hard constraints (Spec 001 + 002 + 003 + 004 + 005 + 006): continue the approved design (Spec 001 is the
-visual target); **static HTML-first** — pages pre-rendered to complete `public/*.html`, NO
-whole-page `<div id="app">` mount, **all course/group cards + profile tabs + `<template data-preview>`
-drawers are baked at build time** (runtime JS builds no page DOM), runtime JS enhances existing markup
-only via `data-*` hooks (switch profile tabs, filter pre-rendered cards/rows, tile→`data-filter-set`,
+Hard constraints (Spec 001 + 002 + 003 + 004 + 005 + 006 + 007): continue the approved design (Spec 001 is
+the visual target); **static HTML-first** — pages pre-rendered to complete `public/*.html`, NO whole-page
+`<div id="app">` mount, **all teacher cards + KPI tiles + comparison rows + profile tabs +
+`<template data-preview>` drawers are baked at build time** (runtime JS builds no page DOM), runtime JS
+enhances existing markup only via `data-*` hooks (switch profile tabs, filter pre-rendered cards/rows,
 open drawer/confirm, toasts/disabled-reason, fake-submit demo — NO new hook); per-language pre-rendered
-pages; relative asset paths; GitHub-Pages compatible; Django-template-ready (`{% for course/group/student %}`,
-tabs → `{% if %}`, canonical drawer → ONE partial, status maps → template tags); Arabic RTL first +
-English LTR; Light/Dark/System; labeled course/group/enrollment status chips (never numeric/color-only);
-native JS; no CDN/TypeScript/SPA/chart libs/**table libs/form libs/calendar libs**; fixtures only — no real
-API/auth/permissions/CRUD/persistence, **no course/group/enrollment/assignment/curriculum/certificate/
-scheduling/attendance/finance engine**, no real status mutation/notification; **no student/family/teacher
-dashboards or portals** (future-role, never rendered); the Groups DIRECTORY + PROFILE are now built
-(fixture-only) but Family-Categories stays planned; no copied legacy assets/classes/logo/palette/wording,
-no legacy numeric statuses; screenshot-based visual acceptance.
+pages; relative asset paths; GitHub-Pages compatible; Django-template-ready (`{% for teacher %}`, tabs →
+`{% if %}`, canonical drawer → ONE partial, status/signal maps → template tags); Arabic RTL first +
+English LTR; Light/Dark/System; labeled teacher-status/workload/follow-up status chips (never
+numeric/color-only); native JS; no CDN/TypeScript/SPA/chart libs/table libs/form libs/calendar libs;
+fixtures only — no real API/auth/permissions/CRUD/persistence, **no teacher-management/assignment/
+workload-calc/performance-scoring/ranking/salary-payroll/attendance/scheduling/notification engine**, no
+real status mutation; **NO computed teacher score/rank/leaderboard/percentile/chart anywhere; ALL
+finance (salary/payroll/compensation/payout) OUT of scope**; **no student/family/teacher dashboards or
+portals** (future-role, never rendered; `teacher.html` is an ADMIN profile, not a portal); the Teacher
+Performance board is now built (fixture-only) but addTeacher/teacherCategories/sessionsKpi/monthlyPerf
+stay planned; no copied legacy assets/classes/logo/palette/wording, no legacy numeric statuses;
+screenshot-based visual acceptance.
 <!-- SPECKIT END -->

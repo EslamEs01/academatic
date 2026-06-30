@@ -57,7 +57,7 @@ export const NAV_CATEGORIES = [
       {
         titleKey: 'cat.teachersPerf',
         items: [
-          item({ id: 'teacherKpi', labelKey: 'nav.teacherKpi', icon: 'trending-up', status: 'planned' }),
+          item({ id: 'teacherKpi', labelKey: 'nav.teacherKpi', icon: 'trending-up', route: 'teacher-performance.html' }),
           item({ id: 'sessionsKpi', labelKey: 'nav.sessionsKpi', icon: 'trending-up', status: 'planned' }),
           item({ id: 'monthlyPerf', labelKey: 'nav.monthlyPerf', icon: 'reports', status: 'planned' }),
         ],

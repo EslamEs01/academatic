@@ -29,6 +29,8 @@ import { renderAttendance } from '../src/js/pages/attendance.js';
 import { renderGroups } from '../src/js/pages/groups.js';
 import { renderCourse } from '../src/js/pages/course.js';
 import { renderGroup } from '../src/js/pages/group.js';
+import { renderTeacher } from '../src/js/pages/teacher.js';
+import { renderTeacherPerformance } from '../src/js/pages/teacher-performance.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -64,6 +66,9 @@ const PAGES = [
   { base: 'groups', activeId: 'groups', titleKey: 'topbar.title.groups', crumbKey: 'topbar.crumb.groups', render: renderGroups },
   { base: 'course', activeId: 'courses', titleKey: 'topbar.title.course', crumbKey: 'topbar.crumb.course', render: renderCourse },
   { base: 'group', activeId: 'groups', titleKey: 'topbar.title.group', crumbKey: 'topbar.crumb.group', render: renderGroup },
+  // Spec 007 — teacher performance & academic KPIs (teacher = profile template; teacher-performance = promoted teacherKpi nav)
+  { base: 'teacher', activeId: 'teachers', titleKey: 'topbar.title.teacher', crumbKey: 'topbar.crumb.teacher', render: renderTeacher },
+  { base: 'teacher-performance', activeId: 'teacherKpi', titleKey: 'topbar.title.teacherPerf', crumbKey: 'topbar.crumb.teacherPerf', render: renderTeacherPerformance },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

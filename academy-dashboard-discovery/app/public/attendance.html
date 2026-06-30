@@ -318,9 +318,9 @@
       
     <div class="nav-subsection">
       <div class="nav-subsection-label">مؤشرات الأداء</div>
-      <div class="space-y-1"><button type="button" class="nav-item is-planned" data-nav="teacherKpi" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">مؤشرات أداء المعلمين</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="sessionsKpi" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <div class="space-y-1"><a href="teacher-performance.html" class="nav-item" data-nav="teacherKpi" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">مؤشرات أداء المعلمين</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="sessionsKpi" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">مؤشر أداء الحصص</span><span class="nav-soon">قريبًا</span>
     </button><button type="button" class="nav-item is-planned" data-nav="monthlyPerf" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">الأداء الشهري</span><span class="nav-soon">قريبًا</span>
@@ -453,7 +453,7 @@
     <div class="min-w-0"><div class="ot-v">٥</div><div class="ot-l">حضور مكتمل</div></div>
   </button><button type="button" class="outcome-tile" data-filter-set="outcome:studentAbsent" data-target="#attendance-list">
     <span class="medallion m-soft tone-coral "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg></span>
-    <div class="min-w-0"><div class="ot-v">٢</div><div class="ot-l">غياب طلاب</div></div>
+    <div class="min-w-0"><div class="ot-v">٣</div><div class="ot-l">غياب طلاب</div></div>
   </button><button type="button" class="outcome-tile" data-filter-set="outcome:teacherAbsent" data-target="#attendance-list">
     <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg></span>
     <div class="min-w-0"><div class="ot-v">١</div><div class="ot-l">غياب معلمين</div></div>
@@ -462,7 +462,7 @@
     <div class="min-w-0"><div class="ot-v">٣</div><div class="ot-l">ملغاة ومؤجلة</div></div>
   </button><button type="button" class="outcome-tile" data-filter-set="attention:1" data-target="#attendance-list">
     <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg></span>
-    <div class="min-w-0"><div class="ot-v">٦</div><div class="ot-l">تحتاج متابعة</div></div>
+    <div class="min-w-0"><div class="ot-v">٧</div><div class="ot-l">تحتاج متابعة</div></div>
   </button></div>
     <form class="filterbar" data-filter-form data-target="#attendance-list">
     <div class="input-wrap" style="flex:1 1 220px;min-width:180px">
@@ -648,6 +648,17 @@
     <div class="or-end">
       <button type="button" class="icon-btn" data-row-menu="out14" aria-haspopup="menu" aria-label="النتيجة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button>
     </div>
+  </div><div class="outcome-row is-hoverable" data-row data-outcome="studentabsent" data-teacher="sara" data-family="fam1" data-day="tue" data-subject="math" data-attention="1" data-search="أساسيات الرياضيات سارة القحطاني وليد الغامدي أبو سلمان الغامدي">
+    <div class="or-when"><div class="t1">13:30</div><div class="t2">الثلاثاء</div></div>
+    <span class="avatar avatar-sm av-violet" aria-hidden="true">س</span>
+    <div class="or-body">
+      <div class="or-title">أساسيات الرياضيات</div>
+      <div class="or-sub">الرياضيات · سارة القحطاني</div>
+      <div class="or-meta"><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg><span>غياب الطالب</span></span><a href="student.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>وليد الغامدي</span></a><a href="family.html" class="link-chip"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>أبو سلمان الغامدي</span></a><span class="attention-flag att-attention" data-attention="attention"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>متابعة غياب</span></span></div>
+    </div>
+    <div class="or-end">
+      <button type="button" class="icon-btn" data-row-menu="out15" aria-haspopup="menu" aria-label="النتيجة"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-ellipsis"></use></svg></button>
+    </div>
   </div></div>
     <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
     <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
@@ -810,6 +821,17 @@
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
       <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">الثلاثاء</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">13:00</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">خالد العنزي</span></div><div class="sheet-row"><span class="k">العائلة</span><span class="v"><a href="family.html" class="link-more">أبو سلمان الغامدي</a></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">العلوم</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">معمل ٢</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">جلسة قادمة ضمن جدول اليوم.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="تم تسجيل الحضور (تجريبي) — لا يُحفظ شيء."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>تسجيل حضور</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="تسجيل غياب الطالب؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يُحفظ شيء." data-confirm-cta="تسجيل الغياب" data-confirm-toast="تم تسجيل غياب الطالب (تجريبي)." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg><span>تسجيل غياب الطالب</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="تسجيل غياب المعلم؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يُحفظ شيء." data-confirm-cta="تسجيل الغياب" data-confirm-toast="تم تسجيل غياب المعلم (تجريبي)." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg><span>تسجيل غياب المعلم</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="تم الإلغاء (تجريبي)." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إعادة جدولة هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يتم حجز موعد فعلي." data-confirm-cta="إعادة الجدولة" data-confirm-toast="تم فتح إعادة الجدولة (تجريبي)." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>إعادة جدولة</span></button><a href="schedule.html#view=timetable" class="btn btn-secondary btn-sm"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span>عرض في الجدول</span></a></div></div>
+    </div>
+  </template><template data-preview="out15">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">أساسيات الرياضيات</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="mb-3"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">الثلاثاء</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">13:30</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٦٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">سارة القحطاني</span></div><div class="sheet-row"><span class="k">العائلة</span><span class="v"><a href="family.html" class="link-more">أبو سلمان الغامدي</a></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">الرياضيات</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة أ</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">لم يحضر الطالب؛ تم إخطار العائلة.</span></div><div class="sheet-row" style="border-top:1px solid var(--c-line);margin-top:8px;padding-top:12px"><span class="k">النتيجة</span><span class="v"><span class="chip tone-cancelled"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg><span>غياب الطالب</span></span></span></div><div class="sheet-row"><span class="k">الحضور</span><span class="v"><span class="tabular">١٣ / ١٦</span></span></div><div class="sheet-row"><span class="k">الطالب</span><span class="v"><a href="student.html" class="link-more">وليد الغامدي</a></span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg><span>تغيّب الطالب عن الجلسة</span></span></span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-rotate-cw"></use></svg><span>أُضيفت إلى الرصيد (تجريبي)</span></span></span></div><div class="sheet-row"><span class="k"></span><span class="v"><span class="attention-flag"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>متابعة غياب</span></span></span></div><div class="sheet-row"><span class="k">ملاحظة المعلم</span><span class="v">يحتاج إلى متابعة الواجب قبل الجلسة القادمة.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إعادة جدولة هذه الجلسة؟" data-confirm-msg="إجراء تجريبي على الواجهة فقط — لا يتم حجز موعد فعلي." data-confirm-cta="إعادة الجدولة" data-confirm-toast="تم فتح إعادة الجدولة (تجريبي)." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="تم إرسال التنبيه (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه العائلة</span></button><button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="تم التراجع عن النتيجة (تجريبي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-rotate-cw"></use></svg><span>تراجع</span></button><button type="button" class="btn btn-secondary btn-sm" disabled title="تتطلب وحدة الفوترة/الرصيد (خارج النطاق الحالي)." aria-disabled="true" ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span>إضافة إلى الرصيد</span></button><a href="schedule.html#view=timetable" class="btn btn-secondary btn-sm"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span>عرض في الجدول</span></a></div></div>
     </div>
   </template>
   </div>

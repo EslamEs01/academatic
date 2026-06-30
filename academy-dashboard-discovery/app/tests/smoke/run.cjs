@@ -6,7 +6,7 @@ const { PORT } = require('../../scripts/serve.cjs');
 
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
-  'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group'];
+  'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance'];
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -403,6 +403,122 @@ const ok = (c, m) => { if (!c) fails.push(m); };
           return { courses: has(/(^|\/)courses\.(en\.)?html/), groups: has(/(^|\/)groups\.(en\.)?html/) };
         });
         ok(a.courses && a.groups, `${page}/${lang}: family profile missing courses/groups deep-links`);
+      }
+
+      // Spec 007 — Teachers page enrichment: labeled status chips · counts · real teacher.html links · status filter
+      if (page === 'teachers') {
+        const a = await p.evaluate(() => {
+          const cards = [...document.querySelectorAll('#teachers-grid .dir-card')];
+          const labeled = cards.filter((c) => { const ch = c.querySelector('.chip'); return ch && ch.querySelector('svg') && ch.textContent.trim().length > 0; }).length;
+          const profileLinks = [...document.querySelectorAll('#teachers-grid a[href]')].filter((x) => /(^|\/)teacher\.(en\.)?html$/.test(x.getAttribute('href') || '')).length;
+          const withCounts = cards.filter((c) => [...c.querySelectorAll('.stat-mini .v')].filter((v) => v.textContent.trim().length > 0).length >= 3).length;
+          return { cards: cards.length, labeled, profileLinks, withCounts };
+        });
+        ok(a.cards >= 6, `${page}/${lang}: expected ≥6 teacher cards, got ${a.cards}`);
+        ok(a.labeled === a.cards, `${page}/${lang}: not every teacher card has a labeled status chip (${a.labeled}/${a.cards})`);
+        ok(a.profileLinks >= a.cards, `${page}/${lang}: teacher cards missing teacher.html profile links (${a.profileLinks}/${a.cards})`);
+        ok(a.withCounts === a.cards, `${page}/${lang}: not every teacher card shows its courses/groups/students counts (${a.withCounts}/${a.cards})`);
+        const before = await p.$$eval('#teachers-grid .dir-card', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="status"]', 'active').catch(() => {});
+        await p.waitForTimeout(150);
+        const after = await p.$$eval('#teachers-grid .dir-card', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `${page}/${lang}: status filter did not narrow teachers (${before} → ${after})`);
+      }
+
+      // Spec 007 — Teacher profile: 8 baked tabs · one visible · named switch · cross-links · canonical drawer · teacherAbsent≠studentAbsent · not a nav item
+      if (page === 'teacher') {
+        const a = await p.evaluate(() => {
+          const wrap = document.querySelector('[data-tabs="teacher"]');
+          const panels = wrap ? [...wrap.querySelectorAll('[data-tabpanel]')] : [];
+          return {
+            bannerLabeled: [...document.querySelectorAll('.profile-banner .chip')].some((c) => c.querySelector('svg') && c.textContent.trim().length > 0),
+            tabsN: wrap ? wrap.querySelectorAll('[role="tab"][data-tab]').length : 0,
+            panels: panels.length, visible: panels.filter((pn) => !pn.hidden).length,
+            drawers: document.querySelectorAll('template[data-preview]').length,
+            notNav: !document.querySelector('.nav-panel .nav-item[data-nav="teacher"]'),
+          };
+        });
+        ok(a.tabsN === 8 && a.panels === 8, `${page}/${lang}: expected 8 profile tabs/panels, got ${a.tabsN}/${a.panels}`);
+        ok(a.visible === 1, `${page}/${lang}: expected exactly one visible tab panel, got ${a.visible}`);
+        ok(a.bannerLabeled, `${page}/${lang}: teacher banner missing a labeled status chip (icon + text)`);
+        ok(a.drawers >= 4, `${page}/${lang}: reused appointment/outcome drawer templates not baked (${a.drawers})`);
+        ok(a.notNav, `${page}/${lang}: teacher.html must NOT be a sidebar nav item`);
+        await p.click('[data-tabs="teacher"] [role="tab"][data-tab="students"]').catch(() => {});
+        await p.waitForTimeout(150);
+        const sw = await p.evaluate(() => { const v = [...document.querySelectorAll('[data-tabpanel]')].filter((pn) => !pn.hidden); return { count: v.length, id: v[0] ? v[0].getAttribute('data-tabpanel') : null }; });
+        ok(sw.count === 1 && sw.id === 'students', `${page}/${lang}: named tab switch did not activate 'students' (visible=${sw.count}, id=${sw.id})`);
+        const links = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const has = (re) => [...body.querySelectorAll('a[href]')].some((x) => re.test(x.getAttribute('href') || ''));
+          return {
+            course: has(/(^|\/)course\.(en\.)?html/), group: has(/(^|\/)group\.(en\.)?html/),
+            student: has(/(^|\/)student\.(en\.)?html/), family: has(/(^|\/)family\.(en\.)?html/),
+            sched: has(/(^|\/)schedule\.(en\.)?html#view=timetable/), att: has(/(^|\/)attendance\.(en\.)?html/),
+          };
+        });
+        ok(links.course && links.group && links.student && links.family, `${page}/${lang}: teacher profile body missing course/group/student/family links`);
+        ok(links.sched && links.att, `${page}/${lang}: teacher profile missing schedule/attendance deep-links`);
+        // Sessions & Outcomes tab — teacherAbsent vs studentAbsent distinct + the CANONICAL drawer opens (reuse, not bespoke)
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        await p.click('[data-tabs="teacher"] [role="tab"][data-tab="sessions-outcomes"]').catch(() => {});
+        await p.waitForTimeout(160);
+        const ab = await p.evaluate(() => {
+          const panel = document.querySelector('[data-tabpanel="sessions-outcomes"]');
+          const chipText = (oid) => { const row = panel && panel.querySelector(`.outcome-row[data-outcome="${oid}"]`); const ch = row && row.querySelector('.or-meta .chip'); return ch ? ch.textContent.trim() : ''; };
+          return { ta: chipText('teacherabsent'), sa: chipText('studentabsent') };
+        });
+        ok(ab.ta && ab.sa && ab.ta !== ab.sa, `${page}/${lang}: teacherAbsent vs studentAbsent not distinct in teacher context ("${ab.ta}" / "${ab.sa}")`);
+        const kebab = await p.$('[data-tabpanel="sessions-outcomes"] .outcome-row [data-row-menu]');
+        if (kebab) { await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150); const v = await p.$('.popover [data-drawer]'); if (v) { await v.scrollIntoViewIfNeeded(); await v.click(); await p.waitForTimeout(240); } }
+        const drawer = await p.evaluate(() => { const d = document.querySelector('.drawer.sheet'); return d ? { open: true, hasOutcome: /النتيجة|Outcome/.test(d.textContent) } : { open: false }; });
+        ok(drawer.open, `${page}/${lang}: the canonical outcome drawer did not open from the teacher 'sessions-outcomes' tab`);
+        ok(drawer.hasOutcome, `${page}/${lang}: the teacher outcome drawer is missing the Outcome section (bespoke drawer?)`);
+        await p.keyboard.press('Escape');
+        await p.waitForTimeout(120);
+        // Timetable tab reuses the Spec 003 agenda — named switch + at least one agenda block (data-drawer)
+        await p.click('[data-tabs="teacher"] [role="tab"][data-tab="timetable"]').catch(() => {});
+        await p.waitForTimeout(150);
+        const tt = await p.evaluate(() => {
+          const panel = document.querySelector('[data-tabpanel="timetable"]');
+          return { visible: !!(panel && !panel.hidden), blocks: panel ? panel.querySelectorAll('[data-drawer]').length : 0 };
+        });
+        ok(tt.visible && tt.blocks >= 1, `${page}/${lang}: teacher Timetable tab did not show the reused agenda (visible=${tt.visible}, blocks=${tt.blocks})`);
+        // banner Notify-family confirm is an honest action — clicking it opens a confirm modal (not a dead control)
+        const conf = await p.$('.profile-banner [data-confirm]');
+        if (conf) { await conf.click(); await p.waitForTimeout(160); }
+        const modal = await p.evaluate(() => !!document.querySelector('.modal-scrim, .drawer.sheet'));
+        ok(modal, `${page}/${lang}: the banner Notify-family action did not open a confirm modal`);
+        await p.keyboard.press('Escape');
+      }
+
+      // Spec 007 — Teacher Performance board: promoted nav · KPI tiles · comparison rows → teacher.html · queue · counts-not-scores · filter
+      if (page === 'teacher-performance') {
+        const a = await p.evaluate(() => {
+          const cards = [...document.querySelectorAll('#perf-list .dir-card')];
+          const navK = document.querySelector('.nav-panel .nav-item[data-nav="teacherKpi"]');
+          const body = document.getElementById('page-body');
+          const profileLinks = [...body.querySelectorAll('#perf-list a[href]')].filter((x) => /(^|\/)teacher\.(en\.)?html$/.test(x.getAttribute('href') || '')).length;
+          return {
+            cards: cards.length, profileLinks,
+            tiles: body.querySelectorAll('.medallion.m-soft').length,
+            navOk: !!(navK && navK.tagName === 'A' && /(^|\/)teacher-performance\.(en\.)?html$/.test(navK.getAttribute('href') || '')),
+            queueRows: body.querySelectorAll('.people-row').length,
+            // forbidden: a computed score/rank/leaderboard or a finance figure visible in the board body (EN + AR)
+            forbidden: /\b(score|scored|rank|ranked|ranking|leaderboard|percentile|gpa|salary|payroll|payout|compensation)\b/i.test(body.innerText)
+              || /لوحة الصدارة|الترتيب|تقييم رقمي|الرواتب|الراتب/.test(body.innerText),
+          };
+        });
+        ok(a.cards >= 6, `${page}/${lang}: expected ≥6 per-teacher comparison cards, got ${a.cards}`);
+        ok(a.profileLinks >= a.cards, `${page}/${lang}: comparison cards missing teacher.html links (${a.profileLinks}/${a.cards})`);
+        ok(a.tiles >= 5, `${page}/${lang}: expected ≥5 KPI tiles, got ${a.tiles}`);
+        ok(a.navOk, `${page}/${lang}: teacherKpi nav is not a real <a> to teacher-performance.html`);
+        ok(a.queueRows >= 1, `${page}/${lang}: follow-up queue has no rows (${a.queueRows})`);
+        ok(!a.forbidden, `${page}/${lang}: board shows a forbidden score/rank/leaderboard/finance token in the page body`);
+        const before = await p.$$eval('#perf-list .dir-card', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="workload"]', 'high').catch(() => {});
+        await p.waitForTimeout(150);
+        const after = await p.$$eval('#perf-list .dir-card', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `${page}/${lang}: workload filter did not narrow the board (${before} → ${after})`);
       }
       await ctx.close();
     }

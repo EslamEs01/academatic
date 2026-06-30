@@ -10,6 +10,7 @@ import { FAMILIES } from '../fixtures/families.js';
 import { STUDENTS } from '../fixtures/students.js';
 import { OUTCOME_SUMMARY } from '../fixtures/attendance.js';
 import { GROUP_SUMMARY } from '../fixtures/groups.js';
+import { TEACHERS_NEEDING_FOLLOWUP } from '../fixtures/teachers.js';
 import { STATUS_SUMMARY } from '../fixtures/status-summary.js';
 import { REPORTS } from '../fixtures/reports.js';
 import { PROFILE } from '../fixtures/profile.js';
@@ -64,6 +65,7 @@ function peopleSignal() {
   const stuHref = lang === 'en' ? './students.en.html' : './students.html';
   const attHref = lang === 'en' ? './attendance.en.html' : './attendance.html';
   const groupsHref = lang === 'en' ? './groups.en.html' : './groups.html';
+  const perfHref = lang === 'en' ? './teacher-performance.en.html' : './teacher-performance.html';
   const attnFamilies = new Set(FAMILIES.rows.filter((f) => f.attention).map((f) => f.id));
   const attn = STUDENTS.rows.filter((s) => attnFamilies.has(s.familyId) || s.statusId === 'suspended' || s.statusId === 'stopped').length;
   return `<section class="mb-8">
@@ -76,6 +78,7 @@ function peopleSignal() {
       <div class="flex flex-wrap items-center gap-2.5 ms-auto">
         <a href="${attHref}" class="chip tone-amber" style="text-decoration:none">${icon('clipboard-check', 'ico')}<span>${t('dash.outcomeFollowUp', { n: num(OUTCOME_SUMMARY.needsFollowUp) })}</span></a>
         <a href="${groupsHref}" class="chip tone-amber" style="text-decoration:none">${icon('students', 'ico')}<span>${t('dash.groupsAttention', { n: num(GROUP_SUMMARY.needsAttention) })}</span></a>
+        <a href="${perfHref}" class="chip tone-amber" style="text-decoration:none">${icon('trainers', 'ico')}<span>${t('dash.teachersFollowup', { n: num(TEACHERS_NEEDING_FOLLOWUP) })}</span></a>
         <a href="${stuHref}" class="chip tone-amber" style="text-decoration:none">${icon('alert-triangle', 'ico')}<span>${t('dash.studentsAttention', { n: num(attn) })}</span></a>
         <a href="${famHref}" class="link-more">${t('dash.viewFamilies')} ${icon('arrow-left', 'ico ico-sm')}</a>
       </div>

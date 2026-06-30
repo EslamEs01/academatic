@@ -57,6 +57,15 @@ const MATRIX = [
   { page: 'course', lang: 'en', theme: 'light' },
   { page: 'group', lang: 'ar', theme: 'light' },
   { page: 'group', lang: 'ar', theme: 'light', hash: '#view=sessions' },
+  // Spec 007 — teacher performance & academic KPIs (teachers enriched + teacher profile + board)
+  { page: 'teachers', lang: 'ar', theme: 'dark' },
+  { page: 'teachers', lang: 'en', theme: 'light' },
+  { page: 'teacher', lang: 'ar', theme: 'light' },
+  { page: 'teacher', lang: 'ar', theme: 'light', hash: '#view=sessions-outcomes' },
+  { page: 'teacher', lang: 'en', theme: 'light' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'light' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-performance', lang: 'en', theme: 'light' },
 ];
 
 (async () => {
