@@ -20,6 +20,11 @@ const MATRIX = [
   { page: 'dashboard', lang: 'ar', theme: 'dark', vp: 'desktop' },
   { page: 'dashboard', lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'reports', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', reportAction: true, variant: 'action' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', reportFilter: true, variant: 'filter' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'gallery', lang: 'ar', theme: 'light', vp: 'desktop' },
   { page: 'gallery', lang: 'ar', theme: 'dark', vp: 'desktop' },
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'mobile' },
@@ -155,9 +160,12 @@ const MATRIX = [
     }
     // Spec 007 — open the teacher banner Notify-family confirm modal
     if (s.teacherConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(380); }
+    // Spec 008 — reports: Schedule confirm modal (demo) / category-card filter narrowed
+    if (s.reportAction) { await page.click('.report-actions [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
+    if (s.reportFilter) { await page.selectOption('select[data-filter="area"]', 'attendance').catch(() => {}); await page.waitForTimeout(220); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
-    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm });
+    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction });
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
     else console.log(`  ✓ ${name}`);

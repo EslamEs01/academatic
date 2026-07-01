@@ -520,6 +520,87 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         const after = await p.$$eval('#perf-list .dir-card', (els) => els.filter((e) => !e.hidden).length);
         ok(after > 0 && after < before, `${page}/${lang}: workload filter did not narrow the board (${before} → ${after})`);
       }
+
+      // Spec 008 — Academic Reports shell: baked category cards (available real <a> · planned disabled-with-reason)
+      // · operations overview tiles · per-area sections · real source links · honest actions · teacherAbsent≠studentAbsent
+      // · NO finance/chart/score-rank token in the page body · filter narrows · no dead links/#app.
+      if (page === 'reports') {
+        const a = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const grid = document.getElementById('reports-grid');
+          const cards = [...(grid ? grid.querySelectorAll('.report-card') : [])];
+          const availableCards = cards.filter((c) => c.tagName === 'A');
+          const plannedCards = cards.filter((c) => c.classList.contains('is-disabled'));
+          const deadCardLinks = availableCards.filter((c) => { const h = c.getAttribute('href') || ''; return !h || h === '#'; }).length;
+          // each available card must point at one of the expected implemented pages (not just "not dead")
+          const EXPECTED = ['attendance', 'sessions', 'courses', 'teacher-performance', 'students'];
+          const badRoute = availableCards.filter((c) => {
+            const base = (c.getAttribute('href') || '').replace(/\.en\.html.*$/, '').replace(/\.html.*$/, '');
+            return !EXPECTED.includes(base);
+          }).length;
+          const plannedDead = plannedCards.filter((c) => c.tagName === 'A').length;
+          const plannedHaveReason = plannedCards.every((c) => (c.getAttribute('title') || '').length > 0 || !!c.querySelector('.report-reason'));
+          const hrefs = [...body.querySelectorAll('a[href]')].map((x) => x.getAttribute('href') || '');
+          const has = (re) => hrefs.some((h) => re.test(h));
+          const sources = {
+            attendance: has(/(^|\/)attendance\.(en\.)?html$/),
+            sessions: has(/(^|\/)sessions\.(en\.)?html$/),
+            timetable: has(/(^|\/)schedule\.(en\.)?html#view=timetable$/),
+            courses: has(/(^|\/)courses\.(en\.)?html$/),
+            groups: has(/(^|\/)groups\.(en\.)?html$/),
+            teacherPerf: has(/(^|\/)teacher-performance\.(en\.)?html$/),
+            teacher: has(/(^|\/)teacher\.(en\.)?html$/),
+            students: has(/(^|\/)students\.(en\.)?html$/),
+            families: has(/(^|\/)families\.(en\.)?html$/),
+          };
+          // teacherAbsent vs studentAbsent must be two textually-distinct chips (both use the user-x glyph)
+          const userXChips = [...body.querySelectorAll('.chip')].filter((c) => c.querySelector('use[href="#i-user-x"]'));
+          const userXTexts = [...new Set(userXChips.map((c) => c.textContent.replace(/\s+/g, ' ').trim()))];
+          // honest actions only — no real export/download anchor
+          const realExport = body.querySelectorAll('a[download], a[href^="blob:"], a[href$=".csv"], a[href$=".pdf"]').length;
+          const txt = body.innerText;
+          const forbidden = /\b(salary|payroll|payout|invoice|revenue|accounting|compensation|chart|canvas|graph|leaderboard|percentile|score|scored|rank|ranked|ranking)\b/i.test(txt)
+            || /الرواتب|الراتب|المدفوعات|الفواتير|الإيرادات|المحاسبة|الرسم البياني|لوحة الصدارة|لوحة المتصدرين|الترتيب|النسبة المئوية|تقييم رقمي/.test(txt);
+          return {
+            cards: cards.length, availableCards: availableCards.length, plannedCards: plannedCards.length,
+            deadCardLinks, badRoute, plannedDead, plannedHaveReason,
+            // scope the tile count to the operations-overview section ONLY (card medallions are excluded)
+            tiles: document.querySelectorAll('#ops-overview .medallion.m-soft').length,
+            sources, userXTexts,
+            demo: !!body.querySelector('[data-demo-action]'),
+            disabledReason: body.querySelectorAll('[data-disabled-reason]').length,
+            confirm: !!body.querySelector('[data-confirm]'),
+            realExport, forbidden,
+            deadHash: body.querySelectorAll('a[href="#"]').length,
+          };
+        });
+        ok(a.cards === 7, `${page}/${lang}: expected exactly 7 baked category cards (5 available + 2 planned), got ${a.cards}`);
+        ok(a.availableCards === 5, `${page}/${lang}: expected exactly 5 available category cards as real <a>, got ${a.availableCards}`);
+        ok(a.plannedCards === 2, `${page}/${lang}: expected exactly 2 planned/backendRequired cards, got ${a.plannedCards}`);
+        ok(a.deadCardLinks === 0, `${page}/${lang}: an available category card has a dead/empty link`);
+        ok(a.badRoute === 0, `${page}/${lang}: an available card points at an unexpected page (${a.badRoute})`);
+        ok(a.plannedDead === 0, `${page}/${lang}: a planned card is a dead <a> instead of disabled-with-reason`);
+        ok(a.plannedHaveReason, `${page}/${lang}: a planned card has no visible reason`);
+        ok(a.tiles === 8, `${page}/${lang}: expected exactly 8 baked operations-overview tiles in #ops-overview, got ${a.tiles}`);
+        for (const [k, v] of Object.entries(a.sources)) ok(v, `${page}/${lang}: missing real source link (${k})`);
+        ok(a.userXTexts.length >= 2, `${page}/${lang}: teacherAbsent vs studentAbsent are not two distinct chips (${JSON.stringify(a.userXTexts)})`);
+        ok(a.demo, `${page}/${lang}: missing Print demo action`);
+        ok(a.disabledReason >= 3, `${page}/${lang}: expected ≥3 disabled-with-reason actions (CSV/PDF/Share), got ${a.disabledReason}`);
+        ok(a.confirm, `${page}/${lang}: missing Schedule confirm action`);
+        ok(a.realExport === 0, `${page}/${lang}: found a real export/download link (must be demo only)`);
+        ok(!a.forbidden, `${page}/${lang}: reports body shows a forbidden finance/chart/score/rank token`);
+        ok(a.deadHash === 0, `${page}/${lang}: dead href="#" present in the reports body`);
+        const before = await p.$$eval('#reports-grid .report-card', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="area"]', 'attendance').catch(() => {});
+        await p.waitForTimeout(150);
+        const after = await p.$$eval('#reports-grid .report-card', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `${page}/${lang}: area filter did not narrow the category cards (${before} → ${after})`);
+        const sched = await p.$('.report-actions [data-confirm]');
+        if (sched) { await sched.click(); await p.waitForTimeout(160); }
+        const modal = await p.evaluate(() => !!document.querySelector('.modal-scrim, .drawer.sheet'));
+        ok(modal, `${page}/${lang}: the Schedule action did not open a confirm modal`);
+        await p.keyboard.press('Escape');
+      }
       await ctx.close();
     }
   }

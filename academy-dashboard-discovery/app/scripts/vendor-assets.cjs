@@ -98,6 +98,10 @@ const ICONS = {
   'calendar-clock': ['calendar-clock'],
   'rotate-cw': ['rotate-cw', 'refresh-cw'],
   'clipboard-check': ['clipboard-check', 'clipboard-list'],
+  /* Spec 008 — academic reports shell (honest action cluster icons; no chart icon) */
+  printer: ['printer'],
+  download: ['download', 'arrow-down-to-line'],
+  share: ['share-2', 'share'],
 };
 
 function innerSvg(name) {
