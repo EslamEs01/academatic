@@ -64,5 +64,8 @@
   "user-x",
   "calendar-clock",
   "rotate-cw",
-  "clipboard-check"
+  "clipboard-check",
+  "printer",
+  "download",
+  "share"
 ]

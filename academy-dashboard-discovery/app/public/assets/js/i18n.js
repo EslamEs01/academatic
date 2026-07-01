@@ -13,6 +13,8 @@ import arC from '../locales/ar.crs.js';
 import enC from '../locales/en.crs.js';
 import arT from '../locales/ar.trn.js';
 import enT from '../locales/en.trn.js';
+import arR from '../locales/ar.rep.js';
+import enR from '../locales/en.rep.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -37,6 +39,9 @@ deepMerge(en, enC);
 // Spec 007 keys live in *.trn.js (teacher performance & academic KPIs)
 deepMerge(ar, arT);
 deepMerge(en, enT);
+// Spec 008 keys live in *.rep.js (academic reports & operations shell)
+deepMerge(ar, arR);
+deepMerge(en, enR);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

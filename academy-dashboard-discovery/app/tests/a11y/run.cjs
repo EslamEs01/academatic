@@ -10,6 +10,8 @@ const MATRIX = [
   { page: 'dashboard', lang: 'ar', theme: 'dark' },
   { page: 'dashboard', lang: 'en', theme: 'light' },
   { page: 'reports', lang: 'ar', theme: 'light' },
+  { page: 'reports', lang: 'ar', theme: 'dark' },
+  { page: 'reports', lang: 'en', theme: 'light' },
   { page: 'gallery', lang: 'ar', theme: 'light' },
   { page: 'gallery', lang: 'ar', theme: 'dark' },
   // Spec 002 pages

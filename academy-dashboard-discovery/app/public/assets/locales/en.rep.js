@@ -1,0 +1,102 @@
+/* Spec 008 — English keys (Academic Reports & Operations shell).
+ * Mirrors ar.rep.js exactly. Merged into en.js at runtime (deepMerge extends).
+ * No finance/score/chart wording anywhere. */
+export default {
+  reportsPage: {
+    title: 'Reports',
+    subtitle: 'Organize and review your academy’s academic operations — one calm place to see what needs follow-up and open the source page.',
+  },
+
+  rep: {
+    signal: {
+      healthy: 'Healthy',
+      needsFollowUp: 'Needs follow-up',
+      attentionRisk: 'Attention risk',
+    },
+    avail: {
+      available: 'Available',
+      demoOnly: 'Demo only',
+      planned: 'Planned',
+      backendRequired: 'Backend required',
+    },
+    act: {
+      group: 'Report actions',
+      print: 'Print report',
+      printToast: 'Print is a demo — no file is generated.',
+      exportCsv: 'Export CSV',
+      exportPdf: 'Export PDF',
+      share: 'Share report',
+      schedule: 'Schedule report',
+      scheduleTitle: 'Schedule this report',
+      scheduleMsg: 'This is a demo only — no backend job is created and nothing is sent.',
+      scheduleCta: 'Confirm schedule',
+      scheduleToast: 'Scheduled (demo) — no backend job was created.',
+    },
+    reason: {
+      export: 'Export needs the backend module — out of current scope.',
+      share: 'Sharing needs the backend module — out of current scope.',
+    },
+    cat: {
+      attendance: { title: 'Attendance & Outcomes', desc: 'Session attendance, absences and follow-up.' },
+      sessions: { title: 'Sessions & Timetable', desc: 'Session status across the week.' },
+      coursesGroups: { title: 'Courses & Groups', desc: 'Active courses and group health.' },
+      teachers: { title: 'Teachers', desc: 'Teacher follow-up and absences.' },
+      studentsFamilies: { title: 'Students & Families', desc: 'People who need follow-up today.' },
+      monthly: { title: 'Monthly reports', desc: 'Month-by-month operations summaries.' },
+      analysis: { title: 'Data analysis', desc: 'Deeper cross-area review.' },
+    },
+    planned: {
+      monthlyReason: 'Planned — monthly roll-ups arrive with the reporting backend.',
+      analysisReason: 'Backend required — needs the reporting service to compute.',
+    },
+    ops: {
+      title: 'Academic operations',
+      sub: 'What needs follow-up across the academy — every number matches the dashboard.',
+      completed: 'Completed sessions',
+      needsFollowUp: 'Outcomes need follow-up',
+      teacherAbsent: 'Teacher absences',
+      studentAbsent: 'Student absences',
+      cancelled: 'Cancelled / rescheduled',
+      groupsAttention: 'Groups need attention',
+      teachersFollowUp: 'Teachers need follow-up',
+      studentsFollowUp: 'Students need follow-up',
+      statusStrip: 'Area status',
+    },
+    sec: {
+      catalogTitle: 'Report categories',
+      catalogSub: 'Open any area to inspect its source page. Advanced reports arrive with the backend.',
+      detailTitle: 'Operations detail',
+      detailSub: 'Per-area summaries rolled up from the same fixtures — open any source page to inspect.',
+      // stat labels
+      cancelledResched: 'Cancelled / rescheduled',
+      needsFollowUp: 'Needs follow-up',
+      totalSessions: 'Total sessions',
+      activeCourses: 'Active courses',
+      groups: 'Groups',
+      groupsAttention: 'Need attention',
+      teachersFollowUp: 'Need follow-up',
+      studentsFollowUp: 'Students need follow-up',
+      familiesAttention: 'Families need attention',
+      // links
+      viewAttendance: 'View attendance',
+      viewSessions: 'View sessions',
+      viewTimetable: 'View timetable',
+      viewCourses: 'View courses',
+      viewGroups: 'View groups',
+      teacherPerformance: 'Teacher performance',
+      teacherProfile: 'Teacher profile',
+      viewStudents: 'View students',
+      viewFamilies: 'View families',
+      studentProfile: 'Student profile',
+      familyProfile: 'Family profile',
+    },
+    filter: {
+      search: 'Search reports',
+      area: 'Area',
+      allAreas: 'All areas',
+      advanced: 'Advanced',
+      availability: 'Availability',
+      allAvailability: 'All availability',
+    },
+  },
+};

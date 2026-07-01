@@ -91,9 +91,6 @@ export default {
   report: {
     permissionBadge: 'Permission required',
     trainers: { title: 'Teachers report', desc: 'Teacher performance, hours and ratings.', reason: 'Requires academy-manager permission.' },
-    revenue: { title: 'Revenue report', desc: 'Monthly subscriptions and payments.' },
-    studentPerf: { title: 'Student performance', desc: 'Grade progress and participation across the term.' },
-    attendanceMonthly: { title: 'Monthly attendance', desc: 'Attendance and absence rates per subject and level.' },
   },
 
   state: {
@@ -104,7 +101,7 @@ export default {
 
   reportsPage: {
     title: 'Reports center',
-    subtitle: 'Operational and financial academy reports in one place.',
+    subtitle: 'Academy academic-operations reports in one place.',
   },
 
   gallery: {
