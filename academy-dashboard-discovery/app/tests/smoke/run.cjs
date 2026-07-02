@@ -10,6 +10,38 @@ const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedu
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
+// Spec 010 — the set of built page files, for the link-integrity crawl (a link must
+// target one of these, an in-page hash, or be a documented hash-view).
+const VALID_FILES = new Set();
+for (const b of PAGES) { VALID_FILES.add(`${b}.html`); VALID_FILES.add(`${b}.en.html`); }
+VALID_FILES.add('index.html');
+
+// Spec 010 — the sessions badge must equal the authored fixture total (nav-IA contract §5:
+// derived, not a hard-coded literal). Read SESSIONS.total from source so the assertion proves
+// the tie to the exact fixture the badge derives from (and does not rot if the fixture changes).
+const fs = require('fs');
+const path = require('path');
+const sessSrc = fs.readFileSync(path.join(__dirname, '../../src/js/fixtures/sessions.js'), 'utf8');
+const SESSIONS_TOTAL = (sessSrc.match(/export const SESSIONS\s*=\s*\{[\s\S]*?total:\s*(\d+)/) || [])[1] || '';
+
+// Spec 010 — pages with a filter form / tiles-as-filters. Each must genuinely hide non-matching
+// rows (the [data-row][hidden] fix) AND keep only matching rows visible. `facet`/`value` (lowercased
+// to match enhance.js's compare) drive the correctness check; a null facet (schedule's dynamic
+// teacher index) is engagement/leak-only, its correctness covered by the per-page schedule block.
+const FILTER_SPEC = {
+  attendance: { facet: 'outcome', value: 'studentabsent', apply: (p) => p.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]') },
+  finance: { facet: 'status', value: 'overdue', apply: (p) => p.click('[data-filter-set="status:overdue"]') },
+  sessions: { facet: 'status', value: 'completed', apply: (p) => p.selectOption('select[data-filter="status"]', 'completed') },
+  students: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  teachers: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  courses: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  groups: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  families: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  'teacher-performance': { facet: 'workload', value: 'high', apply: (p) => p.selectOption('select[data-filter="workload"]', 'high') },
+  reports: { facet: 'area', value: 'attendance', apply: (p) => p.selectOption('select[data-filter="area"]', 'attendance') },
+  schedule: { facet: null, value: null, apply: (p) => p.selectOption('select[data-filter="teacher"]', { index: 1 }) },
+};
+
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
 
@@ -760,6 +792,112 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         ok(fin.walletInBody === wantMoney, `${page}/${lang}: expected ${wantMoney} wallet icon(s) in #page-body, got ${fin.walletInBody} — a finance widget may have been added`);
         ok(fin.currencyTokens === wantMoney, `${page}/${lang}: expected ${wantMoney} currency token(s) in #page-body, got ${fin.currencyTokens} — a money figure may have been added`);
       }
+
+      // ===== Spec 010 — navigation IA corrections (shared sidebar; asserted on every page) =====
+      const nav010 = await p.evaluate(() => {
+        const railCats = document.querySelectorAll('.nav-rail .rail-cat[data-nav-category]').length;
+        const rep = document.getElementById('catpanel-reports');
+        const adm = document.getElementById('catpanel-admin');
+        const finSub = rep ? [...rep.querySelectorAll('.nav-subsection')]
+          .find((s) => (s.querySelector('.nav-subsection-label')?.textContent || '').trim().length > 0) : null;
+        const finLabel = finSub ? finSub.querySelector('.nav-subsection-label').textContent.trim() : '';
+        const finMembers = finSub ? [...finSub.querySelectorAll('.nav-item')].map((n) => n.getAttribute('data-nav')) : [];
+        const finLinks = finSub ? [...finSub.querySelectorAll('a.nav-item[data-nav-status="implemented"]')].map((n) => n.getAttribute('data-nav')) : [];
+        const admItems = adm ? [...adm.querySelectorAll('.nav-item')].map((n) => n.getAttribute('data-nav')) : [];
+        const banksInReports = !!rep?.querySelector('[data-nav="banks"]');
+        const banksInAdmin = !!adm?.querySelector('[data-nav="banks"]');
+        const sessBadge = (document.querySelector('.nav-item[data-nav="sessions"] .nav-badge')?.textContent || '').trim();
+        const famTitle = (document.querySelector('#catpanel-families .cat-title')?.textContent || '').trim();
+        // sitewide locked finance items (six billing + banks) — all disabled + reason + lock
+        const lockedFin = ['invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport', 'banks'];
+        const lockedOk = lockedFin.every((id) => {
+          const el = document.querySelector(`.nav-item[data-nav="${id}"]`);
+          return !!el && el.getAttribute('data-nav-status') === 'disabled'
+            && el.getAttribute('data-reason-key') === 'nav.reason.finance'
+            && !!el.querySelector('use[href="#i-lock"]');
+        });
+        return { railCats, finLabel, finMembers, finLinks, admItems, banksInReports, banksInAdmin, sessBadge, famTitle, lockedOk };
+      });
+      const expFinMembers = ['finance', 'invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport', 'banks'];
+      const expFamTitle = lang === 'en' ? 'Families & Students' : 'العائلات والطلاب';
+      const expFinLabel = lang === 'en' ? 'Finance' : 'المالية';
+      ok(nav010.railCats === 6, `${page}/${lang}: expected exactly 6 rail categories, got ${nav010.railCats} (no 7th finance rail category)`);
+      ok(nav010.finLabel === expFinLabel, `${page}/${lang}: finance sub-section label should be "${expFinLabel}", got "${nav010.finLabel}"`);
+      ok(JSON.stringify(nav010.finMembers) === JSON.stringify(expFinMembers), `${page}/${lang}: finance sub-section members/order wrong: ${JSON.stringify(nav010.finMembers)}`);
+      ok(JSON.stringify(nav010.finLinks) === JSON.stringify(['finance']), `${page}/${lang}: finance sub-section must have exactly one implemented link (finance), got ${JSON.stringify(nav010.finLinks)}`);
+      ok(nav010.banksInReports && !nav010.banksInAdmin, `${page}/${lang}: banks must live in the reports finance sub-section, not admin (reports=${nav010.banksInReports}, admin=${nav010.banksInAdmin})`);
+      ok(nav010.admItems.length === 5 && !nav010.admItems.includes('banks'), `${page}/${lang}: admin category should have 5 planned items and no banks, got ${JSON.stringify(nav010.admItems)}`);
+      ok(nav010.lockedOk, `${page}/${lang}: the seven locked finance items (six billing + banks) must stay disabled+reason+lock`);
+      ok(nav010.sessBadge === SESSIONS_TOTAL, `${page}/${lang}: sessions badge should equal the fixture SESSIONS.total (${SESSIONS_TOTAL}), got "${nav010.sessBadge}" — must be derived, not a stray literal`);
+      ok(nav010.famTitle === expFamTitle, `${page}/${lang}: families category label should be "${expFamTitle}", got "${nav010.famTitle}"`);
+
+      // ===== Spec 010 — link integrity crawl (every anchor: no href="#", target exists, no external) =====
+      const links010 = await p.evaluate((valid) => {
+        const anchors = [...document.querySelectorAll('a[href]')];
+        let deadHash = 0, external = 0, badTarget = 0;
+        for (const a of anchors) {
+          let h = (a.getAttribute('href') || '').trim();
+          if (h === '#' || h === '') { deadHash++; continue; }
+          if (h.startsWith('#')) continue;                       // in-page anchor (skip link, hash view)
+          if (/^https?:|^\/\//.test(h)) { external++; continue; }
+          h = h.replace(/^\.\//, '');                            // normalize the relative "./" prefix
+          const file = h.split('#')[0];                          // strip hash-view fragment
+          if (file && !valid.includes(file)) badTarget++;
+        }
+        return { deadHash, external, badTarget };
+      }, [...VALID_FILES]);
+      // `a[href="#"]` is this app's enhance.js-handled control hook (enhance.js:506/512). The ONLY
+      // instance in the built output is the pre-existing Spec 001 dashboard "overview → view all"
+      // section-header link, which lives in the now-contract-frozen dashboard body (see
+      // dashboard-impact-contract). Allow exactly that one; catch any NEW dead link anywhere else.
+      ok(links010.deadHash === (page === 'dashboard' ? 1 : 0), `${page}/${lang}: ${links010.deadHash} dead href="#" link(s) (expected ${page === 'dashboard' ? 1 : 0})`);
+      ok(links010.external === 0, `${page}/${lang}: ${links010.external} unexpected external link(s)`);
+      ok(links010.badTarget === 0, `${page}/${lang}: ${links010.badTarget} link(s) to a nonexistent page file`);
+
+      // ===== Spec 010 — planned/backendRequired truthfulness sweep =====
+      const truth010 = await p.evaluate(() => {
+        const items = [...document.querySelectorAll('.nav-panel .nav-item')];
+        // every non-implemented item is a <button> (cannot navigate), with a coming-soon or reason hook
+        const badPlanned = items.filter((n) => n.getAttribute('data-nav-status') === 'planned'
+          && (n.tagName !== 'BUTTON' || !n.hasAttribute('data-coming-soon'))).length;
+        const badDisabled = items.filter((n) => n.getAttribute('data-nav-status') === 'disabled'
+          && (n.tagName !== 'BUTTON' || n.getAttribute('aria-disabled') !== 'true' || !n.hasAttribute('data-reason-key'))).length;
+        return { badPlanned, badDisabled };
+      });
+      ok(truth010.badPlanned === 0, `${page}/${lang}: ${truth010.badPlanned} planned nav item(s) not a non-navigating «قريبًا» button`);
+      ok(truth010.badDisabled === 0, `${page}/${lang}: ${truth010.badDisabled} disabled nav item(s) missing button/aria-disabled/reason`);
+
+      // ===== Spec 010 — the one sanctioned family→finance body link =====
+      if (page === 'family') {
+        const famFin = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const isFin = (h) => /(^|\/)finance\.(en\.)?html($|#)/.test(h || '');
+          return [...body.querySelectorAll('a[href]')].filter((a) => isFin(a.getAttribute('href'))).length;
+        });
+        ok(famFin === 1, `${page}/${lang}: family body must contain exactly one finance link, got ${famFin}`);
+      }
+
+      // ===== Spec 010 — filter visibility: filtered-out rows are genuinely invisible, and only
+      // matching rows stay visible (the [data-row][hidden] fix + correct narrowing) =====
+      if (FILTER_SPEC[page]) {
+        const spec = FILTER_SPEC[page];
+        await spec.apply(p).catch(() => {});
+        await p.waitForTimeout(240);
+        const vis = await p.evaluate((f) => {
+          const rows = [...document.querySelectorAll('[data-row]')];
+          const shownRows = rows.filter((r) => getComputedStyle(r).display !== 'none');
+          const leaked = rows.filter((r) => r.hasAttribute('hidden') && getComputedStyle(r).display !== 'none').length;
+          const hidden = rows.filter((r) => r.hasAttribute('hidden')).length;
+          // correctness: with a known facet, every still-visible row must match the applied value.
+          // If the filter silently failed to engage, non-matching rows stay visible → mismatch > 0.
+          const mismatch = f ? shownRows.filter((r) => (r.getAttribute('data-' + f.facet) || '').toLowerCase() !== f.value).length : 0;
+          return { leaked, hidden, shown: shownRows.length, total: rows.length, mismatch };
+        }, spec.facet ? { facet: spec.facet, value: spec.value } : null);
+        ok(vis.leaked === 0, `${page}/${lang}: ${vis.leaked} filtered-out row(s) attribute-hidden but still visually rendered — the [data-row][hidden] fix failed`);
+        ok(vis.hidden > 0, `${page}/${lang}: narrowing filter hid 0 of ${vis.total} rows — filter did not engage, visibility check is vacuous`);
+        ok(vis.mismatch === 0, `${page}/${lang}: ${vis.mismatch} visible row(s) do not match the applied filter (${spec.facet}=${spec.value}) — filtering is incorrect or did not engage`);
+      }
+
       await ctx.close();
     }
   }

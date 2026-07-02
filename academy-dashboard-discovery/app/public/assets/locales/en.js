@@ -4,8 +4,8 @@ export default {
 
   /* rail category labels (also the panel titles) */
   cat: {
-    control: 'Control panel', families: 'Families', teachers: 'Teachers', teachersPerf: 'Performance',
-    reports: 'Reports', admin: 'Administration', settings: 'Settings',
+    control: 'Control panel', families: 'Families & Students', teachers: 'Teachers', teachersPerf: 'Performance',
+    reports: 'Reports', finance: 'Finance', admin: 'Administration', settings: 'Settings',
   },
 
   nav: {

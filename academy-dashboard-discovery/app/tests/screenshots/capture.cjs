@@ -124,6 +124,13 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeConfirm: true, variant: 'confirm' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeFilter: true,  variant: 'filter' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 010 — Coverage, Navigation IA & Polish (acceptance frames). The six rail categories
+  // expanded (AR light) are already covered above via the default control view + cat: families/
+  // teachers/reports/admin/settings; the reports-category frame shows the finance sub-section.
+  { page: 'dashboard',  lang: 'ar', theme: 'dark',  vp: 'desktop', cat: 'reports', variant: 'finance-group' },
+  { page: 'dashboard',  lang: 'en', theme: 'light', vp: 'desktop', cat: 'reports', variant: 'finance-group' },
+  { page: 'family',     lang: 'ar', theme: 'light', vp: 'desktop', view: 'plan',   variant: 'plan-billing' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', attnFilter: true, variant: 'filtered' },
 ];
 
 (async () => {
@@ -175,6 +182,8 @@ const MATRIX = [
     if (s.financeDrawer) { await page.click('#invoice-list [data-drawer]').catch(() => {}); await page.waitForTimeout(380); }
     if (s.financeConfirm) { await page.click('#invoice-list [data-confirm]').catch(() => {}); await page.waitForTimeout(380); }
     if (s.financeFilter) { await page.click('[data-filter-set="status:overdue"]').catch(() => {}); await page.waitForTimeout(250); }
+    // Spec 010 — attendance status-tile filter narrowing proof
+    if (s.attnFilter) { await page.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]').catch(() => {}); await page.waitForTimeout(280); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
     await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm });

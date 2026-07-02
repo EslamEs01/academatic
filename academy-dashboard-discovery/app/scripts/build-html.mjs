@@ -76,6 +76,19 @@ const PAGES = [
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;
 
+/* Chip-tone build guard (Spec 010): every `chip tone-X` in rendered HTML must map to
+ * a styled `.chip.tone-X` rule — an unstyled tone renders as a bare pill silently
+ * (the Spec 008 `coral` bug). Unknown tone → throw (fails the build). Medallions use a
+ * separate, richer palette (`m-soft/m-grad tone-*`) and are intentionally NOT scanned. */
+const STYLED_CHIP_TONES = new Set(['live', 'upcoming', 'completed', 'cancelled', 'amber', 'neutral']);
+function assertChipTones(html, file) {
+  for (const m of html.matchAll(/\bchip tone-([a-z-]+)/g)) {
+    if (!STYLED_CHIP_TONES.has(m[1])) {
+      throw new Error(`[build:html] ${file}: unstyled chip tone "tone-${m[1]}" — add a .chip.tone-${m[1]} rule or use a styled tone (${[...STYLED_CHIP_TONES].join('/')})`);
+    }
+  }
+}
+
 function htmlDoc({ lang, dir, title, body }) {
   return `<!DOCTYPE html>
 <html lang="${lang}" dir="${dir}">
@@ -104,6 +117,7 @@ for (const p of PAGES) {
     const title = `${t(p.titleKey)} · ${t('brand.name')}`;
     const body = shellMarkup({ activeId: p.activeId, titleKey: p.titleKey, crumbKey: p.crumbKey, bodyHTML: p.render() });
     const file = lang === 'en' ? `${p.base}.en.html` : `${p.base}.html`;
+    assertChipTones(body, file);
     writeFileSync(resolve(OUT, file), htmlDoc({ lang, dir, title, body }));
     count++;
   }

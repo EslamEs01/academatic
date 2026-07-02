@@ -59,10 +59,11 @@ grep -RniE 'invoice|فاتورة|فواتير|مدفوعات|payroll|payout|sala
   src/js/pages/attendance.js src/js/pages/sessions.js src/js/pages/schedule.js \
   src/js/fixtures/teachers.js src/js/fixtures/students.js src/js/fixtures/courses.js src/js/fixtures/groups.js \
   src/locales/ar.rep.js src/locales/en.rep.js src/locales/ar.trn.js src/locales/en.trn.js \
-  | grep -viE 'fam\.bill|fam\.attn\.payment|fam\.tab\.billing|Plan & Billing|att\.reason\.finance|att\.act\.addToCredit|billingPanel|billingStep|billingAlerts|hourRate|No pay/finance|no pay figures|finance is out' \
+  | grep -viE 'fam\.bill|fam\.attn\.payment|fam\.tab\.billing|Plan & Billing|att\.reason\.finance|att\.act\.addToCredit|billingPanel|billingStep|billingAlerts|hourRate|No pay/finance|no pay figures|finance is out|fam\.bill\.viewInvoices' \
   && echo FAIL || echo ok
 #    (the exclusion list = the sanctioned PRE-EXISTING touch-points of Specs 004/005 — nothing Spec 009 adds may need it.
 #     `fam.tab.billing` + the "Plan & Billing" header comment are Spec 004 lines in pages/family.js, unchanged by Spec 009 — verified via git diff.)
+#     `fam.bill.viewInvoices` (Spec 010 sanctioned touch-point: family→finance shortcut) — the one honest family-profile link to the fixture-only Finance shell added by Spec 010; already covered by the `fam.bill` prefix, listed explicitly for documentation. The `finance.html`/`finance.en.html` href on that line is not a no-leak token.
 
 # 2) NO-ENGINE direction — no gateway/ledger/FX/tax machinery in the finance files
 grep -RniE 'paymob|payoneer|stripe|paypal|ledger|vat|\btax\b|exchange.?rate|conversion|gateway' \
@@ -99,7 +100,7 @@ Built-page body checks for dashboard/reports are DOM-based in smoke (a file grep
 - "Does any action mutate a chip, produce a file, send anything, or persist anything?" → MUST be **no**.
 - "Does the dashboard or reports **body** (excluding the sidebar) contain any new finance word, figure, or link?" → MUST be **no**.
 - "Is there a receipt-upload affordance, a pay figure, a gateway name, or a chart anywhere?" → MUST be **no**.
-- "Did any file from Specs 001–008's guarded sets change?" → MUST be **no** (git diff is the evidence).
+- "Did any file from Specs 001–008's guarded sets change?" → MUST be **no** (git diff is the evidence) — except `pages/family.js`, changed once by Spec 010's documented family→finance shortcut (see Spec 010 `source-links-contract.md`); that single sanctioned link is the only exception.
 
 ## G9. Enforcement
 

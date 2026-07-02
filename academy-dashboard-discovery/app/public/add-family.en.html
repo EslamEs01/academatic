@@ -241,7 +241,7 @@
       <div class="rail-cats" role="tablist" aria-orientation="vertical" aria-label="Navigation categories" data-nav-rail>
         <button type="button" class="rail-cat" role="tab" id="railcat-control" aria-controls="catpanel-control" aria-selected="false" data-nav-category="control" aria-label="Control panel" title="Control panel" tabindex="-1">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-layers"></use></svg>
-  </button><button type="button" class="rail-cat is-active" role="tab" id="railcat-families" aria-controls="catpanel-families" aria-selected="true" data-nav-category="families" aria-label="Families" title="Families" tabindex="0">
+  </button><button type="button" class="rail-cat is-active" role="tab" id="railcat-families" aria-controls="catpanel-families" aria-selected="true" data-nav-category="families" aria-label="Families &amp; Students" title="Families &amp; Students" tabindex="0">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg>
   </button><button type="button" class="rail-cat" role="tab" id="railcat-teachers" aria-controls="catpanel-teachers" aria-selected="false" data-nav-category="teachers" aria-label="Teachers" title="Teachers" tabindex="-1">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg>
@@ -293,8 +293,8 @@
       
     </nav>
   </div><div class="cat-panel" id="catpanel-families" role="tabpanel" tabindex="-1" aria-labelledby="railcat-families" data-nav-panel="families">
-    <div class="cat-title">Families</div>
-    <nav class="panel-nav" aria-label="Families">
+    <div class="cat-title">Families & Students</div>
+    <nav class="panel-nav" aria-label="Families &amp; Students">
       <div class="space-y-1"><a href="families.en.html" class="nav-item" data-nav="families" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span class="label">Families</span>
   </a><a href="add-family.en.html" class="nav-item is-active" data-nav="addFamily" data-nav-status="implemented" aria-current="page">
@@ -347,7 +347,11 @@
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">Monthly reports</span><span class="nav-soon">Soon</span>
     </button><button type="button" class="nav-item is-planned" data-nav="dataAnalysis" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Data analysis</span><span class="nav-soon">Soon</span>
-    </button><a href="finance.en.html" class="nav-item" data-nav="finance" data-nav-status="implemented">
+    </button></div>
+      
+    <div class="nav-subsection">
+      <div class="nav-subsection-label">Finance</div>
+      <div class="space-y-1"><a href="finance.en.html" class="nav-item" data-nav="finance" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Finance</span>
   </a><button type="button" class="nav-item is-disabled" data-nav="invoices" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the real billing backend — the Finance page shows a fixture-only preview." aria-label="Invoices — Requires the real billing backend — the Finance page shows a fixture-only preview.">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Invoices</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
@@ -361,8 +365,10 @@
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Payments</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
     </button><button type="button" class="nav-item is-disabled" data-nav="classSalaryReport" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the real billing backend — the Finance page shows a fixture-only preview." aria-label="Class salary report — Requires the real billing backend — the Finance page shows a fixture-only preview.">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Class salary report</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="banks" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the real billing backend — the Finance page shows a fixture-only preview." aria-label="Banks — Requires the real billing backend — the Finance page shows a fixture-only preview.">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Banks</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
     </button></div>
-      
+    </div>
     </nav>
   </div><div class="cat-panel" id="catpanel-admin" role="tabpanel" tabindex="-1" aria-labelledby="railcat-admin" data-nav-panel="admin" hidden>
     <div class="cat-title">Administration</div>
@@ -377,8 +383,6 @@
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">Certificates</span><span class="nav-soon">Soon</span>
     </button><button type="button" class="nav-item is-planned" data-nav="certificateRequests" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">Certificate requests</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-disabled" data-nav="banks" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="Requires the real billing backend — the Finance page shows a fixture-only preview." aria-label="Banks — Requires the real billing backend — the Finance page shows a fixture-only preview.">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">Banks</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
     </button></div>
       
     </nav>

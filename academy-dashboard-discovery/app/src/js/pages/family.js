@@ -118,6 +118,9 @@ function schedulePanel(blocks) {
 
 function billingPanel(fam) {
   const p = fam.plan;
+  /* Real money management stays out of scope (disabled-with-reason); the one honest
+   * onward link points to the fixture-only Finance shell. */
+  const financeHref = getLang() === 'en' ? 'finance.en.html' : 'finance.html';
   return `<div class="info-card">
     <div class="ic-title">${icon('wallet', 'ico')}<span>${t('fam.bill.title')}</span></div>
     ${sheetRow(t('fam.bill.planLabel'), t(p.labelKey))}
@@ -126,8 +129,9 @@ function billingPanel(fam) {
     ${sheetRow(t('fam.bill.status'), chip({ labelKey: 'fam.bill.statusVal', tone: 'completed', icon: 'check-circle' }))}
     <div class="flex flex-wrap items-center gap-2 mt-4">
       ${button({ labelKey: 'fam.bill.manage', variant: 'secondary', size: 'sm', icon: 'wallet', disabled: true, reasonKey: 'fam.bill.reason' })}
-      <span class="text-[12px]" style="color:var(--c-ink-3)">${t('fam.bill.note')}</span>
+      <a href="${financeHref}" class="link-more">${t('fam.bill.viewInvoices')} ${icon('arrow-left', 'ico ico-sm')}</a>
     </div>
+    <div class="text-[12px] mt-2" style="color:var(--c-ink-3)">${t('fam.bill.note')}</div>
   </div>`;
 }
 

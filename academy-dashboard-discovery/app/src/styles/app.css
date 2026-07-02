@@ -749,6 +749,15 @@
   .fin-pay-row .fp-family { @apply font-bold text-[13px] text-ink truncate; text-decoration: none; flex: 1 1 130px; min-width: 0; }
   a.fp-family:hover { color: var(--c-primary); }
   .fin-pay-row .fp-amount { @apply font-bold text-[13.5px] text-ink shrink-0; }
+
+  /* Shared filter-visibility guarantee (Spec 010): the runtime filter sets the
+   * `hidden` attribute on `[data-row]` elements, but a component's own display
+   * rule (e.g. `.outcome-row{display:flex}`) can win the specificity tie and
+   * leave "hidden" rows visually rendered. This late, hook-scoped rule makes the
+   * semantic hidden state always win, app-wide. Scoped to the closed `data-row`
+   * filter hook so component visibility (tabs/panels/wizard/drawers) is untouched.
+   * The only !important Spec 010 adds (and the only one on the filter hook). */
+  [data-row][hidden] { display: none !important; }
 }
 
 @media (max-width: 640px) {

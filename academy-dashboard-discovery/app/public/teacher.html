@@ -241,7 +241,7 @@
       <div class="rail-cats" role="tablist" aria-orientation="vertical" aria-label="فئات التنقّل" data-nav-rail>
         <button type="button" class="rail-cat" role="tab" id="railcat-control" aria-controls="catpanel-control" aria-selected="false" data-nav-category="control" aria-label="لوحة التحكم" title="لوحة التحكم" tabindex="-1">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-layers"></use></svg>
-  </button><button type="button" class="rail-cat" role="tab" id="railcat-families" aria-controls="catpanel-families" aria-selected="false" data-nav-category="families" aria-label="العائلات" title="العائلات" tabindex="-1">
+  </button><button type="button" class="rail-cat" role="tab" id="railcat-families" aria-controls="catpanel-families" aria-selected="false" data-nav-category="families" aria-label="العائلات والطلاب" title="العائلات والطلاب" tabindex="-1">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg>
   </button><button type="button" class="rail-cat is-active" role="tab" id="railcat-teachers" aria-controls="catpanel-teachers" aria-selected="true" data-nav-category="teachers" aria-label="المعلمون" title="المعلمون" tabindex="0">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg>
@@ -293,8 +293,8 @@
       
     </nav>
   </div><div class="cat-panel" id="catpanel-families" role="tabpanel" tabindex="-1" aria-labelledby="railcat-families" data-nav-panel="families" hidden>
-    <div class="cat-title">العائلات</div>
-    <nav class="panel-nav" aria-label="العائلات">
+    <div class="cat-title">العائلات والطلاب</div>
+    <nav class="panel-nav" aria-label="العائلات والطلاب">
       <div class="space-y-1"><a href="families.html" class="nav-item" data-nav="families" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span class="label">العائلات</span>
   </a><a href="add-family.html" class="nav-item" data-nav="addFamily" data-nav-status="implemented">
@@ -347,7 +347,11 @@
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span class="label">التقارير الشهرية</span><span class="nav-soon">قريبًا</span>
     </button><button type="button" class="nav-item is-planned" data-nav="dataAnalysis" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">تحليل البيانات</span><span class="nav-soon">قريبًا</span>
-    </button><a href="finance.html" class="nav-item" data-nav="finance" data-nav-status="implemented">
+    </button></div>
+      
+    <div class="nav-subsection">
+      <div class="nav-subsection-label">المالية</div>
+      <div class="space-y-1"><a href="finance.html" class="nav-item" data-nav="finance" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">المالية</span>
   </a><button type="button" class="nav-item is-disabled" data-nav="invoices" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة." aria-label="الفواتير — يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة.">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">الفواتير</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
@@ -361,8 +365,10 @@
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">المدفوعات</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
     </button><button type="button" class="nav-item is-disabled" data-nav="classSalaryReport" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة." aria-label="تقرير رواتب الفصول — يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة.">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">تقرير رواتب الفصول</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
+    </button><button type="button" class="nav-item is-disabled" data-nav="banks" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة." aria-label="البنوك — يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة.">
+      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">البنوك</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
     </button></div>
-      
+    </div>
     </nav>
   </div><div class="cat-panel" id="catpanel-admin" role="tabpanel" tabindex="-1" aria-labelledby="railcat-admin" data-nav-panel="admin" hidden>
     <div class="cat-title">الإدارة</div>
@@ -377,8 +383,6 @@
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">الشهادات</span><span class="nav-soon">قريبًا</span>
     </button><button type="button" class="nav-item is-planned" data-nav="certificateRequests" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">طلبات الشهادات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-disabled" data-nav="banks" data-nav-status="disabled" aria-disabled="true" data-disabled-reason data-reason-key="nav.reason.finance" title="يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة." aria-label="البنوك — يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة.">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span class="label">البنوك</span><svg class="ico ico-sm nav-lock" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg>
     </button></div>
       
     </nav>
