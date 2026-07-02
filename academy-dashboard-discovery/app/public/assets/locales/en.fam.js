@@ -56,6 +56,7 @@ export default {
       title: 'Plan & Billing', planLabel: 'Current plan', rate: 'Hourly rate', cycle: 'Billing cycle', cycleVal: 'Monthly',
       status: 'Billing status', statusVal: 'Up to date', reason: 'Requires the billing module (out of current scope).',
       manage: 'Manage billing', note: 'Display only — no real amounts are charged.',
+      viewInvoices: 'View family invoices on the Finance page (fixture preview)',
     },
     notes: { title: 'Family notes', none: 'No notes yet.' },
     act: {

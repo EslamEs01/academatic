@@ -4,14 +4,14 @@ export default {
 
   /* rail category labels (also the panel titles) */
   cat: {
-    control: 'لوحة التحكم', families: 'العائلات', teachers: 'المعلمون', teachersPerf: 'مؤشرات الأداء',
-    reports: 'التقارير', admin: 'الإدارة', settings: 'الإعدادات',
+    control: 'لوحة التحكم', families: 'العائلات والطلاب', teachers: 'المعلمون', teachersPerf: 'مؤشرات الأداء',
+    reports: 'التقارير', finance: 'المالية', admin: 'الإدارة', settings: 'الإعدادات',
   },
 
   nav: {
     categories: 'فئات التنقّل', landmark: 'القائمة الجانبية', collapse: 'طيّ القائمة',
     soon: 'قريبًا', comingSoon: 'هذه الصفحة قيد الإعداد وستتوفر قريبًا.',
-    reason: { finance: 'تتطلب وحدة الفوترة (خارج النطاق الحالي).' },
+    reason: { finance: 'يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة.' },
     // control
     home: 'الرئيسية', sessions: 'الجلسات', schedule: 'الجدول الدراسي',
     sessionsAnalysis: 'تحليل الجلسات', messages: 'المحادثات', leads: 'الطلبات الجديدة', tasks: 'المهام',

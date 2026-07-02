@@ -5,10 +5,49 @@ const { chromium } = require('playwright');
 const { PORT } = require('../../scripts/serve.cjs');
 
 const BASE = `http://localhost:${PORT}`;
-const PAGES = ['dashboard', 'reports', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
-  'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance'];
+const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
+  'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
+  'portals', 'student-portal', 'family-portal', 'teacher-portal'];
+
+// Spec 012 — the role-portal surface (portal shell, not the admin shell). Admin-shell
+// assertions are scoped to admin pages; portal pages get their own block below. The
+// future-role portal-ABSENCE assertion stays enforced verbatim on every ADMIN page.
+const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal']);
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
+
+// Spec 010 — the set of built page files, for the link-integrity crawl (a link must
+// target one of these, an in-page hash, or be a documented hash-view).
+const VALID_FILES = new Set();
+for (const b of PAGES) { VALID_FILES.add(`${b}.html`); VALID_FILES.add(`${b}.en.html`); }
+VALID_FILES.add('index.html');
+
+// Spec 010 — the sessions badge must equal the authored fixture total (nav-IA contract §5:
+// derived, not a hard-coded literal). Read SESSIONS.total from source so the assertion proves
+// the tie to the exact fixture the badge derives from (and does not rot if the fixture changes).
+const fs = require('fs');
+const path = require('path');
+const sessSrc = fs.readFileSync(path.join(__dirname, '../../src/js/fixtures/sessions.js'), 'utf8');
+const SESSIONS_TOTAL = (sessSrc.match(/export const SESSIONS\s*=\s*\{[\s\S]*?total:\s*(\d+)/) || [])[1] || '';
+if (!/^\d+$/.test(SESSIONS_TOTAL)) throw new Error('[smoke] could not extract SESSIONS.total from src/js/fixtures/sessions.js — the badge assertions would be meaningless');
+
+// Spec 010 — pages with a filter form / tiles-as-filters. Each must genuinely hide non-matching
+// rows (the [data-row][hidden] fix) AND keep only matching rows visible. `facet`/`value` (lowercased
+// to match enhance.js's compare) drive the correctness check; a null facet (schedule's dynamic
+// teacher index) is engagement/leak-only, its correctness covered by the per-page schedule block.
+const FILTER_SPEC = {
+  attendance: { facet: 'outcome', value: 'studentabsent', apply: (p) => p.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]') },
+  finance: { facet: 'status', value: 'overdue', apply: (p) => p.click('[data-filter-set="status:overdue"]') },
+  sessions: { facet: 'status', value: 'completed', apply: (p) => p.selectOption('select[data-filter="status"]', 'completed') },
+  students: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  teachers: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  courses: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  groups: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  families: { facet: 'status', value: 'active', apply: (p) => p.selectOption('select[data-filter="status"]', 'active') },
+  'teacher-performance': { facet: 'workload', value: 'high', apply: (p) => p.selectOption('select[data-filter="workload"]', 'high') },
+  reports: { facet: 'area', value: 'attendance', apply: (p) => p.selectOption('select[data-filter="area"]', 'attendance') },
+  schedule: { facet: null, value: null, apply: (p) => p.selectOption('select[data-filter="teacher"]', { index: 1 }) },
+};
 
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
@@ -62,23 +101,29 @@ const ok = (c, m) => { if (!c) fails.push(m); };
       ok(ext.length === 0, `${page}/${lang}: external requests ${JSON.stringify(ext.slice(0, 3))}`);
       ok(errs.length === 0, `${page}/${lang}: page errors ${JSON.stringify(errs.slice(0, 2))}`);
       ok(info.disabledNoReason === 0, `${page}/${lang}: ${info.disabledNoReason} disabled controls without a reason`);
-      ok(info.focusables > 5, `${page}/${lang}: too few focusable elements (${info.focusables})`);
+      // portal foundation pages are deliberately action-light (honest few affordances);
+      // admin pages keep the original richer threshold
+      ok(info.focusables > (PORTAL_PAGES.has(page) ? 3 : 5), `${page}/${lang}: too few focusable elements (${info.focusables})`);
       ok(!info.hasAppMount, `${page}/${lang}: found a whole-page #app mount (must be static HTML-first)`);
-      ok(info.hasShell, `${page}/${lang}: missing static shell/content`);
-      ok(info.hasRail, `${page}/${lang}: missing slim icon rail (.nav-rail)`);
-      ok(info.hasPanel, `${page}/${lang}: missing light nav panel (.nav-panel)`);
-      // every product page marks exactly one active nav item; the dev gallery has none
-      ok(info.activeNav === (page === 'gallery' ? 0 : 1), `${page}/${lang}: expected ${page === 'gallery' ? 0 : 1} active nav item, got ${info.activeNav}`);
-      ok(info.deadNav === 0, `${page}/${lang}: ${info.deadNav} dead nav item(s) — anchor without route or planned/disabled button without a hook`);
-      ok(info.railCats >= 6, `${page}/${lang}: expected ≥6 category tabs in the rail, got ${info.railCats}`);
-      ok(info.visiblePanels === 1, `${page}/${lang}: expected exactly ONE category panel visible (not all links at once), got ${info.visiblePanels}`);
+      if (!PORTAL_PAGES.has(page)) {
+        // ===== ADMIN-shell assertions (all 20 admin bases — unchanged from Specs 001–011) =====
+        ok(info.hasShell, `${page}/${lang}: missing static shell/content`);
+        ok(info.hasRail, `${page}/${lang}: missing slim icon rail (.nav-rail)`);
+        ok(info.hasPanel, `${page}/${lang}: missing light nav panel (.nav-panel)`);
+        // every product page marks exactly one active nav item; the dev gallery has none
+        ok(info.activeNav === (page === 'gallery' ? 0 : 1), `${page}/${lang}: expected ${page === 'gallery' ? 0 : 1} active nav item, got ${info.activeNav}`);
+        ok(info.deadNav === 0, `${page}/${lang}: ${info.deadNav} dead nav item(s) — anchor without route or planned/disabled button without a hook`);
+        ok(info.railCats >= 6, `${page}/${lang}: expected ≥6 category tabs in the rail, got ${info.railCats}`);
+        ok(info.visiblePanels === 1, `${page}/${lang}: expected exactly ONE category panel visible (not all links at once), got ${info.visiblePanels}`);
+        // Spec 012: future-role portal ids must NEVER render inside the ADMIN console
+        ok(info.portals === 0, `${page}/${lang}: a future-role portal is rendered in the ADMIN console DOM`);
+      }
       // Spec 003: schedule + sessions carry baked List/Timetable content tabs; exactly one panel visible
       const hasTabs = page === 'schedule' || page === 'sessions';
       ok(!hasTabs || info.contentTabs >= 2, `${page}/${lang}: expected ≥2 content tabs (List/Timetable), got ${info.contentTabs}`);
       ok(!hasTabs || info.visibleTabpanels === 1, `${page}/${lang}: expected exactly ONE visible tabpanel, got ${info.visibleTabpanels}`);
       ok(page !== 'schedule' || info.hasTimetable, `${page}/${lang}: schedule is missing the baked timetable grid`);
       ok(info.absAssets.length === 0, `${page}/${lang}: non-relative asset paths ${JSON.stringify(info.absAssets)}`);
-      ok(info.portals === 0, `${page}/${lang}: a future-role portal is rendered in the DOM`);
 
       // behavioral no-dead-button: a filter button and a pager must produce feedback
       if (page === 'dashboard') {
@@ -601,6 +646,329 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         ok(modal, `${page}/${lang}: the Schedule action did not open a confirm modal`);
         await p.keyboard.press('Escape');
       }
+
+      // Spec 009 — Finance shell: 4 status tiles equal invoice-list row counts per status
+      // · 9 invoice rows + 6 payment rows baked · labeled chips for every invoice/payment status
+      // · honest actions (≥3 disabled-with-reason + ≥1 demo in the action cluster, ≥1 confirm in rows,
+      // the cancelled invoice gates record-payment to disabled-with-reason, never confirm)
+      // · one drawer per invoice (9) · zero href="#"/receipt/upload/type="file" tokens
+      // · confirming Record payment mutates NO invoice status chip · the planned section renders
+      // 9 figure-free disabled report-cards with availability chips · zero chart/score/rank tokens.
+      if (page === 'finance') {
+        const FIN_STATUS_LABELS = (lang === 'en'
+          ? { paid: 'Paid', unpaid: 'Unpaid', overdue: 'Overdue', cancelled: 'Cancelled' }
+          : { paid: 'مدفوعة', unpaid: 'غير مدفوعة', overdue: 'متأخرة', cancelled: 'ملغاة' });
+        const FIN_PAY_LABELS = (lang === 'en'
+          ? { recorded: 'Recorded', pending: 'Pending', returned: 'Returned' }
+          : { recorded: 'مسجَّلة', pending: 'قيد التأكيد', returned: 'مرتجعة' });
+        const a = await p.evaluate(() => {
+          const toNum = (s) => parseInt(String(s).trim().replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)), 10);
+          const body = document.getElementById('page-body');
+          const tiles = [...document.querySelectorAll('.fin-tile[data-filter-set]')];
+          const tileCounts = tiles.map((tl) => ({
+            status: (tl.getAttribute('data-filter-set') || '').split(':')[1],
+            count: toNum((tl.querySelector('.ft-v') || {}).textContent || ''),
+          }));
+          const rows = [...document.querySelectorAll('#invoice-list [data-row]')];
+          const rowCountByStatus = {};
+          rows.forEach((r) => { const s = r.getAttribute('data-status'); rowCountByStatus[s] = (rowCountByStatus[s] || 0) + 1; });
+          const payRows = [...document.querySelectorAll('.fin-pay-row')];
+          const invoiceChipTexts = [...new Set(rows.map((r) => { const c = r.querySelector('.fr-meta .chip'); return c ? c.textContent.replace(/\s+/g, ' ').trim() : ''; }))];
+          const paymentChipTexts = [...new Set(payRows.map((r) => { const chips = r.querySelectorAll('.chip'); const c = chips[chips.length - 1]; return c ? c.textContent.replace(/\s+/g, ' ').trim() : ''; }))];
+          const actionCluster = document.querySelector('.report-actions');
+          const disabledInCluster = actionCluster ? actionCluster.querySelectorAll('[data-disabled-reason]').length : 0;
+          const demoInCluster = actionCluster ? actionCluster.querySelectorAll('[data-demo-action]').length : 0;
+          const rowConfirm = document.querySelectorAll('#invoice-list [data-row] [data-confirm]').length;
+          const cancelledRow = document.querySelector('#invoice-list [data-row][data-status="cancelled"]');
+          const cancelledDisabledRecord = cancelledRow ? !!cancelledRow.querySelector('.fr-actions [data-disabled-reason]') : false;
+          const cancelledConfirmRecord = cancelledRow ? !!cancelledRow.querySelector('.fr-actions [data-confirm]') : false;
+          const drawers = document.querySelectorAll('template[data-preview]').length;
+          const hrefHash = body.querySelectorAll('a[href="#"]').length;
+          const receiptTokens = /receipt|upload|type="file"|إيصال|مرفق/i.test(body.innerHTML);
+          const plannedCards = [...document.querySelectorAll('.report-card')];
+          const plannedDisabled = plannedCards.filter((c) => c.classList.contains('is-disabled')).length;
+          const plannedDigitFree = plannedCards.every((c) => !/[0-9٠-٩]/.test(c.textContent));
+          const plannedHasAvailability = plannedCards.every((c) => !!c.querySelector('.chip'));
+          const forbidden = /\b(chart|canvas|graph|score|rank|leaderboard|percentile)\b/i.test(body.innerHTML);
+          return {
+            tileCounts, rowCountByStatus, rowsN: rows.length, payRowsN: payRows.length,
+            invoiceChipTexts, paymentChipTexts, disabledInCluster, demoInCluster, rowConfirm,
+            cancelledFound: !!cancelledRow, cancelledDisabledRecord, cancelledConfirmRecord,
+            drawers, hrefHash, receiptTokens,
+            plannedN: plannedCards.length, plannedDisabled, plannedDigitFree, plannedHasAvailability,
+            forbidden,
+          };
+        });
+        // (a) exactly 4 tiles, each count === its facet's #invoice-list row count
+        ok(a.tileCounts.length === 4, `${page}/${lang}: expected exactly 4 invoice status tiles, got ${a.tileCounts.length}`);
+        for (const tl of a.tileCounts) {
+          ok(tl.count === (a.rowCountByStatus[tl.status] || 0),
+            `${page}/${lang}: tile '${tl.status}' shows ${tl.count} but #invoice-list has ${a.rowCountByStatus[tl.status] || 0} rows`);
+        }
+        // (b) 9 invoice rows + 6 payment rows baked
+        ok(a.rowsN === 9, `${page}/${lang}: expected 9 baked invoice rows, got ${a.rowsN}`);
+        ok(a.payRowsN === 6, `${page}/${lang}: expected 6 baked payment rows, got ${a.payRowsN}`);
+        // (c) ≥1 chip text per invoice/payment status, using the exact AR/EN label copy
+        for (const [id, label] of Object.entries(FIN_STATUS_LABELS)) {
+          ok(a.invoiceChipTexts.includes(label), `${page}/${lang}: no invoice row shows the '${id}' status chip text "${label}"`);
+        }
+        for (const [id, label] of Object.entries(FIN_PAY_LABELS)) {
+          ok(a.paymentChipTexts.includes(label), `${page}/${lang}: no payment row shows the '${id}' status chip text "${label}"`);
+        }
+        // (d) honest actions: ≥3 disabled-with-reason + ≥1 demo in the action cluster; ≥1 confirm among
+        // rows; the cancelled invoice's row disables record-payment (never a confirm control there)
+        ok(a.disabledInCluster >= 3, `${page}/${lang}: expected ≥3 disabled-with-reason controls in the finance action cluster, got ${a.disabledInCluster}`);
+        ok(a.demoInCluster >= 1, `${page}/${lang}: expected ≥1 demo action in the finance action cluster, got ${a.demoInCluster}`);
+        ok(a.rowConfirm >= 1, `${page}/${lang}: expected ≥1 [data-confirm] record-payment control among invoice rows`);
+        ok(a.cancelledFound, `${page}/${lang}: no cancelled invoice row found`);
+        ok(a.cancelledDisabledRecord, `${page}/${lang}: the cancelled invoice's row is missing a disabled-with-reason record-payment control`);
+        ok(!a.cancelledConfirmRecord, `${page}/${lang}: the cancelled invoice's row must NOT have a confirm record-payment control`);
+        // (e) one drawer template per invoice
+        ok(a.drawers === 9, `${page}/${lang}: expected 9 baked invoice drawer templates, got ${a.drawers}`);
+        // (f) no dead links / receipt-upload tokens in the page body
+        ok(a.hrefHash === 0, `${page}/${lang}: dead href="#" present in the finance page body`);
+        ok(!a.receiptTokens, `${page}/${lang}: a receipt/upload/type="file" token was found in the finance page body`);
+        // (h) the planned section: exactly 9 disabled, figure-free report-cards with availability chips
+        ok(a.plannedN === 9 && a.plannedDisabled === 9, `${page}/${lang}: expected exactly 9 disabled planned report-cards, got ${a.plannedN} (${a.plannedDisabled} disabled)`);
+        ok(a.plannedDigitFree, `${page}/${lang}: a planned finance card shows a digit (must be figure-free)`);
+        ok(a.plannedHasAvailability, `${page}/${lang}: a planned finance card is missing its availability chip`);
+        // (i) no chart/score/rank/leaderboard/percentile token anywhere in the page body
+        ok(!a.forbidden, `${page}/${lang}: finance page body shows a forbidden chart/score/rank/leaderboard/percentile token`);
+
+        // (g) confirming a Record-payment action changes NO invoice status chip (before/after)
+        const chipsBefore = await p.$$eval('#invoice-list .fr-meta .chip', (els) => els.map((e) => e.textContent.trim()));
+        const confirmBtn = await p.$('#invoice-list [data-row]:not([data-status="cancelled"]) [data-confirm]');
+        if (confirmBtn) {
+          await confirmBtn.click();
+          await p.waitForTimeout(160);
+          const modalOpen = await p.evaluate(() => !!document.querySelector('.modal-scrim'));
+          ok(modalOpen, `${page}/${lang}: Record payment did not open a confirm modal`);
+          const go = await p.$('.modal-scrim [data-confirm-go]');
+          if (go) { await go.click(); await p.waitForTimeout(160); }
+        }
+        await p.keyboard.press('Escape');
+        await p.waitForTimeout(100);
+        const chipsAfter = await p.$$eval('#invoice-list .fr-meta .chip', (els) => els.map((e) => e.textContent.trim()));
+        ok(JSON.stringify(chipsBefore) === JSON.stringify(chipsAfter),
+          `${page}/${lang}: confirming Record payment changed an invoice status chip (before=${JSON.stringify(chipsBefore)}, after=${JSON.stringify(chipsAfter)})`);
+
+        // (j) tiles-as-filters narrows VISUALLY (computed display — the [hidden] attr alone is not
+        // enough: a component display rule can win the specificity tie and leave rows rendered)
+        await p.click('[data-filter-set="status:overdue"]');
+        await p.waitForTimeout(250);
+        const narrowed = await p.evaluate(() => {
+          const rows = [...document.querySelectorAll('#invoice-list [data-row]')];
+          return {
+            shown: rows.filter((r) => getComputedStyle(r).display !== 'none').length,
+            overdue: rows.filter((r) => r.getAttribute('data-status') === 'overdue').length,
+          };
+        });
+        ok(narrowed.shown === narrowed.overdue,
+          `${page}/${lang}: overdue tile did not visually narrow the invoice list (shown=${narrowed.shown}, expected=${narrowed.overdue})`);
+      }
+
+      // Spec 009 — Dashboard/Reports integration: no new finance chrome in the body,
+      // the sidebar carries exactly one finance link, the six wallet items stay locked.
+      if (page === 'dashboard' || page === 'reports') {
+        const fin = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const txt = body.innerText;
+          const enHit = /\b(invoice|invoices|payment|payments|billing|salary|salaries|payroll|payout|accounting)\b/i.test(txt);
+          const arHit = /فاتورة|فواتير|مدفوعات|رواتب|محاسبة|الفوترة/.test(txt);
+          // structural money-widget guard: a token-free finance widget (e.g. a bare "SAR 12,300" card)
+          // must fail too — the only sanctioned wallet icon + currency token in a #page-body is the
+          // pre-existing Spec 001 revenue KPI on the dashboard; the reports body has zero of both.
+          const walletInBody = body.querySelectorAll('use[href="#i-wallet"]').length;
+          const currencyTokens = (txt.match(/ريال|\bSAR\b/g) || []).length;
+          const isFinanceLink = (h) => /(^|\/)finance\.(en\.)?html$/.test(h || '');
+          const sidebarFinanceLinks = [...document.querySelectorAll('.sidebar a[href]')].filter((x) => isFinanceLink(x.getAttribute('href'))).length;
+          const bodyFinanceLinks = [...body.querySelectorAll('a[href]')].filter((x) => isFinanceLink(x.getAttribute('href'))).length;
+          const walletIds = ['invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport'];
+          const walletOk = walletIds.every((id) => {
+            const el = document.querySelector(`.nav-item[data-nav="${id}"]`);
+            return !!el && el.getAttribute('data-nav-status') === 'disabled' && el.getAttribute('aria-disabled') === 'true' && !!el.querySelector('use[href="#i-lock"]');
+          });
+          return { enHit, arHit, sidebarFinanceLinks, bodyFinanceLinks, walletOk, walletInBody, currencyTokens };
+        });
+        // (a) finance-token regex over #page-body must be clean (revenue words are deliberately excluded —
+        // the pre-existing Spec 001 revenue KPI legitimately says "الإيرادات الشهرية"/"Monthly revenue")
+        ok(!fin.enHit, `${page}/${lang}: #page-body contains a forbidden finance token (EN: invoice/payment/billing/salary/payroll/payout/accounting)`);
+        ok(!fin.arHit, `${page}/${lang}: #page-body contains a forbidden finance token (AR: فاتورة/فواتير/مدفوعات/رواتب/محاسبة/الفوترة)`);
+        // (b) the sidebar carries exactly one finance link
+        ok(fin.sidebarFinanceLinks === 1, `${page}/${lang}: expected exactly one sidebar finance link, got ${fin.sidebarFinanceLinks}`);
+        // (c) the six wallet items remain locked/disabled
+        ok(fin.walletOk, `${page}/${lang}: one or more of the six locked wallet nav items lost its disabled/lock state`);
+        // (d) zero finance.html links inside the page body
+        ok(fin.bodyFinanceLinks === 0, `${page}/${lang}: #page-body must not contain a finance.html link`);
+        // (e) structural money-widget guard (see the evaluate block): sanctioned counts only
+        const wantMoney = page === 'dashboard' ? 1 : 0;
+        ok(fin.walletInBody === wantMoney, `${page}/${lang}: expected ${wantMoney} wallet icon(s) in #page-body, got ${fin.walletInBody} — a finance widget may have been added`);
+        ok(fin.currencyTokens === wantMoney, `${page}/${lang}: expected ${wantMoney} currency token(s) in #page-body, got ${fin.currencyTokens} — a money figure may have been added`);
+      }
+
+      // ===== Spec 010 — navigation IA corrections (shared ADMIN sidebar; admin pages only —
+      // portal pages carry the portal shell and are asserted in the Spec 012 block below) =====
+      if (!PORTAL_PAGES.has(page)) {
+      const nav010 = await p.evaluate(() => {
+        const railCats = document.querySelectorAll('.nav-rail .rail-cat[data-nav-category]').length;
+        const rep = document.getElementById('catpanel-reports');
+        const adm = document.getElementById('catpanel-admin');
+        const finSub = rep ? [...rep.querySelectorAll('.nav-subsection')]
+          .find((s) => (s.querySelector('.nav-subsection-label')?.textContent || '').trim().length > 0) : null;
+        const finLabel = finSub ? finSub.querySelector('.nav-subsection-label').textContent.trim() : '';
+        const finMembers = finSub ? [...finSub.querySelectorAll('.nav-item')].map((n) => n.getAttribute('data-nav')) : [];
+        const finLinks = finSub ? [...finSub.querySelectorAll('a.nav-item[data-nav-status="implemented"]')].map((n) => n.getAttribute('data-nav')) : [];
+        const admItems = adm ? [...adm.querySelectorAll('.nav-item')].map((n) => n.getAttribute('data-nav')) : [];
+        const banksInReports = !!rep?.querySelector('[data-nav="banks"]');
+        const banksInAdmin = !!adm?.querySelector('[data-nav="banks"]');
+        const sessBadge = (document.querySelector('.nav-item[data-nav="sessions"] .nav-badge')?.textContent || '').trim();
+        const famTitle = (document.querySelector('#catpanel-families .cat-title')?.textContent || '').trim();
+        // sitewide locked finance items (six billing + banks) — all disabled + reason + lock
+        const lockedFin = ['invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport', 'banks'];
+        const lockedOk = lockedFin.every((id) => {
+          const el = document.querySelector(`.nav-item[data-nav="${id}"]`);
+          return !!el && el.getAttribute('data-nav-status') === 'disabled'
+            && el.getAttribute('data-reason-key') === 'nav.reason.finance'
+            && !!el.querySelector('use[href="#i-lock"]');
+        });
+        return { railCats, finLabel, finMembers, finLinks, admItems, banksInReports, banksInAdmin, sessBadge, famTitle, lockedOk };
+      });
+      const expFinMembers = ['finance', 'invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport', 'banks'];
+      const expFamTitle = lang === 'en' ? 'Families & Students' : 'العائلات والطلاب';
+      const expFinLabel = lang === 'en' ? 'Finance' : 'المالية';
+      ok(nav010.railCats === 6, `${page}/${lang}: expected exactly 6 rail categories, got ${nav010.railCats} (no 7th finance rail category)`);
+      ok(nav010.finLabel === expFinLabel, `${page}/${lang}: finance sub-section label should be "${expFinLabel}", got "${nav010.finLabel}"`);
+      ok(JSON.stringify(nav010.finMembers) === JSON.stringify(expFinMembers), `${page}/${lang}: finance sub-section members/order wrong: ${JSON.stringify(nav010.finMembers)}`);
+      ok(JSON.stringify(nav010.finLinks) === JSON.stringify(['finance']), `${page}/${lang}: finance sub-section must have exactly one implemented link (finance), got ${JSON.stringify(nav010.finLinks)}`);
+      ok(nav010.banksInReports && !nav010.banksInAdmin, `${page}/${lang}: banks must live in the reports finance sub-section, not admin (reports=${nav010.banksInReports}, admin=${nav010.banksInAdmin})`);
+      ok(nav010.admItems.length === 5 && !nav010.admItems.includes('banks'), `${page}/${lang}: admin category should have 5 planned items and no banks, got ${JSON.stringify(nav010.admItems)}`);
+      ok(nav010.lockedOk, `${page}/${lang}: the seven locked finance items (six billing + banks) must stay disabled+reason+lock`);
+      // Spec 011 — the badge is localized: Arabic pages show Arabic-Indic digits, English pages Western,
+      // both equal the fixture SESSIONS.total (num()/Intl.NumberFormat). Assert the locale-correct form.
+      const expBadge = new Intl.NumberFormat(lang === 'en' ? 'en-US' : 'ar-EG').format(Number(SESSIONS_TOTAL));
+      ok(nav010.sessBadge === expBadge, `${page}/${lang}: sessions badge should be the localized fixture SESSIONS.total ("${expBadge}"), got "${nav010.sessBadge}" — must be derived and locale-formatted, not a stray/Western literal`);
+      // formatter-independent guard: an Arabic badge must carry NO ASCII digit (catches a Western "24"
+      // even if the Node ICU build ever collapsed both sides of the compare above to Latin digits)
+      if (lang === 'ar') ok(!/[0-9]/.test(nav010.sessBadge), `${page}/ar: sessions badge must be Arabic-Indic digits only, got "${nav010.sessBadge}"`);
+      ok(nav010.famTitle === expFamTitle, `${page}/${lang}: families category label should be "${expFamTitle}", got "${nav010.famTitle}"`);
+      } // end admin-only Spec 010 nav IA block (Spec 012 re-scope)
+
+      // ===== Spec 010 — link integrity crawl (every anchor: no href="#", target exists, no external) =====
+      const links010 = await p.evaluate((valid) => {
+        const anchors = [...document.querySelectorAll('a[href]')];
+        let deadHash = 0, external = 0, badTarget = 0;
+        for (const a of anchors) {
+          let h = (a.getAttribute('href') || '').trim();
+          if (h === '#' || h === '') { deadHash++; continue; }
+          if (h.startsWith('#')) continue;                       // in-page anchor (skip link, hash view)
+          if (/^https?:|^\/\//.test(h)) { external++; continue; }
+          h = h.replace(/^\.\//, '');                            // normalize the relative "./" prefix
+          const file = h.split('#')[0];                          // strip hash-view fragment
+          if (file && !valid.includes(file)) badTarget++;
+        }
+        return { deadHash, external, badTarget };
+      }, [...VALID_FILES]);
+      // Spec 011 closed the one pre-existing dashboard "overview → view all" href="#" (now points to
+      // reports.html). Zero dead href="#" is the invariant on EVERY page — any occurrence is a regression.
+      ok(links010.deadHash === 0, `${page}/${lang}: ${links010.deadHash} dead href="#" link(s) (expected 0)`);
+      ok(links010.external === 0, `${page}/${lang}: ${links010.external} unexpected external link(s)`);
+      ok(links010.badTarget === 0, `${page}/${lang}: ${links010.badTarget} link(s) to a nonexistent page file`);
+
+      // ===== Spec 010 — planned/backendRequired truthfulness sweep =====
+      const truth010 = await p.evaluate(() => {
+        const items = [...document.querySelectorAll('.nav-panel .nav-item')];
+        // every non-implemented item is a <button> (cannot navigate), with a coming-soon or reason hook
+        const badPlanned = items.filter((n) => n.getAttribute('data-nav-status') === 'planned'
+          && (n.tagName !== 'BUTTON' || !n.hasAttribute('data-coming-soon'))).length;
+        const badDisabled = items.filter((n) => n.getAttribute('data-nav-status') === 'disabled'
+          && (n.tagName !== 'BUTTON' || n.getAttribute('aria-disabled') !== 'true' || !n.hasAttribute('data-reason-key'))).length;
+        return { badPlanned, badDisabled };
+      });
+      ok(truth010.badPlanned === 0, `${page}/${lang}: ${truth010.badPlanned} planned nav item(s) not a non-navigating «قريبًا» button`);
+      ok(truth010.badDisabled === 0, `${page}/${lang}: ${truth010.badDisabled} disabled nav item(s) missing button/aria-disabled/reason`);
+
+      // ===== Spec 010 — the one sanctioned family→finance body link =====
+      if (page === 'family') {
+        const famFin = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const isFin = (h) => /(^|\/)finance\.(en\.)?html($|#)/.test(h || '');
+          return [...body.querySelectorAll('a[href]')].filter((a) => isFin(a.getAttribute('href'))).length;
+        });
+        ok(famFin === 1, `${page}/${lang}: family body must contain exactly one finance link, got ${famFin}`);
+      }
+
+      // ===== Spec 012 — role portal foundation block (portal pages only) =====
+      if (PORTAL_PAGES.has(page)) {
+        const prt = await p.evaluate(() => {
+          const shell = document.querySelector('.portal-shell');
+          const role = shell ? shell.getAttribute('data-role') : '';
+          const adminMarkup = !!document.querySelector('.app-shell, .nav-rail, .nav-panel');
+          const switchLink = [...document.querySelectorAll('.pt-header a[href]')]
+            .some((a) => /portals\.(en\.)?html$/.test(a.getAttribute('href') || ''));
+          const bodyText = (document.getElementById('page-body') || document.body).innerText;
+          // AR digit hygiene: the big authored counters must be Arabic-Indic on Arabic pages
+          const gauges = [...document.querySelectorAll('.pt-gauge-num')];
+          const gaugeCount = gauges.length;
+          const gaugeAscii = gauges.filter((el) => /[0-9]/.test(el.textContent)).length;
+          const planned = [...document.querySelectorAll('.pt-planned')];
+          // a planned card must never navigate and must carry a LABELED chip (icon + text, never color-only)
+          const plannedBad = planned.filter((c) => c.tagName === 'A' || !c.querySelector('.chip svg')
+            || !(c.querySelector('.chip')?.textContent || '').trim()).length;
+          const hubRoleTargets = [...document.querySelectorAll('.pt-hub-card[href]')]
+            .map((a) => (a.getAttribute('href') || '').replace('.en.html', '').replace('.html', '')).sort();
+          const hubAdminLink = [...document.querySelectorAll('#page-body a[href]')]
+            .filter((a) => /dashboard\.(en\.)?html$/.test(a.getAttribute('href') || '')).length;
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink };
+        });
+        const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
+        ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
+        ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
+        if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
+        // existence floor first, so the AR digit check below can never pass vacuously
+        if (page === 'student-portal') ok(prt.gaugeCount >= 1, `${page}/${lang}: expected ≥1 progress gauge counter, got ${prt.gaugeCount}`);
+        if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
+        const expPlanned = { 'student-portal': 3, 'family-portal': 3, 'teacher-portal': 2, portals: 0 }[page];
+        ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
+        ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
+        if (page === 'portals') {
+          ok(JSON.stringify(prt.hubRoleTargets) === JSON.stringify(['family-portal', 'student-portal', 'teacher-portal']),
+            `${page}/${lang}: hub role cards must target exactly the three portals, got ${JSON.stringify(prt.hubRoleTargets)}`);
+          ok(prt.hubAdminLink === 1, `${page}/${lang}: hub should offer exactly one labeled admin-console link, got ${prt.hubAdminLink}`);
+        }
+        if (page === 'teacher-portal') {
+          // FR-006/SC-005 — the pay-free rule, enforced on the rendered body in BOTH languages
+          const payHit = /\b(salary|salaries|payouts?|earnings?|compensation)\b/i.test(prt.bodyText)
+            || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
+          ok(!payHit, `${page}/${lang}: the teacher portal contains pay vocabulary — forbidden (FR-006)`);
+        }
+        // student portal is table-free by contract
+        if (page === 'student-portal') {
+          const tables = await p.$$eval('#page-body table', (els) => els.length);
+          ok(tables === 0, `${page}/${lang}: the student portal must contain zero tables, got ${tables}`);
+        }
+      }
+
+      // ===== Spec 010 — filter visibility: filtered-out rows are genuinely invisible, and only
+      // matching rows stay visible (the [data-row][hidden] fix + correct narrowing) =====
+      if (FILTER_SPEC[page]) {
+        const spec = FILTER_SPEC[page];
+        await spec.apply(p).catch(() => {});
+        await p.waitForTimeout(240);
+        const vis = await p.evaluate((f) => {
+          const rows = [...document.querySelectorAll('[data-row]')];
+          const shownRows = rows.filter((r) => getComputedStyle(r).display !== 'none');
+          const leaked = rows.filter((r) => r.hasAttribute('hidden') && getComputedStyle(r).display !== 'none').length;
+          const hidden = rows.filter((r) => r.hasAttribute('hidden')).length;
+          // correctness: with a known facet, every still-visible row must match the applied value.
+          // If the filter silently failed to engage, non-matching rows stay visible → mismatch > 0.
+          const mismatch = f ? shownRows.filter((r) => (r.getAttribute('data-' + f.facet) || '').toLowerCase() !== f.value).length : 0;
+          return { leaked, hidden, shown: shownRows.length, total: rows.length, mismatch };
+        }, spec.facet ? { facet: spec.facet, value: spec.value } : null);
+        ok(vis.leaked === 0, `${page}/${lang}: ${vis.leaked} filtered-out row(s) attribute-hidden but still visually rendered — the [data-row][hidden] fix failed`);
+        ok(vis.hidden > 0, `${page}/${lang}: narrowing filter hid 0 of ${vis.total} rows — filter did not engage, visibility check is vacuous`);
+        ok(vis.mismatch === 0, `${page}/${lang}: ${vis.mismatch} visible row(s) do not match the applied filter (${spec.facet}=${spec.value}) — filtering is incorrect or did not engage`);
+      }
+
       await ctx.close();
     }
   }

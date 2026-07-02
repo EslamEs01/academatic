@@ -9,6 +9,8 @@
  *   hidden      — discovered but intentionally not shown now.
  * See contracts/navigation-ia-contract.md. */
 
+import { SESSIONS } from './fixtures/sessions.js';
+
 export const BRAND = { nameKey: 'brand.name', icon: 'graduation-cap' };
 
 const item = (o) => ({ status: o.status || 'implemented', ...o });
@@ -19,7 +21,7 @@ export const NAV_CATEGORIES = [
     id: 'control', labelKey: 'cat.control', icon: 'layers',
     items: [
       item({ id: 'home', labelKey: 'nav.home', icon: 'home', route: 'dashboard.html' }),
-      item({ id: 'sessions', labelKey: 'nav.sessions', icon: 'sessions', route: 'sessions.html', badge: 24 }),
+      item({ id: 'sessions', labelKey: 'nav.sessions', icon: 'sessions', route: 'sessions.html', badge: SESSIONS.total }),
       item({ id: 'schedule', labelKey: 'nav.schedule', icon: 'schedule', route: 'schedule.html' }),
       item({ id: 'attendance', labelKey: 'nav.attendance', icon: 'clipboard-check', route: 'attendance.html' }),
       item({ id: 'sessionsAnalysis', labelKey: 'nav.sessionsAnalysis', icon: 'trending-up', status: 'planned' }),
@@ -70,12 +72,25 @@ export const NAV_CATEGORIES = [
       item({ id: 'reports', labelKey: 'nav.reports', icon: 'reports', route: 'reports.html' }),
       item({ id: 'monthlyReports', labelKey: 'nav.monthlyReports', icon: 'reports', status: 'planned' }),
       item({ id: 'dataAnalysis', labelKey: 'nav.dataAnalysis', icon: 'trending-up', status: 'planned' }),
-      item({ id: 'invoices', labelKey: 'nav.invoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-      item({ id: 'monthlyInvoices', labelKey: 'nav.monthlyInvoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-      item({ id: 'salaries', labelKey: 'nav.salaries', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-      item({ id: 'staffSalaries', labelKey: 'nav.staffSalaries', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-      item({ id: 'payments', labelKey: 'nav.payments', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-      item({ id: 'classSalaryReport', labelKey: 'nav.classSalaryReport', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+    ],
+    sections: [
+      {
+        /* Finance shell + its backend-locked siblings, grouped under one honest
+         * sub-section (same mechanism as teachers → cat.teachersPerf). Finance is
+         * the only real link; the rest stay disabled-with-reason until the real
+         * billing backend exists. `banks` lives here (moved from admin). */
+        titleKey: 'cat.finance',
+        items: [
+          item({ id: 'finance', labelKey: 'nav.finance', icon: 'wallet', route: 'finance.html' }),
+          item({ id: 'invoices', labelKey: 'nav.invoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+          item({ id: 'monthlyInvoices', labelKey: 'nav.monthlyInvoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+          item({ id: 'salaries', labelKey: 'nav.salaries', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+          item({ id: 'staffSalaries', labelKey: 'nav.staffSalaries', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+          item({ id: 'payments', labelKey: 'nav.payments', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+          item({ id: 'classSalaryReport', labelKey: 'nav.classSalaryReport', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+          item({ id: 'banks', labelKey: 'nav.banks', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+        ],
+      },
     ],
   },
   {
@@ -86,7 +101,6 @@ export const NAV_CATEGORIES = [
       item({ id: 'books', labelKey: 'nav.books', icon: 'curricula', status: 'planned' }),
       item({ id: 'certificates', labelKey: 'nav.certificates', icon: 'certificates', status: 'planned' }),
       item({ id: 'certificateRequests', labelKey: 'nav.certificateRequests', icon: 'certificates', status: 'planned' }),
-      item({ id: 'banks', labelKey: 'nav.banks', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
     ],
   },
   {
@@ -116,16 +130,16 @@ export function categoryOf(activeId) {
 
 /* Documented-but-NOT-rendered registers (reference IA). */
 export const FUTURE_ROLE = [
-  { id: 'teacher-portal', reason: 'Separate guarded Teacher app — its own future spec; never in the admin nav.' },
-  { id: 'family-portal', reason: 'Guarded Family/Guardian app with a multi-child switcher — future spec.' },
-  { id: 'student-portal', reason: 'Student experience lives under the Family portal — not an admin destination.' },
+  { id: 'teacher-portal', reason: 'Separate Teacher portal surface — foundation shipped by Spec 012 (teacher-portal.html); deep experience is Spec 015; never an admin nav item.' },
+  { id: 'family-portal', reason: 'Family/Guardian portal with the multi-child pattern — foundation shipped by Spec 012 (family-portal.html); deep experience is Spec 014; never an admin nav item.' },
+  { id: 'student-portal', reason: 'Student portal split out of the legacy guardian-proxied portal as its own surface — foundation Spec 012 (student-portal.html); deep experience is Spec 013; never an admin nav item.' },
 ];
 
 /* intended routes when a planned item is promoted (NI9 / NI12) */
 export const FUTURE_ROUTES = {
   sessionsAnalysis: 'sessions-analysis.html', messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
-  announcements: 'announcements.html', attendance: 'attendance.html', groups: 'groups.html', studentResult: 'student-results.html',
-  studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html', teacherKpi: 'teacher-performance.html',
+  announcements: 'announcements.html', studentResult: 'student-results.html',
+  studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html',
   materials: 'materials.html', books: 'library.html', certificates: 'certificates.html', staff: 'staff.html',
   dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',
 };

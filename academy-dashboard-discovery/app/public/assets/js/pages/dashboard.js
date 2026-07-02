@@ -91,7 +91,7 @@ export function renderDashboard() {
     ${welcomeZone(WELCOME)}
 
     <section class="mb-7">
-      ${sectionHeader({ titleKey: 'section.overview', linkKey: 'section.overviewLink' })}
+      ${sectionHeader({ titleKey: 'section.overview', linkKey: 'section.overviewLink', linkHref: getLang() === 'en' ? 'reports.en.html' : 'reports.html' })}
       ${kpiRow(KPIS)}
     </section>
 

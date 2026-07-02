@@ -4,14 +4,14 @@ export default {
 
   /* rail category labels (also the panel titles) */
   cat: {
-    control: 'Control panel', families: 'Families', teachers: 'Teachers', teachersPerf: 'Performance',
-    reports: 'Reports', admin: 'Administration', settings: 'Settings',
+    control: 'Control panel', families: 'Families & Students', teachers: 'Teachers', teachersPerf: 'Performance',
+    reports: 'Reports', finance: 'Finance', admin: 'Administration', settings: 'Settings',
   },
 
   nav: {
     categories: 'Navigation categories', landmark: 'Sidebar', collapse: 'Collapse menu',
     soon: 'Soon', comingSoon: 'This page is being prepared and will be available soon.',
-    reason: { finance: 'Requires the billing module (out of current scope).' },
+    reason: { finance: 'Requires the real billing backend — the Finance page shows a fixture-only preview.' },
     // control
     home: 'Home', sessions: 'Sessions', schedule: 'Timetable',
     sessionsAnalysis: 'Sessions analysis', messages: 'Messages', leads: 'New Requests', tasks: 'Tasks',

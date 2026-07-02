@@ -31,6 +31,13 @@ import { renderCourse } from '../src/js/pages/course.js';
 import { renderGroup } from '../src/js/pages/group.js';
 import { renderTeacher } from '../src/js/pages/teacher.js';
 import { renderTeacherPerformance } from '../src/js/pages/teacher-performance.js';
+import { renderFinance } from '../src/js/pages/finance.js';
+// Spec 012 — role portal foundation (portal shell, not the admin shell)
+import { portalShellMarkup } from '../src/js/components/portal-shell.js';
+import { renderPortalsHub } from '../src/js/pages/portals.js';
+import { renderStudentPortal } from '../src/js/pages/student-portal.js';
+import { renderFamilyPortal } from '../src/js/pages/family-portal.js';
+import { renderTeacherPortal } from '../src/js/pages/teacher-portal.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -69,9 +76,29 @@ const PAGES = [
   // Spec 007 — teacher performance & academic KPIs (teacher = profile template; teacher-performance = promoted teacherKpi nav)
   { base: 'teacher', activeId: 'teachers', titleKey: 'topbar.title.teacher', crumbKey: 'topbar.crumb.teacher', render: renderTeacher },
   { base: 'teacher-performance', activeId: 'teacherKpi', titleKey: 'topbar.title.teacherPerf', crumbKey: 'topbar.crumb.teacherPerf', render: renderTeacherPerformance },
+  // Spec 009 — finance, billing & payments shell
+  { base: 'finance', activeId: 'finance', titleKey: 'topbar.title.finance', crumbKey: 'topbar.crumb.finance', render: renderFinance },
+  // Spec 012 — role portal foundation (portal shell; NOT admin nav pages; hub = the documented demo entry)
+  { base: 'portals', shell: 'portal', role: 'hub', activeId: null, titleKey: 'prt.title.hub', render: renderPortalsHub },
+  { base: 'student-portal', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: null, titleKey: 'prt.title.student', render: renderStudentPortal },
+  { base: 'family-portal', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: null, titleKey: 'prt.title.family', render: renderFamilyPortal },
+  { base: 'teacher-portal', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: null, titleKey: 'prt.title.teacher', render: renderTeacherPortal },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;
+
+/* Chip-tone build guard (Spec 010): every `chip tone-X` in rendered HTML must map to
+ * a styled `.chip.tone-X` rule — an unstyled tone renders as a bare pill silently
+ * (the Spec 008 `coral` bug). Unknown tone → throw (fails the build). Medallions use a
+ * separate, richer palette (`m-soft/m-grad tone-*`) and are intentionally NOT scanned. */
+const STYLED_CHIP_TONES = new Set(['live', 'upcoming', 'completed', 'cancelled', 'amber', 'neutral']);
+function assertChipTones(html, file) {
+  for (const m of html.matchAll(/\bchip tone-([a-z-]+)/g)) {
+    if (!STYLED_CHIP_TONES.has(m[1])) {
+      throw new Error(`[build:html] ${file}: unstyled chip tone "tone-${m[1]}" — add a .chip.tone-${m[1]} rule or use a styled tone (${[...STYLED_CHIP_TONES].join('/')})`);
+    }
+  }
+}
 
 function htmlDoc({ lang, dir, title, body }) {
   return `<!DOCTYPE html>
@@ -99,8 +126,11 @@ for (const p of PAGES) {
     applyLang(lang);
     const dir = LANGS[lang].dir;
     const title = `${t(p.titleKey)} · ${t('brand.name')}`;
-    const body = shellMarkup({ activeId: p.activeId, titleKey: p.titleKey, crumbKey: p.crumbKey, bodyHTML: p.render() });
+    const body = p.shell === 'portal'
+      ? portalShellMarkup({ role: p.role, personaKey: p.personaKey || '', bodyHTML: p.render() })
+      : shellMarkup({ activeId: p.activeId, titleKey: p.titleKey, crumbKey: p.crumbKey, bodyHTML: p.render() });
     const file = lang === 'en' ? `${p.base}.en.html` : `${p.base}.html`;
+    assertChipTones(body, file);
     writeFileSync(resolve(OUT, file), htmlDoc({ lang, dir, title, body }));
     count++;
   }

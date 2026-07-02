@@ -15,6 +15,10 @@ import arT from '../locales/ar.trn.js';
 import enT from '../locales/en.trn.js';
 import arR from '../locales/ar.rep.js';
 import enR from '../locales/en.rep.js';
+import arFin from '../locales/ar.fin.js';
+import enFin from '../locales/en.fin.js';
+import arPrt from '../locales/ar.prt.js';
+import enPrt from '../locales/en.prt.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -42,6 +46,11 @@ deepMerge(en, enT);
 // Spec 008 keys live in *.rep.js (academic reports & operations shell)
 deepMerge(ar, arR);
 deepMerge(en, enR);
+// Spec 009 keys live in *.fin.js (finance, billing & payments shell)
+deepMerge(ar, arFin);
+deepMerge(en, enFin);
+deepMerge(ar, arPrt);
+deepMerge(en, enPrt);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

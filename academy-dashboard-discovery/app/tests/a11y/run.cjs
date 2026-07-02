@@ -68,6 +68,22 @@ const MATRIX = [
   { page: 'teacher-performance', lang: 'ar', theme: 'light' },
   { page: 'teacher-performance', lang: 'ar', theme: 'dark' },
   { page: 'teacher-performance', lang: 'en', theme: 'light' },
+  // Spec 009 — finance, billing & payments shell (AR light + dark + EN)
+  { page: 'finance', lang: 'ar', theme: 'light' },
+  { page: 'finance', lang: 'ar', theme: 'dark' },
+  { page: 'finance', lang: 'en', theme: 'light' },
+  { page: 'finance', lang: 'en', theme: 'dark' },
+  // Spec 012 — role portal foundation (portal shell surfaces)
+  { page: 'portals', lang: 'ar', theme: 'light' },
+  { page: 'student-portal', lang: 'ar', theme: 'light' },
+  { page: 'student-portal', lang: 'ar', theme: 'dark' },
+  { page: 'student-portal', lang: 'en', theme: 'light' },
+  { page: 'family-portal', lang: 'ar', theme: 'light' },
+  { page: 'family-portal', lang: 'ar', theme: 'dark' },
+  { page: 'family-portal', lang: 'en', theme: 'light' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-portal', lang: 'en', theme: 'light' },
 ];
 
 (async () => {

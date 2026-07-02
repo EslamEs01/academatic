@@ -1,104 +1,83 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 008 — Academic Reports and Operations Analytics Shell**
-(branch `feature/001-approved-dashboard-design`).
+Active feature: **Spec 012 — Role Portal Foundation**
+(branch `feature/011-final-qa-demo-readiness`).
 
 For technologies, project structure, shell commands, design decisions, contracts,
 and acceptance, read the current plan and its artifacts:
-`academy-dashboard-discovery/specs/008-academic-reports-analytics/plan.md`
-(see also `research.md`, `data-model.md`, `quickstart.md`, and `contracts/`).
+`academy-dashboard-discovery/specs/012-role-portal-foundation/plan.md`
+(see also `research.md` (D1–D12), `data-model.md`, `quickstart.md`, and `contracts/` — 12 contracts).
 
-Spec 008 ENRICHES the implemented Spec 001–007 app (`academy-dashboard-discovery/app/`) by turning the
-existing implemented (but placeholder) **`reports.html`** into a calm, fixture-only **Academic Reports &
-Operations Shell** — one page that ORGANIZES + SUMMARIZES + LINKS the academy's existing operations
-(attendance/outcomes · sessions/timetable · courses/groups · teachers · students/families) into
-report-category cards + a fixture-backed operations overview + per-area summary sections + honest demo
-export actions + real drill-down links. **Grounding spine** (legacy + current-app passes): `reports.html`
-is ALREADY implemented (a real `reports` nav item, `activeId:'reports'`, registered in `build-html.mjs`,
-rendered by `pages/reports.js`) but shows only 4 placeholder `reportCard`s with dead `route:'#'` —
-including a FINANCE `revenue` card; and the legacy reports were scattered/weak/finance-mixed with NO
-computed score/rank/percentile (only raw counts + a single feedback %) and thin/broken export. So Spec 008
-**ENRICHES the existing page in place** (the Spec 006/007 enrich pattern) — **NO new page, NO nav
-promotion, NO dashboard change** — replacing the placeholders, and **REMOVING all finance**. **Every report
-number is a display-only ROLL-UP of an existing fixture summary** — `OUTCOME_SUMMARY` (Spec 005),
-`STATUS_SUMMARY`/`SESSIONS.total` (Spec 001/003), `GROUP_SUMMARY` + active-courses (Spec 006),
-`TEACHERS_NEEDING_FOLLOWUP` + `OUTCOME_SUMMARY` absences (Spec 007), and the Spec 004 family/student
-attention computation (reused verbatim from `dashboard.js` `peopleSignal()`) — **NO fabricated metric, NO
-computed score/rank/percentile/chart/BI, NO finance figure**. Surfaces: rewrite `pages/reports.js` (the
-shell) + `fixtures/reports.js` (a `report-summary` roll-up resolver + honest `REPORT_CATEGORIES`, finance
-removed); lightly EXTEND `components/report-card.js` (+availability chip +summary slot, backward-compatible);
-add `report-status.js` (TWO new labeled maps: **report-signal** healthy/needsFollowUp/attentionRisk +
-**report-availability** available/demoOnly/planned/backendRequired — distinct from existing maps, never
-numeric/color-only) + `report-actions.js` (`reportActions()`: Print=demo-toast · Export-CSV/PDF/Share=
-disabled-with-reason · Schedule=confirm→demo-toast — NO real export/send/schedule/persist); new overlay
-`ar.rep.js`/`en.rep.js` (`rep.*`). **REUSE, never duplicate**: Spec 005 `outcome-status` chips (teacherAbsent
-vs studentAbsent stay two DISTINCT labeled facts), Spec 001/003 session status-map, Spec 006 `group-status`,
-Spec 007 teacher signals; `pageHeader`/`summaryCards`/`cardGrid`/`filterBar`/`states`/`confirmAction`.
-Advanced reports (`monthlyReports`/`dataAnalysis`/`sessionsAnalysis`) stay PLANNED, surfaced as honest
-planned/backendRequired cards (no dead links). NO `build-html.mjs`/`nav.config.js`/`dashboard.js` change.
-Prior plans: `…/007-teacher-performance-kpis/plan.md`, `…/006-courses-groups-learning-paths/plan.md`,
-`…/005-attendance-session-outcomes/plan.md`, `…/004-family-student-profiles/plan.md`,
-`…/003-timetable-scheduling/plan.md`, `…/002-admin-core-operations/plan.md`,
-`…/001-approved-dashboard-foundation/plan.md`.
+Spec 012 starts the ROLE-PORTAL layer as a FOUNDATION-ONLY pass on top of the demo-ready admin console
+(Specs 001–011 complete; Spec 011 = commit `e7ee011`; 41 built pages). Deliverables: (1) a **shared warm
+portal shell** — NEW `components/portal-shell.js` (`portalShellMarkup()`): sticky friendly header (brand +
+portal name + role-identity chip + persona greeting + EXISTING `data-action="lang-menu"/"theme-menu"` hooks
+reused + labeled demo role-switch link) above single-column `main#page > #page-body`; root
+`class="portal-shell" data-role="student|family|teacher|hub"` drives role accents from EXISTING tokens; NO
+`.app-shell`/`.nav-rail`/`.nav-panel`/admin topbar — structurally distinct from admin BY CONSTRUCTION;
+(2) **four new page pairs** (8 files → 49 total): `portals` (demo role-switch hub: 3 friendly role cards +
+ONE labeled admin-return link + honest no-login framing — the documented demo path; gallery/index untouched)
++ `student-portal` / `family-portal` / `teacher-portal`, registered in `build-html.mjs` via a NEW per-page
+`shell:'portal'` branch (admin render path untouched — all 40 admin files rebuild BYTE-IDENTICAL, asserted by
+hash-compare, stronger than the 009/010 body-scoped bar); (3) **personas from EXISTING fixtures** (coherent
+story): student=`st1` (∈ fam1, math, progress 78, grp1) · family=`fam1` (5 children st1/st6/st11/st12/st13 —
+real multi-child pattern) · teacher=`sara` (full teacher-links graph); NEW `fixtures/portal.js` = display-only
+preview snippets/planned-card registers, NO new domain entities; (4) **binding compositions** (the ceiling AND
+the floor — deep dashboards are Specs 013/014/015): student = welcome hero · today's learning · next-session
+(honest demo, NEVER a live-join look) · my-courses cards (ZERO tables) · progress gauge (authored) ·
+achievements preview (net-new — legacy had NO gamification) · planned homework/materials/leaderboard cards ·
+Spec-013 note; family = guardian welcome · children overview · today's sessions · attendance/progress ·
+teacher-notes preview · planned billing(NO amounts)/meetings/subscriptions cards · Spec-014 note; teacher =
+welcome · today's schedule · next-session demo · my students · outcome-workflow preview (display-only) ·
+planned materials/tasks cards · optional labeled admin teacher-performance link · **ZERO pay figures/vocab
+(grep-enforced EN+AR: salary|payout|earning|راتب|رواتب|أجر…)** · Spec-015 note; (5) NEW locale overlay
+`ar.prt.js`/`en.prt.js` (`prt.*`, merged LAST after fin; Arabic-first copy, availability language, no
+"coming soon" hype); `.portal-shell` CSS namespace block in `app.css` (tokens reused, mobile-first,
+warm/soft/card-based); (6) **`legacy-role-capability-coverage.md`** — ALL 39 legacy portal pages (teacher
+26/22 templates + guardian-operated family portal 13/11 — legacy had NO separate student login; the
+three-portal split is a recorded improvement) classified under the SEVEN-way scheme (foundation-only/
+planned-013/planned-014/planned-015/backendRequired/future-role-deep/intentionallyExcluded): pay surfaces→
+backendRequired (never previewed); broken routes (both /profile 500s, Dashboard-1 404s) + the FAKE legacy
+"live room" (it just re-rendered home) + thin duplicates→excluded; itemized 013/014/015 boundaries +
+sign-off; (7) **two sanctioned reconciliations ONLY**: `nav.config.js` FUTURE_ROLE `reason` wording updated
+to post-012 truth (foundation shipped; deep = 013–015; never an admin nav item) + `tests/smoke/run.cjs`
+portal-absence assertion RE-SCOPED to the 20 admin bases (kept verbatim there, never deleted) with a NEW
+PORTAL_PAGES branch (portal shell present · admin markup absent · pay-token-free teacher portal · localized
+digits · honest planned cards · crawl auto-covers the 4 new bases via PAGES). Admin console gains NOTHING
+(no nav item/link/body change); `enhance.js`/`package.json`/all existing fixtures+components untouched.
+MVP = shell + overlays + build branch + hub + student portal + smoke re-scope (research D12).
 
-Spec 007 EXTENDS the implemented Spec 001–006 app (`academy-dashboard-discovery/app/`) with the admin
-**Teacher Performance & Academic KPIs** experience — turning the flat teacher directory into a unified
-academic hub (teacher↔course↔group↔students↔family↔schedule↔outcomes↔absence↔follow-up) and giving admins
-one calm board to review/compare/follow-up teacher delivery. **Grounding spine** (legacy + current-app
-passes): the legacy system **NEVER** had a computed teacher score/rank/leaderboard — "performance" was
-scattered **raw counts** (Teachers-Details Cancel/Absent/Attend, a single feedback %, a system-wide
-Sessions-Analysis with a `teacher_id` filter but no per-teacher drill-down) + a `View KPIs` nav group with
-no destination page; and the legacy 56-button teacher profile **mixed academic data with FINANCE**
-(Compensations/Salary/Payouts). So Spec 007 is a **DISPLAY of fixture-backed raw counts + labeled signals
-— NEVER a computed score/rank/analytics engine**, and **ALL finance (salary/payroll/compensation/payout)
-is explicitly OUT of scope** (a future finance spec). Surfaces: **ENRICH** `teachers.html` (status chip +
-counts courses/groups/students + upcoming hint + workload hint + conditional follow-up flag + a
-profile link); add **`teacher.html`** profile (banner + baked tabs Overview/Courses/Groups/Timetable/
-Sessions&Outcomes/Students/Follow-up/Notes — bake `sara`); **promote `teacherKpi` planned→implemented**
-and add **`teacher-performance.html`** board (KPI tiles + a per-teacher comparison list + a follow-up
-queue — display-only counts, no score/rank/chart/salary). `teacher.html` is a **profile template**
-(activeId `teachers`, NOT a nav item); `teacher-performance.html` is the promoted nav page (activeId
-`teacherKpi`). `sessionsKpi`/`monthlyPerf`/`addTeacher`/`teacherCategories` stay planned. THREE NEW
-labeled maps: **teacher-status** (`teacher-status.js`: active/paused/inactive), **workload**
-(`teacher-signals.js`: light/balanced/high), **follow-up signal** (`teacher-signals.js`:
-strongDelivery/stable/needsFollowUp/attentionRisk) — distinct from the six existing maps, never
-numeric/color-only; **REUSE** availability (`TEACHER_AVAIL` available/busy/off). EXTEND `fixtures/teachers.js`
-(+statusId/workload/followUp/notes + derived counts — **NO finance fields**); add the only new resolver
-**`outcomesOfTeacher(id)`** (`SESSION_OUTCOMES` filter by `trainer.id`) in `attendance.js`; new actions
-cluster `teacherActions()` (`teacher-actions.js`). **REUSE, never duplicate**: Spec 003 `scheduleAgenda`
-(+`schedule.html#view=timetable`) for Timetable tabs; Spec 005 `outcomeRow`/`outcomeTemplate` (the
-canonical drawer, +`attendance.html`) for Sessions&Outcomes — **teacherAbsent vs studentAbsent stay two
-DISTINCT labeled chips, never one "absences"**; Spec 006 `cohort-panels`/`profileBanner`/`tabs`,
-`directoryCard`/`filterBar`/`summaryCards`. Light integration: teacher→student/family/course/group
-deep-links; Dashboard gets ONE "teachers needing follow-up" chip folded into the people-signal card →
-`teacher-performance.html`. New locale overlay `ar.trn.js`/`en.trn.js` (`trn.*`). Prior plans:
+Spec 011 (commit `e7ee011`) closed the final admin QA follow-ups: dashboard Overview `href="#"` →
+language-aware `linkHref:'reports(.en).html'` (zero `href="#"` sitewide is now a STANDING invariant, smoke
+`deadHash===0` on every page) + the sessions badge localized via `num()` (`${num(it.badge)}` in sidebar.js —
+AR ٢٤ / EN 24, still `SESSIONS.total`; smoke assert locale-aware + Arabic-no-ASCII-digit guard). Spec 010
+(commit `0ee1965`) delivered the coverage matrix (90 rows, nine-way scheme), nav IA corrections (finance
+sub-section under Reports via the teachersPerf `sections` mechanism · banks moved from admin · `cat.families`
+→ «العائلات والطلاب» · FUTURE_ROUTES cleanup · badge derived), the app-wide `[data-row][hidden]{display:none
+!important}` filter-visibility fix + computed-visibility smoke on all 11 filterable pages, ONE family→finance
+link (Spec 009 guard amended additively), and the chip-tone build guard. Prior plans: `…/011-final-qa-demo-
+readiness/plan.md`, `…/010-capability-coverage-ia-polish/plan.md`, `…/009-finance-billing-payments/plan.md`,
+`…/008-academic-reports-analytics/plan.md`, `…/007-teacher-performance-kpis/plan.md`,
 `…/006-courses-groups-learning-paths/plan.md`, `…/005-attendance-session-outcomes/plan.md`,
 `…/004-family-student-profiles/plan.md`, `…/003-timetable-scheduling/plan.md`,
 `…/002-admin-core-operations/plan.md`, `…/001-approved-dashboard-foundation/plan.md`.
 
-Hard constraints (Spec 001 + 002 + 003 + 004 + 005 + 006 + 007 + 008): continue the approved design (Spec 001 is
-the visual target); **static HTML-first** — pages pre-rendered to complete `public/*.html`, NO whole-page
-`<div id="app">` mount, **all teacher cards + KPI tiles + comparison rows + profile tabs +
-`<template data-preview>` drawers are baked at build time** (runtime JS builds no page DOM), runtime JS
-enhances existing markup only via `data-*` hooks (switch profile tabs, filter pre-rendered cards/rows,
-open drawer/confirm, toasts/disabled-reason, fake-submit demo — NO new hook); per-language pre-rendered
-pages; relative asset paths; GitHub-Pages compatible; Django-template-ready (`{% for teacher %}`, tabs →
-`{% if %}`, canonical drawer → ONE partial, status/signal maps → template tags); Arabic RTL first +
-English LTR; Light/Dark/System; labeled teacher-status/workload/follow-up status chips (never
-numeric/color-only); native JS; no CDN/TypeScript/SPA/chart libs/table libs/form libs/calendar libs;
-fixtures only — no real API/auth/permissions/CRUD/persistence, **no teacher-management/assignment/
-workload-calc/performance-scoring/ranking/salary-payroll/attendance/scheduling/notification engine**, no
-real status mutation; **NO computed teacher score/rank/leaderboard/percentile/chart anywhere; ALL
-finance (salary/payroll/compensation/payout) OUT of scope**; **no student/family/teacher dashboards or
-portals** (future-role, never rendered; `teacher.html` is an ADMIN profile, not a portal); the Teacher
-Performance board is now built (fixture-only) but addTeacher/teacherCategories/sessionsKpi/monthlyPerf
-stay planned; no copied legacy assets/classes/logo/palette/wording, no legacy numeric statuses;
-screenshot-based visual acceptance. **Spec 008 adds:** the enriched `reports.html` shell is fixtures-only —
-**no reporting/analytics/aggregation/export/PDF/CSV/scheduled-report/BI engine, no chart/graph/canvas, no
-computed report score/rank/leaderboard/percentile/trend, no finance/salary/payroll/invoice/accounting/
-revenue report (the legacy `revenue` card is removed)**; every report number is a display-only ROLL-UP of an
-existing fixture summary (matches the dashboard chips); report actions are demo/confirm/disabled-with-reason
-only (NO real export/send/schedule/persist); reports drill-down only to implemented pages (advanced reports
-stay planned/backendRequired, never dead links); NEW labeled report-signal + report-availability maps (never
-numeric/color-only); reuse Spec 005 outcome-status (teacherAbsent≠studentAbsent), Spec 003 session map,
-Spec 006 group-status, Spec 007 teacher signals; NO new page/nav/dashboard change.
+Hard constraints (Specs 001–011, all carried + binding): the ADMIN console continues the approved design
+(Spec 001 visual target; six-category rail); **static HTML-first** — complete pre-rendered `public/*.html`
+per language, NO whole-page `#app`, all content baked at build (runtime JS builds no page DOM), enhancement
+only via the CLOSED `data-*` hook set — NO new hook; relative paths; GitHub-Pages compatible;
+Django-template-ready; Arabic RTL first + English LTR; Light/Dark/System; ALL status/signal chips labeled
+icon+text; native JS; no CDN/TypeScript/SPA/chart/table/form/calendar libs; fixtures only — no real
+API/auth/permissions/CRUD/persistence; NO engine of any kind (attendance/scheduling/enrollment/grading/
+teacher-scoring/notification/chat/tasks/requests/scheduled-actions/holidays/time-zone/reporting/BI/export/
+invoice/payment/accounting/payroll/gateway); NO computed score/rank/leaderboard/percentile/chart; ALL
+salary/payroll/compensation/payout math OUT of scope — zero pay figures anywhere; reports body finance-free
+FOREVER; finance body Spec 009-invariant; zero `href="#"` sitewide; no copied legacy assets/classes/palette/
+wording/status codes; screenshot-based visual acceptance. **Spec 012 amends the portal rule**: role portals
+are now a real SEPARATE surface (foundation pages only) — student/family/teacher portal items remain FOREVER
+absent from the admin console (nav + bodies; admin-scoped smoke assertion), deep role dashboards stay future
+(Specs 013–015), and the portal layer must never look like the admin console or the legacy portals. **Spec
+012 adds**: new files confined to the portal namespace + 3 registration touch-points; personas = existing
+fixtures; every portal number authored; every action one of the four honest classes; planned cards labeled,
+figure-free; the demo hub is the only entry (documented URL); admin built output byte-identical; Specs
+008–011 guards re-run green with zero new amendments.
 <!-- SPECKIT END -->

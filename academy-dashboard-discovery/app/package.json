@@ -16,7 +16,7 @@
     "serve": "node scripts/serve.cjs",
     "preview": "node scripts/serve.cjs",
     "dev": "npm run build && node scripts/serve.cjs",
-    "deploy:pages": "node scripts/deploy-pages.mjs",
+    "deploy:pages": "npm run build && node scripts/sync-pages.mjs",
     "screenshots": "node tests/screenshots/capture.cjs",
     "test:smoke": "node tests/smoke/run.cjs",
     "test:a11y": "node tests/a11y/run.cjs",
