@@ -378,3 +378,35 @@ Deepens the Spec-012 student foundation (`student-portal(.en).html`, persona **s
 **Failure conditions:** none triggered — not admin-like (rail-less warm shell, card language), not a legacy clone (cards vs the legacy 10-col today table / 8-col grid; designed empty states the legacy never had), zero tables, bright-not-childish, no fake live join / upload / submit / download / chat / ranking (all backend-gated or display-only), stress-free celebration (unordered, no ranking), zero raw keys, zero `href="#"`, zero dead links, correct RTL/LTR, clean mobile, good dark contrast, no admin/family/teacher/reports/finance change, no new backend/library.
 
 **Automated (accompanying):** build clean (49) · smoke PASS (48 loads; student branch amended: ≥2 gauge counters, ≥10 sections, ≥1 `.pt-empty`, zero body anchors, ≥2 backendRequired gates, planned count 3 with new semantics, zero tables, 390px overflow probe; **admin/family/teacher/hub asserts byte-verbatim**) · axe **critical=0 serious=0** (student AR/EN × light/dark incl. the deepened sections) · **11 student frames, 0 console errors** (4 experience + 7 element-scoped area close-ups) · byte-identity: exactly `student-portal.html` + `.en.html` changed, 47/49 identical · Spec 008–012 guards re-run `ok` (incl. teacher pay-grep + admin 40-file identity).
+
+---
+
+## Spec 014 — Family / Guardian Dashboard — 2026-07-03
+
+Deepens the Spec-012 family foundation (`family-portal(.en).html`, persona **fam1** — guardian + 5 children) into the full one-page **guardian control center** — 12 sections, calm/child-centered/parent-friendly, ZERO tables, ZERO form controls, ZERO body anchors, and the **zero-pay hard line** (no currency/amount/pay token anywhere; the fixture's `hourRate`/`plan.perHour` display-suppressed). Delivers the guardian capabilities F1–F16 (previews with gated submits) with real per-child signals grounded in real outcome rows (out15 st11 absence · out12 st13 trial-cancel). Only the family pair changed — **47/49 built files byte-identical to HEAD**.
+
+**Baseline (pre-change gate, T001):** build 49 · smoke PASS · axe 0/0 · Spec 008–013 audits `ok` · HEAD `86729a9`.
+
+| # | Scenario | File | Verdict |
+|---|----------|------|---------|
+| 1 | Family dashboard · AR Light desktop (full) | `family-portal__ar__light__desktop.png` | ✅ PASS — 12 sections: violet guardian hero «مرحبًا، أبو سلمان الغامدي 🌿» + family summary + next-action hint · ALL FIVE children with status chips + progress bars (٧٨/٤١/٣٣/٢٨/١٥٪) + per-child hints · child-associated today sessions «لـ …» · the trio (١٢/٣/١) + TWO real attention cards (وليد «غياب واحد — متابعة لطيفة مع سارة» + absence chip · دانة trial-cancel) + reassurance · 3 teacher notes · child-first history (real «حضور مكتمل» + «غياب الطالب» + «مرفق») + planned full-history · subscriptions «الخطة المتقدمة» + status chips (ZERO amounts) · «جميع الفواتير مسوّاة» billing status (ZERO figures) + backendRequired gate · the requests hub (cancel + no-replacement caution · rubric question-lines · trial tiles · truthful meetings empty state) all «يتطلب الخادم» · materials + download gate · account slice. Calm, not admin-like, zero tables |
+| 2 | Family dashboard · AR Dark desktop | `family-portal__ar__dark__desktop.png` | ✅ PASS — premium dark surfaces; violet accents, status/outcome chips, amber gates hold contrast (axe-clean) |
+| 3 | Family dashboard · EN Light desktop | `family-portal__en__light__desktop.png` | ✅ PASS — LTR mirror, same 12-section structure, zero currency tokens |
+| 4 | Family dashboard · AR Mobile 390px | `family-portal__ar__light__mobile.png` | ✅ PASS — clean single-column reflow, five children + hub cards stack, no horizontal scroll (smoke probe scrollWidth ≤ 391) |
+| 5 | Children overview area | `…__area-children.png` | ✅ PASS — five child cards, gentle progress + per-child hints, no switcher |
+| 6 | Today sessions area | `…__area-today.png` | ✅ PASS — each card names its child; status chips; no join/cancel control |
+| 7 | Progress/signals area | `…__area-signals.png` | ✅ PASS — trio + two REAL outcome attention cards + reassurance; gentle, no KPI wall |
+| 8 | Teacher notes area | `…__area-notes.png` | ✅ PASS — 3 child-associated notes, summary/homework shape |
+| 9 | History area | `…__area-history.png` | ✅ PASS — real out1 + out15 child-first records + authored + planned full-history |
+| 10 | Subscriptions area | `…__area-subscriptions.png` | ✅ PASS — plan label + 5 status rows, ZERO amounts |
+| 11 | Billing area | `…__area-billing.png` | ✅ PASS — settled-status card + backendRequired gate, ZERO figures, no pay-now |
+| 12 | Requests hub area | `…__area-requests.png` | ✅ PASS — four honest preview cards, the no-replacement caution, rubric question-lines, trial tiles, truthful meetings empty state; every submit «يتطلب الخادم»; ZERO form controls |
+| 13 | Materials area | `…__area-materials.png` | ✅ PASS — 3 display-only cards + download backendRequired gate |
+| 14 | Student portal unchanged-proof | `student-portal__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD |
+| 15 | Teacher portal unchanged-proof | `teacher-portal__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD, pay-free |
+| 16 | Portal hub unchanged-proof | `portals__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD |
+| 17 | Admin dashboard unchanged-proof | `dashboard__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD (all 40 admin files hash-identical) |
+
+**Failure conditions:** none triggered — not admin-like (warm rail-less shell, card language), not a legacy clone (cards vs the legacy 10-col today / 8-col billing tables; designed empty states the legacy never had), zero tables, **no confusing child switcher** (everyone-inline), **no fake payment** (status only, zero figures, no pay-now), no fake cancel/reschedule/upload/voice/feedback submit (all backend-gated previews, zero form controls), zero raw keys, zero `href="#"`, zero dead links, correct RTL/LTR, clean mobile, good dark contrast, no student/teacher/admin change, no reports/finance regression, no new backend/library, **no currency/pay figure anywhere**.
+
+**Automated (accompanying):** build clean (49) · smoke PASS (48 loads; family branch amended: 5 progress bars = 5 children, ≥10 sections, ≥1 `.pt-empty`, zero body anchors, **zero form controls**, planned 2 amber + 2 neutral, **zero-pay regex 0 hits**, tables 0, 390px probe; **student/admin/teacher/hub asserts byte-verbatim**) · axe **critical=0 serious=0** (family AR/EN × light/dark) · **13 family frames, 0 console errors** (4 experience + 9 element-scoped area close-ups) · byte-identity: exactly `family-portal.html` + `.en.html` changed, 47/49 identical · Spec 008–013 guards re-run `ok` (incl. teacher pay-grep + admin 40-file identity + the Spec-013 student smoke branch unchanged).

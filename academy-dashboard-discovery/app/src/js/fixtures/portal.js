@@ -54,13 +54,42 @@ export const STUDENT_PREVIEW = {
   ],
 };
 
-/* Family portal — authored after-session teacher notes (the legacy per-session
- * Class-Summary/Homework record, reborn as friendly note cards). */
+/* Family portal — Spec 014 guardian control center (fam1 + 5 children).
+ * All authored/display-only literals or refs to EXISTING fixtures. NO computed
+ * score/rank, NO backend-shaped state, and — the hard line — NO money-like field
+ * is ever surfaced (the family fixture's hourRate/plan cost is display-suppressed).
+ * Personas + student/teacher registers untouched. */
 export const FAMILY_PREVIEW = {
+  /* authored sessionId → child mapping for the today band (which child each session is for) */
+  todayChildren: { s2: 'st1', s3: 'st11', s5: 'st6' },
+  /* authored family attendance trio (display-only; gentle, not a KPI wall) */
+  attendance: { attended: 12, upcoming: 3, followUp: 1 },
+  /* the "is anyone behind?" signals — REAL outcome rows only (no fabrication):
+   * out15 = st11 studentAbsent + follow-up (with support feedback) · out12 = st13 trial cancel */
+  signals: [
+    { outcomeId: 'out15', framingKey: 'prt.fam.sig.absence' },
+    { outcomeId: 'out12', framingKey: 'prt.fam.sig.trial' },
+  ],
+  /* recent after-session teacher notes (the legacy Class-Summary/Homework record, reborn) */
   teacherNotes: [
     { id: 'n1', studentId: 'st1', teacherKey: 'data.t.sara', noteKey: 'data.prtNote1', dateKey: 'sess.today' },
     { id: 'n2', studentId: 'st6', teacherKey: 'data.t.khalid', noteKey: 'data.prtNote2', dateKey: 'sess.today' },
+    { id: 'n3', studentId: 'st12', teacherKey: 'data.t.khalid', noteKey: 'data.prtFamNote3', dateKey: 'sess.today' },
   ],
+  /* guardian history mirror (F6) — child-first cards; first two resolve REAL outcome rows */
+  history: [
+    { id: 'h1', outcomeId: 'out1', dayKey: 'prt.fam.hist.daySun' },
+    { id: 'h2', outcomeId: 'out15', dayKey: 'prt.fam.hist.dayTue' },
+    { id: 'h3', childId: 'st6', teacherKey: 'data.t.khalid', dayKey: 'prt.fam.hist.dayMon', summaryKey: 'data.prtFamHist3sum', homeworkKey: 'data.prtFamHist3hw', hasAttachment: true },
+  ],
+  /* family materials preview (F12 slice) — display-only; child-associated */
+  materials: [
+    { id: 'm1', titleKey: 'data.prtFamMat1', childId: 'st1', typeIcon: 'file-text' },
+    { id: 'm2', titleKey: 'data.prtFamMat2', childId: 'st11', typeIcon: 'play' },
+    { id: 'm3', titleKey: 'data.prtFamMat3', childId: 'st6', typeIcon: 'materials' },
+  ],
+  /* per-child gentle hint lines (authored, display-only) */
+  kidHints: { st1: 'data.prtFamKid1', st6: 'data.prtFamKid2', st11: 'data.prtFamKid3', st12: 'data.prtFamKid4', st13: 'data.prtFamKid5' },
 };
 
 /* Planned/backend-gated foundation cards per portal (availability reuses the
@@ -73,10 +102,14 @@ export const PORTAL_PLANNED = {
     { id: 'matDownload', icon: 'materials', titleKey: 'prt.stu.plan.matDownload.t', descKey: 'prt.stu.plan.matDownload.d', availability: 'backendRequired' },
     { id: 'fullHistory', icon: 'clipboard-check', titleKey: 'prt.stu.plan.fullHistory.t', descKey: 'prt.stu.plan.fullHistory.d', availability: 'planned' },
   ],
+  /* Spec 014 — four family mini-cards, each placed inside its owning section:
+   * billing view/settle + materials download are backend-gated; full-history +
+   * meeting-request are planned. (billing carries ZERO amounts — a gate, not a ledger.) */
   family: [
-    { id: 'billing', icon: 'wallet', titleKey: 'prt.fam.planned.bill.t', descKey: 'prt.fam.planned.bill.d', availability: 'backendRequired' },
-    { id: 'meetings', icon: 'calendar', titleKey: 'prt.fam.planned.meet.t', descKey: 'prt.fam.planned.meet.d', availability: 'planned' },
-    { id: 'subscriptions', icon: 'certificates', titleKey: 'prt.fam.planned.subs.t', descKey: 'prt.fam.planned.subs.d', availability: 'planned' },
+    { id: 'billingGate', icon: 'wallet', titleKey: 'prt.fam.plan.billing.t', descKey: 'prt.fam.plan.billing.d', availability: 'backendRequired' },
+    { id: 'matDownload', icon: 'materials', titleKey: 'prt.fam.plan.matDownload.t', descKey: 'prt.fam.plan.matDownload.d', availability: 'backendRequired' },
+    { id: 'fullHistory', icon: 'clipboard-check', titleKey: 'prt.fam.plan.fullHistory.t', descKey: 'prt.fam.plan.fullHistory.d', availability: 'planned' },
+    { id: 'meetingRequest', icon: 'calendar', titleKey: 'prt.fam.plan.meetingRequest.t', descKey: 'prt.fam.plan.meetingRequest.d', availability: 'planned' },
   ],
   teacher: [
     { id: 'materials', icon: 'materials', titleKey: 'prt.tch.planned.mat.t', descKey: 'prt.tch.planned.mat.d', availability: 'planned' },

@@ -138,6 +138,7 @@ const MATRIX = [
   { page: 'student-portal', lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'family-portal',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-portal',  lang: 'ar', theme: 'dark',  vp: 'desktop' },
   { page: 'family-portal',  lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'family-portal',  lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop' },
@@ -156,6 +157,18 @@ const MATRIX = [
   { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-achievements' },
   { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-celebration' },
   { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(11)', variant: 'area-history' },
+  // Spec 014 — family dashboard area close-ups ('section' includes hero, so nth-of-type:
+  // 1=hero 2=children 3=today 4=progress/signals 5=notes 6=history 7=subscriptions 8=billing
+  // 9=requests-hub 10=materials 11=account).
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(2)',  variant: 'area-children' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)',  variant: 'area-today' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(4)',  variant: 'area-signals' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(5)',  variant: 'area-notes' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(6)',  variant: 'area-history' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(7)',  variant: 'area-subscriptions' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(8)',  variant: 'area-billing' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-requests' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-materials' },
 ];
 
 (async () => {

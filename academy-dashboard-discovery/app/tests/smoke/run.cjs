@@ -926,7 +926,10 @@ const FILTER_SPEC = {
           const bodyAnchors = [...document.querySelectorAll('#page-body a[href]')].length;
           const plannedBackend = document.querySelectorAll('.pt-planned .chip.tone-amber').length;
           const plannedPlanned = document.querySelectorAll('.pt-planned .chip.tone-neutral').length;
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned };
+          // Spec 014 — family: five children each carry a progress bar; the page has zero form controls
+          const progressBars = document.querySelectorAll('.pt-bar').length;
+          const formControls = document.querySelectorAll('#page-body form, #page-body input, #page-body select, #page-body textarea').length;
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls };
         });
         const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
@@ -945,8 +948,25 @@ const FILTER_SPEC = {
           ok(prt.plannedBackend === 2, `${page}/${lang}: expected 2 backendRequired planned gates (homework + materials), got ${prt.plannedBackend}`);
           ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned gate (full history), got ${prt.plannedPlanned}`);
         }
+        // Spec 014 — the deepened family dashboard: all five fam1 children visible, ≥10 sections,
+        // the truthful meetings empty-state, zero body anchors/form controls, and the ZERO-PAY hard line.
+        if (page === 'family-portal') {
+          ok(prt.progressBars === 5, `${page}/${lang}: expected all 5 fam1 children (5 progress bars), got ${prt.progressBars}`);
+          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
+          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the reassuring empty-state pattern (≥1 .pt-empty), got ${prt.emptyCount}`);
+          ok(prt.bodyAnchors === 0, `${page}/${lang}: the family page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          ok(prt.formControls === 0, `${page}/${lang}: the family page must contain zero form controls, got ${prt.formControls}`);
+          // planned-card graduation: billing + materials gates are backendRequired (amber lock),
+          // full-history + meeting-request are planned (neutral clock).
+          ok(prt.plannedBackend === 2, `${page}/${lang}: expected 2 backendRequired family gates (billing + materials), got ${prt.plannedBackend}`);
+          ok(prt.plannedPlanned === 2, `${page}/${lang}: expected 2 planned family gates (full history + meeting), got ${prt.plannedPlanned}`);
+          // THE ZERO-PAY HARD LINE — no currency/amount/pay-action token may render on the family body
+          // (Arabic-first: mirror the EN amount/price tokens with مبلغ/سعر/رسوم so a bare AR amount is caught too)
+          const payFigure = /ريال|ر\.س|\bSAR\b|\bUSD\b|جنيه|\bEGP\b|[$€£]|ادفع|سداد|pay now|payment|\bamount\b|\bprice\b|مبلغ|سعر|رسوم/i.test(prt.bodyText);
+          ok(!payFigure, `${page}/${lang}: the family dashboard shows a currency/pay figure — forbidden (SC-005, the zero-pay hard line)`);
+        }
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
-        const expPlanned = { 'student-portal': 3, 'family-portal': 3, 'teacher-portal': 2, portals: 0 }[page];
+        const expPlanned = { 'student-portal': 3, 'family-portal': 4, 'teacher-portal': 2, portals: 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
         ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
         if (page === 'portals') {
@@ -960,11 +980,11 @@ const FILTER_SPEC = {
             || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
           ok(!payHit, `${page}/${lang}: the teacher portal contains pay vocabulary — forbidden (FR-006)`);
         }
-        // student portal is table-free by contract
-        if (page === 'student-portal') {
+        // the student + family dashboards are table-free and mobile-clean by contract
+        if (page === 'student-portal' || page === 'family-portal') {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
-          ok(tables === 0, `${page}/${lang}: the student portal must contain zero tables, got ${tables}`);
-          // Spec 013 — mobile-first: no horizontal overflow at 390px (this context is discarded after)
+          ok(tables === 0, `${page}/${lang}: this portal must contain zero tables, got ${tables}`);
+          // mobile-first: no horizontal overflow at 390px (this context is discarded after)
           await p.setViewportSize({ width: 390, height: 900 });
           await p.waitForTimeout(120);
           const overflow = await p.evaluate(() => document.documentElement.scrollWidth);

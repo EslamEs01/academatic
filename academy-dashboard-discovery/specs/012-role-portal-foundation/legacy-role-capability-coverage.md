@@ -189,3 +189,38 @@ Spec 013 (Student Dashboard) deepens the student portal and resolves the student
 - [x] Backend-gated capabilities (uploads, downloads, full history) stay visibly labeled, never faked.
 
 **Reviewer:** ______________________  **Date:** ______________
+
+---
+
+## 8. Spec 014 delivery notes (family/guardian dispositions — appended, no row reclassified)
+
+Spec 014 (Family / Guardian Dashboard) deepens the family portal and dispositions every guardian row (F1–F17). These are **delivery annotations only** — the §2 classifications, destinations, and rationales above are unchanged; nothing is re-scoped. Requests are honest previews whose *submission* stays gated (backend / planned-016).
+
+| Row | Spec-014 disposition |
+|---|---|
+| **F1** guardian home widgets | **Delivered** — deep guardian hero + five-children overview + today band + the attendance trio |
+| **F2** multi-child proxy | **Delivered** — everyone-inline five-children overview (capture-verified: legacy had NO global switcher; the switching promise resolves as everyone-visible-at-once; the Spec-012 kidsHint copy is updated to post-014 truth) |
+| **F3** today + request-cancel | **Delivered** as honest preview — child-associated today band + the cancel/reschedule preview card with the no-replacement caution; the request *submission* stays gated (backendRequired now; real request flow → planned-016) |
+| **F5** timetable (family slice) | **Delivered** — the today band answers the family-side schedule question; the deep student timetable shipped in Spec 013 (§7); no separate family grid (calm > grid, deliberate) |
+| **F6** history (guardian mirror) | **Delivered** — child-first recent-sessions cards resolving REAL `out1` (st1 attended + good feedback) and REAL `out15` (st11 absent + support feedback) + one authored record; full history stays a labeled `planned` mini-card |
+| **F7** subscriptions / plans | **Delivered** — per-child plan-label rows («الخطة المتقدمة») + status chips; **ZERO amounts** |
+| **F8** feedback-about-teacher rubric | **Delivered** as a display-only rubric preview (question lines, no rating-scale visual, no score vocabulary); submit `backendRequired` |
+| **F9** billing (view-only) | **Delivered** as a calm STATUS preview (settled chip + reassurance), **ZERO currency figures**, no pay-now; real invoices/payment stay `backendRequired` (capture-verified: legacy itself rendered zero amounts) |
+| **F10** feedback / meetings | **Delivered** — the truthful "no meetings scheduled" empty state + a labeled `planned` request-a-meeting mini-card |
+| **F11** request-trial / add-child | **Delivered** as a display-only new-vs-existing-child preview; submit `backendRequired` |
+| **F12** materials (family slice) | **Delivered** — 3 display-only child-associated cards; download `backendRequired` |
+| **F13** account / profile edit | **Delivered** as the account slice (guardian contact / joined / children display-only); editing `backendRequired` |
+| **F16** teacher-notes preview | **Delivered** — deepened to 3 child-associated notes (summary/homework shape) |
+| **F4** file/voice upload | **UNCHANGED** — `backendRequired`; never rendered as a control (no upload/record affordance exists on the page) |
+| **F14** `/profile` 500 · **F15** Dashboard-1 404 · **F17** dual-badge bug | **UNCHANGED** — `intentionally excluded` |
+
+**Real request-submission engines** (cancel / feedback / trial / meeting requests) are deferred to **planned-016** (the Role-Portal Operations / Communications shell) on top of their per-card backendRequired gates. Already-delivered-013 items (the student slices of F5/F6/F12, and the student portal generally) remain under §7 and are untouched.
+
+**Spec 014 sign-off:**
+- [x] All 17 guardian rows (F1–F17) carry an explicit Spec-014 disposition — zero silent gaps.
+- [x] Billing/subscriptions delivered with ZERO amounts / no pay control (the zero-pay hard line; grep- and smoke-enforced).
+- [x] Every request is an honest preview; no fake pay/cancel/upload/voice/feedback submission; the page carries zero form controls.
+- [x] The multi-child pattern is everyone-visible-at-once (no fake switcher).
+- [x] §§1–7 byte-unchanged; no student/teacher row reclassified.
+
+**Reviewer:** ______________________  **Date:** ______________

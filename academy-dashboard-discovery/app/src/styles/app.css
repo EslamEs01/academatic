@@ -890,4 +890,15 @@
   /* recent-sessions attachment annotation (display-only, no link) */
   .pt-attach { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--c-ink-3); }
   .pt-attach .ico { color: var(--c-ink-3); }
+
+  /* ===== Spec 014 — family requests hub + display-only line lists (.portal-shell namespace ONLY) ===== */
+  .pt-lines { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .pt-line { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--c-ink-2); line-height: 1.6; }
+  .pt-line .ico { color: var(--pt-accent); flex-shrink: 0; margin-top: 2px; }
+  .pt-tiles { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 6px; }
+  @media (min-width: 560px) { .pt-tiles { grid-template-columns: 1fr 1fr; } }
+  .pt-tile { border: 1px solid var(--c-line); border-radius: 12px; padding: 10px 12px; background: var(--c-surface-2); }
+  .pt-tile-t { font-weight: 700; font-size: 12.5px; color: var(--c-ink); }
+  /* an inline availability chip sitting under a preview card's content */
+  .pt-card-chip { margin-top: 4px; }
 }
