@@ -11,7 +11,7 @@ export default {
   nav: {
     categories: 'Navigation categories', landmark: 'Sidebar', collapse: 'Collapse menu',
     soon: 'Soon', comingSoon: 'This page is being prepared and will be available soon.',
-    reason: { finance: 'Requires the billing module (out of current scope).' },
+    reason: { finance: 'Requires the real billing backend — the Finance page shows a fixture-only preview.' },
     // control
     home: 'Home', sessions: 'Sessions', schedule: 'Timetable',
     sessionsAnalysis: 'Sessions analysis', messages: 'Messages', leads: 'New Requests', tasks: 'Tasks',

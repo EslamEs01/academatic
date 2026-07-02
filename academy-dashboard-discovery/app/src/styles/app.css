@@ -719,3 +719,40 @@
   .group-row .gr-end { flex-basis: 100%; text-align: start; margin-top: 6px; }
   .level-step { flex-basis: 100%; }
 }
+
+/* Spec 009 — finance tiles/rows/drawer lines. Mirrors the existing outcome-tile
+ * (tiles) and group-row (list rows) looks with a `fin-` prefix; no new color/tone,
+ * every value the markup places here is an authored literal or a row count. */
+@layer components {
+  .fin-tiles { @apply grid gap-3 mb-5; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .fin-tile { @apply card flex items-center gap-3 p-3.5 text-start transition-all w-full; cursor: pointer; }
+  .fin-tile:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+  .fin-tile:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
+  .fin-tile .ft-v { @apply font-bold tabular text-ink; font-size: 21px; line-height: 1; }
+  .fin-tile .ft-l { @apply text-[12px] mt-1; color: var(--c-ink-3); }
+
+  .fin-row { @apply card flex items-center gap-3 p-3.5 mb-2.5 transition-all; }
+  .fin-row[hidden] { display: none; } /* the [data-row] filter sets the hidden attr; the component display rule must not win the tie */
+  .fin-row.is-hoverable:hover { box-shadow: var(--sh-md); transform: translateY(-1px); }
+  .fin-row .fr-serial { @apply text-center shrink-0 font-bold text-ink text-[12.5px]; min-width: 100px; }
+  .fin-row .fr-body { @apply min-w-0 flex-1; }
+  .fin-row .fr-title { @apply font-bold text-ink text-[14px] truncate; display: block; text-decoration: none; }
+  a.fr-title:hover { color: var(--c-primary); }
+  .fin-row .fr-sub { @apply text-[12px] truncate mt-0.5; color: var(--c-ink-3); }
+  .fin-row .fr-meta { @apply flex flex-wrap items-center gap-2 mt-1.5; }
+  .fin-row .fr-amount { @apply text-end shrink-0 font-bold text-[14px]; min-width: 92px; }
+  .fin-row .fr-actions { @apply flex flex-wrap items-center gap-2 shrink-0; }
+
+  .fin-pay-row { @apply flex items-center gap-3 p-3 rounded-tile flex-wrap; border: 1px solid var(--c-line); background: var(--c-surface); }
+  .fin-pay-row + .fin-pay-row { margin-top: 8px; }
+  .fin-pay-row .fp-date { @apply text-[12px] shrink-0; color: var(--c-ink-3); min-width: 76px; }
+  .fin-pay-row .fp-family { @apply font-bold text-[13px] text-ink truncate; text-decoration: none; flex: 1 1 130px; min-width: 0; }
+  a.fp-family:hover { color: var(--c-primary); }
+  .fin-pay-row .fp-amount { @apply font-bold text-[13.5px] text-ink shrink-0; }
+}
+
+@media (max-width: 640px) {
+  .fin-row { flex-wrap: wrap; }
+  .fin-row .fr-body { flex-basis: calc(100% - 60px); }
+  .fin-row .fr-amount, .fin-row .fr-actions { flex-basis: 100%; text-align: start; margin-top: 6px; justify-content: flex-start; }
+}

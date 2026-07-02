@@ -11,7 +11,7 @@ export default {
   nav: {
     categories: 'فئات التنقّل', landmark: 'القائمة الجانبية', collapse: 'طيّ القائمة',
     soon: 'قريبًا', comingSoon: 'هذه الصفحة قيد الإعداد وستتوفر قريبًا.',
-    reason: { finance: 'تتطلب وحدة الفوترة (خارج النطاق الحالي).' },
+    reason: { finance: 'يتطلب نظام الفوترة الفعلي — صفحة «المالية» تعرض معاينة تجريبية بالبيانات الثابتة.' },
     // control
     home: 'الرئيسية', sessions: 'الجلسات', schedule: 'الجدول الدراسي',
     sessionsAnalysis: 'تحليل الجلسات', messages: 'المحادثات', leads: 'الطلبات الجديدة', tasks: 'المهام',

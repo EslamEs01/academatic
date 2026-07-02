@@ -116,6 +116,14 @@ const MATRIX = [
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'teachers-followup' },
   { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 009 — Finance, Billing & Payments Shell (acceptance matrix)
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeDrawer: true,  variant: 'drawer' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeConfirm: true, variant: 'confirm' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeFilter: true,  variant: 'filter' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile' },
 ];
 
 (async () => {
@@ -163,9 +171,13 @@ const MATRIX = [
     // Spec 008 — reports: Schedule confirm modal (demo) / category-card filter narrowed
     if (s.reportAction) { await page.click('.report-actions [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
     if (s.reportFilter) { await page.selectOption('select[data-filter="area"]', 'attendance').catch(() => {}); await page.waitForTimeout(220); }
+    // Spec 009 — finance: invoice drawer / record-payment confirm / overdue-tile filter
+    if (s.financeDrawer) { await page.click('#invoice-list [data-drawer]').catch(() => {}); await page.waitForTimeout(380); }
+    if (s.financeConfirm) { await page.click('#invoice-list [data-confirm]').catch(() => {}); await page.waitForTimeout(380); }
+    if (s.financeFilter) { await page.click('[data-filter-set="status:overdue"]').catch(() => {}); await page.waitForTimeout(250); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
-    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction });
+    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm });
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
     else console.log(`  ✓ ${name}`);

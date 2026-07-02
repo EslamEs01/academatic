@@ -70,6 +70,7 @@ export const NAV_CATEGORIES = [
       item({ id: 'reports', labelKey: 'nav.reports', icon: 'reports', route: 'reports.html' }),
       item({ id: 'monthlyReports', labelKey: 'nav.monthlyReports', icon: 'reports', status: 'planned' }),
       item({ id: 'dataAnalysis', labelKey: 'nav.dataAnalysis', icon: 'trending-up', status: 'planned' }),
+      item({ id: 'finance', labelKey: 'nav.finance', icon: 'wallet', route: 'finance.html' }),
       item({ id: 'invoices', labelKey: 'nav.invoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
       item({ id: 'monthlyInvoices', labelKey: 'nav.monthlyInvoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
       item({ id: 'salaries', labelKey: 'nav.salaries', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
@@ -127,7 +128,7 @@ export const FUTURE_ROUTES = {
   announcements: 'announcements.html', attendance: 'attendance.html', groups: 'groups.html', studentResult: 'student-results.html',
   studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html', teacherKpi: 'teacher-performance.html',
   materials: 'materials.html', books: 'library.html', certificates: 'certificates.html', staff: 'staff.html',
-  dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',
+  dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html', finance: 'finance.html',
 };
 
 /* build-time guard — a dead link cannot ship */

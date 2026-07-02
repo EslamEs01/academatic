@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
 const { PORT } = require('../../scripts/serve.cjs');
 
 const BASE = `http://localhost:${PORT}`;
-const PAGES = ['dashboard', 'reports', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
+const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
   'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance'];
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
@@ -600,6 +600,165 @@ const ok = (c, m) => { if (!c) fails.push(m); };
         const modal = await p.evaluate(() => !!document.querySelector('.modal-scrim, .drawer.sheet'));
         ok(modal, `${page}/${lang}: the Schedule action did not open a confirm modal`);
         await p.keyboard.press('Escape');
+      }
+
+      // Spec 009 — Finance shell: 4 status tiles equal invoice-list row counts per status
+      // · 9 invoice rows + 6 payment rows baked · labeled chips for every invoice/payment status
+      // · honest actions (≥3 disabled-with-reason + ≥1 demo in the action cluster, ≥1 confirm in rows,
+      // the cancelled invoice gates record-payment to disabled-with-reason, never confirm)
+      // · one drawer per invoice (9) · zero href="#"/receipt/upload/type="file" tokens
+      // · confirming Record payment mutates NO invoice status chip · the planned section renders
+      // 9 figure-free disabled report-cards with availability chips · zero chart/score/rank tokens.
+      if (page === 'finance') {
+        const FIN_STATUS_LABELS = (lang === 'en'
+          ? { paid: 'Paid', unpaid: 'Unpaid', overdue: 'Overdue', cancelled: 'Cancelled' }
+          : { paid: 'مدفوعة', unpaid: 'غير مدفوعة', overdue: 'متأخرة', cancelled: 'ملغاة' });
+        const FIN_PAY_LABELS = (lang === 'en'
+          ? { recorded: 'Recorded', pending: 'Pending', returned: 'Returned' }
+          : { recorded: 'مسجَّلة', pending: 'قيد التأكيد', returned: 'مرتجعة' });
+        const a = await p.evaluate(() => {
+          const toNum = (s) => parseInt(String(s).trim().replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)), 10);
+          const body = document.getElementById('page-body');
+          const tiles = [...document.querySelectorAll('.fin-tile[data-filter-set]')];
+          const tileCounts = tiles.map((tl) => ({
+            status: (tl.getAttribute('data-filter-set') || '').split(':')[1],
+            count: toNum((tl.querySelector('.ft-v') || {}).textContent || ''),
+          }));
+          const rows = [...document.querySelectorAll('#invoice-list [data-row]')];
+          const rowCountByStatus = {};
+          rows.forEach((r) => { const s = r.getAttribute('data-status'); rowCountByStatus[s] = (rowCountByStatus[s] || 0) + 1; });
+          const payRows = [...document.querySelectorAll('.fin-pay-row')];
+          const invoiceChipTexts = [...new Set(rows.map((r) => { const c = r.querySelector('.fr-meta .chip'); return c ? c.textContent.replace(/\s+/g, ' ').trim() : ''; }))];
+          const paymentChipTexts = [...new Set(payRows.map((r) => { const chips = r.querySelectorAll('.chip'); const c = chips[chips.length - 1]; return c ? c.textContent.replace(/\s+/g, ' ').trim() : ''; }))];
+          const actionCluster = document.querySelector('.report-actions');
+          const disabledInCluster = actionCluster ? actionCluster.querySelectorAll('[data-disabled-reason]').length : 0;
+          const demoInCluster = actionCluster ? actionCluster.querySelectorAll('[data-demo-action]').length : 0;
+          const rowConfirm = document.querySelectorAll('#invoice-list [data-row] [data-confirm]').length;
+          const cancelledRow = document.querySelector('#invoice-list [data-row][data-status="cancelled"]');
+          const cancelledDisabledRecord = cancelledRow ? !!cancelledRow.querySelector('.fr-actions [data-disabled-reason]') : false;
+          const cancelledConfirmRecord = cancelledRow ? !!cancelledRow.querySelector('.fr-actions [data-confirm]') : false;
+          const drawers = document.querySelectorAll('template[data-preview]').length;
+          const hrefHash = body.querySelectorAll('a[href="#"]').length;
+          const receiptTokens = /receipt|upload|type="file"|إيصال|مرفق/i.test(body.innerHTML);
+          const plannedCards = [...document.querySelectorAll('.report-card')];
+          const plannedDisabled = plannedCards.filter((c) => c.classList.contains('is-disabled')).length;
+          const plannedDigitFree = plannedCards.every((c) => !/[0-9٠-٩]/.test(c.textContent));
+          const plannedHasAvailability = plannedCards.every((c) => !!c.querySelector('.chip'));
+          const forbidden = /\b(chart|canvas|graph|score|rank|leaderboard|percentile)\b/i.test(body.innerHTML);
+          return {
+            tileCounts, rowCountByStatus, rowsN: rows.length, payRowsN: payRows.length,
+            invoiceChipTexts, paymentChipTexts, disabledInCluster, demoInCluster, rowConfirm,
+            cancelledFound: !!cancelledRow, cancelledDisabledRecord, cancelledConfirmRecord,
+            drawers, hrefHash, receiptTokens,
+            plannedN: plannedCards.length, plannedDisabled, plannedDigitFree, plannedHasAvailability,
+            forbidden,
+          };
+        });
+        // (a) exactly 4 tiles, each count === its facet's #invoice-list row count
+        ok(a.tileCounts.length === 4, `${page}/${lang}: expected exactly 4 invoice status tiles, got ${a.tileCounts.length}`);
+        for (const tl of a.tileCounts) {
+          ok(tl.count === (a.rowCountByStatus[tl.status] || 0),
+            `${page}/${lang}: tile '${tl.status}' shows ${tl.count} but #invoice-list has ${a.rowCountByStatus[tl.status] || 0} rows`);
+        }
+        // (b) 9 invoice rows + 6 payment rows baked
+        ok(a.rowsN === 9, `${page}/${lang}: expected 9 baked invoice rows, got ${a.rowsN}`);
+        ok(a.payRowsN === 6, `${page}/${lang}: expected 6 baked payment rows, got ${a.payRowsN}`);
+        // (c) ≥1 chip text per invoice/payment status, using the exact AR/EN label copy
+        for (const [id, label] of Object.entries(FIN_STATUS_LABELS)) {
+          ok(a.invoiceChipTexts.includes(label), `${page}/${lang}: no invoice row shows the '${id}' status chip text "${label}"`);
+        }
+        for (const [id, label] of Object.entries(FIN_PAY_LABELS)) {
+          ok(a.paymentChipTexts.includes(label), `${page}/${lang}: no payment row shows the '${id}' status chip text "${label}"`);
+        }
+        // (d) honest actions: ≥3 disabled-with-reason + ≥1 demo in the action cluster; ≥1 confirm among
+        // rows; the cancelled invoice's row disables record-payment (never a confirm control there)
+        ok(a.disabledInCluster >= 3, `${page}/${lang}: expected ≥3 disabled-with-reason controls in the finance action cluster, got ${a.disabledInCluster}`);
+        ok(a.demoInCluster >= 1, `${page}/${lang}: expected ≥1 demo action in the finance action cluster, got ${a.demoInCluster}`);
+        ok(a.rowConfirm >= 1, `${page}/${lang}: expected ≥1 [data-confirm] record-payment control among invoice rows`);
+        ok(a.cancelledFound, `${page}/${lang}: no cancelled invoice row found`);
+        ok(a.cancelledDisabledRecord, `${page}/${lang}: the cancelled invoice's row is missing a disabled-with-reason record-payment control`);
+        ok(!a.cancelledConfirmRecord, `${page}/${lang}: the cancelled invoice's row must NOT have a confirm record-payment control`);
+        // (e) one drawer template per invoice
+        ok(a.drawers === 9, `${page}/${lang}: expected 9 baked invoice drawer templates, got ${a.drawers}`);
+        // (f) no dead links / receipt-upload tokens in the page body
+        ok(a.hrefHash === 0, `${page}/${lang}: dead href="#" present in the finance page body`);
+        ok(!a.receiptTokens, `${page}/${lang}: a receipt/upload/type="file" token was found in the finance page body`);
+        // (h) the planned section: exactly 9 disabled, figure-free report-cards with availability chips
+        ok(a.plannedN === 9 && a.plannedDisabled === 9, `${page}/${lang}: expected exactly 9 disabled planned report-cards, got ${a.plannedN} (${a.plannedDisabled} disabled)`);
+        ok(a.plannedDigitFree, `${page}/${lang}: a planned finance card shows a digit (must be figure-free)`);
+        ok(a.plannedHasAvailability, `${page}/${lang}: a planned finance card is missing its availability chip`);
+        // (i) no chart/score/rank/leaderboard/percentile token anywhere in the page body
+        ok(!a.forbidden, `${page}/${lang}: finance page body shows a forbidden chart/score/rank/leaderboard/percentile token`);
+
+        // (g) confirming a Record-payment action changes NO invoice status chip (before/after)
+        const chipsBefore = await p.$$eval('#invoice-list .fr-meta .chip', (els) => els.map((e) => e.textContent.trim()));
+        const confirmBtn = await p.$('#invoice-list [data-row]:not([data-status="cancelled"]) [data-confirm]');
+        if (confirmBtn) {
+          await confirmBtn.click();
+          await p.waitForTimeout(160);
+          const modalOpen = await p.evaluate(() => !!document.querySelector('.modal-scrim'));
+          ok(modalOpen, `${page}/${lang}: Record payment did not open a confirm modal`);
+          const go = await p.$('.modal-scrim [data-confirm-go]');
+          if (go) { await go.click(); await p.waitForTimeout(160); }
+        }
+        await p.keyboard.press('Escape');
+        await p.waitForTimeout(100);
+        const chipsAfter = await p.$$eval('#invoice-list .fr-meta .chip', (els) => els.map((e) => e.textContent.trim()));
+        ok(JSON.stringify(chipsBefore) === JSON.stringify(chipsAfter),
+          `${page}/${lang}: confirming Record payment changed an invoice status chip (before=${JSON.stringify(chipsBefore)}, after=${JSON.stringify(chipsAfter)})`);
+
+        // (j) tiles-as-filters narrows VISUALLY (computed display — the [hidden] attr alone is not
+        // enough: a component display rule can win the specificity tie and leave rows rendered)
+        await p.click('[data-filter-set="status:overdue"]');
+        await p.waitForTimeout(250);
+        const narrowed = await p.evaluate(() => {
+          const rows = [...document.querySelectorAll('#invoice-list [data-row]')];
+          return {
+            shown: rows.filter((r) => getComputedStyle(r).display !== 'none').length,
+            overdue: rows.filter((r) => r.getAttribute('data-status') === 'overdue').length,
+          };
+        });
+        ok(narrowed.shown === narrowed.overdue,
+          `${page}/${lang}: overdue tile did not visually narrow the invoice list (shown=${narrowed.shown}, expected=${narrowed.overdue})`);
+      }
+
+      // Spec 009 — Dashboard/Reports integration: no new finance chrome in the body,
+      // the sidebar carries exactly one finance link, the six wallet items stay locked.
+      if (page === 'dashboard' || page === 'reports') {
+        const fin = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const txt = body.innerText;
+          const enHit = /\b(invoice|invoices|payment|payments|billing|salary|salaries|payroll|payout|accounting)\b/i.test(txt);
+          const arHit = /فاتورة|فواتير|مدفوعات|رواتب|محاسبة|الفوترة/.test(txt);
+          // structural money-widget guard: a token-free finance widget (e.g. a bare "SAR 12,300" card)
+          // must fail too — the only sanctioned wallet icon + currency token in a #page-body is the
+          // pre-existing Spec 001 revenue KPI on the dashboard; the reports body has zero of both.
+          const walletInBody = body.querySelectorAll('use[href="#i-wallet"]').length;
+          const currencyTokens = (txt.match(/ريال|\bSAR\b/g) || []).length;
+          const isFinanceLink = (h) => /(^|\/)finance\.(en\.)?html$/.test(h || '');
+          const sidebarFinanceLinks = [...document.querySelectorAll('.sidebar a[href]')].filter((x) => isFinanceLink(x.getAttribute('href'))).length;
+          const bodyFinanceLinks = [...body.querySelectorAll('a[href]')].filter((x) => isFinanceLink(x.getAttribute('href'))).length;
+          const walletIds = ['invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport'];
+          const walletOk = walletIds.every((id) => {
+            const el = document.querySelector(`.nav-item[data-nav="${id}"]`);
+            return !!el && el.getAttribute('data-nav-status') === 'disabled' && el.getAttribute('aria-disabled') === 'true' && !!el.querySelector('use[href="#i-lock"]');
+          });
+          return { enHit, arHit, sidebarFinanceLinks, bodyFinanceLinks, walletOk, walletInBody, currencyTokens };
+        });
+        // (a) finance-token regex over #page-body must be clean (revenue words are deliberately excluded —
+        // the pre-existing Spec 001 revenue KPI legitimately says "الإيرادات الشهرية"/"Monthly revenue")
+        ok(!fin.enHit, `${page}/${lang}: #page-body contains a forbidden finance token (EN: invoice/payment/billing/salary/payroll/payout/accounting)`);
+        ok(!fin.arHit, `${page}/${lang}: #page-body contains a forbidden finance token (AR: فاتورة/فواتير/مدفوعات/رواتب/محاسبة/الفوترة)`);
+        // (b) the sidebar carries exactly one finance link
+        ok(fin.sidebarFinanceLinks === 1, `${page}/${lang}: expected exactly one sidebar finance link, got ${fin.sidebarFinanceLinks}`);
+        // (c) the six wallet items remain locked/disabled
+        ok(fin.walletOk, `${page}/${lang}: one or more of the six locked wallet nav items lost its disabled/lock state`);
+        // (d) zero finance.html links inside the page body
+        ok(fin.bodyFinanceLinks === 0, `${page}/${lang}: #page-body must not contain a finance.html link`);
+        // (e) structural money-widget guard (see the evaluate block): sanctioned counts only
+        const wantMoney = page === 'dashboard' ? 1 : 0;
+        ok(fin.walletInBody === wantMoney, `${page}/${lang}: expected ${wantMoney} wallet icon(s) in #page-body, got ${fin.walletInBody} — a finance widget may have been added`);
+        ok(fin.currencyTokens === wantMoney, `${page}/${lang}: expected ${wantMoney} currency token(s) in #page-body, got ${fin.currencyTokens} — a money figure may have been added`);
       }
       await ctx.close();
     }

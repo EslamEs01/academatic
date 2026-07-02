@@ -31,6 +31,7 @@ import { renderCourse } from '../src/js/pages/course.js';
 import { renderGroup } from '../src/js/pages/group.js';
 import { renderTeacher } from '../src/js/pages/teacher.js';
 import { renderTeacherPerformance } from '../src/js/pages/teacher-performance.js';
+import { renderFinance } from '../src/js/pages/finance.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -69,6 +70,8 @@ const PAGES = [
   // Spec 007 — teacher performance & academic KPIs (teacher = profile template; teacher-performance = promoted teacherKpi nav)
   { base: 'teacher', activeId: 'teachers', titleKey: 'topbar.title.teacher', crumbKey: 'topbar.crumb.teacher', render: renderTeacher },
   { base: 'teacher-performance', activeId: 'teacherKpi', titleKey: 'topbar.title.teacherPerf', crumbKey: 'topbar.crumb.teacherPerf', render: renderTeacherPerformance },
+  // Spec 009 — finance, billing & payments shell
+  { base: 'finance', activeId: 'finance', titleKey: 'topbar.title.finance', crumbKey: 'topbar.crumb.finance', render: renderFinance },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

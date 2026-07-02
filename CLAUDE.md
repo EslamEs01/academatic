@@ -1,11 +1,56 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 008 — Academic Reports and Operations Analytics Shell**
+Active feature: **Spec 009 — Finance, Billing & Payments Shell**
 (branch `feature/001-approved-dashboard-design`).
 
 For technologies, project structure, shell commands, design decisions, contracts,
 and acceptance, read the current plan and its artifacts:
-`academy-dashboard-discovery/specs/008-academic-reports-analytics/plan.md`
+`academy-dashboard-discovery/specs/009-finance-billing-payments/plan.md`
 (see also `research.md`, `data-model.md`, `quickstart.md`, and `contracts/`).
+
+Spec 009 ADDS the academy's first admin **Finance, Billing & Payments Shell** to the implemented Spec
+001–008 app (`academy-dashboard-discovery/app/`): ONE new fixture-only page pair **`finance.html`/
+`finance.en.html`** that ORGANIZES the legacy system's sprawling finance module (56 pages/20 templates:
+accounting dashboard w/ 10 money KPIs + 16-currency FX · invoices · monthly invoices · create-parent-invoice ·
+transactions ledger · expenses+heads · teacher/staff salaries · salary-class-report · payouts+providers ·
+P&L analyses · banks — the legacy planning's #1 IA complaint: "scattered across ~10 sidebar entries") into
+fixture-authored **family invoices** + **recent payments** + count-only tiles-as-filters + a baked invoice
+drawer + honest actions + real source links + NINE figure-free planned/backendRequired cards. **Grounding
+spine**: Spec 009 IS the "future finance spec" every prior scope-guard deferred to — the nav already carries
+six `disabled` wallet items (`invoices`/`monthlyInvoices`/`salaries`/`staffSalaries`/`payments`/
+`classSalaryReport`) + `banks`, all `nav.reason.finance`-locked with NO reserved routes, and every existing
+billing touchpoint (Spec 001 `revenue` KPI · Spec 004 family `plan`/`hourRate` stub + disabled Manage-billing +
+`fam5` `fam.attn.payment` flag · Spec 005 disabled add-to-credit · settings `billingAlerts`) is already
+display-only/disabled-with-reason. Nav: add exactly ONE born-and-promoted item **`finance`** (المالية/Finance,
+route `finance.html`, activeId `finance`, reports category, the Spec 005 `attendance` precedent + a
+`FUTURE_ROUTES` line); the six locked items + `banks` STAY locked (base `nav.reason.finance` copy updated ONE
+line to stay truthful: real billing backend still required, the shell is a fixture preview). **Every number is
+fixture-authored** (`fixtures/finance.js`: ~9 invoices + ~6 payments + `FINANCE_SUMMARY` as ROW COUNTS only +
+`PLANNED_FINANCE` 9 cards + a THROWING build-time coherence guard: fam5 must have an overdue invoice, trial
+fams `fam3`/`fam8` have none, the one cancelled invoice is `fam7`'s with no payments, payments reference only
+existing non-cancelled invoices) — **NO runtime money arithmetic anywhere** (no sum/FX/total/balance/
+overdue-by-date/hourRate-derivation). TWO new labeled maps (`finance-status.js`, sets distinct from all ten
+existing): **invoice-status** `paid/unpaid/overdue/cancelled` (legacy-backed; NO partial/draft — verified
+absent from the reference) + **payment-status** `recorded/pending/returned` (NO gateway lifecycle);
+availability REUSES Spec 008 `REPORT_AVAILABILITY`/`availabilityChip` (never duplicated); chip tones only from
+the styled set (`completed/amber/cancelled/neutral/upcoming/live`). Actions (`finance-actions.js`): View=drawer ·
+Print=demo-toast · Record-payment/Mark-paid + Send-reminder=confirm→demo-toast (chips NEVER change; gated
+disabled-with-reason on the cancelled invoice) · Export-CSV/PDF + Send-invoice + Create-invoice=
+disabled-with-reason · **Upload-receipt ABSENT entirely** (the reference had no receipt concept). **Integration
+honesty (body-scoped, NOT byte-identical)**: `pages/dashboard.js`/`pages/reports.js`/reports fixtures+
+components/academic modules UNTOUCHED; built `dashboard.html`/`reports.html` `#page-body` regions gain ZERO
+finance chrome; the shared sidebar on EVERY built page legitimately gains the one finance item (whole-file
+identity impossible by construction — smoke asserts body-scoped + exactly one `a[href$="finance.html"]` + six
+items still locked). Scope-guard is PATH-AWARE (two-direction grep audit): finance vocabulary ONLY in the new
+finance files + 3 registration touch-points (`nav.config.js`/`build-html.mjs`/`i18n.js`) + the 1-line reason
+copy; Spec 001–008 guards stay green verbatim. New overlay `ar.fin.js`/`en.fin.js` (`fin.*`, merged last;
+carries `nav.finance` + `topbar.title/crumb.finance`). **REUSE, never duplicate**: `pageHeader`/`summaryCards`,
+Spec 005 tiles-as-filters (`data-filter-set`, ONE filter form → invoices list only; payments = short
+unfiltered recent list), `filterBar`/`noResults`, Spec 008 `reportCard`+availability chips for the 9 planned
+cards, `previewTemplate`/`sheetRow` drawer, `confirmAction`/`toast`, `chip`/`button`/`medallion`. Prior plans:
+`…/008-academic-reports-analytics/plan.md`, `…/007-teacher-performance-kpis/plan.md`,
+`…/006-courses-groups-learning-paths/plan.md`, `…/005-attendance-session-outcomes/plan.md`,
+`…/004-family-student-profiles/plan.md`, `…/003-timetable-scheduling/plan.md`,
+`…/002-admin-core-operations/plan.md`, `…/001-approved-dashboard-foundation/plan.md`.
 
 Spec 008 ENRICHES the implemented Spec 001–007 app (`academy-dashboard-discovery/app/`) by turning the
 existing implemented (but placeholder) **`reports.html`** into a calm, fixture-only **Academic Reports &
@@ -40,42 +85,7 @@ Prior plans: `…/007-teacher-performance-kpis/plan.md`, `…/006-courses-groups
 `…/003-timetable-scheduling/plan.md`, `…/002-admin-core-operations/plan.md`,
 `…/001-approved-dashboard-foundation/plan.md`.
 
-Spec 007 EXTENDS the implemented Spec 001–006 app (`academy-dashboard-discovery/app/`) with the admin
-**Teacher Performance & Academic KPIs** experience — turning the flat teacher directory into a unified
-academic hub (teacher↔course↔group↔students↔family↔schedule↔outcomes↔absence↔follow-up) and giving admins
-one calm board to review/compare/follow-up teacher delivery. **Grounding spine** (legacy + current-app
-passes): the legacy system **NEVER** had a computed teacher score/rank/leaderboard — "performance" was
-scattered **raw counts** (Teachers-Details Cancel/Absent/Attend, a single feedback %, a system-wide
-Sessions-Analysis with a `teacher_id` filter but no per-teacher drill-down) + a `View KPIs` nav group with
-no destination page; and the legacy 56-button teacher profile **mixed academic data with FINANCE**
-(Compensations/Salary/Payouts). So Spec 007 is a **DISPLAY of fixture-backed raw counts + labeled signals
-— NEVER a computed score/rank/analytics engine**, and **ALL finance (salary/payroll/compensation/payout)
-is explicitly OUT of scope** (a future finance spec). Surfaces: **ENRICH** `teachers.html` (status chip +
-counts courses/groups/students + upcoming hint + workload hint + conditional follow-up flag + a
-profile link); add **`teacher.html`** profile (banner + baked tabs Overview/Courses/Groups/Timetable/
-Sessions&Outcomes/Students/Follow-up/Notes — bake `sara`); **promote `teacherKpi` planned→implemented**
-and add **`teacher-performance.html`** board (KPI tiles + a per-teacher comparison list + a follow-up
-queue — display-only counts, no score/rank/chart/salary). `teacher.html` is a **profile template**
-(activeId `teachers`, NOT a nav item); `teacher-performance.html` is the promoted nav page (activeId
-`teacherKpi`). `sessionsKpi`/`monthlyPerf`/`addTeacher`/`teacherCategories` stay planned. THREE NEW
-labeled maps: **teacher-status** (`teacher-status.js`: active/paused/inactive), **workload**
-(`teacher-signals.js`: light/balanced/high), **follow-up signal** (`teacher-signals.js`:
-strongDelivery/stable/needsFollowUp/attentionRisk) — distinct from the six existing maps, never
-numeric/color-only; **REUSE** availability (`TEACHER_AVAIL` available/busy/off). EXTEND `fixtures/teachers.js`
-(+statusId/workload/followUp/notes + derived counts — **NO finance fields**); add the only new resolver
-**`outcomesOfTeacher(id)`** (`SESSION_OUTCOMES` filter by `trainer.id`) in `attendance.js`; new actions
-cluster `teacherActions()` (`teacher-actions.js`). **REUSE, never duplicate**: Spec 003 `scheduleAgenda`
-(+`schedule.html#view=timetable`) for Timetable tabs; Spec 005 `outcomeRow`/`outcomeTemplate` (the
-canonical drawer, +`attendance.html`) for Sessions&Outcomes — **teacherAbsent vs studentAbsent stay two
-DISTINCT labeled chips, never one "absences"**; Spec 006 `cohort-panels`/`profileBanner`/`tabs`,
-`directoryCard`/`filterBar`/`summaryCards`. Light integration: teacher→student/family/course/group
-deep-links; Dashboard gets ONE "teachers needing follow-up" chip folded into the people-signal card →
-`teacher-performance.html`. New locale overlay `ar.trn.js`/`en.trn.js` (`trn.*`). Prior plans:
-`…/006-courses-groups-learning-paths/plan.md`, `…/005-attendance-session-outcomes/plan.md`,
-`…/004-family-student-profiles/plan.md`, `…/003-timetable-scheduling/plan.md`,
-`…/002-admin-core-operations/plan.md`, `…/001-approved-dashboard-foundation/plan.md`.
-
-Hard constraints (Spec 001 + 002 + 003 + 004 + 005 + 006 + 007 + 008): continue the approved design (Spec 001 is
+Hard constraints (Spec 001 + 002 + 003 + 004 + 005 + 006 + 007 + 008 + 009): continue the approved design (Spec 001 is
 the visual target); **static HTML-first** — pages pre-rendered to complete `public/*.html`, NO whole-page
 `<div id="app">` mount, **all teacher cards + KPI tiles + comparison rows + profile tabs +
 `<template data-preview>` drawers are baked at build time** (runtime JS builds no page DOM), runtime JS
@@ -88,7 +98,7 @@ numeric/color-only); native JS; no CDN/TypeScript/SPA/chart libs/table libs/form
 fixtures only — no real API/auth/permissions/CRUD/persistence, **no teacher-management/assignment/
 workload-calc/performance-scoring/ranking/salary-payroll/attendance/scheduling/notification engine**, no
 real status mutation; **NO computed teacher score/rank/leaderboard/percentile/chart anywhere; ALL
-finance (salary/payroll/compensation/payout) OUT of scope**; **no student/family/teacher dashboards or
+salary/payroll/compensation/payout math OUT of scope**; **no student/family/teacher dashboards or
 portals** (future-role, never rendered; `teacher.html` is an ADMIN profile, not a portal); the Teacher
 Performance board is now built (fixture-only) but addTeacher/teacherCategories/sessionsKpi/monthlyPerf
 stay planned; no copied legacy assets/classes/logo/palette/wording, no legacy numeric statuses;
@@ -100,5 +110,18 @@ existing fixture summary (matches the dashboard chips); report actions are demo/
 only (NO real export/send/schedule/persist); reports drill-down only to implemented pages (advanced reports
 stay planned/backendRequired, never dead links); NEW labeled report-signal + report-availability maps (never
 numeric/color-only); reuse Spec 005 outcome-status (teacherAbsent≠studentAbsent), Spec 003 session map,
-Spec 006 group-status, Spec 007 teacher signals; NO new page/nav/dashboard change.
+Spec 006 group-status, Spec 007 teacher signals; NO new page/nav/dashboard change — **the reports body stays
+finance-free FOREVER (Spec 009's shell is a separate page)**. **Spec 009 adds:** the `finance.html` shell is
+fixtures-only — **no real invoice/payment/accounting/payroll engine, no payment gateway, no real PDF/CSV
+export, no receipt upload (absent entirely), no send/reminder job, no mark-paid mutation (chips never change),
+no persistence, no runtime money arithmetic (no sum/FX/total/balance/overdue-by-date), no chart, no revenue
+analytics/cashflow, no teacher/staff pay figure anywhere**; every invoice/payment number is a fixture-authored
+literal, summary tiles are ROW COUNTS only, coherence is guard-enforced at build; NEW labeled invoice-status
+(`paid/unpaid/overdue/cancelled` — NO partial/draft) + payment-status (`recorded/pending/returned` — NO
+gateway states) maps; availability REUSED from Spec 008 (never duplicated); exactly ONE new nav item
+(`finance`) — the six disabled wallet items + `banks` stay locked with truthful reason copy; payroll/
+accounting/expenses/banks/FX appear ONLY as figure-free planned/backendRequired cards; dashboard/reports page
+modules untouched and their built BODIES finance-free (body-scoped invariant — the shared sidebar's single
+new finance item is the only permitted built-file diff); finance vocabulary contained path-aware to the new
+finance files + 3 registration touch-points; Spec 001–008 scope-guards stay green.
 <!-- SPECKIT END -->

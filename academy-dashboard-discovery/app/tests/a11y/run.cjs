@@ -68,6 +68,11 @@ const MATRIX = [
   { page: 'teacher-performance', lang: 'ar', theme: 'light' },
   { page: 'teacher-performance', lang: 'ar', theme: 'dark' },
   { page: 'teacher-performance', lang: 'en', theme: 'light' },
+  // Spec 009 — finance, billing & payments shell (AR light + dark + EN)
+  { page: 'finance', lang: 'ar', theme: 'light' },
+  { page: 'finance', lang: 'ar', theme: 'dark' },
+  { page: 'finance', lang: 'en', theme: 'light' },
+  { page: 'finance', lang: 'en', theme: 'dark' },
 ];
 
 (async () => {
