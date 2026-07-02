@@ -1,11 +1,35 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 010 — Full Academy Capability Coverage, Navigation IA & Admin Experience Polish**
+Active feature: **Spec 011 — Admin Console Final QA Hotfix & Demo Readiness**
 (branch `feature/001-approved-dashboard-design`).
 
 For technologies, project structure, shell commands, design decisions, contracts,
 and acceptance, read the current plan and its artifacts:
-`academy-dashboard-discovery/specs/010-capability-coverage-ia-polish/plan.md`
-(see also `research.md` (D1–D12), `data-model.md`, `quickstart.md`, and `contracts/` — 14 contracts).
+`academy-dashboard-discovery/specs/011-final-qa-demo-readiness/plan.md`
+(see also `research.md` (D1–D5), `data-model.md`, `quickstart.md`, and `contracts/` — 9 contracts).
+
+Spec 011 is a TWO-FIX QA hotfix + demo-readiness pass closing the accepted follow-ups Spec 010 (committed
+`0ee1965`) left in the then-frozen dashboard body. **Fix 1 — dashboard Overview `href="#"`**: `pages/
+dashboard.js` Overview `sectionHeader({titleKey:'section.overview', linkKey:'section.overviewLink'})` omitted
+`linkHref`, so the shared `sectionHeader()` (`ui.js`, default `linkHref='#'`) rendered a dead `<a href="#">
+View all metrics</a>` (the ONLY `href="#"` in built output — 1 per dashboard file, 0 elsewhere). Add
+language-aware `linkHref:'reports.html'`/`reports.en.html` at the call site (the real, already-linked metrics
+hub — zero visual change, only the href value; the shared component default is NOT changed). **Fix 2 — Arabic
+sessions badge digits**: `components/sidebar.js:37` rendered the badge as raw `${it.badge}` (Western "24" on
+Arabic pages); wrap it in the existing build-time locale helper `num()` (`i18n.js`, `Intl.NumberFormat`
+ar-EG→٢٤ / en-US→24) → `${num(it.badge)}`; `nav.config.js` stays `badge: SESSIONS.total` (single fixture
+source, no per-language literal). The badge is in the shared SIDEBAR (outside `#page-body`), so it ripples all
+40 pages but is NOT a dashboard/reports/finance body change. **Required test updates** (`tests/smoke/run.cjs`,
+correcting Spec 010 assertions to the fixed state — not weakening): (a) the sessions-badge assert becomes
+locale-aware (`Intl.NumberFormat(lang==='en'?'en-US':'ar-EG').format(Number(SESSIONS_TOTAL)) === sessBadge`);
+(b) the link-crawl `deadHash` assert tightens from `=== (page==='dashboard'?1:0)` to `=== 0` for every page.
+**Prior-doc reconciliation** (allowed reference-to-fixed-follow-up updates only): tighten Spec 010 scope-guard
+G7 #4 to "zero href=# everywhere (closed by Spec 011)"; add one-line "Resolved in Spec 011" notes to Spec 010
+`page-coverage-audit.md` + `REVIEW.md`. **Guarded-untouchable (git diff empty)**: `pages/reports.js`,
+`pages/finance.js` + their fixtures/components, all six Spec 009 finance files, `enhance.js`, `package.json`,
+`nav.config.js`, `i18n.js`. Dashboard `#page-body` diff = ONLY the Overview href; reports/finance `#page-body`
+byte-identical to HEAD. Zero new page/file/hook/library/engine. MVP = the two fixes + the two test updates.
+Out of scope: any new feature/card/redesign/role-portal/backend; reports/finance body edits; Spec 010 IA
+changes (finance sub-section, banks move, families relabel); Spec 009 finance invariants.
 
 Spec 010 is the BROWNFIELD coverage/IA/polish pass over the fully implemented Spec 001–009 app
 (`academy-dashboard-discovery/app/`, 20 page pairs + index, nav = 6 rail categories / 41 items:

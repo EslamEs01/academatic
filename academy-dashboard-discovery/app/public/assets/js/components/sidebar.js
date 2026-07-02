@@ -4,7 +4,7 @@
  * visible on load, the rest are `hidden`; enhance.js swaps them on rail click.
  * Items carry a status — implemented = <a href> (+ violet active pill); planned/
  * disabled = <button> (no dead link). See sidebar-shell + navigation-ia contracts. */
-import { t, getLang } from '../i18n.js';
+import { t, getLang, num } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
 import { avatar } from './ui.js';
@@ -34,7 +34,7 @@ function navItem(it, activeId) {
     </button>`;
   }
   const active = it.id === activeId ? ' is-active' : '';
-  const badge = it.badge != null ? `<span class="badge nav-badge tabular">${it.badge}</span>` : '';
+  const badge = it.badge != null ? `<span class="badge nav-badge tabular">${num(it.badge)}</span>` : '';
   const current = active ? ' aria-current="page"' : '';
   return `<a href="${esc(langRoute(it.route))}" class="nav-item${active}" data-nav="${esc(it.id)}" data-nav-status="implemented"${current}>
     ${icon(it.icon, 'ico')}<span class="label">${label}</span>${badge}

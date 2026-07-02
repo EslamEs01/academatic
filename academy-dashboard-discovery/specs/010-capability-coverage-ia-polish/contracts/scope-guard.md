@@ -60,11 +60,10 @@ git status --porcelain src/ scripts/ | grep '^??' | grep -q . && echo FAIL || ec
 # 3) Zero new pages (file count in public/ unchanged: 41 html + .nojekyll)
 [ "$(ls public/*.html | wc -l)" = "41" ] && echo ok || echo FAIL
 
-# 4) No NEW dead links. `a[href="#"]` is this app's enhance.js-handled control hook; the ONLY
-#    instance in built output is the pre-existing Spec 001 dashboard "overview → view all"
-#    section-header link, in the contract-frozen dashboard body (accepted follow-up, not Spec 010's
-#    to change). Assert: every page EXCEPT the two dashboard files has zero href="#".
-grep -c 'href="#"' public/*.html | grep -vE ':0$' | grep -vE 'dashboard\.(en\.)?html:1$' | grep -q . && echo FAIL || echo ok
+# 4) No dead links. (Historical note: Spec 010 accepted one pre-existing dashboard "overview → view
+#    all" href="#" as a frozen-body follow-up. RESOLVED IN SPEC 011 — that link now points to
+#    reports.html; the invariant is now zero href="#" on EVERY page.)
+grep -c 'href="#"' public/*.html | grep -vE ':0$' | grep -q . && echo FAIL || echo ok
 
 # 5) The one sanctioned family link — present exactly once per language build
 [ "$(grep -o 'finance.html' public/family.html | wc -l)" -ge 1 ] && \

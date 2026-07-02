@@ -167,7 +167,11 @@ resolved to `pass` or a named `fixNow` PolishAction in §2. (The exhaustive lega
 classification — all 19 legacy modules, the nine-way scheme, exclusions, future-role registers — is
 the separate `legacy-capability-coverage.md` artifact; this page audit only cross-references it.)
 
-### Accepted follow-up (not Spec 010's to change)
+### Accepted follow-up (not Spec 010's to change) — ✅ RESOLVED IN SPEC 011
+
+> **Resolved in Spec 011** (final QA hotfix): the Overview "view all metrics" link now points to
+> `reports.html`/`reports.en.html` (the real metrics hub); sitewide `href="#"` is now zero. The note
+> below is retained as the original Spec 010 record.
 
 - **dashboard — one pre-existing `<a href="#">`**: the Overview section header renders a "view all"
   affordance (`sectionHeader({ linkKey: 'section.overviewLink' })` with no `linkHref`) as

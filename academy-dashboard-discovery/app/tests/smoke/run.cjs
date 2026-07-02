@@ -23,6 +23,7 @@ const fs = require('fs');
 const path = require('path');
 const sessSrc = fs.readFileSync(path.join(__dirname, '../../src/js/fixtures/sessions.js'), 'utf8');
 const SESSIONS_TOTAL = (sessSrc.match(/export const SESSIONS\s*=\s*\{[\s\S]*?total:\s*(\d+)/) || [])[1] || '';
+if (!/^\d+$/.test(SESSIONS_TOTAL)) throw new Error('[smoke] could not extract SESSIONS.total from src/js/fixtures/sessions.js — the badge assertions would be meaningless');
 
 // Spec 010 — pages with a filter form / tiles-as-filters. Each must genuinely hide non-matching
 // rows (the [data-row][hidden] fix) AND keep only matching rows visible. `facet`/`value` (lowercased
@@ -828,7 +829,13 @@ const FILTER_SPEC = {
       ok(nav010.banksInReports && !nav010.banksInAdmin, `${page}/${lang}: banks must live in the reports finance sub-section, not admin (reports=${nav010.banksInReports}, admin=${nav010.banksInAdmin})`);
       ok(nav010.admItems.length === 5 && !nav010.admItems.includes('banks'), `${page}/${lang}: admin category should have 5 planned items and no banks, got ${JSON.stringify(nav010.admItems)}`);
       ok(nav010.lockedOk, `${page}/${lang}: the seven locked finance items (six billing + banks) must stay disabled+reason+lock`);
-      ok(nav010.sessBadge === SESSIONS_TOTAL, `${page}/${lang}: sessions badge should equal the fixture SESSIONS.total (${SESSIONS_TOTAL}), got "${nav010.sessBadge}" — must be derived, not a stray literal`);
+      // Spec 011 — the badge is localized: Arabic pages show Arabic-Indic digits, English pages Western,
+      // both equal the fixture SESSIONS.total (num()/Intl.NumberFormat). Assert the locale-correct form.
+      const expBadge = new Intl.NumberFormat(lang === 'en' ? 'en-US' : 'ar-EG').format(Number(SESSIONS_TOTAL));
+      ok(nav010.sessBadge === expBadge, `${page}/${lang}: sessions badge should be the localized fixture SESSIONS.total ("${expBadge}"), got "${nav010.sessBadge}" — must be derived and locale-formatted, not a stray/Western literal`);
+      // formatter-independent guard: an Arabic badge must carry NO ASCII digit (catches a Western "24"
+      // even if the Node ICU build ever collapsed both sides of the compare above to Latin digits)
+      if (lang === 'ar') ok(!/[0-9]/.test(nav010.sessBadge), `${page}/ar: sessions badge must be Arabic-Indic digits only, got "${nav010.sessBadge}"`);
       ok(nav010.famTitle === expFamTitle, `${page}/${lang}: families category label should be "${expFamTitle}", got "${nav010.famTitle}"`);
 
       // ===== Spec 010 — link integrity crawl (every anchor: no href="#", target exists, no external) =====
@@ -846,11 +853,9 @@ const FILTER_SPEC = {
         }
         return { deadHash, external, badTarget };
       }, [...VALID_FILES]);
-      // `a[href="#"]` is this app's enhance.js-handled control hook (enhance.js:506/512). The ONLY
-      // instance in the built output is the pre-existing Spec 001 dashboard "overview → view all"
-      // section-header link, which lives in the now-contract-frozen dashboard body (see
-      // dashboard-impact-contract). Allow exactly that one; catch any NEW dead link anywhere else.
-      ok(links010.deadHash === (page === 'dashboard' ? 1 : 0), `${page}/${lang}: ${links010.deadHash} dead href="#" link(s) (expected ${page === 'dashboard' ? 1 : 0})`);
+      // Spec 011 closed the one pre-existing dashboard "overview → view all" href="#" (now points to
+      // reports.html). Zero dead href="#" is the invariant on EVERY page — any occurrence is a regression.
+      ok(links010.deadHash === 0, `${page}/${lang}: ${links010.deadHash} dead href="#" link(s) (expected 0)`);
       ok(links010.external === 0, `${page}/${lang}: ${links010.external} unexpected external link(s)`);
       ok(links010.badTarget === 0, `${page}/${lang}: ${links010.badTarget} link(s) to a nonexistent page file`);
 
