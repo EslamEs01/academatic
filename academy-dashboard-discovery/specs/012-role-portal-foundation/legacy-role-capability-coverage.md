@@ -165,3 +165,27 @@ Each future spec owns a distinct capability set. Foundation-only rows are previe
 - [x] **Net-new recorded** — gamification / achievements / leaderboard / points recorded as absent-in-legacy net-new value, and the guardian-proxied single portal recorded as deliberately split into Student (013) + Family (014) (§3).
 
 **Reviewer:** ______________________  **Date:** ______________
+
+---
+
+## 7. Spec 013 delivery notes (student planned-013 resolution — appended, no row reclassified)
+
+Spec 013 (Student Dashboard) deepens the student portal and resolves the student-owned `planned-013` rows. These are **delivery annotations only** — the §1/§2 classifications, destinations, and rationales above are unchanged; nothing is re-scoped.
+
+| Row / item | Spec 013 delivery |
+|---|---|
+| **F5** — Student timetable | **Delivered** as the *week-at-a-glance* agenda (SAT-first stacked day groups from `SCHEDULE_WEEK`, sara/grp1 proxy; «اليوم» marker; the Friday rest-day empty state). Never a grid/table clone. The guardian-side timetable view remains Spec 014. |
+| **F6** — Class history + per-session details | **Delivered** as the *recent-sessions* feedback cards (Class Summary + Homework Note fields; the first card resolves the REAL `SESSION_OUTCOMES.out1` row — st1·math·sara·attended·`data.att.fb.good`; one display-only attachment annotation). The full-history surface remains a labeled `planned` mini-card; the guardian mirror remains Spec 014. |
+| **F12** — Materials library | **Delivered** as the *materials* display-only preview (3 authored cards, type icons). Download stays `backendRequired` (F4 unchanged); the family/teacher library surfaces remain 014/015. |
+| **§4 item 6** — Leaderboard (net-new) | **Delivered** as *celebration recognition* («نجوم مجموعتي») — unordered, authored, stress-free, demo-labeled. NO computed ranking, points, or per-peer comparison (research D3). |
+| **§4 items 1/4/5/7/8/9** | **Delivered** by the corresponding Spec-013 sections: deep today's-learning (1), deep progress visualization + attendance trio (4), deep achievements (5), homework/tasks student surface (7), student materials surface (8), student profile slice (9). |
+
+**Still deferred (unchanged):** uploads (F4) and material downloads → `backendRequired` (visibly gated by the two backendRequired mini-cards); the full-history deep surface → `planned`; all `planned-014` / `planned-015` / other `backendRequired` / `intentionally excluded` rows are untouched. **Zero silent gaps.**
+
+**Spec 013 sign-off:**
+- [x] All three student `planned-013` rows (F5, F6, F12) carry delivery notes.
+- [x] Every §4 Spec-013 item is delivered (1/4/5/6/7/8/9) — none silently dropped.
+- [x] The leaderboard is delivered as honest celebration, not computed ranking.
+- [x] Backend-gated capabilities (uploads, downloads, full history) stay visibly labeled, never faked.
+
+**Reviewer:** ______________________  **Date:** ______________

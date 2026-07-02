@@ -918,14 +918,33 @@ const FILTER_SPEC = {
             .map((a) => (a.getAttribute('href') || '').replace('.en.html', '').replace('.html', '')).sort();
           const hubAdminLink = [...document.querySelectorAll('#page-body a[href]')]
             .filter((a) => /dashboard\.(en\.)?html$/.test(a.getAttribute('href') || '')).length;
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink };
+          // Spec 013 — student dashboard section/empty-state counts + planned-card graduation.
+          // Bind the backend-gate check to the actual planned chips (amber lock = backendRequired,
+          // neutral clock = planned), so it can't pass on descriptive prose alone.
+          const sectionCount = document.querySelectorAll('.pt-section').length;
+          const emptyCount = document.querySelectorAll('.pt-empty').length;
+          const bodyAnchors = [...document.querySelectorAll('#page-body a[href]')].length;
+          const plannedBackend = document.querySelectorAll('.pt-planned .chip.tone-amber').length;
+          const plannedPlanned = document.querySelectorAll('.pt-planned .chip.tone-neutral').length;
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned };
         });
         const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
         ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
         if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
         // existence floor first, so the AR digit check below can never pass vacuously
-        if (page === 'student-portal') ok(prt.gaugeCount >= 1, `${page}/${lang}: expected ≥1 progress gauge counter, got ${prt.gaugeCount}`);
+        // Spec 013 — the deepened student dashboard: ≥2 gauge counters (overall + attendance trio),
+        // ≥10 sections, the truthful Friday empty-state, and a page body that never navigates.
+        if (page === 'student-portal') {
+          ok(prt.gaugeCount >= 2, `${page}/${lang}: expected ≥2 progress gauge counters (overall + trio), got ${prt.gaugeCount}`);
+          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
+          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the friendly empty-state pattern (≥1 .pt-empty), got ${prt.emptyCount}`);
+          ok(prt.bodyAnchors === 0, `${page}/${lang}: the student page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          // planned-card graduation: homework + materials gates are backendRequired (amber lock),
+          // full-history is planned (neutral clock) — the exact re-registered semantics.
+          ok(prt.plannedBackend === 2, `${page}/${lang}: expected 2 backendRequired planned gates (homework + materials), got ${prt.plannedBackend}`);
+          ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned gate (full history), got ${prt.plannedPlanned}`);
+        }
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
         const expPlanned = { 'student-portal': 3, 'family-portal': 3, 'teacher-portal': 2, portals: 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
@@ -945,6 +964,11 @@ const FILTER_SPEC = {
         if (page === 'student-portal') {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
           ok(tables === 0, `${page}/${lang}: the student portal must contain zero tables, got ${tables}`);
+          // Spec 013 — mobile-first: no horizontal overflow at 390px (this context is discarded after)
+          await p.setViewportSize({ width: 390, height: 900 });
+          await p.waitForTimeout(120);
+          const overflow = await p.evaluate(() => document.documentElement.scrollWidth);
+          ok(overflow <= 391, `${page}/${lang}: horizontal overflow at 390px (scrollWidth ${overflow})`);
         }
       }
 

@@ -144,6 +144,18 @@ const MATRIX = [
   { page: 'teacher-portal', lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'portals',        lang: 'ar', theme: 'light', vp: 'desktop' },
+  // Spec 013 — student dashboard area close-ups (element-scoped, auto-scroll; 'section' includes
+  // the hero, so nth-of-type: 1=hero 2=today 3=next 4=week 5=courses 6=homework 7=materials
+  // 8=progress 9=achievements 10=celebration 11=history 12=profile). The full-page desktop frame
+  // shows every band top-to-bottom; these are readable close-ups of each experience band.
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)',  variant: 'area-next' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(4)',  variant: 'area-week' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(6)',  variant: 'area-homework' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(7)',  variant: 'area-materials' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(8)',  variant: 'area-progress' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-achievements' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-celebration' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(11)', variant: 'area-history' },
 ];
 
 (async () => {
@@ -199,7 +211,14 @@ const MATRIX = [
     if (s.attnFilter) { await page.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]').catch(() => {}); await page.waitForTimeout(280); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
-    await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm });
+    // Spec 013 — area close-ups are element-scoped (Playwright auto-scrolls the element into view)
+    if (s.area) {
+      const el = await page.$(s.area);
+      if (el) await el.screenshot({ path: path.join(OUT, name) });
+      else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
+    } else {
+      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm });
+    }
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
     else console.log(`  ✓ ${name}`);
