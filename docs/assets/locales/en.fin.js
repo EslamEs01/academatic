@@ -1,0 +1,136 @@
+/* Spec 009 — English keys (Finance, Billing & Payments shell).
+ * Mirrors ar.fin.js exactly, key for key. Merged into en.js at runtime (deepMerge
+ * extends, registered after the rep.* overlay) — nav.finance / topbar.title.finance /
+ * topbar.crumb.finance are NEW keys that extend the existing nav/topbar blocks.
+ * Every amount referenced by this copy is an authored demo literal — nothing here
+ * is derived or computed; the only numbers that vary anywhere on the page are row
+ * counts. The reference system had no payment-evidence concept and none is worded here. */
+export default {
+  nav: {
+    finance: 'Finance',
+  },
+
+  topbar: {
+    title: { finance: 'Finance & Billing' },
+    crumb: { finance: 'Finance' },
+  },
+
+  finPage: {
+    title: 'Finance & Billing',
+    subtitle: 'Organize family invoices and payments in one calm place — a demo preview backed by fixture data.',
+  },
+
+  fin: {
+    status: {
+      paid: 'Paid',
+      unpaid: 'Unpaid',
+      overdue: 'Overdue',
+      cancelled: 'Cancelled',
+    },
+    pay: {
+      recorded: 'Recorded',
+      pending: 'Pending',
+      returned: 'Returned',
+    },
+    method: {
+      bankTransfer: 'Bank transfer',
+      card: 'Card',
+      cash: 'Cash',
+    },
+    tile: {
+      paid: 'Paid invoices',
+      unpaid: 'Unpaid invoices',
+      overdue: 'Overdue invoices',
+      cancelled: 'Cancelled invoices',
+    },
+    sec: {
+      invoices: 'Family invoices',
+      invoicesSub: 'Invoices issued to families — open any invoice to see its details.',
+      payments: 'Recent payments',
+      paymentsSub: 'The most recent payments recorded against invoices.',
+      planned: 'Salaries & accounting',
+      plannedSub: 'These capabilities arrive with the real billing backend — shown here for context only.',
+      teacherContext: 'View teacher performance (academic context)',
+    },
+    act: {
+      group: 'Finance actions',
+      createInvoice: 'Create invoice',
+      exportCsv: 'Export CSV',
+      exportPdf: 'Export PDF',
+      print: 'Print',
+      printToast: 'Print is a demo — no file is generated.',
+      view: 'View invoice',
+      recordPayment: 'Record payment',
+      recordTitle: 'Record a payment on this invoice?',
+      recordMsg: 'This is a demo only — no payment is saved and the invoice status does not change.',
+      recordCta: 'Confirm record',
+      recordToast: 'Payment shown as a demo — no data was saved.',
+      markPaid: 'Mark as paid',
+      markTitle: 'Mark this invoice as paid?',
+      markMsg: 'This is a demo only — the invoice status does not actually change.',
+      markCta: 'Confirm',
+      markToast: 'Shown as a demo — the invoice status did not change.',
+      sendReminder: 'Send reminder',
+      remindTitle: 'Send a payment reminder to this family?',
+      remindMsg: 'This is a demo only — no real reminder is sent.',
+      remindCta: 'Send',
+      remindToast: 'Sent as a demo — no real reminder was delivered.',
+      sendInvoice: 'Send invoice',
+    },
+    reason: {
+      export: 'Export requires the real billing backend — out of current scope.',
+      backend: 'Requires the real billing backend.',
+      send: 'Sending requires the real billing backend — out of current scope.',
+      cancelled: 'Cancelled invoice — a payment cannot be recorded on it.',
+      comingSoon: 'Planned — not part of the current fixture preview.',
+    },
+    filter: {
+      searchPh: 'Search invoices…',
+      status: 'Status',
+      family: 'Family',
+      allStatuses: 'All statuses',
+      allFamilies: 'All families',
+    },
+    drawer: {
+      serial: 'Invoice number',
+      family: 'Family',
+      students: 'Students',
+      course: 'Course',
+      group: 'Group',
+      month: 'Billing month',
+      issued: 'Issued date',
+      due: 'Due date',
+      amount: 'Amount',
+      displayOnly: 'Display only — no real amounts are calculated.',
+      status: 'Status',
+      note: 'Note',
+    },
+    planned: {
+      monthlyInvoices: { title: 'Monthly invoices', desc: 'Planned — a month-by-month roll-up of family invoices.' },
+      invoicesEngine: { title: 'Invoices engine', desc: 'Creating invoices with line items and discounts arrives with the real billing backend.' },
+      paymentsCollection: { title: 'Payments collection', desc: 'Recording payments and connecting payment providers arrives with the real billing backend.' },
+      teacherSalaries: { title: 'Teacher salaries', desc: 'Calculating teacher salaries arrives with the real billing backend.' },
+      staffSalaries: { title: 'Staff salaries', desc: 'Calculating staff salaries arrives with the real billing backend.' },
+      classSalaryReport: { title: 'Class salary report', desc: 'A per-teacher class salary breakdown arrives with the real billing backend.' },
+      payoutsCompensations: { title: 'Payouts & compensations', desc: 'Disbursing payouts and compensations arrives with the real billing backend.' },
+      accountingExpenses: { title: 'Accounting & expenses', desc: 'Expenses, analytics and currencies arrive with the real billing backend.' },
+      banks: { title: 'Banks', desc: 'Linking bank accounts arrives with the real billing backend.' },
+    },
+  },
+
+  /* ============ fixture content (authored demo literals, display-only) ============ */
+  data: {
+    fin: {
+      month: {
+        april: 'April 2026',
+        may: 'May 2026',
+        june: 'June 2026',
+        july: 'July 2026',
+      },
+      inv: {
+        inv6: { note: 'A payment reminder was sent to this family.' },
+        inv9: { note: 'This family has stopped studying; the invoice was cancelled.' },
+      },
+    },
+  },
+};

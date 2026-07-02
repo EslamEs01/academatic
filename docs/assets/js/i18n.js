@@ -1,0 +1,117 @@
+/* Native i18n — Arabic (default) + English. JSON dictionaries, dotted keys.
+ * Sets <html lang/dir>, persists choice, and exposes t(). A missing key is
+ * loudly flagged (⟦key⟧) so the no-raw-i18n-key smoke test catches it. */
+import ar from '../locales/ar.js';
+import en from '../locales/en.js';
+import arX from '../locales/ar.extra.js';
+import enX from '../locales/en.extra.js';
+import arF from '../locales/ar.fam.js';
+import enF from '../locales/en.fam.js';
+import arA from '../locales/ar.att.js';
+import enA from '../locales/en.att.js';
+import arC from '../locales/ar.crs.js';
+import enC from '../locales/en.crs.js';
+import arT from '../locales/ar.trn.js';
+import enT from '../locales/en.trn.js';
+import arR from '../locales/ar.rep.js';
+import enR from '../locales/en.rep.js';
+import arFin from '../locales/ar.fin.js';
+import enFin from '../locales/en.fin.js';
+import arPrt from '../locales/ar.prt.js';
+import enPrt from '../locales/en.prt.js';
+
+function deepMerge(target, src) {
+  for (const k in src) {
+    if (src[k] && typeof src[k] === 'object' && !Array.isArray(src[k])) {
+      target[k] = target[k] || {};
+      deepMerge(target[k], src[k]);
+    } else target[k] = src[k];
+  }
+  return target;
+}
+// Spec 002/003 keys live in *.extra.js; Spec 004 keys live in *.fam.js —
+// both merge (deep) into the Spec 001 dictionaries (nested blocks extend, not clobber)
+deepMerge(ar, arX);
+deepMerge(en, enX);
+deepMerge(ar, arF);
+deepMerge(en, enF);
+deepMerge(ar, arA);
+deepMerge(en, enA);
+// Spec 006 keys live in *.crs.js (courses/groups/learning-paths)
+deepMerge(ar, arC);
+deepMerge(en, enC);
+// Spec 007 keys live in *.trn.js (teacher performance & academic KPIs)
+deepMerge(ar, arT);
+deepMerge(en, enT);
+// Spec 008 keys live in *.rep.js (academic reports & operations shell)
+deepMerge(ar, arR);
+deepMerge(en, enR);
+// Spec 009 keys live in *.fin.js (finance, billing & payments shell)
+deepMerge(ar, arFin);
+deepMerge(en, enFin);
+deepMerge(ar, arPrt);
+deepMerge(en, enPrt);
+
+const DICTS = { ar, en };
+const KEY = 'academy.lang';
+export const LANGS = { ar: { dir: 'rtl', label: 'العربية' }, en: { dir: 'ltr', label: 'English' } };
+const FALLBACK = 'ar';
+
+let current = 'ar';
+
+export function getStoredLang() {
+  const v = localStorage.getItem(KEY);
+  return LANGS[v] ? v : 'ar';
+}
+export function getLang() { return current; }
+export function getDir() { return LANGS[current].dir; }
+
+function resolve(dict, key) {
+  return key.split('.').reduce((o, k) => (o && o[k] != null ? o[k] : undefined), dict);
+}
+
+/** t('kpi.revenue', {n: 5}) — interpolates {tokens}; falls back ar; flags misses */
+export function t(key, vars) {
+  let v = resolve(DICTS[current], key);
+  if (v == null) v = resolve(DICTS[FALLBACK], key);
+  if (v == null) { console.warn('[i18n] missing key:', key); return `⟦${key}⟧`; }
+  if (vars) v = v.replace(/\{(\w+)\}/g, (m, k) => (vars[k] != null ? vars[k] : m));
+  return v;
+}
+
+/** localized digits — Arabic-Indic for ar, Latin for en. Never mirrors. */
+export function num(n, opts) {
+  const locale = current === 'ar' ? 'ar-EG' : 'en-US';
+  try { return new Intl.NumberFormat(locale, opts).format(n); }
+  catch { return String(n); }
+}
+
+export function applyLang(lang) {
+  current = LANGS[lang] ? lang : 'ar';
+  // DOM-guarded so the render functions can run under Node (static-site generation)
+  if (typeof document !== 'undefined') {
+    const root = document.documentElement;
+    root.setAttribute('lang', current);
+    root.setAttribute('dir', LANGS[current].dir);
+  }
+}
+
+export function setLang(lang) {
+  if (!LANGS[lang]) lang = 'ar';
+  localStorage.setItem(KEY, lang);
+  applyLang(lang);
+  window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
+}
+
+/** bind any static [data-i18n] / [data-i18n-attr] nodes (pages are mostly JS-rendered) */
+export function applyI18nDom(root = document) {
+  root.querySelectorAll('[data-i18n]').forEach((n) => { n.textContent = t(n.getAttribute('data-i18n')); });
+  root.querySelectorAll('[data-i18n-attr]').forEach((n) => {
+    n.getAttribute('data-i18n-attr').split(',').forEach((pair) => {
+      const [attr, key] = pair.split(':').map((s) => s.trim());
+      if (attr && key) n.setAttribute(attr, t(key));
+    });
+  });
+}
+
+export function initI18n() { applyLang(getStoredLang()); }

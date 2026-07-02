@@ -52,15 +52,29 @@ Prefer a Node server instead? `npm run preview` → http://localhost:4178.
 > ES modules need http. The page **content** renders without JS; only the
 > interactive behaviors need the http origin.
 
-## Deploy to GitHub Pages
+## Deploy to GitHub Pages (repo `/docs`)
+
+The repo serves Pages from the root **`docs/`** folder, which is a full mirror of the
+built site. After any change:
 
 ```bash
-npm run build
-npm run deploy:pages -- --out=../../docs    # or any folder; copies public/ there
+cd academy-dashboard-discovery/app
+npm run deploy:pages     # = npm run build && node scripts/sync-pages.mjs
 ```
 
-`public/` is a self-contained static site (relative paths + `.nojekyll`). Publish it
-via your Pages source (repo `/docs`, a `gh-pages` branch, or a Pages action).
+`sync-pages.mjs` cleans root `docs/` and mirrors the COMPLETE `public/` output into it
+(all pages incl. `.en.html` variants, `assets/`, `index.html`, `.nojekyll`) — removed
+pages never linger stale, and `public/` stays the untouched canonical build output.
+The site is self-contained with relative paths, so everything works unchanged at a
+project URL (`user.github.io/repo/`).
+
+Then commit together: `docs/` + `academy-dashboard-discovery/app/public/` + your
+source changes.
+
+**GitHub Pages settings (one-time):** Settings → Pages → *Deploy from a branch* →
+branch **main** (or your active branch) → folder **`/docs`**.
+
+(For an arbitrary output folder there is still `node scripts/deploy-pages.mjs -- --out=<dir>`.)
 
 ## Test & screenshots
 
