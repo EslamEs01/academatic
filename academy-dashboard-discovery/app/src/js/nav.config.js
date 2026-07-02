@@ -130,9 +130,9 @@ export function categoryOf(activeId) {
 
 /* Documented-but-NOT-rendered registers (reference IA). */
 export const FUTURE_ROLE = [
-  { id: 'teacher-portal', reason: 'Separate guarded Teacher app — its own future spec; never in the admin nav.' },
-  { id: 'family-portal', reason: 'Guarded Family/Guardian app with a multi-child switcher — future spec.' },
-  { id: 'student-portal', reason: 'Student experience lives under the Family portal — not an admin destination.' },
+  { id: 'teacher-portal', reason: 'Separate Teacher portal surface — foundation shipped by Spec 012 (teacher-portal.html); deep experience is Spec 015; never an admin nav item.' },
+  { id: 'family-portal', reason: 'Family/Guardian portal with the multi-child pattern — foundation shipped by Spec 012 (family-portal.html); deep experience is Spec 014; never an admin nav item.' },
+  { id: 'student-portal', reason: 'Student portal split out of the legacy guardian-proxied portal as its own surface — foundation Spec 012 (student-portal.html); deep experience is Spec 013; never an admin nav item.' },
 ];
 
 /* intended routes when a planned item is promoted (NI9 / NI12) */

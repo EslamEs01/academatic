@@ -73,6 +73,17 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'dark' },
   { page: 'finance', lang: 'en', theme: 'light' },
   { page: 'finance', lang: 'en', theme: 'dark' },
+  // Spec 012 — role portal foundation (portal shell surfaces)
+  { page: 'portals', lang: 'ar', theme: 'light' },
+  { page: 'student-portal', lang: 'ar', theme: 'light' },
+  { page: 'student-portal', lang: 'ar', theme: 'dark' },
+  { page: 'student-portal', lang: 'en', theme: 'light' },
+  { page: 'family-portal', lang: 'ar', theme: 'light' },
+  { page: 'family-portal', lang: 'ar', theme: 'dark' },
+  { page: 'family-portal', lang: 'en', theme: 'light' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-portal', lang: 'en', theme: 'light' },
 ];
 
 (async () => {

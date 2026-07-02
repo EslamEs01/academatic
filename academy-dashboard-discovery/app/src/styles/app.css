@@ -765,3 +765,86 @@
   .fin-row .fr-body { flex-basis: calc(100% - 60px); }
   .fin-row .fr-amount, .fin-row .fr-actions { flex-basis: 100%; text-align: start; margin-top: 6px; justify-content: flex-start; }
 }
+
+/* ============================================================================
+ * Spec 012 — ROLE PORTAL shell (.portal-shell namespace ONLY).
+ * A warm, rail-less, mobile-first surface for the Student/Family/Teacher
+ * portal foundations + the demo hub. Reuses existing tokens; role accents
+ * come from the data-role attribute. No admin selector is touched.
+ * ==========================================================================*/
+@layer components {
+  .portal-shell { min-height: 100vh; display: flex; flex-direction: column; background: var(--c-bg); }
+  .portal-shell { --pt-accent: var(--c-primary); --pt-accent-weak: var(--c-primary-weak); --pt-accent-ink: var(--c-primary); }
+  .portal-shell[data-role="student"] { --pt-accent: var(--c-sky); --pt-accent-weak: var(--c-sky-weak); --pt-accent-ink: var(--c-sky-ink); }
+  .portal-shell[data-role="family"]  { --pt-accent: var(--c-primary); --pt-accent-weak: var(--c-primary-weak); --pt-accent-ink: var(--c-primary); }
+  .portal-shell[data-role="teacher"] { --pt-accent: var(--c-teal); --pt-accent-weak: var(--c-teal-weak); --pt-accent-ink: var(--c-teal-ink); }
+
+  .pt-header { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 12px clamp(16px, 4vw, 32px); background: color-mix(in srgb, var(--c-surface) 92%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--c-border); }
+  .pt-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .pt-brand-name { font-weight: 800; color: var(--c-ink); font-size: 14px; line-height: 1.15; }
+  .pt-portal-name { font-size: 11.5px; color: var(--pt-accent-ink); font-weight: 700; }
+  .pt-head-end { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .pt-greet { font-size: 13px; color: var(--c-ink-2); }
+  .pt-greet strong { color: var(--c-ink); }
+  .pt-role-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px;
+    background: var(--pt-accent-weak); color: var(--pt-accent-ink); font-size: 12px; font-weight: 700; }
+  .pt-switch { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px;
+    border: 1px solid var(--c-border); color: var(--c-ink-2); font-size: 12.5px; font-weight: 600; text-decoration: none;
+    transition: all .15s ease; }
+  .pt-switch:hover { color: var(--pt-accent); border-color: var(--pt-accent); background: var(--pt-accent-weak); }
+
+  .pt-main { flex: 1; }
+  .pt-body { max-width: 980px; margin: 0 auto; padding: clamp(16px, 4vw, 32px); display: flex; flex-direction: column; gap: 22px; }
+
+  /* hero — big, soft, friendly */
+  .pt-hero { border-radius: 22px; padding: clamp(20px, 5vw, 34px);
+    background: linear-gradient(135deg, var(--pt-accent-weak), var(--c-surface)); border: 1px solid var(--c-border); }
+  .pt-hero-hi { font-size: clamp(20px, 4.5vw, 28px); font-weight: 800; color: var(--c-ink); margin-bottom: 6px; }
+  .pt-hero-sub { font-size: 14px; color: var(--c-ink-2); max-width: 56ch; line-height: 1.7; }
+
+  /* sections + friendly cards */
+  .pt-section { display: flex; flex-direction: column; gap: 12px; }
+  .pt-sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .pt-sec-title { display: inline-flex; align-items: center; gap: 8px; font-size: 16.5px; font-weight: 800; color: var(--c-ink); }
+  .pt-sec-title .ico { color: var(--pt-accent); }
+  .pt-sec-hint { font-size: 12px; color: var(--c-ink-3); }
+  .pt-cards { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 640px) { .pt-cards { grid-template-columns: repeat(2, 1fr); } .pt-cards.pt-cards-3 { grid-template-columns: repeat(3, 1fr); } }
+  .pt-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 18px; padding: 16px;
+    box-shadow: var(--sh-sm); display: flex; flex-direction: column; gap: 10px; }
+  .pt-card-row { display: flex; align-items: center; gap: 12px; }
+  .pt-card-title { font-weight: 800; color: var(--c-ink); font-size: 14px; }
+  .pt-card-sub { font-size: 12.5px; color: var(--c-ink-2); line-height: 1.6; }
+  .pt-time { font-weight: 800; color: var(--pt-accent-ink); font-size: 13px; min-width: 52px; }
+
+  /* progress visuals */
+  .pt-gauge { display: flex; align-items: center; gap: 14px; }
+  .pt-gauge-num { font-size: 30px; font-weight: 800; color: var(--pt-accent-ink); }
+  .pt-bar { height: 10px; border-radius: 999px; background: var(--c-surface-2); overflow: hidden; flex: 1; }
+  .pt-bar > span { display: block; height: 100%; border-radius: 999px; background: var(--pt-accent); }
+
+  /* planned/backend-gated cards — visibly softer + labeled */
+  .pt-planned { border: 1.5px dashed color-mix(in srgb, var(--c-ink-3) 45%, transparent); background: color-mix(in srgb, var(--c-surface) 70%, var(--c-bg)); }
+  .pt-planned .pt-card-title { color: var(--c-ink-2); }
+
+  /* honest closing note */
+  .pt-note { display: flex; gap: 10px; align-items: flex-start; border-radius: 16px; padding: 14px 16px;
+    background: var(--c-surface-2); color: var(--c-ink-2); font-size: 13px; line-height: 1.7; }
+  .pt-note .ico { color: var(--pt-accent); flex-shrink: 0; margin-top: 2px; }
+
+  .pt-foot { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px;
+    color: var(--c-ink-3); font-size: 12px; border-top: 1px solid var(--c-border); }
+
+  /* hub role cards */
+  .pt-hub-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 720px) { .pt-hub-grid { grid-template-columns: repeat(3, 1fr); } }
+  .pt-hub-card { display: flex; flex-direction: column; gap: 12px; padding: 22px; border-radius: 20px; text-decoration: none;
+    background: var(--c-surface); border: 1px solid var(--c-border); box-shadow: var(--sh-sm); transition: all .18s ease; }
+  .pt-hub-card:hover { transform: translateY(-3px); box-shadow: var(--sh-md); border-color: var(--pt-accent); }
+  .pt-hub-card[data-role="student"] { --pt-accent: var(--c-sky); --pt-accent-weak: var(--c-sky-weak); --pt-accent-ink: var(--c-sky-ink); }
+  .pt-hub-card[data-role="family"]  { --pt-accent: var(--c-primary); --pt-accent-weak: var(--c-primary-weak); --pt-accent-ink: var(--c-primary); }
+  .pt-hub-card[data-role="teacher"] { --pt-accent: var(--c-teal); --pt-accent-weak: var(--c-teal-weak); --pt-accent-ink: var(--c-teal-ink); }
+  .pt-hub-open { display: inline-flex; align-items: center; gap: 6px; color: var(--pt-accent-ink); font-weight: 700; font-size: 13px; }
+}

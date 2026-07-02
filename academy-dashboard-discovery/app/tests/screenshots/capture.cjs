@@ -131,6 +131,19 @@ const MATRIX = [
   { page: 'dashboard',  lang: 'en', theme: 'light', vp: 'desktop', cat: 'reports', variant: 'finance-group' },
   { page: 'family',     lang: 'ar', theme: 'light', vp: 'desktop', view: 'plan',   variant: 'plan-billing' },
   { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', attnFilter: true, variant: 'filtered' },
+  // Spec 012 — role portal foundation (12-frame acceptance matrix; plain page loads).
+  // Frame 12 (admin unchanged-proof) = the existing dashboard ar/light/desktop frame above.
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-portal', lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'student-portal', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-portal',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-portal',  lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'family-portal',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-portal', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'portals',        lang: 'ar', theme: 'light', vp: 'desktop' },
 ];
 
 (async () => {

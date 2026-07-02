@@ -6,7 +6,13 @@ const { PORT } = require('../../scripts/serve.cjs');
 
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
-  'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance'];
+  'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
+  'portals', 'student-portal', 'family-portal', 'teacher-portal'];
+
+// Spec 012 — the role-portal surface (portal shell, not the admin shell). Admin-shell
+// assertions are scoped to admin pages; portal pages get their own block below. The
+// future-role portal-ABSENCE assertion stays enforced verbatim on every ADMIN page.
+const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal']);
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -95,23 +101,29 @@ const FILTER_SPEC = {
       ok(ext.length === 0, `${page}/${lang}: external requests ${JSON.stringify(ext.slice(0, 3))}`);
       ok(errs.length === 0, `${page}/${lang}: page errors ${JSON.stringify(errs.slice(0, 2))}`);
       ok(info.disabledNoReason === 0, `${page}/${lang}: ${info.disabledNoReason} disabled controls without a reason`);
-      ok(info.focusables > 5, `${page}/${lang}: too few focusable elements (${info.focusables})`);
+      // portal foundation pages are deliberately action-light (honest few affordances);
+      // admin pages keep the original richer threshold
+      ok(info.focusables > (PORTAL_PAGES.has(page) ? 3 : 5), `${page}/${lang}: too few focusable elements (${info.focusables})`);
       ok(!info.hasAppMount, `${page}/${lang}: found a whole-page #app mount (must be static HTML-first)`);
-      ok(info.hasShell, `${page}/${lang}: missing static shell/content`);
-      ok(info.hasRail, `${page}/${lang}: missing slim icon rail (.nav-rail)`);
-      ok(info.hasPanel, `${page}/${lang}: missing light nav panel (.nav-panel)`);
-      // every product page marks exactly one active nav item; the dev gallery has none
-      ok(info.activeNav === (page === 'gallery' ? 0 : 1), `${page}/${lang}: expected ${page === 'gallery' ? 0 : 1} active nav item, got ${info.activeNav}`);
-      ok(info.deadNav === 0, `${page}/${lang}: ${info.deadNav} dead nav item(s) — anchor without route or planned/disabled button without a hook`);
-      ok(info.railCats >= 6, `${page}/${lang}: expected ≥6 category tabs in the rail, got ${info.railCats}`);
-      ok(info.visiblePanels === 1, `${page}/${lang}: expected exactly ONE category panel visible (not all links at once), got ${info.visiblePanels}`);
+      if (!PORTAL_PAGES.has(page)) {
+        // ===== ADMIN-shell assertions (all 20 admin bases — unchanged from Specs 001–011) =====
+        ok(info.hasShell, `${page}/${lang}: missing static shell/content`);
+        ok(info.hasRail, `${page}/${lang}: missing slim icon rail (.nav-rail)`);
+        ok(info.hasPanel, `${page}/${lang}: missing light nav panel (.nav-panel)`);
+        // every product page marks exactly one active nav item; the dev gallery has none
+        ok(info.activeNav === (page === 'gallery' ? 0 : 1), `${page}/${lang}: expected ${page === 'gallery' ? 0 : 1} active nav item, got ${info.activeNav}`);
+        ok(info.deadNav === 0, `${page}/${lang}: ${info.deadNav} dead nav item(s) — anchor without route or planned/disabled button without a hook`);
+        ok(info.railCats >= 6, `${page}/${lang}: expected ≥6 category tabs in the rail, got ${info.railCats}`);
+        ok(info.visiblePanels === 1, `${page}/${lang}: expected exactly ONE category panel visible (not all links at once), got ${info.visiblePanels}`);
+        // Spec 012: future-role portal ids must NEVER render inside the ADMIN console
+        ok(info.portals === 0, `${page}/${lang}: a future-role portal is rendered in the ADMIN console DOM`);
+      }
       // Spec 003: schedule + sessions carry baked List/Timetable content tabs; exactly one panel visible
       const hasTabs = page === 'schedule' || page === 'sessions';
       ok(!hasTabs || info.contentTabs >= 2, `${page}/${lang}: expected ≥2 content tabs (List/Timetable), got ${info.contentTabs}`);
       ok(!hasTabs || info.visibleTabpanels === 1, `${page}/${lang}: expected exactly ONE visible tabpanel, got ${info.visibleTabpanels}`);
       ok(page !== 'schedule' || info.hasTimetable, `${page}/${lang}: schedule is missing the baked timetable grid`);
       ok(info.absAssets.length === 0, `${page}/${lang}: non-relative asset paths ${JSON.stringify(info.absAssets)}`);
-      ok(info.portals === 0, `${page}/${lang}: a future-role portal is rendered in the DOM`);
 
       // behavioral no-dead-button: a filter button and a pager must produce feedback
       if (page === 'dashboard') {
@@ -794,7 +806,9 @@ const FILTER_SPEC = {
         ok(fin.currencyTokens === wantMoney, `${page}/${lang}: expected ${wantMoney} currency token(s) in #page-body, got ${fin.currencyTokens} — a money figure may have been added`);
       }
 
-      // ===== Spec 010 — navigation IA corrections (shared sidebar; asserted on every page) =====
+      // ===== Spec 010 — navigation IA corrections (shared ADMIN sidebar; admin pages only —
+      // portal pages carry the portal shell and are asserted in the Spec 012 block below) =====
+      if (!PORTAL_PAGES.has(page)) {
       const nav010 = await p.evaluate(() => {
         const railCats = document.querySelectorAll('.nav-rail .rail-cat[data-nav-category]').length;
         const rep = document.getElementById('catpanel-reports');
@@ -837,6 +851,7 @@ const FILTER_SPEC = {
       // even if the Node ICU build ever collapsed both sides of the compare above to Latin digits)
       if (lang === 'ar') ok(!/[0-9]/.test(nav010.sessBadge), `${page}/ar: sessions badge must be Arabic-Indic digits only, got "${nav010.sessBadge}"`);
       ok(nav010.famTitle === expFamTitle, `${page}/${lang}: families category label should be "${expFamTitle}", got "${nav010.famTitle}"`);
+      } // end admin-only Spec 010 nav IA block (Spec 012 re-scope)
 
       // ===== Spec 010 — link integrity crawl (every anchor: no href="#", target exists, no external) =====
       const links010 = await p.evaluate((valid) => {
@@ -880,6 +895,57 @@ const FILTER_SPEC = {
           return [...body.querySelectorAll('a[href]')].filter((a) => isFin(a.getAttribute('href'))).length;
         });
         ok(famFin === 1, `${page}/${lang}: family body must contain exactly one finance link, got ${famFin}`);
+      }
+
+      // ===== Spec 012 — role portal foundation block (portal pages only) =====
+      if (PORTAL_PAGES.has(page)) {
+        const prt = await p.evaluate(() => {
+          const shell = document.querySelector('.portal-shell');
+          const role = shell ? shell.getAttribute('data-role') : '';
+          const adminMarkup = !!document.querySelector('.app-shell, .nav-rail, .nav-panel');
+          const switchLink = [...document.querySelectorAll('.pt-header a[href]')]
+            .some((a) => /portals\.(en\.)?html$/.test(a.getAttribute('href') || ''));
+          const bodyText = (document.getElementById('page-body') || document.body).innerText;
+          // AR digit hygiene: the big authored counters must be Arabic-Indic on Arabic pages
+          const gauges = [...document.querySelectorAll('.pt-gauge-num')];
+          const gaugeCount = gauges.length;
+          const gaugeAscii = gauges.filter((el) => /[0-9]/.test(el.textContent)).length;
+          const planned = [...document.querySelectorAll('.pt-planned')];
+          // a planned card must never navigate and must carry a LABELED chip (icon + text, never color-only)
+          const plannedBad = planned.filter((c) => c.tagName === 'A' || !c.querySelector('.chip svg')
+            || !(c.querySelector('.chip')?.textContent || '').trim()).length;
+          const hubRoleTargets = [...document.querySelectorAll('.pt-hub-card[href]')]
+            .map((a) => (a.getAttribute('href') || '').replace('.en.html', '').replace('.html', '')).sort();
+          const hubAdminLink = [...document.querySelectorAll('#page-body a[href]')]
+            .filter((a) => /dashboard\.(en\.)?html$/.test(a.getAttribute('href') || '')).length;
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink };
+        });
+        const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
+        ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
+        ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
+        if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
+        // existence floor first, so the AR digit check below can never pass vacuously
+        if (page === 'student-portal') ok(prt.gaugeCount >= 1, `${page}/${lang}: expected ≥1 progress gauge counter, got ${prt.gaugeCount}`);
+        if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
+        const expPlanned = { 'student-portal': 3, 'family-portal': 3, 'teacher-portal': 2, portals: 0 }[page];
+        ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
+        ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
+        if (page === 'portals') {
+          ok(JSON.stringify(prt.hubRoleTargets) === JSON.stringify(['family-portal', 'student-portal', 'teacher-portal']),
+            `${page}/${lang}: hub role cards must target exactly the three portals, got ${JSON.stringify(prt.hubRoleTargets)}`);
+          ok(prt.hubAdminLink === 1, `${page}/${lang}: hub should offer exactly one labeled admin-console link, got ${prt.hubAdminLink}`);
+        }
+        if (page === 'teacher-portal') {
+          // FR-006/SC-005 — the pay-free rule, enforced on the rendered body in BOTH languages
+          const payHit = /\b(salary|salaries|payouts?|earnings?|compensation)\b/i.test(prt.bodyText)
+            || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
+          ok(!payHit, `${page}/${lang}: the teacher portal contains pay vocabulary — forbidden (FR-006)`);
+        }
+        // student portal is table-free by contract
+        if (page === 'student-portal') {
+          const tables = await p.$$eval('#page-body table', (els) => els.length);
+          ok(tables === 0, `${page}/${lang}: the student portal must contain zero tables, got ${tables}`);
+        }
       }
 
       // ===== Spec 010 — filter visibility: filtered-out rows are genuinely invisible, and only
