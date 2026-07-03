@@ -169,6 +169,23 @@ const MATRIX = [
   { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(8)',  variant: 'area-billing' },
   { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-requests' },
   { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-materials' },
+  // Spec 015 — teacher dashboard: the NEW ar/dark base frame + area close-ups ('section'
+  // includes the hero, so nth-of-type: 1=hero 2=today 3=next 4=follow-up 5=students
+  // 6=workflow 7=recent-history 8=tasks 9=materials 10=timetable 11=rubric
+  // 12=requests-performance 13=account).
+  { page: 'teacher-portal', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(2)',  variant: 'area-today' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)',  variant: 'area-next' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(4)',  variant: 'area-followup' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(5)',  variant: 'area-students' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(6)',  variant: 'area-workflow' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(7)',  variant: 'area-history' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(8)',  variant: 'area-tasks' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-materials' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-timetable' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(11)', variant: 'area-rubric' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(12)', variant: 'area-requests' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(13)', variant: 'area-account' },
 ];
 
 (async () => {
