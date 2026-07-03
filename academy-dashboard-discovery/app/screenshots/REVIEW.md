@@ -410,3 +410,36 @@ Deepens the Spec-012 family foundation (`family-portal(.en).html`, persona **fam
 **Failure conditions:** none triggered — not admin-like (warm rail-less shell, card language), not a legacy clone (cards vs the legacy 10-col today / 8-col billing tables; designed empty states the legacy never had), zero tables, **no confusing child switcher** (everyone-inline), **no fake payment** (status only, zero figures, no pay-now), no fake cancel/reschedule/upload/voice/feedback submit (all backend-gated previews, zero form controls), zero raw keys, zero `href="#"`, zero dead links, correct RTL/LTR, clean mobile, good dark contrast, no student/teacher/admin change, no reports/finance regression, no new backend/library, **no currency/pay figure anywhere**.
 
 **Automated (accompanying):** build clean (49) · smoke PASS (48 loads; family branch amended: 5 progress bars = 5 children, ≥10 sections, ≥1 `.pt-empty`, zero body anchors, **zero form controls**, planned 2 amber + 2 neutral, **zero-pay regex 0 hits**, tables 0, 390px probe; **student/admin/teacher/hub asserts byte-verbatim**) · axe **critical=0 serious=0** (family AR/EN × light/dark) · **13 family frames, 0 console errors** (4 experience + 9 element-scoped area close-ups) · byte-identity: exactly `family-portal.html` + `.en.html` changed, 47/49 identical · Spec 008–013 guards re-run `ok` (incl. teacher pay-grep + admin 40-file identity + the Spec-013 student smoke branch unchanged).
+
+## Spec 015 — Teacher Dashboard — 2026-07-03
+
+**Baseline (T001):** HEAD `0d144aa` (Spec 014, watcher-committed) · branch `feature/012-role-portal-foundation` · working tree carries only the Spec-015 planning artifacts · rebuild deterministic (49 pages, **0** built files differ from HEAD) · smoke PASS (48 loads) · axe **critical=0 serious=0** (incl. teacher-portal ar/light, ar/dark, en/light) · Spec 008–014 guard asserts all green inside the smoke run. Frames + verdicts recorded below after implementation (T022/T023).
+
+**Delivered (T022/T023):** the 14-section cockpit reviewed frame-by-frame against `contracts/screenshot-acceptance.md` §2.
+
+| # | Frame | File | Verdict |
+|---|---|---|---|
+| 1 | Teacher dashboard · AR Light desktop (full) | `teacher-portal__ar__light__desktop.png` | ✅ PASS — organized daily cockpit, all 14 sections in D1+A1 order; card language, zero tables, zero admin chrome; ZERO pay vocabulary/figures |
+| 2 | Teacher dashboard · AR Dark desktop (NEW frame) | `teacher-portal__ar__dark__desktop.png` | ✅ PASS — premium dark surfaces; teal accents, status/outcome chips, amber gates hold contrast (axe-clean) |
+| 3 | Teacher dashboard · EN Light desktop | `teacher-portal__en__light__desktop.png` | ✅ PASS — LTR mirror, same 14-section structure, zero pay/currency tokens |
+| 4 | Teacher dashboard · AR Mobile 390px | `teacher-portal__ar__light__mobile.png` | ✅ PASS — clean single-column reflow; steps/day-groups/gates stack; no horizontal scroll (smoke probe scrollWidth ≤ 391) |
+| 5 | Today schedule area | `…__area-today.png` | ✅ PASS — 2 session cards, labeled live chips, authored «١٨ من ٢٠ طالبًا» counts; no join control |
+| 6 | Next class area | `…__area-next.png` | ✅ PASS — rich card + group tag + prepare hint + the honest backendRequired live note (never join-styled) |
+| 7 | Follow-up board area | `…__area-followup.png` | ✅ PASS — the two REAL outcome cards (out15 st11 absence + support note · out4 st7 make-up) with real chips + reassurance; no risk numbers |
+| 8 | My students area | `…__area-students.png` | ✅ PASS — 4 grp1 roster cards, lifecycle chips, worded notes; zero links/percentages |
+| 9 | Outcome workflow area | `…__area-workflow.png` | ✅ PASS — the 5 capture-verified steps display-only + the A2 mark-absent gated note + the «حفظ نتيجة الجلسة» gate; ZERO form controls |
+| 10 | Recent sessions area (A1) | `…__area-history.png` | ✅ PASS — 2 REAL outcome records (out1 · out11) w/ chips + feedback + homework lines; no route/modal |
+| 11 | Tasks area | `…__area-tasks.png` | ✅ PASS — 3 authored prep cards + due tags + the planned task-management gate |
+| 12 | Materials area | `…__area-materials.png` | ✅ PASS — 3 display-only cards + the upload/download backendRequired gate |
+| 13 | Timetable/availability area | `…__area-timetable.png` | ✅ PASS — SAT/MON/TUE day-grouped agenda + the TRUTHFUL free-days empty state + the availability-edit gate; never a grid |
+| 14 | Monthly rubric area | `…__area-rubric.png` | ✅ PASS — 5 display-only dimension lines + inline gate; NO answer scales / rating visual / score vocabulary |
+| 15 | Requests & performance area | `…__area-requests.png` | ✅ PASS — certificate preview + inline gate + the A2 cancel/reschedule gated note + the ONE sanctioned labeled performance link |
+| 16 | Account area | `…__area-account.png` | ✅ PASS — name/subject rows + labeled status/availability chips + backendRequired edit note; rating/util NEVER rendered |
+| 17 | Student portal unchanged-proof | `student-portal__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD |
+| 18 | Family portal unchanged-proof | `family-portal__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD |
+| 19 | Portal hub unchanged-proof | `portals__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD |
+| 20 | Admin dashboard unchanged-proof | `dashboard__ar__light__desktop.png` | ✅ PASS — byte-identical to HEAD (all 40 admin files hash-identical) |
+
+**Failure conditions:** none triggered — not admin-like (warm rail-less shell, card language), not a legacy clone (cards vs the legacy pay-hero home / hour-grid timetable / 13-col ledgers; the fake live room never cloned), zero tables, **no pay vocabulary or money/currency figure anywhere** (three-layer enforced), no fake live-join/end-class/attendance-save/upload/download/chat/certificate/profile-save (every write a labeled gate; zero form controls), no computed score/rating (sara's numerics suppressed), zero raw keys, zero `href="#"`, zero dead links, correct RTL/LTR, clean mobile, good dark contrast, no student/family/admin change, no reports/finance regression, no new backend/library.
+
+**Automated (accompanying):** build clean (49) · smoke PASS (48 loads; teacher branch amended: ≥10 sections, ≥1 `.pt-empty`, **bodyAnchors === 1 pinned to `teacher-performance(.en).html`**, zero form controls, planned 3 amber + 1 neutral, avatar floor ≥6, the Spec-012 payHit assert BYTE-VERBATIM and green, tables 0, 390px probe; **student/family/admin/hub asserts byte-verbatim**) · axe **critical=0 serious=0** (teacher AR light/dark + EN light) · **16 teacher frames + 4 refreshed proofs, 0 console errors** · byte-identity: exactly `teacher-portal.html` + `.en.html` changed among the 49, 47/49 identical · Spec 008–014 guards re-run `ok`.

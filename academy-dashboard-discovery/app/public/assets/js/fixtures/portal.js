@@ -13,7 +13,7 @@ export const PORTAL_PERSONAS = {
 /* Student portal — Spec 013 deep dashboard. All authored/display-only literals
  * (anchored in the legacy hours-gauge + per-session summary/homework record ideas,
  * presented as friendly visuals). NO computed score/rank, NO backend-shaped state,
- * NO pay-adjacent fields. Personas/family/teacher registers untouched. */
+ * NO money-adjacent fields. Personas/family/teacher registers untouched. */
 export const STUDENT_PREVIEW = {
   overallProgress: 78, // mirrors st1's authored progress figure
   courses: [
@@ -92,6 +92,44 @@ export const FAMILY_PREVIEW = {
   kidHints: { st1: 'data.prtFamKid1', st6: 'data.prtFamKid2', st11: 'data.prtFamKid3', st12: 'data.prtFamKid4', st13: 'data.prtFamKid5' },
 };
 
+/* Teacher portal — Spec 015 daily cockpit (sara). All authored/display-only
+ * literals or refs to EXISTING fixtures via the teacher-links graph. NO computed
+ * score/rank (sara's numeric rating/util stay display-suppressed — labeled,
+ * worded signals only), NO backend-shaped state, NO money-like field of any kind.
+ * Personas + student/family registers untouched. */
+export const TEACHER_PREVIEW = {
+  /* the "who needs follow-up" board — REAL outcome rows only (no fabrication):
+   * out15 = st11 absence w/ the support feedback · out4 = st7 needs a make-up slot */
+  followUps: [
+    { outcomeId: 'out15', framingKey: 'prt.tch.sig.absence' },
+    { outcomeId: 'out4', framingKey: 'prt.tch.sig.makeup' },
+  ],
+  /* recent sessions (the T20/T21 history slice) — REAL outcome refs (out1 st1 ·
+   * out11 st11, both attended sara rows); the homework-note lines are authored */
+  history: [
+    { outcomeId: 'out1', homeworkKey: 'data.prtTchHist1hw' },
+    { outcomeId: 'out11', homeworkKey: 'data.prtTchHist2hw' },
+  ],
+  /* authored per-roster-student learning notes (worded signals — no numbers) */
+  studentNotes: { st1: 'data.prtTchStu1', st6: 'data.prtTchStu2', st11: 'data.prtTchStu3', st13: 'data.prtTchStu4' },
+  /* prep/review cards (display-only; due labels authored, never computed) */
+  tasks: [
+    { id: 'tk1', titleKey: 'data.prtTchTask1', subKey: 'data.prtTchTask1s', dueKey: 'prt.tch.due.today', icon: 'file-text' },
+    { id: 'tk2', titleKey: 'data.prtTchTask2', subKey: 'data.prtTchTask2s', dueKey: 'prt.tch.due.tomorrow', icon: 'tasks' },
+    { id: 'tk3', titleKey: 'data.prtTchTask3', subKey: 'data.prtTchTask3s', dueKey: 'prt.tch.due.endOfWeek', icon: 'clipboard-check' },
+  ],
+  /* teaching materials preview (display-only; type icon + course ref) */
+  materials: [
+    { id: 'tm1', titleKey: 'data.prtTchMat1', courseId: 'c1', typeIcon: 'file-text' },
+    { id: 'tm2', titleKey: 'data.prtTchMat2', courseId: 'c1', typeIcon: 'play' },
+    { id: 'tm3', titleKey: 'data.prtTchMat3', courseId: 'c1', typeIcon: 'materials' },
+  ],
+  /* monthly-report rubric dimensions (display-only question lines — no answer scales) */
+  rubricKeys: ['prt.tch.rubric.achievements', 'prt.tch.rubric.learning', 'prt.tch.rubric.focus', 'prt.tch.rubric.homework', 'prt.tch.rubric.punctuality'],
+  /* certificate-request concept lines (display-only preview of what a request carries) */
+  certKeys: ['prt.tch.cert.line1', 'prt.tch.cert.line2'],
+};
+
 /* Planned/backend-gated foundation cards per portal (availability reuses the
  * Spec 008 vocabulary via availabilityChip — labeled, never color-only). */
 export const PORTAL_PLANNED = {
@@ -111,8 +149,13 @@ export const PORTAL_PLANNED = {
     { id: 'fullHistory', icon: 'clipboard-check', titleKey: 'prt.fam.plan.fullHistory.t', descKey: 'prt.fam.plan.fullHistory.d', availability: 'planned' },
     { id: 'meetingRequest', icon: 'calendar', titleKey: 'prt.fam.plan.meetingRequest.t', descKey: 'prt.fam.plan.meetingRequest.d', availability: 'planned' },
   ],
+  /* Spec 015 — four teacher mini-cards, each placed inside its owning section:
+   * outcome-save + file upload/download + availability editing are backend-gated;
+   * the full task surface is planned (the Spec-016 operations shell). */
   teacher: [
-    { id: 'materials', icon: 'materials', titleKey: 'prt.tch.planned.mat.t', descKey: 'prt.tch.planned.mat.d', availability: 'planned' },
-    { id: 'tasks', icon: 'tasks', titleKey: 'prt.tch.planned.tasks.t', descKey: 'prt.tch.planned.tasks.d', availability: 'planned' },
+    { id: 'outcomeSave', icon: 'clipboard-check', titleKey: 'prt.tch.plan.outcomeSave.t', descKey: 'prt.tch.plan.outcomeSave.d', availability: 'backendRequired' },
+    { id: 'matUpload', icon: 'materials', titleKey: 'prt.tch.plan.matUpload.t', descKey: 'prt.tch.plan.matUpload.d', availability: 'backendRequired' },
+    { id: 'availabilityEdit', icon: 'calendar', titleKey: 'prt.tch.plan.availabilityEdit.t', descKey: 'prt.tch.plan.availabilityEdit.d', availability: 'backendRequired' },
+    { id: 'taskManage', icon: 'tasks', titleKey: 'prt.tch.plan.taskManage.t', descKey: 'prt.tch.plan.taskManage.d', availability: 'planned' },
   ],
 };

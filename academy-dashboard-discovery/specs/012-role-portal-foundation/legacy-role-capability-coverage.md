@@ -224,3 +224,50 @@ Spec 014 (Family / Guardian Dashboard) deepens the family portal and disposition
 - [x] §§1–7 byte-unchanged; no student/teacher row reclassified.
 
 **Reviewer:** ______________________  **Date:** ______________
+
+## 9. Spec 015 delivery notes (teacher dispositions — appended, no row reclassified)
+
+Spec 015 (Teacher Dashboard) deepens the teacher portal into the one-page daily cockpit and dispositions every teacher row (T1–T27). These are **delivery annotations only** — the §1 classifications, destinations, and rationales above are unchanged; nothing is re-scoped. Every write (outcome save, absence, cancel/reschedule, upload, availability, certificate, profile) stays honestly gated; **the four pay rows never render**.
+
+| Row | Spec-015 disposition |
+|---|---|
+| **T1** home dashboard | **Delivered** — the deep cockpit hero + today's schedule (authored student counts) + follow-up board, WITHOUT the legacy pay hero (see T2) |
+| **T2** home pay hero tile | **UNCHANGED** — `backendRequired`; never rendered, zero figures, zero vocabulary, no route (grep- and smoke-enforced, three layers) |
+| **T3** end-of-session recording | **Delivered** as the display-only 5-step workflow preview (attendance · remark · summary · homework note · files — the capture-verified `classes-end` order); the save itself = the labeled `outcomeSave` backendRequired mini-card |
+| **T4** mark class absent | **Delivered** as a VISIBLE gated capability (amendment A2) — the calm backendRequired note «تسجيل الغياب يحتاج تفعيل الخادم.» inside the workflow section; no control, no write |
+| **T5** request-cancel / reschedule | **Delivered** as a VISIBLE gated capability (amendment A2) — the calm backendRequired note «طلب إلغاء أو تعويض الحصة يحتاج تفعيل الخادم.» inside requests & performance; no control, no write |
+| **T6** fake "live room" | **UNCHANGED** — `intentionally excluded` (never cloned) |
+| **T7** real live classroom | **UNCHANGED** — `backendRequired`; the next-class card keeps the honest integration note, never a join-styled control |
+| **T8** my-students roster | **Delivered** — the 4-card grp1 roster (st1/st6/st11/st13): group/course association, labeled lifecycle chips, authored worded learning notes; display-only, zero links, zero percentages (deep row actions stay out) |
+| **T9** monthly report rubric | **Delivered** as the display-only 5-dimension preview (achievements · learning progress · focus · homework completion · punctuality); NO answer scales/rating visual; submit = inline backendRequired chip |
+| **T10** certificate request | **Delivered** as the display-only routed-to-management preview (description + date concept lines); submit = inline backendRequired chip |
+| **T11** monthly learning plans | **Delivered (folded)** — the planning concept folds into the tasks preview (incl. the prepare-monthly-reports card) + the rubric preview; no separate authoring surface (real authoring stays backend) |
+| **T12** duplicate roster | **UNCHANGED** — `intentionally excluded` (consolidated into the one T8 roster) |
+| **T13** chat / messaging | **UNCHANGED** — `backendRequired`; surface home refined: the messaging shell arrives with **planned-016** on top of the backend gate (the closing note says so) |
+| **T14** timetable + availability | **Delivered** — SAT/MON/TUE day-grouped agenda cards (never a grid) + the TRUTHFUL merged free-days empty state («الأربعاء والخميس — بلا حصص») + the `availabilityEdit` backendRequired mini-card |
+| **T15** materials library | **Delivered** — 3 display-only course-associated cards; upload AND download = the `matUpload` backendRequired mini-card |
+| **T16** tasks (empty KPI shell) | **UNCHANGED** — `intentionally excluded` as a surface; the authored 3-card tasks preview delivers MORE than the legacy empty shell ever shipped; the full task board = the `taskManage` planned-016 mini-card |
+| **T17** pay breakdown ledger | **UNCHANGED** — `backendRequired`; never rendered, no route |
+| **T18** pay class report | **UNCHANGED** — `backendRequired`; never rendered, no route |
+| **T19** per-student pay result | **UNCHANGED** — `backendRequired`; never rendered, no route |
+| **T20** session / course history | **Delivered** — the EXPLICIT recent-sessions history slice (amendment A1): 2 cards resolving REAL `out1` (st1 attended + good feedback) and REAL `out11` (st11 attended) with real outcome chips + homework-note lines, PLUS the workflow preview that produces such records; full history browsing stays out (no route, no modal) |
+| **T21** teacher history (duplicate) | **Delivered** — merged into the single T20 slice exactly as §1 planned (one consolidated history, duplicate route family dropped) |
+| **T22** outcome-workflow preview | **Delivered** — deepened from the 4-step foundation glimpse to the capture-verified 5-step order with the explicit save gate |
+| **T23** profile / account edit | **Delivered** — the account slice (name · subject · labeled status chip · labeled availability chip, display-only); editing = the backendRequired note; sara's numeric `rating`/`util`/`hours`/`sessions` are NEVER rendered |
+| **T24** `/profile` 500 | **UNCHANGED** — `intentionally excluded`; the account view derives from the working edit surface's concept, the 500 is not reproduced |
+| **T25** Dashboard-1 404s | **UNCHANGED** — `intentionally excluded` |
+| **T26** admin page leak | **UNCHANGED** — `intentionally excluded` (admin surface, not a portal one) |
+| **T27** dual-badge bug | **UNCHANGED** — `intentionally excluded`; the cockpit hero carries NO notification count at all |
+
+The ONE page-body link remains the sanctioned labeled admin performance card → `teacher-performance(.en).html` (a pay-free KPI board; smoke pins `bodyAnchors === 1` + the exact target). Real messaging/notifications and the full task board are **planned-016**; admin missing modules = Spec 017.
+
+**Spec 015 sign-off:**
+- [x] All 27 teacher rows (T1–T27) carry an explicit Spec-015 disposition — zero silent gaps.
+- [x] T2/T17/T18/T19 stay backendRequired: zero pay figures, zero pay vocabulary (copy AND comments), zero currency tokens, zero routes — three-layer enforced (source grep · built grep · the byte-verbatim Spec-012 smoke assert).
+- [x] T20/T21 delivered through the explicit recent-sessions/history slice + the session-outcome workflow preview.
+- [x] T4/T5 visible on the page as honest backendRequired gated notes (non-anchor, zero controls).
+- [x] No computed score/rank/rating anywhere; sara's numerics stay display-suppressed.
+- [x] The page carries zero form controls and exactly ONE sanctioned body anchor.
+- [x] §§1–8 byte-unchanged; no student/family row reclassified.
+
+**Reviewer:** ______________________  **Date:** ______________

@@ -929,7 +929,10 @@ const FILTER_SPEC = {
           // Spec 014 — family: five children each carry a progress bar; the page has zero form controls
           const progressBars = document.querySelectorAll('.pt-bar').length;
           const formControls = document.querySelectorAll('#page-body form, #page-body input, #page-body select, #page-body textarea').length;
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls };
+          // Spec 015 — teacher: the exact body-anchor inventory + the roster/board avatar floor
+          const anchorTargets = [...document.querySelectorAll('#page-body a[href]')].map((a) => a.getAttribute('href') || '');
+          const avatars = document.querySelectorAll('#page-body .avatar').length;
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars };
         });
         const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
@@ -966,7 +969,7 @@ const FILTER_SPEC = {
           ok(!payFigure, `${page}/${lang}: the family dashboard shows a currency/pay figure — forbidden (SC-005, the zero-pay hard line)`);
         }
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
-        const expPlanned = { 'student-portal': 3, 'family-portal': 4, 'teacher-portal': 2, portals: 0 }[page];
+        const expPlanned = { 'student-portal': 3, 'family-portal': 4, 'teacher-portal': 4, portals: 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
         ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
         if (page === 'portals') {
@@ -979,9 +982,21 @@ const FILTER_SPEC = {
           const payHit = /\b(salary|salaries|payouts?|earnings?|compensation)\b/i.test(prt.bodyText)
             || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
           ok(!payHit, `${page}/${lang}: the teacher portal contains pay vocabulary — forbidden (FR-006)`);
+          // Spec 015 — the deepened teacher cockpit (research D13 + amendments A1/A2): section/empty
+          // floors, graduation semantics (3 backend gates + 1 planned), a form-free body, the
+          // roster+board avatar floor, and the ONE sanctioned page-body anchor pinned to its target.
+          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
+          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the truthful free-days empty state (≥1 .pt-empty), got ${prt.emptyCount}`);
+          ok(prt.bodyAnchors === 1, `${page}/${lang}: the teacher page body must contribute exactly ONE anchor (the performance link), got ${prt.bodyAnchors}`);
+          ok(prt.anchorTargets.every((h) => /(^|\/)teacher-performance\.(en\.)?html$/.test(h)),
+            `${page}/${lang}: the teacher body anchor must target the performance board, got ${JSON.stringify(prt.anchorTargets)}`);
+          ok(prt.formControls === 0, `${page}/${lang}: the teacher page must contain zero form controls, got ${prt.formControls}`);
+          ok(prt.plannedBackend === 3, `${page}/${lang}: expected 3 backendRequired teacher gates (outcome-save + files + availability), got ${prt.plannedBackend}`);
+          ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned teacher gate (task management), got ${prt.plannedPlanned}`);
+          ok(prt.avatars >= 6, `${page}/${lang}: expected ≥6 student avatars (roster 4 + follow-up board 2), got ${prt.avatars}`);
         }
-        // the student + family dashboards are table-free and mobile-clean by contract
-        if (page === 'student-portal' || page === 'family-portal') {
+        // the three deepened role dashboards are table-free and mobile-clean by contract
+        if (page === 'student-portal' || page === 'family-portal' || page === 'teacher-portal') {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
           ok(tables === 0, `${page}/${lang}: this portal must contain zero tables, got ${tables}`);
           // mobile-first: no horizontal overflow at 390px (this context is discarded after)
