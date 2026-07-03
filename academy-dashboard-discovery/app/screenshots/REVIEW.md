@@ -443,3 +443,25 @@ Deepens the Spec-012 family foundation (`family-portal(.en).html`, persona **fam
 **Failure conditions:** none triggered — not admin-like (warm rail-less shell, card language), not a legacy clone (cards vs the legacy pay-hero home / hour-grid timetable / 13-col ledgers; the fake live room never cloned), zero tables, **no pay vocabulary or money/currency figure anywhere** (three-layer enforced), no fake live-join/end-class/attendance-save/upload/download/chat/certificate/profile-save (every write a labeled gate; zero form controls), no computed score/rating (sara's numerics suppressed), zero raw keys, zero `href="#"`, zero dead links, correct RTL/LTR, clean mobile, good dark contrast, no student/family/admin change, no reports/finance regression, no new backend/library.
 
 **Automated (accompanying):** build clean (49) · smoke PASS (48 loads; teacher branch amended: ≥10 sections, ≥1 `.pt-empty`, **bodyAnchors === 1 pinned to `teacher-performance(.en).html`**, zero form controls, planned 3 amber + 1 neutral, avatar floor ≥6, the Spec-012 payHit assert BYTE-VERBATIM and green, tables 0, 390px probe; **student/family/admin/hub asserts byte-verbatim**) · axe **critical=0 serious=0** (teacher AR light/dark + EN light) · **16 teacher frames + 4 refreshed proofs, 0 console errors** · byte-identity: exactly `teacher-portal.html` + `.en.html` changed among the 49, 47/49 identical · Spec 008–014 guards re-run `ok`.
+
+## Spec 017 — Role Dashboard Shell + Navigation — 2026-07-03
+
+**Baseline (T001):** HEAD `2b8bb84` (Spec 016 law, committed) · tree clean · rebuild deterministic (49 pages, 0 diffs) · smoke PASS (48 loads) · axe critical=0 serious=0 · prior 008–016 guards green. **Planned freeze amendments** (research D4/D5, recorded up front): **A1** — the role mobile nav is a NATIVE `details.pt-nav-drawer` disclosure (the frozen enhance.js clone-drawer targets the admin `#shell > .sidebar` only); **A2** — no desktop sidebar collapse in 017 (collapse would need hooks/storage that are frozen). Frames + verdicts recorded below after implementation (T020).
+
+**Delivered (T018/T020):** Shell v2 reviewed frame-by-frame; **freeze amendments A1 (native disclosure) + A2 (no collapse) applied as recorded** — reasons verified in source (`enhance.js openDrawer()` targets `#shell > .sidebar` only; collapse would need frozen hooks/storage).
+
+| # | Frame | Verdict |
+|---|---|---|
+| 1 | Student · AR light desktop | ✅ PASS — real dashboard frame: sky sidebar (identity block · 7 items · home active pill · 6 «قريبًا» planned buttons · hub exit); all 13 home sections intact; not admin-like |
+| 2 | Family · AR light desktop | ✅ PASS — violet sidebar, 8 items (الفواتير = status register), 12 sections intact |
+| 3 | Teacher · AR light desktop | ✅ PASS — teal cockpit sidebar, 7 items, 14 sections intact, the ONE body anchor unchanged |
+| 4 | Teacher · AR dark desktop | ✅ PASS — sidebar/drawer dark-safe, pills legible (axe-clean) |
+| 5 | Student/Family/Teacher · EN light | ✅ PASS — LTR mirror, mirrored labels, same counts/active/planned |
+| 6 | Teacher · AR mobile (closed) | ✅ PASS — «القائمة» disclosure under the topbar, zero overflow |
+| 7 | Teacher · AR mobile **drawer-OPEN** (NEW) | ✅ PASS — native details panel lists all 7 items + hub exit; opens/closes natively; A1 proven |
+| 8 | Portals hub | ✅ PASS — NO sidebar (entry chooser); refreshed dashboard-register copy; inventory asserts unchanged |
+| 9 | Admin dashboard proof | ✅ PASS — byte-identical (41/49 identity) |
+
+**Failure sweep:** none — no admin markup in role pages, no bottom tabs, no fake affordances (planned = labeled buttons + existing toast), zero `href="#"`, zero pay vocabulary (extended set, three layers), RTL/LTR/dark/mobile clean, home `#page-body` regions BYTE-EQUAL to HEAD (all six files), hub-only entry preserved.
+
+**Automated:** build clean (49) · smoke PASS (48 loads; Shell-v2 asserts: sidenav on exactly 3 pages, counts 7/8/7 both instances, active home ×2/page, planned-as-buttons, drawer summary, shell-anchor set {self,hub} multiset 5; **every pre-017 assert byte-verbatim incl. payHit**) · axe 0/0 · 43 portal frames + admin proofs, 0 console errors · 41/49 hash-identical · G2 diffs (enhance/build-html/nav.config/package.json) = 0 lines.

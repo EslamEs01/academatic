@@ -932,7 +932,18 @@ const FILTER_SPEC = {
           // Spec 015 — teacher: the exact body-anchor inventory + the roster/board avatar floor
           const anchorTargets = [...document.querySelectorAll('#page-body a[href]')].map((a) => a.getAttribute('href') || '');
           const avatars = document.querySelectorAll('#page-body .avatar').length;
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars };
+          // Spec 017 — Shell v2: role sidebar / native drawer / registry counts / shell-anchor inventory
+          const sidenavs = document.querySelectorAll('.pt-sidenav').length;
+          const navAside = document.querySelectorAll('.pt-sidenav .pt-nav > .pt-nav-item').length;
+          const navDrawer = document.querySelectorAll('.pt-nav-drawer .pt-nav > .pt-nav-item').length;
+          const drawerSummary = !!document.querySelector('details.pt-nav-drawer > summary');
+          const navCurrentHrefs = [...document.querySelectorAll('.pt-nav-item[aria-current="page"]')].map((a) => a.getAttribute('href') || '');
+          const plannedNavAnchors = document.querySelectorAll('a.pt-nav-item.is-planned').length;
+          const navListAnchors = document.querySelectorAll('.pt-sidenav .pt-nav > a.pt-nav-item').length;
+          const shellAnchors = [...document.querySelectorAll('a[href]')]
+            .filter((a) => !a.closest('#page-body') && !(a.getAttribute('href') || '').startsWith('#'))
+            .map((a) => a.getAttribute('href'));
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors };
         });
         const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
@@ -995,6 +1006,31 @@ const FILTER_SPEC = {
           ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned teacher gate (task management), got ${prt.plannedPlanned}`);
           ok(prt.avatars >= 6, `${page}/${lang}: expected ≥6 student avatars (roster 4 + follow-up board 2), got ${prt.avatars}`);
         }
+        // ===== Spec 017 — Shell v2: role sidebar + native drawer + the sanctioned anchor registry.
+        // The nav is baked twice (desktop aside + mobile details drawer), all of it OUTSIDE
+        // #page-body — so every body-scoped assert above is untouched by construction. =====
+        if (page === 'portals') {
+          ok(prt.sidenavs === 0 && !prt.drawerSummary, `${page}/${lang}: the hub must not carry the role sidebar/drawer`);
+          ok(prt.shellAnchors.length === 0, `${page}/${lang}: the hub shell must contribute zero non-hash anchors outside the body, got ${prt.shellAnchors.length}`);
+        } else {
+          const navWant = { 'student-portal': 7, 'family-portal': 8, 'teacher-portal': 7 }[page];
+          const selfHref = `${page}${lang === 'en' ? '.en' : ''}.html`;
+          const hubHref = `portals${lang === 'en' ? '.en' : ''}.html`;
+          ok(prt.sidenavs === 1, `${page}/${lang}: expected exactly one role sidebar, got ${prt.sidenavs}`);
+          ok(prt.navAside === navWant && prt.navDrawer === navWant,
+            `${page}/${lang}: nav registry count mismatch (aside ${prt.navAside} / drawer ${prt.navDrawer}, want ${navWant})`);
+          ok(prt.drawerSummary, `${page}/${lang}: the native mobile nav disclosure (details>summary) is missing`);
+          ok(prt.navCurrentHrefs.length === 2 && prt.navCurrentHrefs.every((h) => h === selfHref),
+            `${page}/${lang}: expected the home entry active once per nav instance (2×self), got ${JSON.stringify(prt.navCurrentHrefs)}`);
+          ok(prt.plannedNavAnchors === 0, `${page}/${lang}: planned nav entries must never be anchors, got ${prt.plannedNavAnchors}`);
+          ok(prt.navListAnchors === 1, `${page}/${lang}: expected exactly one link (home) in the sidebar nav list, got ${prt.navListAnchors}`);
+          const uniq = [...new Set(prt.shellAnchors)].sort();
+          ok(JSON.stringify(uniq) === JSON.stringify([hubHref, selfHref].sort()),
+            `${page}/${lang}: shell anchors outside the registry set {self, hub}: ${JSON.stringify(uniq)}`);
+          ok(prt.shellAnchors.length === 5,
+            `${page}/${lang}: sanctioned shell-anchor multiset must be 5 (self×2 + hub×3), got ${prt.shellAnchors.length}`);
+        }
+
         // the three deepened role dashboards are table-free and mobile-clean by contract
         if (page === 'student-portal' || page === 'family-portal' || page === 'teacher-portal') {
           const tables = await p.$$eval('#page-body table', (els) => els.length);

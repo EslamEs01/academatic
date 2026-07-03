@@ -56,13 +56,24 @@ export default {
       demoNote: 'Fixture-only demo preview — no login, nothing is saved.',
     },
 
+    /* Spec 017 — Shell v2 role navigation (new namespace; chrome + per-role labels) */
+    nav: {
+      menu: 'Menu',
+      soon: 'Soon',
+      hub: 'Back to hub',
+      navAria: 'Role dashboard navigation',
+      stu: { home: 'Home', schedule: 'Schedule', homework: 'Homework', materials: 'Materials', progress: 'Progress', history: 'History', profile: 'Profile' },
+      fam: { home: 'Home', children: 'Children', schedule: 'Schedule', progress: 'Progress', billing: 'Billing', requests: 'Requests', materials: 'Materials', profile: 'Profile' },
+      tch: { home: 'Home', schedule: 'Schedule', students: 'Students', outcomes: 'Outcomes', tasks: 'Tasks', reports: 'Reports', profile: 'Profile' },
+    },
+
     hub: {
       headline: 'Try the portals',
-      sub: 'Pick a role to explore its portal foundation — a friendly fixture-only preview, no login required.',
+      sub: 'Pick a role to open its dashboard — full fixture-driven dashboards, no login required.',
       open: 'Open portal',
-      student: { t: 'Student portal', d: 'My learning day, my courses, my progress and badges — encouraging and easy.' },
-      family: { t: 'Family portal', d: 'My children, today’s sessions, their progress and teacher notes — calm and clear.' },
-      teacher: { t: 'Teacher portal', d: 'Today’s schedule, my students, and the session-outcome flow — fast and organized.' },
+      student: { t: 'Student portal', d: 'My learning dashboard: my day, homework, materials and progress — encouraging and easy.' },
+      family: { t: 'Family portal', d: 'The family dashboard: children, schedule, progress and requests — calm and clear.' },
+      teacher: { t: 'Teacher portal', d: 'The teacher’s daily dashboard: schedule, students and class outcomes — fast and organized.' },
       adminT: 'Academy admin console',
       adminD: 'The full administrative interface (demo).',
       adminOpen: 'Open admin console',
