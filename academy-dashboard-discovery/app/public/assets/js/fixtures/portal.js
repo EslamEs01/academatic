@@ -13,7 +13,7 @@ export const PORTAL_PERSONAS = {
 /* Student portal — Spec 013 deep dashboard. All authored/display-only literals
  * (anchored in the legacy hours-gauge + per-session summary/homework record ideas,
  * presented as friendly visuals). NO computed score/rank, NO backend-shaped state,
- * NO money-adjacent fields. Personas/family/teacher registers untouched. */
+ * NO figure-bearing fields. Personas/family/teacher registers untouched. */
 export const STUDENT_PREVIEW = {
   overallProgress: 78, // mirrors st1's authored progress figure
   courses: [
@@ -56,7 +56,7 @@ export const STUDENT_PREVIEW = {
 
 /* Family portal — Spec 014 guardian control center (fam1 + 5 children).
  * All authored/display-only literals or refs to EXISTING fixtures. NO computed
- * score/rank, NO backend-shaped state, and — the hard line — NO money-like field
+ * score/rank, NO backend-shaped state, and — the hard line — NO figure-bearing field
  * is ever surfaced (the family fixture's hourRate/plan cost is display-suppressed).
  * Personas + student/teacher registers untouched. */
 export const FAMILY_PREVIEW = {
@@ -95,7 +95,7 @@ export const FAMILY_PREVIEW = {
 /* Teacher portal — Spec 015 daily cockpit (sara). All authored/display-only
  * literals or refs to EXISTING fixtures via the teacher-links graph. NO computed
  * score/rank (sara's numeric rating/util stay display-suppressed — labeled,
- * worded signals only), NO backend-shaped state, NO money-like field of any kind.
+ * worded signals only), NO backend-shaped state, NO figure-bearing field of any kind.
  * Personas + student/family registers untouched. */
 export const TEACHER_PREVIEW = {
   /* the "who needs follow-up" board — REAL outcome rows only (no fabrication):
@@ -128,6 +128,43 @@ export const TEACHER_PREVIEW = {
   rubricKeys: ['prt.tch.rubric.achievements', 'prt.tch.rubric.learning', 'prt.tch.rubric.focus', 'prt.tch.rubric.homework', 'prt.tch.rubric.punctuality'],
   /* certificate-request concept lines (display-only preview of what a request carries) */
   certKeys: ['prt.tch.cert.line1', 'prt.tch.cert.line2'],
+};
+
+/* Spec 017 — the role dashboard navigation registries (Shell v2). Data-driven,
+ * display-only: `implemented` renders a real language-correct link; `planned`
+ * renders a labeled non-anchor button (the honest «قريبًا» state). Specs 018–020
+ * flip statuses one line at a time as their pages ship. Frozen order and labels
+ * per the Spec-017 nav table; the teacher set is worded clean by the standing
+ * teacher hard rule (zero flagged vocabulary anywhere in this register). */
+export const ROLE_NAV = {
+  student: [
+    { id: 'home', labelKey: 'prt.nav.stu.home', icon: 'home', page: 'student-portal', status: 'implemented' },
+    { id: 'schedule', labelKey: 'prt.nav.stu.schedule', icon: 'schedule', page: 'student-schedule', status: 'planned' },
+    { id: 'homework', labelKey: 'prt.nav.stu.homework', icon: 'tasks', page: 'student-homework', status: 'planned' },
+    { id: 'materials', labelKey: 'prt.nav.stu.materials', icon: 'materials', page: 'student-materials', status: 'planned' },
+    { id: 'progress', labelKey: 'prt.nav.stu.progress', icon: 'trending-up', page: 'student-progress', status: 'planned' },
+    { id: 'history', labelKey: 'prt.nav.stu.history', icon: 'clipboard-check', page: 'student-history', status: 'planned' },
+    { id: 'profile', labelKey: 'prt.nav.stu.profile', icon: 'user', page: 'student-profile', status: 'planned' },
+  ],
+  family: [
+    { id: 'home', labelKey: 'prt.nav.fam.home', icon: 'home', page: 'family-portal', status: 'implemented' },
+    { id: 'children', labelKey: 'prt.nav.fam.children', icon: 'families', page: 'family-children', status: 'planned' },
+    { id: 'schedule', labelKey: 'prt.nav.fam.schedule', icon: 'calendar', page: 'family-schedule', status: 'planned' },
+    { id: 'progress', labelKey: 'prt.nav.fam.progress', icon: 'trending-up', page: 'family-progress', status: 'planned' },
+    { id: 'billing', labelKey: 'prt.nav.fam.billing', icon: 'wallet', page: 'family-billing', status: 'planned' },
+    { id: 'requests', labelKey: 'prt.nav.fam.requests', icon: 'help', page: 'family-requests', status: 'planned' },
+    { id: 'materials', labelKey: 'prt.nav.fam.materials', icon: 'materials', page: 'family-materials', status: 'planned' },
+    { id: 'profile', labelKey: 'prt.nav.fam.profile', icon: 'user', page: 'family-profile', status: 'planned' },
+  ],
+  teacher: [
+    { id: 'home', labelKey: 'prt.nav.tch.home', icon: 'home', page: 'teacher-portal', status: 'implemented' },
+    { id: 'schedule', labelKey: 'prt.nav.tch.schedule', icon: 'calendar', page: 'teacher-schedule', status: 'planned' },
+    { id: 'students', labelKey: 'prt.nav.tch.students', icon: 'students', page: 'teacher-students', status: 'planned' },
+    { id: 'outcomes', labelKey: 'prt.nav.tch.outcomes', icon: 'clipboard-check', page: 'teacher-outcomes', status: 'planned' },
+    { id: 'tasks', labelKey: 'prt.nav.tch.tasks', icon: 'tasks', page: 'teacher-tasks', status: 'planned' },
+    { id: 'reports', labelKey: 'prt.nav.tch.reports', icon: 'reports', page: 'teacher-reports', status: 'planned' },
+    { id: 'profile', labelKey: 'prt.nav.tch.profile', icon: 'user', page: 'teacher-profile', status: 'planned' },
+  ],
 };
 
 /* Planned/backend-gated foundation cards per portal (availability reuses the

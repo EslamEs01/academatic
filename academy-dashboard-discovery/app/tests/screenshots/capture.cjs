@@ -186,6 +186,8 @@ const MATRIX = [
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(11)', variant: 'area-rubric' },
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(12)', variant: 'area-requests' },
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(13)', variant: 'area-account' },
+  // Spec 017 — Shell v2: the native mobile nav disclosure, captured OPEN (amendment A1 proof)
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile', roleDrawer: true, variant: 'drawer-open' },
 ];
 
 (async () => {
@@ -239,6 +241,8 @@ const MATRIX = [
     if (s.financeFilter) { await page.click('[data-filter-set="status:overdue"]').catch(() => {}); await page.waitForTimeout(250); }
     // Spec 010 — attendance status-tile filter narrowing proof
     if (s.attnFilter) { await page.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]').catch(() => {}); await page.waitForTimeout(280); }
+    // Spec 017 — open the role-nav native disclosure (mobile)
+    if (s.roleDrawer) { await page.click('.pt-nav-drawer > summary').catch(() => {}); await page.waitForTimeout(260); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
     // Spec 013 — area close-ups are element-scoped (Playwright auto-scrolls the element into view)
