@@ -918,16 +918,55 @@ const FILTER_SPEC = {
             .map((a) => (a.getAttribute('href') || '').replace('.en.html', '').replace('.html', '')).sort();
           const hubAdminLink = [...document.querySelectorAll('#page-body a[href]')]
             .filter((a) => /dashboard\.(en\.)?html$/.test(a.getAttribute('href') || '')).length;
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink };
+          // Spec 013 — student dashboard section/empty-state counts + planned-card graduation.
+          // Bind the backend-gate check to the actual planned chips (amber lock = backendRequired,
+          // neutral clock = planned), so it can't pass on descriptive prose alone.
+          const sectionCount = document.querySelectorAll('.pt-section').length;
+          const emptyCount = document.querySelectorAll('.pt-empty').length;
+          const bodyAnchors = [...document.querySelectorAll('#page-body a[href]')].length;
+          const plannedBackend = document.querySelectorAll('.pt-planned .chip.tone-amber').length;
+          const plannedPlanned = document.querySelectorAll('.pt-planned .chip.tone-neutral').length;
+          // Spec 014 — family: five children each carry a progress bar; the page has zero form controls
+          const progressBars = document.querySelectorAll('.pt-bar').length;
+          const formControls = document.querySelectorAll('#page-body form, #page-body input, #page-body select, #page-body textarea').length;
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls };
         });
         const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
         ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
         if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
         // existence floor first, so the AR digit check below can never pass vacuously
-        if (page === 'student-portal') ok(prt.gaugeCount >= 1, `${page}/${lang}: expected ≥1 progress gauge counter, got ${prt.gaugeCount}`);
+        // Spec 013 — the deepened student dashboard: ≥2 gauge counters (overall + attendance trio),
+        // ≥10 sections, the truthful Friday empty-state, and a page body that never navigates.
+        if (page === 'student-portal') {
+          ok(prt.gaugeCount >= 2, `${page}/${lang}: expected ≥2 progress gauge counters (overall + trio), got ${prt.gaugeCount}`);
+          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
+          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the friendly empty-state pattern (≥1 .pt-empty), got ${prt.emptyCount}`);
+          ok(prt.bodyAnchors === 0, `${page}/${lang}: the student page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          // planned-card graduation: homework + materials gates are backendRequired (amber lock),
+          // full-history is planned (neutral clock) — the exact re-registered semantics.
+          ok(prt.plannedBackend === 2, `${page}/${lang}: expected 2 backendRequired planned gates (homework + materials), got ${prt.plannedBackend}`);
+          ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned gate (full history), got ${prt.plannedPlanned}`);
+        }
+        // Spec 014 — the deepened family dashboard: all five fam1 children visible, ≥10 sections,
+        // the truthful meetings empty-state, zero body anchors/form controls, and the ZERO-PAY hard line.
+        if (page === 'family-portal') {
+          ok(prt.progressBars === 5, `${page}/${lang}: expected all 5 fam1 children (5 progress bars), got ${prt.progressBars}`);
+          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
+          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the reassuring empty-state pattern (≥1 .pt-empty), got ${prt.emptyCount}`);
+          ok(prt.bodyAnchors === 0, `${page}/${lang}: the family page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          ok(prt.formControls === 0, `${page}/${lang}: the family page must contain zero form controls, got ${prt.formControls}`);
+          // planned-card graduation: billing + materials gates are backendRequired (amber lock),
+          // full-history + meeting-request are planned (neutral clock).
+          ok(prt.plannedBackend === 2, `${page}/${lang}: expected 2 backendRequired family gates (billing + materials), got ${prt.plannedBackend}`);
+          ok(prt.plannedPlanned === 2, `${page}/${lang}: expected 2 planned family gates (full history + meeting), got ${prt.plannedPlanned}`);
+          // THE ZERO-PAY HARD LINE — no currency/amount/pay-action token may render on the family body
+          // (Arabic-first: mirror the EN amount/price tokens with مبلغ/سعر/رسوم so a bare AR amount is caught too)
+          const payFigure = /ريال|ر\.س|\bSAR\b|\bUSD\b|جنيه|\bEGP\b|[$€£]|ادفع|سداد|pay now|payment|\bamount\b|\bprice\b|مبلغ|سعر|رسوم/i.test(prt.bodyText);
+          ok(!payFigure, `${page}/${lang}: the family dashboard shows a currency/pay figure — forbidden (SC-005, the zero-pay hard line)`);
+        }
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
-        const expPlanned = { 'student-portal': 3, 'family-portal': 3, 'teacher-portal': 2, portals: 0 }[page];
+        const expPlanned = { 'student-portal': 3, 'family-portal': 4, 'teacher-portal': 2, portals: 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
         ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
         if (page === 'portals') {
@@ -941,10 +980,15 @@ const FILTER_SPEC = {
             || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
           ok(!payHit, `${page}/${lang}: the teacher portal contains pay vocabulary — forbidden (FR-006)`);
         }
-        // student portal is table-free by contract
-        if (page === 'student-portal') {
+        // the student + family dashboards are table-free and mobile-clean by contract
+        if (page === 'student-portal' || page === 'family-portal') {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
-          ok(tables === 0, `${page}/${lang}: the student portal must contain zero tables, got ${tables}`);
+          ok(tables === 0, `${page}/${lang}: this portal must contain zero tables, got ${tables}`);
+          // mobile-first: no horizontal overflow at 390px (this context is discarded after)
+          await p.setViewportSize({ width: 390, height: 900 });
+          await p.waitForTimeout(120);
+          const overflow = await p.evaluate(() => document.documentElement.scrollWidth);
+          ok(overflow <= 391, `${page}/${lang}: horizontal overflow at 390px (scrollWidth ${overflow})`);
         }
       }
 

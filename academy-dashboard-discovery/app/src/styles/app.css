@@ -847,4 +847,58 @@
   .pt-hub-card[data-role="family"]  { --pt-accent: var(--c-primary); --pt-accent-weak: var(--c-primary-weak); --pt-accent-ink: var(--c-primary); }
   .pt-hub-card[data-role="teacher"] { --pt-accent: var(--c-teal); --pt-accent-weak: var(--c-teal-weak); --pt-accent-ink: var(--c-teal-ink); }
   .pt-hub-open { display: inline-flex; align-items: center; gap: 6px; color: var(--pt-accent-ink); font-weight: 700; font-size: 13px; }
+
+  /* ===== Spec 013 — student dashboard sections (.portal-shell namespace ONLY) ===== */
+  /* friendly empty state (used truthfully by the Friday rest day in the week view) */
+  .pt-empty { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+    padding: 22px; border-radius: 18px; border: 1.5px dashed color-mix(in srgb, var(--c-ink-3) 32%, transparent);
+    background: color-mix(in srgb, var(--c-surface) 70%, var(--c-bg)); }
+  .pt-empty .ico { color: var(--pt-accent); }
+  .pt-empty-title { font-weight: 800; color: var(--c-ink); font-size: 14px; }
+
+  /* week-at-a-glance — stacked day groups (never a grid/table clone) */
+  .pt-week { display: flex; flex-direction: column; gap: 16px; }
+  .pt-day { display: flex; flex-direction: column; gap: 10px; }
+  .pt-day-head { display: flex; align-items: center; gap: 8px; }
+  .pt-day-name { font-weight: 800; color: var(--c-ink); font-size: 13.5px; }
+  .pt-today-chip { display: inline-flex; align-items: center; padding: 3px 9px; border-radius: 999px;
+    background: var(--pt-accent-weak); color: var(--pt-accent-ink); font-size: 10.5px; font-weight: 700; }
+
+  /* small tags (homework due / state) — labeled text, never color-only */
+  .pt-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pt-tag { display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 999px;
+    background: var(--c-surface-2); color: var(--c-ink-2); font-size: 11.5px; font-weight: 600; }
+  .pt-tag.is-accent { background: var(--pt-accent-weak); color: var(--pt-accent-ink); }
+
+  /* attendance stat tiles (reuse .pt-gauge-num, sized down) */
+  .pt-stat { align-items: flex-start; text-align: start; gap: 4px; }
+  .pt-stat .pt-gauge-num { font-size: 24px; }
+  .pt-stat-label { font-size: 12px; color: var(--c-ink-2); }
+
+  /* celebration — warm, unordered recognition (NOT a ranking) */
+  .pt-celeb { background: linear-gradient(135deg, var(--pt-accent-weak), var(--c-surface)); }
+  .pt-celeb-label { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 999px;
+    background: var(--pt-accent-weak); color: var(--pt-accent-ink); font-size: 10.5px; font-weight: 700; }
+
+  /* profile slice */
+  .pt-prof-row { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 7px 0;
+    border-bottom: 1px solid var(--c-border); }
+  .pt-prof-row:last-child { border-bottom: 0; }
+  .pt-prof-k { color: var(--c-ink-3); }
+  .pt-prof-v { color: var(--c-ink); font-weight: 700; }
+
+  /* recent-sessions attachment annotation (display-only, no link) */
+  .pt-attach { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--c-ink-3); }
+  .pt-attach .ico { color: var(--c-ink-3); }
+
+  /* ===== Spec 014 — family requests hub + display-only line lists (.portal-shell namespace ONLY) ===== */
+  .pt-lines { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+  .pt-line { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--c-ink-2); line-height: 1.6; }
+  .pt-line .ico { color: var(--pt-accent); flex-shrink: 0; margin-top: 2px; }
+  .pt-tiles { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 6px; }
+  @media (min-width: 560px) { .pt-tiles { grid-template-columns: 1fr 1fr; } }
+  .pt-tile { border: 1px solid var(--c-line); border-radius: 12px; padding: 10px 12px; background: var(--c-surface-2); }
+  .pt-tile-t { font-weight: 700; font-size: 12.5px; color: var(--c-ink); }
+  /* an inline availability chip sitting under a preview card's content */
+  .pt-card-chip { margin-top: 4px; }
 }

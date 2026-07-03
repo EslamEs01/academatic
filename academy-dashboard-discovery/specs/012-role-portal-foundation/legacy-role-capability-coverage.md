@@ -165,3 +165,62 @@ Each future spec owns a distinct capability set. Foundation-only rows are previe
 - [x] **Net-new recorded** — gamification / achievements / leaderboard / points recorded as absent-in-legacy net-new value, and the guardian-proxied single portal recorded as deliberately split into Student (013) + Family (014) (§3).
 
 **Reviewer:** ______________________  **Date:** ______________
+
+---
+
+## 7. Spec 013 delivery notes (student planned-013 resolution — appended, no row reclassified)
+
+Spec 013 (Student Dashboard) deepens the student portal and resolves the student-owned `planned-013` rows. These are **delivery annotations only** — the §1/§2 classifications, destinations, and rationales above are unchanged; nothing is re-scoped.
+
+| Row / item | Spec 013 delivery |
+|---|---|
+| **F5** — Student timetable | **Delivered** as the *week-at-a-glance* agenda (SAT-first stacked day groups from `SCHEDULE_WEEK`, sara/grp1 proxy; «اليوم» marker; the Friday rest-day empty state). Never a grid/table clone. The guardian-side timetable view remains Spec 014. |
+| **F6** — Class history + per-session details | **Delivered** as the *recent-sessions* feedback cards (Class Summary + Homework Note fields; the first card resolves the REAL `SESSION_OUTCOMES.out1` row — st1·math·sara·attended·`data.att.fb.good`; one display-only attachment annotation). The full-history surface remains a labeled `planned` mini-card; the guardian mirror remains Spec 014. |
+| **F12** — Materials library | **Delivered** as the *materials* display-only preview (3 authored cards, type icons). Download stays `backendRequired` (F4 unchanged); the family/teacher library surfaces remain 014/015. |
+| **§4 item 6** — Leaderboard (net-new) | **Delivered** as *celebration recognition* («نجوم مجموعتي») — unordered, authored, stress-free, demo-labeled. NO computed ranking, points, or per-peer comparison (research D3). |
+| **§4 items 1/4/5/7/8/9** | **Delivered** by the corresponding Spec-013 sections: deep today's-learning (1), deep progress visualization + attendance trio (4), deep achievements (5), homework/tasks student surface (7), student materials surface (8), student profile slice (9). |
+
+**Still deferred (unchanged):** uploads (F4) and material downloads → `backendRequired` (visibly gated by the two backendRequired mini-cards); the full-history deep surface → `planned`; all `planned-014` / `planned-015` / other `backendRequired` / `intentionally excluded` rows are untouched. **Zero silent gaps.**
+
+**Spec 013 sign-off:**
+- [x] All three student `planned-013` rows (F5, F6, F12) carry delivery notes.
+- [x] Every §4 Spec-013 item is delivered (1/4/5/6/7/8/9) — none silently dropped.
+- [x] The leaderboard is delivered as honest celebration, not computed ranking.
+- [x] Backend-gated capabilities (uploads, downloads, full history) stay visibly labeled, never faked.
+
+**Reviewer:** ______________________  **Date:** ______________
+
+---
+
+## 8. Spec 014 delivery notes (family/guardian dispositions — appended, no row reclassified)
+
+Spec 014 (Family / Guardian Dashboard) deepens the family portal and dispositions every guardian row (F1–F17). These are **delivery annotations only** — the §2 classifications, destinations, and rationales above are unchanged; nothing is re-scoped. Requests are honest previews whose *submission* stays gated (backend / planned-016).
+
+| Row | Spec-014 disposition |
+|---|---|
+| **F1** guardian home widgets | **Delivered** — deep guardian hero + five-children overview + today band + the attendance trio |
+| **F2** multi-child proxy | **Delivered** — everyone-inline five-children overview (capture-verified: legacy had NO global switcher; the switching promise resolves as everyone-visible-at-once; the Spec-012 kidsHint copy is updated to post-014 truth) |
+| **F3** today + request-cancel | **Delivered** as honest preview — child-associated today band + the cancel/reschedule preview card with the no-replacement caution; the request *submission* stays gated (backendRequired now; real request flow → planned-016) |
+| **F5** timetable (family slice) | **Delivered** — the today band answers the family-side schedule question; the deep student timetable shipped in Spec 013 (§7); no separate family grid (calm > grid, deliberate) |
+| **F6** history (guardian mirror) | **Delivered** — child-first recent-sessions cards resolving REAL `out1` (st1 attended + good feedback) and REAL `out15` (st11 absent + support feedback) + one authored record; full history stays a labeled `planned` mini-card |
+| **F7** subscriptions / plans | **Delivered** — per-child plan-label rows («الخطة المتقدمة») + status chips; **ZERO amounts** |
+| **F8** feedback-about-teacher rubric | **Delivered** as a display-only rubric preview (question lines, no rating-scale visual, no score vocabulary); submit `backendRequired` |
+| **F9** billing (view-only) | **Delivered** as a calm STATUS preview (settled chip + reassurance), **ZERO currency figures**, no pay-now; real invoices/payment stay `backendRequired` (capture-verified: legacy itself rendered zero amounts) |
+| **F10** feedback / meetings | **Delivered** — the truthful "no meetings scheduled" empty state + a labeled `planned` request-a-meeting mini-card |
+| **F11** request-trial / add-child | **Delivered** as a display-only new-vs-existing-child preview; submit `backendRequired` |
+| **F12** materials (family slice) | **Delivered** — 3 display-only child-associated cards; download `backendRequired` |
+| **F13** account / profile edit | **Delivered** as the account slice (guardian contact / joined / children display-only); editing `backendRequired` |
+| **F16** teacher-notes preview | **Delivered** — deepened to 3 child-associated notes (summary/homework shape) |
+| **F4** file/voice upload | **UNCHANGED** — `backendRequired`; never rendered as a control (no upload/record affordance exists on the page) |
+| **F14** `/profile` 500 · **F15** Dashboard-1 404 · **F17** dual-badge bug | **UNCHANGED** — `intentionally excluded` |
+
+**Real request-submission engines** (cancel / feedback / trial / meeting requests) are deferred to **planned-016** (the Role-Portal Operations / Communications shell) on top of their per-card backendRequired gates. Already-delivered-013 items (the student slices of F5/F6/F12, and the student portal generally) remain under §7 and are untouched.
+
+**Spec 014 sign-off:**
+- [x] All 17 guardian rows (F1–F17) carry an explicit Spec-014 disposition — zero silent gaps.
+- [x] Billing/subscriptions delivered with ZERO amounts / no pay control (the zero-pay hard line; grep- and smoke-enforced).
+- [x] Every request is an honest preview; no fake pay/cancel/upload/voice/feedback submission; the page carries zero form controls.
+- [x] The multi-child pattern is everyone-visible-at-once (no fake switcher).
+- [x] §§1–7 byte-unchanged; no student/teacher row reclassified.
+
+**Reviewer:** ______________________  **Date:** ______________
