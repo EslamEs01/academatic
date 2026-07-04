@@ -84,6 +84,12 @@ const MATRIX = [
   { page: 'teacher-portal', lang: 'ar', theme: 'light' },
   { page: 'teacher-portal', lang: 'ar', theme: 'dark' },
   { page: 'teacher-portal', lang: 'en', theme: 'light' },
+  // Spec 018 — family-child drill-down (default st1 + a deep-linked switched panel); the compact
+  // role homes are re-scanned by the student/family/teacher-portal rows above.
+  { page: 'family-child', lang: 'ar', theme: 'light' },
+  { page: 'family-child', lang: 'ar', theme: 'dark' },
+  { page: 'family-child', lang: 'en', theme: 'light' },
+  { page: 'family-child', lang: 'ar', theme: 'light', hash: '#child=st11' },
 ];
 
 (async () => {

@@ -1,10 +1,32 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 017 — Role Dashboard Shell + Navigation Implementation**
-(branch `feature/012-role-portal-foundation`; Spec 016 = commit `2b8bb84` (docs-only law) · Spec 015 = `20dc089`, 49 built pages).
+Active feature: **Spec 019 — Student Internal Pages** (next). **Spec 018 — Role Dashboards Admin-Like UX
+Rework is IMPLEMENTED** (awaiting the watcher commit): the three role HOMES are now COMPACT admin-like
+dashboards (5 bands each, scrollHeight ≈1,428/1,753/1,486px @1366×768, down from ≈3,600/4,200/4,390) + the
+NEW `family-child(.en).html` drill-down (five baked fam1 panels, pure-CSS `#child=stX` `:target` switching).
+Identity 43/51; smoke/a11y green; teacher pay-free + family zero-pay held byte-verbatim.
+(branch `feature/012-role-portal-foundation`; Spec 017 = commit `0edafe1` (Shell v2, 49 built pages) · Spec 016 = `2b8bb84` (law)).
 
 For decisions, contracts, and acceptance read the current plan and its artifacts:
-`academy-dashboard-discovery/specs/017-role-dashboard-shell-navigation/plan.md`
-(see also `research.md` (D1–D13), `data-model.md`, `quickstart.md`, and `contracts/` — 11 contracts).
+`academy-dashboard-discovery/specs/018-role-dashboards-admin-like-ux-rework/plan.md`
+(see also `research.md` (D1–D15), `data-model.md`, `quickstart.md`, and `contracts/` — 11 contracts).
+
+**Spec 018 (the user's binding verdict)**: the three role HOMES are too long/portal-like → rework into
+COMPACT admin-like dashboards inside the untouched Shell v2 — the 7-band recipe (compact header · 4-KPI
+row (`num()` fixture literals) · now band (today ≤3 + next) · role-core (student homework snapshot ·
+family CHILDREN CARDS w/ real drill-down links · teacher follow-up board) · ONE preview band · quick-link
+tiles · one-line note), HARD CEILINGS smoke-asserted (sections 4–7 · scrollHeight ≤2,200px @1366×768,
+±10% tunable-recorded) — the endless page can never return. **NEW `family-child(.en).html`** (the ONE
+sanctioned build-html.mjs touch = 2 lines: import + PAGES entry): five BAKED child panels for the REAL
+fam1 roster **st1/st6/st11/st12/st13**, existing data-tab/hash machinery, default st1, deep links
+`#child=stX`; family home bodyAnchors 0→**5** exact child targets; the child page: shell registry
+{family-portal, portals}×5, body 0, zero-pay regex applies. **Displacement map is law** — zero capability
+deletion; displaced fixtures/keys RETAINED (grep-audited) for Specs 019–021. ONE sanctioned smoke
+amendment re-scopes the 013/014/015 long-home branches (KPI===4 + window + ceiling; family anchors===5;
+teacher anchors===1 KEPT) + adds the family-child branch (50 loads) — **payHit + family zero-pay regex +
+ALL Shell-v2/hub/admin asserts BYTE-VERBATIM**. Identity target **43/51** (40 admin + index + hub pair;
+built = 51 files). Teacher pay-free EXTENDED set re-runs all three layers. Sequence renumbered
+(user-directed, append-only amendment to the 016 sequence artifact): **019 Student pages · 020 Family
+pages · 021 Teacher pages · 022–027 admin groups · 028 Final QA**.
 
 **Spec 016 is BINDING LAW for all Specs 017–027** (committed docs at
 `…/specs/016-full-frontend-audit-role-dashboards-ia-design-freeze/`): the role-dashboard IA
@@ -15,28 +37,12 @@ backendRequired contract (four action classes, four gate patterns, the no-fake r
 matrix (178 templates, zero uncategorized), the admin sidebar inventory (57 rows → Specs 021–026),
 and the sequence 017–027 with Spec-027's eight machine-checkable no-missing rules.
 
-**Spec 017 builds Portal Shell v2** — role topbar + persistent desktop `aside.pt-sidenav`
-(identity block · registry items · hub exit) + native mobile `details.pt-nav-drawer` — for the
-THREE role pages only (hub stays header-only). Nav = data-driven `ROLE_NAV` registries in
-`fixtures/portal.js` (student 7 · family 8 · teacher 7, frozen labels in the spec table);
-017 ships home=implemented (real self-link, `aria-current="page"`) + all future entries as
-labeled planned BUTTONS («قريبًا/Soon» pill + the existing acknowledge toast — zero new hooks;
-**Option B: no placeholder pages**). ALL nav markup sits OUTSIDE `#page-body` so every standing
-body assert (bodyAnchors 0/0/1 + teacher exact target, zero-pay regexes, payHit BYTE-VERBATIM)
-survives untouched. **Freeze amendments recorded**: A1 mobile nav = native disclosure (the frozen
-enhance.js clone-drawer is admin-`#shell`-bound) · A2 no desktop collapse (hooks/storage frozen).
-**Change surface (scope-guard G1)**: `portal-shell.js` · `fixtures/portal.js` (ROLE_NAV only) ·
-`portals.js` (4 hub copy keys only) · role page modules (wrapper-arg-only if needed; content
-byte-untouched — integrity contract proves `#page-body` byte-equal) · `ar/en.prt.js` (NEW
-`prt.nav.*` namespace + the 4 hub keys ONLY; all sibling content keys + `data.*` frozen) ·
-`app.css` additive · smoke (ONE amendment: sidenav on exactly 3 pages, counts 7/8/7, one
-aria-current, planned-as-buttons, drawer present, **sanctioned-anchor registry**: shell anchors
-unique-set {self,hub} multiset 5 = self×2+hub×3 per role page) · a11y/capture additive (+ the
-drawer-OPEN mobile frame) · docs (README/CLAUDE/REVIEW + the 016 matrix delivery annotation).
-**Acceptance ceiling: 41/49 built files hash-identical** (40 admin + index) — only the four
-portal pairs change. MVP = registries/keys/CSS → shell v2 → integrity proof → smoke green.
-
-History: Spec 015 (`20dc089`) delivered the TEACHER home — 14 sections (real out15/out4 follow-ups,
+History: Spec 017 (`0edafe1`) delivered **Portal Shell v2** — role topbar + desktop `aside.pt-sidenav`
+(identity block · ROLE_NAV items · hub exit) + native mobile `details.pt-nav-drawer` (freeze amendments
+A1 native-disclosure + A2 no-collapse) on the three role pages; ROLE_NAV registries (7/8/7, home=real
+self-link `aria-current`, futures=planned «قريبًا» BUTTONS, zero new hooks/pages); all nav OUTSIDE
+`#page-body` (home content proven byte-equal); sanctioned-anchor registries smoke-pinned (shell
+{self,hub} multiset 5); 41/49 identity held. Spec 015 (`20dc089`) delivered the TEACHER home — 14 sections (real out15/out4 follow-ups,
 5-step workflow + A2 gate notes «تسجيل الغياب…»/«طلب إلغاء أو تعويض…», recent-sessions slice out1/out11,
 SAT/MON/TUE day-groups + truthful free-days empty, rubric lines, ONE sanctioned body anchor →
 `teacher-performance(.en).html`), planned register {outcomeSave/matUpload/availabilityEdit:

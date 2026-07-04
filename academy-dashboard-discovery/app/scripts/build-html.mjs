@@ -38,6 +38,7 @@ import { renderPortalsHub } from '../src/js/pages/portals.js';
 import { renderStudentPortal } from '../src/js/pages/student-portal.js';
 import { renderFamilyPortal } from '../src/js/pages/family-portal.js';
 import { renderTeacherPortal } from '../src/js/pages/teacher-portal.js';
+import { renderFamilyChild } from '../src/js/pages/family-child.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -83,6 +84,7 @@ const PAGES = [
   { base: 'student-portal', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: null, titleKey: 'prt.title.student', render: renderStudentPortal },
   { base: 'family-portal', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: null, titleKey: 'prt.title.family', render: renderFamilyPortal },
   { base: 'teacher-portal', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: null, titleKey: 'prt.title.teacher', render: renderTeacherPortal },
+  { base: 'family-child', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: null, titleKey: 'prt.title.familyChild', render: renderFamilyChild },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

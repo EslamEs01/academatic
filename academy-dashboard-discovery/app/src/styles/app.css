@@ -943,4 +943,67 @@
     .pt-layout { padding: 0 clamp(12px, 2.5vw, 24px); }
     .pt-layout > .pt-main { min-width: 0; }
   }
+
+  /* ===== Spec 018 — compact admin-like role homes + family-child (.portal-shell namespace ONLY) =====
+   * The admin dashboard rhythm (welcome → KPI overview → today → drill-downs) re-expressed
+   * in portal tokens. Additive; no existing selector is modified. Role accents via data-role. */
+  /* compact page header (slim greeting + one-line status) — replaces the tall hero band */
+  .pt-home-head { display: flex; flex-direction: column; gap: 5px; padding: 2px 2px 0; }
+  .pt-home-hi { font-size: clamp(19px, 3.6vw, 24px); font-weight: 800; color: var(--c-ink); }
+  .pt-home-status { font-size: 13px; color: var(--c-ink-2); line-height: 1.6; max-width: 66ch; }
+
+  /* KPI row — the admin kpiRow rhythm, portal-side (2×2 on mobile → 4-up desktop) */
+  .pt-kpi-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (min-width: 900px) { .pt-kpi-row { grid-template-columns: repeat(4, 1fr); } }
+  .pt-kpi { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 16px;
+    padding: 14px; box-shadow: var(--sh-sm); display: flex; flex-direction: column; gap: 8px; }
+  .pt-kpi-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pt-kpi .pt-gauge-num { font-size: 26px; line-height: 1.05; }
+  .pt-kpi-label { font-size: 12px; color: var(--c-ink-2); font-weight: 600; }
+
+  /* now band — today list (≤3) beside the next-session card on desktop */
+  .pt-now { display: grid; grid-template-columns: 1fr; gap: 12px; align-items: start; }
+  @media (min-width: 1024px) { .pt-now { grid-template-columns: 3fr 2fr; } }
+  .pt-now-col { display: flex; flex-direction: column; gap: 10px; }
+
+  /* quick-link tiles — planned destinations, honest «قريبًا» buttons matching the shell nav */
+  .pt-qtiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media (min-width: 720px) { .pt-qtiles { grid-template-columns: repeat(3, 1fr); } }
+  .pt-qtile { display: flex; align-items: center; gap: 9px; padding: 11px 12px; border-radius: 14px;
+    border: 1px solid var(--c-border); background: var(--c-surface); font-family: inherit; text-align: start;
+    font-size: 13px; font-weight: 700; color: var(--c-ink-2); cursor: default; width: 100%; }
+  .pt-qtile .ico { color: var(--pt-accent); flex-shrink: 0; }
+  .pt-qtile-soon { margin-inline-start: auto; font-size: 10px; font-weight: 700; padding: 2px 7px;
+    border-radius: 999px; background: var(--c-surface-2); color: var(--c-ink-3);
+    border: 1px dashed color-mix(in srgb, var(--c-ink-3) 45%, transparent); flex-shrink: 0; }
+
+  /* the real drill-down link on a family child card (the «فتح ملف الابن» affordance) */
+  .pt-drill { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px;
+    color: var(--pt-accent-ink); font-weight: 700; font-size: 12.5px; text-decoration: none; }
+  .pt-drill .ico { color: var(--pt-accent-ink); }
+  .pt-drill:hover { text-decoration: underline; }
+
+  /* ── family-child page: pure-CSS :target panel switcher (no-JS-safe deep links #child=stX,
+   * because the frozen enhance.js tab hash reads only #view=; research D6 amended). ── */
+  .pt-child-switch { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pt-child-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px;
+    border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-ink-2);
+    font-size: 12.5px; font-weight: 700; text-decoration: none; }
+  .pt-child-pill:hover { border-color: var(--pt-accent); color: var(--pt-accent-ink); background: var(--pt-accent-weak); }
+  .pt-child-panels > .pt-child-panel { display: none; flex-direction: column; gap: 14px; }
+  .pt-child-panels > .pt-child-panel:target { display: flex; }
+  /* default (no #child= in the URL): show the first child (st1) */
+  .pt-child-panels:not(:has(> .pt-child-panel:target)) > .pt-child-panel[data-default] { display: flex; }
+  /* active-pill highlight — default (st1) when nothing targeted, else the targeted child */
+  .pt-child-root:not(:has(.pt-child-panel:target)) .pt-child-pill[data-default],
+  .pt-child-root:has(#child\=st1:target)  .pt-child-pill[href="#child=st1"],
+  .pt-child-root:has(#child\=st6:target)  .pt-child-pill[href="#child=st6"],
+  .pt-child-root:has(#child\=st11:target) .pt-child-pill[href="#child=st11"],
+  .pt-child-root:has(#child\=st12:target) .pt-child-pill[href="#child=st12"],
+  .pt-child-root:has(#child\=st13:target) .pt-child-pill[href="#child=st13"] {
+    border-color: var(--pt-accent); color: var(--pt-accent-ink); background: var(--pt-accent-weak); }
+  .pt-child-head { display: flex; align-items: center; gap: 12px; }
+  .pt-child-name { font-weight: 800; color: var(--c-ink); font-size: 17px; line-height: 1.2; }
+  .pt-child-meta { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  @media (min-width: 640px) { .pt-child-meta { grid-template-columns: repeat(3, 1fr); } }
 }

@@ -272,10 +272,29 @@
       </aside>
     <main class="pt-main" id="page" tabindex="-1">
       <div class="pt-body" id="page-body">
-    <section class="pt-hero">
-      <h1 class="pt-hero-hi">مرحبًا، سارة القحطاني 👋</h1>
-      <p class="pt-hero-sub">حصتان اليوم ومتابعتان لطيفتان — جدولك وطلابك وسير التسجيل في صفحة واحدة.</p>
-      <p class="pt-hero-sub" style="margin-top:8px;font-weight:600;color:var(--pt-accent-ink)"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg> ابدأ بجلستك القادمة، ثم اطمئن على طلاب المتابعة.</p>
+    <div class="pt-home-head">
+      <h1 class="pt-home-hi">مرحبًا، سارة القحطاني 👋</h1>
+      <p class="pt-home-status">ملخّص يوم عملك — حصصك، متابعاتك، وسير تسجيل الجلسات.</p>
+    </div>
+
+    <section class="pt-section">
+      <div class="pt-sec-head">
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg>نظرة سريعة</h2>
+    <span class="pt-sec-hint">أهم أرقامك — قيم توضيحية ثابتة</span>
+  </div>
+      <div class="pt-kpi-row"><div class="pt-kpi">
+    <div class="pt-kpi-top"><span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg></span><span class="pt-gauge-num tabular">٢</span></div>
+    <div class="pt-kpi-label">حصص اليوم</div>
+  </div><div class="pt-kpi">
+    <div class="pt-kpi-top"><span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg></span><span class="pt-gauge-num tabular">٢</span></div>
+    <div class="pt-kpi-label">متابعات</div>
+  </div><div class="pt-kpi">
+    <div class="pt-kpi-top"><span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span><span class="pt-gauge-num tabular">٣</span></div>
+    <div class="pt-kpi-label">مهام مفتوحة</div>
+  </div><div class="pt-kpi">
+    <div class="pt-kpi-top"><span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg></span><span class="pt-gauge-num tabular">٤</span></div>
+    <div class="pt-kpi-label">طلابي</div>
+  </div></div>
     </section>
 
     <section class="pt-section">
@@ -283,7 +302,8 @@
     <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg>جدول اليوم <span class="pt-role-chip" style="font-size:11px">٢</span></h2>
     <span class="pt-sec-hint">جلساتك مرتّبة حسب الوقت</span>
   </div>
-      <div class="pt-cards"><div class="pt-card">
+      <div class="pt-now">
+        <div class="pt-now-col"><div class="pt-card">
     <div class="pt-card-row">
       <span class="pt-time tabular">09:00</span>
       <div style="flex:1;min-width:0">
@@ -302,25 +322,19 @@
       <span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span>
     </div>
   </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>جلستي القادمة</h2>
-    
-  </div>
-      <div class="pt-card">
-        <div class="pt-card-row">
-          <span class="pt-time tabular">09:30</span>
-          <div style="flex:1;min-width:0">
-            <div class="pt-card-title">نادي الرياضيات</div>
-            <div class="pt-card-sub">إثرائي · قاعة ج</div>
+        <div class="pt-now-col">
+          <div class="pt-card" style="border-color:var(--pt-accent)">
+            <div class="pt-card-row">
+              <span class="pt-time tabular">09:30</span>
+              <div style="flex:1;min-width:0">
+                <div class="pt-card-title">التالي: نادي الرياضيات</div>
+                <div class="pt-card-sub">إثرائي · قاعة ج</div>
+              </div>
+              <span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span>
+            </div>
+            <p class="pt-card-sub">التحضير المقترح: راجع أمثلة المعادلات وجهّز ورقة التمارين قبل بدء الحصة.</p>
           </div>
-          <span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span>
         </div>
-        <div class="pt-tags"><span class="pt-tag is-accent"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg>مجموعة الرياضيات أ</span></div>
-        <p class="pt-card-sub">التحضير المقترح: راجع أمثلة المعادلات وجهّز ورقة التمارين قبل بدء الحصة.</p>
-        <div class="pt-note" style="padding:10px 12px"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>الانضمام المباشر يتطلب ربط نظام الجلسات الفعلي — هذه معاينة تجريبية.</span></div>
       </div>
     </section>
 
@@ -355,99 +369,28 @@
 
     <section class="pt-section">
       <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg>طلابي</h2>
-    <span class="pt-sec-hint">مجموعة الرياضيات — عرض للاطلاع فقط</span>
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg>سير التسجيل والأداء</h2>
+    <span class="pt-sec-hint">ملخّص — التفاصيل الكاملة لاحقًا</span>
   </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="avatar avatar-sm av-violet" aria-hidden="true">س</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">سلمان الغامدي</div>
-        <div class="pt-card-sub">مجموعة الرياضيات أ · الرياضيات</div>
+      <div class="pt-cards">
+        <div class="pt-card">
+          <div class="pt-card-row">
+            <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+            <div style="flex:1;min-width:0"><div class="pt-card-title">تسجيل نتيجة الجلسة</div></div>
+          </div>
+          <div class="pt-lines"><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>الحضور</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>التقييم</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>الملخص</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>ملاحظة الواجب</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>الملفات</span></div></div>
+        </div>
+        <div class="pt-card">
+          <div class="pt-card-row">
+            <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
+            <div style="flex:1;min-width:0">
+              <div class="pt-card-title">أدائي الأكاديمي</div>
+              <p class="pt-card-sub">عرض مؤشرات الأداء في الواجهة الإدارية (عرض تجريبي).</p>
+            </div>
+            <a class="btn btn-secondary btn-sm" href="teacher-performance.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>فتح لوحة الأداء</span></a>
+          </div>
+        </div>
       </div>
-      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span>
-    </div>
-    <div class="pt-card-sub">تقدّم ثابت في الكسور — مشاركة ممتازة.</div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="avatar avatar-sm av-violet" aria-hidden="true">د</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">دانة الحربي</div>
-        <div class="pt-card-sub">مجموعة الرياضيات أ · الرياضيات</div>
-      </div>
-      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span>
-    </div>
-    <div class="pt-card-sub">بداية هادئة — يستفيد من تشجيع بسيط في بداية الحصة.</div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="avatar avatar-sm av-sky" aria-hidden="true">و</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">وليد الغامدي</div>
-        <div class="pt-card-sub">مجموعة الرياضيات أ · الرياضيات</div>
-      </div>
-      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span>
-    </div>
-    <div class="pt-card-sub">عاد بعد غياب — خطة لحاق لطيفة هذا الأسبوع.</div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="avatar avatar-sm av-amber" aria-hidden="true">س</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">سلمى الغامدي</div>
-        <div class="pt-card-sub">مجموعة الرياضيات أ · الرياضيات</div>
-      </div>
-      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>تجريبية</span></span>
-    </div>
-    <div class="pt-card-sub">فترة تجريبية — انطباع أول إيجابي.</div>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg>تسجيل نتيجة الجلسة</h2>
-    <span class="pt-sec-hint">هكذا سيبدو سير العمل بعد كل جلسة — عرض توضيحي فقط</span>
-  </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg></span>
-      <div>
-        <div class="pt-card-title"><span class="tabular" style="color:var(--pt-accent-ink)">١.</span> الحضور</div>
-        <div class="pt-card-sub">حاضر أم غائب</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
-      <div>
-        <div class="pt-card-title"><span class="tabular" style="color:var(--pt-accent-ink)">٢.</span> التقييم</div>
-        <div class="pt-card-sub">انطباع سريع عن الجلسة</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg></span>
-      <div>
-        <div class="pt-card-title"><span class="tabular" style="color:var(--pt-accent-ink)">٣.</span> الملخص</div>
-        <div class="pt-card-sub">سطر عمّا تم إنجازه</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span>
-      <div>
-        <div class="pt-card-title"><span class="tabular" style="color:var(--pt-accent-ink)">٤.</span> ملاحظة الواجب</div>
-        <div class="pt-card-sub">ما المطلوب إنجازه قبل الجلسة القادمة</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg></span>
-      <div>
-        <div class="pt-card-title"><span class="tabular" style="color:var(--pt-accent-ink)">٥.</span> الملفات</div>
-        <div class="pt-card-sub">مرفقات أو مواد تشاركها مع الأسرة</div>
-      </div>
-    </div>
-  </div></div>
-      <div class="pt-note" style="padding:10px 12px"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span><span>تسجيل الغياب يحتاج تفعيل الخادم.</span></div>
       <div class="pt-cards"><div class="pt-card pt-planned">
     <div class="pt-card-row">
       <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
@@ -462,233 +405,13 @@
 
     <section class="pt-section">
       <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg>آخر الجلسات</h2>
-    <span class="pt-sec-hint">ما ينتجه سير التسجيل: ملخّص وملاحظة واجب لكل جلسة</span>
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg>روابط سريعة</h2>
+    <span class="pt-sec-hint">صفحات لوحتك — تصل تباعًا</span>
   </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">سلمان الغامدي — أساسيات الرياضيات</div>
-        <div class="pt-card-sub">الأحد</div>
-      </div>
-      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>حضور مكتمل</span></span>
-    </div>
-    <p class="pt-card-sub">مشاركة فاعلة وأداء ممتاز خلال الجلسة.</p>
-    <p class="pt-card-sub">الواجب: إكمال تمارين الكسور المتبقية.</p>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">وليد الغامدي — نادي الرياضيات</div>
-        <div class="pt-card-sub">الإثنين</div>
-      </div>
-      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>حضور مكتمل</span></span>
-    </div>
-    <p class="pt-card-sub">مشاركة فاعلة وأداء ممتاز خلال الجلسة.</p>
-    <p class="pt-card-sub">الواجب: حل ورقة المعادلات القصيرة.</p>
-  </div></div>
+      <div class="pt-qtiles"><div class="pt-qtile is-planned"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span>جدولي</span><span class="pt-qtile-soon">قريبًا</span></div><div class="pt-qtile is-planned"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span>طلابي</span><span class="pt-qtile-soon">قريبًا</span></div><div class="pt-qtile is-planned"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span>نتائج الحصص</span><span class="pt-qtile-soon">قريبًا</span></div><div class="pt-qtile is-planned"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span>المهام</span><span class="pt-qtile-soon">قريبًا</span></div><div class="pt-qtile is-planned"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg><span>التقارير</span><span class="pt-qtile-soon">قريبًا</span></div><div class="pt-qtile is-planned"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>ملفي</span><span class="pt-qtile-soon">قريبًا</span></div></div>
     </section>
 
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg>الواجبات والمهام</h2>
-    <span class="pt-sec-hint">ما تحتاج تجهيزه لطلابك</span>
-  </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">تجهيز ورقة عمل الكسور</div>
-        <div class="pt-card-sub">أساسيات الرياضيات · مجموعة الرياضيات</div>
-      </div>
-    </div>
-    <div class="pt-tags"><span class="pt-tag is-accent"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>الموعد: اليوم</span></div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">مراجعة حلول الواجب الأخيرة</div>
-        <div class="pt-card-sub">مجموعة الرياضيات</div>
-      </div>
-    </div>
-    <div class="pt-tags"><span class="pt-tag is-accent"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>الموعد: غدًا</span></div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">إعداد التقارير الشهرية للمجموعة</div>
-        <div class="pt-card-sub">مجموعة الرياضيات</div>
-      </div>
-    </div>
-    <div class="pt-tags"><span class="pt-tag is-accent"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>الموعد: نهاية الأسبوع</span></div>
-  </div></div>
-      <div class="pt-cards"><div class="pt-card pt-planned">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">إدارة المهام</div>
-        <div class="pt-card-sub">لوحة المهام الكاملة تأتي في المواصفة ٠١٦.</div>
-      </div>
-    </div>
-    <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قيد التخطيط</span></span>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg>المواد والمكتبة</h2>
-    <span class="pt-sec-hint">موادك التعليمية وملفات دوراتك</span>
-  </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">ورقة عمل الكسور (PDF)</div>
-        <div class="pt-card-sub">الرياضيات</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">فيديو: شرح المعادلات</div>
-        <div class="pt-card-sub">الرياضيات</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">أمثلة تدريبية للحصة</div>
-        <div class="pt-card-sub">الرياضيات</div>
-      </div>
-    </div>
-  </div></div>
-      <div class="pt-cards"><div class="pt-card pt-planned">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">رفع وتنزيل الملفات</div>
-        <div class="pt-card-sub">تخزين الملفات ومشاركتها يتطلب الخادم الفعلي.</div>
-      </div>
-    </div>
-    <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg>جدولي الأسبوعي والتوفّر</h2>
-    <span class="pt-sec-hint">حصصك عبر الأسبوع — بطاقات يومية مريحة</span>
-  </div>
-      <div class="pt-week"><div class="pt-day">
-    <div class="pt-day-head"><span class="pt-day-name">السبت</span></div>
-    <div class="pt-cards"><div class="pt-card">
-      <div class="pt-card-row">
-        <span class="pt-time tabular">09:00–10:00</span>
-        <div style="flex:1;min-width:0">
-          <div class="pt-card-title">أساسيات الرياضيات</div>
-          <div class="pt-card-sub">قاعة أ</div>
-        </div>
-        <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مكتملة</span></span>
-      </div>
-    </div></div>
-  </div><div class="pt-day">
-    <div class="pt-day-head"><span class="pt-day-name">الإثنين</span></div>
-    <div class="pt-cards"><div class="pt-card">
-      <div class="pt-card-row">
-        <span class="pt-time tabular">09:00–10:00</span>
-        <div style="flex:1;min-width:0">
-          <div class="pt-card-title">أساسيات الرياضيات</div>
-          <div class="pt-card-sub">قاعة أ</div>
-        </div>
-        <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
-      </div>
-    </div></div>
-  </div><div class="pt-day">
-    <div class="pt-day-head"><span class="pt-day-name">الثلاثاء</span></div>
-    <div class="pt-cards"><div class="pt-card">
-      <div class="pt-card-row">
-        <span class="pt-time tabular">08:30–09:30</span>
-        <div style="flex:1;min-width:0">
-          <div class="pt-card-title">نادي الرياضيات</div>
-          <div class="pt-card-sub">قاعة ج</div>
-        </div>
-        <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span>
-      </div>
-    </div></div>
-  </div></div>
-      <div class="pt-empty"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span class="pt-empty-title">الأربعاء والخميس — بلا حصص، وقت مثالي للتحضير 🌤</span></div>
-      <div class="pt-cards"><div class="pt-card pt-planned">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">تعديل التوفّر</div>
-        <div class="pt-card-sub">تعديل فترات توفّرك يُكتب في الجدول الفعلي ويتطلب الخادم.</div>
-      </div>
-    </div>
-    <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg>التقرير الشهري للطالب</h2>
-    <span class="pt-sec-hint">خمسة محاور تُعبّأ بملاحظات وصفية — عرض توضيحي</span>
-  </div>
-      <div class="pt-card">
-        <div class="pt-lines"><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>الإنجازات</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>تقدّم التعلّم</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>التركيز</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>إتمام الواجبات</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>الالتزام بالمواعيد</span></div></div>
-        <div class="pt-card-chip"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span></div>
-      </div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg>الطلبات والأداء</h2>
-    <span class="pt-sec-hint">الشهادات والطلبات — التنفيذ يتطلب الخادم</span>
-  </div>
-      <div class="pt-cards">
-        <div class="pt-card">
-          <div class="pt-card-row">
-            <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-            <div style="flex:1;min-width:0">
-              <div class="pt-card-title">طلب شهادة لطالب</div>
-              <div class="pt-card-sub">يُرسَل الطلب إلى إدارة الأكاديمية للمراجعة والإصدار.</div>
-            </div>
-          </div>
-          <div class="pt-lines"><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>وصف الشهادة والمناسبة</span></div><div class="pt-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>التاريخ المقترح للإصدار</span></div></div>
-          <div class="pt-card-chip"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span></div>
-        </div>
-        <div class="pt-card">
-          <div class="pt-card-row">
-            <span class="medallion m-soft tone-teal "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-            <div style="flex:1;min-width:0">
-              <div class="pt-card-title">أدائي الأكاديمي</div>
-              <p class="pt-card-sub">عرض مؤشرات الأداء في الواجهة الإدارية (عرض تجريبي).</p>
-            </div>
-            <a class="btn btn-secondary btn-sm" href="teacher-performance.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>فتح لوحة الأداء</span></a>
-          </div>
-        </div>
-      </div>
-      <div class="pt-note" style="padding:10px 12px"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span><span>طلب إلغاء أو تعويض الحصة يحتاج تفعيل الخادم.</span></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg>حسابي</h2>
-    
-  </div>
-      <div class="pt-card">
-        <div class="pt-prof-row"><span class="pt-prof-k">الاسم</span><span class="pt-prof-v">سارة القحطاني</span></div>
-        <div class="pt-prof-row"><span class="pt-prof-k">المادة</span><span class="pt-prof-v">الرياضيات</span></div>
-        <div class="pt-prof-row"><span class="pt-prof-k">الحالة</span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div>
-        <div class="pt-prof-row"><span class="pt-prof-k">التوفّر</span><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>متاح</span></span></div>
-        <div class="pt-note" style="padding:10px 12px;margin-top:4px"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>تعديل بيانات الحساب يتطلب الخادم.</span></div>
-      </div>
-    </section>
-
-    <div class="pt-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span><strong>لوحة المعلم — النسخة الأولى</strong> — هذه لوحتك اليومية. الجلسات المباشرة وعمليات الحفظ والرفع تتطلب الخادم؛ الرسائل والإشعارات تأتي في المواصفة ٠١٦.</span></div>
+    <div class="pt-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span><strong>لوحة المعلم — النسخة الأولى</strong> — لوحة مدمجة: أهم عملك اليوم هنا، والتفاصيل الكاملة في صفحاتك تباعًا.</span></div>
   </div>
     </main>
     </div>

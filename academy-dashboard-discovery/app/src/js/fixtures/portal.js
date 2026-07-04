@@ -196,3 +196,60 @@ export const PORTAL_PLANNED = {
     { id: 'taskManage', icon: 'tasks', titleKey: 'prt.tch.plan.taskManage.t', descKey: 'prt.tch.plan.taskManage.d', availability: 'planned' },
   ],
 };
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Spec 018 — Role Dashboards Admin-Like UX Rework (ADDITIVE; nothing above is
+ * touched — the 013/014/015 PREVIEW slices and the 017 ROLE_NAV/PLANNED registers
+ * are RETAINED verbatim so Specs 019–021 re-render the displaced detail on their
+ * own pages). Below: the compact-home 4-KPI rows (authored fixture literals, the
+ * admin `kpiRow` rhythm re-expressed portal-side) + the baked child-profile panels
+ * for the REAL fam1 roster. Zero computed values, zero figure-bearing fields. */
+
+/* The four KPI cards per compact home. Every `value` is an authored literal that
+ * mirrors an EXISTING preview figure (attended/progress/roster/etc.) — rendered via
+ * num(), never derived at runtime. `format:'percent'` appends the locale % sign. */
+export const COMPACT_HOME = {
+  student: {
+    kpis: [
+      { icon: 'check-circle', value: 9, labelKey: 'prt.kpi.stu.attended' },
+      { icon: 'trending-up', value: 78, format: 'percent', labelKey: 'prt.kpi.stu.progress' },
+      { icon: 'tasks', value: 3, labelKey: 'prt.kpi.stu.homework' },
+      { icon: 'sparkles', value: 5, labelKey: 'prt.kpi.stu.streak' },
+    ],
+  },
+  family: {
+    kpis: [
+      { icon: 'families', value: 5, labelKey: 'prt.kpi.fam.children' },
+      { icon: 'check-circle', value: 12, labelKey: 'prt.kpi.fam.attended' },
+      { icon: 'clock', value: 3, labelKey: 'prt.kpi.fam.upcoming' },
+      { icon: 'alert-triangle', value: 1, labelKey: 'prt.kpi.fam.followUps' },
+    ],
+  },
+  teacher: {
+    kpis: [
+      { icon: 'schedule', value: 2, labelKey: 'prt.kpi.tch.today' },
+      { icon: 'alert-triangle', value: 2, labelKey: 'prt.kpi.tch.followUps' },
+      { icon: 'tasks', value: 3, labelKey: 'prt.kpi.tch.tasks' },
+      { icon: 'students', value: 4, labelKey: 'prt.kpi.tch.roster' },
+    ],
+  },
+};
+
+/* Per-child baked panel content for `family-child` — the REAL fam1 roster
+ * st1·st6·st11·st12·st13 (identity/level/subject/progress/status/teacher resolve
+ * from students.js; today/next from SESSIONS_FULL + FAMILY_PREVIEW.todayChildren;
+ * the note is a REAL FAMILY_PREVIEW teacher note where one exists — st1/st6/st12 —
+ * else an authored line for st11/st13). The attendance trio + homework/materials
+ * summary lines are authored display-only literals. NO figure-bearing field, NO
+ * computed score/rank; the history/profile drill-downs are honest availability gates. */
+export const CHILD_PROFILE = {
+  st1:  { attendance: { attended: 9, upcoming: 2, absent: 0 }, noteKey: 'data.prtNote1',         hwKey: 'data.prtChildHwSt1',  matKey: 'data.prtChildMatSt1' },
+  st6:  { attendance: { attended: 7, upcoming: 1, absent: 1 }, noteKey: 'data.prtNote2',         hwKey: 'data.prtChildHwSt6',  matKey: 'data.prtChildMatSt6' },
+  st11: { attendance: { attended: 6, upcoming: 2, absent: 1 }, noteKey: 'data.prtChildNoteSt11', hwKey: 'data.prtChildHwSt11', matKey: 'data.prtChildMatSt11' },
+  st12: { attendance: { attended: 8, upcoming: 1, absent: 0 }, noteKey: 'data.prtFamNote3',      hwKey: 'data.prtChildHwSt12', matKey: 'data.prtChildMatSt12' },
+  st13: { attendance: { attended: 2, upcoming: 1, absent: 0 }, noteKey: 'data.prtChildNoteSt13', hwKey: 'data.prtChildHwSt13', matKey: 'data.prtChildMatSt13' },
+};
+
+/* the fam1 child order for family-child panels + the home drill-down cards (deep
+ * links `#child=st1|st6|st11|st12|st13`); default visible panel = the first (st1). */
+export const CHILD_ORDER = ['st1', 'st6', 'st11', 'st12', 'st13'];

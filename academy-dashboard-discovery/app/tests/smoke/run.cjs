@@ -7,12 +7,12 @@ const { PORT } = require('../../scripts/serve.cjs');
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
   'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
-  'portals', 'student-portal', 'family-portal', 'teacher-portal'];
+  'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child'];
 
 // Spec 012 — the role-portal surface (portal shell, not the admin shell). Admin-shell
 // assertions are scoped to admin pages; portal pages get their own block below. The
 // future-role portal-ABSENCE assertion stays enforced verbatim on every ADMIN page.
-const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal']);
+const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child']);
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -924,6 +924,11 @@ const FILTER_SPEC = {
           const sectionCount = document.querySelectorAll('.pt-section').length;
           const emptyCount = document.querySelectorAll('.pt-empty').length;
           const bodyAnchors = [...document.querySelectorAll('#page-body a[href]')].length;
+          // Spec 018 — compact-home KPI row (=== 4 per home) + family-child baked panels
+          const kpiCards = document.querySelectorAll('#page-body .pt-kpi').length;
+          const childPanelCount = document.querySelectorAll('#page-body .pt-child-panel').length;
+          const childDefaultVisible = [...document.querySelectorAll('#page-body .pt-child-panel')]
+            .filter((el) => getComputedStyle(el).display !== 'none').map((el) => el.id);
           const plannedBackend = document.querySelectorAll('.pt-planned .chip.tone-amber').length;
           const plannedPlanned = document.querySelectorAll('.pt-planned .chip.tone-neutral').length;
           // Spec 014 — family: five children each carry a progress bar; the page has zero form controls
@@ -943,44 +948,66 @@ const FILTER_SPEC = {
           const shellAnchors = [...document.querySelectorAll('a[href]')]
             .filter((a) => !a.closest('#page-body') && !(a.getAttribute('href') || '').startsWith('#'))
             .map((a) => a.getAttribute('href'));
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors };
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible };
         });
-        const expRole = page === 'portals' ? 'hub' : page.replace('-portal', '');
+        const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
         ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
         if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
         // existence floor first, so the AR digit check below can never pass vacuously
-        // Spec 013 — the deepened student dashboard: ≥2 gauge counters (overall + attendance trio),
-        // ≥10 sections, the truthful Friday empty-state, and a page body that never navigates.
+        // Spec 018 — the COMPACT student home (re-scoped from the 013 long-home floors): the 7-band
+        // recipe (4–7 sections), exactly 4 KPI cards, a body that never navigates (all detail displaced
+        // to Spec 019), and the two rendered gates (homework-submit backendRequired + full-history planned).
         if (page === 'student-portal') {
-          ok(prt.gaugeCount >= 2, `${page}/${lang}: expected ≥2 progress gauge counters (overall + trio), got ${prt.gaugeCount}`);
-          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
-          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the friendly empty-state pattern (≥1 .pt-empty), got ${prt.emptyCount}`);
+          ok(prt.sectionCount >= 4 && prt.sectionCount <= 7, `${page}/${lang}: compact home must have 4–7 sections, got ${prt.sectionCount}`);
+          ok(prt.kpiCards === 4, `${page}/${lang}: expected exactly 4 KPI cards, got ${prt.kpiCards}`);
           ok(prt.bodyAnchors === 0, `${page}/${lang}: the student page body must contribute zero anchors, got ${prt.bodyAnchors}`);
-          // planned-card graduation: homework + materials gates are backendRequired (amber lock),
-          // full-history is planned (neutral clock) — the exact re-registered semantics.
-          ok(prt.plannedBackend === 2, `${page}/${lang}: expected 2 backendRequired planned gates (homework + materials), got ${prt.plannedBackend}`);
+          ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (homework submit), got ${prt.plannedBackend}`);
           ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned gate (full history), got ${prt.plannedPlanned}`);
         }
-        // Spec 014 — the deepened family dashboard: all five fam1 children visible, ≥10 sections,
-        // the truthful meetings empty-state, zero body anchors/form controls, and the ZERO-PAY hard line.
+        // Spec 018 — the COMPACT family home (re-scoped from the 014 long-home floors): the 7-band
+        // recipe (4–7 sections), 4 KPI cards, the five REAL child drill-down links (body anchors === 5,
+        // one per fam1 child, targeting family-child), a form-free body, the two rendered gates
+        // (billing backendRequired + meeting planned), and — unchanged, byte-verbatim — the ZERO-PAY hard line.
         if (page === 'family-portal') {
-          ok(prt.progressBars === 5, `${page}/${lang}: expected all 5 fam1 children (5 progress bars), got ${prt.progressBars}`);
-          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
-          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the reassuring empty-state pattern (≥1 .pt-empty), got ${prt.emptyCount}`);
-          ok(prt.bodyAnchors === 0, `${page}/${lang}: the family page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          ok(prt.sectionCount >= 4 && prt.sectionCount <= 7, `${page}/${lang}: compact home must have 4–7 sections, got ${prt.sectionCount}`);
+          ok(prt.kpiCards === 4, `${page}/${lang}: expected exactly 4 KPI cards, got ${prt.kpiCards}`);
           ok(prt.formControls === 0, `${page}/${lang}: the family page must contain zero form controls, got ${prt.formControls}`);
-          // planned-card graduation: billing + materials gates are backendRequired (amber lock),
-          // full-history + meeting-request are planned (neutral clock).
-          ok(prt.plannedBackend === 2, `${page}/${lang}: expected 2 backendRequired family gates (billing + materials), got ${prt.plannedBackend}`);
-          ok(prt.plannedPlanned === 2, `${page}/${lang}: expected 2 planned family gates (full history + meeting), got ${prt.plannedPlanned}`);
+          // the mandatory drill-down: five real links, one per fam1 child, targeting the family-child page
+          const childHrefs = prt.anchorTargets;
+          const childRe = new RegExp(`^family-child${lang === 'en' ? '\\.en' : ''}\\.html#child=(st1|st6|st11|st12|st13)$`);
+          const childIds = childHrefs.map((h) => (h.match(childRe) || [])[1]).filter(Boolean);
+          ok(prt.bodyAnchors === 5 && childHrefs.every((h) => childRe.test(h)),
+            `${page}/${lang}: family home body must be exactly 5 child drill-down links, got ${JSON.stringify(childHrefs)}`);
+          ok(JSON.stringify([...new Set(childIds)].sort()) === JSON.stringify(['st1', 'st11', 'st12', 'st13', 'st6'].sort()),
+            `${page}/${lang}: the five child links must target st1/st6/st11/st12/st13 exactly once, got ${JSON.stringify(childIds)}`);
+          ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (billing), got ${prt.plannedBackend}`);
+          ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned gate (meeting request), got ${prt.plannedPlanned}`);
           // THE ZERO-PAY HARD LINE — no currency/amount/pay-action token may render on the family body
           // (Arabic-first: mirror the EN amount/price tokens with مبلغ/سعر/رسوم so a bare AR amount is caught too)
           const payFigure = /ريال|ر\.س|\bSAR\b|\bUSD\b|جنيه|\bEGP\b|[$€£]|ادفع|سداد|pay now|payment|\bamount\b|\bprice\b|مبلغ|سعر|رسوم/i.test(prt.bodyText);
           ok(!payFigure, `${page}/${lang}: the family dashboard shows a currency/pay figure — forbidden (SC-005, the zero-pay hard line)`);
         }
+        // Spec 018 — the NEW family-child drill-down page (family shell; five baked child panels,
+        // default st1 visible, pure-CSS :target deep-link switching because the frozen enhance.js tab
+        // hash reads only #view=). The body's only anchors are the five #child= switcher pills; zero
+        // forms; the same zero-pay hard line applies here too.
+        if (page === 'family-child') {
+          ok(prt.childPanelCount === 5, `${page}/${lang}: expected 5 baked child panels, got ${prt.childPanelCount}`);
+          ok(JSON.stringify(prt.childDefaultVisible) === JSON.stringify(['child=st1']),
+            `${page}/${lang}: exactly the default child (st1) must be visible on load, got ${JSON.stringify(prt.childDefaultVisible)}`);
+          ok(prt.formControls === 0, `${page}/${lang}: the family-child page must contain zero form controls, got ${prt.formControls}`);
+          const switchRe = /^#child=(st1|st6|st11|st12|st13)$/;
+          const switchIds = prt.anchorTargets.map((h) => (h.match(switchRe) || [])[1]).filter(Boolean);
+          ok(prt.bodyAnchors === 5 && prt.anchorTargets.every((h) => switchRe.test(h)),
+            `${page}/${lang}: family-child body must be exactly 5 #child= switcher links, got ${JSON.stringify(prt.anchorTargets)}`);
+          ok(JSON.stringify([...new Set(switchIds)].sort()) === JSON.stringify(['st1', 'st11', 'st12', 'st13', 'st6'].sort()),
+            `${page}/${lang}: the switcher must cover st1/st6/st11/st12/st13 exactly, got ${JSON.stringify(switchIds)}`);
+          const payFigure = /ريال|ر\.س|\bSAR\b|\bUSD\b|جنيه|\bEGP\b|[$€£]|ادفع|سداد|pay now|payment|\bamount\b|\bprice\b|مبلغ|سعر|رسوم/i.test(prt.bodyText);
+          ok(!payFigure, `${page}/${lang}: the family-child page shows a currency/pay figure — forbidden (the zero-pay hard line)`);
+        }
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
-        const expPlanned = { 'student-portal': 3, 'family-portal': 4, 'teacher-portal': 4, portals: 0 }[page];
+        const expPlanned = { 'student-portal': 2, 'family-portal': 2, 'teacher-portal': 1, portals: 0, 'family-child': 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
         ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
         if (page === 'portals') {
@@ -993,18 +1020,17 @@ const FILTER_SPEC = {
           const payHit = /\b(salary|salaries|payouts?|earnings?|compensation)\b/i.test(prt.bodyText)
             || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
           ok(!payHit, `${page}/${lang}: the teacher portal contains pay vocabulary — forbidden (FR-006)`);
-          // Spec 015 — the deepened teacher cockpit (research D13 + amendments A1/A2): section/empty
-          // floors, graduation semantics (3 backend gates + 1 planned), a form-free body, the
-          // roster+board avatar floor, and the ONE sanctioned page-body anchor pinned to its target.
-          ok(prt.sectionCount >= 10, `${page}/${lang}: expected ≥10 dashboard sections, got ${prt.sectionCount}`);
-          ok(prt.emptyCount >= 1, `${page}/${lang}: expected the truthful free-days empty state (≥1 .pt-empty), got ${prt.emptyCount}`);
+          // Spec 018 — the COMPACT teacher cockpit (re-scoped from the 015 long-home floors): the 7-band
+          // recipe (4–7 sections), 4 KPI cards, a form-free body, the KEPT single page-body anchor pinned
+          // to the performance board, and the one rendered gate (outcome-save backendRequired).
+          ok(prt.sectionCount >= 4 && prt.sectionCount <= 7, `${page}/${lang}: compact home must have 4–7 sections, got ${prt.sectionCount}`);
+          ok(prt.kpiCards === 4, `${page}/${lang}: expected exactly 4 KPI cards, got ${prt.kpiCards}`);
           ok(prt.bodyAnchors === 1, `${page}/${lang}: the teacher page body must contribute exactly ONE anchor (the performance link), got ${prt.bodyAnchors}`);
           ok(prt.anchorTargets.every((h) => /(^|\/)teacher-performance\.(en\.)?html$/.test(h)),
             `${page}/${lang}: the teacher body anchor must target the performance board, got ${JSON.stringify(prt.anchorTargets)}`);
           ok(prt.formControls === 0, `${page}/${lang}: the teacher page must contain zero form controls, got ${prt.formControls}`);
-          ok(prt.plannedBackend === 3, `${page}/${lang}: expected 3 backendRequired teacher gates (outcome-save + files + availability), got ${prt.plannedBackend}`);
-          ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned teacher gate (task management), got ${prt.plannedPlanned}`);
-          ok(prt.avatars >= 6, `${page}/${lang}: expected ≥6 student avatars (roster 4 + follow-up board 2), got ${prt.avatars}`);
+          ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (outcome save), got ${prt.plannedBackend}`);
+          ok(prt.plannedPlanned === 0, `${page}/${lang}: expected 0 planned teacher gates on the compact home, got ${prt.plannedPlanned}`);
         }
         // ===== Spec 017 — Shell v2: role sidebar + native drawer + the sanctioned anchor registry.
         // The nav is baked twice (desktop aside + mobile details drawer), all of it OUTSIDE
@@ -1012,6 +1038,24 @@ const FILTER_SPEC = {
         if (page === 'portals') {
           ok(prt.sidenavs === 0 && !prt.drawerSummary, `${page}/${lang}: the hub must not carry the role sidebar/drawer`);
           ok(prt.shellAnchors.length === 0, `${page}/${lang}: the hub shell must contribute zero non-hash anchors outside the body, got ${prt.shellAnchors.length}`);
+        } else if (page === 'family-child') {
+          // Spec 018 — the family-child page consumes the FAMILY shell (8-item registry); home stays the
+          // active nav anchor (build passes no activeId → shell default 'home'), so the aside/drawer home
+          // links + aria-current point at family-portal, and the shell-anchor set is {family-portal, hub}.
+          const homeHref = `family-portal${lang === 'en' ? '.en' : ''}.html`;
+          const hubHref = `portals${lang === 'en' ? '.en' : ''}.html`;
+          ok(prt.sidenavs === 1, `${page}/${lang}: expected exactly one role sidebar, got ${prt.sidenavs}`);
+          ok(prt.navAside === 8 && prt.navDrawer === 8, `${page}/${lang}: family registry count mismatch (aside ${prt.navAside} / drawer ${prt.navDrawer}, want 8)`);
+          ok(prt.drawerSummary, `${page}/${lang}: the native mobile nav disclosure (details>summary) is missing`);
+          ok(prt.navCurrentHrefs.length === 2 && prt.navCurrentHrefs.every((h) => h === homeHref),
+            `${page}/${lang}: family-child must keep home (family-portal) active once per nav instance, got ${JSON.stringify(prt.navCurrentHrefs)}`);
+          ok(prt.plannedNavAnchors === 0, `${page}/${lang}: planned nav entries must never be anchors, got ${prt.plannedNavAnchors}`);
+          ok(prt.navListAnchors === 1, `${page}/${lang}: expected exactly one link (home) in the sidebar nav list, got ${prt.navListAnchors}`);
+          const uniq = [...new Set(prt.shellAnchors)].sort();
+          ok(JSON.stringify(uniq) === JSON.stringify([hubHref, homeHref].sort()),
+            `${page}/${lang}: family-child shell anchors outside the set {family-portal, hub}: ${JSON.stringify(uniq)}`);
+          ok(prt.shellAnchors.length === 5,
+            `${page}/${lang}: sanctioned shell-anchor multiset must be 5 (home×2 + hub×3), got ${prt.shellAnchors.length}`);
         } else {
           const navWant = { 'student-portal': 7, 'family-portal': 8, 'teacher-portal': 7 }[page];
           const selfHref = `${page}${lang === 'en' ? '.en' : ''}.html`;
@@ -1031,10 +1075,21 @@ const FILTER_SPEC = {
             `${page}/${lang}: sanctioned shell-anchor multiset must be 5 (self×2 + hub×3), got ${prt.shellAnchors.length}`);
         }
 
-        // the three deepened role dashboards are table-free and mobile-clean by contract
-        if (page === 'student-portal' || page === 'family-portal' || page === 'teacher-portal') {
+        // Spec 018 — the compact role homes + family-child are table-free and mobile-clean; the three
+        // homes also carry the HARD COMPACTNESS CEILING (the endless page can never return).
+        const isCompactHome = page === 'student-portal' || page === 'family-portal' || page === 'teacher-portal';
+        if (isCompactHome || page === 'family-child') {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
           ok(tables === 0, `${page}/${lang}: this portal must contain zero tables, got ${tables}`);
+        }
+        if (isCompactHome) {
+          // ceiling probe @1366×768 — scrollHeight must sit in the compact window [900, 2200]px (research D1)
+          await p.setViewportSize({ width: 1366, height: 768 });
+          await p.waitForTimeout(150);
+          const tallH = await p.evaluate(() => document.documentElement.scrollHeight);
+          ok(tallH >= 900 && tallH <= 2200, `${page}/${lang}: scrollHeight ${tallH}px is outside the compact window [900, 2200] @1366×768 — the endless page must not return`);
+        }
+        if (isCompactHome || page === 'family-child') {
           // mobile-first: no horizontal overflow at 390px (this context is discarded after)
           await p.setViewportSize({ width: 390, height: 900 });
           await p.waitForTimeout(120);

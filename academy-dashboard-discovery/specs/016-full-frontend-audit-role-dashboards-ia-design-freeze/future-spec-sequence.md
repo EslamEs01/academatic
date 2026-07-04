@@ -30,3 +30,39 @@ Standing rules for every spec below: static HTML-first · fixtures only · the d
 6. Quality: smoke green on all loads; axe critical=0 serious=0 across the matrix; 390px probe green on every page; zero raw keys; zero console errors in captures.
 7. Identity discipline: each spec's diff confined to its owned family (hash audit per spec, re-verified cumulatively).
 8. Visual: screenshot review recorded per page family in REVIEW.md with explicit PASS verdicts against the freeze's forbidden-pattern register.
+
+## Amendment (user-directed, Spec 018 — append-only; the table above is preserved as history)
+
+**A corrective UX spec was INSERTED after Spec 017**, so the internal-page and admin specs renumber by +1.
+The original sequence table above is kept verbatim (history); the binding sequence from Spec 018 onward is:
+
+| # | Spec | Was (016 table) |
+|---|---|---|
+| **018** | **Role Dashboards Admin-Like UX Rework** (CORRECTIVE — the three role HOMES compressed into compact admin-like dashboards inside the untouched Shell v2 + the NEW `family-child` drill-down page) | *(new — inserted)* |
+| **019** | Student Internal Pages | was 018 |
+| **020** | Family / Guardian Internal Pages | was 019 |
+| **021** | Teacher Internal Pages | was 020 |
+| **022** | Admin Control / Sessions / Operations Pages | was 021 |
+| **023** | Admin Families / Students / Courses / Groups Pages | was 022 |
+| **024** | Admin Teachers / Performance Pages | was 023 |
+| **025** | Admin Reports / Analytics / Feedback / Forms Pages | was 024 |
+| **026** | Admin Finance / Invoices / Salaries / Banks Pages | was 025 |
+| **027** | Admin Management / Content / Certificates / Settings Pages | was 026 |
+| **028** | Final Full Frontend QA + No-Missing Coverage Audit | was 027 |
+
+Why inserted: the user's binding verdict — the role homes were too long/portal-like ("even the developer got
+lost"); Spec 018 reworks them into compact admin-like dashboards (the 7-band recipe · hard scrollHeight ceiling
+≤2,200px @1366×768 · a mandatory guardian→child-profile drill-down) BEFORE any internal pages are built, so
+Specs 019–021 inherit compact, correct homes + the drill-down pattern. The eight final acceptance rules above are
+unchanged and still owned by the final QA spec (now **028**). The no-reorder rule is amended ONLY by this
+owner-directed insertion; all downstream dependencies shift by one number.
+
+**Spec 018 (2026-07-04) — Role Dashboards Admin-Like UX Rework: DELIVERED.** The three role homes are compact
+(student ≈3,600→1,428px · family ≈4,200→1,753px · teacher ≈4,390→1,486px @1366×768, all inside [900, 2,200]);
+each is the 7-band recipe (compact header · 4-KPI row · now band · role-core · preview · quick-links · note),
+smoke-pinned (sections 4–7 · KPI===4 · ceiling probe). The NEW `family-child(.en).html` ships five baked child
+panels for the REAL fam1 roster (st1/st6/st11/st12/st13), pure-CSS `:target` deep-link switching (`#child=stX`;
+the frozen enhance.js hash reads only `#view=`), default st1; the family home carries the five REAL drill-down
+links (body anchors===5). Displacement is law — zero capability deleted; the displaced 013/014/015 fixtures/keys
+are RETAINED (grep-audited) for Specs 019–021. Identity 43/51 (40 admin + index + hub pair byte-identical);
+teacher pay-free three layers green; the Spec-012 payHit + family zero-pay asserts held BYTE-VERBATIM.

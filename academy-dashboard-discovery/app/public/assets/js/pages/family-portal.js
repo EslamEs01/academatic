@@ -1,40 +1,52 @@
-/* Spec 014 — FAMILY / GUARDIAN DASHBOARD (fam1's control center). Calm,
- * trustworthy, child-centered. All authored/fixture display-only content — NO
- * computed score/rank, NO engine, NO fake pay/cancel/upload/voice/feedback/join.
- * THE ZERO-PAY HARD LINE: no amount/price/rate/currency is ever rendered (the
- * family fixture's hourRate/plan cost is display-suppressed). The page body
- * contributes zero anchors and zero form controls; the only links are the shell's.
- * Deep siblings: Student = Spec 013 · Teacher = Spec 015 · Comms = Spec 016. */
+/* Spec 018 — FAMILY / GUARDIAN HOME, reworked into a COMPACT admin-like dashboard
+ * (the 7-band recipe: compact header · 4-KPI row · now band · children core w/ REAL
+ * drill-down links · preview · quick-links · one-line note). The endless 12-section
+ * portal is gone; the displaced detail is RETAINED in fixtures/locales and re-rendered
+ * by Spec 020's internal pages + the NEW family-child page (each child card links to
+ * family-child(.en).html#child=stX). Display-only; THE ZERO-PAY HARD LINE holds
+ * (status-only billing, no rendered figures ever); the body's only anchors are the
+ * five child drill-downs; zero form controls, zero fake pay/cancel/upload. */
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
 import { medallion, avatar, chip } from '../components/ui.js';
 import { availabilityChip } from '../components/report-status.js';
 import { statusChip } from '../components/status-chip.js';
-import { outcomeChip } from '../components/outcome-status.js';
+import { familyStatusChip } from '../components/family-status.js';
 import { FAMILIES } from '../fixtures/families.js';
 import { STUDENTS } from '../fixtures/students.js';
 import { SESSIONS_FULL } from '../fixtures/sessions.js';
-import { OUTCOME_BY_ID } from '../fixtures/attendance.js';
-import { familyStatusChip } from '../components/family-status.js';
-import { FAMILY_PREVIEW, PORTAL_PLANNED, PORTAL_PERSONAS } from '../fixtures/portal.js';
+import { FAMILY_PREVIEW, COMPACT_HOME, PORTAL_PLANNED, PORTAL_PERSONAS, ROLE_NAV, CHILD_ORDER } from '../fixtures/portal.js';
 
 const pctSign = () => (getLang() === 'en' ? '%' : '٪');
+const enSuffix = () => (getLang() === 'en' ? '.en' : '');
 const fam = () => FAMILIES.rows.find((f) => f.id === PORTAL_PERSONAS.family);
-const kids = () => STUDENTS.rows.filter((s) => s.familyId === PORTAL_PERSONAS.family);
 const STUD = Object.fromEntries(STUDENTS.rows.map((s) => [s.id, s]));
 const childName = (id) => t(STUD[id].nameKey);
-/* family's sessions today — the established sara/khalid family proxy */
+const orderedKids = () => CHILD_ORDER.map((id) => STUD[id]);
 const todaySessions = () => SESSIONS_FULL.rows.filter((r) => ['sara', 'khalid'].includes(r.trainer.id)).slice(0, 3);
 const planned = (id) => PORTAL_PLANNED.family.find((p) => p.id === id);
 
+/* ── shared compact-home primitives (duplicated per page by the Spec-018 file scope:
+ * no new shared render module is permitted; kept byte-identical across the 3 homes) ── */
 function secHead(icn, titleKey, hintKey, extra = '') {
   return `<div class="pt-sec-head">
     <h2 class="pt-sec-title">${icon(icn, 'ico')}${esc(t(titleKey))}${extra}</h2>
     ${hintKey ? `<span class="pt-sec-hint">${esc(t(hintKey))}</span>` : ''}
   </div>`;
 }
-
+function kpiCard(k, tone) {
+  const pct = k.format === 'percent' ? pctSign() : '';
+  return `<div class="pt-kpi">
+    <div class="pt-kpi-top">${medallion({ icon: k.icon, tone, size: 'sm' })}<span class="pt-gauge-num tabular">${num(k.value)}${pct}</span></div>
+    <div class="pt-kpi-label">${esc(t(k.labelKey))}</div>
+  </div>`;
+}
+function kpiRow(kpis, tone) { return `<div class="pt-kpi-row">${kpis.map((k) => kpiCard(k, tone)).join('')}</div>`; }
+function quickTiles(role) {
+  return `<div class="pt-qtiles">${ROLE_NAV[role].filter((e) => e.id !== 'home').map((e) =>
+    `<div class="pt-qtile is-planned">${icon(e.icon, 'ico ico-sm')}<span>${esc(t(e.labelKey))}</span><span class="pt-qtile-soon">${esc(t('prt.nav.soon'))}</span></div>`).join('')}</div>`;
+}
 function plannedCard(p) {
   return `<div class="pt-card pt-planned">
     <div class="pt-card-row">
@@ -48,33 +60,14 @@ function plannedCard(p) {
   </div>`;
 }
 
-/* ── section: my children (everyone inline, no switcher) ───────────────── */
-function kidCard(s, i) {
-  return `<div class="pt-card" ${i === 0 ? 'style="border-color:var(--pt-accent)"' : ''}>
-    <div class="pt-card-row">
-      ${avatar({ nameKey: s.nameKey, accent: s.accent, size: 'sm' })}
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(t(s.nameKey))}</div>
-        <div class="pt-card-sub">${esc(t(s.levelKey))}</div>
-      </div>
-      ${familyStatusChip(s.statusId)}
-    </div>
-    <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:${s.progress}%"></span></div>
-      <span class="tabular pt-card-sub" style="font-weight:700">${num(s.progress)}${pctSign()}</span>
-    </div>
-    <div class="pt-card-sub">${esc(t(FAMILY_PREVIEW.kidHints[s.id]))}</div>
-  </div>`;
-}
-
-/* ── section: today's sessions (child-associated) ──────────────────────── */
+/* ── now band: a today session, child-tagged (the family proxy) ─────────────── */
 function sessCard(r) {
   const childId = FAMILY_PREVIEW.todayChildren[r.id];
   return `<div class="pt-card">
     <div class="pt-card-row">
       <span class="pt-time tabular">${esc(r.time)}</span>
       <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(t(r.titleKey))} · <span style="color:var(--pt-accent-ink)">${esc(t('prt.fam.todayFor'))} ${childId ? esc(childName(childId)) : ''}</span></div>
+        <div class="pt-card-title">${esc(t(r.titleKey))}${childId ? ` · <span style="color:var(--pt-accent-ink)">${esc(t('prt.fam.todayFor'))} ${esc(childName(childId))}</span>` : ''}</div>
         <div class="pt-card-sub">${esc(t(r.trainer.nameKey))} · ${esc(t(r.roomKey))}</div>
       </div>
       ${statusChip(r.statusId)}
@@ -82,204 +75,84 @@ function sessCard(r) {
   </div>`;
 }
 
-/* ── section: attendance signals (REAL outcome rows) ───────────────────── */
-function statTile(icn, tone, value, labelKey) {
-  return `<div class="pt-card pt-stat">
-    <div class="pt-card-row">${medallion({ icon: icn, tone })}<span class="pt-gauge-num tabular">${num(value)}</span></div>
-    <div class="pt-stat-label">${esc(t(labelKey))}</div>
-  </div>`;
-}
-function signalCard(sig) {
-  const o = OUTCOME_BY_ID[sig.outcomeId];
-  return `<div class="pt-card">
-    <div class="pt-card-row">
-      ${avatar({ nameKey: STUD[o.studentId].nameKey, accent: STUD[o.studentId].accent, size: 'sm' })}
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(childName(o.studentId))}</div>
-        <div class="pt-card-sub">${esc(t(sig.framingKey))}</div>
-      </div>
-      ${outcomeChip(o.outcomeId)}
-    </div>
-  </div>`;
-}
-
-/* ── section: teacher notes ────────────────────────────────────────────── */
-function noteCard(n) {
-  return `<div class="pt-card">
-    <div class="pt-card-row">
-      ${medallion({ icon: 'message-circle', tone: 'primary' })}
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(childName(n.studentId))} — ${esc(t(n.teacherKey))}</div>
-        <p class="pt-card-sub">${esc(t(n.noteKey))}</p>
-      </div>
-    </div>
-  </div>`;
-}
-
-/* ── section: recent sessions (guardian F6 mirror, child-first) ────────── */
-function historyCard(h) {
-  if (h.outcomeId) {
-    const o = OUTCOME_BY_ID[h.outcomeId];
-    return `<div class="pt-card">
-      <div class="pt-card-row">
-        ${medallion({ icon: 'clipboard-check', tone: o.outcomeId === 'attended' ? 'success' : 'amber' })}
-        <div style="flex:1;min-width:0">
-          <div class="pt-card-title">${esc(childName(o.studentId))} — ${esc(t(o.trainer.nameKey))}</div>
-          <div class="pt-card-sub">${esc(t(h.dayKey))}</div>
-        </div>
-        ${outcomeChip(o.outcomeId)}
-      </div>
-      ${o.feedbackKey ? `<p class="pt-card-sub">${esc(t(o.feedbackKey))}</p>` : ''}
-    </div>`;
-  }
-  return `<div class="pt-card">
-    <div class="pt-card-row">
-      ${medallion({ icon: 'clipboard-check', tone: 'primary' })}
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(childName(h.childId))} — ${esc(t(h.teacherKey))}</div>
-        <div class="pt-card-sub">${esc(t(h.dayKey))}</div>
-      </div>
-    </div>
-    <p class="pt-card-sub">${esc(t(h.summaryKey))}</p>
-    <p class="pt-card-sub">${esc(t(h.homeworkKey))}</p>
-    ${h.hasAttachment ? `<span class="pt-attach">${icon('file-text', 'ico ico-sm')}${esc(t('prt.fam.histAttach'))}</span>` : ''}
-  </div>`;
-}
-
-/* ── section: plans & subscriptions (ZERO amounts) ─────────────────────── */
-function subRow(s) {
+/* ── role-core band: a compact child card with the REAL drill-down link ─────── */
+function childCard(s) {
+  const href = `family-child${enSuffix()}.html#child=${s.id}`;
   return `<div class="pt-card">
     <div class="pt-card-row">
       ${avatar({ nameKey: s.nameKey, accent: s.accent, size: 'sm' })}
-      <div style="flex:1;min-width:0"><div class="pt-card-title">${esc(t(s.nameKey))}</div></div>
+      <div style="flex:1;min-width:0">
+        <div class="pt-card-title">${esc(t(s.nameKey))}</div>
+        <div class="pt-card-sub">${esc(t(FAMILY_PREVIEW.kidHints[s.id]))}</div>
+      </div>
       ${familyStatusChip(s.statusId)}
     </div>
-  </div>`;
-}
-
-/* ── section: materials ────────────────────────────────────────────────── */
-function materialCard(m) {
-  return `<div class="pt-card">
-    <div class="pt-card-row">
-      ${medallion({ icon: m.typeIcon, tone: 'primary' })}
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(t(m.titleKey))}</div>
-        <div class="pt-card-sub">${esc(childName(m.childId))}</div>
-      </div>
+    <div class="pt-gauge">
+      <div class="pt-bar"><span style="width:${s.progress}%"></span></div>
+      <span class="tabular pt-card-sub" style="font-weight:700">${num(s.progress)}${pctSign()}</span>
     </div>
-  </div>`;
-}
-
-/* ── section: requests hub — preview cards (no form controls) ──────────── */
-function lineList(keys) {
-  return `<div class="pt-lines">${keys.map((k) => `<div class="pt-line">${icon('check-circle', 'ico ico-sm')}<span>${esc(t(k))}</span></div>`).join('')}</div>`;
-}
-function reqCard(icn, titleKey, bodyHTML, chipHTML) {
-  return `<div class="pt-card">
-    <div class="pt-card-row">
-      ${medallion({ icon: icn, tone: 'primary' })}
-      <div style="flex:1;min-width:0"><div class="pt-card-title">${esc(t(titleKey))}</div></div>
-    </div>
-    ${bodyHTML}
-    ${chipHTML}
+    <a class="pt-drill" href="${href}">${icon('user', 'ico ico-sm')}<span>${esc(t('prt.band.openChild'))}</span></a>
   </div>`;
 }
 
 export function renderFamilyPortal() {
   const f = fam();
-  const children = kids();
-  const att = FAMILY_PREVIEW.attendance;
-  const backendChip = `<div class="pt-card-chip">${availabilityChip('backendRequired')}</div>`;
+  const children = orderedKids();
+  const today = todaySessions();
+  const next = today.find((r) => r.statusId === 'upcoming') || today[0];
 
   return `
-    <section class="pt-hero">
-      <h1 class="pt-hero-hi">${esc(t('prt.shell.greet'))} ${esc(t(f.guardian.nameKey))} 🌿</h1>
-      <p class="pt-hero-sub">${esc(t('prt.fam.heroSub'))}</p>
-      <p class="pt-hero-sub" style="margin-top:8px;font-weight:600;color:var(--pt-accent-ink)">${icon('sparkles', 'ico ico-sm')} ${esc(t('prt.fam.heroHint'))}</p>
-    </section>
+    <div class="pt-home-head">
+      <h1 class="pt-home-hi">${esc(t('prt.shell.greet'))} ${esc(t(f.guardian.nameKey))} 🌿</h1>
+      <p class="pt-home-status">${esc(t('prt.band.famStatus'))}</p>
+    </div>
 
     <section class="pt-section">
-      ${secHead('families', 'prt.fam.kidsTitle', 'prt.fam.kidsHint', ` <span class="pt-role-chip" style="font-size:11px">${num(children.length)}</span>`)}
-      <div class="pt-cards">${children.map(kidCard).join('')}</div>
+      ${secHead('trending-up', 'prt.band.overview', 'prt.band.overviewHint')}
+      ${kpiRow(COMPACT_HOME.family.kpis, 'primary')}
     </section>
 
     <section class="pt-section">
       ${secHead('sessions', 'prt.fam.todayTitle', 'prt.fam.todayHint')}
-      <div class="pt-cards">${todaySessions().map(sessCard).join('')}</div>
-    </section>
-
-    <section class="pt-section">
-      ${secHead('clipboard-check', 'prt.fam.progTitle', 'prt.fam.progHint')}
-      <div class="pt-cards pt-cards-3">
-        ${statTile('check-circle', 'success', att.attended, 'prt.fam.att.attended')}
-        ${statTile('clock', 'sky', att.upcoming, 'prt.fam.att.upcoming')}
-        ${statTile('alert-triangle', 'amber', att.followUp, 'prt.fam.att.followUp')}
-      </div>
-      <div class="pt-sec-head" style="margin-top:6px"><h2 class="pt-sec-title" style="font-size:14px">${icon('alert-triangle', 'ico')}${esc(t('prt.fam.sigTitle'))}</h2><span class="pt-sec-hint">${esc(t('prt.fam.sigHint'))}</span></div>
-      <div class="pt-cards">${FAMILY_PREVIEW.signals.map(signalCard).join('')}</div>
-      <div class="pt-note" style="padding:10px 12px">${icon('check-circle', 'ico ico-sm')}<span>${esc(t('prt.fam.sigReassure'))}</span></div>
-    </section>
-
-    <section class="pt-section">
-      ${secHead('message-circle', 'prt.fam.notesTitle', 'prt.fam.notesHint')}
-      <div class="pt-cards">${FAMILY_PREVIEW.teacherNotes.map(noteCard).join('')}</div>
-    </section>
-
-    <section class="pt-section">
-      ${secHead('clipboard-check', 'prt.fam.histTitle', 'prt.fam.histHint')}
-      <div class="pt-cards">${FAMILY_PREVIEW.history.map(historyCard).join('')}</div>
-      <div class="pt-cards">${plannedCard(planned('fullHistory'))}</div>
-    </section>
-
-    <section class="pt-section">
-      ${secHead('certificates', 'prt.fam.subsTitle', 'prt.fam.subsHint')}
-      <div class="pt-note" style="padding:10px 12px">${icon('certificates', 'ico ico-sm')}<span><strong>${esc(t('prt.fam.subsPlan'))}:</strong> ${esc(t('data.fam.fam1.plan'))}</span></div>
-      <div class="pt-cards">${children.map(subRow).join('')}</div>
-    </section>
-
-    <section class="pt-section">
-      ${secHead('wallet', 'prt.fam.billTitle', 'prt.fam.billHint')}
-      <div class="pt-card">
-        <div class="pt-card-row">
-          ${chip({ labelKey: 'prt.fam.billSettled', tone: 'completed', icon: 'check-circle' })}
+      <div class="pt-now">
+        <div class="pt-now-col">${today.map(sessCard).join('')}</div>
+        <div class="pt-now-col">
+          <div class="pt-card" style="border-color:var(--pt-accent)">
+            <div class="pt-card-row">
+              <span class="pt-time tabular">${esc(next.time)}</span>
+              <div style="flex:1;min-width:0">
+                <div class="pt-card-title">${esc(t('prt.band.nowNext'))}: ${esc(t(next.titleKey))}</div>
+                <div class="pt-card-sub">${esc(t(next.trainer.nameKey))} · ${esc(t(next.roomKey))}</div>
+              </div>
+              ${statusChip(next.statusId)}
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="pt-section">
+      ${secHead('families', 'prt.band.famCore', 'prt.band.famCoreHint', ` <span class="pt-role-chip" style="font-size:11px">${num(children.length)}</span>`)}
+      <div class="pt-cards">${children.map(childCard).join('')}</div>
+    </section>
+
+    <section class="pt-section">
+      ${secHead('wallet', 'prt.band.famPreview', 'prt.band.famPreviewHint')}
+      <div class="pt-card">
+        <div class="pt-card-row">${chip({ labelKey: 'prt.fam.billSettled', tone: 'completed', icon: 'check-circle' })}</div>
         <p class="pt-card-sub">${esc(t('prt.fam.billReassure'))}</p>
       </div>
-      <div class="pt-cards">${plannedCard(planned('billingGate'))}</div>
-    </section>
-
-    <section class="pt-section">
-      ${secHead('help', 'prt.fam.reqTitle', 'prt.fam.reqHint')}
       <div class="pt-cards">
-        ${reqCard('calendar', 'prt.fam.req.cancelT', `${lineList(['prt.fam.req.cancelOpt1', 'prt.fam.req.cancelOpt2'])}<div class="pt-note" style="padding:10px 12px;margin-top:8px">${icon('alert-triangle', 'ico ico-sm')}<span>${esc(t('prt.fam.req.cancelCaution'))}</span></div>`, backendChip)}
-        ${reqCard('message-circle', 'prt.fam.req.feedbackT', lineList(['prt.fam.req.fbQ1', 'prt.fam.req.fbQ2', 'prt.fam.req.fbQ3', 'prt.fam.req.fbQ4']), backendChip)}
-        ${reqCard('families', 'prt.fam.req.trialT', `<div class="pt-tiles"><div class="pt-tile"><div class="pt-tile-t">${esc(t('prt.fam.req.trialNew'))}</div></div><div class="pt-tile"><div class="pt-tile-t">${esc(t('prt.fam.req.trialExisting'))}</div></div></div>`, backendChip)}
-        <div class="pt-card">
-          <div class="pt-card-row">${medallion({ icon: 'calendar', tone: 'primary' })}<div style="flex:1;min-width:0"><div class="pt-card-title">${esc(t('prt.fam.req.meetingsT'))}</div></div></div>
-          <div class="pt-empty">${icon('sparkles', 'ico')}<span class="pt-empty-title">${esc(t('prt.fam.req.meetingsEmpty'))}</span></div>
-        </div>
+        ${plannedCard(planned('billingGate'))}
         ${plannedCard(planned('meetingRequest'))}
       </div>
     </section>
 
     <section class="pt-section">
-      ${secHead('materials', 'prt.fam.matTitle', 'prt.fam.matHint')}
-      <div class="pt-cards">${FAMILY_PREVIEW.materials.map(materialCard).join('')}</div>
-      <div class="pt-cards">${plannedCard(planned('matDownload'))}</div>
+      ${secHead('grid', 'prt.band.quickTitle', 'prt.band.quickHint')}
+      ${quickTiles('family')}
     </section>
 
-    <section class="pt-section">
-      ${secHead('user', 'prt.fam.acctTitle')}
-      <div class="pt-card">
-        <div class="pt-prof-row"><span class="pt-prof-k">${esc(t('prt.fam.acct.guardian'))}</span><span class="pt-prof-v">${esc(t(f.guardian.nameKey))}</span></div>
-        <div class="pt-prof-row"><span class="pt-prof-k">${esc(t('prt.fam.acct.email'))}</span><span class="pt-prof-v">${esc(t(f.contact.emailKey))}</span></div>
-        <div class="pt-prof-row"><span class="pt-prof-k">${esc(t('prt.fam.acct.city'))}</span><span class="pt-prof-v">${esc(t(f.location.cityKey))}</span></div>
-        <div class="pt-prof-row"><span class="pt-prof-k">${esc(t('prt.fam.acct.joined'))}</span><span class="pt-prof-v">${esc(t(f.joinedDateKey))}</span></div>
-        <div class="pt-prof-row"><span class="pt-prof-k">${esc(t('prt.fam.acct.children'))}</span><span class="pt-prof-v tabular">${num(children.length)}</span></div>
-        <div class="pt-note" style="padding:10px 12px;margin-top:4px">${icon('help', 'ico ico-sm')}<span>${esc(t('prt.fam.acctEditNote'))}</span></div>
-      </div>
-    </section>
-
-    <div class="pt-note">${icon('help', 'ico ico-sm')}<span><strong>${esc(t('prt.fam.noteT'))}</strong> — ${esc(t('prt.fam.noteD'))}</span></div>
+    <div class="pt-note">${icon('help', 'ico ico-sm')}<span><strong>${esc(t('prt.fam.noteT'))}</strong> — ${esc(t('prt.band.noteFam'))}</span></div>
   `;
 }
