@@ -1,14 +1,23 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 019 — Student Internal Pages** (next). **Spec 018 — Role Dashboards Admin-Like UX
-Rework is IMPLEMENTED** (awaiting the watcher commit): the three role HOMES are now COMPACT admin-like
-dashboards (5 bands each, scrollHeight ≈1,428/1,753/1,486px @1366×768, down from ≈3,600/4,200/4,390) + the
-NEW `family-child(.en).html` drill-down (five baked fam1 panels, pure-CSS `#child=stX` `:target` switching).
-Identity 43/51; smoke/a11y green; teacher pay-free + family zero-pay held byte-verbatim.
-(branch `feature/012-role-portal-foundation`; Spec 017 = commit `0edafe1` (Shell v2, 49 built pages) · Spec 016 = `2b8bb84` (law)).
+Active feature: **Spec 020 — Family / Guardian Internal Pages** (next). **Spec 019 — Student Internal Pages
+is IMPLEMENTED** (awaiting the watcher commit): six new page pairs `student-{schedule,homework,materials,
+progress,history,profile}(.en).html` (51→**63** built; **49/63 hash-identical**) · six `ROLE_NAV.student`
+flips `planned→implemented` · the home quick-tiles honesty fix (implemented tiles are REAL links; home body
+anchors 0→6) · ONE shared primitives component `components/portal-page.js` · the `build-html.mjs` touch =
+6 imports + 6 entries + the line-132 `activeId` pass-through (byte-neutral for all 51 pre-existing files —
+proven) · ceiling extended to internals [500,2200] · smoke 62 loads green · axe 0/0 · payHit/zero-pay/family/
+teacher/hub/family-child/admin asserts held BYTE-VERBATIM. The pattern for Specs 020/021: flip the role's
+registry statuses + ship the page pairs + make that home's quick-tiles status-aware; the shell never changes.
 
-For decisions, contracts, and acceptance read the current plan and its artifacts:
-`academy-dashboard-discovery/specs/018-role-dashboards-admin-like-ux-rework/plan.md`
-(see also `research.md` (D1–D15), `data-model.md`, `quickstart.md`, and `contracts/` — 11 contracts).
+For decisions, contracts, and acceptance read the delivered plan and its artifacts:
+`academy-dashboard-discovery/specs/019-student-internal-pages/plan.md`
+(see also `research.md` (D1–D16), `data-model.md`, `quickstart.md`, `visual-grounding.md`, and `contracts/` — 15 contracts).
+
+History: **Spec 018** (commit `fe47f68`) delivered the COMPACT admin-like role homes (5 bands each,
+≈1,428/1,753/1,486px @1366×768, down from ≈3,600/4,200/4,390; ceiling smoke-pinned) + the NEW
+`family-child(.en).html` drill-down (five baked fam1 panels st1/st6/st11/st12/st13, pure-CSS `#child=stX`
+`:target` switching, family home bodyAnchors===5); identity 43/51; displaced 013/014/015 fixtures/keys
+RETAINED for 019–021. Spec 017 = `0edafe1` (Shell v2) · Spec 016 = `2b8bb84` (law).
 
 **Spec 018 (the user's binding verdict)**: the three role HOMES are too long/portal-like → rework into
 COMPACT admin-like dashboards inside the untouched Shell v2 — the 7-band recipe (compact header · 4-KPI

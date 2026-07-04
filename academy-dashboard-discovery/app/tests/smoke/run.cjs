@@ -7,12 +7,16 @@ const { PORT } = require('../../scripts/serve.cjs');
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
   'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
-  'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child'];
+  'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
+  'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile'];
 
 // Spec 012 — the role-portal surface (portal shell, not the admin shell). Admin-shell
 // assertions are scoped to admin pages; portal pages get their own block below. The
 // future-role portal-ABSENCE assertion stays enforced verbatim on every ADMIN page.
-const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child']);
+const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
+  'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile']);
+// Spec 019 — the six student internal pages (all consume the student shell with a full 7-item, all-implemented registry)
+const STUDENT_INTERNAL = new Set(['student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile']);
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -950,7 +954,7 @@ const FILTER_SPEC = {
             .map((a) => a.getAttribute('href'));
           return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible };
         });
-        const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : page.replace('-portal', '');
+        const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : STUDENT_INTERNAL.has(page) ? 'student' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
         ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
         if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
@@ -961,9 +965,25 @@ const FILTER_SPEC = {
         if (page === 'student-portal') {
           ok(prt.sectionCount >= 4 && prt.sectionCount <= 7, `${page}/${lang}: compact home must have 4–7 sections, got ${prt.sectionCount}`);
           ok(prt.kpiCards === 4, `${page}/${lang}: expected exactly 4 KPI cards, got ${prt.kpiCards}`);
-          ok(prt.bodyAnchors === 0, `${page}/${lang}: the student page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          // Spec 019 — the honesty fix: the quick-links band now navigates to the six LIVE sibling pages
+          // (a «قريبًا» pill over a live page would lie). Home body anchors 0 → 6, exact sibling targets.
+          const qRe = new RegExp(`^student-(schedule|homework|materials|progress|history|profile)${lang === 'en' ? '\\.en' : ''}\\.html$`);
+          const qIds = prt.anchorTargets.map((h) => (h.match(qRe) || [])[1]).filter(Boolean);
+          ok(prt.bodyAnchors === 6 && prt.anchorTargets.every((h) => qRe.test(h)),
+            `${page}/${lang}: student home body must be exactly 6 quick-link sibling anchors, got ${JSON.stringify(prt.anchorTargets)}`);
+          ok(JSON.stringify([...new Set(qIds)].sort()) === JSON.stringify(['history', 'homework', 'materials', 'profile', 'progress', 'schedule'].sort()),
+            `${page}/${lang}: the six quick links must target schedule/homework/materials/progress/history/profile exactly, got ${JSON.stringify(qIds)}`);
           ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (homework submit), got ${prt.plannedBackend}`);
           ok(prt.plannedPlanned === 1, `${page}/${lang}: expected 1 planned gate (full history), got ${prt.plannedPlanned}`);
+        }
+        // Spec 019 — a student INTERNAL page: the sidebar owns navigation (body anchors 0), display-only
+        // (zero forms), real content (a card floor), and honest gates (profile shows exactly its three).
+        if (STUDENT_INTERNAL.has(page)) {
+          ok(prt.bodyAnchors === 0, `${page}/${lang}: student internal page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          ok(prt.formControls === 0, `${page}/${lang}: student internal page must contain zero form controls, got ${prt.formControls}`);
+          const cards = await p.$$eval('#page-body .pt-card', (els) => els.length);
+          ok(cards >= 3, `${page}/${lang}: expected a real content floor (≥3 cards), got ${cards}`);
+          if (page === 'student-profile') ok(prt.plannedBackend === 3, `${page}/${lang}: the profile must show exactly 3 backendRequired gates (photo/save/password), got ${prt.plannedBackend}`);
         }
         // Spec 018 — the COMPACT family home (re-scoped from the 014 long-home floors): the 7-band
         // recipe (4–7 sections), 4 KPI cards, the five REAL child drill-down links (body anchors === 5,
@@ -1007,7 +1027,8 @@ const FILTER_SPEC = {
           ok(!payFigure, `${page}/${lang}: the family-child page shows a currency/pay figure — forbidden (the zero-pay hard line)`);
         }
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
-        const expPlanned = { 'student-portal': 2, 'family-portal': 2, 'teacher-portal': 1, portals: 0, 'family-child': 0 }[page];
+        const expPlanned = { 'student-portal': 2, 'family-portal': 2, 'teacher-portal': 1, portals: 0, 'family-child': 0,
+          'student-schedule': 0, 'student-homework': 1, 'student-materials': 1, 'student-progress': 0, 'student-history': 0, 'student-profile': 3 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
         ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
         if (page === 'portals') {
@@ -1056,8 +1077,29 @@ const FILTER_SPEC = {
             `${page}/${lang}: family-child shell anchors outside the set {family-portal, hub}: ${JSON.stringify(uniq)}`);
           ok(prt.shellAnchors.length === 5,
             `${page}/${lang}: sanctioned shell-anchor multiset must be 5 (home×2 + hub×3), got ${prt.shellAnchors.length}`);
+        } else if (page === 'student-portal' || STUDENT_INTERNAL.has(page)) {
+          // Spec 019 — after the nav flip, EVERY student page carries the full 7-item registry, ALL
+          // implemented: aside + drawer each render 7 links; the current page is the active one; the
+          // shell-anchor multiset is 17 (7 nav ×2 + hub×3), unique = {the 7 student pages + hub}.
+          const selfHref = `${page}${lang === 'en' ? '.en' : ''}.html`;
+          const hubHref = `portals${lang === 'en' ? '.en' : ''}.html`;
+          const stuBases = ['student-portal', 'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile'];
+          const wantSet = stuBases.map((b) => `${b}${lang === 'en' ? '.en' : ''}.html`).concat(hubHref).sort();
+          ok(prt.sidenavs === 1, `${page}/${lang}: expected exactly one role sidebar, got ${prt.sidenavs}`);
+          ok(prt.navAside === 7 && prt.navDrawer === 7,
+            `${page}/${lang}: student registry count mismatch (aside ${prt.navAside} / drawer ${prt.navDrawer}, want 7)`);
+          ok(prt.drawerSummary, `${page}/${lang}: the native mobile nav disclosure (details>summary) is missing`);
+          ok(prt.navCurrentHrefs.length === 2 && prt.navCurrentHrefs.every((h) => h === selfHref),
+            `${page}/${lang}: expected this page active once per nav instance (2×self), got ${JSON.stringify(prt.navCurrentHrefs)}`);
+          ok(prt.plannedNavAnchors === 0, `${page}/${lang}: planned nav entries must never be anchors, got ${prt.plannedNavAnchors}`);
+          ok(prt.navListAnchors === 7, `${page}/${lang}: expected all 7 student nav items implemented as links, got ${prt.navListAnchors}`);
+          const uniq = [...new Set(prt.shellAnchors)].sort();
+          ok(JSON.stringify(uniq) === JSON.stringify(wantSet),
+            `${page}/${lang}: student shell anchors outside {7 student pages, hub}: ${JSON.stringify(uniq)}`);
+          ok(prt.shellAnchors.length === 17,
+            `${page}/${lang}: sanctioned student shell-anchor multiset must be 17 (7×2 + hub×3), got ${prt.shellAnchors.length}`);
         } else {
-          const navWant = { 'student-portal': 7, 'family-portal': 8, 'teacher-portal': 7 }[page];
+          const navWant = { 'family-portal': 8, 'teacher-portal': 7 }[page];
           const selfHref = `${page}${lang === 'en' ? '.en' : ''}.html`;
           const hubHref = `portals${lang === 'en' ? '.en' : ''}.html`;
           ok(prt.sidenavs === 1, `${page}/${lang}: expected exactly one role sidebar, got ${prt.sidenavs}`);
@@ -1078,7 +1120,9 @@ const FILTER_SPEC = {
         // Spec 018 — the compact role homes + family-child are table-free and mobile-clean; the three
         // homes also carry the HARD COMPACTNESS CEILING (the endless page can never return).
         const isCompactHome = page === 'student-portal' || page === 'family-portal' || page === 'teacher-portal';
-        if (isCompactHome || page === 'family-child') {
+        const isStudentInternal = STUDENT_INTERNAL.has(page);
+        const isRoleContent = isCompactHome || page === 'family-child' || isStudentInternal;
+        if (isRoleContent) {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
           ok(tables === 0, `${page}/${lang}: this portal must contain zero tables, got ${tables}`);
         }
@@ -1088,8 +1132,15 @@ const FILTER_SPEC = {
           await p.waitForTimeout(150);
           const tallH = await p.evaluate(() => document.documentElement.scrollHeight);
           ok(tallH >= 900 && tallH <= 2200, `${page}/${lang}: scrollHeight ${tallH}px is outside the compact window [900, 2200] @1366×768 — the endless page must not return`);
+        } else if (isStudentInternal) {
+          // Spec 019 — student internal pages carry the same HARD CEILING (endless page can never return);
+          // a lower floor [500] because a single-purpose page is legitimately shorter than a home.
+          await p.setViewportSize({ width: 1366, height: 768 });
+          await p.waitForTimeout(150);
+          const tallH = await p.evaluate(() => document.documentElement.scrollHeight);
+          ok(tallH >= 500 && tallH <= 2200, `${page}/${lang}: scrollHeight ${tallH}px is outside the compact window [500, 2200] @1366×768 — the endless page must not return`);
         }
-        if (isCompactHome || page === 'family-child') {
+        if (isRoleContent) {
           // mobile-first: no horizontal overflow at 390px (this context is discarded after)
           await p.setViewportSize({ width: 390, height: 900 });
           await p.waitForTimeout(120);

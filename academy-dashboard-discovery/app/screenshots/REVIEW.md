@@ -501,3 +501,40 @@ The ceiling was NOT retuned — every home landed well inside the D1 window [900
 **Failure sweep:** none — no endless page (hard ceiling smoke-pinned), no admin chrome in role pages, no fake actions (quick-links are honest «قريبًا» tiles, gates are labeled availability chips, zero form controls), **zero pay vocabulary/currency in the teacher family (three layers)**, family + family-child bodies carry zero currency/amount figures, zero `href="#"`, zero dead links, zero raw keys, RTL/LTR/dark/mobile clean, displaced capabilities RETAINED for Specs 019–021.
 
 **Automated:** build clean (51) · smoke PASS (50 loads; compact branches: sections 4–7, KPI===4, ceiling [900,2200], family bodyAnchors===5 exact child links, family-child 5 panels + default st1 + 5 #child= switcher links; **payHit + family zero-pay BYTE-VERBATIM; all Shell-v2/hub/admin asserts unchanged**) · axe **critical=0 serious=0** (3 compact homes ar/dark + en + family-child default/dark/en/switched) · 43/51 hash-identical · frozen-file diffs (enhance.js/nav.config.js/package.json/portal-shell.js) = 0 lines · build-html.mjs diff = exactly 2 registration lines.
+
+## Spec 019 — Student Internal Pages — 2026-07-04
+
+**Goal:** turn the six student planned nav entries into real COMPACT admin-like pages inside the untouched Shell v2, completing the Student Dashboard App. Visual grounding gate COMPLETE (`specs/019-…/visual-grounding.md`, 7 areas; no legacy student role — guardian surfaces + teacher-side records; the 3 profile gates fixed by the legacy profile-edit frame).
+
+**Baseline (T001):** HEAD `fe47f68` · tree clean · rebuild deterministic (51 files) · smoke 50 loads PASS · axe 0/0.
+
+### Heights (scrollHeight @1366×768, AR — the endless page can never return; window [500, 2200])
+
+| Page | Height | Sections/content | Verdict |
+|---|---|---|---|
+| student-portal (home, refreshed) | 1426 px | 5 bands; quick-tiles now 6 REAL links | ✅ compact; honesty fix live |
+| student-schedule | 1434 px | today+next · day-grouped week · live gate | ✅ inside [500,2200] |
+| student-homework | 1126 px | KPI trio · pending/in-progress/reviewed · submit gate | ✅ |
+| student-materials | 790 px | per-course groups · download gate; no hero | ✅ |
+| student-progress | 1222 px | KPI · course bars · attendance · achievements+celebration · signals | ✅ |
+| student-history | 920 px | out1 first · F6 records · display-only period chips | ✅ |
+| student-profile | 1422 px | identity · academic · guardian · prefs · 3 gates | ✅ |
+
+### Screenshot review (30 frames, 0 console errors)
+
+| # | Frame | Verdict |
+|---|---|---|
+| 1 | Schedule · AR desktop | ✅ today+next cards, day-grouped week (SAT/MON/TUE real, SUN/WED/THU truthful «يوم راحة» rest days), labeled status chips, ONE live gate, zero tables; sky sidebar, «جدولي» active |
+| 2 | Homework · AR desktop | ✅ KPI trio, pending/in-progress/reviewed sections, due+state chips, teacher-note lines on reviewed, submit gate |
+| 3 | Materials · AR desktop | ✅ per-course groups (math/programming), type chips, download gate; NO marketing hero |
+| 4 | Progress · AR desktop + dark | ✅ KPI band, `.pt-bar` course bars (78/41), attendance trio, re-homed achievements+celebration (unordered), teacher signals; zero charts/rank; dark-safe |
+| 5 | History · AR desktop | ✅ out1 real outcome first, F6 records (summary + homework note), display-only period chips, no dead filters |
+| 6 | Profile · AR desktop | ✅ identity + academic + guardian + preference chips + EXACTLY 3 backendRequired gates (photo/save/password); zero forms |
+| 7 | All six · AR mobile (390) | ✅ single-column stacks, zero horizontal overflow |
+| 8 | Schedule · EN desktop | ✅ LTR mirror, sidebar left, clean English, «Schedule» active |
+| 9 | Student home · refresh (tiles-now-links) | ✅ the quick-links band is six REAL `<a>` links (no «قريبًا» over a live page); home still compact (1426px) |
+| 10 | Family / teacher / family-child / admin | ✅ unchanged (49/63 hash-identical — proof, not re-shot) |
+
+**Failure sweep:** none — no long-page regression (ceiling smoke-pinned [500,2200] on internals, [900,2200] on homes), no admin chrome, no marketing hero, no charts/rank, no fake actions (every write a labeled `يتطلب الخادم`/backendRequired gate; internal-page bodies zero anchors; zero forms), zero `href="#"`/dead links/dead filters/raw keys, RTL/LTR/dark/mobile clean, teacher pay-free + family zero-pay held.
+
+**Automated:** build clean (63) · smoke PASS (62 loads; new student-internal branch — role/active===2×self/navListAnchors===7/shell multiset===17/bodyAnchors===0/forms===0/tables===0/ceiling[500,2200]/profile 3 gates; home re-scope bodyAnchors===6 exact siblings; **payHit + family zero-pay + family/teacher/hub/family-child/admin asserts BYTE-VERBATIM**) · axe **critical=0 serious=0** (6 pages AR light/dark + EN sample + home refresh) · **49/63 hash-identical** · frozen-file diffs (portal-shell/enhance/nav.config/package.json/family/teacher modules) = 0 · build-html.mjs diff = 6 imports + 6 entries + 1 amended line.

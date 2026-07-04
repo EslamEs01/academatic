@@ -90,6 +90,20 @@ const MATRIX = [
   { page: 'family-child', lang: 'ar', theme: 'dark' },
   { page: 'family-child', lang: 'en', theme: 'light' },
   { page: 'family-child', lang: 'ar', theme: 'light', hash: '#child=st11' },
+  // Spec 019 — the six student internal pages (AR light + AR dark; schedule as the EN sample)
+  { page: 'student-schedule', lang: 'ar', theme: 'light' },
+  { page: 'student-schedule', lang: 'ar', theme: 'dark' },
+  { page: 'student-schedule', lang: 'en', theme: 'light' },
+  { page: 'student-homework', lang: 'ar', theme: 'light' },
+  { page: 'student-homework', lang: 'ar', theme: 'dark' },
+  { page: 'student-materials', lang: 'ar', theme: 'light' },
+  { page: 'student-materials', lang: 'ar', theme: 'dark' },
+  { page: 'student-progress', lang: 'ar', theme: 'light' },
+  { page: 'student-progress', lang: 'ar', theme: 'dark' },
+  { page: 'student-history', lang: 'ar', theme: 'light' },
+  { page: 'student-history', lang: 'ar', theme: 'dark' },
+  { page: 'student-profile', lang: 'ar', theme: 'light' },
+  { page: 'student-profile', lang: 'ar', theme: 'dark' },
 ];
 
 (async () => {

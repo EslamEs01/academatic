@@ -42,9 +42,14 @@ function kpiCard(k, tone) {
   </div>`;
 }
 function kpiRow(kpis, tone) { return `<div class="pt-kpi-row">${kpis.map((k) => kpiCard(k, tone)).join('')}</div>`; }
+/* Spec 019 — status-aware: an `implemented` destination becomes a REAL link (the six
+ * student pages now exist — a «قريبًا» pill over a live page would lie); `planned` keeps
+ * the honest non-anchor tile. Family/teacher homes keep their own all-planned copies. */
 function quickTiles(role) {
-  return `<div class="pt-qtiles">${ROLE_NAV[role].filter((e) => e.id !== 'home').map((e) =>
-    `<div class="pt-qtile is-planned">${icon(e.icon, 'ico ico-sm')}<span>${esc(t(e.labelKey))}</span><span class="pt-qtile-soon">${esc(t('prt.nav.soon'))}</span></div>`).join('')}</div>`;
+  const en = getLang() === 'en';
+  return `<div class="pt-qtiles">${ROLE_NAV[role].filter((e) => e.id !== 'home').map((e) => e.status === 'implemented'
+    ? `<a class="pt-qtile" href="${e.page}${en ? '.en' : ''}.html">${icon(e.icon, 'ico ico-sm')}<span>${esc(t(e.labelKey))}</span></a>`
+    : `<div class="pt-qtile is-planned">${icon(e.icon, 'ico ico-sm')}<span>${esc(t(e.labelKey))}</span><span class="pt-qtile-soon">${esc(t('prt.nav.soon'))}</span></div>`).join('')}</div>`;
 }
 function plannedCard(p) {
   return `<div class="pt-card pt-planned">

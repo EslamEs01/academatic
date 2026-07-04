@@ -163,6 +163,23 @@ const MATRIX = [
   { page: 'family-child', lang: 'ar', theme: 'dark',  vp: 'desktop' },
   { page: 'family-child', lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'family-child', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 019 — the six student internal pages (AR desktop + mobile), a dark + an EN sample,
+  // and the student home refresh (quick-tiles are now REAL links). Full-page frames.
+  { page: 'student-schedule',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-schedule',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-schedule',  lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'student-homework',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-homework',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-materials', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-materials', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-progress',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-progress',  lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'student-progress',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-history',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-history',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-profile',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-profile',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-portal',    lang: 'ar', theme: 'light', vp: 'desktop', variant: 'tiles-now-links' },
   // Spec 017 — Shell v2: the native mobile nav disclosure, captured OPEN (amendment A1 proof)
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile', roleDrawer: true, variant: 'drawer-open' },
 ];

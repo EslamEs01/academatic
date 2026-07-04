@@ -139,12 +139,12 @@ export const TEACHER_PREVIEW = {
 export const ROLE_NAV = {
   student: [
     { id: 'home', labelKey: 'prt.nav.stu.home', icon: 'home', page: 'student-portal', status: 'implemented' },
-    { id: 'schedule', labelKey: 'prt.nav.stu.schedule', icon: 'schedule', page: 'student-schedule', status: 'planned' },
-    { id: 'homework', labelKey: 'prt.nav.stu.homework', icon: 'tasks', page: 'student-homework', status: 'planned' },
-    { id: 'materials', labelKey: 'prt.nav.stu.materials', icon: 'materials', page: 'student-materials', status: 'planned' },
-    { id: 'progress', labelKey: 'prt.nav.stu.progress', icon: 'trending-up', page: 'student-progress', status: 'planned' },
-    { id: 'history', labelKey: 'prt.nav.stu.history', icon: 'clipboard-check', page: 'student-history', status: 'planned' },
-    { id: 'profile', labelKey: 'prt.nav.stu.profile', icon: 'user', page: 'student-profile', status: 'planned' },
+    { id: 'schedule', labelKey: 'prt.nav.stu.schedule', icon: 'schedule', page: 'student-schedule', status: 'implemented' },
+    { id: 'homework', labelKey: 'prt.nav.stu.homework', icon: 'tasks', page: 'student-homework', status: 'implemented' },
+    { id: 'materials', labelKey: 'prt.nav.stu.materials', icon: 'materials', page: 'student-materials', status: 'implemented' },
+    { id: 'progress', labelKey: 'prt.nav.stu.progress', icon: 'trending-up', page: 'student-progress', status: 'implemented' },
+    { id: 'history', labelKey: 'prt.nav.stu.history', icon: 'clipboard-check', page: 'student-history', status: 'implemented' },
+    { id: 'profile', labelKey: 'prt.nav.stu.profile', icon: 'user', page: 'student-profile', status: 'implemented' },
   ],
   family: [
     { id: 'home', labelKey: 'prt.nav.fam.home', icon: 'home', page: 'family-portal', status: 'implemented' },
@@ -253,3 +253,73 @@ export const CHILD_PROFILE = {
 /* the fam1 child order for family-child panels + the home drill-down cards (deep
  * links `#child=st1|st6|st11|st12|st13`); default visible panel = the first (st1). */
 export const CHILD_ORDER = ['st1', 'st6', 'st11', 'st12', 'st13'];
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Spec 019 — Student Internal Pages (ADDITIVE; the 013/018 STUDENT_PREVIEW slices
+ * above are RETAINED verbatim and re-rendered by these pages — schedule reuses
+ * SESSIONS_FULL/SCHEDULE_WEEK, progress re-renders STUDENT_PREVIEW.{courses,
+ * attendance,achievements,celebration}). Below = only the NET-NEW authored bits the
+ * six pages need (homework state grouping, per-course material groups, teacher
+ * signals, extra history records, profile prefs + the three legacy-evidenced gates).
+ * All authored literals consistent with st1 (9 attended · math 78% · prog 41% ·
+ * streak 5); zero computed, zero figure-bearing/flagged fields. */
+export const STUDENT_PAGES = {
+  /* homework page — the KPI trio + five records grouped by state (pending/inProgress/
+   * reviewed); the first three re-reference the RETAINED hw1–hw3 titleKeys. */
+  homework: {
+    kpis: [
+      { icon: 'clock', value: 2, labelKey: 'prt.stu.pg.hw.kPending' },
+      { icon: 'tasks', value: 1, labelKey: 'prt.stu.pg.hw.kProgress' },
+      { icon: 'check-circle', value: 2, labelKey: 'prt.stu.pg.hw.kReviewed' },
+    ],
+    records: [
+      { id: 'hw1', titleKey: 'data.prtStuHw1', courseId: 'c1', dueKey: 'prt.stu.due.tomorrow', stateId: 'pending' },
+      { id: 'hw3', titleKey: 'data.prtStuHw3', courseId: 'c1', dueKey: 'prt.stu.due.nextWeek', stateId: 'pending' },
+      { id: 'hw2', titleKey: 'data.prtStuHw2', courseId: 'c3', dueKey: 'prt.stu.due.thu', stateId: 'inProgress' },
+      { id: 'hw4', titleKey: 'data.prtStuPgHw4', courseId: 'c1', dueKey: 'prt.stu.pg.hw.dueDone', stateId: 'reviewed', noteKey: 'data.prtStuPgHw4note' },
+      { id: 'hw5', titleKey: 'data.prtStuPgHw5', courseId: 'c3', dueKey: 'prt.stu.pg.hw.dueDone', stateId: 'reviewed', noteKey: 'data.prtStuPgHw5note' },
+    ],
+  },
+  /* materials page — per-course groups; mat1–mat3 re-referenced + one NEW item per course */
+  materials: {
+    groups: [
+      { courseId: 'c1', items: [
+        { id: 'mat1', titleKey: 'data.prtStuMat1', typeIcon: 'file-text', typeKey: 'prt.stu.pg.mat.tPdf' },
+        { id: 'mat2', titleKey: 'data.prtStuMat2', typeIcon: 'play', typeKey: 'prt.stu.pg.mat.tVideo' },
+        { id: 'matN1', titleKey: 'data.prtStuPgMat1', typeIcon: 'materials', typeKey: 'prt.stu.pg.mat.tSheet' },
+      ] },
+      { courseId: 'c3', items: [
+        { id: 'mat3', titleKey: 'data.prtStuMat3', typeIcon: 'materials', typeKey: 'prt.stu.pg.mat.tSheet' },
+        { id: 'matN2', titleKey: 'data.prtStuPgMat2', typeIcon: 'play', typeKey: 'prt.stu.pg.mat.tVideo' },
+      ] },
+    ],
+  },
+  /* progress page — two authored teacher-signal lines (progress re-renders the RETAINED
+   * STUDENT_PREVIEW.{overallProgress,courses,attendance,achievements,celebration}) */
+  progress: { signals: ['data.prtStuPgSig1', 'data.prtStuPgSig2'] },
+  /* history page — the F6 record list; h1 resolves the REAL out1 outcome, then the
+   * RETAINED h2/h3 record shapes re-referenced, then two NEW authored records. */
+  history: {
+    records: [
+      { id: 'h1', outcomeId: 'out1' },
+      { id: 'h2', courseId: 'c3', teacherKey: 'data.t.layan', dayKey: 'prt.stu.hist.dayMon', summaryKey: 'data.prtStuHist2sum', homeworkKey: 'data.prtStuHist2hw', hasAttachment: true },
+      { id: 'h3', courseId: 'c1', teacherKey: 'data.t.sara', dayKey: 'prt.stu.hist.daySat', summaryKey: 'data.prtStuHist3sum', homeworkKey: 'data.prtStuHist3hw' },
+      { id: 'h4', courseId: 'c1', teacherKey: 'data.t.sara', dayKey: 'prt.stu.pg.hist.dayThu', summaryKey: 'data.prtStuPgHist4sum', homeworkKey: 'data.prtStuPgHist4hw' },
+      { id: 'h5', courseId: 'c3', teacherKey: 'data.t.layan', dayKey: 'prt.stu.pg.hist.dayWed', summaryKey: 'data.prtStuPgHist5sum', homeworkKey: 'data.prtStuPgHist5hw' },
+    ],
+  },
+  /* profile page — display-only preference chips + the three legacy-evidenced write
+   * gates (the profile-edit page's exact surface: photo upload · profile save · password). */
+  profile: {
+    prefs: [
+      { icon: 'globe', labelKey: 'prt.stu.pg.prof.prefLang', valueKey: 'prt.stu.pg.prof.prefLangV' },
+      { icon: 'sun', labelKey: 'prt.stu.pg.prof.prefTheme', valueKey: 'prt.stu.pg.prof.prefThemeV' },
+      { icon: 'help', labelKey: 'prt.stu.pg.prof.prefContact', valueKey: 'prt.stu.pg.prof.prefContactV' },
+    ],
+    gates: [
+      { id: 'photoUpload', icon: 'materials', titleKey: 'prt.stu.pg.prof.gPhoto.t', descKey: 'prt.stu.pg.prof.gPhoto.d', availability: 'backendRequired' },
+      { id: 'profileSave', icon: 'user', titleKey: 'prt.stu.pg.prof.gSave.t', descKey: 'prt.stu.pg.prof.gSave.d', availability: 'backendRequired' },
+      { id: 'passwordChange', icon: 'help', titleKey: 'prt.stu.pg.prof.gPass.t', descKey: 'prt.stu.pg.prof.gPass.d', availability: 'backendRequired' },
+    ],
+  },
+};

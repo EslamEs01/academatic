@@ -976,6 +976,10 @@
   .pt-qtile-soon { margin-inline-start: auto; font-size: 10px; font-weight: 700; padding: 2px 7px;
     border-radius: 999px; background: var(--c-surface-2); color: var(--c-ink-3);
     border: 1px dashed color-mix(in srgb, var(--c-ink-3) 45%, transparent); flex-shrink: 0; }
+  /* Spec 019 — a quick-link tile that targets a LIVE page is a real link (implemented status) */
+  a.pt-qtile { cursor: pointer; text-decoration: none; }
+  a.pt-qtile:hover { border-color: var(--pt-accent); background: var(--pt-accent-weak); color: var(--pt-accent-ink); }
+  a.pt-qtile:hover .ico { color: var(--pt-accent-ink); }
 
   /* the real drill-down link on a family child card (the «فتح ملف الابن» affordance) */
   .pt-drill { display: inline-flex; align-items: center; gap: 6px; margin-top: 2px;

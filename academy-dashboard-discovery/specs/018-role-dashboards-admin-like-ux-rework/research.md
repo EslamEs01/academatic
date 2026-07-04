@@ -69,3 +69,7 @@ visible). **Consequences vs the original D6/D8:** the switcher is five `<a href=
 to **=== 5** (all `#child=(st1|st6|st11|st12|st13)`; smoke pins this). The three homes and the family-home
 body-anchor count (===5 child drill-downs) are unaffected. This is the only decision that changed during
 implementation; everything else (ceiling, bands, KPI===4, identity 43/51, pay-free, displacement) landed as planned.
+
+## Displacement re-homing — delivered by Spec 019 (recorded 2026-07-04)
+
+The Spec-018 displacement map's STUDENT rows are now re-homed (the RETAINED fixtures/keys render again; none were retired): achievements + celebration → `student-progress`; the full week → `student-schedule`; the full materials library + `matDownload` gate → `student-materials`; the full history + `fullHistory` gate + the `out1` record → `student-history` (fullHistory stays a planned gate on the home; the history PAGE renders the records); the profile detail + edit note → `student-profile` (as the three backendRequired gates); the `hwSubmit` gate → `student-homework`. Zero capability deletion; the student home stayed compact and its quick-tiles became real links (the D13 honesty fix). Family (020) and teacher (021) rows remain displaced-and-retained per the same map.
