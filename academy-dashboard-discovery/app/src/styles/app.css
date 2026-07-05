@@ -1010,4 +1010,92 @@
   .pt-child-name { font-weight: 800; color: var(--c-ink); font-size: 17px; line-height: 1.2; }
   .pt-child-meta { display: grid; grid-template-columns: 1fr; gap: 6px; }
   @media (min-width: 640px) { .pt-child-meta { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ============================================================================
+     Spec 022 — the LIVING LAYER (additive; no rule above is touched). Shared
+     primitives consumed by the reworked hub + role homes: identity hero · living
+     day rail · status stories · workflow flow strip · guided gate panels · joy.
+     Per-role accent comes from the existing --pt-accent* tokens (dark-safe). ALL
+     auto-playing motion is quarantined inside the single prefers-reduced-motion:
+     no-preference block at the very end; the no-motion state is the static default.
+     ========================================================================== */
+
+  /* — identity hero (replaces the plain head + KPI overview on the three homes) — */
+  .pt-idhero { position: relative; overflow: hidden; border-radius: 22px; padding: clamp(18px, 4vw, 26px);
+    background: linear-gradient(135deg, var(--pt-accent-weak), var(--c-surface) 72%);
+    border: 1px solid var(--c-border); display: flex; flex-direction: column; gap: 16px; }
+  .pt-idhero::before { content: ''; position: absolute; inset-block-start: -42%; inset-inline-end: -8%;
+    width: 340px; height: 340px; border-radius: 50%; pointer-events: none; opacity: .55;
+    background: radial-gradient(circle, var(--pt-accent-weak), transparent 70%); }
+  .pt-idhero-top { position: relative; z-index: 1; display: flex; align-items: center; gap: 14px; }
+  .pt-idhero-hi { font-size: clamp(19px, 3.6vw, 25px); font-weight: 800; color: var(--c-ink); line-height: 1.2; }
+  .pt-idhero-sub { font-size: 13px; color: var(--c-ink-2); line-height: 1.6; margin-top: 3px; max-width: 60ch; }
+  .pt-idhero-stats { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  @media (max-width: 540px) { .pt-idhero-stats { grid-template-columns: 1fr; } }
+  .pt-idhero-stat { background: color-mix(in srgb, var(--c-surface) 76%, transparent); border: 1px solid var(--c-border);
+    border-radius: 14px; padding: 11px 13px; display: flex; flex-direction: column; gap: 3px; }
+  .pt-idhero-stat-top { display: flex; align-items: center; gap: 8px; }
+  .pt-idhero-stat-num { font-size: 22px; font-weight: 800; color: var(--pt-accent-ink); line-height: 1; }
+  .pt-idhero-stat-label { font-size: 12px; font-weight: 700; color: var(--c-ink); }
+  .pt-idhero-stat-story { font-size: 11.5px; color: var(--c-ink-2); line-height: 1.5; }
+
+  /* — living day rail: today as now / next / done stops — */
+  .pt-rail { display: flex; flex-direction: column; gap: 10px; }
+  .pt-stop { display: flex; gap: 12px; align-items: flex-start; background: var(--c-surface);
+    border: 1px solid var(--c-border); border-radius: 16px; padding: 13px 15px; }
+  .pt-stop-dot { flex-shrink: 0; width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; background: var(--c-ink-3); }
+  .pt-stop-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .pt-stop-row { display: flex; align-items: center; gap: 10px; }
+  .pt-stop-time { font-weight: 800; color: var(--pt-accent-ink); font-size: 13px; min-width: 46px; }
+  .pt-stop-title { font-weight: 800; color: var(--c-ink); font-size: 13.5px; }
+  .pt-stop-sub { font-size: 12px; color: var(--c-ink-2); line-height: 1.5; }
+  .pt-stop-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px;
+    background: var(--pt-accent-weak); color: var(--pt-accent-ink); font-size: 10.5px; font-weight: 700; }
+  .pt-stop.is-now { border-color: var(--pt-accent); box-shadow: 0 0 0 3px var(--pt-accent-weak); }
+  .pt-stop.is-now .pt-stop-dot { background: var(--pt-accent); }
+  .pt-stop.is-next { border-color: color-mix(in srgb, var(--pt-accent) 42%, var(--c-border)); }
+  .pt-stop.is-next .pt-stop-dot { background: var(--pt-accent-ink); }
+  .pt-stop.is-done { opacity: .72; }
+
+  /* — status story rows (a number that tells a story + a real destination) — */
+  .pt-story { display: flex; align-items: center; gap: 13px; background: var(--c-surface);
+    border: 1px solid var(--c-border); border-radius: 16px; padding: 14px 16px; }
+  .pt-story-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .pt-story-title { font-weight: 800; color: var(--c-ink); font-size: 13.5px; }
+  .pt-story-sub { font-size: 12.5px; color: var(--c-ink-2); line-height: 1.55; }
+
+  /* — teacher workflow flow strip: prepare → attend → record → review — */
+  .pt-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  @media (max-width: 640px) { .pt-flow { grid-template-columns: repeat(2, 1fr); } }
+  .pt-flow-step { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 14px;
+    padding: 12px; display: flex; flex-direction: column; gap: 7px; }
+  .pt-flow-head { display: flex; align-items: center; gap: 8px; }
+  .pt-flow-num { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--pt-accent-weak);
+    color: var(--pt-accent-ink); display: grid; place-items: center; font-size: 11px; font-weight: 800; }
+  .pt-flow-title { font-size: 12.5px; font-weight: 800; color: var(--c-ink); }
+  .pt-flow-sub { font-size: 11px; color: var(--c-ink-2); line-height: 1.5; }
+  .pt-flow-step.is-gated { border-style: dashed; border-color: color-mix(in srgb, var(--pt-accent) 45%, var(--c-border)); }
+
+  /* — guided gate panel (a visual upgrade of .pt-planned; stays non-interactive) — */
+  .pt-planned.pt-guide { background: linear-gradient(135deg, color-mix(in srgb, var(--pt-accent-weak) 45%, var(--c-surface)), var(--c-surface)); }
+  .pt-guide-line { display: flex; align-items: flex-start; gap: 8px; font-size: 11.5px; color: var(--c-ink-2); line-height: 1.5; }
+  .pt-guide-line .ico { color: var(--pt-accent); flex-shrink: 0; margin-top: 1px; }
+
+  /* — joy: hover lift on link cards/tiles + celebration wash — */
+  .pt-lift { transition: transform .18s var(--ease), box-shadow .18s var(--ease), border-color .18s var(--ease); }
+  .pt-lift:hover { transform: translateY(-2px); box-shadow: var(--sh-md); border-color: var(--pt-accent); }
+  .pt-cele { background: linear-gradient(135deg, var(--pt-accent-weak), var(--c-surface));
+    border-color: color-mix(in srgb, var(--pt-accent) 30%, var(--c-border)); }
+
+  /* — motion quarantine: the ONLY auto-playing animations, all reduced-motion-safe.
+     Static default (this block off) already shows the finished state. — */
+  @keyframes lv-fadeup { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes lv-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes lv-pulse { 0%, 100% { box-shadow: 0 0 0 0 var(--pt-accent-weak); } 50% { box-shadow: 0 0 0 7px transparent; } }
+  @media (prefers-reduced-motion: no-preference) {
+    .pt-idhero { animation: lv-fadeup .5s var(--ease) both; }
+    .pt-bar.is-live > span { transform-origin: left center; animation: lv-fill .8s var(--ease) both; }
+    [dir="rtl"] .pt-bar.is-live > span { transform-origin: right center; }
+    .pt-stop.is-now .pt-stop-dot { animation: lv-pulse 2.4s var(--ease) infinite; }
+  }
 }

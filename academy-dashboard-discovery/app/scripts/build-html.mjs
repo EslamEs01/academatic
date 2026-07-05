@@ -45,6 +45,13 @@ import { renderStudentMaterials } from '../src/js/pages/student-materials.js';
 import { renderStudentProgress } from '../src/js/pages/student-progress.js';
 import { renderStudentHistory } from '../src/js/pages/student-history.js';
 import { renderStudentProfile } from '../src/js/pages/student-profile.js';
+import { renderFamilyChildren } from '../src/js/pages/family-children.js';
+import { renderFamilySchedule } from '../src/js/pages/family-schedule.js';
+import { renderFamilyProgress } from '../src/js/pages/family-progress.js';
+import { renderFamilyBilling } from '../src/js/pages/family-billing.js';
+import { renderFamilyRequests } from '../src/js/pages/family-requests.js';
+import { renderFamilyMaterials } from '../src/js/pages/family-materials.js';
+import { renderFamilyProfile } from '../src/js/pages/family-profile.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -97,6 +104,13 @@ const PAGES = [
   { base: 'student-progress', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'progress', titleKey: 'prt.title.stuProgress', render: renderStudentProgress },
   { base: 'student-history', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'history', titleKey: 'prt.title.stuHistory', render: renderStudentHistory },
   { base: 'student-profile', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'profile', titleKey: 'prt.title.stuProfile', render: renderStudentProfile },
+  { base: 'family-children', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'children', titleKey: 'prt.title.famChildren', render: renderFamilyChildren },
+  { base: 'family-schedule', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'schedule', titleKey: 'prt.title.famSchedule', render: renderFamilySchedule },
+  { base: 'family-progress', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'progress', titleKey: 'prt.title.famProgress', render: renderFamilyProgress },
+  { base: 'family-billing', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'billing', titleKey: 'prt.title.famBilling', render: renderFamilyBilling },
+  { base: 'family-requests', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'requests', titleKey: 'prt.title.famRequests', render: renderFamilyRequests },
+  { base: 'family-materials', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'materials', titleKey: 'prt.title.famMaterials', render: renderFamilyMaterials },
+  { base: 'family-profile', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'profile', titleKey: 'prt.title.famProfile', render: renderFamilyProfile },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

@@ -148,13 +148,13 @@ export const ROLE_NAV = {
   ],
   family: [
     { id: 'home', labelKey: 'prt.nav.fam.home', icon: 'home', page: 'family-portal', status: 'implemented' },
-    { id: 'children', labelKey: 'prt.nav.fam.children', icon: 'families', page: 'family-children', status: 'planned' },
-    { id: 'schedule', labelKey: 'prt.nav.fam.schedule', icon: 'calendar', page: 'family-schedule', status: 'planned' },
-    { id: 'progress', labelKey: 'prt.nav.fam.progress', icon: 'trending-up', page: 'family-progress', status: 'planned' },
-    { id: 'billing', labelKey: 'prt.nav.fam.billing', icon: 'wallet', page: 'family-billing', status: 'planned' },
-    { id: 'requests', labelKey: 'prt.nav.fam.requests', icon: 'help', page: 'family-requests', status: 'planned' },
-    { id: 'materials', labelKey: 'prt.nav.fam.materials', icon: 'materials', page: 'family-materials', status: 'planned' },
-    { id: 'profile', labelKey: 'prt.nav.fam.profile', icon: 'user', page: 'family-profile', status: 'planned' },
+    { id: 'children', labelKey: 'prt.nav.fam.children', icon: 'families', page: 'family-children', status: 'implemented' },
+    { id: 'schedule', labelKey: 'prt.nav.fam.schedule', icon: 'calendar', page: 'family-schedule', status: 'implemented' },
+    { id: 'progress', labelKey: 'prt.nav.fam.progress', icon: 'trending-up', page: 'family-progress', status: 'implemented' },
+    { id: 'billing', labelKey: 'prt.nav.fam.billing', icon: 'wallet', page: 'family-billing', status: 'implemented' },
+    { id: 'requests', labelKey: 'prt.nav.fam.requests', icon: 'help', page: 'family-requests', status: 'implemented' },
+    { id: 'materials', labelKey: 'prt.nav.fam.materials', icon: 'materials', page: 'family-materials', status: 'implemented' },
+    { id: 'profile', labelKey: 'prt.nav.fam.profile', icon: 'user', page: 'family-profile', status: 'implemented' },
   ],
   teacher: [
     { id: 'home', labelKey: 'prt.nav.tch.home', icon: 'home', page: 'teacher-portal', status: 'implemented' },
@@ -322,4 +322,108 @@ export const STUDENT_PAGES = {
       { id: 'passwordChange', icon: 'help', titleKey: 'prt.stu.pg.prof.gPass.t', descKey: 'prt.stu.pg.prof.gPass.d', availability: 'backendRequired' },
     ],
   },
+};
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Spec 020 — Family / Guardian Internal Pages (ADDITIVE; every retained 014/018
+ * slice above stays verbatim and is re-rendered by these pages). Only the NET-NEW
+ * authored bits: the hour-quota trio (hours are session units — figure-safe, never
+ * a ledger), per-child subscription context, invoice STATUS rows (the shape has NO
+ * figure-bearing field by construction — the legacy column is deliberately dropped),
+ * request-type cards re-referencing the RETAINED prt.fam.req.* register, the two
+ * missing per-child material items, and the guardian profile prefs + the three
+ * legacy-evidenced write gates. All authored literals consistent with fam1 and the
+ * five family-child children. */
+export const FAMILY_PAGES = {
+  /* the legacy home hour-quota idea (Total/Remaining/Taken) — authored, 40 = 12 + 28;
+   * takenH mirrors the retained FAMILY_PREVIEW.attendance.attended register */
+  quota: { totalH: 40, takenH: 12, remainH: 28 },
+  /* per-child directory context (identity/course/teacher/progress/status resolve from
+   * students.js + SUBJ maps + the RETAINED kidHints; subscription = the family plan) */
+  children: [
+    { childId: 'st1', subscriptionKey: 'data.fam.fam1.plan' },
+    { childId: 'st6', subscriptionKey: 'data.fam.fam1.plan' },
+    { childId: 'st11', subscriptionKey: 'data.fam.fam1.plan' },
+    { childId: 'st12', subscriptionKey: 'data.fam.fam1.plan' },
+    { childId: 'st13', subscriptionKey: 'data.fam.fam1.plan' },
+  ],
+  /* invoice STATUS rows — serial/month/due/course/status ONLY (no figure field exists) */
+  billing: {
+    invoices: [
+      { id: 'inv1', serialKey: 'data.prtFamPgInv1s', monthKey: 'data.prtFamPgInv1m', dueKey: 'data.prtFamPgInv1d', courseId: 'c1', statusTone: 'completed' },
+      { id: 'inv2', serialKey: 'data.prtFamPgInv2s', monthKey: 'data.prtFamPgInv2m', dueKey: 'data.prtFamPgInv2d', courseId: 'c3', statusTone: 'completed' },
+      { id: 'inv3', serialKey: 'data.prtFamPgInv3s', monthKey: 'data.prtFamPgInv3m', dueKey: 'data.prtFamPgInv3d', courseId: 'c1', statusTone: 'upcoming' },
+    ],
+  },
+  /* requests page summary counts — the four request TYPES render as bespoke sections on
+   * the page itself (each re-homing its RETAINED prt.fam.req.* register verbatim) */
+  requests: { counts: { types: 4, open: 0 } },
+  /* materials — the RETAINED FAMILY_PREVIEW.materials rows re-referenced (st1/st11/st6)
+   * + the two NEW items so every child has coverage */
+  materials: {
+    extra: [
+      { id: 'fm4', titleKey: 'data.prtFamPgMat4', childId: 'st12', typeIcon: 'file-text', typeKey: 'prt.stu.pg.mat.tPdf' },
+      { id: 'fm5', titleKey: 'data.prtFamPgMat5', childId: 'st13', typeIcon: 'play', typeKey: 'prt.stu.pg.mat.tVideo' },
+    ],
+  },
+  /* guardian profile — display-only prefs + the profile-edit page's exact write surface */
+  profile: {
+    prefs: [
+      { icon: 'globe', labelKey: 'prt.fam.pg.prof.prefLang', valueKey: 'prt.fam.pg.prof.prefLangV' },
+      { icon: 'sun', labelKey: 'prt.fam.pg.prof.prefTheme', valueKey: 'prt.fam.pg.prof.prefThemeV' },
+      { icon: 'help', labelKey: 'prt.fam.pg.prof.prefContact', valueKey: 'prt.fam.pg.prof.prefContactV' },
+    ],
+    gates: [
+      { id: 'photoUpload', icon: 'materials', titleKey: 'prt.fam.pg.prof.gPhoto.t', descKey: 'prt.fam.pg.prof.gPhoto.d', availability: 'backendRequired' },
+      { id: 'profileSave', icon: 'user', titleKey: 'prt.fam.pg.prof.gSave.t', descKey: 'prt.fam.pg.prof.gSave.d', availability: 'backendRequired' },
+      { id: 'passwordChange', icon: 'help', titleKey: 'prt.fam.pg.prof.gPass.t', descKey: 'prt.fam.pg.prof.gPass.d', availability: 'backendRequired' },
+    ],
+  },
+};
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Spec 022 — Living Dashboards Experience Rework (ADDITIVE; nothing above is
+ * touched). The hero counter VALUES re-express the RETAINED COMPACT_HOME.kpis
+ * literals (same authored numbers, now presented as identity counters with a
+ * one-line story); labels reuse the existing prt.kpi.* keys, stories are the NEW
+ * prt.lv.* namespace. Rail stops derive at render time from the EXISTING today
+ * slices — no new session data. Teacher counters are hour/class/task COUNTS only
+ * (the teacher GLOBAL hard rule holds — zero figure-bearing/flagged fields anywhere).
+ * The hub childView entry demotes the student surface to the family journey. */
+export const LIVING_HOME = {
+  family: {
+    hero: { emoji: '🌿', subKey: 'prt.lv.fam.heroSub', counters: [
+      { icon: 'families',        value: 5, labelKey: 'prt.kpi.fam.children',  storyKey: 'prt.lv.fam.st.kids' },
+      { icon: 'calendar',        value: 3, labelKey: 'prt.kpi.fam.upcoming',  storyKey: 'prt.lv.fam.st.today' },
+      { icon: 'alert-triangle',  value: 1, labelKey: 'prt.kpi.fam.followUps', storyKey: 'prt.lv.fam.st.watch' },
+    ] },
+    stories: [
+      { icon: 'wallet',  tone: 'completed', titleKey: 'prt.lv.fam.story.billT', subKey: 'prt.lv.fam.story.billD' },
+      { icon: 'message-circle', tone: 'neutral', titleKey: 'prt.lv.fam.story.reqT',  subKey: 'prt.lv.fam.story.reqD' },
+    ],
+  },
+  teacher: {
+    hero: { emoji: '👋', subKey: 'prt.lv.tea.heroSub', counters: [
+      { icon: 'schedule',        value: 2, labelKey: 'prt.kpi.tch.today',     storyKey: 'prt.lv.tea.st.today' },
+      { icon: 'alert-triangle',  value: 2, labelKey: 'prt.kpi.tch.followUps', storyKey: 'prt.lv.tea.st.watch' },
+      { icon: 'tasks',           value: 3, labelKey: 'prt.kpi.tch.tasks',     storyKey: 'prt.lv.tea.st.tasks' },
+    ] },
+    /* the outcome workflow as a 4-step visual flow; the RECORD step is the honest gate */
+    flow: [
+      { icon: 'file-text',        titleKey: 'prt.lv.tea.flow.prepT',   subKey: 'prt.lv.tea.flow.prepD' },
+      { icon: 'check-circle',     titleKey: 'prt.lv.tea.flow.attendT', subKey: 'prt.lv.tea.flow.attendD' },
+      { icon: 'clipboard-check',  titleKey: 'prt.lv.tea.flow.recT',    subKey: 'prt.lv.tea.flow.recD', gated: true },
+      { icon: 'trending-up',      titleKey: 'prt.lv.tea.flow.revT',    subKey: 'prt.lv.tea.flow.revD' },
+    ],
+  },
+  student: {
+    hero: { emoji: '🌟', subKey: 'prt.lv.stu.heroSub', counters: [
+      { icon: 'check-circle',  value: 9,  labelKey: 'prt.kpi.stu.attended', storyKey: 'prt.lv.stu.st.attended' },
+      { icon: 'trending-up',   value: 78, format: 'percent', labelKey: 'prt.kpi.stu.progress', storyKey: 'prt.lv.stu.st.progress' },
+      { icon: 'tasks',         value: 3,  labelKey: 'prt.kpi.stu.homework', storyKey: 'prt.lv.stu.st.homework' },
+    ] },
+  },
+  /* the hub's demoted child-view entry — a real link to the preserved student
+   * pages, framed as a preview inside the family journey (never a fourth role). */
+  hub: { childView: { icon: 'user', page: 'student-portal', tKey: 'prt.lv.hub.cvT', dKey: 'prt.lv.hub.cvD', openKey: 'prt.lv.hub.cvOpen' } },
 };

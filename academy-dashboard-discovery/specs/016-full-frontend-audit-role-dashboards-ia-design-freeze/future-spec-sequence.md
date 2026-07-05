@@ -66,3 +66,37 @@ the frozen enhance.js hash reads only `#view=`), default st1; the family home ca
 links (body anchors===5). Displacement is law — zero capability deleted; the displaced 013/014/015 fixtures/keys
 are RETAINED (grep-audited) for Specs 019–021. Identity 43/51 (40 admin + index + hub pair byte-identical);
 teacher pay-free three layers green; the Spec-012 payHit + family zero-pay asserts held BYTE-VERBATIM.
+
+---
+
+## Append-only amendment — Spec 021 (2026-07-05) supersedes the 018 renumbering (DEC-009)
+
+Spec 021 (Role Model & Student Reclassification Audit) proved from the legacy crawl that the system
+has **three** primary logins only — **Admin `/management/*` · Teacher `/teacher/*` · Family/Guardian
+`/student/*`** (there is NO standalone Student role; every legacy `student-*` route is a guardian
+surface; the rebuilt hub's standalone Student portal was a classification drift — its persona Salman
+IS fam1's child st1). Binding decisions DEC-001…DEC-009 fold Student under Family as the child's own
+view (preserved, never deleted) and require the dashboards be made *living* before any more feature
+pages. The sequence is therefore revised (this supersedes the Spec-018 sequence note above):
+
+**021** Role Model & Student Reclassification Audit · **022** Living Dashboards Experience Rework ·
+**023** Full Legacy Coverage Audit 000–020 · **024** Corrections From Legacy Coverage Audit ·
+**025** Teacher Internal Pages (resumes here, once on the corrected model) · **026** Admin Control/
+Sessions/Operations · **027** Admin Families/Students/Courses/Groups · **028** Admin Teachers/
+Performance · **029** Admin Reports/Analytics/Feedback/Forms · **030** Admin Finance/Invoices/
+Salaries/Banks · **031** Admin Management/Content/Certificates/Settings · **032** Final Full Frontend
+QA + No-Missing Coverage Audit.
+
+## Spec 022 delivered (2026-07-06)
+
+The hub + the three role homes became LIVING cockpits and the corrected role model landed: hub =
+2 primary role cards (family + teacher) + admin console + ONE demoted child-view preview (→ the
+preserved student pages); five shared living primitives shipped in `portal-page.js` (idHero · dayRail
+· storyRow · flowStrip · guidePanel) over an additive `app.css` living layer (all motion quarantined
+behind `prefers-reduced-motion: no-preference`); the student surface reframed «بوابة الطالب» → «عرض
+الابن» at the locale layer with the six internal MODULES untouched (their `#page-body` byte-equal —
+extraction-proven); family-child gained the ONE sanctioned fold-point link (body anchors 5→6).
+Identity **55/77** (22 intentional rebakes: hub·family-portal·teacher-portal ×2 + student ×14 +
+family-child ×2); 40 admin + index + all other family internals byte-identical; family-children
+byte-identical; portal-shell/enhance/nav.config/build-html/package.json 0-diff; teacher pay-free
+three layers + payHit + family zero-pay held green/byte-verbatim.

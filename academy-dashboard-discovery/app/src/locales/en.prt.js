@@ -72,11 +72,24 @@ export default {
     prtStuPgHist4hw: 'Homework: finish the remaining exercises.',
     prtStuPgHist5sum: 'A fun intro to programming — you grasped the idea quickly.',
     prtStuPgHist5hw: 'Homework: change the variable values in the example.',
+    /* Spec 020 — family internal pages authored content (display-only; the invoice rows
+     * carry serial/month/due/course/status labels ONLY — zero figure-bearing fields) */
+    prtFamPgInv1s: 'INV-2026-05-01',
+    prtFamPgInv1m: 'May 2026',
+    prtFamPgInv1d: 'Early May',
+    prtFamPgInv2s: 'INV-2026-06-01',
+    prtFamPgInv2m: 'June 2026',
+    prtFamPgInv2d: 'Early June',
+    prtFamPgInv3s: 'INV-2026-07-01',
+    prtFamPgInv3m: 'July 2026',
+    prtFamPgInv3d: 'Early July',
+    prtFamPgMat4: 'Science lesson summary (PDF)',
+    prtFamPgMat5: 'Video: unit-one words',
   },
   prt: {
-    title: { hub: 'Portals — role demo', student: 'Student portal', family: 'Family portal', teacher: 'Teacher portal', familyChild: 'Child file', stuSchedule: 'My schedule', stuHomework: 'My homework', stuMaterials: 'Materials', stuProgress: 'My progress', stuHistory: 'History', stuProfile: 'My profile' },
-    portal: { hub: 'Portal hub', student: 'Student portal', family: 'Family portal', teacher: 'Teacher portal' },
-    role: { hub: 'Demo preview', student: 'Student', family: 'Guardian', teacher: 'Teacher' },
+    title: { hub: 'Portals — role demo', student: 'Child view', family: 'Family portal', teacher: 'Teacher portal', familyChild: 'Child file', stuSchedule: 'My schedule', stuHomework: 'My homework', stuMaterials: 'Materials', stuProgress: 'My progress', stuHistory: 'History', stuProfile: 'My profile', famChildren: 'Children', famSchedule: 'Family schedule', famProgress: 'Children’s progress', famBilling: 'Billing status', famRequests: 'Requests', famMaterials: 'Children’s materials', famProfile: 'Family profile' },
+    portal: { hub: 'Portal hub', student: 'Child view', family: 'Family portal', teacher: 'Teacher portal' },
+    role: { hub: 'Demo preview', student: 'Family child', family: 'Guardian', teacher: 'Teacher' },
     shell: {
       switchRole: 'Switch role',
       greet: 'Hi,',
@@ -161,6 +174,44 @@ export default {
       adminD: 'The full administrative interface (demo).',
       adminOpen: 'Open admin console',
       personaNote: 'Demo persona:',
+    },
+
+    /* Spec 022 — the living layer (mirrors ar.prt.js). Family copy is zero-pay-safe;
+     * teacher copy carries zero pay/figure-bearing tokens (the pay-free GLOBAL rule). */
+    lv: {
+      guideWhenLive: 'What happens when live: the action is saved for real and the right person is notified.',
+      fam: {
+        heroSub: 'Your family today at a glance — who needs your attention, and where each child stands.',
+        st: { kids: 'Five children in one place', today: 'Sessions scheduled today across your children', watch: 'One child needs a gentle follow-up' },
+        story: {
+          billT: 'Invoices settled', billD: 'Nothing overdue — status only, no figures.',
+          reqT: 'No open requests', reqD: 'Your requests and follow-ups with the academy will show here when opened.',
+        },
+      },
+      tea: {
+        heroSub: 'Your teaching day at a glance — today’s classes, who needs follow-up, and the outcome flow.',
+        st: { today: 'Two classes on your schedule today', watch: 'Two students need a gentle follow-up', tasks: 'Three prep tasks still open' },
+        flow: {
+          prepT: 'Prepare', prepD: 'Review the lesson and ready the materials.',
+          attendT: 'Attend', attendD: 'Start the class and mark attendance.',
+          recT: 'Record outcome', recD: 'Attendance, assessment and summary — needs the server.',
+          revT: 'Review', revD: 'Follow the student’s progress before the next class.',
+        },
+      },
+      stu: {
+        heroSub: 'Child view — Salman’s learning day: his sessions, progress and homework in one place.',
+        st: { attended: 'Nine sessions attended steadily', progress: 'Steady progress at his level', homework: 'Three homework items open' },
+      },
+      hub: {
+        cvT: 'Child view — preview',
+        cvD: 'Preview the child’s dashboard (Salman) inside the family journey; children are reached through the family account — no separate login.',
+        cvOpen: 'Open preview',
+      },
+      child: {
+        foldT: 'Open the full child view',
+        foldD: 'An illustrative preview of the child’s learning day (Salman) — inside the family journey.',
+        foldOpen: 'Open preview',
+      },
     },
 
     stu: {
@@ -300,6 +351,35 @@ export default {
         matDownload: { t: 'Download files', d: 'Downloading material files requires the real backend.' },
         fullHistory: { t: 'Full history', d: 'Browsing all your children’s past sessions will arrive in the dashboard later.' },
         meetingRequest: { t: 'Request a meeting', d: 'Booking a follow-up meeting with the academy requires the backend.' },
+      },
+      /* Spec 020 — the seven family internal pages (children/schedule/progress/billing/requests/materials/profile) */
+      pg: {
+        kids: { title: 'Children', sub: 'All your children in one place — open any child’s file for details.', countHint: 'children on the family plan', subLabel: 'Subscription' },
+        sched: { title: 'Family schedule', sub: 'Your children’s sessions today and across the week, each tagged with the child’s name.', liveGate: 'Joining your children’s live sessions requires backend activation.' },
+        prog: { title: 'Children’s progress', sub: 'Each child’s level, attendance and teacher notes.', famTitle: 'Family summary', kidsTitle: 'Each child’s progress', openFile: 'Open child file' },
+        bill: {
+          title: 'Billing status', sub: 'Status only — no figures; settlement is handled by the academy administration.',
+          quotaTitle: 'Hour balance', qTotal: 'Total hours', qTaken: 'Hours used', qRemain: 'Hours remaining',
+          subsTitle: 'Children’s subscriptions', invTitle: 'Invoice record', invHint: 'Status only, per invoice',
+          serial: 'Reference no.', month: 'Month', due: 'Due window', stSettled: 'Settled', stUpcoming: 'Upcoming',
+          adminNote: 'Invoice details and settlement are managed by the academy administration and require the backend.',
+        },
+        req: {
+          title: 'Requests', sub: 'What you can ask the academy for — carrying it out requires the backend.',
+          kTypes: 'Request types', kOpen: 'Open requests',
+          stAvailable: 'Available to request', stCaution: 'Mind the conditions',
+          gate: 'Sending this request requires backend activation.',
+        },
+        mat: { title: 'Children’s materials', sub: 'Each child’s files and resources, grouped by name.', empty: 'No materials yet for this child.' },
+        prof: {
+          title: 'Family profile', sub: 'Your account, family details and children.',
+          identityTitle: 'Guardian', acctTitle: 'Account details', kidsTitle: 'Children', prefTitle: 'Preferences',
+          kidsLine: 'Five children on the family plan',
+          prefLang: 'Language', prefLangV: 'Arabic', prefTheme: 'Theme', prefThemeV: 'System', prefContact: 'Contact', prefContactV: 'Email',
+          gPhoto: { t: 'Change photo', d: 'Uploading a new photo requires the real backend.' },
+          gSave: { t: 'Save account details', d: 'Editing your name and email requires the real backend.' },
+          gPass: { t: 'Change password', d: 'Updating your password requires the real backend.' },
+        },
       },
       noteT: 'Family dashboard — first version',
       noteD: 'This is your family home. Requests, billing, and live sessions require the backend; messages and notifications arrive in Spec 016.',

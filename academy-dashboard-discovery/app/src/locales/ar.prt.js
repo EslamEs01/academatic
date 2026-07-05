@@ -74,11 +74,24 @@ export default {
     prtStuPgHist4hw: 'الواجب: إكمال التمارين المتبقية.',
     prtStuPgHist5sum: 'مقدمة ممتعة للبرمجة — استوعبت الفكرة بسرعة.',
     prtStuPgHist5hw: 'الواجب: تعديل قيم المتغيّرات في المثال.',
+    /* Spec 020 — family internal pages authored content (display-only; the invoice rows
+     * carry serial/month/due/course/status labels ONLY — zero figure-bearing fields) */
+    prtFamPgInv1s: 'ف-٢٠٢٦-٠٥-٠١',
+    prtFamPgInv1m: 'مايو ٢٠٢٦',
+    prtFamPgInv1d: 'مطلع مايو',
+    prtFamPgInv2s: 'ف-٢٠٢٦-٠٦-٠١',
+    prtFamPgInv2m: 'يونيو ٢٠٢٦',
+    prtFamPgInv2d: 'مطلع يونيو',
+    prtFamPgInv3s: 'ف-٢٠٢٦-٠٧-٠١',
+    prtFamPgInv3m: 'يوليو ٢٠٢٦',
+    prtFamPgInv3d: 'مطلع يوليو',
+    prtFamPgMat4: 'ملخّص درس العلوم (PDF)',
+    prtFamPgMat5: 'فيديو: كلمات الوحدة الأولى',
   },
   prt: {
-    title: { hub: 'البوابات — تجربة الأدوار', student: 'بوابة الطالب', family: 'بوابة العائلة', teacher: 'بوابة المعلم', familyChild: 'ملف الابن', stuSchedule: 'جدولي', stuHomework: 'واجباتي', stuMaterials: 'المواد', stuProgress: 'تقدّمي', stuHistory: 'سجل الحصص', stuProfile: 'ملفي' },
-    portal: { hub: 'مركز البوابات', student: 'بوابة الطالب', family: 'بوابة العائلة', teacher: 'بوابة المعلم' },
-    role: { hub: 'عرض تجريبي', student: 'طالب', family: 'وليّ أمر', teacher: 'معلّم' },
+    title: { hub: 'البوابات — تجربة الأدوار', student: 'عرض الابن', family: 'بوابة العائلة', teacher: 'بوابة المعلم', familyChild: 'ملف الابن', stuSchedule: 'جدولي', stuHomework: 'واجباتي', stuMaterials: 'المواد', stuProgress: 'تقدّمي', stuHistory: 'سجل الحصص', stuProfile: 'ملفي', famChildren: 'الأبناء', famSchedule: 'جدول العائلة', famProgress: 'تقدّم الأبناء', famBilling: 'حالة الفواتير', famRequests: 'الطلبات', famMaterials: 'مواد الأبناء', famProfile: 'ملف العائلة' },
+    portal: { hub: 'مركز البوابات', student: 'عرض الابن', family: 'بوابة العائلة', teacher: 'بوابة المعلم' },
+    role: { hub: 'عرض تجريبي', student: 'ابن العائلة', family: 'وليّ أمر', teacher: 'معلّم' },
     shell: {
       switchRole: 'تبديل الدور',
       greet: 'مرحبًا،',
@@ -163,6 +176,45 @@ export default {
       adminD: 'الواجهة الإدارية الكاملة (عرض تجريبي).',
       adminOpen: 'فتح لوحة التحكم',
       personaNote: 'شخصية العرض:',
+    },
+
+    /* Spec 022 — the living layer: hero story lines · family status stories ·
+     * teacher outcome flow · the hub's demoted child-view entry. Family copy is
+     * zero-pay-safe; teacher copy carries zero figure-bearing/flagged tokens. */
+    lv: {
+      guideWhenLive: 'ماذا يحدث عند التفعيل: يُحفظ الإجراء فعليًا ويُخطر المسؤول المعني.',
+      fam: {
+        heroSub: 'ملخّص عائلتك اليوم — من يحتاج انتباهك، وأين وصل كل ابن.',
+        st: { kids: 'خمسة أبناء في مكان واحد', today: 'جلسات مجدولة اليوم عبر الأبناء', watch: 'ابن واحد يحتاج متابعتك' },
+        story: {
+          billT: 'الفواتير مسوّاة', billD: 'لا فواتير متأخرة — الحالة فقط، دون أرقام.',
+          reqT: 'لا طلبات مفتوحة', reqD: 'طلباتك ومتابعاتك مع الأكاديمية ستظهر هنا عند فتحها.',
+        },
+      },
+      tea: {
+        heroSub: 'يوم عملك في لمحة — حصص اليوم، من يحتاج متابعة، وسير تسجيل النتائج.',
+        st: { today: 'حصتان على جدولك اليوم', watch: 'طالبان يحتاجان متابعة لطيفة', tasks: 'ثلاث مهام تحضير مفتوحة' },
+        flow: {
+          prepT: 'التحضير', prepD: 'راجع الدرس وجهّز المواد.',
+          attendT: 'الحضور', attendD: 'ابدأ الحصة وسجّل الحضور.',
+          recT: 'تسجيل النتيجة', recD: 'الحضور والتقييم والملخص — يتطلب الخادم.',
+          revT: 'المراجعة', revD: 'تابع تقدّم الطالب قبل الحصة القادمة.',
+        },
+      },
+      stu: {
+        heroSub: 'عرض الابن — يوم سلمان الدراسي: جلساته وتقدّمه وواجباته في مكان واحد.',
+        st: { attended: 'تسع جلسات حضرها بانتظام', progress: 'تقدّم ثابت في مستواه', homework: 'ثلاثة واجبات مفتوحة' },
+      },
+      hub: {
+        cvT: 'عرض الابن — معاينة',
+        cvD: 'معاينة لوحة الابن (سلمان) ضمن رحلة العائلة؛ الوصول إلى الأبناء يُدار عبر حساب العائلة — دون تسجيل دخول منفصل.',
+        cvOpen: 'فتح المعاينة',
+      },
+      child: {
+        foldT: 'افتح عرض الابن الكامل',
+        foldD: 'معاينة توضيحية لليوم الدراسي للابن (سلمان) — ضمن رحلة العائلة.',
+        foldOpen: 'فتح المعاينة',
+      },
     },
 
     stu: {
@@ -302,6 +354,35 @@ export default {
         matDownload: { t: 'تحميل الملفات', d: 'تنزيل ملفات المواد يتطلب الخادم الفعلي.' },
         fullHistory: { t: 'السجل الكامل', d: 'استعراض كل جلسات أبنائك السابقة سيتوفّر ضمن اللوحة لاحقًا.' },
         meetingRequest: { t: 'طلب لقاء', d: 'حجز لقاء متابعة مع الأكاديمية يتطلب الخادم.' },
+      },
+      /* Spec 020 — the seven family internal pages (children/schedule/progress/billing/requests/materials/profile) */
+      pg: {
+        kids: { title: 'الأبناء', sub: 'كل أبنائك في مكان واحد — افتح ملف أي ابن للتفاصيل.', countHint: 'أبناء على خطة العائلة', subLabel: 'الاشتراك' },
+        sched: { title: 'جدول العائلة', sub: 'جلسات أبنائك اليوم وخلال الأسبوع، مع اسم كل ابن.', liveGate: 'الانضمام المباشر لجلسات الأبناء يتطلب تفعيل الخادم.' },
+        prog: { title: 'تقدّم الأبناء', sub: 'مستوى كل ابن وحضوره وملاحظات معلّميه.', famTitle: 'ملخّص العائلة', kidsTitle: 'تقدّم كل ابن', openFile: 'فتح ملف الابن' },
+        bill: {
+          title: 'حالة الفواتير', sub: 'الحالة فقط — دون أرقام؛ الإتمام يتم عبر إدارة الأكاديمية.',
+          quotaTitle: 'رصيد الساعات', qTotal: 'إجمالي الساعات', qTaken: 'ساعات مستخدمة', qRemain: 'الساعات المتبقية',
+          subsTitle: 'اشتراكات الأبناء', invTitle: 'سجل الفواتير', invHint: 'الحالة فقط لكل فاتورة',
+          serial: 'الرقم المرجعي', month: 'الشهر', due: 'الاستحقاق', stSettled: 'مسوّاة', stUpcoming: 'قادمة',
+          adminNote: 'تفاصيل الفواتير وإتمامها تُدار من إدارة الأكاديمية وتتطلب الخادم.',
+        },
+        req: {
+          title: 'الطلبات', sub: 'ما يمكنك طلبه من الأكاديمية — التنفيذ يتطلب الخادم.',
+          kTypes: 'أنواع الطلبات', kOpen: 'طلبات مفتوحة',
+          stAvailable: 'متاح للطلب', stCaution: 'انتبه للشروط',
+          gate: 'إرسال هذا الطلب يتطلب تفعيل الخادم.',
+        },
+        mat: { title: 'مواد الأبناء', sub: 'ملفات وموارد كل ابن، مرتّبة بالاسم.', empty: 'لا مواد بعد لهذا الابن.' },
+        prof: {
+          title: 'ملف العائلة', sub: 'حسابك وبيانات العائلة وأبناؤك.',
+          identityTitle: 'وليّ الأمر', acctTitle: 'بيانات الحساب', kidsTitle: 'الأبناء', prefTitle: 'التفضيلات',
+          kidsLine: 'خمسة أبناء على خطة العائلة',
+          prefLang: 'اللغة', prefLangV: 'العربية', prefTheme: 'المظهر', prefThemeV: 'حسب النظام', prefContact: 'التواصل', prefContactV: 'البريد الإلكتروني',
+          gPhoto: { t: 'تغيير الصورة', d: 'رفع صورة جديدة يتطلب الخادم الفعلي.' },
+          gSave: { t: 'حفظ بيانات الحساب', d: 'تعديل الاسم والبريد يتطلب الخادم الفعلي.' },
+          gPass: { t: 'تغيير كلمة المرور', d: 'تحديث كلمة المرور يتطلب الخادم الفعلي.' },
+        },
       },
       noteT: 'لوحة العائلة — النسخة الأولى',
       noteD: 'هذه لوحتك العائلية. الطلبات والفوترة والجلسات المباشرة تتطلب الخادم؛ الرسائل والإشعارات تأتي في المواصفة ٠١٦.',

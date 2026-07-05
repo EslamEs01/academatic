@@ -1,0 +1,2 @@
+# Contract — family-materials (Spec 020)
+Bands: pageHead · per-CHILD groups (the guardian's mental model; five children covered — the retained st1/st11/st6 items + 2 NEW for st12/st13, or a truthful empty) · material cards (type medallion + type chip + title + course label) · the matDownload backendRequired gate (re-homed) · note. HARD PINS: body anchors === 0; NO marketing hero (the legacy library anti-pattern, twice-evidenced); zero fake file/download anchors; zero tables. Grounding: the library frames incl. the open category dropdown.

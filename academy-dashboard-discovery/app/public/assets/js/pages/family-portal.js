@@ -1,22 +1,23 @@
-/* Spec 018 — FAMILY / GUARDIAN HOME, reworked into a COMPACT admin-like dashboard
- * (the 7-band recipe: compact header · 4-KPI row · now band · children core w/ REAL
- * drill-down links · preview · quick-links · one-line note). The endless 12-section
- * portal is gone; the displaced detail is RETAINED in fixtures/locales and re-rendered
- * by Spec 020's internal pages + the NEW family-child page (each child card links to
- * family-child(.en).html#child=stX). Display-only; THE ZERO-PAY HARD LINE holds
- * (status-only billing, no rendered figures ever); the body's only anchors are the
- * five child drill-downs; zero form controls, zero fake pay/cancel/upload. */
+/* Spec 018 → Spec 022 — FAMILY / GUARDIAN HOME, reworked into a LIVING guardian
+ * cockpit: a violet identity hero (guardian + children context, counters that tell
+ * a story) · a living day rail across the children (now/next/done stops) · the five
+ * child cards with progress movement + latest-signal lines + the REAL drill-downs ·
+ * billing/requests as safe STATUS STORIES · guided gate panels · quick links. The
+ * content facts are unchanged (every number authored, display-only); only the
+ * presentation transforms. THE ZERO-PAY HARD LINE holds (status-only billing, no
+ * rendered figures ever); the body's only anchors are the five child drill-downs
+ * + the seven quick-tile sibling links (12 total, unchanged); zero form controls. */
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
-import { medallion, avatar, chip } from '../components/ui.js';
-import { availabilityChip } from '../components/report-status.js';
+import { avatar } from '../components/ui.js';
 import { statusChip } from '../components/status-chip.js';
 import { familyStatusChip } from '../components/family-status.js';
 import { FAMILIES } from '../fixtures/families.js';
 import { STUDENTS } from '../fixtures/students.js';
 import { SESSIONS_FULL } from '../fixtures/sessions.js';
-import { FAMILY_PREVIEW, COMPACT_HOME, PORTAL_PLANNED, PORTAL_PERSONAS, ROLE_NAV, CHILD_ORDER } from '../fixtures/portal.js';
+import { FAMILY_PREVIEW, PORTAL_PLANNED, PORTAL_PERSONAS, ROLE_NAV, CHILD_ORDER, LIVING_HOME } from '../fixtures/portal.js';
+import { idHero, dayRail, storyRow, guidePanel } from '../components/portal-page.js';
 
 const pctSign = () => (getLang() === 'en' ? '%' : '٪');
 const enSuffix = () => (getLang() === 'en' ? '.en' : '');
@@ -27,58 +28,41 @@ const orderedKids = () => CHILD_ORDER.map((id) => STUD[id]);
 const todaySessions = () => SESSIONS_FULL.rows.filter((r) => ['sara', 'khalid'].includes(r.trainer.id)).slice(0, 3);
 const planned = (id) => PORTAL_PLANNED.family.find((p) => p.id === id);
 
-/* ── shared compact-home primitives (duplicated per page by the Spec-018 file scope:
- * no new shared render module is permitted; kept byte-identical across the 3 homes) ── */
 function secHead(icn, titleKey, hintKey, extra = '') {
   return `<div class="pt-sec-head">
     <h2 class="pt-sec-title">${icon(icn, 'ico')}${esc(t(titleKey))}${extra}</h2>
     ${hintKey ? `<span class="pt-sec-hint">${esc(t(hintKey))}</span>` : ''}
   </div>`;
 }
-function kpiCard(k, tone) {
-  const pct = k.format === 'percent' ? pctSign() : '';
-  return `<div class="pt-kpi">
-    <div class="pt-kpi-top">${medallion({ icon: k.icon, tone, size: 'sm' })}<span class="pt-gauge-num tabular">${num(k.value)}${pct}</span></div>
-    <div class="pt-kpi-label">${esc(t(k.labelKey))}</div>
-  </div>`;
-}
-function kpiRow(kpis, tone) { return `<div class="pt-kpi-row">${kpis.map((k) => kpiCard(k, tone)).join('')}</div>`; }
+
+/* Spec 020 — status-aware quick tiles: an `implemented` destination is a REAL link
+ * (all seven family pages exist); the pt-lift gives the honest hover affordance. */
 function quickTiles(role) {
-  return `<div class="pt-qtiles">${ROLE_NAV[role].filter((e) => e.id !== 'home').map((e) =>
-    `<div class="pt-qtile is-planned">${icon(e.icon, 'ico ico-sm')}<span>${esc(t(e.labelKey))}</span><span class="pt-qtile-soon">${esc(t('prt.nav.soon'))}</span></div>`).join('')}</div>`;
-}
-function plannedCard(p) {
-  return `<div class="pt-card pt-planned">
-    <div class="pt-card-row">
-      ${medallion({ icon: p.icon, tone: 'muted' })}
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(t(p.titleKey))}</div>
-        <div class="pt-card-sub">${esc(t(p.descKey))}</div>
-      </div>
-    </div>
-    ${availabilityChip(p.availability)}
-  </div>`;
+  const en = getLang() === 'en';
+  return `<div class="pt-qtiles">${ROLE_NAV[role].filter((e) => e.id !== 'home').map((e) => e.status === 'implemented'
+    ? `<a class="pt-qtile pt-lift" href="${e.page}${en ? '.en' : ''}.html">${icon(e.icon, 'ico ico-sm')}<span>${esc(t(e.labelKey))}</span></a>`
+    : `<div class="pt-qtile is-planned">${icon(e.icon, 'ico ico-sm')}<span>${esc(t(e.labelKey))}</span><span class="pt-qtile-soon">${esc(t('prt.nav.soon'))}</span></div>`).join('')}</div>`;
 }
 
-/* ── now band: a today session, child-tagged (the family proxy) ─────────────── */
-function sessCard(r) {
-  const childId = FAMILY_PREVIEW.todayChildren[r.id];
-  return `<div class="pt-card">
-    <div class="pt-card-row">
-      <span class="pt-time tabular">${esc(r.time)}</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">${esc(t(r.titleKey))}${childId ? ` · <span style="color:var(--pt-accent-ink)">${esc(t('prt.fam.todayFor'))} ${esc(childName(childId))}</span>` : ''}</div>
-        <div class="pt-card-sub">${esc(t(r.trainer.nameKey))} · ${esc(t(r.roomKey))}</div>
-      </div>
-      ${statusChip(r.statusId)}
-    </div>
-  </div>`;
+/* ── living day rail: today's sessions across the children (now / next stops) ── */
+function railStops(today) {
+  return today.map((r) => {
+    const childId = FAMILY_PREVIEW.todayChildren[r.id];
+    return {
+      time: r.time,
+      state: r.statusId === 'live' ? 'now' : 'next',
+      tag: childId ? `<span class="pt-stop-tag">${icon('user', 'ico ico-sm')}${esc(childName(childId))}</span>` : '',
+      chip: statusChip(r.statusId),
+      title: esc(t(r.titleKey)),
+      sub: `${esc(t(r.trainer.nameKey))} · ${esc(t(r.roomKey))}`,
+    };
+  });
 }
 
-/* ── role-core band: a compact child card with the REAL drill-down link ─────── */
+/* ── child card: alive — progress movement + latest-signal line + REAL drill-down ── */
 function childCard(s) {
   const href = `family-child${enSuffix()}.html#child=${s.id}`;
-  return `<div class="pt-card">
+  return `<div class="pt-card pt-lift">
     <div class="pt-card-row">
       ${avatar({ nameKey: s.nameKey, accent: s.accent, size: 'sm' })}
       <div style="flex:1;min-width:0">
@@ -88,7 +72,7 @@ function childCard(s) {
       ${familyStatusChip(s.statusId)}
     </div>
     <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:${s.progress}%"></span></div>
+      <div class="pt-bar is-live"><span style="width:${s.progress}%"></span></div>
       <span class="tabular pt-card-sub" style="font-weight:700">${num(s.progress)}${pctSign()}</span>
     </div>
     <a class="pt-drill" href="${href}">${icon('user', 'ico ico-sm')}<span>${esc(t('prt.band.openChild'))}</span></a>
@@ -99,36 +83,14 @@ export function renderFamilyPortal() {
   const f = fam();
   const children = orderedKids();
   const today = todaySessions();
-  const next = today.find((r) => r.statusId === 'upcoming') || today[0];
+  const lv = LIVING_HOME.family;
 
   return `
-    <div class="pt-home-head">
-      <h1 class="pt-home-hi">${esc(t('prt.shell.greet'))} ${esc(t(f.guardian.nameKey))} 🌿</h1>
-      <p class="pt-home-status">${esc(t('prt.band.famStatus'))}</p>
-    </div>
-
-    <section class="pt-section">
-      ${secHead('trending-up', 'prt.band.overview', 'prt.band.overviewHint')}
-      ${kpiRow(COMPACT_HOME.family.kpis, 'primary')}
-    </section>
+    ${idHero({ nameKey: f.guardian.nameKey, accent: 'violet', tone: 'primary', emoji: lv.hero.emoji, subKey: lv.hero.subKey, counters: lv.hero.counters })}
 
     <section class="pt-section">
       ${secHead('sessions', 'prt.fam.todayTitle', 'prt.fam.todayHint')}
-      <div class="pt-now">
-        <div class="pt-now-col">${today.map(sessCard).join('')}</div>
-        <div class="pt-now-col">
-          <div class="pt-card" style="border-color:var(--pt-accent)">
-            <div class="pt-card-row">
-              <span class="pt-time tabular">${esc(next.time)}</span>
-              <div style="flex:1;min-width:0">
-                <div class="pt-card-title">${esc(t('prt.band.nowNext'))}: ${esc(t(next.titleKey))}</div>
-                <div class="pt-card-sub">${esc(t(next.trainer.nameKey))} · ${esc(t(next.roomKey))}</div>
-              </div>
-              ${statusChip(next.statusId)}
-            </div>
-          </div>
-        </div>
-      </div>
+      ${dayRail(railStops(today))}
     </section>
 
     <section class="pt-section">
@@ -138,13 +100,10 @@ export function renderFamilyPortal() {
 
     <section class="pt-section">
       ${secHead('wallet', 'prt.band.famPreview', 'prt.band.famPreviewHint')}
-      <div class="pt-card">
-        <div class="pt-card-row">${chip({ labelKey: 'prt.fam.billSettled', tone: 'completed', icon: 'check-circle' })}</div>
-        <p class="pt-card-sub">${esc(t('prt.fam.billReassure'))}</p>
-      </div>
+      ${storyRow(lv.stories)}
       <div class="pt-cards">
-        ${plannedCard(planned('billingGate'))}
-        ${plannedCard(planned('meetingRequest'))}
+        ${guidePanel(planned('billingGate'))}
+        ${guidePanel(planned('meetingRequest'))}
       </div>
     </section>
 

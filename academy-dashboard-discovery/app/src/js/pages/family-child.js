@@ -136,6 +136,17 @@ export function renderFamilyChild() {
       <p class="pt-home-status">${esc(t('prt.child.intro'))}</p>
     </div>
 
+    ${(() => { const href = `student-portal${getLang() === 'en' ? '.en' : ''}.html`; return `<a class="pt-card pt-childview pt-lift" href="${href}">
+      <div class="pt-card-row">
+        ${medallion({ icon: 'user', tone: 'sky' })}
+        <div style="flex:1;min-width:0">
+          <div class="pt-card-title">${esc(t('prt.lv.child.foldT'))}</div>
+          <p class="pt-card-sub">${esc(t('prt.lv.child.foldD'))}</p>
+        </div>
+        <span class="pt-hub-open">${esc(t('prt.lv.child.foldOpen'))} ${icon('arrow-left', 'ico ico-sm')}</span>
+      </div>
+    </a>`; })()}
+
     <div class="pt-child-root">
       ${subHead('families', 'prt.child.switchTitle')}
       <div class="pt-child-switch" role="group" aria-label="${esc(t('prt.child.switchAria'))}">

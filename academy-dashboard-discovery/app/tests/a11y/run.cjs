@@ -75,6 +75,7 @@ const MATRIX = [
   { page: 'finance', lang: 'en', theme: 'dark' },
   // Spec 012 — role portal foundation (portal shell surfaces)
   { page: 'portals', lang: 'ar', theme: 'light' },
+  { page: 'portals', lang: 'ar', theme: 'dark' },
   { page: 'student-portal', lang: 'ar', theme: 'light' },
   { page: 'student-portal', lang: 'ar', theme: 'dark' },
   { page: 'student-portal', lang: 'en', theme: 'light' },
@@ -104,6 +105,22 @@ const MATRIX = [
   { page: 'student-history', lang: 'ar', theme: 'dark' },
   { page: 'student-profile', lang: 'ar', theme: 'light' },
   { page: 'student-profile', lang: 'ar', theme: 'dark' },
+  // Spec 020 — the seven family internal pages (AR light + AR dark; children as the EN sample)
+  { page: 'family-children', lang: 'ar', theme: 'light' },
+  { page: 'family-children', lang: 'ar', theme: 'dark' },
+  { page: 'family-children', lang: 'en', theme: 'light' },
+  { page: 'family-schedule', lang: 'ar', theme: 'light' },
+  { page: 'family-schedule', lang: 'ar', theme: 'dark' },
+  { page: 'family-progress', lang: 'ar', theme: 'light' },
+  { page: 'family-progress', lang: 'ar', theme: 'dark' },
+  { page: 'family-billing', lang: 'ar', theme: 'light' },
+  { page: 'family-billing', lang: 'ar', theme: 'dark' },
+  { page: 'family-requests', lang: 'ar', theme: 'light' },
+  { page: 'family-requests', lang: 'ar', theme: 'dark' },
+  { page: 'family-materials', lang: 'ar', theme: 'light' },
+  { page: 'family-materials', lang: 'ar', theme: 'dark' },
+  { page: 'family-profile', lang: 'ar', theme: 'light' },
+  { page: 'family-profile', lang: 'ar', theme: 'dark' },
 ];
 
 (async () => {

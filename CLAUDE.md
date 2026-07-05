@@ -1,17 +1,71 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 020 — Family / Guardian Internal Pages** (next). **Spec 019 — Student Internal Pages
-is IMPLEMENTED** (awaiting the watcher commit): six new page pairs `student-{schedule,homework,materials,
-progress,history,profile}(.en).html` (51→**63** built; **49/63 hash-identical**) · six `ROLE_NAV.student`
-flips `planned→implemented` · the home quick-tiles honesty fix (implemented tiles are REAL links; home body
-anchors 0→6) · ONE shared primitives component `components/portal-page.js` · the `build-html.mjs` touch =
-6 imports + 6 entries + the line-132 `activeId` pass-through (byte-neutral for all 51 pre-existing files —
-proven) · ceiling extended to internals [500,2200] · smoke 62 loads green · axe 0/0 · payHit/zero-pay/family/
-teacher/hub/family-child/admin asserts held BYTE-VERBATIM. The pattern for Specs 020/021: flip the role's
-registry statuses + ship the page pairs + make that home's quick-tiles status-aware; the shell never changes.
+Active feature: **Spec 023 — Full Legacy Coverage Audit 000–020** (next, per DEC-009). **Spec 022 —
+Living Dashboards Experience Rework is IMPLEMENTED** (awaiting the watcher commit): the hub + the
+three role homes became LIVING cockpits and the corrected role model landed. Five shared living
+primitives added to `portal-page.js` (**idHero · dayRail · storyRow · flowStrip · guidePanel** —
+append-only; the six pre-existing exports byte-identical) over an additive `app.css` living layer
+(`.pt-idhero/.pt-rail/.pt-story/.pt-flow/.pt-guide`; ALL motion — `lv-fill/lv-fadeup/lv-pulse` —
+quarantined in ONE `prefers-reduced-motion: no-preference` block, smoke-audited; `.pt-hero` stays the
+hub's). **Corrected role model** (Spec 021 DEC-001/002/004): hub = 2 primary role cards [family,
+teacher] + admin console + **1 demoted child-view preview** (→ student-portal); the student shell
+reframed «بوابة الطالب»→«عرض الابن» / «طالب»→«ابن العائلة» PURELY at the locale layer
+(`prt.portal.student`/`prt.role.student`/`prt.title.student`), so the **six student internal MODULES
+got ZERO touches and their `#page-body` stayed BYTE-EQUAL** (12 extraction-hash proofs). `family-child`
+gained the ONE sanctioned fold-point link (body anchors 5→6; new baseline body md5 recorded — declared
+supersession of the 020 hash). **family-children NOT touched** (per-child child-view links REJECTED as
+dishonest — the preview persona is st1/سلمان only; byte-identical). Identity **55/77** (22 rebakes:
+hub·family-portal·teacher-portal ×2 + student ×14 + family-child ×2); 40 admin + index + the other 6
+family internals byte-identical; portal-shell/enhance/nav.config/build-html/package.json 0-diff.
+ONE smoke amendment (kpiCards 4→0 + idHero/railStops/flowSteps/storyRows probes + hub 2-card re-pin +
+childView probe + family-child +1-anchor re-pin + reduced-motion CSS audit); **payHit + both
+payFigure/famPay regex lines + ALL admin asserts + FAMILY_INTERNAL/STUDENT_INTERNAL branches
+BYTE-VERBATIM**; smoke 76 loads green · teacher pay-free three layers green · family zero-pay green on
+all 18 bodies. Artifacts: `academy-dashboard-discovery/specs/022-living-dashboards-experience-rework/`
+(spec · plan · research D1–D24 · data-model · quickstart · 16 contracts).
 
-For decisions, contracts, and acceptance read the delivered plan and its artifacts:
-`academy-dashboard-discovery/specs/019-student-internal-pages/plan.md`
-(see also `research.md` (D1–D16), `data-model.md`, `quickstart.md`, `visual-grounding.md`, and `contracts/` — 15 contracts).
+History: **Spec 022 mission** — transform hub + role homes from static card galleries into living
+educational cockpits AND land the corrected role model, under ALL standing laws. **The Living
+Design System (6 shared primitives)**: `pt-hero` role identity band (gradient wash + avatar +
+2–3 contextual counters; NEVER pay data) · `pt-rail` living day timeline (now pulses/next
+emphasized/done dims; child/room tags) · `pt-story` status story rows (number + narrative + real
+link — replaces KPI tiles) · `pt-flow` teacher prepare→attend→record→review strip · `pt-guide`
+guided gate panels (still non-interactive) · joy/motion layer (C10's proven وسام/celebration
+language scaled up; pure CSS; `prefers-reduced-motion` honored; NO JS animation engine). Surfaces:
+portals hub (3 primary cards + admin + DEMOTED child-view entry) · family-portal (violet guardian
+cockpit) · teacher-portal (teal teaching cockpit, PAY-FREE extended set) · student pages =
+**Option B+** (all 7 reframed «بوابة الطالب»→«عرض الابن»; home also adopts hero/rail/story; six
+internals copy-reframe ONLY; Option C rejected) · family-child + family-children fold-point links
+(«افتح عرض الابن الكامل») — the ONLY family-internal body change. Protections: 40 admin + index
+BYTE-IDENTICAL · payHit + zero-pay regex lines + admin asserts BYTE-VERBATIM · ONE sanctioned smoke
+amendment · ceilings re-pinned ±10% tunable · closed hook set (NO new hooks/keys) · zero deletion
+(ROLE_NAV.student structurally untouched). Artifacts:
+`academy-dashboard-discovery/specs/022-living-dashboards-experience-rework/` (spec.md ·
+visual-grounding.md (16 frames incl. L9/L10 legacy day surfaces + C8/C9/C10 mobile/dark/progress) ·
+dashboard-diagnosis.md (10 answers) · role-reclassification-scope.md · checklists/).
+
+History: **Spec 021 — Role Model Audit** (audit-only, delivered): legacy = THREE logins (Admin ·
+Teacher · Family/Guardian at `/student/*`; NO student role — folder/inventory/pixel-proven; persona
+Salman IS fam1's child st1). DEC-001…009 binding: student demoted (no deletion) · 019 pages
+preserved as child-view · family owns the child journey · sequence 022 living rework → 023 coverage
+audit → 024 corrections → **025 Teacher Internal Pages** → 026–031 admin groups → 032 final QA.
+Artifacts: `specs/021-role-model-student-reclassification/` (visual-grounding L1–L8/C1–C7 ·
+role-model-decision · current-vs-legacy-map).
+
+History: **Spec 020 — Family / Guardian Internal Pages is IMPLEMENTED** (awaiting the watcher commit):
+seven new page pairs `family-{children,schedule,progress,billing,requests,materials,profile}(.en).html`
+(63→**77** built; **59/77 hash-identical**) · seven `ROLE_NAV.family` flips · the home quick-tiles
+honesty fix (home body anchors 5→**12**) · **family-child preserved as the drill-down** (`#page-body`
+extraction hash BYTE-EQUAL both languages) · billing STATUS-FIRST under the zero-pay hard line
+(hour-quota 40/12/28 · amount-free invoice rows · the verbatim payFigure regex green on ALL 18 family
+bodies) · build touch = 7 imports + 7 entries (purely additive, zero drift on the 63 pre-existing
+files — proven) · smoke **76 loads** green · student/teacher/hub/admin branches + payHit + the
+original zero-pay lines held BYTE-VERBATIM. Plan and 17 contracts:
+`academy-dashboard-discovery/specs/020-family-guardian-internal-pages/plan.md`
+(see also `research.md` (D1–D20), `data-model.md`, `quickstart.md`, `visual-grounding.md` (27/27), and `contracts/`).
+
+History: **Spec 019** (commit `8d3d561`) delivered the six student internal pages (51→63; 49/63 identity;
+nav flip + quick-tiles honesty fix + `portal-page.js` + the build `activeId` pass-through; ceiling
+[500,2200] on internals).
 
 History: **Spec 018** (commit `fe47f68`) delivered the COMPACT admin-like role homes (5 bands each,
 ≈1,428/1,753/1,486px @1366×768, down from ≈3,600/4,200/4,390; ceiling smoke-pinned) + the NEW

@@ -180,6 +180,25 @@ const MATRIX = [
   { page: 'student-profile',   lang: 'ar', theme: 'light', vp: 'desktop' },
   { page: 'student-profile',   lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'student-portal',    lang: 'ar', theme: 'light', vp: 'desktop', variant: 'tiles-now-links' },
+  // Spec 020 — the seven family internal pages (AR desktop + mobile), billing dark + children EN
+  // samples, the family home refresh (tiles-now-links) and the family-child preservation proof.
+  { page: 'family-children',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-children',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-children',  lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'family-schedule',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-schedule',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-progress',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-progress',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-billing',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-billing',   lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'family-billing',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-requests',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-requests',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-materials', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-materials', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-profile',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-profile',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-portal',    lang: 'ar', theme: 'light', vp: 'desktop', variant: 'tiles-now-links' },
   // Spec 017 — Shell v2: the native mobile nav disclosure, captured OPEN (amendment A1 proof)
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile', roleDrawer: true, variant: 'drawer-open' },
 ];
