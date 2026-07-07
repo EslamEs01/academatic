@@ -43,6 +43,8 @@ const MATRIX = [
   { page: 'student', lang: 'ar', theme: 'dark' },
   { page: 'student', lang: 'ar', theme: 'light', hash: '#view=results' },
   { page: 'student', lang: 'ar', theme: 'light', hash: '#view=evaluation' },
+  // Spec 027 — the Courses tab surfaces the enroll/assign/move picker triggers + the availability gate
+  { page: 'student', lang: 'ar', theme: 'light', hash: '#view=courses' },
   { page: 'student', lang: 'en', theme: 'light' },
   // Spec 005 — attendance & session outcomes (AR light + dark + EN)
   { page: 'attendance', lang: 'ar', theme: 'light' },

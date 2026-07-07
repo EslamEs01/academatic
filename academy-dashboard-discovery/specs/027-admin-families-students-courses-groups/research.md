@@ -1,0 +1,45 @@
+# Research & Decisions — Spec 027
+
+Decisions D1–D41, grounded in the spec artifacts + the 3-agent audit + the Spec-026 mechanism.
+
+- **D1 — Evidence gate sufficient?** YES. Three-agent read-only audit (legacy families/students · legacy courses/groups/relations · current 9-page inventory) produced exact-path artifacts (`legacy-…-coverage.md`, `current-management-action-inventory.md`, `missing-action-register.md`). No P0 gaps; the deltas (M-A…M-V) are enumerated and owned.
+- **D2 — Current count.** **97** (verified).
+- **D3 — Target count after 027.** **97** — zero new pages.
+- **D4 — Any standalone page?** NO. Every delta is a modal/drawer/picker/kebab/tab-deepening/gate on an existing page; no modal/drawer is insufficient. The 4 planned nav items (studentResult/studentEvaluation/scheduleSearch/familyCategories) stay planned gates + in-flow modals/tabs.
+- **D5 — Edit-family modal.** `data-modal-trigger` honest modal (title `fam.act.edit` + `common.backendRequiredNote`) on `family.js` banner + `familyMenu` (enhance.js). Upgrade from the current `data-demo-action` toast.
+- **D6 — Add-child modal/step.** `data-modal-trigger` modal on `family.js` (banner + Students-tab) and add-family; optionally the wizard child step. backendRequired final.
+- **D7 — Family notes modal.** Notes-tab Add → `data-modal-trigger` modal.
+- **D8 — Family category reclassify.** Assignment-preview modal/drawer (display-only member list + backendRequired Save) on family/families; `familyCategories` nav stays planned. Grounded by `management-categories-families-2-assign.md`.
+- **D9 — Edit-student modal.** `student.js` banner Edit → `data-modal-trigger` modal.
+- **D10 — Add-note modal.** `student.js` Notes Add → `data-modal-trigger` modal.
+- **D11 — Students row kebab.** Add `studentMenu(id)` in `enhance.js` (View real link · Edit modal · Suspend confirm · Remove confirm) mirroring `familyMenu`; route via the EXISTING `data-row-menu` dispatch (+ one `=== 'student'` branch); wire `data-row-menu data-row-menu-kind="student"` in `students.js` rows. Reuses the row-menu hook — NOT a new dispatch hook.
+- **D12 — Suspend/deactivate/reactivate student.** `data-confirm` on student banner + row kebab → backendRequired; no status flip.
+- **D13 — Enroll student in course.** Student Courses-tab "Add" (disabled+reason) → `data-drawer` course-picker (baked `<template>` display-only candidate courses + `data-disabled-reason` backendRequired Enroll). Reuses `openSheet`.
+- **D14 — Assign student to group.** Group "Add students" + student profile → `data-drawer` student/group-picker (display-only + backendRequired Assign).
+- **D15 — Group↔group move.** `data-modal-trigger`/`data-drawer` grounded move → backendRequired.
+- **D16 — Cross-family transfer.** **Honest gate only** (`data-disabled-reason`) — no legacy route; do NOT invent fields.
+- **D17 — Edit-course modal.** `course-group-actions.js courseActions` Edit → `data-modal-trigger` modal.
+- **D18 — Add students to course.** course "Add students" (disabled+reason) → `data-drawer` student-picker → backendRequired.
+- **D19 — Create group from course.** `data-modal-trigger`/`data-drawer` prefilled-course create-group → backendRequired.
+- **D20 — Edit-group modal.** `groupActions` Edit → `data-modal-trigger` modal; thin group-edit evidence → only grounded fields, unconfirmed ones stay a gate.
+- **D21 — Assign-students-to-group picker.** `data-drawer` student-picker (display-only candidate list + backendRequired Assign).
+- **D22 — Remove-student confirm.** Stays `data-confirm-danger` → backendRequired (already honest).
+- **D23 — Results/Evaluation thin surfaces.** Deepen the EXISTING student.html Results/Evaluation `data-tab` panels with display-only rubric dimension lines. **NO computed score/rank/chart.** No new page.
+- **D24 — Schedule-search preview.** An availability-preview gate (`data-disabled-reason`) surfaced inside the assign/enroll flow; `scheduleSearch` nav stays planned. No page, no fake results.
+- **D25 — familyCategories surface.** Assignment-preview modal (D8) + planned nav gate. No page.
+- **D26 — Assign-teacher → 028.** Keep the `data-disabled-reason` reference gate; no teacher CRUD in 027.
+- **D27 — Message/contact → 026/future.** Keep honest toast/gate; no composer.
+- **D28 — Print/export/report → 029.** Keep gate; no fake file.
+- **D29 — Billing/plan → 030.** Keep display-only single-value admin plan literal (no math); route persistence to 030; family-portal stays figure-free.
+- **D30 — Materials/content → 031.** Keep gate; no catalog in 027.
+- **D31 — Modal/drawer/picker patterns.** Reuse `data-modal-trigger`(+title/note), `data-confirm`, `data-drawer`(+baked `<template>` display-only list), `data-disabled-reason`, `data-tab`, `data-filter`. Pickers = display-only candidate lists inside a drawer with a backendRequired final. No new interaction engine.
+- **D32 — Fixtures.** Extend authored data: picker candidate lists (assignable courses/groups/students), results/evaluation dimension lines, category members. Display-only; no computed values; no pay figures.
+- **D33 — Locales.** AR+EN mirrored under `fam.*`/`stu.*`/`crs.*`/`grp.*`; reuse `common.backendRequiredNote`; picker/kebab/modal copy. No raw keys, no family pay tokens, no «لوحة الطالب».
+- **D34 — CSS.** Additive only (picker rows, kebab); no redesign, no new hook/key.
+- **D35 — Smoke.** Additive: students row-kebab exists + honest; enroll/assign/move open modal/drawer/gate; edit family/student/course/group open modals; results/evaluation no computed score/chart; count=97; `href="#"`=0; no dead/fake. Keep payHit/famPay/child-view/admin-finance + 026 action-completion asserts byte-verbatim.
+- **D36 — A11y.** changed pages + wizard + ≥1 create modal + ≥1 edit modal/drawer + ≥1 assignment drawer + ≥1 confirm; critical=0 serious=0; dark/light; mobile-390.
+- **D37 — Screenshots.** families/family/students(kebab)/student/course/group + wizard final + edit modal/drawer + assignment picker + confirm final + results/scheduleSearch proof + mobile + dark; update REVIEW.md.
+- **D38 — Role-law protection.** Family zero-pay (portal), student child-view, teacher pay-free, admin finance Spec-009 invariant — byte-verbatim green; the family.html admin plan literal stays single-value/no-math.
+- **D39 — Impact protection.** Only touched management pages/components change; portal + admin-ops + index byte-identical; package.json 0-diff; no backend/engine.
+- **D40 — Allowed/forbidden files.** Per `plan.md §9`. Forbidden: package.json, deps, backend/auth, forbidden pages, finance/reports/settings pages, new engines, new hook/key, any new standalone page.
+- **D41 — Risks/stops.** Per `plan.md §11` + `contracts/scope-guard.md`. Biggest: (a) shared-component edits (course-group-actions/family/student/wizard) touch many pages → per-page byte-diff review; (b) picker drawers must stay display-only (no fake roster mutation); (c) the `enhance.js` studentMenu variant must exactly mirror familyMenu (no new hook). None blocking.

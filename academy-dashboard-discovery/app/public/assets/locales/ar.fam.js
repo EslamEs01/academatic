@@ -16,7 +16,7 @@ export default {
 
   /* students directory — Spec 004 additions (family link + facet) */
   stu: {
-    col: { family: 'العائلة' }, fFamily: 'العائلة', allFamilies: 'كل العائلات', viewProfile: 'عرض الملف الأكاديمي',
+    col: { family: 'العائلة' }, fFamily: 'العائلة', allFamilies: 'كل العائلات', viewProfile: 'عرض الملف الأكاديمي', rowMenu: 'إجراءات الطالب',
   },
 
   /* dashboard impact (minimal, fixture-backed) */
@@ -40,6 +40,10 @@ export default {
       standard: 'أساسية', standardDesc: 'عائلات بالخطة الأساسية.',
       trial: 'تجريبية', trialDesc: 'عائلات في الفترة التجريبية.',
       scholarship: 'منح', scholarshipDesc: 'عائلات ضمن برنامج المنح.',
+      reclass: 'إعادة التصنيف', reclassTitle: 'إعادة تصنيف الفئة',
+      reclassHint: 'اعرض الفئات وأعِد تصنيف العائلة — يتم الحفظ بعد ربط الخادم.',
+      current: 'الفئة الحالية', members: '{n} عائلة', save: 'حفظ التصنيف',
+      reclassReason: 'يتوفّر تغيير الفئة بعد ربط الخادم (لا يُحفَظ شيء الآن).',
     },
     plan: { perHour: 'ريال/ساعة' },
     attn: { trialEnds: 'الفترة التجريبية تنتهي قريبًا', payment: 'دفعة متأخرة' },
@@ -66,7 +70,7 @@ export default {
       manage: 'إدارة الفوترة', note: 'عرض فقط — لا تُحتسب أي مبالغ فعلية.',
       viewInvoices: 'عرض فواتير العائلة في صفحة المالية (معاينة تجريبية)',
     },
-    notes: { title: 'ملاحظات العائلة', none: 'لا توجد ملاحظات.' },
+    notes: { title: 'ملاحظات العائلة', none: 'لا توجد ملاحظات.', add: 'إضافة ملاحظة' },
     act: {
       edit: 'تعديل', suspend: 'إيقاف مؤقت', stop: 'إيقاف الاشتراك', addChild: 'إضافة ابن',
       editToast: 'سيتوفّر تعديل العائلة بعد ربط الخادم.',
@@ -116,7 +120,15 @@ export default {
     timetable: { title: 'الجلسات القادمة', viewInSchedule: 'عرض في الجدول', none: 'لا جلسات قادمة لهذا الطالب.' },
     family: { title: 'العائلة', guardian: 'وليّ الأمر', viewFamily: 'عرض ملف العائلة', siblings: 'الإخوة', noSiblings: 'لا يوجد إخوة مسجّلون.' },
     notes: { title: 'ملاحظات الطالب', none: 'لا توجد ملاحظات.' },
-    act: { message: 'مراسلة', edit: 'تعديل', editToast: 'سيتوفّر التعديل بعد ربط الخادم.', messageToast: 'سيتوفّر التواصل بعد ربط الخادم.', viewFamily: 'عرض العائلة' },
+    act: {
+      message: 'مراسلة', edit: 'تعديل', editToast: 'سيتوفّر التعديل بعد ربط الخادم.', messageToast: 'سيتوفّر التواصل بعد ربط الخادم.', viewFamily: 'عرض العائلة', addNote: 'إضافة ملاحظة',
+      suspend: 'إيقاف الطالب', suspendTitle: 'إيقاف هذا الطالب مؤقتًا؟', suspendMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن.', suspendCta: 'إيقاف مؤقت', suspendToast: 'سيتوفّر إيقاف الطالب بعد ربط الخادم.',
+      remove: 'إزالة الطالب', removeTitle: 'إزالة هذا الطالب؟', removeMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يُحفَظ شيء الآن.', removeCta: 'إزالة', removeToast: 'سيتوفّر إزالة الطالب بعد ربط الخادم.',
+    },
+    enroll: { action: 'تسجيل في دورة', title: 'تسجيل الطالب في دورة', hint: 'اختر دورة من القائمة — يتم التسجيل بعد ربط الخادم.', cta: 'تسجيل', reason: 'يتوفّر التسجيل بعد ربط الخادم (لا يُحفَظ شيء الآن).' },
+    assign: { action: 'إسناد إلى مجموعة', title: 'إسناد الطالب إلى مجموعة', hint: 'اختر مجموعة — يتم الإسناد بعد ربط الخادم.', cta: 'إسناد', reason: 'يتوفّر الإسناد بعد ربط الخادم (لا يُحفَظ شيء الآن).' },
+    move: { action: 'نقل بين المجموعات', title: 'نقل الطالب بين المجموعات', hint: 'اختر المجموعة الجديدة — يتم النقل بعد ربط الخادم.', cta: 'نقل', reason: 'يتوفّر النقل بعد ربط الخادم (لا يُحفَظ شيء الآن).', crossFamily: 'نقل إلى عائلة أخرى', crossReason: 'النقل بين العائلات يتطلب ربط الخادم (خارج النطاق الحالي).' },
+    search: { action: 'بحث في الأوقات المتاحة', reason: 'مطابقة الأوقات المتاحة تتطلب ربط الخادم (خارج النطاق الحالي).' },
   },
 
   /* student Results tab (fixture-only — no gradebook) */

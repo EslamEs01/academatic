@@ -11,7 +11,7 @@ export default {
   },
 
   stu: {
-    col: { family: 'Family' }, fFamily: 'Family', allFamilies: 'All families', viewProfile: 'View academic profile',
+    col: { family: 'Family' }, fFamily: 'Family', allFamilies: 'All families', viewProfile: 'View academic profile', rowMenu: 'Student actions',
   },
 
   dash: {
@@ -33,6 +33,10 @@ export default {
       standard: 'Standard', standardDesc: 'Families on the standard plan.',
       trial: 'Trial', trialDesc: 'Families in the trial period.',
       scholarship: 'Scholarship', scholarshipDesc: 'Families in the scholarship program.',
+      reclass: 'Reclassify', reclassTitle: 'Reclassify category',
+      reclassHint: 'Review the categories and reassign this family — saved once the server is connected.',
+      current: 'Current category', members: '{n} families', save: 'Save category',
+      reclassReason: 'Changing the category will be available once the server is connected — nothing is saved yet.',
     },
     plan: { perHour: 'SAR/hour' },
     attn: { trialEnds: 'Trial ending soon', payment: 'Payment overdue' },
@@ -58,7 +62,7 @@ export default {
       manage: 'Manage billing', note: 'Display only — no real amounts are charged.',
       viewInvoices: 'View family invoices on the Finance page (fixture preview)',
     },
-    notes: { title: 'Family notes', none: 'No notes yet.' },
+    notes: { title: 'Family notes', none: 'No notes yet.', add: 'Add note' },
     act: {
       edit: 'Edit', suspend: 'Suspend', stop: 'Stop subscription', addChild: 'Add child',
       editToast: 'Editing the family will be available once the server is connected.',
@@ -106,7 +110,15 @@ export default {
     timetable: { title: 'Upcoming sessions', viewInSchedule: 'View in schedule', none: 'No upcoming sessions for this student.' },
     family: { title: 'Family', guardian: 'Guardian', viewFamily: 'View family profile', siblings: 'Siblings', noSiblings: 'No siblings enrolled.' },
     notes: { title: 'Student notes', none: 'No notes yet.' },
-    act: { message: 'Message', edit: 'Edit', editToast: 'Editing will be available once the server is connected.', messageToast: 'Messaging will be available once the server is connected.', viewFamily: 'View family' },
+    act: {
+      message: 'Message', edit: 'Edit', editToast: 'Editing will be available once the server is connected.', messageToast: 'Messaging will be available once the server is connected.', viewFamily: 'View family', addNote: 'Add note',
+      suspend: 'Suspend student', suspendTitle: 'Suspend this student?', suspendMsg: 'This will be available once the server is connected — nothing changes yet.', suspendCta: 'Suspend', suspendToast: 'Suspending the student will be available once the server is connected.',
+      remove: 'Remove student', removeTitle: 'Remove this student?', removeMsg: 'This will be available once the server is connected — nothing is saved yet.', removeCta: 'Remove', removeToast: 'Removing the student will be available once the server is connected.',
+    },
+    enroll: { action: 'Enroll in course', title: 'Enroll the student in a course', hint: 'Pick a course from the list — enrolled once the server is connected.', cta: 'Enroll', reason: 'Enrolling will be available once the server is connected — nothing is saved yet.' },
+    assign: { action: 'Assign to group', title: 'Assign the student to a group', hint: 'Pick a group — assigned once the server is connected.', cta: 'Assign', reason: 'Assigning will be available once the server is connected — nothing is saved yet.' },
+    move: { action: 'Move between groups', title: 'Move the student between groups', hint: 'Pick the new group — moved once the server is connected.', cta: 'Move', reason: 'Moving will be available once the server is connected — nothing is saved yet.', crossFamily: 'Move to another family', crossReason: 'Transferring between families needs the backend (out of current scope).' },
+    search: { action: 'Search available times', reason: 'Matching available times needs the backend (out of current scope).' },
   },
 
   res: {

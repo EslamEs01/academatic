@@ -220,6 +220,17 @@ const MATRIX = [
   { page: 'teacher-reports', lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'teacher-profile', lang: 'ar', theme: 'light', vp: 'desktop' },
   { page: 'teacher-library', lang: 'ar', theme: 'light', vp: 'desktop' },
+  // Spec 027 — admin deep management: honest modals / drawer-pickers / row-kebab / gates
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', studentKebab: true, variant: 'sp027-row-kebab' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', openDrawer: 'stu-enroll', variant: 'sp027-enroll-picker' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-cat', variant: 'sp027-reclassify' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', mgmtModal: 'fam.act.edit', variant: 'sp027-edit-modal' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-enroll', variant: 'sp027-add-students' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-assign', variant: 'sp027-add-students' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', mgmtConfirm: true, variant: 'sp027-suspend-confirm' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp027-mobile' },
+  { page: 'course', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp027-en' },
+  { page: 'group', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp027-dark' },
 ];
 
 (async () => {
@@ -276,6 +287,11 @@ const MATRIX = [
     // Spec 017 — open the role-nav native disclosure (mobile)
     if (s.roleDrawer) { await page.click('.pt-nav-drawer > summary').catch(() => {}); await page.waitForTimeout(260); }
     if (s.sessCreateModal) { await page.click('[data-modal-trigger]').catch(() => {}); await page.waitForTimeout(340); }
+    // Spec 027 — deep-management surfaces (view/hash flags above position the trigger's tab first)
+    if (s.studentKebab) { await page.click('#students-table [data-row-menu][data-row-menu-kind="student"]').catch(() => {}); await page.waitForTimeout(320); }
+    if (s.openDrawer) { await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440); }
+    if (s.mgmtModal) { await page.click(`[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`).catch(() => {}); await page.waitForTimeout(340); }
+    if (s.mgmtConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
     // Spec 013 — area close-ups are element-scoped (Playwright auto-scrolls the element into view)
@@ -284,7 +300,7 @@ const MATRIX = [
       if (el) await el.screenshot({ path: path.join(OUT, name) });
       else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
     } else {
-      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal });
+      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm });
     }
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);

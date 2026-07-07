@@ -6,7 +6,7 @@ import { STUDENTS } from '../fixtures/students.js';
 import { FAMILIES, familyOf } from '../fixtures/families.js';
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
-import { facetAttrs } from '../dom.js';
+import { esc, facetAttrs } from '../dom.js';
 import { pageHeader, summaryCards } from '../components/page-header.js';
 import { filterBar } from '../components/filter-bar.js';
 import { dataTable, tableFooter } from '../components/data-table.js';
@@ -42,6 +42,7 @@ function row(s) {
     <td class="text-end"><div class="flex items-center justify-end gap-1">
       <a href="${studentHref()}" class="icon-btn" aria-label="${t('stu.viewProfile')}">${icon('user', 'ico')}</a>
       <button type="button" class="icon-btn" data-drawer="${s.id}" aria-label="${t('dir.viewDetails')}">${icon('chevronEnd', 'ico')}</button>
+      <button type="button" class="icon-btn" data-row-menu="${esc(s.id)}" data-row-menu-kind="student" aria-haspopup="menu" aria-label="${esc(t('stu.rowMenu'))}">${icon('ellipsis', 'ico')}</button>
     </div></td>
   </tr>`;
 }

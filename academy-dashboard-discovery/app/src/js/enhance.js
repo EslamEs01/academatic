@@ -104,10 +104,24 @@ function familyMenu(id) {
   const href = getLang() === 'en' ? 'family.en.html' : 'family.html';
   return `<div>
     <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('fam.card.viewProfile')}</span></a>
-    <button class="menu-item" role="menuitem" data-demo-action data-toast="${esc(t('fam.act.editToast'))}">${icon('edit', 'ico')}<span>${t('fam.act.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="fam.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('fam.act.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="fam.cat.reclassTitle" data-modal-note-key="common.backendRequiredNote">${icon('filter', 'ico')}<span>${t('fam.cat.reclass')}</span></button>
     <div class="menu-sep"></div>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('fam.act.suspendTitle'))}" data-confirm-msg="${esc(t('fam.act.suspendMsg'))}" data-confirm-cta="${esc(t('fam.act.suspendCta'))}" data-confirm-toast="${esc(t('fam.act.suspendToast'))}">${icon('pause-circle', 'ico')}<span>${t('fam.act.suspend')}</span></button>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('fam.act.stopTitle'))}" data-confirm-msg="${esc(t('fam.act.stopMsg'))}" data-confirm-cta="${esc(t('fam.act.stopCta'))}" data-confirm-toast="${esc(t('fam.act.stopToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('fam.act.stop')}</span></button>
+  </div>`;
+}
+/* students-table row kebab (Spec 027, M-I) — mirrors familyMenu: "view profile"
+ * navigates; edit opens the honest backendRequired modal; suspend/remove confirm.
+ * Routed by the EXISTING data-row-menu dispatch (a 'student' branch) — no new hook. */
+function studentMenu(id) {
+  const href = getLang() === 'en' ? 'student.en.html' : 'student.html';
+  return `<div>
+    <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('stu.viewProfile')}</span></a>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="sp.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('sp.act.edit')}</span></button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('sp.act.suspendTitle'))}" data-confirm-msg="${esc(t('sp.act.suspendMsg'))}" data-confirm-cta="${esc(t('sp.act.suspendCta'))}" data-confirm-toast="${esc(t('sp.act.suspendToast'))}">${icon('pause-circle', 'ico')}<span>${t('sp.act.suspend')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('sp.act.removeTitle'))}" data-confirm-msg="${esc(t('sp.act.removeMsg'))}" data-confirm-cta="${esc(t('sp.act.removeCta'))}" data-confirm-toast="${esc(t('sp.act.removeToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('sp.act.remove')}</span></button>
   </div>`;
 }
 /* Spec 026 — the honest fallback: an action with no real destination announces that
@@ -522,8 +536,12 @@ document.addEventListener('click', (e) => {
     return;
   }
   if (trg.matches('a[href="#"]')) e.preventDefault();
-  if (trg.hasAttribute('data-row-menu')) { const rid = trg.getAttribute('data-row-menu'); return void openPopover(trg, trg.getAttribute('data-row-menu-kind') === 'family' ? familyMenu(rid) : rowMenu(rid)); }
-  if (trg.hasAttribute('data-modal-trigger')) return openModal(trg);
+  if (trg.hasAttribute('data-row-menu')) {
+    const rid = trg.getAttribute('data-row-menu');
+    const kind = trg.getAttribute('data-row-menu-kind');
+    return void openPopover(trg, kind === 'family' ? familyMenu(rid) : kind === 'student' ? studentMenu(rid) : rowMenu(rid));
+  }
+  if (trg.hasAttribute('data-modal-trigger')) { closeMenu(); return openModal(trg); }
   switch (trg.getAttribute('data-action')) {
     case 'theme-menu': return void openPopover(trg, themeMenu());
     case 'lang-menu': return void openPopover(trg, langMenu());

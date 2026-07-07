@@ -33,13 +33,14 @@ export default {
     act: {
       add: 'New course', addToast: 'Adding a course will be available once the server is connected.',
       edit: 'Edit course', editToast: 'Editing the course will be available once the server is connected.',
-      assignTeacher: 'Assign teacher', addStudents: 'Add students', print: 'Print summary',
+      assignTeacher: 'Assign teacher', addStudents: 'Add students', print: 'Print summary', createGroup: 'Create group from course',
     },
     reason: {
       assign: 'Assigning teachers needs the backend (out of current scope).',
       enroll: 'Enrolling students needs the enrolment engine (out of current scope).',
       export: 'Exporting the summary needs the backend (out of current scope).',
     },
+    enroll: { title: 'Add students to the course', hint: 'Pick students from the list — enrolled once the server is connected.', cta: 'Add students' },
     studentTitle: 'Course & group', familyTitle: "Children's courses & groups",
     familyHint: '{c} active courses · {g} groups', familyNone: 'No active courses yet',
   },
@@ -62,14 +63,16 @@ export default {
       edit: 'Edit group', editToast: 'Editing the group will be available once the server is connected.',
       assignTeacher: 'Assign teacher', addStudents: 'Add students', addStudentsToast: 'Adding students will be available once the server is connected.',
       removeStudent: 'Remove student', removeTitle: 'Remove the student from this group?', removeMsg: 'This will be available once the server is connected — nothing is saved yet.', removeCta: 'Remove', removeToast: 'Removing the student will be available once the server is connected.',
-      print: 'Print summary',
+      move: 'Move student', print: 'Print summary',
     },
     reason: {
       assign: 'Assigning teachers needs the backend (out of current scope).',
       enroll: 'Enrolling students needs the enrolment engine (out of current scope).',
       full: 'The group is full — students cannot be added.',
       export: 'Exporting the summary needs the backend (out of current scope).',
+      move: 'Moving students between groups needs the backend (out of current scope).',
     },
+    assign: { title: 'Add students to the group', hint: 'Pick students — assigned once the server is connected.', cta: 'Add students' },
   },
 
   data: {

@@ -300,6 +300,89 @@ const FILTER_SPEC = {
         }
       }
 
+      // Spec 027 — deep management: every new action opens a real modal / drawer-picker /
+      // confirm / gate; NO fake create/enroll/assign/move/save. (One sanctioned amendment.)
+      if (page === 'students') {
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        const kb = await p.evaluate(() => {
+          const rows = [...document.querySelectorAll('#students-table [data-row]')];
+          const kebabs = [...document.querySelectorAll('#students-table [data-row-menu][data-row-menu-kind="student"]')];
+          return { rows: rows.length, kebabs: kebabs.length };
+        });
+        ok(kb.kebabs > 0 && kb.kebabs === kb.rows, `${page}/${lang}: students table missing the per-row student kebab (${kb.kebabs}/${kb.rows})`);
+        const kebab = await p.$('#students-table [data-row-menu][data-row-menu-kind="student"]');
+        if (kebab) { await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150); }
+        const menu = await p.evaluate(() => {
+          const pop = document.querySelector('.popover');
+          if (!pop) return { open: false };
+          return {
+            open: true,
+            link: !!pop.querySelector('a[href*="student"]'),
+            editModal: !!pop.querySelector('[data-modal-trigger][data-modal-title-key="sp.act.edit"]'),
+            confirms: pop.querySelectorAll('[data-confirm]').length,
+            demo: pop.querySelectorAll('[data-demo-action]').length,
+          };
+        });
+        ok(menu.open && menu.link && menu.editModal && menu.confirms >= 2 && menu.demo === 0,
+          `${page}/${lang}: student row kebab is not honest (View link + Edit modal + Suspend/Remove confirm, no demo) — ${JSON.stringify(menu)}`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'student') {
+        const s = await p.evaluate(() => {
+          const tpl = document.querySelector('template[data-preview="stu-enroll"]');
+          const body = document.querySelector('#page-body') || document.body;
+          return {
+            enroll: !!document.querySelector('[data-drawer="stu-enroll"]'),
+            assign: !!document.querySelector('[data-drawer="stu-assign"]'),
+            move: !!document.querySelector('[data-drawer="stu-move"]'),
+            crossGate: !!(document.querySelector('template[data-preview="stu-move"]') || {}).content?.querySelector?.('[data-reason-key="sp.move.crossReason"]'),
+            editModal: !!document.querySelector('[data-modal-trigger][data-modal-title-key="sp.act.edit"]'),
+            suspend: !!document.querySelector('[data-confirm][data-confirm-title]'),
+            tplGate: !!(tpl && tpl.content.querySelector('[data-disabled-reason]')),
+            noScore: !/\b(percentile|leaderboard)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML),
+          };
+        });
+        ok(s.enroll && s.assign && s.move, `${page}/${lang}: student missing enroll/assign/move picker triggers`);
+        ok(s.editModal, `${page}/${lang}: student Edit is not an honest modal trigger`);
+        ok(s.suspend, `${page}/${lang}: student missing the suspend confirm`);
+        ok(s.tplGate, `${page}/${lang}: enroll picker is not a display-only list with a backendRequired gate`);
+        ok(s.crossGate, `${page}/${lang}: cross-family transfer must be an honest gate inside the move picker`);
+        ok(s.noScore, `${page}/${lang}: results/evaluation must not add a computed score/rank/chart`);
+      }
+      if (page === 'course' || page === 'group') {
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        const did = page === 'course' ? 'crs-enroll' : 'grp-assign';
+        const ek = page === 'course' ? 'crs.act.edit' : 'grp.act.edit';
+        const c = await p.evaluate(({ did2, ek2 }) => ({
+          edit: !!document.querySelector(`[data-modal-trigger][data-modal-title-key="${ek2}"]`),
+          addDrawer: !!document.querySelector(`[data-drawer="${did2}"]`),
+          tpl: !!document.querySelector(`template[data-preview="${did2}"]`),
+          createGroup: !!document.querySelector('[data-modal-trigger][data-modal-title-key="crs.act.createGroup"]'),
+        }), { did2: did, ek2: ek });
+        ok(c.edit, `${page}/${lang}: ${page} Edit is not an honest modal trigger`);
+        ok(c.addDrawer && c.tpl, `${page}/${lang}: ${page} add-students picker (drawer + baked template) missing`);
+        if (page === 'course') ok(c.createGroup, `${page}/${lang}: course missing the create-group modal trigger`);
+        const trg = await p.$(`[data-drawer="${did}"]`);
+        if (trg) { await trg.scrollIntoViewIfNeeded(); await trg.click(); await p.waitForTimeout(230); }
+        const drw = await p.evaluate(() => {
+          const d = document.querySelector('.drawer.sheet');
+          if (!d) return { open: false };
+          return { open: true, gate: !!d.querySelector('[data-disabled-reason]') };
+        });
+        ok(drw.open && drw.gate, `${page}/${lang}: ${page} add-students picker is not an honest drawer w/ backendRequired gate (${JSON.stringify(drw)})`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'family') {
+        const fm = await p.evaluate(() => ({
+          edit: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.edit"]'),
+          addChild: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.addChild"]'),
+          reclassDrawer: !!document.querySelector('[data-drawer="fam-cat"]'),
+          reclassTpl: !!(document.querySelector('template[data-preview="fam-cat"]') || {}).content?.querySelector?.('[data-disabled-reason]'),
+        }));
+        ok(fm.edit && fm.addChild, `${page}/${lang}: family banner missing edit/add-child modal triggers`);
+        ok(fm.reclassDrawer && fm.reclassTpl, `${page}/${lang}: family category reclassify drawer/template (w/ backendRequired gate) missing`);
+      }
+
       // Spec 004 — add-family wizard: 5 baked steps · labeled fields · Next/Back · Save toasts
       if (page === 'add-family') {
         const wiz = await p.evaluate(() => {

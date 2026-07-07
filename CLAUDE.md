@@ -1,6 +1,52 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 026 — Admin Control / Sessions / Operations + Global Action Completion Pass is
-IMPLEMENTED** (awaiting the watcher commit; artifacts + tasks + 20 contracts at
+Active feature: **Spec 027 — Admin Families / Students / Courses / Groups Deep Management is IMPLEMENTED**
+(awaiting the watcher commit; artifacts + `tasks.md` (57 tasks) + 20 contracts at
+`academy-dashboard-discovery/specs/027-admin-families-students-courses-groups/`). **Count HELD 97 → 97 — ZERO new
+pages**: every delta a modal/drawer/picker/row-kebab/tab/gate on the existing 9 management pages. Resolved
+M-A…M-M + M-R/M-S: Edit family/student/course/group + Add-child + Add-note + family-category reclassify = honest
+`data-modal-trigger` backendRequired modals; enroll-in-course / assign-to-group / move-between-groups /
+add-students(course·group) = display-only candidate-list `data-drawer` pickers (`stu-enroll`/`stu-assign`/
+`stu-move`/`crs-enroll`/`grp-assign` + the `fam-cat` reclassify preview) baked as `<template data-preview>` with a
+clickable `data-disabled-reason` backendRequired final (NO persisted selection, NO roster mutation);
+create-group-from-course = modal; **students-table row kebab (M-I, was 0)** = a new `studentMenu` builder in
+`enhance.js` routed by the EXISTING `data-row-menu` dispatch (one `'student'` branch mirroring `familyMenu` — NOT
+a new hook) → View real · Edit modal · Suspend/Remove confirm; suspend-student = `data-confirm`; cross-family
+transfer + schedule-search = honest gates (no invented fields); Results/Evaluation kept display-only (**no computed
+score/rank/chart** added). New display-only fixture `fixtures/management.js` (picker candidates derived from
+existing entities — no computed/pay values); AR+EN keys under `ar/en.fam.js` (fam/stu/res/eval) + `ar/en.crs.js`
+(crs/grp), reusing `common.backendRequiredNote`; **no new CSS** (pickers reuse `sheet-*`, kebab reuses `icon-btn`).
+Route-out kept as honest gates: assign-teacher→028, message→026/future, print/export→029, billing/plan→030 (family
+plan literal stays single-value/no-math), materials→031, login-as/reset→future-backend. **Verified**: build 97;
+smoke PASS (96 loads; +83-line additive amendment — payHit/famPay/payFigure/child-view/admin-finance + the 026
+action-completion asserts byte-verbatim); a11y critical=0 serious=0; 187 screenshots 0 console errors. Only the 10
+detail/list HTML changed (course/family/group/student/students ×2); families/add-family/courses/groups + all portal
++ admin-ops (sessions-analysis/public-holiday/scheduled-actions) + index byte-identical; `package.json` 0-diff; no
+new hook/storage key/engine/dependency/page. Role laws green: family zero-pay, student child-view (no «لوحة
+الطالب»), teacher pay-free (reference only), admin finance Spec-009 invariant. Next: watcher commit.
+**History: Spec 027 SPECIFIED/PLANNED** — Spec 026 was the committed baseline (HEAD `a0189d0`; 97 public
+HTML; working tree clean). Artifacts at `academy-dashboard-discovery/specs/027-admin-families-students-courses-groups/`
+(spec · visual-grounding · legacy-family-student-course-group-coverage · current-management-action-inventory ·
+missing-action-register (M-A…M-V) · entity-relationship-scope · modal-and-page-scope · future-owner-register ·
+checklists/requirements). Grounded via a 3-agent read-only audit (legacy families/students · legacy
+courses/groups/relations · current 9-page inventory). **Key finding**: the 9 management pages
+(families/family/add-family/students/student/courses/course/groups/group) are ALREADY honest after Spec 026
+(0 dead buttons, 0 `href="#"`, 0 fake finals, confirm finals backendRequired) but **SHALLOW on deep
+management**. Spec 027 = deepen + complete: **M-A…M-M** (upgrade Edit family/student/course/group + Add-child
++ Add-note from shallow toast/modal → richer modal/drawer; add enroll-in-course + assign-students-to-group +
+move-student pickers; add the students-table row kebab [absent — families has 16, students 0]; suspend-student;
+family-category reclassify; create-group-from-course) + grounded thin surfaces **M-R/M-S** (studentResult/
+studentEvaluation display-only, NO computed score/chart; scheduleSearch availability preview = gate). Every
+027 write ends at a backendRequired final; reuse the CLOSED `data-*` set (Spec-026 `data-modal-trigger`+
+`data-modal-title-key`/`data-modal-note-key`, `data-confirm`, `data-drawer`, `data-disabled-reason`, `data-tab`,
+`data-filter`) — NO new hook/storage key, NO fake persistence. **Route out**: assign-teacher persistence→028,
+message→026/future, print/export→029, billing/plan persistence→030 (family-portal stays figure-free; the
+family.html admin **plan hour-rate literal** «سعر الساعة ٨٠ ريال/ساعة· عرض فقط» is a Spec-004/009-sanctioned
+admin-only single-value literal, distinct from the family-PORTAL zero-pay line — keep single-value/no-math),
+feedback/analytics→029, materials/subjects→031, impersonation→future-backend. Teacher = reference only (deep
+mgmt=028). Count default **97** (deepen via existing pages/modals/drawers; a new page must be legacy-justified
++ build-verified in planning). Role laws binding (family zero-pay portal · student child-view · teacher pay-free ·
+admin finance Spec-009 invariant · all Spec-026 action-completion protections). Next: `/speckit-plan`.
+**History: Spec 026 — Admin Control / Sessions / Operations + Global Action Completion Pass is IMPLEMENTED** (awaiting the watcher commit; artifacts + tasks + 20 contracts at
 `academy-dashboard-discovery/specs/026-admin-control-sessions-operations/`). **91→97 HTML.** **Layer A**:
 built 3 admin ops pages (sessions-analysis · public-holiday · scheduled-actions, AR+EN; new `pages/*.js` +
 `fixtures/*.js` authored via a parallel workflow; new `ar.ops.js`/`en.ops.js` locale module registered in

@@ -207,3 +207,37 @@ backendRequired modal (reusing the existing `data-modal-trigger`); the previous 
 unwired filter widget was replaced with a real link to the sessions page. No backend, no fake
 persistence, no new hook or storage key; teacher pay-free / family zero-pay / student child-view /
 admin finance invariants all preserved.
+
+## Spec 027 — Admin Families / Students / Courses / Groups Deep Management
+
+Deepened the nine already-honest admin management pages (families · family · add-family · students ·
+student · courses · course · groups · group) into real, usable admin screens — **no new pages
+(97 → 97)**. Every delta is a modal, a drawer-picker, a row-kebab, a tab, or an honest gate on an
+existing page, reusing ONLY the closed Spec-026 `data-*` hook set (no new dispatch hook, storage key,
+engine, dependency, or CSS redesign).
+
+- **Edit family/student/course/group · Add-child · Add-note · Create-group-from-course** → honest
+  `data-modal-trigger` backendRequired modals (title + "nothing is saved yet" note; no fake fields).
+- **Enroll-in-course · Assign-to-group · Move-between-groups · Add-students (course/group) ·
+  Family-category reclassify** → display-only candidate-list drawers baked as `<template data-preview>`
+  (`stu-enroll`/`stu-assign`/`stu-move`/`crs-enroll`/`grp-assign`/`fam-cat`), each ending at a clickable
+  `data-disabled-reason` backendRequired gate — no selection persists, no roster mutates.
+- **Students-table row kebab** (previously absent) → a new `studentMenu` builder in `enhance.js`, routed
+  by the EXISTING `data-row-menu` dispatch via one `'student'` branch mirroring `familyMenu` (View
+  profile · Edit modal · Suspend/Remove confirm) — **not** a new hook.
+- **Suspend/Remove student** → `data-confirm`; **cross-family transfer** and **schedule-search** →
+  honest gates (no invented fields); **Results/Evaluation** stay display-only (no computed score/chart).
+- Out-of-scope actions stay honest owner gates: assign-teacher → 028, message → 026/future, print/export
+  → 029, billing/plan → 030 (the admin plan hour-rate stays a single-value, no-math literal), materials
+  → 031, login-as/reset → future-backend.
+
+New display-only fixture `src/js/fixtures/management.js` (picker candidates derived from existing
+entities — no computed or pay values); mirrored AR/EN keys added to `ar/en.fam.js` (fam/stu/res/eval) and
+`ar/en.crs.js` (crs/grp), reusing `common.backendRequiredNote`. **Django note**: each picker is a baked
+`<template data-preview="…">` block (a `{% include %}` of a candidate list) whose final button is a
+`backendRequired` gate — the real Enroll/Assign/Move POST lands behind `{% if backend %}`; the student
+row kebab reuses the same `data-row-menu` menu machinery as the family kebab. Only the ten detail/list
+HTML changed (course/family/group/student/students × 2 languages); families/add-family/courses/groups +
+all portal + admin-ops + index stay byte-identical; `package.json` 0-diff; teacher pay-free / family
+zero-pay / student child-view / admin finance Spec-009 invariants all preserved. Build 97; smoke PASS;
+a11y critical=0 serious=0.
