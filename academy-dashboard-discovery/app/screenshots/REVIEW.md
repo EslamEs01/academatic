@@ -632,3 +632,25 @@ B-02 Locations→031 · B-04 live-room→future-backend · B-06 teacher chat→f
 
 ### Failure sweep
 None. Forbidden files (build-html.mjs, package.json, nav.config.js, enhance.js, topbar.js) 0-diff. Teacher pay-free three layers green; family zero-pay green. No `href="#"`, no new hook/storage key. Admin pages untouched.
+
+## Spec 025 — Teacher Internal Pages (2026-07-07)
+
+The seven teacher internal pages built behind the teacher portal nav (each AR+EN → 77→91 public HTML). Static, pay-free, honest gates; no backend, no fake actions. Smoke PASS (90 loads); a11y critical=0 serious=0; 170 screenshots / 0 console errors.
+
+### Pages (grounded in the Spec 015 T1–T27 map)
+- **teacher-schedule** (T14): today dayRail (roster counts + «جارية الآن» status + prep hint) + week day-grouped agenda cards (truthful rest days, no grid clone); live-room + availability = backendRequired gates.
+- **teacher-students** (T8): view-only roster cards (st1/st6/st11/st13 — course/group + learning signal) + follow-up storyRow; zero form controls, zero body anchors.
+- **teacher-outcomes** (T22/T3): prepare→attend→record→review flowStrip + the five classes-end capture fields display-only + recorded examples (out1/out11); save = backendRequired.
+- **teacher-tasks** (T11/T16): task board (priority/status + due) + monthly-plan preview; complete = backendRequired; no tickets chart/average.
+- **teacher-reports** (T9+T20/T21): **academic-only** — authored counts (24 sessions / 4 students / 3 on-track), student-progress cards, 5 rubric dimension lines (no scales/scores), export = backendRequired. **The teacher-home performance anchor's repoint target.**
+- **teacher-profile** (T23): identity + subjects + availability windows + preferences; exactly 3 backendRequired write gates (photo/save/password).
+- **teacher-library** (T15): resource cards (type/status/course) from TEACHER_PREVIEW.materials; upload/download = backendRequired.
+
+### Nav conversion + anchor repoint
+The 7 planned ROLE_NAV.teacher items → implemented (navListAnchors 1→8, plannedNavAnchors===0, shell-anchor multiset 5→19 — teacher is now a full role app like family). The teacher-home performance anchor repointed `teacher-performance`→`teacher-reports` (closing the Spec-024 B-07 admin-shell adjacency).
+
+### Pay-free / honesty
+Teacher pay-free GLOBAL verified at 3 layers (source incl. comments + built + smoke `payHit` byte-verbatim; 0 hits on the 7 teacher-owned pages + teacher-portal). Reports academic-only (no chart/computed-score). Live-room = backendRequired gate (B-04); no teacher chat page/nav (B-06→026); every unavailable action an honest gate; zero `href="#"`, zero form controls, zero body anchors.
+
+### Failure sweep
+None. Admin (40) + index + all family + all student pages byte-identical (only teacher-portal pair changed — nav+anchor). package.json / enhance.js / topbar.js / portal-shell.js / nav.config.js 0-diff. One sanctioned smoke amendment (TEACHER_INTERNAL set + teacher nav/body asserts + anchor re-pin + expPlanned entries); payHit/famPay/admin asserts byte-verbatim. Dark/RTL/mobile-390 clean.

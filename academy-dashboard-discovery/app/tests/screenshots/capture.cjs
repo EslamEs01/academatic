@@ -201,6 +201,17 @@ const MATRIX = [
   { page: 'family-portal',    lang: 'ar', theme: 'light', vp: 'desktop', variant: 'tiles-now-links' },
   // Spec 017 — Shell v2: the native mobile nav disclosure, captured OPEN (amendment A1 proof)
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile', roleDrawer: true, variant: 'drawer-open' },
+  // Spec 025 — the seven teacher internal pages: all seven AR desktop + reports EN + schedule dark + schedule mobile
+  { page: 'teacher-schedule', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-schedule', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'teacher-schedule', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'teacher-students', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-outcomes', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-tasks', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-reports', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-profile', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-library', lang: 'ar', theme: 'light', vp: 'desktop' },
 ];
 
 (async () => {

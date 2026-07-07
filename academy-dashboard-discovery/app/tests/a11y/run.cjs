@@ -121,6 +121,17 @@ const MATRIX = [
   { page: 'family-materials', lang: 'ar', theme: 'dark' },
   { page: 'family-profile', lang: 'ar', theme: 'light' },
   { page: 'family-profile', lang: 'ar', theme: 'dark' },
+  // Spec 025 — the seven teacher internal pages (AR light covers all seven; reports/schedule AR dark; schedule as the EN sample)
+  { page: 'teacher-schedule', lang: 'ar', theme: 'light' },
+  { page: 'teacher-schedule', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-schedule', lang: 'en', theme: 'light' },
+  { page: 'teacher-students', lang: 'ar', theme: 'light' },
+  { page: 'teacher-outcomes', lang: 'ar', theme: 'light' },
+  { page: 'teacher-tasks', lang: 'ar', theme: 'light' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'light' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-profile', lang: 'ar', theme: 'light' },
+  { page: 'teacher-library', lang: 'ar', theme: 'light' },
 ];
 
 (async () => {

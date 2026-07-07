@@ -33,7 +33,22 @@ finance-boundary provenance in README/CLAUDE, **B-10** rail verified MOVED-not-d
 flowStrip «التحضير»), family-children no-fold-link recorded intentional. **Finance boundary (B-09,
 binding)**: authored admin invoice-amount literals are Spec-009-sanctioned (zero aggregate/math,
 admin-only); salary/payroll/compensation/payout FIGURES never allowed anywhere; family/teacher stay
-figure-free. **Spec 025 (Teacher Internal Pages) = GO** (024 closed B-04/B-05/B-06/B-07). **Spec 022 —
+figure-free. **Spec 025 — Teacher Internal Pages is IMPLEMENTED** (awaiting the watcher commit; artifacts
++ tasks + 18 contracts at `academy-dashboard-discovery/specs/025-teacher-internal-pages/`). Built the 7
+teacher internal pages (schedule·students·outcomes·tasks·reports·profile·library, each AR+EN → **77→91
+HTML**) from the existing living primitives + retained TEACHER_PREVIEW fixtures (7 new `teacher-*.js`
+modules, authored via a parallel workflow; all new copy under `prt.tch.pg.<page>.*`, mirrored ar/en).
+Flipped the 7 planned ROLE_NAV.teacher items→implemented (**navListAnchors 1→8**, plannedNavAnchors===0,
+shell-anchor multiset 5→19 — teacher is now a full role app like family); build-html registers the 7
+pages ONLY. **Repointed the teacher-home performance anchor `teacher-performance`→`teacher-reports`**
+(`teacher-portal.js:70`), closing the Spec-024 B-07 admin-shell adjacency; smoke anchor assert re-pinned.
+Pay-free GLOBAL verified 3-layer (source incl. comments + built + smoke `payHit` byte-verbatim; reports
+is academic-only — authored counts + rubric dimension lines, NO chart/score); live-room + availability +
+save/submit + export + upload/download + the 3 profile write gates are honest backendRequired gates;
+**no teacher chat page/nav** (B-06→026). Smoke PASS (90 loads); admin+index+family+student byte-identical
+(only teacher-portal pair changed); package.json/enhance.js/topbar.js/portal-shell.js/nav.config.js
+0-diff. Smoke rescope added a TEACHER_INTERNAL set + the teacher nav/body asserts (one sanctioned
+amendment; payHit/famPay/admin asserts byte-verbatim). **Spec 022 —
 Living Dashboards Experience Rework is IMPLEMENTED** (awaiting the watcher commit): the hub + the
 three role homes became LIVING cockpits and the corrected role model landed. Five shared living
 primitives added to `portal-page.js` (**idHero · dayRail · storyRow · flowStrip · guidePanel** —

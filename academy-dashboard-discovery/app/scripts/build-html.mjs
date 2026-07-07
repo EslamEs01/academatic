@@ -38,6 +38,13 @@ import { renderPortalsHub } from '../src/js/pages/portals.js';
 import { renderStudentPortal } from '../src/js/pages/student-portal.js';
 import { renderFamilyPortal } from '../src/js/pages/family-portal.js';
 import { renderTeacherPortal } from '../src/js/pages/teacher-portal.js';
+import { renderTeacherSchedule } from '../src/js/pages/teacher-schedule.js';
+import { renderTeacherStudents } from '../src/js/pages/teacher-students.js';
+import { renderTeacherOutcomes } from '../src/js/pages/teacher-outcomes.js';
+import { renderTeacherTasks } from '../src/js/pages/teacher-tasks.js';
+import { renderTeacherReports } from '../src/js/pages/teacher-reports.js';
+import { renderTeacherProfile } from '../src/js/pages/teacher-profile.js';
+import { renderTeacherLibrary } from '../src/js/pages/teacher-library.js';
 import { renderFamilyChild } from '../src/js/pages/family-child.js';
 import { renderStudentSchedule } from '../src/js/pages/student-schedule.js';
 import { renderStudentHomework } from '../src/js/pages/student-homework.js';
@@ -111,6 +118,14 @@ const PAGES = [
   { base: 'family-requests', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'requests', titleKey: 'prt.title.famRequests', render: renderFamilyRequests },
   { base: 'family-materials', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'materials', titleKey: 'prt.title.famMaterials', render: renderFamilyMaterials },
   { base: 'family-profile', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'profile', titleKey: 'prt.title.famProfile', render: renderFamilyProfile },
+  // Spec 025 — the seven teacher internal pages (portal shell, role teacher, persona sara; nav planned→implemented)
+  { base: 'teacher-schedule', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'schedule', titleKey: 'prt.tch.pg.sched.title', render: renderTeacherSchedule },
+  { base: 'teacher-students', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'students', titleKey: 'prt.tch.pg.students.title', render: renderTeacherStudents },
+  { base: 'teacher-outcomes', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'outcomes', titleKey: 'prt.tch.pg.outcomes.title', render: renderTeacherOutcomes },
+  { base: 'teacher-tasks', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'tasks', titleKey: 'prt.tch.pg.tasks.title', render: renderTeacherTasks },
+  { base: 'teacher-reports', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'reports', titleKey: 'prt.tch.pg.reports.title', render: renderTeacherReports },
+  { base: 'teacher-profile', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'profile', titleKey: 'prt.tch.pg.profile.title', render: renderTeacherProfile },
+  { base: 'teacher-library', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'library', titleKey: 'prt.tch.pg.library.title', render: renderTeacherLibrary },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

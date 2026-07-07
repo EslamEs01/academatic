@@ -179,3 +179,14 @@ Recorded so no future pass "restores" a law-excluded surface or copies figures a
 - **Finance boundary**: authored admin invoice-amount literals on admin finance pages are
   Spec-009-sanctioned (zero aggregate, zero runtime math, admin-only); **salary/payroll/compensation/
   payout figures are NEVER allowed anywhere**; family and teacher surfaces stay figure-free.
+
+## Spec 025 — Teacher Internal Pages
+
+The teacher portal is now a full role app: seven internal pages (schedule · students ·
+outcomes · tasks · reports · profile · library), each AR + EN, built from the shared living
+primitives + the retained `TEACHER_PREVIEW` fixtures (77 → 91 public HTML). The seven planned
+`ROLE_NAV.teacher` items are now implemented links; the teacher-home performance anchor repoints
+to the pay-free `teacher-reports` page (closing the Spec-024 B-07 admin-shell adjacency). Every
+unavailable action (live-room, save/submit, export, upload/download, the three profile writes) is
+an honest backendRequired gate; `teacher-reports` is academic-only (no chart/score). Teacher
+surfaces stay pay-free GLOBALLY (three-layer enforced); no teacher chat page/nav (chat → Spec 026).

@@ -158,13 +158,13 @@ export const ROLE_NAV = {
   ],
   teacher: [
     { id: 'home', labelKey: 'prt.nav.tch.home', icon: 'home', page: 'teacher-portal', status: 'implemented' },
-    { id: 'schedule', labelKey: 'prt.nav.tch.schedule', icon: 'calendar', page: 'teacher-schedule', status: 'planned' },
-    { id: 'students', labelKey: 'prt.nav.tch.students', icon: 'students', page: 'teacher-students', status: 'planned' },
-    { id: 'outcomes', labelKey: 'prt.nav.tch.outcomes', icon: 'clipboard-check', page: 'teacher-outcomes', status: 'planned' },
-    { id: 'tasks', labelKey: 'prt.nav.tch.tasks', icon: 'tasks', page: 'teacher-tasks', status: 'planned' },
-    { id: 'reports', labelKey: 'prt.nav.tch.reports', icon: 'reports', page: 'teacher-reports', status: 'planned' },
-    { id: 'library', labelKey: 'prt.nav.tch.library', icon: 'book-open', page: 'teacher-library', status: 'planned' },
-    { id: 'profile', labelKey: 'prt.nav.tch.profile', icon: 'user', page: 'teacher-profile', status: 'planned' },
+    { id: 'schedule', labelKey: 'prt.nav.tch.schedule', icon: 'calendar', page: 'teacher-schedule', status: 'implemented' },
+    { id: 'students', labelKey: 'prt.nav.tch.students', icon: 'students', page: 'teacher-students', status: 'implemented' },
+    { id: 'outcomes', labelKey: 'prt.nav.tch.outcomes', icon: 'clipboard-check', page: 'teacher-outcomes', status: 'implemented' },
+    { id: 'tasks', labelKey: 'prt.nav.tch.tasks', icon: 'tasks', page: 'teacher-tasks', status: 'implemented' },
+    { id: 'reports', labelKey: 'prt.nav.tch.reports', icon: 'reports', page: 'teacher-reports', status: 'implemented' },
+    { id: 'library', labelKey: 'prt.nav.tch.library', icon: 'book-open', page: 'teacher-library', status: 'implemented' },
+    { id: 'profile', labelKey: 'prt.nav.tch.profile', icon: 'user', page: 'teacher-profile', status: 'implemented' },
   ],
 };
 

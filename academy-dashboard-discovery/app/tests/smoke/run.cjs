@@ -9,18 +9,22 @@ const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedu
   'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
   'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
-  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile'];
+  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
+  'teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-profile', 'teacher-library'];
 
 // Spec 012 — the role-portal surface (portal shell, not the admin shell). Admin-shell
 // assertions are scoped to admin pages; portal pages get their own block below. The
 // future-role portal-ABSENCE assertion stays enforced verbatim on every ADMIN page.
 const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
-  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile']);
+  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
+  'teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-profile', 'teacher-library']);
 // Spec 019 — the six student internal pages (all consume the student shell with a full 7-item, all-implemented registry)
 const STUDENT_INTERNAL = new Set(['student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile']);
 // Spec 020 — the seven family internal pages (all consume the family shell with a full 8-item, all-implemented registry)
 const FAMILY_INTERNAL = new Set(['family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile']);
+// Spec 025 — the seven teacher internal pages (all consume the teacher shell with a full 8-item, all-implemented registry)
+const TEACHER_INTERNAL = new Set(['teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-profile', 'teacher-library']);
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -966,7 +970,7 @@ const FILTER_SPEC = {
             .map((a) => a.getAttribute('href'));
           return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible, idHero, railStops, flowSteps, storyRows, childViewLinks };
         });
-        const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : STUDENT_INTERNAL.has(page) ? 'student' : FAMILY_INTERNAL.has(page) ? 'family' : page.replace('-portal', '');
+        const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : STUDENT_INTERNAL.has(page) ? 'student' : FAMILY_INTERNAL.has(page) ? 'family' : TEACHER_INTERNAL.has(page) ? 'teacher' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
         ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
         if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
@@ -1038,6 +1042,19 @@ const FILTER_SPEC = {
           }
           if (page === 'family-profile') ok(prt.plannedBackend === 3, `${page}/${lang}: the family profile must show exactly 3 backendRequired gates (photo/save/password), got ${prt.plannedBackend}`);
         }
+        // Spec 025 — a teacher INTERNAL page: teacher shell, display-only (zero forms), a real content
+        // floor (≥3 cards), zero body anchors (the sidebar owns navigation; every unavailable action is
+        // a non-anchor backendRequired gate), and — the teacher hard rule — ZERO pay vocabulary (the
+        // payHit lineage, byte-verbatim). teacher-profile carries exactly the three write gates.
+        if (TEACHER_INTERNAL.has(page)) {
+          ok(prt.formControls === 0, `${page}/${lang}: teacher internal page must contain zero form controls, got ${prt.formControls}`);
+          const tcards = await p.$$eval('#page-body .pt-card', (els) => els.length);
+          ok(tcards >= 3, `${page}/${lang}: expected a real content floor (≥3 cards), got ${tcards}`);
+          ok(prt.bodyAnchors === 0, `${page}/${lang}: teacher internal page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          const tchPay = /\b(salary|salaries|payouts?|earnings?|compensation)\b/i.test(prt.bodyText) || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
+          ok(!tchPay, `${page}/${lang}: a teacher internal page contains pay vocabulary — forbidden (teacher pay-free GLOBAL)`);
+          if (page === 'teacher-profile') ok(prt.plannedBackend === 3, `${page}/${lang}: the teacher profile must show exactly 3 backendRequired gates (photo/save/password), got ${prt.plannedBackend}`);
+        }
         // Spec 018 — the COMPACT family home (re-scoped from the 014 long-home floors): the 7-band
         // recipe (4–7 sections), 4 KPI cards, the five REAL child drill-down links (body anchors === 5,
         // one per fam1 child, targeting family-child), a form-free body, the two rendered gates
@@ -1099,7 +1116,8 @@ const FILTER_SPEC = {
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
         const expPlanned = { 'student-portal': 2, 'family-portal': 2, 'teacher-portal': 1, portals: 0, 'family-child': 0,
           'student-schedule': 0, 'student-homework': 1, 'student-materials': 1, 'student-progress': 0, 'student-history': 0, 'student-profile': 3,
-          'family-children': 0, 'family-schedule': 0, 'family-progress': 0, 'family-billing': 1, 'family-requests': 1, 'family-materials': 1, 'family-profile': 3 }[page];
+          'family-children': 0, 'family-schedule': 0, 'family-progress': 0, 'family-billing': 1, 'family-requests': 1, 'family-materials': 1, 'family-profile': 3,
+          'teacher-schedule': 0, 'teacher-students': 0, 'teacher-outcomes': 1, 'teacher-tasks': 0, 'teacher-reports': 0, 'teacher-profile': 3, 'teacher-library': 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
         ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
         if (page === 'portals') {
@@ -1128,8 +1146,8 @@ const FILTER_SPEC = {
           ok(prt.flowSteps === 4, `${page}/${lang}: expected the 4-step outcome flow strip (prepare→attend→record→review), got ${prt.flowSteps}`);
           ok(prt.storyRows === 0, `${page}/${lang}: the teacher home carries no family status stories, got ${prt.storyRows}`);
           ok(prt.bodyAnchors === 1, `${page}/${lang}: the teacher page body must contribute exactly ONE anchor (the performance link), got ${prt.bodyAnchors}`);
-          ok(prt.anchorTargets.every((h) => /(^|\/)teacher-performance\.(en\.)?html$/.test(h)),
-            `${page}/${lang}: the teacher body anchor must target the performance board, got ${JSON.stringify(prt.anchorTargets)}`);
+          ok(prt.anchorTargets.every((h) => /(^|\/)teacher-reports\.(en\.)?html$/.test(h)),
+            `${page}/${lang}: the teacher body anchor must target the teacher-reports page (Spec 025 repoint), got ${JSON.stringify(prt.anchorTargets)}`);
           ok(prt.formControls === 0, `${page}/${lang}: the teacher page must contain zero form controls, got ${prt.formControls}`);
           ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (outcome save), got ${prt.plannedBackend}`);
           ok(prt.plannedPlanned === 0, `${page}/${lang}: expected 0 planned teacher gates on the compact home, got ${prt.plannedPlanned}`);
@@ -1203,29 +1221,33 @@ const FILTER_SPEC = {
             `${page}/${lang}: student shell anchors outside {7 student pages, hub}: ${JSON.stringify(uniq)}`);
           ok(prt.shellAnchors.length === 17,
             `${page}/${lang}: sanctioned student shell-anchor multiset must be 17 (7×2 + hub×3), got ${prt.shellAnchors.length}`);
-        } else {
-          const navWant = { 'teacher-portal': 8 }[page];   // Spec 024 B-05: +1 planned «مكتبتي/Library» item (home + 7 planned)
+        } else if (page === 'teacher-portal' || TEACHER_INTERNAL.has(page)) {
+          // Spec 025 — after the flip, EVERY teacher page carries the full 8-item registry, ALL
+          // implemented: aside + drawer each render 8 links; the current page is the active one;
+          // the shell-anchor multiset is 19 (8 nav ×2 + hub×3). NO planned nav anchors; no chat/pay nav.
           const selfHref = `${page}${lang === 'en' ? '.en' : ''}.html`;
           const hubHref = `portals${lang === 'en' ? '.en' : ''}.html`;
+          const tchBases = ['teacher-portal', 'teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-library', 'teacher-profile'];
+          const wantTch = tchBases.map((b) => `${b}${lang === 'en' ? '.en' : ''}.html`).concat(hubHref).sort();
           ok(prt.sidenavs === 1, `${page}/${lang}: expected exactly one role sidebar, got ${prt.sidenavs}`);
-          ok(prt.navAside === navWant && prt.navDrawer === navWant,
-            `${page}/${lang}: nav registry count mismatch (aside ${prt.navAside} / drawer ${prt.navDrawer}, want ${navWant})`);
+          ok(prt.navAside === 8 && prt.navDrawer === 8,
+            `${page}/${lang}: teacher registry count mismatch (aside ${prt.navAside} / drawer ${prt.navDrawer}, want 8)`);
           ok(prt.drawerSummary, `${page}/${lang}: the native mobile nav disclosure (details>summary) is missing`);
           ok(prt.navCurrentHrefs.length === 2 && prt.navCurrentHrefs.every((h) => h === selfHref),
-            `${page}/${lang}: expected the home entry active once per nav instance (2×self), got ${JSON.stringify(prt.navCurrentHrefs)}`);
+            `${page}/${lang}: expected this page active once per nav instance (2×self), got ${JSON.stringify(prt.navCurrentHrefs)}`);
           ok(prt.plannedNavAnchors === 0, `${page}/${lang}: planned nav entries must never be anchors, got ${prt.plannedNavAnchors}`);
-          ok(prt.navListAnchors === 1, `${page}/${lang}: expected exactly one link (home) in the sidebar nav list, got ${prt.navListAnchors}`);
+          ok(prt.navListAnchors === 8, `${page}/${lang}: expected all 8 teacher nav items implemented as links, got ${prt.navListAnchors}`);
           const uniq = [...new Set(prt.shellAnchors)].sort();
-          ok(JSON.stringify(uniq) === JSON.stringify([hubHref, selfHref].sort()),
-            `${page}/${lang}: shell anchors outside the registry set {self, hub}: ${JSON.stringify(uniq)}`);
-          ok(prt.shellAnchors.length === 5,
-            `${page}/${lang}: sanctioned shell-anchor multiset must be 5 (self×2 + hub×3), got ${prt.shellAnchors.length}`);
+          ok(JSON.stringify(uniq) === JSON.stringify(wantTch),
+            `${page}/${lang}: teacher shell anchors outside {8 teacher pages, hub}: ${JSON.stringify(uniq)}`);
+          ok(prt.shellAnchors.length === 19,
+            `${page}/${lang}: sanctioned teacher shell-anchor multiset must be 19 (8×2 + hub×3), got ${prt.shellAnchors.length}`);
         }
 
         // Spec 018 — the compact role homes + family-child are table-free and mobile-clean; the three
         // homes also carry the HARD COMPACTNESS CEILING (the endless page can never return).
         const isCompactHome = page === 'student-portal' || page === 'family-portal' || page === 'teacher-portal';
-        const isInternalPage = STUDENT_INTERNAL.has(page) || FAMILY_INTERNAL.has(page);
+        const isInternalPage = STUDENT_INTERNAL.has(page) || FAMILY_INTERNAL.has(page) || TEACHER_INTERNAL.has(page);
         const isRoleContent = isCompactHome || page === 'family-child' || isInternalPage;
         if (isRoleContent) {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
