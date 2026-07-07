@@ -1087,6 +1087,31 @@
   .pt-cele { background: linear-gradient(135deg, var(--pt-accent-weak), var(--c-surface));
     border-color: color-mix(in srgb, var(--pt-accent) 30%, var(--c-border)); }
 
+  /* ============================================================================
+     Spec 024 — B-11 visual-density pass (additive; pure CSS; no rule above touched;
+     no new hook/page; all motion still lives only in the reduced-motion block below).
+     ========================================================================== */
+  /* D-06 — in dark mode the --pt-accent-weak role tint reads near-charcoal, flattening
+     the family/child identity hero; mix in the fuller role accent so the per-role hero
+     story survives BOTH themes. Theme-aware: explicit [data-theme] + system dark. */
+  [data-theme="dark"] .pt-idhero {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--pt-accent) 24%, var(--c-surface)), var(--c-surface) 76%); }
+  [data-theme="dark"] .pt-idhero::before {
+    opacity: .42; background: radial-gradient(circle, color-mix(in srgb, var(--pt-accent) 55%, transparent), transparent 70%); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .pt-idhero {
+      background: linear-gradient(135deg, color-mix(in srgb, var(--pt-accent) 24%, var(--c-surface)), var(--c-surface) 76%); }
+    :root:not([data-theme="light"]):not([data-theme="dark"]) .pt-idhero::before {
+      opacity: .42; background: radial-gradient(circle, color-mix(in srgb, var(--pt-accent) 55%, transparent), transparent 70%); }
+  }
+  /* D-08 — after the Spec-021 student-card demotion the hub primary row holds exactly
+     two role cards; make the desktop grid 2-up so there is no empty third slot. */
+  @media (min-width: 720px) { .pt-hub-grid { grid-template-columns: repeat(2, 1fr); } }
+  /* D-13 — the role topbar now carries the honest notifications control too; drop the
+     redundant greeting on narrow screens so the action row never wraps awkwardly (the
+     persona is already shown in the sidebar identity block + the hero). */
+  @media (max-width: 560px) { .pt-greet { display: none; } }
+
   /* — motion quarantine: the ONLY auto-playing animations, all reduced-motion-safe.
      Static default (this block off) already shows the finished state. — */
   @keyframes lv-fadeup { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }

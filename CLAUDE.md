@@ -1,5 +1,39 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 023 — Full Legacy Coverage Audit 000–020** (next, per DEC-009). **Spec 022 —
+Active feature: **Spec 023 — Full Legacy Coverage Audit 000–022 is DELIVERED** (audit-only; awaiting
+the watcher commit). Renamed from "000–020" to **000–022** because the audit baseline is the full
+delivered set incl. Spec 021 (role-model correction) + Spec 022 (living rework). **Specs 020/021/022
+are the committed baseline** (HEAD `837b0c1`); the audit made NO app changes. Twelve evidence-based
+artifacts under `academy-dashboard-discovery/specs/023-full-legacy-coverage-audit/` (spec ·
+visual-grounding (25-area) · legacy-inventory · current-app-inventory · **coverage-matrix** (admin 44
+caps folding 300 captures + family 13 + teacher 17 + hub/shell) · current-vs-legacy-map ·
+missing-capabilities-register (M-01…M-16: **0 P0**, 6 P1, 2 P2, 1 P3, 7 excluded-by-law) ·
+extra-or-drift-register (X-01…X-49: **0 remove**, drift verdict NO) · design-quality-register
+(D-01…D-15) · role-model-consistency-audit (**9/9 PASS** + F-00-1) · **correction-backlog-for-024**
+(B-01…B-18) · agent-findings/00–10). VERDICT: the rebuild is traceable to legacy and NOT drifting;
+family strongly covered (020/022), student-as-child-view correct (021), teacher home improved +
+internals planned for 025, admin complete-and-sequenced (43 future items re-verify the 016 57-row
+inventory EXACTLY). **Confirmed defect F-00-1** = leftover «لوحة الطالب — النسخة الأولى» noteT/noteD
+on 6/7 child-view pages (`ar.prt.js:297-298`/`en.prt.js:294`) → **B-01 Must fix in 024** with declared
+hash supersession. **Spec 024 — Corrections From Legacy Coverage Audit is IMPLEMENTED** (awaiting the
+watcher commit; artifacts + `tasks.md` + `correction-status.md` at
+`academy-dashboard-discovery/specs/024-corrections-from-legacy-coverage-audit/`). Closed B-01…B-11 of
+the Spec 023 backlog (correction/alignment only — NO new pages/backend/fake behavior; **77 HTML held**;
+no new hook/storage key). **B-01** reframed the child-view note «لوحة الطالب»→«عرض الابن» (ar
+`prt.stu.noteT/D`, en) + rebake of 6 child-view pairs + a DECLARED 022 extraction-hash supersession
+(10/12 internal-body hashes; student-schedule untouched) + a smoke guard (child-view body ≠
+«لوحة الطالب|بوابة الطالب|student dashboard»); family/teacher role notes byte-unchanged. **B-03** added
+an honest role-shell notifications bell reusing `data-action="notifications"` (no dot/count, no new
+hook, admin gate untouched). **B-05** added one planned teacher `library` «مكتبتي/Library» nav item
+(non-anchor; smoke teacher nav 7→8; `plannedNavAnchors===0` held). **B-11** pure-CSS density: D-06
+dark role-tinted idHero (theme-aware), D-08 hub 2-up, D-13 mobile topbar de-wrap (D-04/D-05/D-09
+deferred — pinned bodies). Records: **B-02** Locations→031, **B-04** live-room→future-backend, **B-06**
+teacher chat→future (owner 025, no nav item), **B-07** pay-free exemption for the pre-existing Spec 007
+admin teacher-performance board (grep NOT weakened; 025 repoints the anchor), **B-08/B-09** exclusion +
+finance-boundary provenance in README/CLAUDE, **B-10** rail verified MOVED-not-deleted (prep-hint →
+flowStrip «التحضير»), family-children no-fold-link recorded intentional. **Finance boundary (B-09,
+binding)**: authored admin invoice-amount literals are Spec-009-sanctioned (zero aggregate/math,
+admin-only); salary/payroll/compensation/payout FIGURES never allowed anywhere; family/teacher stay
+figure-free. **Spec 025 (Teacher Internal Pages) = GO** (024 closed B-04/B-05/B-06/B-07). **Spec 022 —
 Living Dashboards Experience Rework is IMPLEMENTED** (awaiting the watcher commit): the hub + the
 three role homes became LIVING cockpits and the corrected role model landed. Five shared living
 primitives added to `portal-page.js` (**idHero · dayRail · storyRow · flowStrip · guidePanel** —

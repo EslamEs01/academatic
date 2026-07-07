@@ -106,7 +106,7 @@ export default {
       navAria: 'قائمة لوحة الدور',
       stu: { home: 'الرئيسية', schedule: 'جدولي', homework: 'واجباتي', materials: 'المواد', progress: 'تقدمي', history: 'سجل الحصص', profile: 'ملفي' },
       fam: { home: 'الرئيسية', children: 'الأبناء', schedule: 'الجدول', progress: 'التقدم', billing: 'الفواتير', requests: 'الطلبات', materials: 'المواد', profile: 'الملف' },
-      tch: { home: 'الرئيسية', schedule: 'جدولي', students: 'طلابي', outcomes: 'نتائج الحصص', tasks: 'المهام', reports: 'التقارير', profile: 'ملفي' },
+      tch: { home: 'الرئيسية', schedule: 'جدولي', students: 'طلابي', outcomes: 'نتائج الحصص', tasks: 'المهام', reports: 'التقارير', library: 'مكتبتي', profile: 'ملفي' },
     },
 
     /* Spec 018 — compact admin-like role homes (4-KPI row · now band · role-core ·
@@ -294,8 +294,8 @@ export default {
           gPass: { t: 'تغيير كلمة المرور', d: 'تحديث كلمة المرور يتطلب الخادم الفعلي.' },
         },
       },
-      noteT: 'لوحة الطالب — النسخة الأولى',
-      noteD: 'هذه لوحتك الدراسية. الجلسات المباشرة وتعديل الحساب يتطلبان الخادم؛ الرسائل والإشعارات تأتي في المواصفة ٠١٦.',
+      noteT: 'عرض الابن — النسخة الأولى',
+      noteD: 'هذه معاينة لوحة الابن ضمن حساب العائلة. الجلسات المباشرة وتعديل الحساب يتطلبان الخادم؛ الرسائل والإشعارات لاحقًا.',
     },
 
     fam: {

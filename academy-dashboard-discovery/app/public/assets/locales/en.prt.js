@@ -104,7 +104,7 @@ export default {
       navAria: 'Role dashboard navigation',
       stu: { home: 'Home', schedule: 'Schedule', homework: 'Homework', materials: 'Materials', progress: 'Progress', history: 'History', profile: 'Profile' },
       fam: { home: 'Home', children: 'Children', schedule: 'Schedule', progress: 'Progress', billing: 'Billing', requests: 'Requests', materials: 'Materials', profile: 'Profile' },
-      tch: { home: 'Home', schedule: 'Schedule', students: 'Students', outcomes: 'Outcomes', tasks: 'Tasks', reports: 'Reports', profile: 'Profile' },
+      tch: { home: 'Home', schedule: 'Schedule', students: 'Students', outcomes: 'Outcomes', tasks: 'Tasks', reports: 'Reports', library: 'Library', profile: 'Profile' },
     },
 
     /* Spec 018 — compact admin-like role homes (4-KPI row · now band · role-core ·
@@ -291,8 +291,8 @@ export default {
           gPass: { t: 'Change password', d: 'Updating your password requires the real backend.' },
         },
       },
-      noteT: 'Student dashboard — first version',
-      noteD: 'This is your learning home. Live sessions and account editing require the backend; messages and notifications arrive in Spec 016.',
+      noteT: 'Child view — part of the family account',
+      noteD: 'This is a preview of your child\'s dashboard within the family account. Live sessions and account editing require the backend; messages and notifications arrive later.',
     },
 
     fam: {

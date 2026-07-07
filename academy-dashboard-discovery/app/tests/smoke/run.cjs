@@ -1002,6 +1002,12 @@ const FILTER_SPEC = {
           ok(cards >= 3, `${page}/${lang}: expected a real content floor (≥3 cards), got ${cards}`);
           if (page === 'student-profile') ok(prt.plannedBackend === 3, `${page}/${lang}: the profile must show exactly 3 backendRequired gates (photo/save/password), got ${prt.plannedBackend}`);
         }
+        // Spec 024 B-01 — child-view surfaces must never carry pre-021 Student-primary framing
+        // (the demoted child-view is «عرض الابن», owned by the family; F-00-1 correction).
+        if (page === 'student-portal' || STUDENT_INTERNAL.has(page)) {
+          ok(!/لوحة الطالب|بوابة الطالب|student dashboard/i.test(prt.bodyText),
+            `${page}/${lang}: child-view #page-body carries forbidden Student-primary wording — must read child-view/family-owned (Spec 024 B-01)`);
+        }
         // Spec 020 — a family INTERNAL page: display-only (zero forms), a real content floor, THE
         // ZERO-PAY HARD LINE on every page (the identical payFigure regex — billing is the strictest
         // surface), and the pinned drill-down inventories (children/progress = the five exact child
@@ -1198,7 +1204,7 @@ const FILTER_SPEC = {
           ok(prt.shellAnchors.length === 17,
             `${page}/${lang}: sanctioned student shell-anchor multiset must be 17 (7×2 + hub×3), got ${prt.shellAnchors.length}`);
         } else {
-          const navWant = { 'teacher-portal': 7 }[page];
+          const navWant = { 'teacher-portal': 8 }[page];   // Spec 024 B-05: +1 planned «مكتبتي/Library» item (home + 7 planned)
           const selfHref = `${page}${lang === 'en' ? '.en' : ''}.html`;
           const hubHref = `portals${lang === 'en' ? '.en' : ''}.html`;
           ok(prt.sidenavs === 1, `${page}/${lang}: expected exactly one role sidebar, got ${prt.sidenavs}`);

@@ -610,3 +610,25 @@ Hub `hubRoleTargets` = exactly `[family-portal, teacher-portal]` (student demote
 
 ### Failure sweep
 None. Dark/RTL/mobile clean (a11y **critical=0 serious=0** incl. hub dark + all reworked homes light/dark); reduced-motion CSS-audited (all `lv-*` animation quarantined behind `prefers-reduced-motion: no-preference`, static end-state default); zero `href="#"`/dead links/raw keys; **teacher pay-free** three layers green (source incl. comments + built AR/EN + payHit byte-verbatim); **family zero-pay** payFigure regex green on ALL 18 family bodies; family-children byte-identical; no fake actions. Identity **55/77** (22 intentional rebakes); admin/index/other family internals byte-identical.
+
+## Spec 024 — Corrections From Legacy Coverage Audit (2026-07-07)
+
+Correction/alignment pass over the Spec 023 backlog (B-01…B-11). No new pages/backend/fake behavior; 77 HTML held; smoke PASS (76 loads); a11y critical=0 serious=0.
+
+### B-01 — child-view wording (F-00-1 fix)
+The demoted child-view note reframed «لوحة الطالب — النسخة الأولى» → «عرض الابن — النسخة الأولى» (ar) / "Student dashboard…" → "Child view — part of the family account" (en) on the 6 child-view pages that carried it (home + homework/history/profile/progress/materials; student-schedule had none). Grep gates: zero «لوحة الطالب|بوابة الطالب» in `student-*.html`, zero "student dashboard|Student Portal" in `student-*.en.html`. Family note («لوحة العائلة») and teacher note («لوحة المعلم») BYTE-UNCHANGED (both primary roles — correct). Declared 022 extraction-hash supersession (10/12 internal bodies). New smoke guard: child-view `#page-body` must not match `/لوحة الطالب|بوابة الطالب|student dashboard/i`.
+
+### B-03 — role-portal notifications honest gate
+Bell added to the family/teacher/student topbars (reuses `data-action="notifications"` → the existing Soon-badged, `aria-disabled` popover; no dot/count, no new hook, admin gate untouched). The hub (role-switcher) is deliberately EXCLUDED — `portals.html` byte-clean vs HEAD.
+
+### B-05 — teacher library planned nav item
+One `library` «مكتبتي/Library» item added to `ROLE_NAV.teacher` (non-anchor `is-planned` «قريبًا» button, owner Spec 025). Teacher nav 7→8; `plannedNavAnchors===0` held.
+
+### B-11 — visual-density (pure CSS, additive living layer)
+D-06 dark-mode role-tinted idHero (family/child heroes keep role color in dark, theme-aware) · D-08 hub primary grid 2-up (no empty third slot after the student-card demotion) · D-13 mobile topbar de-wrap (hide the redundant greeting <560px so the action row — now with the bell — never wraps). D-04/D-05/D-09 DEFERRED (pinned bodies). Motion untouched (single reduced-motion block); no new hook/page.
+
+### Records (no code)
+B-02 Locations→031 · B-04 live-room→future-backend · B-06 teacher chat→future (owner 025, no nav item) · B-07 pay-free exemption for the pre-existing Spec 007 admin teacher-performance board (grep NOT weakened; 025 repoints the anchor) · B-08/B-09 exclusion + finance-boundary provenance (README/CLAUDE) · B-10 rail verified MOVED-not-deleted (prep-hint → flowStrip «التحضير»); family-children no-fold-link recorded intentional.
+
+### Failure sweep
+None. Forbidden files (build-html.mjs, package.json, nav.config.js, enhance.js, topbar.js) 0-diff. Teacher pay-free three layers green; family zero-pay green. No `href="#"`, no new hook/storage key. Admin pages untouched.

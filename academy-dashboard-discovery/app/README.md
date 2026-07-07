@@ -161,3 +161,21 @@ courses/attendance/finance (→ Spec 009 adds a fixture-only finance shell; real
 billing/payroll engines still out)), sessions lifecycle beyond fixtures, report
 detail pages, portals, charts, CDN, TypeScript, SPA frameworks, copied legacy
 assets/wording.
+
+## Intentional exclusions & the finance boundary (Spec 024 B-08/B-09)
+
+Recorded so no future pass "restores" a law-excluded surface or copies figures across roles:
+
+- **Teacher surfaces are pay-free GLOBALLY** — the legacy teacher salary band, `/teacher/salary`,
+  `/teacher/salary-class-report`, and the update-result pay matrix are intentionally excluded; the
+  ledger concept survives only as zero-figure admin-finance GATE shells (Spec 030).
+- **Family surfaces carry zero pay figures** — the legacy billing **Amount** column is intentionally
+  dropped; family billing is status-first (hour-quota). No family payment token anywhere.
+- **No computed-score / rank / chart engines** — legacy accounting/analysis charts, the tickets pie +
+  "Average" column, and the teacher-feedback "Percentage" are excluded; equivalents are authored STAT
+  cards, never chart series.
+- **No fake-action engines** — notifications, chat, live-room, and the "Add shortcuts" widget are
+  honest gates / future-backend records, never faked (no counts, no read/unread, no send, no join).
+- **Finance boundary**: authored admin invoice-amount literals on admin finance pages are
+  Spec-009-sanctioned (zero aggregate, zero runtime math, admin-only); **salary/payroll/compensation/
+  payout figures are NEVER allowed anywhere**; family and teacher surfaces stay figure-free.

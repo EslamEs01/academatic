@@ -42,6 +42,11 @@ export function portalShellMarkup({ role, personaKey = '', bodyHTML, activeId = 
     : '';
   const switchLink = role === 'hub' ? '' : `
       <a class="pt-switch" href="${hubHref}">${icon('grid', 'ico ico-sm')}<span>${esc(t('prt.shell.switchRole'))}</span></a>`;
+  // Spec 024 B-03 — honest notifications gate on the three ROLE portals only (not the hub);
+  // reuses the existing data-action="notifications" → enhance.js Soon-gated popover (no new hook,
+  // no fake count/unread dot). The demo hub is a role-switcher, not a signed-in role context.
+  const notif = role === 'hub' ? '' : `
+        <button type="button" class="icon-btn" data-action="notifications" aria-label="${esc(t('topbar.notifications'))}" aria-haspopup="menu">${icon('bell', 'ico')}</button>`;
   const header = `<header class="pt-header">
       <div class="pt-brand">
         <span class="medallion m-grad tone-violet-teal medallion-sm">${icon('graduation-cap', 'ico')}</span>
@@ -52,7 +57,7 @@ export function portalShellMarkup({ role, personaKey = '', bodyHTML, activeId = 
       </div>
       <div class="pt-head-end">
         ${greet}
-        <span class="pt-role-chip">${icon(ROLE_ICONS[role] || 'grid', 'ico ico-sm')}<span>${esc(t('prt.role.' + role))}</span></span>
+        <span class="pt-role-chip">${icon(ROLE_ICONS[role] || 'grid', 'ico ico-sm')}<span>${esc(t('prt.role.' + role))}</span></span>${notif}
         <button type="button" class="icon-btn" data-action="theme-menu" aria-label="${esc(t('topbar.toggleTheme'))}" aria-haspopup="menu">
           ${icon('sun', 'ico')}
         </button>

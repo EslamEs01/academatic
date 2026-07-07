@@ -163,6 +163,7 @@ export const ROLE_NAV = {
     { id: 'outcomes', labelKey: 'prt.nav.tch.outcomes', icon: 'clipboard-check', page: 'teacher-outcomes', status: 'planned' },
     { id: 'tasks', labelKey: 'prt.nav.tch.tasks', icon: 'tasks', page: 'teacher-tasks', status: 'planned' },
     { id: 'reports', labelKey: 'prt.nav.tch.reports', icon: 'reports', page: 'teacher-reports', status: 'planned' },
+    { id: 'library', labelKey: 'prt.nav.tch.library', icon: 'book-open', page: 'teacher-library', status: 'planned' },
     { id: 'profile', labelKey: 'prt.nav.tch.profile', icon: 'user', page: 'teacher-profile', status: 'planned' },
   ],
 };
