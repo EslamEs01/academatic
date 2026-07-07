@@ -7,6 +7,8 @@ const { PORT } = require('../../scripts/serve.cjs');
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
   'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
+  // Spec 026 — the three new admin ops pages
+  'sessions-analysis', 'public-holiday', 'scheduled-actions',
   'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
   'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
@@ -137,6 +139,25 @@ const FILTER_SPEC = {
       ok(page !== 'schedule' || info.hasTimetable, `${page}/${lang}: schedule is missing the baked timetable grid`);
       ok(info.absAssets.length === 0, `${page}/${lang}: non-relative asset paths ${JSON.stringify(info.absAssets)}`);
 
+      // Spec 026 — Global Action Completion: no action may claim it happened. Every
+      // data-toast / data-confirm-toast / data-confirm-msg must be honest (backendRequired
+      // wording), never the old fake «(تجريبي)»/"(demo)"/"preview action"/«بنجاح»/"successfully".
+      const actionInfo = await p.evaluate(() => {
+        const FAKE = /\(تجريبي\)|\(demo\)|إجراء تجريبي|preview action|بنجاح|\bsuccessfully\b/i;
+        const bad = [];
+        document.querySelectorAll('[data-toast],[data-confirm-toast],[data-confirm-msg]').forEach((el) => {
+          ['data-toast', 'data-confirm-toast', 'data-confirm-msg'].forEach((a) => {
+            const v = el.getAttribute(a);
+            if (v && FAKE.test(v)) bad.push(`${a}="${v.slice(0, 44)}"`);
+          });
+        });
+        // a create/add primary must open a modal or a gate — never a bare unhandled data-action
+        const fakeCreate = [...document.querySelectorAll('[data-action="new-session"],[data-action="add-session"],[data-action="apply-filter"],[data-action="clear-filter"]')].length;
+        return { bad, fakeCreate };
+      });
+      ok(actionInfo.bad.length === 0, `${page}/${lang}: misleading success wording on an action: ${JSON.stringify(actionInfo.bad.slice(0, 3))}`);
+      ok(actionInfo.fakeCreate === 0, `${page}/${lang}: ${actionInfo.fakeCreate} unhandled create/filter data-action(s) (must open a modal/gate or be a real filter)`);
+
       // behavioral no-dead-button: a filter button and a pager must produce feedback
       if (page === 'dashboard') {
         const clickFeedback = async (sel) => {
@@ -149,7 +170,9 @@ const FILTER_SPEC = {
           await p.waitForTimeout(120);
           return fb ? null : `${sel} produced no feedback (dead button)`;
         };
-        for (const sel of ['.select-btn', '.pager:not(.is-current)', '[data-action="theme-menu"]',
+        // Spec 026 (DU-20): the dashboard's fake .select-btn filter controls were removed (Option B) —
+        // the honest replacement is a real "view all sessions" link; the remaining controls still must feed back.
+        for (const sel of ['.pager:not(.is-current)', '[data-action="theme-menu"]',
           '[data-action="apps-grid"]', '[data-action="quick-actions"]', '.nav-item.is-planned']) {
           const r = await clickFeedback(sel);
           ok(!r, `${page}/${lang}: ${r}`);
@@ -298,10 +321,12 @@ const FILTER_SPEC = {
         ok(ret, `${page}/${lang}: data-step-prev did not return to the identity step`);
         await p.click('[data-step-go="review"]').catch(() => {});
         await p.waitForTimeout(130);
-        const saveBtn = await p.$('[data-step="review"] [data-demo-action]');
-        if (saveBtn) { await saveBtn.click(); await p.waitForTimeout(160); }
-        const toasted = await p.evaluate(() => !!document.querySelector('.toast'));
-        ok(toasted, `${page}/${lang}: wizard Save did not show a demo toast`);
+        // Spec 026 (DU-07): wizard Save now opens an HONEST backendRequired modal (data-modal-trigger),
+        // never a fake "saved" toast. Verify the modal opens.
+        const saveBtn = await p.$('[data-step="review"] [data-modal-trigger]');
+        if (saveBtn) { await saveBtn.click(); await p.waitForTimeout(200); }
+        const modaled = await p.evaluate(() => !!document.querySelector('.modal-scrim'));
+        ok(modaled, `${page}/${lang}: wizard Save must open an honest backendRequired modal (not a fake save toast)`);
         await p.keyboard.press('Escape');
       }
 

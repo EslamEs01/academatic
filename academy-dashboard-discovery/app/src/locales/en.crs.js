@@ -31,8 +31,8 @@ export default {
       certificates: 'Certificates', certHint: '{n} certificates issued within this course', current: 'Current level', students: '{n} students',
     },
     act: {
-      add: 'New course', addToast: 'Add-course opened (demo) — nothing is saved.',
-      edit: 'Edit course', editToast: 'Edit-course opened (demo).',
+      add: 'New course', addToast: 'Adding a course will be available once the server is connected.',
+      edit: 'Edit course', editToast: 'Editing the course will be available once the server is connected.',
       assignTeacher: 'Assign teacher', addStudents: 'Add students', print: 'Print summary',
     },
     reason: {
@@ -58,10 +58,10 @@ export default {
     viewCourse: 'View course', viewInSchedule: 'View in schedule', viewAttendance: 'View attendance',
     empty: { title: 'No groups yet', msg: 'Groups will appear here once created.' },
     act: {
-      add: 'New group', addToast: 'Add-group opened (demo) — nothing is saved.',
-      edit: 'Edit group', editToast: 'Edit-group opened (demo).',
-      assignTeacher: 'Assign teacher', addStudents: 'Add students', addStudentsToast: 'Add-students opened (demo).',
-      removeStudent: 'Remove student', removeTitle: 'Remove the student from this group?', removeMsg: 'A front-end demo only — nothing is saved.', removeCta: 'Remove', removeToast: 'Removed (demo).',
+      add: 'New group', addToast: 'Adding a group will be available once the server is connected.',
+      edit: 'Edit group', editToast: 'Editing the group will be available once the server is connected.',
+      assignTeacher: 'Assign teacher', addStudents: 'Add students', addStudentsToast: 'Adding students will be available once the server is connected.',
+      removeStudent: 'Remove student', removeTitle: 'Remove the student from this group?', removeMsg: 'This will be available once the server is connected — nothing is saved yet.', removeCta: 'Remove', removeToast: 'Removing the student will be available once the server is connected.',
       print: 'Print summary',
     },
     reason: {

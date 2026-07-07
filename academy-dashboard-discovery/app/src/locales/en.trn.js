@@ -33,11 +33,11 @@ export default {
     notesText: 'A steady teacher following the weekly course schedule; notes are reviewed periodically.',
 
     act: {
-      add: 'Add teacher', addToast: 'Add-teacher opened (demo) — nothing is saved.',
-      edit: 'Edit', editToast: 'Edit-teacher opened (demo).',
-      message: 'Message teacher', messageToast: 'Compose opened (demo) — no message is sent.',
-      note: 'Add follow-up note', noteToast: 'Note added (demo) — nothing is saved.',
-      notify: 'Notify family', notifyTitle: 'Send a family notification?', notifyMsg: 'A front-end demo only — no real notification is sent.', notifyCta: 'Send', notifyToast: 'Sent (demo).',
+      add: 'Add teacher', addToast: 'Adding a teacher will be available once the server is connected.',
+      edit: 'Edit', editToast: 'Editing the teacher will be available once the server is connected.',
+      message: 'Message teacher', messageToast: 'Messaging will be available once the server is connected.',
+      note: 'Add follow-up note', noteToast: 'Saving the note will be available once the server is connected.',
+      notify: 'Notify family', notifyTitle: 'Send a family notification?', notifyMsg: 'This will be available once the server is connected — no notification is sent yet.', notifyCta: 'Send', notifyToast: 'Sending the notification will be available once the server is connected.',
       assignCourse: 'Assign course', assignGroup: 'Assign group', openTimetable: 'Open timetable', viewAttendance: 'View attendance', print: 'Print · export summary',
     },
     reason: {

@@ -82,7 +82,7 @@ export function renderStudents() {
   ];
   const table = dataTable({ id: 'students-table', head, rows: rows.map(row), footerHTML: tableFooter({ shown: rows.length, total: rows.length }) });
   return `
-    ${pageHeader({ titleKey: 'stu.title', subKey: 'stu.sub', primary: button({ labelKey: 'stu.add', variant: 'primary', icon: 'plus', attrs: 'data-demo-action' }), summaryHTML: summary })}
+    ${pageHeader({ titleKey: 'stu.title', subKey: 'stu.sub', primary: button({ labelKey: 'stu.add', variant: 'primary', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="stu.add" data-modal-note-key="common.backendRequiredNote"' }), summaryHTML: summary })}
     ${filters}
     ${table}
     ${noResults()}

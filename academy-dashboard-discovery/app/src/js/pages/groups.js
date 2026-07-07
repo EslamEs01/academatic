@@ -66,7 +66,7 @@ export function renderGroups() {
   });
 
   return `
-    ${pageHeader({ titleKey: 'grp.title', subKey: 'grp.sub', primary: button({ labelKey: 'grp.act.add', variant: 'primary', icon: 'plus', attrs: `data-demo-action data-toast="${esc(t('grp.act.addToast'))}"` }) })}
+    ${pageHeader({ titleKey: 'grp.title', subKey: 'grp.sub', primary: button({ labelKey: 'grp.act.add', variant: 'primary', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="grp.act.add" data-modal-note-key="common.backendRequiredNote"' }) })}
     <div class="outcome-tiles">${TILES.map(tile).join('')}</div>
     ${filters}
     <div id="groups-list">${items.map(groupRow).join('')}</div>

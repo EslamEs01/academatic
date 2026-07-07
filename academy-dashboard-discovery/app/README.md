@@ -190,3 +190,20 @@ to the pay-free `teacher-reports` page (closing the Spec-024 B-07 admin-shell ad
 unavailable action (live-room, save/submit, export, upload/download, the three profile writes) is
 an honest backendRequired gate; `teacher-reports` is academic-only (no chart/score). Teacher
 surfaces stay pay-free GLOBALLY (three-layer enforced); no teacher chat page/nav (chat → Spec 026).
+
+## Spec 026 — Admin Control / Sessions / Operations + Global Action Completion
+
+Three new admin operations pages — **sessions-analysis · public-holiday · scheduled-actions**
+(each AR + EN, 91 → 97 public HTML) — grounded in the legacy `management-*` operations captures:
+display-only authored boards/lists where every write (export, set holiday, bulk absence, create
+scheduled action) is an honest `backendRequired` gate. Two more legacy surfaces fold in as ops bands
+(total-queues → Sessions, schedule-requests → Schedule). Three planned nav items flip to real links.
+
+Alongside, a **global action-completion pass**: every visible admin action now resolves to a real
+page, a modal/drawer, a real static tab/filter, or an honest `backendRequired`/`planned` gate — no
+button left claiming it did something it can't. Create/Add/Save primaries open an honest
+backendRequired modal (reusing the existing `data-modal-trigger`); the previous «preview action» /
+"saved (demo)" toasts were reworded to "available once the server is connected"; the dashboard's
+unwired filter widget was replaced with a real link to the sessions page. No backend, no fake
+persistence, no new hook or storage key; teacher pay-free / family zero-pay / student child-view /
+admin finance invariants all preserved.

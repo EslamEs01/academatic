@@ -654,3 +654,23 @@ Teacher pay-free GLOBAL verified at 3 layers (source incl. comments + built + sm
 
 ### Failure sweep
 None. Admin (40) + index + all family + all student pages byte-identical (only teacher-portal pair changed — nav+anchor). package.json / enhance.js / topbar.js / portal-shell.js / nav.config.js 0-diff. One sanctioned smoke amendment (TEACHER_INTERNAL set + teacher nav/body asserts + anchor re-pin + expPlanned entries); payHit/famPay/admin asserts byte-verbatim. Dark/RTL/mobile-390 clean.
+
+## Spec 026 — Admin Control / Sessions / Operations + Global Action Completion Pass (2026-07-07)
+
+Two layers: (A) three new admin ops pages + two folded ops bands + nav flips; (B) a global action-completion pass making every misleading admin «preview action» toast an honest `backendRequired` outcome. Static, honest, no backend, no fake persistence. **91 → 97 HTML.** Smoke PASS (96 loads); a11y critical=0 serious=0; screenshots clean.
+
+### Layer A — new admin ops pages (grounded in legacy management-* captures)
+- **sessions-analysis** (`management-sessions-analysis`): display-only outcome KPI board — helper tiles + regular/trial outcome rows (authored count + total-time), **no computed score/rank/chart**; Export = honest backendRequired gate.
+- **public-holiday** (`management-public-holiday`): authored holiday-window list (from→to, scope, status chip) + summary tallies; Set-holiday + Bulk-absence = backendRequired gates; no fake bulk cancel.
+- **scheduled-actions** (`management-scheduled-actions`): authored queued lifecycle-actions (suspend/activate/cancel-classes, scheduled + auto-return dates) + roll-up; Create = backendRequired gate; no scheduler engine.
+- **Folds** (0 new pages): total-queues → an ops queue band on **sessions**; schedule-requests → an inbox-preview band on **schedule**; add-queue / accept / reject are clickable `data-disabled-reason` backendRequired gates.
+- **Nav**: 3 planned items (`sessionsAnalysis`/`publicHoliday`/`scheduledActions`) flipped planned→implemented (real `<a>` links); the other 5 (leads/tasks/messages/announcements/time-convertor) stay honest `data-coming-soon` planned gates → owner specs.
+
+### Layer B — global action completion (all pages)
+- **Honest core**: `enhance.js` `acknowledge()` now says "available once the server is connected" (never «إجراء تجريبي»/"preview action"); `openModal()` generalized to show a Create/Edit title + a backendRequired note (reuses the existing `data-modal-trigger` — no new dispatch hook, no new storage key).
+- **Create/Add primaries** (New session ×2, Add student/teacher/course/group, wizard Save, Add-another-child) → open the honest backendRequired modal (`data-modal-trigger` + title/note keys), never a fake "saved" toast.
+- **Inline verbs + confirms** (Edit/Notify/Message/Note/Print/Attend/Feedback/Reverse/Cancel/Suspend/Stop/Remove/Record/Mark/Remind/Reset/Schedule) → 78 toast rewordings + 12 confirm-body rewordings to honest "will be available once the server is connected" (never «تم…»/"saved/cancelled/done/(demo)").
+- **DU-20 dashboard "Today's Sessions"**: the fake Apply/Clear/select-btn filter (unwired) removed (Option B); replaced with New-session (honest modal) + a real "view all sessions" link to the working sessions page.
+
+### Honesty / role laws / impact
+No fake create/save/delete/upload/download/export/print/attendance/outcome/chat/live-room. `href="#"` = 0 sitewide; 0 «preview action»; 0 fake-success toast wording in any built page. Teacher pay-free (portal pages 0 pay tokens; teacher-performance is the admin B-07 board), family zero-pay, student child-view, admin finance Spec-009-invariant (finance «رواتب» nav byte-identical to HEAD) — all green. Portal 49 files + index byte-identical; package.json 0-diff; no new dependency/engine/hook/storage key. One sanctioned smoke amendment (3 pages + action-completion asserts; DU-20/DU-07 assertions updated to the new honest behavior).

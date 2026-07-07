@@ -22,15 +22,15 @@ export default {
     act: {
       group: 'Report actions',
       print: 'Print report',
-      printToast: 'Print is a demo — no file is generated.',
+      printToast: 'Printing will be available once the server is connected.',
       exportCsv: 'Export CSV',
       exportPdf: 'Export PDF',
       share: 'Share report',
       schedule: 'Schedule report',
       scheduleTitle: 'Schedule this report',
-      scheduleMsg: 'This is a demo only — no backend job is created and nothing is sent.',
+      scheduleMsg: 'This will be available once the server is connected — nothing is scheduled or sent yet.',
       scheduleCta: 'Confirm schedule',
-      scheduleToast: 'Scheduled (demo) — no backend job was created.',
+      scheduleToast: 'Scheduling the report will be available once the server is connected.',
     },
     reason: {
       export: 'Export needs the backend module — out of current scope.',

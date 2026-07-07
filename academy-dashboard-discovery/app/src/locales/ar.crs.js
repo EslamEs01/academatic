@@ -38,8 +38,8 @@ export default {
       certificates: 'الشهادات', certHint: '{n} شهادة صادرة ضمن هذه الدورة', current: 'المستوى الحالي', students: '{n} طالب',
     },
     act: {
-      add: 'دورة جديدة', addToast: 'تم فتح إضافة الدورة (تجريبي) — لا يُحفظ شيء.',
-      edit: 'تعديل الدورة', editToast: 'تم فتح تعديل الدورة (تجريبي).',
+      add: 'دورة جديدة', addToast: 'سيتوفّر إضافة دورة بعد ربط الخادم.',
+      edit: 'تعديل الدورة', editToast: 'سيتوفّر تعديل الدورة بعد ربط الخادم.',
       assignTeacher: 'إسناد معلم', addStudents: 'إضافة طلاب', print: 'طباعة الملخّص',
     },
     reason: {
@@ -67,10 +67,10 @@ export default {
     viewCourse: 'عرض الدورة', viewInSchedule: 'عرض في الجدول', viewAttendance: 'عرض الحضور',
     empty: { title: 'لا توجد مجموعات بعد', msg: 'ستظهر المجموعات هنا عند إنشائها.' },
     act: {
-      add: 'مجموعة جديدة', addToast: 'تم فتح إضافة المجموعة (تجريبي) — لا يُحفظ شيء.',
-      edit: 'تعديل المجموعة', editToast: 'تم فتح تعديل المجموعة (تجريبي).',
-      assignTeacher: 'إسناد معلم', addStudents: 'إضافة طلاب', addStudentsToast: 'تم فتح إضافة الطلاب (تجريبي).',
-      removeStudent: 'إزالة طالب', removeTitle: 'إزالة الطالب من المجموعة؟', removeMsg: 'إجراء تجريبي على الواجهة فقط — لا يُحفظ شيء.', removeCta: 'إزالة', removeToast: 'تمت الإزالة (تجريبي).',
+      add: 'مجموعة جديدة', addToast: 'سيتوفّر إضافة مجموعة بعد ربط الخادم.',
+      edit: 'تعديل المجموعة', editToast: 'سيتوفّر تعديل المجموعة بعد ربط الخادم.',
+      assignTeacher: 'إسناد معلم', addStudents: 'إضافة طلاب', addStudentsToast: 'سيتوفّر إضافة الطلاب بعد ربط الخادم.',
+      removeStudent: 'إزالة طالب', removeTitle: 'إزالة الطالب من المجموعة؟', removeMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يُحفَظ شيء الآن.', removeCta: 'إزالة', removeToast: 'سيتوفّر إزالة الطالب بعد ربط الخادم.',
       print: 'طباعة الملخّص',
     },
     reason: {

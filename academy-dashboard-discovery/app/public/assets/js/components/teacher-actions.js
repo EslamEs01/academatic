@@ -15,7 +15,7 @@ const link = (labelKey, ic, href) => button({ labelKey, variant: 'secondary', si
 
 /** the teachers-page header primary action (demo add) */
 export function addTeacherAction() {
-  return demo('trn.act.add', 'user-plus', 'trn.act.addToast');
+  return button({ labelKey: 'trn.act.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="trn.act.add" data-modal-note-key="common.backendRequiredNote"' });
 }
 
 /** the teacher profile banner action cluster (demo edit/message · confirm notify · disabled assign/export · real links) */

@@ -73,6 +73,15 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'dark' },
   { page: 'finance', lang: 'en', theme: 'light' },
   { page: 'finance', lang: 'en', theme: 'dark' },
+  // Spec 026 — the three new admin ops pages (AR light+dark; sessions-analysis as the EN sample)
+  { page: 'sessions-analysis', lang: 'ar', theme: 'light' },
+  { page: 'sessions-analysis', lang: 'ar', theme: 'dark' },
+  { page: 'sessions-analysis', lang: 'en', theme: 'light' },
+  { page: 'public-holiday', lang: 'ar', theme: 'light' },
+  { page: 'public-holiday', lang: 'ar', theme: 'dark' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'light' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'dark' },
+  // the shared modal + drawer machinery is covered by finance (drawer/confirm) + sessions (outcome drawer)
   // Spec 012 — role portal foundation (portal shell surfaces)
   { page: 'portals', lang: 'ar', theme: 'light' },
   { page: 'portals', lang: 'ar', theme: 'dark' },

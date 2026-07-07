@@ -57,7 +57,7 @@ export default {
     child: {
       title: 'أبناء العائلة', count: '{n} من الأبناء', add: 'إضافة ابن',
       none: 'لا يوجد أبناء بعد', noneMsg: 'أضِف أول ابن لهذه العائلة وسيظهر هنا.',
-      viewProfile: 'عرض الملف', addToast: 'سيتوفّر ربط ابن جديد بعد ربط الخادم (تجريبي).',
+      viewProfile: 'عرض الملف', addToast: 'سيتوفّر ربط ابن جديد بعد ربط الخادم.',
     },
     sch: { title: 'جلسات الأسبوع', viewInSchedule: 'عرض في الجدول', none: 'لا جلسات قادمة لهذه العائلة.' },
     bill: {
@@ -69,9 +69,9 @@ export default {
     notes: { title: 'ملاحظات العائلة', none: 'لا توجد ملاحظات.' },
     act: {
       edit: 'تعديل', suspend: 'إيقاف مؤقت', stop: 'إيقاف الاشتراك', addChild: 'إضافة ابن',
-      editToast: 'تم فتح التعديل (تجريبي).',
-      suspendTitle: 'إيقاف هذه العائلة مؤقتًا؟', suspendMsg: 'إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية.', suspendCta: 'إيقاف مؤقت', suspendToast: 'تم الإيقاف المؤقت (تجريبي).',
-      stopTitle: 'إيقاف اشتراك هذه العائلة؟', stopMsg: 'إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية.', stopCta: 'إيقاف', stopToast: 'تم الإيقاف (تجريبي).',
+      editToast: 'سيتوفّر تعديل العائلة بعد ربط الخادم.',
+      suspendTitle: 'إيقاف هذه العائلة مؤقتًا؟', suspendMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن.', suspendCta: 'إيقاف مؤقت', suspendToast: 'سيتوفّر الإيقاف المؤقت بعد ربط الخادم.',
+      stopTitle: 'إيقاف اشتراك هذه العائلة؟', stopMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن.', stopCta: 'إيقاف', stopToast: 'سيتوفّر إيقاف الاشتراك بعد ربط الخادم.',
     },
 
     /* add-family wizard */
@@ -84,7 +84,7 @@ export default {
         children: 'أضِف أبناء العائلة.', billing: 'الخطة وسعر الساعة (عرض فقط).', review: 'راجِع البيانات قبل الحفظ.',
       },
       next: 'التالي', back: 'السابق', save: 'حفظ العائلة',
-      savedToast: 'تم إنشاء العائلة (تجريبي) — لا يتم حفظ أي بيانات حقيقية.',
+      savedToast: 'سيتوفّر إنشاء العائلة بعد ربط الخادم.',
       f: {
         guardianName: 'اسم وليّ الأمر', status: 'الحالة', category: 'الفئة',
         phone: 'رقم الهاتف', email: 'البريد الإلكتروني', whatsapp: 'واتساب',
@@ -96,7 +96,7 @@ export default {
         guardianName: 'مثال: أبو سلمان الغامدي', phone: '05xxxxxxxx', email: 'name@example.edu',
         city: 'مثال: الرياض', childName: 'اسم الابن', hourRate: '٦٠', notes: 'أضِف ملاحظة عن العائلة…',
       },
-      children: { add: 'إضافة ابن آخر', addToast: 'يمكن إضافة الأبناء فعليًا بعد ربط الخادم (تجريبي).', row: 'الابن {n}', hint: 'يمكنك إضافة أكثر من ابن لنفس العائلة.' },
+      children: { add: 'إضافة ابن آخر', addToast: 'سيتوفّر إضافة ابن آخر بعد ربط الخادم.', row: 'الابن {n}', hint: 'يمكنك إضافة أكثر من ابن لنفس العائلة.' },
       review: { title: 'مراجعة قبل الحفظ', note: 'هذه معاينة تجريبية — لن يتم حفظ أي بيانات حقيقية.', guardian: 'وليّ الأمر', contact: 'التواصل', children: 'الأبناء', plan: 'الخطة', childrenVal: 'ابنان (تجريبي)' },
     },
   },
@@ -116,7 +116,7 @@ export default {
     timetable: { title: 'الجلسات القادمة', viewInSchedule: 'عرض في الجدول', none: 'لا جلسات قادمة لهذا الطالب.' },
     family: { title: 'العائلة', guardian: 'وليّ الأمر', viewFamily: 'عرض ملف العائلة', siblings: 'الإخوة', noSiblings: 'لا يوجد إخوة مسجّلون.' },
     notes: { title: 'ملاحظات الطالب', none: 'لا توجد ملاحظات.' },
-    act: { message: 'مراسلة', edit: 'تعديل', editToast: 'تم فتح التعديل (تجريبي).', messageToast: 'سيتوفّر التواصل بعد ربط وحدة الرسائل (تجريبي).', viewFamily: 'عرض العائلة' },
+    act: { message: 'مراسلة', edit: 'تعديل', editToast: 'سيتوفّر التعديل بعد ربط الخادم.', messageToast: 'سيتوفّر التواصل بعد ربط الخادم.', viewFamily: 'عرض العائلة' },
   },
 
   /* student Results tab (fixture-only — no gradebook) */
@@ -125,7 +125,7 @@ export default {
     courses: 'تقدّم المواد', certificates: 'الشهادات', noCerts: 'لا توجد شهادات بعد.',
     certStatus: { issued: 'صادرة', pending: 'قيد الإصدار' },
     export: 'تصدير PDF', exportReason: 'يتوفّر التصدير بعد ربط الخادم (خارج النطاق الحالي).',
-    print: 'طباعة', printToast: 'تم فتح الطباعة (تجريبي).',
+    print: 'طباعة', printToast: 'سيتوفّر إنشاء ملف الطباعة بعد ربط الخادم.',
     note: 'عرض تجريبي — ليست نتائج فعلية أو نظام درجات.',
   },
 
@@ -135,7 +135,7 @@ export default {
     criteria: { learningProgress: 'مستوى التعلّم', focus: 'التركيز', homework: 'أداء الواجبات', punctuality: 'الالتزام بالمواعيد' },
     rating: { excellent: 'ممتاز', good: 'جيد', sometimes: 'أحيانًا', rarely: 'نادرًا' },
     achievements: 'أبرز الإنجازات', objectives: 'أهداف الشهر القادم',
-    approve: 'اعتماد التقرير', approved: 'مُعتمد', pending: 'قيد المراجعة', approveToast: 'تم اعتماد التقرير (تجريبي).',
+    approve: 'اعتماد التقرير', approved: 'مُعتمد', pending: 'قيد المراجعة', approveToast: 'سيتوفّر اعتماد التقرير بعد ربط الخادم.',
     note: 'عرض تجريبي — لا يوجد سير عمل اعتماد فعلي.',
   },
 

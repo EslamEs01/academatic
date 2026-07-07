@@ -1,7 +1,7 @@
 /* Spec 002 — Arabic keys (merged into ar.js at runtime). Original placeholder
  * content; no legacy/private wording. */
 export default {
-  common: { close: 'إغلاق', confirm: 'تأكيد', cancel: 'إلغاء', save: 'حفظ', add: 'إضافة', view: 'عرض', edit: 'تعديل' },
+  common: { close: 'إغلاق', confirm: 'تأكيد', cancel: 'إلغاء', save: 'حفظ', add: 'إضافة', view: 'عرض', edit: 'تعديل', backendRequiredNote: 'هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن.' },
 
   filter: {
     apply: 'تطبيق', reset: 'إعادة ضبط',
@@ -73,7 +73,7 @@ export default {
   /* ---- Settings page ---- */
   set: {
     title: 'الإعدادات', sub: 'إعدادات الأكاديمية والمظهر والحساب والصلاحيات.',
-    savedToast: 'تم حفظ التغييرات (تجريبي).', toggle: 'تبديل',
+    savedToast: 'سيتوفّر حفظ التغييرات بعد ربط الخادم.', toggle: 'تبديل',
     sec: {
       profile: 'ملف الأكاديمية', profileDesc: 'الاسم والشعار ومعلومات التواصل.',
       appearance: 'المظهر', appearanceDesc: 'السمة واللغة الافتراضية للوحة التحكم.',
@@ -89,7 +89,7 @@ export default {
       saveProfile: 'حفظ التغييرات', twoFactor: 'التحقّق بخطوتين', resetData: 'إعادة ضبط البيانات التجريبية',
     },
     reason: { backend: 'متاح بعد ربط الخادم في مرحلة لاحقة.', billing: 'تتطلب وحدة الفوترة (خارج النطاق الحالي).' },
-    confirm: { resetTitle: 'إعادة ضبط البيانات التجريبية؟', resetMsg: 'سيعيد هذا ضبط القيم التجريبية في الواجهة فقط — لا يؤثّر على أي بيانات حقيقية.', resetCta: 'إعادة الضبط', resetToast: 'تمت إعادة الضبط (تجريبي).' },
+    confirm: { resetTitle: 'إعادة ضبط البيانات التجريبية؟', resetMsg: 'سيعيد هذا ضبط القيم التجريبية في الواجهة فقط — لا يؤثّر على أي بيانات حقيقية.', resetCta: 'إعادة الضبط', resetToast: 'سيتوفّر إعادة الضبط بعد ربط الخادم.' },
     perm: {
       group: { sessions: 'الجلسات', people: 'الأشخاص', content: 'المحتوى', settings: 'الإعدادات' },
       view: 'عرض', manage: 'إدارة', create: 'إنشاء', export: 'تصدير',
@@ -119,14 +119,35 @@ export default {
     tzHint: 'الأوقات معروضة بتوقيت الأكاديمية.',
     notes: 'ملاحظات', materials: 'المواد', edit: 'تعديل / إعادة جدولة', notify: 'تنبيه',
     cancel: 'إلغاء الجلسة', cancelTitle: 'إلغاء هذه الجلسة؟',
-    cancelMsg: 'إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية.',
-    cancelCta: 'إلغاء الجلسة', cancelToast: 'تم الإلغاء (تجريبي).',
-    editedToast: 'تم فتح التعديل (تجريبي).', notifiedToast: 'تم إرسال التنبيه (تجريبي).',
+    cancelMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن.',
+    cancelCta: 'إلغاء الجلسة', cancelToast: 'سيتوفّر إلغاء الجلسة بعد ربط الخادم.',
+    editedToast: 'سيتوفّر تعديل الجلسة بعد ربط الخادم.', notifiedToast: 'سيتوفّر إرسال التنبيه بعد ربط الخادم.',
     attentionLabel: 'تنبيه',
   },
 
   dash: {
-    upNext: 'القادم هذا الأسبوع', viewTimetable: 'عرض الجدول', attention: '{n} تحتاج انتباه',
+    upNext: 'القادم هذا الأسبوع', viewTimetable: 'عرض الجدول', viewAllSessions: 'عرض كل الجلسات', attention: '{n} تحتاج انتباه',
+  },
+
+  /* ---- Spec 026 — folded ops bands (queue → Sessions, requests → Schedule) ---- */
+  ops: {
+    reason: { backend: 'يتطلب اتصال الخادم — خارج النطاق الحالي.' },
+    queue: {
+      title: 'قائمة المهام التشغيلية', sub: 'ملاحظات ومهام مرتبطة بالجلسات — للعرض فقط.',
+      add: 'إضافة إلى القائمة',
+      lvl: { urgent: 'عاجل', medium: 'متوسط', normal: 'عادي' },
+      st: { open: 'مفتوح', inprogress: 'قيد التنفيذ', closed: 'مغلق' },
+      cls: { math: 'أساسيات الرياضيات', english: 'محادثة إنجليزية', science: 'نادي العلوم' },
+      i: { q1: 'متابعة تجهيز قاعة الاختبار قبل الحصة.', q2: 'التأكد من روابط الحضور للطلاب الجدد.', q3: 'مراجعة ملاحظات الحصة السابقة.' },
+    },
+    req: {
+      title: 'طلبات الجدولة الواردة', sub: 'طلبات جلسات وتجارب بانتظار المراجعة — للعرض فقط.',
+      accept: 'قبول', reject: 'رفض',
+      kind: { regular: 'جلسة', trial: 'تجربة' },
+      s: { salman: 'سلمان الغامدي', dana: 'دانة الحربي' },
+      c: { math: 'الرياضيات', english: 'الإنجليزية' },
+      w: { satEve: 'السبت · مساءً', monMorn: 'الإثنين · صباحًا' },
+    },
   },
 
   /* ============ fixture content ============ */

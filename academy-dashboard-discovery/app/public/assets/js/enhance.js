@@ -110,9 +110,14 @@ function familyMenu(id) {
     <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('fam.act.stopTitle'))}" data-confirm-msg="${esc(t('fam.act.stopMsg'))}" data-confirm-cta="${esc(t('fam.act.stopCta'))}" data-confirm-toast="${esc(t('fam.act.stopToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('fam.act.stop')}</span></button>
   </div>`;
 }
+/* Spec 026 — the honest fallback: an action with no real destination announces that
+ * it needs the server, never claims a preview/save happened. Feeds every demo-action
+ * without a custom toast, the noop menu items, and the no-dead-button catch-all. */
 function acknowledge(el) {
   const label = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 36);
-  return getLang() === 'en' ? `“${label}” — preview action` : `«${label}» — إجراء تجريبي`;
+  return getLang() === 'en'
+    ? `“${label}” — available once the server is connected`
+    : `«${label}» — يُتاح بعد ربط الخادم`;
 }
 
 /* ---- theme icon + rail + settings appearance active states ---- */
@@ -358,14 +363,21 @@ function openConfirm(el) {
   scrimEl.querySelector('[data-confirm-go]').focus();
 }
 
-/* generic demo modal (gallery + data-modal-trigger) */
-function openModal() {
+/* generic modal (gallery + data-modal-trigger). Spec 026: a Create/Edit trigger may carry
+ * data-modal-title-key + data-modal-note-key so the modal shows the entity title + an honest
+ * "needs the server to complete" note (no fake fields, no fake Save) — an honest backendRequired
+ * final. Falls back to the gallery demo copy when no keys are provided. */
+function openModal(trigger) {
+  const titleKey = trigger && trigger.getAttribute && trigger.getAttribute('data-modal-title-key');
+  const noteKey = trigger && trigger.getAttribute && trigger.getAttribute('data-modal-note-key');
+  const title = titleKey ? t(titleKey) : t('gallery.title');
+  const note = noteKey ? t(noteKey) : t('gallery.subtitle');
   const scrimEl = document.createElement('div');
   scrimEl.className = 'modal-scrim';
-  scrimEl.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(t('gallery.title'))}">
-    <div class="flex items-center gap-3 mb-3"><span class="medallion m-soft tone-primary">${icon('sparkles', 'ico')}</span>
-      <h3 class="text-[16px] font-bold text-ink">${t('gallery.title')}</h3></div>
-    <p class="text-[13px] mb-5" style="color:var(--c-ink-3)">${t('gallery.subtitle')}</p>
+  scrimEl.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+    <div class="flex items-center gap-3 mb-3"><span class="medallion m-soft tone-primary">${icon(titleKey ? 'clock' : 'sparkles', 'ico')}</span>
+      <h3 class="text-[16px] font-bold text-ink">${esc(title)}</h3></div>
+    <p class="text-[13px] mb-5" style="color:var(--c-ink-3)">${esc(note)}</p>
     <div class="flex justify-end gap-2.5"><button class="btn btn-primary btn-sm" data-close="1"><span>${t('common.close')}</span></button></div></div>`;
   const close = () => { scrimEl.remove(); document.removeEventListener('keydown', esc2); };
   const esc2 = (e) => { if (e.key === 'Escape') close(); };
@@ -511,7 +523,7 @@ document.addEventListener('click', (e) => {
   }
   if (trg.matches('a[href="#"]')) e.preventDefault();
   if (trg.hasAttribute('data-row-menu')) { const rid = trg.getAttribute('data-row-menu'); return void openPopover(trg, trg.getAttribute('data-row-menu-kind') === 'family' ? familyMenu(rid) : rowMenu(rid)); }
-  if (trg.hasAttribute('data-modal-trigger')) return openModal();
+  if (trg.hasAttribute('data-modal-trigger')) return openModal(trg);
   switch (trg.getAttribute('data-action')) {
     case 'theme-menu': return void openPopover(trg, themeMenu());
     case 'lang-menu': return void openPopover(trg, langMenu());

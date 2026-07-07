@@ -1,6 +1,6 @@
 /* Spec 002 — English keys (merged into en.js at runtime). Mirrors ar.extra.js. */
 export default {
-  common: { close: 'Close', confirm: 'Confirm', cancel: 'Cancel', save: 'Save', add: 'Add', view: 'View', edit: 'Edit' },
+  common: { close: 'Close', confirm: 'Confirm', cancel: 'Cancel', save: 'Save', add: 'Add', view: 'View', edit: 'Edit', backendRequiredNote: 'This action needs the server connection to complete — nothing is saved yet.' },
 
   filter: {
     apply: 'Apply', reset: 'Reset',
@@ -66,7 +66,7 @@ export default {
 
   set: {
     title: 'Settings', sub: 'Academy profile, appearance, account, and permissions.',
-    savedToast: 'Changes saved (demo).', toggle: 'Toggle',
+    savedToast: 'Saving changes will be available once the server is connected.', toggle: 'Toggle',
     sec: {
       profile: 'Academy profile', profileDesc: 'Name, logo, and contact details.',
       appearance: 'Appearance', appearanceDesc: 'Dashboard theme and default language.',
@@ -82,7 +82,7 @@ export default {
       saveProfile: 'Save changes', twoFactor: 'Two-factor auth', resetData: 'Reset demo data',
     },
     reason: { backend: 'Available once the backend is connected in a later spec.', billing: 'Requires the billing module (out of current scope).' },
-    confirm: { resetTitle: 'Reset demo data?', resetMsg: 'This resets the on-screen demo values only — it does not affect any real data.', resetCta: 'Reset', resetToast: 'Demo data reset (demo).' },
+    confirm: { resetTitle: 'Reset demo data?', resetMsg: 'This resets the on-screen demo values only — it does not affect any real data.', resetCta: 'Reset', resetToast: 'Resetting will be available once the server is connected.' },
     perm: {
       group: { sessions: 'Sessions', people: 'People', content: 'Content', settings: 'Settings' },
       view: 'View', manage: 'Manage', create: 'Create', export: 'Export',
@@ -112,14 +112,35 @@ export default {
     tzHint: 'Times shown in the academy timezone.',
     notes: 'Notes', materials: 'Materials', edit: 'Edit / Reschedule', notify: 'Notify',
     cancel: 'Cancel session', cancelTitle: 'Cancel this session?',
-    cancelMsg: 'A front-end demo only — it does not affect any real data.',
-    cancelCta: 'Cancel session', cancelToast: 'Cancelled (demo).',
-    editedToast: 'Edit opened (demo).', notifiedToast: 'Notification sent (demo).',
+    cancelMsg: 'This will be available once the server is connected — nothing changes yet.',
+    cancelCta: 'Cancel session', cancelToast: 'Cancelling the session will be available once the server is connected.',
+    editedToast: 'Editing the session will be available once the server is connected.', notifiedToast: 'Sending the notification will be available once the server is connected.',
     attentionLabel: 'Attention',
   },
 
   dash: {
-    upNext: 'Up next this week', viewTimetable: 'View timetable', attention: '{n} need attention',
+    upNext: 'Up next this week', viewTimetable: 'View timetable', viewAllSessions: 'View all sessions', attention: '{n} need attention',
+  },
+
+  /* ---- Spec 026 — folded ops bands (queue → Sessions, requests → Schedule) ---- */
+  ops: {
+    reason: { backend: 'Needs the server connection — out of current scope.' },
+    queue: {
+      title: 'Operational queue', sub: 'Notes and tasks attached to sessions — display only.',
+      add: 'Add to queue',
+      lvl: { urgent: 'Urgent', medium: 'Medium', normal: 'Normal' },
+      st: { open: 'Open', inprogress: 'In progress', closed: 'Closed' },
+      cls: { math: 'Math Basics', english: 'English Conversation', science: 'Science Club' },
+      i: { q1: 'Follow up on exam-room setup before class.', q2: 'Confirm attendance links for new students.', q3: 'Review notes from the previous session.' },
+    },
+    req: {
+      title: 'Incoming schedule requests', sub: 'Session and trial requests awaiting review — display only.',
+      accept: 'Accept', reject: 'Reject',
+      kind: { regular: 'Session', trial: 'Trial' },
+      s: { salman: 'Salman Al-Ghamdi', dana: 'Dana Al-Harbi' },
+      c: { math: 'Mathematics', english: 'English' },
+      w: { satEve: 'Sat · evening', monMorn: 'Mon · morning' },
+    },
   },
 
   data: {

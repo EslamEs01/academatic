@@ -49,7 +49,7 @@ export default {
     child: {
       title: 'Children', count: '{n} children', add: 'Add child',
       none: 'No children yet', noneMsg: 'Add the first child to this family and they will appear here.',
-      viewProfile: 'View profile', addToast: 'Adding a child will be available once the backend is connected (demo).',
+      viewProfile: 'View profile', addToast: 'Adding a child will be available once the server is connected.',
     },
     sch: { title: 'This week’s sessions', viewInSchedule: 'View in schedule', none: 'No upcoming sessions for this family.' },
     bill: {
@@ -61,9 +61,9 @@ export default {
     notes: { title: 'Family notes', none: 'No notes yet.' },
     act: {
       edit: 'Edit', suspend: 'Suspend', stop: 'Stop subscription', addChild: 'Add child',
-      editToast: 'Edit opened (demo).',
-      suspendTitle: 'Suspend this family?', suspendMsg: 'A front-end demo only — it does not affect any real data.', suspendCta: 'Suspend', suspendToast: 'Suspended (demo).',
-      stopTitle: 'Stop this family’s subscription?', stopMsg: 'A front-end demo only — it does not affect any real data.', stopCta: 'Stop', stopToast: 'Stopped (demo).',
+      editToast: 'Editing the family will be available once the server is connected.',
+      suspendTitle: 'Suspend this family?', suspendMsg: 'This will be available once the server is connected — nothing changes yet.', suspendCta: 'Suspend', suspendToast: 'Suspending will be available once the server is connected.',
+      stopTitle: 'Stop this family’s subscription?', stopMsg: 'This will be available once the server is connected — nothing changes yet.', stopCta: 'Stop', stopToast: 'Stopping the subscription will be available once the server is connected.',
     },
 
     wiz: {
@@ -75,7 +75,7 @@ export default {
         children: 'Add the family’s children.', billing: 'Plan and hourly rate (display only).', review: 'Review before saving.',
       },
       next: 'Next', back: 'Back', save: 'Save family',
-      savedToast: 'Family created (demo) — nothing is actually saved.',
+      savedToast: 'Creating the family will be available once the server is connected.',
       f: {
         guardianName: 'Guardian name', status: 'Status', category: 'Category',
         phone: 'Phone number', email: 'Email', whatsapp: 'WhatsApp',
@@ -87,7 +87,7 @@ export default {
         guardianName: 'e.g. Abu Salman Al-Ghamdi', phone: '05xxxxxxxx', email: 'name@example.edu',
         city: 'e.g. Riyadh', childName: 'Child name', hourRate: '60', notes: 'Add a note about the family…',
       },
-      children: { add: 'Add another child', addToast: 'Children can be added for real once the backend is connected (demo).', row: 'Child {n}', hint: 'You can add more than one child to the same family.' },
+      children: { add: 'Add another child', addToast: 'Adding another child will be available once the server is connected.', row: 'Child {n}', hint: 'You can add more than one child to the same family.' },
       review: { title: 'Review before saving', note: 'This is a demo preview — nothing real is saved.', guardian: 'Guardian', contact: 'Contact', children: 'Children', plan: 'Plan', childrenVal: 'Two children (demo)' },
     },
   },
@@ -106,7 +106,7 @@ export default {
     timetable: { title: 'Upcoming sessions', viewInSchedule: 'View in schedule', none: 'No upcoming sessions for this student.' },
     family: { title: 'Family', guardian: 'Guardian', viewFamily: 'View family profile', siblings: 'Siblings', noSiblings: 'No siblings enrolled.' },
     notes: { title: 'Student notes', none: 'No notes yet.' },
-    act: { message: 'Message', edit: 'Edit', editToast: 'Edit opened (demo).', messageToast: 'Messaging will be available once the messages module is connected (demo).', viewFamily: 'View family' },
+    act: { message: 'Message', edit: 'Edit', editToast: 'Editing will be available once the server is connected.', messageToast: 'Messaging will be available once the server is connected.', viewFamily: 'View family' },
   },
 
   res: {
@@ -114,7 +114,7 @@ export default {
     courses: 'Course progress', certificates: 'Certificates', noCerts: 'No certificates yet.',
     certStatus: { issued: 'Issued', pending: 'In progress' },
     export: 'Export PDF', exportReason: 'Export will be available once the backend is connected (out of current scope).',
-    print: 'Print', printToast: 'Print opened (demo).',
+    print: 'Print', printToast: 'Printing will be available once the server is connected.',
     note: 'A demo view — not real results or a grading system.',
   },
 
@@ -123,7 +123,7 @@ export default {
     criteria: { learningProgress: 'Learning progress', focus: 'Focus', homework: 'Homework completion', punctuality: 'Punctuality' },
     rating: { excellent: 'Excellent', good: 'Good', sometimes: 'Sometimes', rarely: 'Rarely' },
     achievements: 'Key achievements', objectives: 'Next-month objectives',
-    approve: 'Approve report', approved: 'Approved', pending: 'Pending review', approveToast: 'Report approved (demo).',
+    approve: 'Approve report', approved: 'Approved', pending: 'Pending review', approveToast: 'Approving the report will be available once the server is connected.',
     note: 'A demo view — there is no real approval workflow.',
   },
 

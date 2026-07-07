@@ -1,5 +1,49 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 023 — Full Legacy Coverage Audit 000–022 is DELIVERED** (audit-only; awaiting
+Active feature: **Spec 026 — Admin Control / Sessions / Operations + Global Action Completion Pass is
+IMPLEMENTED** (awaiting the watcher commit; artifacts + tasks + 20 contracts at
+`academy-dashboard-discovery/specs/026-admin-control-sessions-operations/`). **91→97 HTML.** **Layer A**:
+built 3 admin ops pages (sessions-analysis · public-holiday · scheduled-actions, AR+EN; new `pages/*.js` +
+`fixtures/*.js` authored via a parallel workflow; new `ar.ops.js`/`en.ops.js` locale module registered in
+i18n.js) — display-only authored boards/lists, every write an honest `backendRequired` gate, no
+score/chart; folded total-queues→sessions + schedule-requests→schedule (new `ops-bands.js` +
+`fixtures/ops-bands.js`, 0 new pages); flipped 3 nav items planned→implemented (`nav.config.js`; other 5
+stay planned gates); registered 3 pages in build-html. **Layer B (global action completion)**: the core
+honesty change is `enhance.js` — `acknowledge()` now says «يُتاح بعد ربط الخادم»/"available once the server
+is connected" (killed «إجراء تجريبي»/"preview action" globally) + `openModal()` generalized to read
+`data-modal-title-key`/`data-modal-note-key` (reuses the EXISTING `data-modal-trigger` — NO new dispatch
+hook, NO new storage key). Create/Add primaries (New-session ×2, Add student/teacher/course/group, wizard
+Save, add-child) → honest backendRequired modal; **78 toast rewordings + 12 confirm-body rewordings** →
+"available once the server is connected" (deterministic Node script; never «تم…»/"saved/done/(demo)");
+**DU-20** dashboard fake Apply/Clear/select-btn filter removed (Option B) → New-session modal + real "view
+all sessions" link. **Verified**: smoke PASS (96 loads); a11y 0/0; `href="#"`=0; 0 fake-success toast in
+any built page; teacher pay-free (portal 0 tokens; teacher-performance=B-07 admin board), family zero-pay,
+student child-view, admin finance Spec-009-invariant (finance «رواتب» nav byte-identical to HEAD) all green;
+portal 49 files + index byte-identical; package.json 0-diff; no new dependency/engine. One sanctioned smoke
+amendment (3 pages + action-completion asserts; DU-20/DU-07 assertions updated to the new honest behavior). Spec 025 is the committed baseline (HEAD `e4ee3cd`;
+91 public HTML, working tree clean). Artifacts at
+`academy-dashboard-discovery/specs/026-admin-control-sessions-operations/` (spec · visual-grounding ·
+legacy-admin-ops-coverage · current-action-inventory · dead-ui-register · admin-ops-page-scope ·
+modal-and-gate-scope · future-owner-register · checklists/requirements). **Two layers**: **Layer A** =
+admin ops (sessions·timetable·attendance·outcomes·cancellation/reschedule·daily-ops·cross-links),
+grounded ONLY in legacy evidence — the eight planned nav items (`nav.config.js:27-34`: sessionsAnalysis·
+messages·leads·tasks·announcements·timeConverter·publicHoliday·scheduledActions) + two folds
+(total-queues, schedule-requests inbox); done pages dashboard/sessions/schedule/attendance deepen
+session-lifecycle modals; core new-page candidates = sessions-analysis·public-holiday·scheduled-actions
+(display-only/list, writes gated). **Layer B** = Global Action Completion audit over ALL 91 pages. Grounded
+finding via a 3-agent read-only audit: **ZERO truly-dead controls** (0 `href="#"` sitewide; catch-all
+`toast(acknowledge)`; planned nav = honest `data-coming-soon`; portal 49 files fully action-complete &
+honest, role laws re-swept green). The real work = **reclassify admin «preview action» `data-demo-action`
+toasts on persistence-implying actions → honest `backendRequired` finals** (Tiers 1–4: ~9 Create/Add
+primaries + ~8 shared components [appointment/outcome drawers, row/family kebab, teacher/course-group/
+finance actions, settings, wizard] + confirm→success writes reworded + the dashboard "Today's Sessions"
+apply/clear-filter widget wired-or-reworded), reusing the CLOSED `data-*` hook set (NO new hook/key).
+Cross-page honesty inconsistency is the argument: finance Create-invoice/Export + student Add-course are
+honest `data-disabled-reason` gates while Add student/teacher/course/group + New-session + Print are
+`data-demo-action` preview toasts. Excluded-by-law: fake live room/direct-links (G13), pay-signal «Fine»/
+«unpaid» tint (M-14), computed «Average» (M-13), fake chat (M-02). Count policy: 91 now; +6 if the 3 core
+ops pages build (→97); EXACT count fixed in plan + build-verified. Role laws binding (teacher pay-free ·
+family zero-pay · student child-view · admin finance Spec-009-invariant, zero salary/payroll figures).
+Next: `/speckit-plan`. **History: Spec 023 — Full Legacy Coverage Audit 000–022 is DELIVERED** (audit-only; awaiting
 the watcher commit). Renamed from "000–020" to **000–022** because the audit baseline is the full
 delivered set incl. Spec 021 (role-model correction) + Spec 022 (living rework). **Specs 020/021/022
 are the committed baseline** (HEAD `837b0c1`); the audit made NO app changes. Twelve evidence-based

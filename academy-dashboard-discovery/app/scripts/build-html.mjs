@@ -32,6 +32,10 @@ import { renderGroup } from '../src/js/pages/group.js';
 import { renderTeacher } from '../src/js/pages/teacher.js';
 import { renderTeacherPerformance } from '../src/js/pages/teacher-performance.js';
 import { renderFinance } from '../src/js/pages/finance.js';
+// Spec 026 — admin control / sessions / operations
+import { renderSessionsAnalysis } from '../src/js/pages/sessions-analysis.js';
+import { renderPublicHoliday } from '../src/js/pages/public-holiday.js';
+import { renderScheduledActions } from '../src/js/pages/scheduled-actions.js';
 // Spec 012 — role portal foundation (portal shell, not the admin shell)
 import { portalShellMarkup } from '../src/js/components/portal-shell.js';
 import { renderPortalsHub } from '../src/js/pages/portals.js';
@@ -99,6 +103,9 @@ const PAGES = [
   { base: 'teacher-performance', activeId: 'teacherKpi', titleKey: 'topbar.title.teacherPerf', crumbKey: 'topbar.crumb.teacherPerf', render: renderTeacherPerformance },
   // Spec 009 — finance, billing & payments shell
   { base: 'finance', activeId: 'finance', titleKey: 'topbar.title.finance', crumbKey: 'topbar.crumb.finance', render: renderFinance },
+  { base: 'sessions-analysis', activeId: 'sessionsAnalysis', titleKey: 'sa.title', crumbKey: 'nav.sessionsAnalysis', render: renderSessionsAnalysis },
+  { base: 'public-holiday', activeId: 'publicHoliday', titleKey: 'ph.title', crumbKey: 'nav.publicHoliday', render: renderPublicHoliday },
+  { base: 'scheduled-actions', activeId: 'scheduledActions', titleKey: 'sca.title', crumbKey: 'nav.scheduledActions', render: renderScheduledActions },
   // Spec 012 — role portal foundation (portal shell; NOT admin nav pages; hub = the documented demo entry)
   { base: 'portals', shell: 'portal', role: 'hub', activeId: null, titleKey: 'prt.title.hub', render: renderPortalsHub },
   { base: 'student-portal', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: null, titleKey: 'prt.title.student', render: renderStudentPortal },

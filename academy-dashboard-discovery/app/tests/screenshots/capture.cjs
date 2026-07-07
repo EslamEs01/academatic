@@ -124,6 +124,14 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeConfirm: true, variant: 'confirm' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeFilter: true,  variant: 'filter' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 026 — the three new admin ops pages + one create modal + one details drawer + mobile + dark
+  { page: 'sessions-analysis', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'sessions-analysis', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'public-holiday', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'public-holiday', lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'desktop', sessCreateModal: true, variant: 'create-modal' },
   // Spec 010 — Coverage, Navigation IA & Polish (acceptance frames). The six rail categories
   // expanded (AR light) are already covered above via the default control view + cat: families/
   // teachers/reports/admin/settings; the reports-category frame shows the finance sub-section.
@@ -267,6 +275,7 @@ const MATRIX = [
     if (s.attnFilter) { await page.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]').catch(() => {}); await page.waitForTimeout(280); }
     // Spec 017 — open the role-nav native disclosure (mobile)
     if (s.roleDrawer) { await page.click('.pt-nav-drawer > summary').catch(() => {}); await page.waitForTimeout(260); }
+    if (s.sessCreateModal) { await page.click('[data-modal-trigger]').catch(() => {}); await page.waitForTimeout(340); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
     // Spec 013 — area close-ups are element-scoped (Playwright auto-scrolls the element into view)
@@ -275,7 +284,7 @@ const MATRIX = [
       if (el) await el.screenshot({ path: path.join(OUT, name) });
       else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
     } else {
-      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm });
+      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal });
     }
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);
