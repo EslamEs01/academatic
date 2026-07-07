@@ -145,47 +145,60 @@ const MATRIX = [
   { page: 'teacher-portal', lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile' },
   { page: 'portals',        lang: 'ar', theme: 'light', vp: 'desktop' },
-  // Spec 013 — student dashboard area close-ups (element-scoped, auto-scroll; 'section' includes
-  // the hero, so nth-of-type: 1=hero 2=today 3=next 4=week 5=courses 6=homework 7=materials
-  // 8=progress 9=achievements 10=celebration 11=history 12=profile). The full-page desktop frame
-  // shows every band top-to-bottom; these are readable close-ups of each experience band.
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)',  variant: 'area-next' },
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(4)',  variant: 'area-week' },
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(6)',  variant: 'area-homework' },
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(7)',  variant: 'area-materials' },
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(8)',  variant: 'area-progress' },
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-achievements' },
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-celebration' },
-  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(11)', variant: 'area-history' },
-  // Spec 014 — family dashboard area close-ups ('section' includes hero, so nth-of-type:
-  // 1=hero 2=children 3=today 4=progress/signals 5=notes 6=history 7=subscriptions 8=billing
-  // 9=requests-hub 10=materials 11=account).
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(2)',  variant: 'area-children' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)',  variant: 'area-today' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(4)',  variant: 'area-signals' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(5)',  variant: 'area-notes' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(6)',  variant: 'area-history' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(7)',  variant: 'area-subscriptions' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(8)',  variant: 'area-billing' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-requests' },
-  { page: 'family-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-materials' },
-  // Spec 015 — teacher dashboard: the NEW ar/dark base frame + area close-ups ('section'
-  // includes the hero, so nth-of-type: 1=hero 2=today 3=next 4=follow-up 5=students
-  // 6=workflow 7=recent-history 8=tasks 9=materials 10=timetable 11=rubric
-  // 12=requests-performance 13=account).
-  { page: 'teacher-portal', lang: 'ar', theme: 'dark', vp: 'desktop' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(2)',  variant: 'area-today' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)',  variant: 'area-next' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(4)',  variant: 'area-followup' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(5)',  variant: 'area-students' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(6)',  variant: 'area-workflow' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(7)',  variant: 'area-history' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(8)',  variant: 'area-tasks' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(9)',  variant: 'area-materials' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(10)', variant: 'area-timetable' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(11)', variant: 'area-rubric' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(12)', variant: 'area-requests' },
-  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(13)', variant: 'area-account' },
+  // Spec 018 — compact role home band close-ups (the header is a <div>, so 'section' nth-of-type =
+  // the 5 compact bands: 1=KPI row · 2=now band · 3=role-core · 4=preview · 5=quick-links). The
+  // full-page desktop frames above show each home top-to-bottom in ~1.5–2 screens.
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(1)', variant: 'area-kpi' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(2)', variant: 'area-now' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)', variant: 'area-homework' },
+  { page: 'family-portal',  lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(1)', variant: 'area-kpi' },
+  { page: 'family-portal',  lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)', variant: 'area-children' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(1)', variant: 'area-kpi' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'desktop', area: 'section:nth-of-type(3)', variant: 'area-followup' },
+  // Spec 018 — the NEW family-child drill-down page (default st1 · a switched child #child=st11 ·
+  // dark · EN · mobile). Proves the mandatory guardian→child-profile flow.
+  { page: 'family-child', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-child', lang: 'ar', theme: 'light', vp: 'desktop', childHash: 'st11', variant: 'child-st11' },
+  { page: 'family-child', lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'family-child', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'family-child', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 019 — the six student internal pages (AR desktop + mobile), a dark + an EN sample,
+  // and the student home refresh (quick-tiles are now REAL links). Full-page frames.
+  { page: 'student-schedule',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-schedule',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-schedule',  lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'student-homework',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-homework',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-materials', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-materials', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-progress',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-progress',  lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'student-progress',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-history',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-history',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-profile',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'student-profile',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'student-portal',    lang: 'ar', theme: 'light', vp: 'desktop', variant: 'tiles-now-links' },
+  // Spec 020 — the seven family internal pages (AR desktop + mobile), billing dark + children EN
+  // samples, the family home refresh (tiles-now-links) and the family-child preservation proof.
+  { page: 'family-children',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-children',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-children',  lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'family-schedule',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-schedule',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-progress',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-progress',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-billing',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-billing',   lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'family-billing',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-requests',  lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-requests',  lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-materials', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-materials', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-profile',   lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'family-profile',   lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'family-portal',    lang: 'ar', theme: 'light', vp: 'desktop', variant: 'tiles-now-links' },
   // Spec 017 — Shell v2: the native mobile nav disclosure, captured OPEN (amendment A1 proof)
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile', roleDrawer: true, variant: 'drawer-open' },
 ];
@@ -209,7 +222,7 @@ const MATRIX = [
     page.on('pageerror', (e) => errors.push('pageerror: ' + e.message));
 
     const file = s.lang === 'en' ? `${s.page}.en.html` : `${s.page}.html`;
-    const hash = s.step ? '#step=' + s.step : (s.view ? '#view=' + s.view : '');
+    const hash = s.step ? '#step=' + s.step : (s.view ? '#view=' + s.view : (s.childHash ? '#child=' + s.childHash : ''));
     await page.goto(`${BASE}/${file}${hash}`, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => {
       const b = document.querySelector('#page-body');

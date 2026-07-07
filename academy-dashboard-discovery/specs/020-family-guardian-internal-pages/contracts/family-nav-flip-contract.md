@@ -1,0 +1,2 @@
+# Contract — Family Nav Flip (Spec 020)
+EXACTLY seven one-line edits in `ROLE_NAV.family` (`fixtures/portal.js`): `status: 'planned'` → `'implemented'` for children/schedule/progress/billing/requests/materials/profile. FROZEN: order, ids, labelKeys, icons, `page` routes. FORBIDDEN: any edit to `ROLE_NAV.student` (7 implemented) or `ROLE_NAV.teacher` (1+6) — byte-untouched, grep-proven. Smoke pins: family pages navListAnchors===8 & plannedNavAnchors===0; the student and teacher branch asserts BYTE-VERBATIM.

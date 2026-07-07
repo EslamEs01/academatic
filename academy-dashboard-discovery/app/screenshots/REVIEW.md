@@ -465,3 +465,170 @@ Deepens the Spec-012 family foundation (`family-portal(.en).html`, persona **fam
 **Failure sweep:** none — no admin markup in role pages, no bottom tabs, no fake affordances (planned = labeled buttons + existing toast), zero `href="#"`, zero pay vocabulary (extended set, three layers), RTL/LTR/dark/mobile clean, home `#page-body` regions BYTE-EQUAL to HEAD (all six files), hub-only entry preserved.
 
 **Automated:** build clean (49) · smoke PASS (48 loads; Shell-v2 asserts: sidenav on exactly 3 pages, counts 7/8/7 both instances, active home ×2/page, planned-as-buttons, drawer summary, shell-anchor set {self,hub} multiset 5; **every pre-017 assert byte-verbatim incl. payHit**) · axe 0/0 · 43 portal frames + admin proofs, 0 console errors · 41/49 hash-identical · G2 diffs (enhance/build-html/nav.config/package.json) = 0 lines.
+
+## Spec 018 — Role Dashboards Admin-Like UX Rework — 2026-07-04
+
+**The corrective verdict (the user's binding complaint):** the three role HOMES were too long / portal-like ("even the developer got lost"). Spec 018 reworks them into COMPACT admin-like dashboards (the 7-band recipe: compact header · 4-KPI row · now band · role-core · preview · quick-links · one-line note) inside the UNTOUCHED Shell v2, and adds the mandatory guardian→child drill-down page `family-child(.en).html`. **Visual grounding gate** (23 legacy/reference frames) recorded in `specs/018-.../visual-grounding-addendum.md` — zero decisions changed; three strengthened.
+
+**Baseline (T001):** HEAD `0edafe1` (Spec 017 committed) · tree clean (only sanctioned dirty files) · rebuild deterministic (49 pages, 0 diffs) · smoke PASS (48 loads) · axe 0/0.
+
+### Before → after height (scrollHeight @ 1366×768, the endless-page cure)
+
+| Home | Before (AR / EN) | After (AR / EN) | Sections | KPIs | Verdict |
+|---|---|---|---|---|---|
+| Student | 3597 / 3638 px | **1428 / 1467 px** | 11 → 5 | 4 | ✅ ~2 screens; inside [900, 2200] |
+| Family  | 4202 / 4348 px | **1753 / 1771 px** | 10 → 5 | 4 | ✅ ~2 screens; inside [900, 2200] |
+| Teacher | 4390 / 4449 px | **1486 / 1486 px** | 12 → 5 | 4 | ✅ ~2 screens; inside [900, 2200] |
+| family-child (new) | — | **1162 / 1162 px** | drill-down | — | ✅ one child panel + switcher |
+
+The ceiling was NOT retuned — every home landed well inside the D1 window [900, 2200] on the first build (no ±10% adjustment needed). The ceiling is now a smoke probe, so a future long-page regression fails the build.
+
+### Screenshot review (element-scoped close-ups + full-page + family-child flow)
+
+| # | Frame | Verdict |
+|---|---|---|
+| 1 | Student · AR light desktop (full) | ✅ PASS — compact: header → 4 KPIs → today+next → homework snapshot → week+history preview → quick-link tiles → note; admin-like rhythm, sky accent; no endless scroll |
+| 2 | Student · AR dark / EN / AR mobile | ✅ PASS — dark-safe, LTR mirror, 2×2 KPI on mobile, zero 390px overflow |
+| 3 | Family · AR light desktop (full) | ✅ PASS — 4 KPIs · today+next · **five child cards each with a real «فتح ملف الابن» link** · billing STATUS chip (zero figures) + gates · quick tiles; violet accent |
+| 4 | Family · AR dark / EN / AR mobile | ✅ PASS — dark/LTR/mobile clean |
+| 5 | Teacher · AR light + AR dark desktop | ✅ PASS — 4 KPIs (حصص اليوم/متابعات/مهام مفتوحة/طلابي) · today+next · follow-up board · recording-flow + performance-link preview · quick tiles; teal accent; ZERO pay vocabulary |
+| 6 | Teacher · EN / AR mobile / drawer-open | ✅ PASS — LTR mirror, mobile clean, native nav disclosure (A1) intact |
+| 7 | **family-child · AR light desktop (default st1)** | ✅ PASS — child header · course/group/teacher · today · attendance trio + progress · latest note · homework/materials · history+profile gates; zero forms, zero money |
+| 8 | **family-child · switched child (#child=st11)** | ✅ PASS — deep-link selects st11's panel (pure-CSS :target); the switcher pill highlights |
+| 9 | family-child · AR dark / EN / AR mobile | ✅ PASS — dark/LTR/mobile clean |
+| 10 | Admin dashboard proof | ✅ PASS — byte-identical (43/51 identity; 40 admin + index + hub pair unchanged) |
+
+**Failure sweep:** none — no endless page (hard ceiling smoke-pinned), no admin chrome in role pages, no fake actions (quick-links are honest «قريبًا» tiles, gates are labeled availability chips, zero form controls), **zero pay vocabulary/currency in the teacher family (three layers)**, family + family-child bodies carry zero currency/amount figures, zero `href="#"`, zero dead links, zero raw keys, RTL/LTR/dark/mobile clean, displaced capabilities RETAINED for Specs 019–021.
+
+**Automated:** build clean (51) · smoke PASS (50 loads; compact branches: sections 4–7, KPI===4, ceiling [900,2200], family bodyAnchors===5 exact child links, family-child 5 panels + default st1 + 5 #child= switcher links; **payHit + family zero-pay BYTE-VERBATIM; all Shell-v2/hub/admin asserts unchanged**) · axe **critical=0 serious=0** (3 compact homes ar/dark + en + family-child default/dark/en/switched) · 43/51 hash-identical · frozen-file diffs (enhance.js/nav.config.js/package.json/portal-shell.js) = 0 lines · build-html.mjs diff = exactly 2 registration lines.
+
+## Spec 019 — Student Internal Pages — 2026-07-04
+
+**Goal:** turn the six student planned nav entries into real COMPACT admin-like pages inside the untouched Shell v2, completing the Student Dashboard App. Visual grounding gate COMPLETE (`specs/019-…/visual-grounding.md`, 7 areas; no legacy student role — guardian surfaces + teacher-side records; the 3 profile gates fixed by the legacy profile-edit frame).
+
+**Baseline (T001):** HEAD `fe47f68` · tree clean · rebuild deterministic (51 files) · smoke 50 loads PASS · axe 0/0.
+
+### Heights (scrollHeight @1366×768, AR — the endless page can never return; window [500, 2200])
+
+| Page | Height | Sections/content | Verdict |
+|---|---|---|---|
+| student-portal (home, refreshed) | 1426 px | 5 bands; quick-tiles now 6 REAL links | ✅ compact; honesty fix live |
+| student-schedule | 1434 px | today+next · day-grouped week · live gate | ✅ inside [500,2200] |
+| student-homework | 1126 px | KPI trio · pending/in-progress/reviewed · submit gate | ✅ |
+| student-materials | 790 px | per-course groups · download gate; no hero | ✅ |
+| student-progress | 1222 px | KPI · course bars · attendance · achievements+celebration · signals | ✅ |
+| student-history | 920 px | out1 first · F6 records · display-only period chips | ✅ |
+| student-profile | 1422 px | identity · academic · guardian · prefs · 3 gates | ✅ |
+
+### Screenshot review (30 frames, 0 console errors)
+
+| # | Frame | Verdict |
+|---|---|---|
+| 1 | Schedule · AR desktop | ✅ today+next cards, day-grouped week (SAT/MON/TUE real, SUN/WED/THU truthful «يوم راحة» rest days), labeled status chips, ONE live gate, zero tables; sky sidebar, «جدولي» active |
+| 2 | Homework · AR desktop | ✅ KPI trio, pending/in-progress/reviewed sections, due+state chips, teacher-note lines on reviewed, submit gate |
+| 3 | Materials · AR desktop | ✅ per-course groups (math/programming), type chips, download gate; NO marketing hero |
+| 4 | Progress · AR desktop + dark | ✅ KPI band, `.pt-bar` course bars (78/41), attendance trio, re-homed achievements+celebration (unordered), teacher signals; zero charts/rank; dark-safe |
+| 5 | History · AR desktop | ✅ out1 real outcome first, F6 records (summary + homework note), display-only period chips, no dead filters |
+| 6 | Profile · AR desktop | ✅ identity + academic + guardian + preference chips + EXACTLY 3 backendRequired gates (photo/save/password); zero forms |
+| 7 | All six · AR mobile (390) | ✅ single-column stacks, zero horizontal overflow |
+| 8 | Schedule · EN desktop | ✅ LTR mirror, sidebar left, clean English, «Schedule» active |
+| 9 | Student home · refresh (tiles-now-links) | ✅ the quick-links band is six REAL `<a>` links (no «قريبًا» over a live page); home still compact (1426px) |
+| 10 | Family / teacher / family-child / admin | ✅ unchanged (49/63 hash-identical — proof, not re-shot) |
+
+**Failure sweep:** none — no long-page regression (ceiling smoke-pinned [500,2200] on internals, [900,2200] on homes), no admin chrome, no marketing hero, no charts/rank, no fake actions (every write a labeled `يتطلب الخادم`/backendRequired gate; internal-page bodies zero anchors; zero forms), zero `href="#"`/dead links/dead filters/raw keys, RTL/LTR/dark/mobile clean, teacher pay-free + family zero-pay held.
+
+**Automated:** build clean (63) · smoke PASS (62 loads; new student-internal branch — role/active===2×self/navListAnchors===7/shell multiset===17/bodyAnchors===0/forms===0/tables===0/ceiling[500,2200]/profile 3 gates; home re-scope bodyAnchors===6 exact siblings; **payHit + family zero-pay + family/teacher/hub/family-child/admin asserts BYTE-VERBATIM**) · axe **critical=0 serious=0** (6 pages AR light/dark + EN sample + home refresh) · **49/63 hash-identical** · frozen-file diffs (portal-shell/enhance/nav.config/package.json/family/teacher modules) = 0 · build-html.mjs diff = 6 imports + 6 entries + 1 amended line.
+
+## Spec 020 — Family / Guardian Internal Pages — 2026-07-05
+
+**Goal:** turn the seven family planned nav entries into real COMPACT admin-like pages inside the untouched Shell v2, preserving `family-child` as the drill-down and keeping billing STATUS-FIRST under the zero-pay hard line. **Visual grounding: 100%** (`specs/020-…/visual-grounding.md`: 27/27 family frames incl. every interaction shot; the Amount column deliberately dropped; trial step-2 stays gated — the recorded legacy gap).
+
+**Baseline (T001):** HEAD `8d3d561` · tree clean · rebuild deterministic (63 files) · smoke 62 loads PASS · axe 0/0 · family-child `#page-body` baseline hashes captured (AR `c1608c6e…` / EN `58c71d31…`).
+
+### Heights (scrollHeight @1366×768, AR — window [500, 2200]; home [900, 2200])
+
+| Page | Height | Content | Verdict |
+|---|---|---|---|
+| family-portal (home, refreshed) | 1749 px | 5 bands; tiles now 7 REAL links + the 5 child links (body 12) | ✅ honesty fix live |
+| family-children | 1203 px | 5 rich child cards → 5 real drill-downs | ✅ |
+| family-schedule | 1628 px | child-tagged today + next → day-grouped week → live gate | ✅ |
+| family-progress | 1317 px | family trio → 5 child bar-cards w/ drill-downs → notes | ✅ |
+| family-billing | 1378 px | quota tiles 40/12/28 → settled chip → subs → amount-free invoices → gates | ✅ zero-pay green |
+| family-requests | 1678 px | 4 type cards (trial/meeting/feedback/cancel) + per-type gates | ✅ |
+| family-materials | 1094 px | 5 per-child groups (all covered) + download gate; no hero | ✅ |
+| family-profile | 1393 px | identity · account · children · prefs · EXACTLY 3 gates | ✅ |
+| family-child (preserved) | 1162 px | **#page-body BYTE-EQUAL to baseline (both languages)** | ✅ drill-down intact |
+
+### Screenshot review (18 new frames + proofs, 0 console errors)
+
+| # | Frame | Verdict |
+|---|---|---|
+| 1 | Children · AR desktop + mobile + EN | ✅ five cards (course/group/teacher · chips · bar · hint · subscription tag · «فتح ملف الابن»); LTR mirror clean |
+| 2 | Schedule · AR desktop + mobile | ✅ child-name tags on today cards; day-grouped week; truthful rest days; ONE live gate; zero tables |
+| 3 | Progress · AR desktop + mobile | ✅ family trio; five bar-cards each with the real drill-down; re-homed teacher notes; zero charts |
+| 4 | Billing · AR light + dark + mobile | ✅ hour tiles (٤٠/١٢/٢٨) · settled chip · per-child subscription rows · serial/month/due/course/status invoice cards — NO amounts, NO pay control; dark-safe |
+| 5 | Requests · AR desktop + mobile | ✅ counts band; trial two-path tiles; meetings truthful empty + gate; feedback lines; cancel options + caution; every type gated |
+| 6 | Materials · AR desktop + mobile | ✅ per-child groups (st12/st13 covered by the new items) + type chips + download gate; NO hero |
+| 7 | Profile · AR desktop + mobile | ✅ guardian identity + account rows + children line + prefs + EXACTLY 3 «يتطلب الخادم» gates; zero forms |
+| 8 | Family home · tiles-now-links refresh | ✅ the quick-links band navigates (7 real tiles); the five child cards unchanged |
+| 9 | family-child · proof | ✅ default st1 renders; deep links switch; nav shows 8 links with HOME active (drill-down semantics kept) |
+| 10 | Student / teacher / admin | ✅ unchanged (59/77 hash-identical — proof, not re-shot) |
+
+**Failure sweep:** none — zero pay/currency/amount tokens on all 18 family bodies (regex-proven), no fake payment/submit/download/save, no hero, no charts/rank, no dead links/`href="#"`/raw keys, no long-page regression (all in-window), RTL/LTR/dark/mobile clean, family-child body byte-equal, student/teacher/admin untouched.
+
+**Automated:** build clean (77) · smoke PASS (**76 loads**; FAMILY_INTERNAL branch: role/active===2×self/navList===8/multiset===19/forms===0/tables===0/ceiling[500,2200]/payFigure-per-page + per-page pins (children 5 exact · progress 5 exact + bars 5 · billing pB===1 · requests pP===1 · materials pB===1+items · profile pB===3); home re-scope bodyAnchors===12 in two exact subsets; family-child re-scope navList 8/multiset 19 w/ **navCurrent 2×family-portal KEPT + ALL body asserts BYTE-KEPT**; **payHit + the original zero-pay lines + the ENTIRE student branch + teacher/hub/admin asserts BYTE-VERBATIM**) · axe **critical=0 serious=0** (7 pages AR light/dark + children EN) · **59/77 hash-identical** · frozen-file diffs = 0 (portal-shell/portal-page/enhance/nav.config/package.json/family-child.js/student/teacher modules) · build-html.mjs diff = exactly 14 added lines.
+
+## Spec 022 — Living Dashboards Experience Rework — 2026-07-06
+
+**Goal:** transform the static card-gallery hub + role homes into LIVING educational cockpits and land the corrected role model (Spec 021 DEC-001…006), under every standing law. **Before frames** archived in `screenshots/before-022/`; **after frames** captured in place (160 frames, **0 console errors**).
+
+### Before → after (the static-card problem, solved)
+
+| Surface | BEFORE (static) | AFTER (living) | Verdict |
+|---|---|---|---|
+| Hub | 3 equal role cards incl. a Student primary | 2 primary role cards (Family·Teacher) + admin console + ONE demoted «عرض الابن — معاينة» child-view entry naming the family journey + سلمان | ✅ role model corrected |
+| Family home | plain head + 4 flat KPI tiles + inert session cards | violet **idHero** (avatar + greeting + 3 counters WITH story lines) · child-tagged **day rail** (now/next stops) · child cards w/ animated bars · billing/requests **status stories** («دون أرقام») · **guided** gate panels | ✅ alive |
+| Teacher home | same flat rhythm | teal **idHero** · roster-tagged **day rail** · follow-up board · التحضير→الحضور→تسجيل→المراجعة **flow strip** (record step dashed-gated) · **guided** gate · performance link | ✅ alive, pay-free |
+| Child view (student) | «بوابة الطالب» primary role, flat KPIs | reframed **«عرض الابن» / «ابن العائلة»** shell · sky **idHero** · **day rail** · homework + celebration + **guided** gates | ✅ reframed + alive |
+| family-child | 5-panel drill-down | + ONE honest fold-point link «افتح عرض الابن الكامل (سلمان)» → the child view | ✅ fold point |
+
+### Heights @1366×768 (compact window held — the endless page did not return)
+
+| Page | Height | Window | Verdict |
+|---|---|---|---|
+| family-portal | 1925 px | [900,2200] | ✅ |
+| teacher-portal | 1563 px | [900,2200] | ✅ |
+| student-portal | 1528 px | [900,2200] | ✅ |
+| portals (hub) | 815 px | — | ✅ |
+| family-child | 1260 px | — | ✅ |
+
+### Living primitives proof (all shared, from `portal-page.js`)
+`idHero` (1 per home) · `dayRail` (now/next/done stops, the now-dot pulses only with motion allowed) · `storyRow` (family billing/requests, 2) · `flowStrip` (teacher, 4 steps) · `guidePanel` (every gate; adds the «ماذا يحدث عند التفعيل» line, stays non-interactive).
+
+### Role-model + demotion proof
+Hub `hubRoleTargets` = exactly `[family-portal, teacher-portal]` (student demoted); exactly 1 child-view link (→ student-portal); admin link kept. Student shell reads «عرض الابن»/«ابن العائلة» on all 14 student pages; the six internal **bodies byte-equal** (12 extraction-hash proofs); `ROLE_NAV.student` structurally untouched (7 links still work).
+
+### Failure sweep
+None. Dark/RTL/mobile clean (a11y **critical=0 serious=0** incl. hub dark + all reworked homes light/dark); reduced-motion CSS-audited (all `lv-*` animation quarantined behind `prefers-reduced-motion: no-preference`, static end-state default); zero `href="#"`/dead links/raw keys; **teacher pay-free** three layers green (source incl. comments + built AR/EN + payHit byte-verbatim); **family zero-pay** payFigure regex green on ALL 18 family bodies; family-children byte-identical; no fake actions. Identity **55/77** (22 intentional rebakes); admin/index/other family internals byte-identical.
+
+## Spec 024 — Corrections From Legacy Coverage Audit (2026-07-07)
+
+Correction/alignment pass over the Spec 023 backlog (B-01…B-11). No new pages/backend/fake behavior; 77 HTML held; smoke PASS (76 loads); a11y critical=0 serious=0.
+
+### B-01 — child-view wording (F-00-1 fix)
+The demoted child-view note reframed «لوحة الطالب — النسخة الأولى» → «عرض الابن — النسخة الأولى» (ar) / "Student dashboard…" → "Child view — part of the family account" (en) on the 6 child-view pages that carried it (home + homework/history/profile/progress/materials; student-schedule had none). Grep gates: zero «لوحة الطالب|بوابة الطالب» in `student-*.html`, zero "student dashboard|Student Portal" in `student-*.en.html`. Family note («لوحة العائلة») and teacher note («لوحة المعلم») BYTE-UNCHANGED (both primary roles — correct). Declared 022 extraction-hash supersession (10/12 internal bodies). New smoke guard: child-view `#page-body` must not match `/لوحة الطالب|بوابة الطالب|student dashboard/i`.
+
+### B-03 — role-portal notifications honest gate
+Bell added to the family/teacher/student topbars (reuses `data-action="notifications"` → the existing Soon-badged, `aria-disabled` popover; no dot/count, no new hook, admin gate untouched). The hub (role-switcher) is deliberately EXCLUDED — `portals.html` byte-clean vs HEAD.
+
+### B-05 — teacher library planned nav item
+One `library` «مكتبتي/Library» item added to `ROLE_NAV.teacher` (non-anchor `is-planned` «قريبًا» button, owner Spec 025). Teacher nav 7→8; `plannedNavAnchors===0` held.
+
+### B-11 — visual-density (pure CSS, additive living layer)
+D-06 dark-mode role-tinted idHero (family/child heroes keep role color in dark, theme-aware) · D-08 hub primary grid 2-up (no empty third slot after the student-card demotion) · D-13 mobile topbar de-wrap (hide the redundant greeting <560px so the action row — now with the bell — never wraps). D-04/D-05/D-09 DEFERRED (pinned bodies). Motion untouched (single reduced-motion block); no new hook/page.
+
+### Records (no code)
+B-02 Locations→031 · B-04 live-room→future-backend · B-06 teacher chat→future (owner 025, no nav item) · B-07 pay-free exemption for the pre-existing Spec 007 admin teacher-performance board (grep NOT weakened; 025 repoints the anchor) · B-08/B-09 exclusion + finance-boundary provenance (README/CLAUDE) · B-10 rail verified MOVED-not-deleted (prep-hint → flowStrip «التحضير»); family-children no-fold-link recorded intentional.
+
+### Failure sweep
+None. Forbidden files (build-html.mjs, package.json, nav.config.js, enhance.js, topbar.js) 0-diff. Teacher pay-free three layers green; family zero-pay green. No `href="#"`, no new hook/storage key. Admin pages untouched.

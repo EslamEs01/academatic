@@ -38,6 +38,20 @@ import { renderPortalsHub } from '../src/js/pages/portals.js';
 import { renderStudentPortal } from '../src/js/pages/student-portal.js';
 import { renderFamilyPortal } from '../src/js/pages/family-portal.js';
 import { renderTeacherPortal } from '../src/js/pages/teacher-portal.js';
+import { renderFamilyChild } from '../src/js/pages/family-child.js';
+import { renderStudentSchedule } from '../src/js/pages/student-schedule.js';
+import { renderStudentHomework } from '../src/js/pages/student-homework.js';
+import { renderStudentMaterials } from '../src/js/pages/student-materials.js';
+import { renderStudentProgress } from '../src/js/pages/student-progress.js';
+import { renderStudentHistory } from '../src/js/pages/student-history.js';
+import { renderStudentProfile } from '../src/js/pages/student-profile.js';
+import { renderFamilyChildren } from '../src/js/pages/family-children.js';
+import { renderFamilySchedule } from '../src/js/pages/family-schedule.js';
+import { renderFamilyProgress } from '../src/js/pages/family-progress.js';
+import { renderFamilyBilling } from '../src/js/pages/family-billing.js';
+import { renderFamilyRequests } from '../src/js/pages/family-requests.js';
+import { renderFamilyMaterials } from '../src/js/pages/family-materials.js';
+import { renderFamilyProfile } from '../src/js/pages/family-profile.js';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -83,6 +97,20 @@ const PAGES = [
   { base: 'student-portal', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: null, titleKey: 'prt.title.student', render: renderStudentPortal },
   { base: 'family-portal', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: null, titleKey: 'prt.title.family', render: renderFamilyPortal },
   { base: 'teacher-portal', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: null, titleKey: 'prt.title.teacher', render: renderTeacherPortal },
+  { base: 'family-child', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: null, titleKey: 'prt.title.familyChild', render: renderFamilyChild },
+  { base: 'student-schedule', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'schedule', titleKey: 'prt.title.stuSchedule', render: renderStudentSchedule },
+  { base: 'student-homework', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'homework', titleKey: 'prt.title.stuHomework', render: renderStudentHomework },
+  { base: 'student-materials', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'materials', titleKey: 'prt.title.stuMaterials', render: renderStudentMaterials },
+  { base: 'student-progress', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'progress', titleKey: 'prt.title.stuProgress', render: renderStudentProgress },
+  { base: 'student-history', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'history', titleKey: 'prt.title.stuHistory', render: renderStudentHistory },
+  { base: 'student-profile', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: 'profile', titleKey: 'prt.title.stuProfile', render: renderStudentProfile },
+  { base: 'family-children', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'children', titleKey: 'prt.title.famChildren', render: renderFamilyChildren },
+  { base: 'family-schedule', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'schedule', titleKey: 'prt.title.famSchedule', render: renderFamilySchedule },
+  { base: 'family-progress', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'progress', titleKey: 'prt.title.famProgress', render: renderFamilyProgress },
+  { base: 'family-billing', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'billing', titleKey: 'prt.title.famBilling', render: renderFamilyBilling },
+  { base: 'family-requests', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'requests', titleKey: 'prt.title.famRequests', render: renderFamilyRequests },
+  { base: 'family-materials', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'materials', titleKey: 'prt.title.famMaterials', render: renderFamilyMaterials },
+  { base: 'family-profile', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'profile', titleKey: 'prt.title.famProfile', render: renderFamilyProfile },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;
@@ -127,7 +155,7 @@ for (const p of PAGES) {
     const dir = LANGS[lang].dir;
     const title = `${t(p.titleKey)} · ${t('brand.name')}`;
     const body = p.shell === 'portal'
-      ? portalShellMarkup({ role: p.role, personaKey: p.personaKey || '', bodyHTML: p.render() })
+      ? portalShellMarkup({ role: p.role, personaKey: p.personaKey || '', bodyHTML: p.render(), activeId: p.activeId || 'home' })
       : shellMarkup({ activeId: p.activeId, titleKey: p.titleKey, crumbKey: p.crumbKey, bodyHTML: p.render() });
     const file = lang === 'en' ? `${p.base}.en.html` : `${p.base}.html`;
     assertChipTones(body, file);

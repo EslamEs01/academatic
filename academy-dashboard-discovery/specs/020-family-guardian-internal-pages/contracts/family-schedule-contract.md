@@ -1,0 +1,2 @@
+# Contract — family-schedule (Spec 020)
+Bands: pageHead · child-tagged today band (the authored fam1 mapping s2→st1 · s3→st11 · s5→st6; child name visible per card) + the next-session emphasis card · day-grouped week agenda w/ child tags (never an hour×day grid) · truthful rest-day empties · ONE live/join backendRequired gateNote · note. HARD PINS: body anchors === 0; zero tables; labeled time/status chips. Grounding: the guardian timetable + today-sessions frames (child-tagged rows kept; empty grid replaced).
