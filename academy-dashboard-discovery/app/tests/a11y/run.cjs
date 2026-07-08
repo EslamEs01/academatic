@@ -80,6 +80,10 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'dark' },
   { page: 'finance', lang: 'en', theme: 'light' },
   { page: 'finance', lang: 'en', theme: 'dark' },
+  // Spec 030 — the folded Salaries + Banks tabs of the finance hub (activate via #view hash)
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=salaries' },
+  { page: 'finance', lang: 'ar', theme: 'dark', hash: '#view=banks' },
+  { page: 'finance', lang: 'en', theme: 'light', hash: '#view=salaries' },
   // Spec 026 — the three new admin ops pages (AR light+dark; sessions-analysis as the EN sample)
   { page: 'sessions-analysis', lang: 'ar', theme: 'light' },
   { page: 'sessions-analysis', lang: 'ar', theme: 'dark' },

@@ -736,3 +736,34 @@ runtime-enforced by the existing Spec-010 nav block. **14 HTML changed**
 + finance + index byte-identical; `package.json` 0-diff. Teacher pay-free / family zero-pay / student child-view
 / admin finance Spec-009 invariant all byte-verbatim green. Additive smoke amendment (Spec-029 asserts + R-G
 re-pin + one facet-scoped filter-correctness refinement); a11y critical=0 serious=0.
+
+## Spec 030 — Admin Finance / Invoices / Payroll / Banks Deep Management
+
+**Frames**: `finance__*__sp030-salaries`, `__sp030-banks-en`, `__sp030-add-bank-modal`, `__sp030-salaries-dark`,
+`__sp030-mobile` (208 total · 0 console errors).
+
+### What became deep (no new page — 97 → 97; nav.config.js 0-diff; finance.html tabbed hub)
+- **Salaries tab** (`sp030-salaries`, `__-dark`): teacher + staff **STATUS-FIRST, FIGURE-FREE** boards — name +
+  status chip + period ONLY (no salary/fixed/fine/gift/hour-rate/total figure). Run-salaries / Approve /
+  Mark-disbursed / Export = honest `data-disabled-reason` gates.
+- **Banks tab** (`sp030-banks-en`): bank name/status list + an Add-bank `backendRequired` modal
+  (`sp030-add-bank-modal`, name only) + Import-statement / Reconcile gates — no credentials, account numbers,
+  balances, or `type=password`.
+- **Overview tab** (unchanged, byte-behavior-identical): 4 status tiles + 9 invoice rows + read-only drawers +
+  recent payments (now with Add/Reconcile gates) + the 9 figure-free planned cards. Print reclassified to a
+  disabled-with-reason gate (F-J).
+- **Mobile** (`sp030-mobile`, 390px): the finance hub tabs + salary board reflow with no horizontal overflow.
+
+### Honesty / no-fake-money / role laws / impact
+Every finance write is a `backendRequired`/`disabled-with-reason` gate or a `data-confirm` that mutates
+nothing — no fake payment / mark-paid / salary generation / payout / bank import / reconciliation / export /
+print. **Two figure classes**: invoice/payment amount literals allowed (Spec-009-sanctioned); **salary/payout/
+compensation figures never shown** (salaries/payouts/class-report are figure-free boards or honest planned
+gates). No computed aggregate (Net Income / P&L / totals / balance), no group-by/sum, no chart/`<canvas>`, no
+`type=file`, no `type=password`, no API-key/webhook/secret/paymob/payoneer. Payout-providers + payment-gateway
+credentials → future-backend/031 (never mocked); teacher-portal salary twin + family payment → excluded.
+**Declared Spec-009 supersession**: lifted the finance-source freeze + the `demoInCluster>=1` assertion (F-J);
+kept byte-verbatim the 4-tiles / 9-invoices / 6-payments / **9-planned-cards** / 9-drawers / forbidden regex /
+no-mutation-on-confirm / no-receipt asserts. **Only `finance.html`/`.en` changed**; `package.json`/
+`nav.config.js`/`enhance.js`/`finance-status.js` 0-diff; teacher-portal ×16 + teacher-performance + family +
+student + reports + index byte-identical. Additive smoke amendment; a11y critical=0 serious=0.

@@ -967,8 +967,8 @@ const FILTER_SPEC = {
         }
         // (d) honest actions: ≥3 disabled-with-reason + ≥1 demo in the action cluster; ≥1 confirm among
         // rows; the cancelled invoice's row disables record-payment (never a confirm control there)
-        ok(a.disabledInCluster >= 3, `${page}/${lang}: expected ≥3 disabled-with-reason controls in the finance action cluster, got ${a.disabledInCluster}`);
-        ok(a.demoInCluster >= 1, `${page}/${lang}: expected ≥1 demo action in the finance action cluster, got ${a.demoInCluster}`);
+        ok(a.disabledInCluster >= 4, `${page}/${lang}: expected ≥4 disabled-with-reason controls in the finance action cluster (Create/CSV/PDF/Print), got ${a.disabledInCluster}`);
+        ok(a.demoInCluster === 0, `${page}/${lang}: finance action cluster must have 0 demo-actions (Spec 030 F-J — Print is a backendRequired export gate, not a demo toast), got ${a.demoInCluster}`);
         ok(a.rowConfirm >= 1, `${page}/${lang}: expected ≥1 [data-confirm] record-payment control among invoice rows`);
         ok(a.cancelledFound, `${page}/${lang}: no cancelled invoice row found`);
         ok(a.cancelledDisabledRecord, `${page}/${lang}: the cancelled invoice's row is missing a disabled-with-reason record-payment control`);
@@ -1015,6 +1015,44 @@ const FILTER_SPEC = {
         });
         ok(narrowed.shown === narrowed.overdue,
           `${page}/${lang}: overdue tile did not visually narrow the invoice list (shown=${narrowed.shown}, expected=${narrowed.overdue})`);
+
+        // ── Spec 030 — finance tabbed hub: Salaries + Banks folded in (no new page; figure-free) ──
+        const f30 = await p.evaluate(() => {
+          const tabsWrap = document.querySelector('[data-tabs="finance"]');
+          const tabIds = [...document.querySelectorAll('[data-tabs="finance"] [role="tab"][data-tab]')].map((tb) => tb.getAttribute('data-tab'));
+          const panels = [...document.querySelectorAll('[data-tabs="finance"] [data-tabpanel]')];
+          const visible = panels.filter((pn) => !pn.hidden).length;
+          const salPanel = document.querySelector('[data-tabpanel="salaries"]');
+          const bankPanel = document.querySelector('[data-tabpanel="banks"]');
+          const salRows = salPanel ? salPanel.querySelectorAll('.card').length : 0;
+          const bankRows = bankPanel ? bankPanel.querySelectorAll('.card').length : 0;
+          const salGates = salPanel ? salPanel.querySelectorAll('[data-disabled-reason]').length : 0;
+          const addBank = bankPanel ? !!bankPanel.querySelector('[data-modal-trigger][data-modal-title-key="fin.bank.addTitle"]') : false;
+          const bankGates = bankPanel ? bankPanel.querySelectorAll('[data-disabled-reason]').length : 0;
+          // figure-free: the salaries + banks panels carry NO currency/amount figure (salary/payout WORDS are fine).
+          // Use textContent (not innerText) — the panels are hidden by default, and innerText would be ''.
+          const figTxt = (salPanel ? salPanel.textContent : '') + ' ' + (bankPanel ? bankPanel.textContent : '');
+          const salFigureFree = !/ريال|ر\.س|\bSAR\b|جنيه|\bEGP\b|\bAED\b|\bEUR\b|[$€£]|[0-9]+[.,][0-9]/.test(figTxt);
+          // no credential/secret/upload anywhere in the finance body
+          const bodyHTML = document.getElementById('page-body').innerHTML;
+          const noSecret = !/type="password"|api[- ]?key|webhook|secret|paymob|payoneer/i.test(bodyHTML);
+          const noFile = !/type="file"/i.test(bodyHTML);
+          return { hasTabs: !!tabsWrap, tabIds, visible, salRows, bankRows, salGates, addBank, bankGates, salFigureFree, noSecret, noFile };
+        });
+        ok(f30.hasTabs && JSON.stringify(f30.tabIds) === JSON.stringify(['overview', 'salaries', 'banks']), `${page}/${lang}: finance hub tabs missing/incorrect (${JSON.stringify(f30.tabIds)})`);
+        ok(f30.visible === 1, `${page}/${lang}: exactly one finance tabpanel must be visible, got ${f30.visible}`);
+        ok(f30.salRows >= 6, `${page}/${lang}: salaries board missing status-first rows (${f30.salRows})`);
+        ok(f30.salGates >= 4, `${page}/${lang}: salaries board missing Generate/Approve/Mark-paid/Export gates (${f30.salGates})`);
+        ok(f30.salFigureFree, `${page}/${lang}: salaries/banks panel shows a pay amount figure — must be status-first FIGURE-FREE`);
+        ok(f30.bankRows >= 4 && f30.addBank && f30.bankGates >= 2, `${page}/${lang}: banks board incomplete (${JSON.stringify({ bankRows: f30.bankRows, addBank: f30.addBank, bankGates: f30.bankGates })})`);
+        ok(f30.noSecret && f30.noFile, `${page}/${lang}: finance body must not render a credential/secret/type=file affordance`);
+        // the Salaries tab actually switches (real static tab), then restore Overview (localStorage safety)
+        const salTab = await p.$('[data-tabs="finance"] [data-tab="salaries"]');
+        if (salTab) { await salTab.click(); await p.waitForTimeout(150); }
+        const salVisible = await p.evaluate(() => { const s = document.querySelector('[data-tabpanel="salaries"]'); return !!s && !s.hidden; });
+        ok(salVisible, `${page}/${lang}: Salaries tab did not become visible on click`);
+        const ovTab = await p.$('[data-tabs="finance"] [data-tab="overview"]');
+        if (ovTab) { await ovTab.click(); await p.waitForTimeout(120); }
       }
 
       // Spec 009 — Dashboard/Reports integration: no new finance chrome in the body,

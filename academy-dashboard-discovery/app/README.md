@@ -312,3 +312,40 @@ Role laws preserved: teacher pay-free (16 portal files + `teacher-performance.ht
 zero-pay, student child-view, admin finance Spec-009 invariant. **14 HTML changed**
 (reports/attendance/sessions/course/group/teacher/student ×2); teacher-performance + portal + family + finance +
 index byte-identical; `package.json`/`nav.config.js` 0-diff. Build 97; smoke PASS; a11y 0/0; screenshots 0 errors.
+
+## Spec 030 — Admin Finance / Invoices / Payroll / Banks Deep Management
+
+Deepened the admin finance domain **without faking any money operation** — **no new pages (97 → 97),
+`nav.config.js` 0-diff**. `finance.html` became a **tabbed hub** (Overview · Salaries · Banks) via the existing
+`data-tab` mechanism — the first sanctioned modification of `finance.html`, done through a **declared Spec-009
+supersession** (lifts the finance-source freeze + the `finance.html` body-byte-identical clause + the
+`demoInCluster>=1` assertion for F-J; keeps every permanent guarantee byte-verbatim).
+
+- **Two money-figure classes (binding)**: invoice/payment **amount literals** are allowed (single authored
+  value, no math — Spec-009-sanctioned); **salary / payout / compensation figures are never shown anywhere**;
+  computed aggregates (Net Income / P&L / totals / balance) and charts are forbidden.
+- **Overview tab**: the existing Spec-009 content, behavior-identical — 4 status tiles, 9 invoice rows + read-
+  only drawers, recent payments, and the 9 figure-free planned cards (kept: `plannedN===9`). Payments gained
+  honest Add-payment / Reconcile gates.
+- **Salaries tab**: teacher + staff **STATUS-FIRST, FIGURE-FREE** boards — name + status chip + period ONLY (no
+  salary/fixed/fine/gift/hour-rate/total figure). Run-salaries / Approve / Mark-disbursed / Export = honest
+  `data-disabled-reason` gates (the real payroll run needs the billing system).
+- **Banks tab**: bank name/status list + Add-bank `backendRequired` modal (name only) + Import-statement /
+  Reconcile gates — no credentials, account numbers, balances, or `type=password`.
+- **Print** reclassified to a disabled-with-reason gate (F-J, like the Spec-029 reports Print). Export CSV/PDF/
+  Download stay gates. **Record-payment / Mark-paid confirms mutate nothing** (status chip unchanged).
+- **Honest gates for the money-movement / computed surfaces**: monthly-invoices, class-salary-report, payouts,
+  accounting, analysis-expenses/invoices, and expense are represented by the existing figure-free planned
+  cards (F-B/F-F/F-H/F-I/F-M/F-N/F-O) — no P&L, no chart, no group-by/sum, no salary total.
+- **Finance menu coverage**: all 8 finance nav items classified; `nav.config.js` 0-diff (the six wallet items +
+  banks stay honest disabled-with-reason gates for the real billing/payroll/bank engine; the display previews
+  live in the hub tabs).
+
+**Django note**: each finance tab is a baked `data-tabpanel`; salary/bank rows are display-only `{% for %}`
+records with a status chip; Add-bank/Run-salaries/Import/Reconcile/Export are `data-modal-trigger`/
+`data-disabled-reason` finals behind `{% if backend %}` — nothing computes, mutates, generates, imports,
+reconciles, or produces a file. **Payout providers (Paymob/Payoneer) credentials + webhooks and payment-gateway
+settings route to future-backend/031 — never mocked; no secret/API-key rendered.** Teacher-portal salary twin
+and family payment stay excluded (pay-free / zero-pay laws). **Only `finance.html`/`.en` changed**; teacher-
+portal ×16 + teacher-performance + family + student + reports + index byte-identical; `package.json`/
+`nav.config.js`/`enhance.js`/`finance-status.js` 0-diff. Build 97; smoke PASS; a11y 0/0; screenshots 0 errors.

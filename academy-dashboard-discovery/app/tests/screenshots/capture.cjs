@@ -239,6 +239,12 @@ const MATRIX = [
   { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'rep-form-frm1', variant: 'sp029-form-drawer-en' },
   { page: 'reports', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'rep-fb-fb1', variant: 'sp029-feedback-drawer-dark' },
   { page: 'reports', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp029-mobile' },
+  // Spec 030 — finance tabbed hub: Salaries + Banks folded in (figure-free) · Add-bank modal · export gate · mobile · dark
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'salaries', variant: 'sp030-salaries' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'banks', variant: 'sp030-banks-en' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'banks', mgmtModal: 'fin.bank.addTitle', variant: 'sp030-add-bank-modal' },
+  { page: 'finance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'salaries', variant: 'sp030-salaries-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile', view: 'salaries', variant: 'sp030-mobile' },
   // Spec 027 — admin deep management: honest modals / drawer-pickers / row-kebab / gates
   { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', studentKebab: true, variant: 'sp027-row-kebab' },
   { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', openDrawer: 'stu-enroll', variant: 'sp027-enroll-picker' },

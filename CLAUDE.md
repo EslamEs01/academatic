@@ -1,6 +1,33 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 029 — Admin Reports / Analytics / Feedback / Forms Deep Management + Admin Menu
-Coverage Gate is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (54 tasks) + 24 contracts
+Active feature: **Spec 030 — Admin Finance / Invoices / Payroll / Banks Deep Management is IMPLEMENTED**
+(awaiting the watcher commit; artifacts + `tasks.md` (55 tasks) + 24 contracts at
+`academy-dashboard-discovery/specs/030-admin-finance-invoices-payroll-banks/`). **Count HELD 97 → 97 — ZERO
+new pages; `nav.config.js` 0-diff.** `finance.html` became a **tabbed hub** (Overview·Salaries·Banks via the
+existing `data-tab`) — the FIRST sanctioned modification of finance.html, via a **declared Spec-009
+supersession** (lifted the finance-source freeze + `finance.html` body-byte + the `demoInCluster>=1` assertion
+for F-J; KEPT byte-verbatim every permanent guarantee: no money arithmetic, no status-mutation-on-confirm, no
+receipt/`type=file`, no chart/`<canvas>`, `FINANCE_SUMMARY` row-count-only, invoice/payment amount literals
+only, salary/payout figures never shown, the finance `forbidden` regex, six-wallet-locked nav + membership).
+**Salaries tab** = teacher+staff STATUS-FIRST **FIGURE-FREE** boards (name+status+period, NO amount) +
+Generate/Approve/Mark-paid/Export `data-disabled-reason` gates. **Banks tab** = name/status list + Add-bank
+backendRequired modal (name only) + Import/Reconcile gates (no credentials). **F-J** finance Print
+`data-demo-action`→disabled-with-reason gate; payments gained Add/Reconcile gates. The 9 figure-free planned
+cards STAY (plannedN===9 byte-verbatim) as honest future-backend gates for the real engine, covering monthly-
+invoices/class-salary-report/payouts/accounting/analysis/expense (F-B/F-F/F-H/F-I/F-M/F-N/F-O). New fixtures
+`SALARIES`/`BANKS` (authored, FIGURE-FREE, no amount) + `fin.tab`/`fin.sal`/`fin.bank`/`fin.pay2` in `ar/en.fin.js`
+(mirrored, 144 keys each, 0 divergence); reused `.card`/`data-tab`/chips — **no new hook/storage key/engine/page/
+CSS**. Payout-providers (Paymob/Payoneer creds/webhooks) + payment-gateway credentials → future-backend/031
+(NEVER mocked; no secret/API-key/`type=password` rendered); teacher-portal salary twin + family payment →
+excluded. **Verified**: build 97; smoke PASS (96 loads; additive Spec-030 block + F-J re-pin; 4-tiles/9-invoices/
+6-payments/9-planned/9-drawers/forbidden/no-mutation/no-receipt + 026/027/028/029 + payHit/tchPay/famPay/payFigure/
+child-view BYTE-VERBATIM); a11y critical=0 serious=0 (+finance salaries/banks tab rows); 5 Spec-030 screenshots
+0 errors. **ONLY `finance.html`/`.en` changed**; `package.json`/`nav.config.js`/`enhance.js`/`finance-status.js`
+0-diff; teacher-portal ×16 + teacher-performance + family + student + reports + index byte-identical. Role laws
+green: teacher pay-free (portal byte-identical; admin salary boards figure-free), family zero-pay, student
+child-view. No pay/salary/payout AMOUNT figure anywhere; no computed aggregate/P&L; no chart; no credential/
+secret/file-upload. Next: watcher commit.
+**History: Spec 029 — Admin Reports / Analytics / Feedback / Forms Deep Management + Admin Menu
+Coverage Gate is IMPLEMENTED** (committed HEAD `7dfafda`; artifacts + `tasks.md` (54 tasks) + 24 contracts
 at `academy-dashboard-discovery/specs/029-admin-reports-analytics-feedback-forms/`). **Count HELD 97 → 97 —
 ZERO new pages**: Feedback-review + Forms/surveys FOLDED into `reports.html` (new `components/report-feedback.js`
 + `fixtures/report-feedback.js` + `rep.fb.*`/`rep.fbcat.*`/`rep.form.*` in `ar/en.rep.js`, mirrored). Feedback

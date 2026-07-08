@@ -116,6 +116,53 @@ export default {
       accountingExpenses: { title: 'Accounting & expenses', desc: 'Expenses, analytics and currencies arrive with the real billing backend.' },
       banks: { title: 'Banks', desc: 'Linking bank accounts arrives with the real billing backend.' },
     },
+
+    /* Spec 030 — finance hub tabs */
+    tab: { overview: 'Overview', salaries: 'Salaries', banks: 'Banks', aria: 'Finance sections' },
+
+    /* Spec 030 — salaries board (STATUS-FIRST, FIGURE-FREE — no pay amount) */
+    sal: {
+      title: 'Teacher & staff salaries',
+      sub: 'Per-month salary status — display-only; calculation and disbursement happen once the real billing system is connected.',
+      teacher: 'Teachers',
+      staff: 'Staff',
+      lblPeriod: 'Period',
+      status: { pending: 'Pending approval', approved: 'Approved', paid: 'Disbursed', onhold: 'On hold' },
+      generate: 'Run salaries',
+      generateReason: 'Running salaries needs the real billing system — out of current scope.',
+      approve: 'Approve',
+      approveReason: 'Approving salaries needs the real billing system — out of current scope.',
+      markPaid: 'Mark disbursed',
+      markReason: 'Disbursing salaries needs the real billing system — out of current scope.',
+      exportRoster: 'Export salary roster',
+      exportReason: 'Export needs the real billing system — out of current scope.',
+      empty: 'No matching salaries.',
+      name: { sara: 'Ms. Sara', mohammed: 'Mr. Mohammed', layan: 'Ms. Layan', reem: 'Ms. Reem', owner: 'Academy management', coord: 'Academy coordinator' },
+      period: { jun: 'Last month', jul: 'This month' },
+    },
+
+    /* Spec 030 — banks (name/status only; no credentials) */
+    bank: {
+      title: 'Bank accounts',
+      sub: 'List of bank accounts — display-only; linking, import and matching need the real bank connection.',
+      status: { active: 'Active', inactive: 'Inactive' },
+      add: 'Add bank account',
+      addTitle: 'Add bank account',
+      import: 'Import statement',
+      importReason: 'Importing statements needs the real bank connection — out of current scope.',
+      reconcile: 'Reconcile',
+      reconcileReason: 'Bank reconciliation needs the real bank connection — out of current scope.',
+      empty: 'No bank accounts.',
+      name: { rajhi: 'Al Rajhi Bank', ahli: 'National Bank', riyad: 'Riyad Bank', inma: 'Alinma Bank' },
+    },
+
+    /* Spec 030 — payment collection gates */
+    pay2: {
+      add: 'Record payment',
+      addReason: 'Recording payments needs the real billing system — out of current scope.',
+      reconcile: 'Reconcile payments',
+      reconcileReason: 'Reconciling payments needs the real billing system — out of current scope.',
+    },
   },
 
   /* ============ fixture content (authored demo literals, display-only) ============ */

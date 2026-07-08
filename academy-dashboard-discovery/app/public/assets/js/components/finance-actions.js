@@ -2,8 +2,9 @@
  * (data-demo-action/data-toast · data-disabled-reason/data-reason-key · data-confirm* ·
  * data-drawer) — NO new hook, and NO action generates a file, sends anything, mutates a
  * status, or persists:
- *   - financeActions()          → page cluster: Create invoice / Export CSV / Export PDF
- *                                  stay disabled-with-reason; Print is a demo toast.
+ *   - financeActions()          → page cluster: Create invoice / Export CSV / Export PDF /
+ *                                  Print all stay disabled-with-reason (Spec 030 F-J made
+ *                                  Print a backendRequired export gate — no fake print).
  *   - invoiceRowActions(inv)     → View opens the baked invoice drawer; Record payment is
  *                                  a confirm→demo toast, EXCEPT on a cancelled invoice
  *                                  where it renders disabled-with-reason (status-gated at
@@ -11,8 +12,8 @@
  *                                  course/group "full" gate, never a runtime check).
  *   - invoiceDrawerActions(inv)  → Mark as paid + Send reminder are confirm→demo toasts
  *                                  (Mark as paid is also disabled-with-reason on a
- *                                  cancelled invoice); Send invoice stays
- *                                  disabled-with-reason; Print is a demo toast.
+ *                                  cancelled invoice); Send invoice + Print stay
+ *                                  disabled-with-reason (Spec 030 F-J).
  * Disabled controls use the clickable honest-disabled variant (aria-disabled + the reason
  * attributes + title) so they stay keyboard-reachable and always surface their reason on
  * click/hover/focus — never a dead button. Confirmed actions fire exactly one toast and
@@ -35,15 +36,10 @@ function disabledAction({ labelKey, icon, reasonKey }) {
   });
 }
 
-/** the shared Print demo-toast action (page cluster + drawer use the same behavior). */
+/** Spec 030 (F-J) — Print is a backendRequired export gate (disabled-with-reason), consistent with
+ * Export CSV/PDF; printing a real file needs the billing system, so it never fires a "success" toast. */
 function printAction() {
-  return button({
-    labelKey: 'fin.act.print',
-    icon: 'printer',
-    variant: 'secondary',
-    size: 'sm',
-    attrs: `data-demo-action data-toast="${esc(t('fin.act.printToast'))}"`,
-  });
+  return disabledAction({ labelKey: 'fin.act.print', icon: 'printer', reasonKey: 'fin.reason.export' });
 }
 
 /** The page-level action cluster (wraps on mobile). */

@@ -102,6 +102,41 @@ export const PLANNED_FINANCE = [
   { id: 'banks', availability: 'backendRequired', titleKey: 'fin.planned.banks.title', descKey: 'fin.planned.banks.desc', icon: 'lock', tone: 'muted' },
 ];
 
+/* Spec 030 — teacher + staff salary rows, STATUS-FIRST and FIGURE-FREE. Name + status +
+ * period ONLY — there is deliberately no pay figure (no fixed, fine, gift, hour-rate, or
+ * total column); salary/payroll figures are never shown anywhere (the standing law). The
+ * real payroll run stays a backendRequired gate on the board. */
+export const SALARIES = [
+  { id: 'sal1', role: 'teacher', nameKey: 'fin.sal.name.sara',     statusId: 'approved', periodKey: 'fin.sal.period.jul' },
+  { id: 'sal2', role: 'teacher', nameKey: 'fin.sal.name.mohammed', statusId: 'pending',  periodKey: 'fin.sal.period.jul' },
+  { id: 'sal3', role: 'teacher', nameKey: 'fin.sal.name.layan',    statusId: 'paid',     periodKey: 'fin.sal.period.jun' },
+  { id: 'sal4', role: 'teacher', nameKey: 'fin.sal.name.reem',     statusId: 'onhold',   periodKey: 'fin.sal.period.jul' },
+  { id: 'sal5', role: 'staff',   nameKey: 'fin.sal.name.owner',    statusId: 'approved', periodKey: 'fin.sal.period.jul' },
+  { id: 'sal6', role: 'staff',   nameKey: 'fin.sal.name.coord',    statusId: 'pending',  periodKey: 'fin.sal.period.jul' },
+];
+
+/* Spec 030 — bank accounts, DISPLAY-ONLY. Name + status ONLY — NO credentials, API keys,
+ * account numbers, or balances. Add/Import/Reconcile stay backendRequired gates. */
+export const BANKS = [
+  { id: 'bank1', nameKey: 'fin.bank.name.rajhi', statusId: 'active' },
+  { id: 'bank2', nameKey: 'fin.bank.name.ahli',  statusId: 'active' },
+  { id: 'bank3', nameKey: 'fin.bank.name.riyad', statusId: 'active' },
+  { id: 'bank4', nameKey: 'fin.bank.name.inma',  statusId: 'inactive' },
+];
+
+/* status → tone/icon (reuse existing chip tones; icon + label, never a figure/color-only) */
+export const SALARY_STATUS = {
+  pending:  { tone: 'amber',     icon: 'clock' },
+  approved: { tone: 'upcoming',  icon: 'check' },
+  paid:     { tone: 'completed', icon: 'check-circle' },
+  onhold:   { tone: 'neutral',   icon: 'pause-circle' },
+};
+export const BANK_STATUS = {
+  active:   { tone: 'completed', icon: 'check-circle' },
+  inactive: { tone: 'neutral',   icon: 'x-circle' },
+};
+export const SALARY_STATUS_ORDER = ['pending', 'approved', 'paid', 'onhold'];
+
 /* ── build-time coherence guard (the nav.config.js pattern — a broken fixture cannot
  * ship). Hardcodes the invoice/payment status id lists locally rather than importing
  * components/finance-status.js, so this fixture stays a plain-data module. */
