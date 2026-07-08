@@ -656,6 +656,83 @@ const FILTER_SPEC = {
         await p.keyboard.press('Escape');
       }
 
+      // Spec 028 — admin teacher deep management: honest kebab / modals / assign pickers /
+      // availability / category drawer / status confirms; NO computed score, NO pay figure in
+      // the #page-body (the shared finance nav «الرواتب» lives in the sidebar, not the body).
+      // (One sanctioned amendment; the payHit/tchPay protected asserts below stay byte-verbatim.)
+      const PAY28 = /راتب|رواتب|salary|payroll|payout|compensation|أتعاب|جنيه|ريال|\bEGP\b|\bAED\b|\bEUR\b/i;
+      if (page === 'teachers') {
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        const kb = await p.evaluate((paySrc) => {
+          const PAY = new RegExp(paySrc, 'i');
+          const cards = [...document.querySelectorAll('#teachers-grid .dir-card')];
+          const kebabs = [...document.querySelectorAll('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]')];
+          const body = document.getElementById('page-body');
+          return { cards: cards.length, kebabs: kebabs.length, pay: PAY.test(body.innerText),
+            cat: !!document.querySelector('[data-drawer="trn-categories"]'), catTpl: !!document.querySelector('template[data-preview="trn-categories"]') };
+        }, PAY28.source);
+        ok(kb.kebabs > 0 && kb.kebabs === kb.cards, `${page}/${lang}: teacher cards missing the row kebab (${kb.kebabs}/${kb.cards})`);
+        ok(!kb.pay, `${page}/${lang}: admin teachers page body shows a pay/salary figure — forbidden`);
+        ok(kb.cat && kb.catTpl, `${page}/${lang}: teacher-categories manage drawer/template missing`);
+        const kebab = await p.$('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]');
+        if (kebab) { await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150); }
+        const menu = await p.evaluate(() => {
+          const pop = document.querySelector('.popover');
+          if (!pop) return { open: false };
+          return { open: true, link: !!pop.querySelector('a[href*="teacher"]'),
+            editModal: !!pop.querySelector('[data-modal-trigger][data-modal-title-key="trn.act.edit"]'),
+            confirms: pop.querySelectorAll('[data-confirm]').length, demo: pop.querySelectorAll('[data-demo-action]').length };
+        });
+        ok(menu.open && menu.link && menu.editModal && menu.confirms >= 2 && menu.demo === 0,
+          `${page}/${lang}: teacher kebab is not honest (View link + Edit modal + confirms, no demo) — ${JSON.stringify(menu)}`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'teacher') {
+        const t28 = await p.evaluate((paySrc) => {
+          const PAY = new RegExp(paySrc, 'i');
+          const body = document.getElementById('page-body');
+          const gate = (id) => { const x = document.querySelector(`template[data-preview="${id}"]`); return !!(x && x.content.querySelector('[data-disabled-reason]')); };
+          return {
+            editModal: !!document.querySelector('.profile-banner [data-modal-trigger][data-modal-title-key="trn.act.edit"]'),
+            noteModal: !!document.querySelector('.profile-banner [data-modal-trigger][data-modal-title-key="trn.act.note"]'),
+            assignCourse: !!document.querySelector('[data-drawer="trn-assign-course"]') && gate('trn-assign-course'),
+            assignGroup: !!document.querySelector('[data-drawer="trn-assign-group"]') && gate('trn-assign-group'),
+            availability: !!document.querySelector('[data-drawer="trn-availability"]') && gate('trn-availability'),
+            confirms: document.querySelectorAll('.profile-banner [data-confirm]').length,
+            pay: PAY.test(body.innerText),
+          };
+        }, PAY28.source);
+        ok(t28.editModal && t28.noteModal, `${page}/${lang}: teacher Edit/Note are not honest modal triggers`);
+        ok(t28.assignCourse && t28.assignGroup, `${page}/${lang}: assign-course/group pickers (drawer + backendRequired gate) missing`);
+        ok(t28.availability, `${page}/${lang}: availability drawer (with backendRequired gate) missing`);
+        ok(t28.confirms >= 3, `${page}/${lang}: teacher banner missing status/delete confirms (got ${t28.confirms})`);
+        ok(!t28.pay, `${page}/${lang}: admin teacher profile body shows a pay/salary figure — forbidden`);
+        await p.click('[data-drawer="trn-assign-course"]').catch(() => {});
+        await p.waitForTimeout(220);
+        const drw = await p.evaluate(() => { const d = document.querySelector('.drawer.sheet'); return d ? { open: true, gate: !!d.querySelector('[data-disabled-reason]') } : { open: false }; });
+        ok(drw.open && drw.gate, `${page}/${lang}: assign-course picker not an honest drawer w/ backendRequired gate (${JSON.stringify(drw)})`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'teacher-performance') {
+        const perf = await p.evaluate((paySrc) => {
+          const PAY = new RegExp(paySrc, 'i');
+          const body = document.getElementById('page-body');
+          return { noChart: !/\b(percentile|leaderboard)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML), pay: PAY.test(body.innerText) };
+        }, PAY28.source);
+        ok(perf.noChart, `${page}/${lang}: teacher-performance board must carry no computed percentile/leaderboard/chart`);
+        ok(!perf.pay, `${page}/${lang}: teacher-performance board body shows a pay/salary figure — forbidden`);
+      }
+      if (page === 'course' || page === 'group') {
+        const did = page === 'course' ? 'crs-assign-teacher' : 'grp-assign-teacher';
+        const c = await p.evaluate((id) => ({ trigger: !!document.querySelector(`[data-drawer="${id}"]`), tpl: !!document.querySelector(`template[data-preview="${id}"]`) }), did);
+        ok(c.trigger && c.tpl, `${page}/${lang}: assign-teacher picker (${did}) trigger + template missing`);
+        const trg = await p.$(`[data-drawer="${did}"]`);
+        if (trg) { await trg.scrollIntoViewIfNeeded(); await trg.click(); await p.waitForTimeout(230); }
+        const drw = await p.evaluate(() => { const d = document.querySelector('.drawer.sheet'); return d ? { open: true, gate: !!d.querySelector('[data-disabled-reason]') } : { open: false }; });
+        ok(drw.open && drw.gate, `${page}/${lang}: ${page} assign-teacher picker not an honest drawer w/ backendRequired gate (${JSON.stringify(drw)})`);
+        await p.keyboard.press('Escape');
+      }
+
       // Spec 007 — Teacher Performance board: promoted nav · KPI tiles · comparison rows → teacher.html · queue · counts-not-scores · filter
       if (page === 'teacher-performance') {
         const a = await p.evaluate(() => {

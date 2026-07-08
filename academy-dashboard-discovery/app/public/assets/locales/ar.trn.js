@@ -39,6 +39,9 @@ export default {
     viewCourse: 'عرض الدورة', viewGroup: 'عرض المجموعة', viewStudent: 'عرض الطالب',
     notesText: 'معلّم منتظم وفق جدول الدورة الأسبوعي؛ تُراجَع الملاحظات دوريًا.',
 
+    /* directory-card kebab */
+    card: { menu: 'إجراءات المعلّم' },
+
     /* honest actions */
     act: {
       add: 'إضافة معلّم', addToast: 'سيتوفّر إضافة معلّم بعد ربط الخادم.',
@@ -47,10 +50,32 @@ export default {
       note: 'إضافة ملاحظة متابعة', noteToast: 'سيتوفّر حفظ الملاحظة بعد ربط الخادم.',
       notify: 'تنبيه ولي الأمر', notifyTitle: 'إرسال تنبيه لولي الأمر؟', notifyMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يُرسَل أي إشعار الآن.', notifyCta: 'إرسال', notifyToast: 'سيتوفّر إرسال التنبيه بعد ربط الخادم.',
       assignCourse: 'إسناد دورة', assignGroup: 'إسناد مجموعة', openTimetable: 'عرض الجدول', viewAttendance: 'عرض الحضور', print: 'طباعة/تصدير الملخّص',
+      vacation: 'إجازة', vacationTitle: 'وضع المعلّم في إجازة؟', vacationMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر شيء الآن.', vacationCta: 'تفعيل الإجازة', vacationToast: 'سيتوفّر ضبط الإجازة بعد ربط الخادم.',
+      deactivate: 'إيقاف التنشيط', deactivateTitle: 'إيقاف تنشيط هذا المعلّم؟', deactivateMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا تتغيّر الحالة الآن.', deactivateCta: 'إيقاف التنشيط', deactivateToast: 'سيتوفّر إيقاف التنشيط بعد ربط الخادم.',
+      del: 'حذف المعلّم', delTitle: 'حذف هذا المعلّم؟', delMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يُحذَف شيء الآن.', delCta: 'حذف', delToast: 'سيتوفّر حذف المعلّم بعد ربط الخادم.',
+      resetPassword: 'إرسال إعادة تعيين كلمة المرور', loginAs: 'الدخول كمعلّم',
     },
     reason: {
       assign: 'الإسناد يتطلب وحدة الإسناد (خارج النطاق الحالي).',
       export: 'التصدير يتطلب ربط الخادم (خارج النطاق الحالي).',
+      resetPassword: 'إعادة تعيين كلمة المرور تتطلب ربط الخادم (خارج النطاق الحالي).',
+      loginAs: 'الدخول كمعلّم يتطلب ربط الخادم (خارج النطاق الحالي).',
+    },
+
+    /* Spec 028 — assign-teacher picker (course/group) + assign-course/group picker (teacher profile) */
+    assignT: { title: 'إسناد معلّم', hint: 'اختر معلّمًا من القائمة — يتم الإسناد بعد ربط الخادم.', cta: 'إسناد المعلّم' },
+    assignC: { title: 'إسناد دورة للمعلّم', hint: 'اختر دورة من القائمة — يتم الإسناد بعد ربط الخادم.', cta: 'إسناد' },
+    assignG: { title: 'إسناد مجموعة للمعلّم', hint: 'اختر مجموعة من القائمة — يتم الإسناد بعد ربط الخادم.', cta: 'إسناد' },
+
+    /* availability-window editor (Timetable tab) — day/time only, no recurrence */
+    availEdit: { open: 'أوقات التوفّر', title: 'أوقات توفّر المعلّم', hint: 'أوقات التوفّر الأسبوعية — يتم الحفظ بعد ربط الخادم.', add: 'إضافة وقت', reason: 'تعديل أوقات التوفّر يتطلب ربط الخادم (خارج النطاق الحالي).' },
+
+    /* teacher categories (nav stays planned — no page) */
+    cat: {
+      manage: 'إدارة الفئات', title: 'فئات المعلّمين', hint: 'الفئات الحالية — الإنشاء والإسناد يتمّان بعد ربط الخادم.',
+      createTitle: 'إضافة فئة معلّمين', members: '{n} معلّم', assign: 'إسناد معلّمين للفئة',
+      assignReason: 'إسناد المعلّمين للفئة يتطلب ربط الخادم (خارج النطاق الحالي).',
+      name: { senior: 'معلّمون أوائل', associate: 'معلّمون مساعدون', trial: 'فترة تجريبية' },
     },
 
     /* performance board (display-only counts + signals — NO score/rank/chart) */

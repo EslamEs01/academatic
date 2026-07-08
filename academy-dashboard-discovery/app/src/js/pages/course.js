@@ -17,6 +17,7 @@ import { profileBanner } from '../components/profile-banner.js';
 import { tabs } from '../components/tabs.js';
 import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
 import { ADD_STUDENTS } from '../fixtures/management.js';
+import { ASSIGN_TEACHERS } from '../fixtures/teacher-management.js';
 import { courseStatusChip } from '../components/course-status.js';
 import { groupStatusChip } from '../components/group-status.js';
 import { familyStatusChip } from '../components/family-status.js';
@@ -89,6 +90,17 @@ function enrollPicker() {
   return previewTemplate('crs-enroll', { titleKey: 'crs.enroll.title', headIcon: 'user-plus', tone: 'primary', bodyHTML: body });
 }
 
+/* Spec 028 — assign-teacher picker (M-N handoff): display-only single-teacher candidate list
+ * in the baked <template data-preview="crs-assign-teacher"> drawer + a backendRequired final
+ * gate. No teacher assignment, no rate figure. */
+function teacherPicker() {
+  const items = ASSIGN_TEACHERS.map((tr) => sheetRow(t(tr.nameKey), t(tr.metaKey))).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('trn.assignT.hint')}</p>
+    ${items}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="crs.reason.assign" aria-disabled="true" title="${esc(t('crs.reason.assign'))}">${icon('user-check', 'ico ico-sm')}<span>${t('trn.assignT.cta')}</span></button>`;
+  return previewTemplate('crs-assign-teacher', { titleKey: 'trn.assignT.title', headIcon: 'user-check', tone: 'primary', bodyHTML: body });
+}
+
 export function renderCourse() {
   const c = COURSE_BY_ID.c1 || COURSES.rows[0];
   const groups = groupsOfCourse(c.id);
@@ -136,5 +148,5 @@ export function renderCourse() {
     },
   });
 
-  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${enrollPicker()}`;
+  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${enrollPicker()}${teacherPicker()}`;
 }

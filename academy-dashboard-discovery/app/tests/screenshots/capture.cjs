@@ -220,6 +220,17 @@ const MATRIX = [
   { page: 'teacher-reports', lang: 'en', theme: 'light', vp: 'desktop' },
   { page: 'teacher-profile', lang: 'ar', theme: 'light', vp: 'desktop' },
   { page: 'teacher-library', lang: 'ar', theme: 'light', vp: 'desktop' },
+  // Spec 028 — admin teacher deep management: kebab · edit modal · assign-teacher/course pickers · availability · category drawer · status confirm
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', teacherKebab: true, variant: 'sp028-kebab' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-categories', variant: 'sp028-categories' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', mgmtModal: 'trn.act.edit', variant: 'sp028-edit-modal' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-assign-course', variant: 'sp028-assign-course' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'timetable', openDrawer: 'trn-availability', variant: 'sp028-availability' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', mgmtConfirm: true, variant: 'sp028-confirm' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-assign-teacher', variant: 'sp028-assign-teacher' },
+  { page: 'group', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'grp-assign-teacher', variant: 'sp028-assign-teacher-dark' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp028-mobile' },
+  { page: 'teacher', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp028-en' },
   // Spec 027 — admin deep management: honest modals / drawer-pickers / row-kebab / gates
   { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', studentKebab: true, variant: 'sp027-row-kebab' },
   { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', openDrawer: 'stu-enroll', variant: 'sp027-enroll-picker' },
@@ -289,6 +300,7 @@ const MATRIX = [
     if (s.sessCreateModal) { await page.click('[data-modal-trigger]').catch(() => {}); await page.waitForTimeout(340); }
     // Spec 027 — deep-management surfaces (view/hash flags above position the trigger's tab first)
     if (s.studentKebab) { await page.click('#students-table [data-row-menu][data-row-menu-kind="student"]').catch(() => {}); await page.waitForTimeout(320); }
+    if (s.teacherKebab) { await page.click('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]').catch(() => {}); await page.waitForTimeout(320); }
     if (s.openDrawer) { await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440); }
     if (s.mgmtModal) { await page.click(`[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`).catch(() => {}); await page.waitForTimeout(340); }
     if (s.mgmtConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
@@ -300,7 +312,7 @@ const MATRIX = [
       if (el) await el.screenshot({ path: path.join(OUT, name) });
       else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
     } else {
-      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm });
+      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.teacherKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm });
     }
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);

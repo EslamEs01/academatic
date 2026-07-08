@@ -22,7 +22,7 @@ const link = (labelKey, ic, href) => button({ labelKey, variant: 'secondary', si
 export function courseActions(_i, { schedHref, attHref } = {}) {
   return `<div class="flex flex-wrap gap-2">`
     + modalBtn('crs.act.edit', 'edit')
-    + off('crs.act.assignTeacher', 'user-check', 'crs.reason.assign')
+    + drawerBtn('crs.act.assignTeacher', 'user-check', 'crs-assign-teacher')
     + drawerBtn('crs.act.addStudents', 'user-plus', 'crs-enroll')
     + modalBtn('crs.act.createGroup', 'plus')
     + (schedHref ? link('crs.viewInSchedule', 'schedule', schedHref) : '')
@@ -43,7 +43,7 @@ export function groupActions(i = {}, { schedHref, attHref } = {}) {
     + addStudents
     + confirmAction({ labelKey: 'grp.act.removeStudent', variant: 'danger', icon: 'user-x', danger: true, size: 'sm', titleKey: 'grp.act.removeTitle', msgKey: 'grp.act.removeMsg', confirmKey: 'grp.act.removeCta', toastKey: 'grp.act.removeToast' })
     + off('grp.act.move', 'arrow-left', 'grp.reason.move')
-    + off('grp.act.assignTeacher', 'user-check', 'grp.reason.assign')
+    + drawerBtn('grp.act.assignTeacher', 'user-check', 'grp-assign-teacher')
     + (schedHref ? link('grp.viewInSchedule', 'schedule', schedHref) : '')
     + (attHref ? link('grp.viewAttendance', 'clipboard-check', attHref) : '')
     + off('grp.act.print', 'file-text', 'grp.reason.export')

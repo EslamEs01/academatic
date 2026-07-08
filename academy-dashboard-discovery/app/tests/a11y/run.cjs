@@ -66,6 +66,8 @@ const MATRIX = [
   { page: 'teachers', lang: 'en', theme: 'light' },
   { page: 'teacher', lang: 'ar', theme: 'light' },
   { page: 'teacher', lang: 'ar', theme: 'light', hash: '#view=sessions-outcomes' },
+  // Spec 028 — the Timetable tab surfaces the availability-editor trigger
+  { page: 'teacher', lang: 'ar', theme: 'light', hash: '#view=timetable' },
   { page: 'teacher', lang: 'en', theme: 'light' },
   { page: 'teacher-performance', lang: 'ar', theme: 'light' },
   { page: 'teacher-performance', lang: 'ar', theme: 'dark' },

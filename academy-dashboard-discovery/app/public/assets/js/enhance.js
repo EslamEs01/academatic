@@ -124,6 +124,21 @@ function studentMenu(id) {
     <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('sp.act.removeTitle'))}" data-confirm-msg="${esc(t('sp.act.removeMsg'))}" data-confirm-cta="${esc(t('sp.act.removeCta'))}" data-confirm-toast="${esc(t('sp.act.removeToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('sp.act.remove')}</span></button>
   </div>`;
 }
+/* teachers-card kebab (Spec 028) — mirrors familyMenu/studentMenu: "view profile"
+ * navigates; edit opens the honest backendRequired modal; on-vacation/deactivate confirm;
+ * delete confirm-danger. Routed by the EXISTING data-row-menu dispatch (a 'teacher'
+ * branch) — no new hook. NO pay/status mutation. */
+function teacherMenu(id) {
+  const href = getLang() === 'en' ? 'teacher.en.html' : 'teacher.html';
+  return `<div>
+    <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('trn.viewProfile')}</span></a>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="trn.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('trn.act.edit')}</span></button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('trn.act.vacationTitle'))}" data-confirm-msg="${esc(t('trn.act.vacationMsg'))}" data-confirm-cta="${esc(t('trn.act.vacationCta'))}" data-confirm-toast="${esc(t('trn.act.vacationToast'))}">${icon('moon', 'ico')}<span>${t('trn.act.vacation')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('trn.act.deactivateTitle'))}" data-confirm-msg="${esc(t('trn.act.deactivateMsg'))}" data-confirm-cta="${esc(t('trn.act.deactivateCta'))}" data-confirm-toast="${esc(t('trn.act.deactivateToast'))}">${icon('pause-circle', 'ico')}<span>${t('trn.act.deactivate')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('trn.act.delTitle'))}" data-confirm-msg="${esc(t('trn.act.delMsg'))}" data-confirm-cta="${esc(t('trn.act.delCta'))}" data-confirm-toast="${esc(t('trn.act.delToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('trn.act.del')}</span></button>
+  </div>`;
+}
 /* Spec 026 — the honest fallback: an action with no real destination announces that
  * it needs the server, never claims a preview/save happened. Feeds every demo-action
  * without a custom toast, the noop menu items, and the no-dead-button catch-all. */
@@ -539,7 +554,7 @@ document.addEventListener('click', (e) => {
   if (trg.hasAttribute('data-row-menu')) {
     const rid = trg.getAttribute('data-row-menu');
     const kind = trg.getAttribute('data-row-menu-kind');
-    return void openPopover(trg, kind === 'family' ? familyMenu(rid) : kind === 'student' ? studentMenu(rid) : rowMenu(rid));
+    return void openPopover(trg, kind === 'family' ? familyMenu(rid) : kind === 'student' ? studentMenu(rid) : kind === 'teacher' ? teacherMenu(rid) : rowMenu(rid));
   }
   if (trg.hasAttribute('data-modal-trigger')) { closeMenu(); return openModal(trg); }
   switch (trg.getAttribute('data-action')) {

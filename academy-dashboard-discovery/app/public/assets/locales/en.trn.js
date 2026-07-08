@@ -32,6 +32,8 @@ export default {
     viewCourse: 'View course', viewGroup: 'View group', viewStudent: 'View student',
     notesText: 'A steady teacher following the weekly course schedule; notes are reviewed periodically.',
 
+    card: { menu: 'Teacher actions' },
+
     act: {
       add: 'Add teacher', addToast: 'Adding a teacher will be available once the server is connected.',
       edit: 'Edit', editToast: 'Editing the teacher will be available once the server is connected.',
@@ -39,10 +41,32 @@ export default {
       note: 'Add follow-up note', noteToast: 'Saving the note will be available once the server is connected.',
       notify: 'Notify family', notifyTitle: 'Send a family notification?', notifyMsg: 'This will be available once the server is connected — no notification is sent yet.', notifyCta: 'Send', notifyToast: 'Sending the notification will be available once the server is connected.',
       assignCourse: 'Assign course', assignGroup: 'Assign group', openTimetable: 'Open timetable', viewAttendance: 'View attendance', print: 'Print · export summary',
+      vacation: 'On vacation', vacationTitle: 'Put this teacher on vacation?', vacationMsg: 'This will be available once the server is connected — nothing changes yet.', vacationCta: 'Set vacation', vacationToast: 'Setting vacation will be available once the server is connected.',
+      deactivate: 'Deactivate', deactivateTitle: 'Deactivate this teacher?', deactivateMsg: 'This will be available once the server is connected — the status does not change yet.', deactivateCta: 'Deactivate', deactivateToast: 'Deactivating will be available once the server is connected.',
+      del: 'Delete teacher', delTitle: 'Delete this teacher?', delMsg: 'This will be available once the server is connected — nothing is deleted yet.', delCta: 'Delete', delToast: 'Deleting the teacher will be available once the server is connected.',
+      resetPassword: 'Send password reset', loginAs: 'Log in as teacher',
     },
     reason: {
       assign: 'Assigning requires the assignment module (out of current scope).',
       export: 'Export requires the backend (out of current scope).',
+      resetPassword: 'Password reset requires the backend (out of current scope).',
+      loginAs: 'Logging in as a teacher requires the backend (out of current scope).',
+    },
+
+    /* Spec 028 — assign-teacher picker (course/group) + assign-course/group picker (teacher profile) */
+    assignT: { title: 'Assign teacher', hint: 'Pick a teacher from the list — assigned once the server is connected.', cta: 'Assign teacher' },
+    assignC: { title: 'Assign a course to the teacher', hint: 'Pick a course from the list — assigned once the server is connected.', cta: 'Assign' },
+    assignG: { title: 'Assign a group to the teacher', hint: 'Pick a group from the list — assigned once the server is connected.', cta: 'Assign' },
+
+    /* availability-window editor (Timetable tab) — day/time only, no recurrence */
+    availEdit: { open: 'Availability', title: 'Teacher availability', hint: 'Weekly availability windows — saved once the server is connected.', add: 'Add window', reason: 'Editing availability requires the backend (out of current scope).' },
+
+    /* teacher categories (nav stays planned — no page) */
+    cat: {
+      manage: 'Manage categories', title: 'Teacher categories', hint: 'Current categories — creating and assigning happen once the server is connected.',
+      createTitle: 'Add teacher category', members: '{n} teachers', assign: 'Assign teachers to category',
+      assignReason: 'Assigning teachers to a category requires the backend (out of current scope).',
+      name: { senior: 'Senior teachers', associate: 'Associate teachers', trial: 'Trial period' },
     },
 
     board: {

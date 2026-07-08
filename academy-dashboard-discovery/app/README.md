@@ -241,3 +241,36 @@ HTML changed (course/family/group/student/students × 2 languages); families/add
 all portal + admin-ops + index stay byte-identical; `package.json` 0-diff; teacher pay-free / family
 zero-pay / student child-view / admin finance Spec-009 invariants all preserved. Build 97; smoke PASS;
 a11y critical=0 serious=0.
+
+## Spec 028 — Admin Teachers / Performance Deep Management
+
+Deepened the admin teacher surfaces (teachers · teacher · teacher-performance) and completed
+the Spec-027 **assign-teacher** handoff on course/group — **no new pages (97 → 97)**. Every delta
+is a modal, a drawer-picker, a row-kebab, a confirm, or an honest gate on an existing page,
+reusing ONLY the closed Spec-026 `data-*` set + the Spec-027 precedents (no new hook/engine/CSS).
+
+- **Teachers list**: a per-card **row kebab** (View profile · Edit modal · On-Vacation/Deactivate
+  confirm · Delete confirm) via a new `teacherMenu` on the EXISTING `data-row-menu` hook (an
+  optional `menuId`/`menuKind` slot on `directory-card.js`); a **Manage-categories** drawer
+  (`trn-categories`: category list + Create-category modal + assign-members backendRequired gate).
+- **Teacher detail**: Edit/Add-note → modals; Notify → confirm; **assign-course/assign-group** →
+  display-only picker drawers (`trn-assign-course`/`trn-assign-group`); On-Vacation/Deactivate/Delete
+  → confirms; **availability-window editor** (`trn-availability`: day/time rows + Add/Update/Delete
+  gates, no recurrence); Reset-password/Login-as → future-backend gates; Message → 026/future; Print → 029.
+- **Course/Group**: the M-N assign-teacher gate → a display-only single-teacher picker drawer
+  (`crs-assign-teacher`/`grp-assign-teacher`), separate from the student `grp-assign` drawer.
+- **Teacher performance**: preserved display-only — **no computed score/rank/chart**; the unused
+  `rating` fixture field stays unsurfaced.
+- **all-teachers-timetable**: **folds into the existing `schedule.html` teacher-lens** (a `teacher`
+  filter over List + Timetable already exists) — no new page, `schedule.js` byte-unchanged.
+
+**Django note**: the teacher row kebab reuses the same `data-row-menu` menu machinery as the
+family/student kebab (one `'teacher'` dispatch branch); each picker is a baked
+`<template data-preview="…">` (a `{% include %}` of a display-only candidate list) whose final
+Assign/Save is a `backendRequired` gate behind `{% if backend %}`. **Pay-finance is excluded**:
+Compensations/Salary/Accounting/Salaries/Payouts → Spec 030; Payout-Providers/Login-as/Reset-password
+→ future-backend; Teacher/Class-Feedback → Spec 029; teacher-portal salary → excluded forever
+(teacher pay-free GLOBAL). **Teacher portal pay-free**: the 16 `teacher-*` portal files stay
+byte-identical (`teacher-performance.html` is the sanctioned admin exempt board, never linked from
+the portal). Family zero-pay / student child-view / admin finance Spec-009 invariant all preserved;
+only teachers/teacher/course/group HTML changed; `package.json` 0-diff. Build 97; smoke PASS; a11y 0/0.
