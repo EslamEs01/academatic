@@ -43,14 +43,14 @@ export default {
 
     /* status-gated, demo-only actions */
     act: {
-      attend: 'تسجيل حضور', attendToast: 'تم تسجيل الحضور (تجريبي) — لا يُحفظ شيء.',
-      notify: 'تنبيه العائلة', notifyToast: 'تم إرسال التنبيه (تجريبي).',
-      feedback: 'إضافة ملاحظة', feedbackToast: 'تم فتح إضافة الملاحظة (تجريبي).',
-      reverse: 'تراجع', reverseToast: 'تم التراجع عن النتيجة (تجريبي).',
-      cancel: 'إلغاء الجلسة', cancelTitle: 'إلغاء هذه الجلسة؟', cancelMsg: 'إجراء تجريبي على الواجهة فقط — لا يؤثّر على أي بيانات حقيقية.', cancelCta: 'إلغاء الجلسة', cancelToast: 'تم الإلغاء (تجريبي).',
-      reschedule: 'إعادة جدولة', rescheduleTitle: 'إعادة جدولة هذه الجلسة؟', rescheduleMsg: 'إجراء تجريبي على الواجهة فقط — لا يتم حجز موعد فعلي.', rescheduleCta: 'إعادة الجدولة', rescheduleToast: 'تم فتح إعادة الجدولة (تجريبي).',
-      studentAbsent: 'تسجيل غياب الطالب', studentAbsentTitle: 'تسجيل غياب الطالب؟', studentAbsentMsg: 'إجراء تجريبي على الواجهة فقط — لا يُحفظ شيء.', studentAbsentCta: 'تسجيل الغياب', studentAbsentToast: 'تم تسجيل غياب الطالب (تجريبي).',
-      teacherAbsent: 'تسجيل غياب المعلم', teacherAbsentTitle: 'تسجيل غياب المعلم؟', teacherAbsentMsg: 'إجراء تجريبي على الواجهة فقط — لا يُحفظ شيء.', teacherAbsentCta: 'تسجيل الغياب', teacherAbsentToast: 'تم تسجيل غياب المعلم (تجريبي).',
+      attend: 'تسجيل حضور', attendToast: 'سيتوفّر تسجيل الحضور بعد ربط الخادم.',
+      notify: 'تنبيه العائلة', notifyToast: 'سيتوفّر إرسال التنبيه بعد ربط الخادم.',
+      feedback: 'إضافة ملاحظة', feedbackToast: 'سيتوفّر حفظ الملاحظة بعد ربط الخادم.',
+      reverse: 'تراجع', reverseToast: 'سيتوفّر التراجع عن النتيجة بعد ربط الخادم.',
+      cancel: 'إلغاء الجلسة', cancelTitle: 'إلغاء هذه الجلسة؟', cancelMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن.', cancelCta: 'إلغاء الجلسة', cancelToast: 'سيتوفّر إلغاء الجلسة بعد ربط الخادم.',
+      reschedule: 'إعادة جدولة', rescheduleTitle: 'إعادة جدولة هذه الجلسة؟', rescheduleMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتم حجز موعد فعلي الآن.', rescheduleCta: 'إعادة الجدولة', rescheduleToast: 'سيتوفّر إعادة الجدولة بعد ربط الخادم.',
+      studentAbsent: 'تسجيل غياب الطالب', studentAbsentTitle: 'تسجيل غياب الطالب؟', studentAbsentMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يُحفَظ شيء الآن.', studentAbsentCta: 'تسجيل الغياب', studentAbsentToast: 'سيتوفّر تسجيل غياب الطالب بعد ربط الخادم.',
+      teacherAbsent: 'تسجيل غياب المعلم', teacherAbsentTitle: 'تسجيل غياب المعلم؟', teacherAbsentMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يُحفَظ شيء الآن.', teacherAbsentCta: 'تسجيل الغياب', teacherAbsentToast: 'سيتوفّر تسجيل غياب المعلم بعد ربط الخادم.',
       addToCredit: 'إضافة إلى الرصيد',
     },
     reason: {

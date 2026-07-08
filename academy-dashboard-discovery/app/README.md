@@ -274,3 +274,41 @@ Compensations/Salary/Accounting/Salaries/Payouts → Spec 030; Payout-Providers/
 byte-identical (`teacher-performance.html` is the sanctioned admin exempt board, never linked from
 the portal). Family zero-pay / student child-view / admin finance Spec-009 invariant all preserved;
 only teachers/teacher/course/group HTML changed; `package.json` 0-diff. Build 97; smoke PASS; a11y 0/0.
+
+## Spec 029 — Admin Reports / Analytics / Feedback / Forms Deep Management + Admin Menu Coverage Gate
+
+Completed the admin reporting/feedback layer that Specs 027/028 routed here, and added an **Admin Menu
+Coverage Gate** — **no new pages (97 → 97)**. Feedback-review + Forms/surveys **fold into `reports.html`**;
+every write is an honest `backendRequired` final. Reuses ONLY the closed `data-*` set + existing primitives
+(`filterBar` · `previewTemplate`/`sheetRow` · `confirmAction` · chips) — no new hook/engine/page; near-zero CSS.
+
+- **Feedback review** (`components/report-feedback.js` + `fixtures/report-feedback.js`): authored rows across
+  teacher/class/family/student — a CATEGORICAL remark pill (never a number), a status chip, a real
+  type/status `filterBar`, a read-only detail drawer per row (Approve = confirm, Delete = confirm-danger,
+  both backendRequired), a Create-feedback modal, and a **Manage-categories** drawer (`rep-fbcat`: list +
+  Create-category modal + assign-members `data-disabled-reason` gate). No computed percentage/score/rank.
+- **Forms / surveys**: display-only list (authored question/response **literals** — no aggregation) + a
+  Create-form modal + a real deep-link to the EXISTING student **Evaluation** tab (the monthly progress form —
+  no duplicate engine).
+- **Export/print honesty**: reports **Print** → disabled-with-reason gate (R-G, consistent with CSV/PDF/Share);
+  the native disabled-with-reason gates on sessions-analysis / course / group / student / teacher stay as-is
+  (already honest); `teacher-performance` stays export-free and display-only.
+- **Write honesty**: the outcome **"Add feedback"** action → a backendRequired modal (R-E, in the ONE
+  canonical `outcome-details.js` drawer — so attendance/sessions/course/group/teacher all pick it up); the
+  student Evaluation **"Approve"** → a backendRequired confirm (R-F).
+- **Analytics**: no plotting visuals, no computed metric; `dataAnalysis`/`monthlyReports`/`monthlyPerf`/
+  `sessionsKpi`/`studentResult`/`studentEvaluation` stay honest **planned** nav gates.
+- **Admin Menu Coverage Gate**: all 43 `nav.config.js` items classified in `admin-menu-coverage-inventory.md`
+  (0 unclassified); `nav.config.js` **0-diff**; runtime coverage enforced by the existing Spec-010 nav block
+  (6 rail categories · exact finance sub-section · banks placement · link-integrity `deadHash/badTarget=0` ·
+  planned-truthfulness) plus a new assert that the folded feedback/forms render on reports.
+
+**Django note**: each feedback/form detail is a baked `<template data-preview="rep-…">` (a `{% include %}` of a
+display-only record) opened by `data-drawer`; Create/Approve/Delete are `data-modal-trigger`/`data-confirm`
+finals behind `{% if backend %}` — no persistence. **Finance excluded**: legacy analysis-expenses/
+analysis-invoices/salary-class-report/invoice-export → Spec 030; finance source is **0-diff** and no pay figure
+enters any 029 body (the reports `#page-body` forbidden-token grep already covers salary/payroll/invoice/etc.).
+Role laws preserved: teacher pay-free (16 portal files + `teacher-performance.html` byte-identical), family
+zero-pay, student child-view, admin finance Spec-009 invariant. **14 HTML changed**
+(reports/attendance/sessions/course/group/teacher/student ×2); teacher-performance + portal + family + finance +
+index byte-identical; `package.json`/`nav.config.js` 0-diff. Build 97; smoke PASS; a11y 0/0; screenshots 0 errors.

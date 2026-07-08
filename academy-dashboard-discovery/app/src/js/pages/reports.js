@@ -16,6 +16,7 @@ import { noResults } from '../components/states.js';
 import { chip } from '../components/ui.js';
 import { reportCard } from '../components/report-card.js';
 import { reportActions } from '../components/report-actions.js';
+import { feedbackSection, formsSection } from '../components/report-feedback.js';
 import { reportSignalChip } from '../components/report-status.js';
 import { outcomeChip } from '../components/outcome-status.js';
 import { statusChip } from '../components/status-chip.js';
@@ -261,5 +262,7 @@ export function renderReports() {
     ${operationsOverview()}
     ${categorySection()}
     ${detailSections()}
+    ${feedbackSection()}
+    ${formsSection()}
   `;
 }

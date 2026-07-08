@@ -1,0 +1,7 @@
+# Contract — Scope Guard (allowed/forbidden + stop conditions)
+
+**Allowed to change**: pages/finance.js; fixtures/finance.js; components/finance-actions.js, components/finance-status.js (only if a new status vocab is unavoidable — prefer reuse); locales/ar.fin.js + en.fin.js; styles/app.css (additive); tests/{smoke,a11y,screenshots}; screenshots/REVIEW.md; README.md; CLAUDE.md; specs/030-*.
+**Generated**: finance.html + finance.en.html.
+**Forbidden**: package.json; dependencies; backend/API/auth/database; nav.config.js (0-diff); teacher-portal files; family/student pages; new chart/export/gateway/payroll/bank/reconciliation engine; new hook/storage key; any new standalone page; 031 pages; payout-provider/payment-gateway credential UI; secret/API-key/`type=password`/`type=file` fields.
+**Scope-guard grep (source incl. comments)**: no chart/canvas/apex/d3; no money arithmetic (`.reduce`/`+=`/`Sum`/`total =`/`amount [*+/-]`); no salary/payout amount on salary/payout fixtures; reword any disclaimer that trips forbidden tokens.
+**STOP if**: Spec-029 uncommitted at IMPLEMENT time · count≠97 · unclassified finance nav item · unresolved F-row · new page without candidate-test · fake payment/mark-paid/salary-gen/payout/bank-import/reconcile/export · salary/payout/compensation figure · money total/net/P&L · chart/canvas · type=file/type=password/API-key/webhook/secret · status mutates after confirm · teacher-portal/family change · href="#"/dead button/raw key · package.json/nav.config.js change · new hook/key/engine.

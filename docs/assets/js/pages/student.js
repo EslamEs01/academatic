@@ -18,13 +18,15 @@ import { avatar, chip, button } from '../components/ui.js';
 import { profileBanner } from '../components/profile-banner.js';
 import { familyStatusChip } from '../components/family-status.js';
 import { tabs } from '../components/tabs.js';
-import { sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
 import { scheduleAgenda } from '../components/schedule-agenda.js';
 import { appointmentTemplate } from '../components/appointment-details.js';
 import { attentionFlag } from '../components/attention-flag.js';
 import { progressBar } from '../components/sparkline.js';
 import { resultSummary } from '../components/result-summary.js';
 import { evaluationRubric } from '../components/evaluation-rubric.js';
+import { confirmAction } from '../components/confirm-modal.js';
+import { ENROLL_COURSES, ASSIGN_GROUPS, MOVE_GROUPS } from '../fixtures/management.js';
 
 const BLOCK_BY_ID = {};
 SCHEDULE_WEEK.forEach((d) => d.blocks.forEach((b) => { BLOCK_BY_ID[b.id] = { ...b, dayNameKey: d.nameKey }; }));
@@ -119,8 +121,13 @@ function coursesPanel(st) {
       ${tags ? `<div class="flex flex-wrap gap-1.5">${tags}</div>` : ''}
     </div>`;
   }).join('');
-  const add = button({ labelKey: 'common.add', variant: 'secondary', size: 'sm', icon: 'plus', disabled: true, reasonKey: 'set.reason.backend' });
-  return `<div class="grid gap-4 sm:grid-cols-2 mb-4">${cards}</div>${add}`;
+  const actions = `<div class="flex flex-wrap gap-2">
+    ${button({ labelKey: 'sp.enroll.action', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-drawer="stu-enroll"' })}
+    ${button({ labelKey: 'sp.assign.action', variant: 'secondary', size: 'sm', icon: 'students', attrs: 'data-drawer="stu-assign"' })}
+    ${button({ labelKey: 'sp.move.action', variant: 'secondary', size: 'sm', icon: 'arrow-left', attrs: 'data-drawer="stu-move"' })}
+    ${button({ labelKey: 'sp.search.action', variant: 'secondary', size: 'sm', icon: 'search', disabled: true, reasonKey: 'sp.search.reason' })}
+  </div>`;
+  return `<div class="grid gap-4 sm:grid-cols-2 mb-4">${cards}</div>${actions}`;
 }
 
 function timetablePanel(blocks) {
@@ -149,8 +156,19 @@ function notesPanel(st) {
   return `<div class="info-card">
     <div class="ic-title">${icon('file-text', 'ico')}<span>${t('sp.notes.title')}</span></div>
     <p class="narrative">${t(st.notesKey)}</p>
-    <div class="mt-4">${button({ labelKey: 'common.add', variant: 'secondary', size: 'sm', icon: 'edit', attrs: `data-demo-action data-toast="${esc(t('sp.act.editToast'))}"` })}</div>
+    <div class="mt-4">${button({ labelKey: 'sp.act.addNote', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="sp.act.addNote" data-modal-note-key="common.backendRequiredNote"' })}</div>
   </div>`;
+}
+
+/* Spec 027 — enroll / assign / move picker (M-A/M-B/M-C): a display-only candidate
+ * list inside the baked <template data-preview> drawer, with a backendRequired final
+ * gate. NO selection persists, NO roster mutates. */
+function pickerDrawer(id, { titleKey, hintKey, candidates, ctaKey, reasonKey, headIcon, extraHTML = '' }) {
+  const items = candidates.map((c) => sheetRow(t(c.nameKey), t(c.metaKey))).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t(hintKey)}</p>
+    ${items}${extraHTML}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="${reasonKey}" aria-disabled="true" title="${esc(t(reasonKey))}">${icon('check', 'ico ico-sm')}<span>${t(ctaKey)}</span></button>`;
+  return previewTemplate(id, { titleKey, headIcon, tone: 'primary', bodyHTML: body });
 }
 
 export function renderStudent() {
@@ -175,7 +193,8 @@ export function renderStudent() {
     ],
     actionsHTML:
       button({ labelKey: 'sp.act.message', variant: 'secondary', size: 'sm', icon: 'message-circle', attrs: `data-demo-action data-toast="${esc(t('sp.act.messageToast'))}"` })
-      + button({ labelKey: 'sp.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: `data-demo-action data-toast="${esc(t('sp.act.editToast'))}"` }),
+      + button({ labelKey: 'sp.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="sp.act.edit" data-modal-note-key="common.backendRequiredNote"' })
+      + confirmAction({ labelKey: 'sp.act.suspend', icon: 'pause-circle', titleKey: 'sp.act.suspendTitle', msgKey: 'sp.act.suspendMsg', confirmKey: 'sp.act.suspendCta', toastKey: 'sp.act.suspendToast' }),
   });
 
   const views = tabs({
@@ -202,5 +221,11 @@ export function renderStudent() {
 
   const templates = blocks.map((b) => appointmentTemplate(apptItem(b, st, fam))).join('');
 
-  return `${banner}${views}${templates}`;
+  const crossGate = `<button type="button" class="btn btn-secondary btn-sm w-full" style="margin-top:8px" data-disabled-reason data-reason-key="sp.move.crossReason" aria-disabled="true" title="${esc(t('sp.move.crossReason'))}">${icon('families', 'ico ico-sm')}<span>${t('sp.move.crossFamily')}</span></button>`;
+  const pickers =
+    pickerDrawer('stu-enroll', { titleKey: 'sp.enroll.title', hintKey: 'sp.enroll.hint', candidates: ENROLL_COURSES, ctaKey: 'sp.enroll.cta', reasonKey: 'sp.enroll.reason', headIcon: 'book-open' })
+    + pickerDrawer('stu-assign', { titleKey: 'sp.assign.title', hintKey: 'sp.assign.hint', candidates: ASSIGN_GROUPS, ctaKey: 'sp.assign.cta', reasonKey: 'sp.assign.reason', headIcon: 'students' })
+    + pickerDrawer('stu-move', { titleKey: 'sp.move.title', hintKey: 'sp.move.hint', candidates: MOVE_GROUPS, ctaKey: 'sp.move.cta', reasonKey: 'sp.move.reason', headIcon: 'arrow-left', extraHTML: crossGate });
+
+  return `${banner}${views}${templates}${pickers}`;
 }

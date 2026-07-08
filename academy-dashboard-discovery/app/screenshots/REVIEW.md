@@ -700,3 +700,39 @@ Deepened the admin teacher surfaces (teachers · teacher · teacher-performance)
 
 ### Honesty / role laws / impact
 No fake teacher create/edit/delete/status-change/assign/schedule/availability mutation; no persisted picker selection; no roster/relationship change. **Zero pay/salary/payroll/compensation/payout figures** on the admin teacher surfaces (the shared «الرواتب» finance nav in the sidebar is the pre-existing Spec-009-sanctioned link, outside `#page-body`); no Salary/Payout fieldset; no compensations tab. Reused ONLY the closed Spec-026 `data-*` set + Spec-027 drawer-picker/kebab precedents — **no new dispatch hook, no storage key, no engine, no page, no CSS**. **Teacher portal pay-free**: the 16 `teacher-*` portal files stay **byte-identical**; `teacher-performance.html` is the Spec-024-B-07 sanctioned admin exempt board (never linked from the portal). Family zero-pay, student child-view, admin finance Spec-009 invariant — all byte-verbatim green. Only teachers/teacher/course/group HTML changed (×2 lang); `teacher-performance` + all portal + admin-ops + the 9 Spec-027 pages + index byte-identical; `package.json` 0-diff. One sanctioned smoke amendment (+77 lines, additions only; payHit/tchPay/famPay/payFigure/child-view/admin-finance + 026/027 asserts byte-verbatim).
+
+## Spec 029 — Admin Reports / Analytics / Feedback / Forms Deep Management + Admin Menu Coverage Gate
+
+**Frames**: `reports__*__sp029-feedback-drawer`, `__sp029-categories`, `__sp029-create-feedback`,
+`__sp029-form-drawer-en`, `__sp029-feedback-drawer-dark`, `__sp029-mobile` (203 total · 0 console errors).
+
+### What became deep (no new page — 97 → 97; feedback + forms folded into reports.html)
+- **Feedback review** (`sp029-feedback-drawer`, `__-dark`): authored rows across teacher/class/family/student
+  — a CATEGORICAL remark pill (never a number) + status chip + a real type/status `filterBar`; each row opens
+  a **read-only** detail drawer whose finals are backendRequired confirms (Approve · Delete). No computed
+  percentage/score/rank; no plotting visuals.
+- **Feedback categories** (`sp029-categories`): a Manage-categories drawer (`rep-fbcat`) — display-only list +
+  a Create-category modal + an assign-members `data-disabled-reason` gate; the nav item stays **planned/folded**
+  (mirrors `teacherCategories`/`familyCategories`).
+- **Create feedback** (`sp029-create-feedback`): an honest `data-modal-trigger` backendRequired modal (nothing
+  saved).
+- **Forms / surveys** (`sp029-form-drawer-en`): a display-only list (authored question/response **literals** —
+  no aggregation) + a Create-form modal + a read-only detail drawer + a real deep-link to the EXISTING student
+  Evaluation tab (the monthly progress form — no duplicate engine).
+- **Mobile** (`sp029-mobile`, 390px): the folded feedback/forms sections reflow with no horizontal overflow.
+
+### Honesty / role laws / impact
+Every 029 write ends at a `backendRequired` modal/confirm/gate — no fake report/export/download/PDF/CSV/print,
+no fake feedback submit/approve/delete, no fake form persistence, no DOM mutation. **No chart engine / `<canvas>`
+/ computed percentage / score / rank / percentile** anywhere; `sparkline.js` not repurposed. **Export/print
+honesty**: reports Print → disabled-with-reason gate (R-G); native disabled-reason gates on sessions-analysis /
+course / group / student / teacher kept (already honest); teacher-performance stays export-free/display-only.
+**Write honesty**: outcome "Add feedback" → backendRequired modal (R-E, via the ONE canonical outcome drawer →
+attendance/sessions/course/group/teacher); student "Approve" → backendRequired confirm (R-F). **No finance
+figure** in any 029 body (reports `#page-body` forbidden-token grep covers salary/payroll/invoice/etc.);
+finance source **0-diff**. **Admin-menu coverage**: 43 items classified, 0 unclassified; `nav.config.js` 0-diff;
+runtime-enforced by the existing Spec-010 nav block. **14 HTML changed**
+(reports/attendance/sessions/course/group/teacher/student ×2); teacher-performance + 16 teacher-portal + family
++ finance + index byte-identical; `package.json` 0-diff. Teacher pay-free / family zero-pay / student child-view
+/ admin finance Spec-009 invariant all byte-verbatim green. Additive smoke amendment (Spec-029 asserts + R-G
+re-pin + one facet-scoped filter-correctness refinement); a11y critical=0 serious=0.

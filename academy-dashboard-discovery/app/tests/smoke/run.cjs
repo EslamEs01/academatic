@@ -826,8 +826,8 @@ const FILTER_SPEC = {
         ok(a.tiles === 8, `${page}/${lang}: expected exactly 8 baked operations-overview tiles in #ops-overview, got ${a.tiles}`);
         for (const [k, v] of Object.entries(a.sources)) ok(v, `${page}/${lang}: missing real source link (${k})`);
         ok(a.userXTexts.length >= 2, `${page}/${lang}: teacherAbsent vs studentAbsent are not two distinct chips (${JSON.stringify(a.userXTexts)})`);
-        ok(a.demo, `${page}/${lang}: missing Print demo action`);
-        ok(a.disabledReason >= 3, `${page}/${lang}: expected ≥3 disabled-with-reason actions (CSV/PDF/Share), got ${a.disabledReason}`);
+        ok(!a.demo, `${page}/${lang}: reports must not use a fake demo-action (Spec 029 R-G — Print is a backendRequired export gate, not a demo toast)`);
+        ok(a.disabledReason >= 4, `${page}/${lang}: expected ≥4 disabled-with-reason export gates (Print/CSV/PDF/Share), got ${a.disabledReason}`);
         ok(a.confirm, `${page}/${lang}: missing Schedule confirm action`);
         ok(a.realExport === 0, `${page}/${lang}: found a real export/download link (must be demo only)`);
         ok(!a.forbidden, `${page}/${lang}: reports body shows a forbidden finance/chart/score/rank token`);
@@ -842,6 +842,59 @@ const FILTER_SPEC = {
         const modal = await p.evaluate(() => !!document.querySelector('.modal-scrim, .drawer.sheet'));
         ok(modal, `${page}/${lang}: the Schedule action did not open a confirm modal`);
         await p.keyboard.press('Escape');
+
+        // ── Spec 029 — Feedback review + Forms/surveys folded into reports.html (no new page) ──
+        const f29 = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const fbSec = document.getElementById('reports-feedback');
+          const fmSec = document.getElementById('reports-forms');
+          const fbRows = document.querySelectorAll('#reports-feedback-grid [data-row]').length;
+          const fbDrawers = document.querySelectorAll('template[data-preview^="rep-fb-"]').length;
+          const catDrawer = !!document.querySelector('template[data-preview="rep-fbcat"]');
+          const fbCreate = !!document.querySelector('[data-modal-trigger][data-modal-title-key="rep.fb.createTitle"]');
+          const catManage = !!document.querySelector('[data-drawer="rep-fbcat"]');
+          const fmRows = document.querySelectorAll('#reports-forms-grid [data-row]').length;
+          const fmDrawers = document.querySelectorAll('template[data-preview^="rep-form-"]').length;
+          const fmCreate = !!document.querySelector('[data-modal-trigger][data-modal-title-key="rep.form.createTitle"]');
+          // the folded feedback+forms region must carry NO chart/canvas and NO computed %/score/rank
+          const seg = (fbSec ? fbSec.innerHTML : '') + (fmSec ? fmSec.innerHTML : '');
+          const noChart = !/<canvas|chart\.js|apexcharts|amcharts|data-chart|<svg[^>]*class="[^"]*chart/i.test(seg);
+          const noComputed = !/\b(percentile|leaderboard|\bscored?\b|\brank(ed|ing)?\b)\b/i.test(body.innerText);
+          // progress form is a REAL deep-link to the existing student Evaluation tab (not a duplicate engine)
+          const evalLink = [...body.querySelectorAll('a[href]')].some((a) => /student(\.en)?\.html#view=evaluation$/.test(a.getAttribute('href') || ''));
+          return { fbSec: !!fbSec, fmSec: !!fmSec, fbRows, fbDrawers, catDrawer, fbCreate, catManage, fmRows, fmDrawers, fmCreate, noChart, noComputed, evalLink };
+        });
+        ok(f29.fbSec && f29.fmSec, `${page}/${lang}: reports is missing the folded Feedback and/or Forms section`);
+        ok(f29.fbRows >= 6 && f29.fbDrawers === f29.fbRows, `${page}/${lang}: feedback rows/drawers mismatch (rows=${f29.fbRows}, drawers=${f29.fbDrawers})`);
+        ok(f29.catDrawer && f29.catManage, `${page}/${lang}: feedback Manage-categories drawer/trigger missing`);
+        ok(f29.fbCreate, `${page}/${lang}: Create-feedback must be an honest backendRequired modal trigger`);
+        ok(f29.fmRows >= 4 && f29.fmDrawers === f29.fmRows, `${page}/${lang}: form rows/drawers mismatch (rows=${f29.fmRows}, drawers=${f29.fmDrawers})`);
+        ok(f29.fmCreate, `${page}/${lang}: Create-form must be an honest backendRequired modal trigger`);
+        ok(f29.noChart, `${page}/${lang}: feedback/forms region must not add a chart/canvas`);
+        ok(f29.noComputed, `${page}/${lang}: reports body must not add a computed score/rank/percentile`);
+        ok(f29.evalLink, `${page}/${lang}: forms section missing the real deep-link to the student Evaluation tab`);
+        // a feedback detail drawer opens READ-ONLY (sheet rows + Approve/Delete confirms, no persisting inputs)
+        const fbTrg = await p.$('#reports-feedback-grid [data-drawer^="rep-fb-"]');
+        if (fbTrg) { await fbTrg.scrollIntoViewIfNeeded(); await fbTrg.click(); await p.waitForTimeout(200); }
+        const fbDrw = await p.evaluate(() => {
+          const d = document.querySelector('.drawer.sheet');
+          if (!d) return { open: false };
+          return {
+            open: true,
+            rows: d.querySelectorAll('.sheet-row').length,
+            confirms: d.querySelectorAll('[data-confirm]').length,
+            inputs: d.querySelectorAll('input,textarea,select').length, // read-only: none persist
+          };
+        });
+        ok(fbDrw.open && fbDrw.rows >= 4 && fbDrw.confirms >= 2 && fbDrw.inputs === 0,
+          `${page}/${lang}: feedback detail drawer is not read-only with Approve/Delete confirms (${JSON.stringify(fbDrw)})`);
+        await p.keyboard.press('Escape');
+        // the feedback type filter narrows the grid client-side (real static filter)
+        const fbBefore = await p.$$eval('#reports-feedback-grid [data-row]', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="type"]', 'teacher').catch(() => {});
+        await p.waitForTimeout(150);
+        const fbAfter = await p.$$eval('#reports-feedback-grid [data-row]', (els) => els.filter((e) => !e.hidden).length);
+        ok(fbAfter > 0 && fbAfter < fbBefore, `${page}/${lang}: feedback type filter did not narrow the rows (${fbBefore} → ${fbAfter})`);
       }
 
       // Spec 009 — Finance shell: 4 status tiles equal invoice-list row counts per status
@@ -1472,9 +1525,13 @@ const FILTER_SPEC = {
           const shownRows = rows.filter((r) => getComputedStyle(r).display !== 'none');
           const leaked = rows.filter((r) => r.hasAttribute('hidden') && getComputedStyle(r).display !== 'none').length;
           const hidden = rows.filter((r) => r.hasAttribute('hidden')).length;
-          // correctness: with a known facet, every still-visible row must match the applied value.
-          // If the filter silently failed to engage, non-matching rows stay visible → mismatch > 0.
-          const mismatch = f ? shownRows.filter((r) => (r.getAttribute('data-' + f.facet) || '').toLowerCase() !== f.value).length : 0;
+          // correctness: with a known facet, every still-visible row IN THAT FACET'S DOMAIN must match
+          // the applied value. If the filter silently failed to engage, matching-domain rows stay
+          // visible → mismatch > 0. (Spec 029: reports now hosts TWO independent facet domains — the
+          // area facet over the category cards AND a type/status facet over the folded feedback rows;
+          // rows that do not carry the applied facet attribute are outside this filter's domain and are
+          // not judged here. A broken area filter still trips this: the area cards DO carry data-area.)
+          const mismatch = f ? shownRows.filter((r) => r.hasAttribute('data-' + f.facet) && (r.getAttribute('data-' + f.facet) || '').toLowerCase() !== f.value).length : 0;
           return { leaked, hidden, shown: shownRows.length, total: rows.length, mismatch };
         }, spec.facet ? { facet: spec.facet, value: spec.value } : null);
         ok(vis.leaked === 0, `${page}/${lang}: ${vis.leaked} filtered-out row(s) attribute-hidden but still visually rendered — the [data-row][hidden] fix failed`);

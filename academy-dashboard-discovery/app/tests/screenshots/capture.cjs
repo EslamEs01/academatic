@@ -231,6 +231,14 @@ const MATRIX = [
   { page: 'group', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'grp-assign-teacher', variant: 'sp028-assign-teacher-dark' },
   { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp028-mobile' },
   { page: 'teacher', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp028-en' },
+  // Spec 029 — Reports feedback/forms fold: review rows · read-only detail drawer · categories drawer ·
+  // create-feedback modal · forms drawer · export/print gates (in the action cluster) · mobile · dark
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'rep-fb-fb1', variant: 'sp029-feedback-drawer' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'rep-fbcat', variant: 'sp029-categories' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', mgmtModal: 'rep.fb.createTitle', variant: 'sp029-create-feedback' },
+  { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'rep-form-frm1', variant: 'sp029-form-drawer-en' },
+  { page: 'reports', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'rep-fb-fb1', variant: 'sp029-feedback-drawer-dark' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp029-mobile' },
   // Spec 027 — admin deep management: honest modals / drawer-pickers / row-kebab / gates
   { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', studentKebab: true, variant: 'sp027-row-kebab' },
   { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', openDrawer: 'stu-enroll', variant: 'sp027-enroll-picker' },

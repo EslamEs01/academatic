@@ -43,7 +43,7 @@ function childRow(n) {
 }
 const childrenStep = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('fam.wiz.children.hint')}</p>
   ${childRow(1)}${childRow(2)}
-  <div class="mt-3">${button({ labelKey: 'fam.wiz.children.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: `data-demo-action data-toast="${esc(t('fam.wiz.children.addToast'))}"` })}</div>`;
+  <div class="mt-3">${button({ labelKey: 'fam.wiz.children.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="fam.wiz.children.add" data-modal-note-key="common.backendRequiredNote"' })}</div>`;
 
 const billingStep = `<div class="wiz-grid">
   ${field({ labelKey: 'fam.wiz.f.planType', name: 'planType', type: 'select', options: CAT_OPTS })}

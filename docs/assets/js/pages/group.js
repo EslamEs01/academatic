@@ -17,7 +17,9 @@ import { esc } from '../dom.js';
 import { avatar, chip, medallion } from '../components/ui.js';
 import { profileBanner } from '../components/profile-banner.js';
 import { tabs } from '../components/tabs.js';
-import { sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { ADD_STUDENTS } from '../fixtures/management.js';
+import { ASSIGN_TEACHERS } from '../fixtures/teacher-management.js';
 import { groupStatusChip } from '../components/group-status.js';
 import { groupActions } from '../components/course-group-actions.js';
 import { blocksOf, outcomesOf, cohortTimetablePanel, cohortOutcomesPanel, cohortTemplates } from '../components/cohort-panels.js';
@@ -79,6 +81,27 @@ function coursePanel(course) {
   </a>`;
 }
 
+/* Spec 027 — add-students picker (M-A): display-only candidate roster in the baked
+ * <template data-preview="grp-assign"> drawer + a backendRequired final gate. No assign. */
+function assignPicker() {
+  const items = ADD_STUDENTS.map((s) => sheetRow(t(s.nameKey), t(s.metaKey))).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('grp.assign.hint')}</p>
+    ${items}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="grp.reason.enroll" aria-disabled="true" title="${esc(t('grp.reason.enroll'))}">${icon('user-plus', 'ico ico-sm')}<span>${t('grp.assign.cta')}</span></button>`;
+  return previewTemplate('grp-assign', { titleKey: 'grp.assign.title', headIcon: 'user-plus', tone: 'primary', bodyHTML: body });
+}
+
+/* Spec 028 — assign-teacher picker (M-N handoff): display-only single-teacher candidate list
+ * in the baked <template data-preview="grp-assign-teacher"> drawer (SEPARATE from the grp-assign
+ * student drawer) + a backendRequired final gate. No teacher assignment, no rate figure. */
+function teacherPicker() {
+  const items = ASSIGN_TEACHERS.map((tr) => sheetRow(t(tr.nameKey), t(tr.metaKey))).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('trn.assignT.hint')}</p>
+    ${items}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="grp.reason.assign" aria-disabled="true" title="${esc(t('grp.reason.assign'))}">${icon('user-check', 'ico ico-sm')}<span>${t('trn.assignT.cta')}</span></button>`;
+  return previewTemplate('grp-assign-teacher', { titleKey: 'trn.assignT.title', headIcon: 'user-check', tone: 'primary', bodyHTML: body });
+}
+
 export function renderGroup() {
   const g = GROUP_BY_ID.grp1 || GROUPS.rows[0];
   const course = COURSE_BY_ID[g.courseId];
@@ -126,5 +149,5 @@ export function renderGroup() {
     },
   });
 
-  return `${banner}${views}${cohortTemplates(blocks, outcomes)}`;
+  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${assignPicker()}${teacherPicker()}`;
 }

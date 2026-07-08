@@ -1,0 +1,7 @@
+# Contract — Scope Guard (allowed/forbidden + stop conditions)
+
+**Allowed to change**: pages/reports.js; components/report-actions.js, components/report-feedback.js (NEW), components/outcome-details.js (R-E), components/evaluation-rubric.js (R-F); fixtures/report-feedback.js (NEW); locales/ar.rep.js + en.rep.js; styles/app.css (additive); tests/{smoke,a11y,screenshots}; screenshots/REVIEW.md; README.md; CLAUDE.md; specs/029-*.
+**Generated**: reports/attendance/sessions/student .html + .en.
+**Forbidden**: package.json; any dependency; backend/API/auth/database; finance.js/fixtures/finance.js/finance-* components/*.fin.js; nav.config.js (0-diff); teacher-portal files; new chart/export/persistence/notification/chat/live-room engine; new hook/storage key; any new standalone page; 030/031 pages; teacher pay/finance/chat/live-room page; family payment page; student primary-role page; admin settings/materials/certificates pages; salary/payroll pages.
+**Scope-guard grep (source incl. comments)**: no chart/canvas/apex/d3; no computed %/score/rank helper; no salary/pay/invoice/amount token; reword any disclaimer that trips forbidden tokens.
+**STOP if**: count≠97 · unclassified nav item · unresolved R-row · new page without candidate-test · chart/canvas · computed %/score/rank · fake report/feedback/export · pay figure in 029 body · finance file change · teacher-portal change · family pay figure · student primary wording · href="#" · dead button · raw key · package.json change · new hook/key/engine.

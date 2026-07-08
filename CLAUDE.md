@@ -1,5 +1,33 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 028 — Admin Teachers / Performance Deep Management is IMPLEMENTED**
+Active feature: **Spec 029 — Admin Reports / Analytics / Feedback / Forms Deep Management + Admin Menu
+Coverage Gate is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (54 tasks) + 24 contracts
+at `academy-dashboard-discovery/specs/029-admin-reports-analytics-feedback-forms/`). **Count HELD 97 → 97 —
+ZERO new pages**: Feedback-review + Forms/surveys FOLDED into `reports.html` (new `components/report-feedback.js`
++ `fixtures/report-feedback.js` + `rep.fb.*`/`rep.fbcat.*`/`rep.form.*` in `ar/en.rep.js`, mirrored). Feedback
+rows (teacher/class/family/student) = authored CATEGORICAL remark pills + status chips + a real type/status
+`filterBar` + read-only detail drawers (Approve/Delete = backendRequired confirms) + Create-feedback modal +
+Manage-categories drawer (create modal + assign `data-disabled-reason` gate; nav stays planned/folded like
+`teacherCategories`). Forms = display-only list (authored question/response LITERALS — no aggregation) +
+Create-form modal + a real deep-link to the EXISTING student Evaluation tab (no duplicate engine). **Export/print
+honesty**: **R-G** reports Print `data-demo-action`→disabled-with-reason gate (consistent with CSV/PDF/Share);
+native disabled-reason gates KEPT (R-H sessions-analysis, R-I course/group/student/teacher — already honest);
+`teacher-performance` stays export-free/display-only (R-M). **Write honesty**: **R-E** outcome "Add feedback"→
+backendRequired modal in the ONE canonical `outcome-details.js` drawer (propagates to attendance/sessions/course/
+group/teacher — byte-clean single-line delta each); **R-F** student "Approve"→backendRequired confirm
+(`evaluation-rubric.js`). **NO chart/canvas/computed-%/score/rank** anywhere; **NO finance figure in any 029
+body**; NO new hook/storage key/engine/page. `nav.config.js` / finance source / `package.json` **0-diff**;
+admin-menu coverage (43 items, 0 unclassified) enforced by the existing Spec-010 nav block (6 rail cats · exact
+finance sub-section · banks placement · link-integrity deadHash/badTarget=0 · planned-truthfulness) + the
+`admin-menu-coverage-inventory.md` artifact. **Verified**: build 97; smoke PASS (96 loads; additive Spec-029
+asserts + R-G re-pin + ONE sanctioned facet-scoped filter-correctness refinement for the now-two-facet reports
+page — still fails a broken area filter; payHit/tchPay/famPay/payFigure/child-view/admin-finance + 026/027/028
+asserts BYTE-VERBATIM); a11y critical=0 serious=0 (+`reports` EN-dark row); 6 Spec-029 screenshots 0 errors.
+**14 HTML changed** (reports/attendance/sessions/course/group/teacher/student ×2); **teacher-performance + 16
+teacher-portal + family + finance + index + dashboard byte-identical**. Role laws green: teacher pay-free (portal
+16 files byte-identical), family zero-pay, student child-view, admin finance Spec-009 invariant. Owner handoff:
+finance analytics (analysis-expenses/invoices, salary-class-report)→030 · certs/materials/settings→031 ·
+messages/leads/announcements/scheduleSearch→future-backend · stale-map/final sweep→032. Next: watcher commit.
+**History: Spec 028 — Admin Teachers / Performance Deep Management is IMPLEMENTED**
 (awaiting the watcher commit; artifacts + `tasks.md` (56 tasks) + 21 contracts at
 `academy-dashboard-discovery/specs/028-admin-teachers-performance/`). **Count HELD 97 → 97 — ZERO new pages**:
 every delta a modal/drawer/picker/row-kebab/confirm/gate on an existing page; **all-teachers-timetable FOLDED

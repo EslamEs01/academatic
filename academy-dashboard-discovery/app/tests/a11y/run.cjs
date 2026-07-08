@@ -12,6 +12,9 @@ const MATRIX = [
   { page: 'reports', lang: 'ar', theme: 'light' },
   { page: 'reports', lang: 'ar', theme: 'dark' },
   { page: 'reports', lang: 'en', theme: 'light' },
+  // Spec 029 — the folded Feedback review + Forms/surveys sections in EN dark (drawer/modal
+  // machinery is centrally covered by finance/sessions; this scans the new baked content)
+  { page: 'reports', lang: 'en', theme: 'dark' },
   { page: 'gallery', lang: 'ar', theme: 'light' },
   { page: 'gallery', lang: 'ar', theme: 'dark' },
   // Spec 002 pages

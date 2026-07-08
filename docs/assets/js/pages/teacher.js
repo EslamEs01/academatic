@@ -14,10 +14,11 @@ import { coursesOfTeacher, groupsOfTeacher, studentsOfTeacher, scheduleOfTeacher
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
-import { avatar, chip, medallion } from '../components/ui.js';
+import { avatar, chip, medallion, button } from '../components/ui.js';
 import { profileBanner } from '../components/profile-banner.js';
 import { tabs } from '../components/tabs.js';
-import { sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { ASSIGN_COURSES, ASSIGN_GROUPS, AVAILABILITY_WINDOWS } from '../fixtures/teacher-management.js';
 import { teacherStatusChip } from '../components/teacher-status.js';
 import { workloadChip, signalChip, needsFollowUp } from '../components/teacher-signals.js';
 import { teacherActions } from '../components/teacher-actions.js';
@@ -114,6 +115,26 @@ function followupRow(o) {
   </div>`;
 }
 
+/* Spec 028 — assign-course / assign-group picker (M-F/M-G from the teacher profile): a
+ * display-only candidate list in a baked <template data-preview> drawer + a backendRequired
+ * final gate. No assignment, no roster/schedule mutation, no rate figure. */
+function pickerDrawer(id, { titleKey, hintKey, candidates, ctaKey, reasonKey, headIcon }) {
+  const items = candidates.map((c) => sheetRow(t(c.nameKey), t(c.metaKey))).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t(hintKey)}</p>
+    ${items}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="${reasonKey}" aria-disabled="true" title="${esc(t(reasonKey))}">${icon('check', 'ico ico-sm')}<span>${t(ctaKey)}</span></button>`;
+  return previewTemplate(id, { titleKey, headIcon, tone: 'primary', bodyHTML: body });
+}
+/* Spec 028 — availability-window editor (M-J): display-only weekly day/time windows + an
+ * Add/Update/Delete backendRequired gate. NO invented recurrence, NO fake schedule mutation. */
+function availabilityDrawer() {
+  const rows = AVAILABILITY_WINDOWS.map((w) => sheetRow(`${t(w.dayFromKey)}–${t(w.dayToKey)}`, `<span class="tabular" dir="ltr">${esc(w.timeFrom)}–${esc(w.timeTo)}</span>`)).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('trn.availEdit.hint')}</p>
+    ${rows}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="trn.availEdit.reason" aria-disabled="true" title="${esc(t('trn.availEdit.reason'))}">${icon('plus', 'ico ico-sm')}<span>${t('trn.availEdit.add')}</span></button>`;
+  return previewTemplate('trn-availability', { titleKey: 'trn.availEdit.title', headIcon: 'schedule', tone: 'primary', bodyHTML: body });
+}
+
 export function renderTeacher() {
   const teacher = TEACHER_BY_ID.sara || TEACHERS.rows[0];
   const counts = teacherCounts(teacher.id);
@@ -160,7 +181,7 @@ export function renderTeacher() {
       overview: overviewPanel(teacher, counts),
       courses: list(courses.map(courseRow).join(''), 'trn.none.courses'),
       groups: list(groups.map(groupRow).join(''), 'trn.none.groups'),
-      timetable: cohortTimetablePanel(blocks, { titleKey: 'trn.tab.timetable' }),
+      timetable: cohortTimetablePanel(blocks, { titleKey: 'trn.tab.timetable' }) + `<div class="flex flex-wrap gap-2 mt-4">${button({ labelKey: 'trn.availEdit.open', variant: 'secondary', size: 'sm', icon: 'schedule', attrs: 'data-drawer="trn-availability"' })}</div>`,
       'sessions-outcomes': cohortOutcomesPanel(outcomes, { titleKey: 'trn.tab.sessions' }),
       students: list(students.map(studentRow).join(''), 'trn.none.students'),
       'follow-up': list(followups.map(followupRow).join(''), 'trn.none.followup'),
@@ -168,5 +189,10 @@ export function renderTeacher() {
     },
   });
 
-  return `${banner}${views}${cohortTemplates(blocks, outcomes)}`;
+  const pickers =
+    pickerDrawer('trn-assign-course', { titleKey: 'trn.assignC.title', hintKey: 'trn.assignC.hint', candidates: ASSIGN_COURSES, ctaKey: 'trn.assignC.cta', reasonKey: 'trn.reason.assign', headIcon: 'curricula' })
+    + pickerDrawer('trn-assign-group', { titleKey: 'trn.assignG.title', hintKey: 'trn.assignG.hint', candidates: ASSIGN_GROUPS, ctaKey: 'trn.assignG.cta', reasonKey: 'trn.reason.assign', headIcon: 'students' })
+    + availabilityDrawer();
+
+  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${pickers}`;
 }

@@ -466,7 +466,7 @@
     </div>
     
     <div class="report-actions flex items-center flex-wrap gap-2" role="group" aria-label="إجراءات التقارير">
-    <button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="سيتوفّر إنشاء ملف الطباعة بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-printer"></use></svg><span>طباعة التقرير</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="التصدير يحتاج وحدة الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>تصدير CSV</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="التصدير يحتاج وحدة الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>تصدير PDF</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.share" title="المشاركة تحتاج وحدة الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-share"></use></svg><span>مشاركة التقرير</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="جدولة هذا التقرير" data-confirm-msg="هذا عرض تجريبي فقط — لا يتم إنشاء أي مهمة ولا إرسال أي شيء." data-confirm-cta="تأكيد الجدولة" data-confirm-toast="سيتوفّر جدولة التقرير بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>جدولة التقرير</span></button>
+    <button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="التصدير يحتاج وحدة الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-printer"></use></svg><span>طباعة التقرير</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="التصدير يحتاج وحدة الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>تصدير CSV</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="التصدير يحتاج وحدة الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>تصدير PDF</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.share" title="المشاركة تحتاج وحدة الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-share"></use></svg><span>مشاركة التقرير</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="جدولة هذا التقرير" data-confirm-msg="هذا عرض تجريبي فقط — لا يتم إنشاء أي مهمة ولا إرسال أي شيء." data-confirm-cta="تأكيد الجدولة" data-confirm-toast="سيتوفّر جدولة التقرير بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>جدولة التقرير</span></button>
   </div>
     <section class="mt-6" id="ops-overview">
     <div class="mb-3">
@@ -664,6 +664,620 @@
     <div class="rep-stats"><span class="rep-stat"><span class="rep-num">٤</span> <span>طلاب يحتاجون متابعة</span></span><span class="rep-stat"><span class="rep-num">٢</span> <span>عائلات تحتاج انتباه</span></span></div>
     <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2"><a href="students.html" class="link-more">عرض الطلاب <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a><a href="families.html" class="link-more">عرض العائلات <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a><a href="student.html" class="link-more">ملف الطالب <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a><a href="family.html" class="link-more">ملف العائلة <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a></div>
   </div>
+  </section>
+    <section class="mt-8" id="reports-feedback">
+    <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+    <div>
+      <h2 class="section-title">مراجعة الملاحظات</h2>
+      <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">ملاحظات المدرّسين والجلسات والعائلات والطلاب — عرض فقط، تُدار بعد ربط الخادم.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2">
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fbcat"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>إدارة الفئات</span></button>
+      <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="rep.fb.createTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>ملاحظة جديدة</span></button>
+    </div>
+  </div>
+    <form class="filterbar" data-filter-form data-target="#reports-feedback-grid">
+    <div class="input-wrap" style="flex:1 1 220px;min-width:180px">
+      <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+      <input class="input" type="search" data-filter="search" placeholder="ابحث في الملاحظات" aria-label="ابحث في الملاحظات" />
+    </div>
+    <span class="select-wrap">
+    <select class="select-input" data-filter="type" aria-label="النوع">
+      <option value="">كل الأنواع</option><option value="teacher">مدرّس</option><option value="class">جلسة</option><option value="family">عائلة</option><option value="student">طالب</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span><span class="select-wrap">
+    <select class="select-input" data-filter="status" aria-label="الحالة">
+      <option value="">كل الحالات</option><option value="open">مفتوحة</option><option value="reviewed">تمت المراجعة</option><option value="resolved">مُغلقة</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span>
+    <div class="flex items-center gap-2 ms-auto">
+      <button type="button" class="btn btn-ghost btn-sm"   data-filter-reset><span>إعادة ضبط</span></button>
+      <button type="button" class="btn btn-dark btn-sm"   data-filter-apply><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>تطبيق</span></button>
+    </div>
+    <span class="w-full text-[12px]" style="color:var(--c-ink-3)" data-filter-count></span>
+  </form>
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" id="reports-feedback-grid" data-grid><div class="card p-3.5" data-row data-type="teacher" data-status="reviewed" data-search="أ. سارة جودة التدريس مدرّس">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">أ. سارة</div>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>مدرّس</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>جودة التدريس</span></span><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>ممتاز</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">قبل يومين</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="teacher" data-status="open" data-search="أ. محمد التواصل مدرّس">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">أ. محمد</div>
+      <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>مدرّس</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>التواصل</span></span><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">قبل ٣ أيام</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb2"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="teacher" data-status="resolved" data-search="أ. ليان جودة التدريس مدرّس">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">أ. ليان</div>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُغلقة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>مدرّس</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>جودة التدريس</span></span><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">الأسبوع الماضي</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb3"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="class" data-status="reviewed" data-search="مجموعة الرياضيات الجلسة جلسة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">مجموعة الرياضيات</div>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>جلسة</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>الجلسة</span></span><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>ممتاز</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">قبل يومين</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb4"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="class" data-status="open" data-search="مجموعة البرمجة الجلسة جلسة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">مجموعة البرمجة</div>
+      <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>جلسة</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>الجلسة</span></span><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>بحاجة متابعة</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">أمس</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb5"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="class" data-status="reviewed" data-search="مجموعة الإنجليزية الجلسة جلسة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">مجموعة الإنجليزية</div>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>جلسة</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>الجلسة</span></span><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">قبل ٣ أيام</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb6"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="family" data-status="resolved" data-search="عائلة العتيبي التواصل عائلة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">عائلة العتيبي</div>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُغلقة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>عائلة</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>التواصل</span></span><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">الأسبوع الماضي</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb7"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="family" data-status="open" data-search="عائلة الشمري اجتماع العائلة عائلة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">عائلة الشمري</div>
+      <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>عائلة</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>اجتماع العائلة</span></span><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>بحاجة متابعة</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">أمس</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb8"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="family" data-status="open" data-search="عائلة القحطاني اجتماع العائلة عائلة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">عائلة القحطاني</div>
+      <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>عائلة</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>اجتماع العائلة</span></span><span class="rating-pill tone-rarely"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>بحاجة اهتمام</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">اليوم</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb9"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="student" data-status="reviewed" data-search="سلمان تقدّم الطالب طالب">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">سلمان</div>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>طالب</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>تقدّم الطالب</span></span><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>ممتاز</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">قبل يومين</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb10"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="student" data-status="resolved" data-search="لينا تقدّم الطالب طالب">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">لينا</div>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُغلقة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>طالب</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>تقدّم الطالب</span></span><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">قبل ٣ أيام</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb11"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-type="student" data-status="open" data-search="يوسف تقدّم الطالب طالب">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">يوسف</div>
+      <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span>طالب</span></span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>تقدّم الطالب</span></span><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>بحاجة متابعة</span></span>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <span class="text-[12px]" style="color:var(--c-ink-3)">اليوم</span>
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fb-fb12"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div></div>
+    <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
+    <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
+    <div>
+      <h3 class="text-[15px] font-bold text-ink mb-1">لا توجد نتائج مطابقة</h3>
+      <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">جرّب تعديل البحث أو إعادة ضبط عوامل التصفية.</p>
+    </div>
+    
+  </div></div>
+    <template data-preview="rep-fb-fb1">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">أ. سارة</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">جودة التدريس</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>ممتاز</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">قبل يومين</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">تفاعل ممتاز مع الطلاب وتحضير منظّم للحصص.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb2">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">أ. محمد</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">التواصل</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">قبل ٣ أيام</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">تواصل جيد مع العائلات، ويُفضّل تحديث أسبوعي أقصر.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb3">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">أ. ليان</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">جودة التدريس</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُغلقة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">الأسبوع الماضي</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">خطة الدرس واضحة والمتابعة منتظمة.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb4">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">مجموعة الرياضيات</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">الجلسة</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>ممتاز</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">قبل يومين</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">الجلسة سارت بسلاسة والمشاركة عالية.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb5">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">مجموعة البرمجة</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">الجلسة</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>بحاجة متابعة</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">أمس</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">حضور متذبذب، بحاجة إلى متابعة مع العائلة.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb6">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">مجموعة الإنجليزية</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">الجلسة</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">قبل ٣ أيام</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">تفاعل جيد وأهداف الحصة مكتملة.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb7">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">عائلة العتيبي</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">التواصل</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُغلقة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">الأسبوع الماضي</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">اجتماع ودّي، والعائلة راضية عن التقدّم.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb8">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">عائلة الشمري</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">اجتماع العائلة</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>بحاجة متابعة</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">أمس</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">طلب توضيح حول الجدول، بانتظار المتابعة.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb9">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">عائلة القحطاني</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">اجتماع العائلة</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-rarely"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>بحاجة اهتمام</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">قلق بشأن انتظام الحضور — يُحدَّد اجتماع.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb10">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">سلمان</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">تقدّم الطالب</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>ممتاز</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>تمت المراجعة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">قبل يومين</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">تقدّم ملحوظ في المهارات هذا الشهر.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb11">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">لينا</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">تقدّم الطالب</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>جيد</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُغلقة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">قبل ٣ أيام</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">أداء ثابت والتزام جيد بالواجبات.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template><template data-preview="rep-fb-fb12">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل الملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الطرف</span><span class="v">يوسف</span></div>
+    <div class="sheet-row"><span class="k">الفئة</span><span class="v">تقدّم الطالب</span></div>
+    <div class="sheet-row"><span class="k">التقدير</span><span class="v"><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>بحاجة متابعة</span></span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>مفتوحة</span></span></span></div>
+    <div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div>
+    <div class="info-card mt-3">
+      <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>الملاحظة</span></div>
+      <p class="narrative">بحاجة إلى دعم إضافي في بعض المفاهيم.</p>
+    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="اعتماد هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="اعتماد" data-confirm-toast="سيتوفّر اعتماد الملاحظة بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>اعتماد</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="حذف هذه الملاحظة" data-confirm-msg="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن." data-confirm-cta="حذف" data-confirm-toast="سيتوفّر حذف الملاحظة بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button></div></div>
+    </div>
+  </template>
+    <template data-preview="rep-fbcat">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">فئات الملاحظات</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">فئات معرّفة مسبقًا لتصنيف الملاحظات — عرض فقط.</p>
+    <div class="sheet-row"><span class="k">جودة التدريس</span><span class="v">٥ عنصر</span></div><div class="sheet-row"><span class="k">التواصل</span><span class="v">٣ عنصر</span></div><div class="sheet-row"><span class="k">الجلسة</span><span class="v">٤ عنصر</span></div><div class="sheet-row"><span class="k">اجتماع العائلة</span><span class="v">٢ عنصر</span></div><div class="sheet-row"><span class="k">تقدّم الطالب</span><span class="v">٣ عنصر</span></div>
+    <div class="flex flex-wrap gap-2 mt-4">
+      <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="rep.fbcat.createTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة فئة</span></button>
+      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="rep.fbcat.assignReason" aria-disabled="true" title="إسناد الأعضاء يحتاج ربط الخادم — خارج النطاق الحالي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>إسناد أعضاء</span></button>
+    </div></div>
+    </div>
+  </template>
+  </section>
+    <section class="mt-8" id="reports-forms">
+    <div class="flex flex-wrap items-start justify-between gap-3 mb-3">
+    <div>
+      <h2 class="section-title">النماذج والاستبيانات</h2>
+      <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">نماذج معرّفة مسبقًا — عرض فقط، تُدار بعد ربط الخادم.</p>
+    </div>
+    <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="rep.form.createTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>نموذج جديد</span></button>
+  </div>
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" id="reports-forms-grid" data-grid><div class="card p-3.5" data-row data-status="active" data-search="تقرير التقدّم الشهري">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">تقرير التقدّم الشهري</div>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-2.5 text-[12.5px]" style="color:var(--c-ink-2)">
+      <span><b class="tabular text-ink">٦</b> الأسئلة</span>
+      <span><b class="tabular text-ink">٤٢</b> الردود</span>
+      <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-star"></use></svg><span>افتراضي</span></span>
+    </div>
+    <div class="flex items-center justify-end">
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-form-frm1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-status="active" data-search="استبيان الحصة التجريبية">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">استبيان الحصة التجريبية</div>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-2.5 text-[12.5px]" style="color:var(--c-ink-2)">
+      <span><b class="tabular text-ink">٤</b> الأسئلة</span>
+      <span><b class="tabular text-ink">١٨</b> الردود</span>
+      
+    </div>
+    <div class="flex items-center justify-end">
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-form-frm2"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-status="active" data-search="استبيان رضا العائلة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">استبيان رضا العائلة</div>
+      <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-2.5 text-[12.5px]" style="color:var(--c-ink-2)">
+      <span><b class="tabular text-ink">٨</b> الأسئلة</span>
+      <span><b class="tabular text-ink">٣١</b> الردود</span>
+      
+    </div>
+    <div class="flex items-center justify-end">
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-form-frm3"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-status="draft" data-search="مراجعة المدرّس">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">مراجعة المدرّس</div>
+      <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>مسودة</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-2.5 text-[12.5px]" style="color:var(--c-ink-2)">
+      <span><b class="tabular text-ink">٥</b> الأسئلة</span>
+      <span><b class="tabular text-ink">٠</b> الردود</span>
+      
+    </div>
+    <div class="flex items-center justify-end">
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-form-frm4"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div><div class="card p-3.5" data-row data-status="closed" data-search="استبيان المغادرة">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="font-bold text-ink text-[13.5px]">استبيان المغادرة</div>
+      <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>مغلق</span></span>
+    </div>
+    <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 mb-2.5 text-[12.5px]" style="color:var(--c-ink-2)">
+      <span><b class="tabular text-ink">٣</b> الأسئلة</span>
+      <span><b class="tabular text-ink">١٢</b> الردود</span>
+      
+    </div>
+    <div class="flex items-center justify-end">
+      <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-form-frm5"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>عرض</span></button>
+    </div>
+  </div></div>
+    <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px]" style="color:var(--c-ink-3)">
+    <span>نموذج تقدّم الطالب الشهري يُعبّأ من تبويب التقييم في ملف الطالب.</span>
+    <a href="student.html#view=evaluation" class="link-more">افتح تقييم الطالب <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a>
+  </div>
+    <template data-preview="rep-form-frm1">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل النموذج</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الأسئلة</span><span class="v"><span class="tabular">٦</span></span></div>
+    <div class="sheet-row"><span class="k">الردود</span><span class="v"><span class="tabular">٤٢</span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></span></div>
+    <div class="sheet-row"><span class="k">أُنشئ</span><span class="v">هذا الشهر</span></div>
+    <p class="text-[12.5px] mt-3" style="color:var(--c-ink-3)">نموذج تقدّم الطالب الشهري يُعبّأ من تبويب التقييم في ملف الطالب.</p>
+      <a href="student.html#view=evaluation" class="link-more mt-1 inline-flex">افتح تقييم الطالب <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a></div>
+    </div>
+  </template><template data-preview="rep-form-frm2">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل النموذج</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الأسئلة</span><span class="v"><span class="tabular">٤</span></span></div>
+    <div class="sheet-row"><span class="k">الردود</span><span class="v"><span class="tabular">١٨</span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></span></div>
+    <div class="sheet-row"><span class="k">أُنشئ</span><span class="v">الشهر الماضي</span></div>
+    </div>
+    </div>
+  </template><template data-preview="rep-form-frm3">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل النموذج</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الأسئلة</span><span class="v"><span class="tabular">٨</span></span></div>
+    <div class="sheet-row"><span class="k">الردود</span><span class="v"><span class="tabular">٣١</span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></span></div>
+    <div class="sheet-row"><span class="k">أُنشئ</span><span class="v">هذا الشهر</span></div>
+    </div>
+    </div>
+  </template><template data-preview="rep-form-frm4">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل النموذج</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الأسئلة</span><span class="v"><span class="tabular">٥</span></span></div>
+    <div class="sheet-row"><span class="k">الردود</span><span class="v"><span class="tabular">٠</span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>مسودة</span></span></span></div>
+    <div class="sheet-row"><span class="k">أُنشئ</span><span class="v">هذا الأسبوع</span></div>
+    </div>
+    </div>
+  </template><template data-preview="rep-form-frm5">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تفاصيل النموذج</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body">
+    <div class="sheet-row"><span class="k">الأسئلة</span><span class="v"><span class="tabular">٣</span></span></div>
+    <div class="sheet-row"><span class="k">الردود</span><span class="v"><span class="tabular">١٢</span></span></div>
+    <div class="sheet-row"><span class="k">الحالة</span><span class="v"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>مغلق</span></span></span></div>
+    <div class="sheet-row"><span class="k">أُنشئ</span><span class="v">قبل شهرين</span></div>
+    </div>
+    </div>
+  </template>
   </section>
   </div>
       </main>
