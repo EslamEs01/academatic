@@ -96,10 +96,10 @@ export const NAV_CATEGORIES = [
   {
     id: 'admin', labelKey: 'cat.admin', icon: 'grid',
     items: [
-      item({ id: 'staff', labelKey: 'nav.staff', icon: 'staff', status: 'planned' }),
+      item({ id: 'staff', labelKey: 'nav.staff', icon: 'staff', route: 'staff.html' }),
       item({ id: 'materials', labelKey: 'nav.materials', icon: 'materials', status: 'planned' }),
-      item({ id: 'books', labelKey: 'nav.books', icon: 'curricula', status: 'planned' }),
-      item({ id: 'certificates', labelKey: 'nav.certificates', icon: 'certificates', status: 'planned' }),
+      item({ id: 'books', labelKey: 'nav.books', icon: 'curricula', route: 'library.html' }),
+      item({ id: 'certificates', labelKey: 'nav.certificates', icon: 'certificates', route: 'certificates.html' }),
       item({ id: 'certificateRequests', labelKey: 'nav.certificateRequests', icon: 'certificates', status: 'planned' }),
     ],
   },
@@ -140,7 +140,7 @@ export const FUTURE_ROUTES = {
   sessionsAnalysis: 'sessions-analysis.html', messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
   announcements: 'announcements.html', studentResult: 'student-results.html',
   studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html',
-  materials: 'materials.html', books: 'library.html', certificates: 'certificates.html', staff: 'staff.html',
+  materials: 'library.html', // Spec 031 — materials folds into the library.html Materials tab (no standalone page)
   dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',
 };
 

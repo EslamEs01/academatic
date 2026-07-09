@@ -767,3 +767,36 @@ kept byte-verbatim the 4-tiles / 9-invoices / 6-payments / **9-planned-cards** /
 no-mutation-on-confirm / no-receipt asserts. **Only `finance.html`/`.en` changed**; `package.json`/
 `nav.config.js`/`enhance.js`/`finance-status.js` 0-diff; teacher-portal ×16 + teacher-performance + family +
 student + reports + index byte-identical. Additive smoke amendment; a11y critical=0 serious=0.
+
+## Spec 031 — Admin Management / Content / Certificates / Settings / Materials
+
+**Frames**: `sp031-staff`, `sp031-staff-rbac`, `sp031-library-en`, `sp031-library-cats`, `sp031-certificates`,
+`sp031-cert-requests`, `sp031-settings`, `sp031-integrations`, `sp031-add-head-modal`, `sp031-settings-dark`,
+`sp031-mobile` (219 total · 0 console errors).
+
+### What became deep (97 → 103; settings folds 0-delta; +staff/library/certificates)
+- **Users & Staff** (`sp031-staff`, `-rbac`): display-only directory + per-row kebab (View drawer · Edit/Duplicate
+  backendRequired modal with **no password / no salary** · display-only RBAC matrix drawer + Save gate · Category/
+  Activity drawers · Deactivate/Delete confirms that mutate nothing · Reset/Invite future-backend gates). The ONE
+  staff home (resolves the settingsUsers duplicate; the settings Users tab deep-links here).
+- **Materials & Library** (`sp031-library-en`, `-cats`): Content hub — Materials (bilingual subject catalog,
+  name-only modals) + Books (media rows with authored view/download **count literals**, filters, category drawer).
+  Add-Material/Upload/Download/Publish/Delete are gates — **no `type=file`, no download link, no fake publish**.
+- **Certificates** (`sp031-certificates`, `-cert-requests`): Templates (+ a **static, non-draggable designer
+  preview** — no `<canvas>`, no drag, no upload) + Requests queue. Approve/Reject/Generate/Preview/Download/Send/
+  Create/Upload = gates — **no PDF, no `window.open`, no status mutation**.
+- **Settings hub** (`sp031-settings`, `-integrations`, `-add-head-modal`, `-settings-dark`): 6 tabs (General ·
+  Notifications · Customization · Security · Users · Integrations). **Theme/language stay REAL**; every Save/
+  Connect/Test is a gate. General omits pay-rate/salary, folds Locations + a figure-free expense-heads lookup.
+  Notifications = figure-free matrix. Integrations = **locked-placeholder** provider cards (name + status only —
+  no credentials, no `type=password`, no webhook). Message-builder/backup/import = future-backend gates.
+- **Mobile** (`sp031-mobile`, 390px): staff directory reflows with no horizontal overflow.
+
+### Honesty / role laws / impact
+Every write is a `backendRequired`/`disabled-with-reason` gate or a `data-confirm` that mutates nothing — no fake
+settings save / user-RBAC mutation / upload-download / certificate-PDF generation / integration connect / backup.
+**0** `type=password`/`type=file`/api-key/secret/webhook/`<canvas>`/`.pdf`/`window.open` in any 031 body; **0**
+salary/pay figure (staff omits salary; heads name/status; notif `salaries` figure-free). Only `settings.html`
+changed among existing bodies; the 3 nav flips changed the shared sidebar (staff/books/certificates → anchors,
+proven the only change); teacher-portal ×16 + family + student + index + finance/reports bodies byte-identical.
+Protected role-law + 026-030 smoke asserts byte-verbatim. a11y critical=0 serious=0.

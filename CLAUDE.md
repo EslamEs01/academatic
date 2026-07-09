@@ -1,6 +1,39 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 030 — Admin Finance / Invoices / Payroll / Banks Deep Management is IMPLEMENTED**
-(awaiting the watcher commit; artifacts + `tasks.md` (55 tasks) + 24 contracts at
+Active feature: **Spec 031 — Admin Management / Content / Certificates / Settings / Materials Deep Management is
+IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (74 tasks) + 24 contracts at
+`academy-dashboard-discovery/specs/031-admin-management-content-certificates-settings-materials/`). **Count 97 →
+103** (+6). Settings-category items **fold into `settings.html`** as a 6-tab hub (General·Notifications·
+Customization·Security·Users·Integrations — the finance.html/Spec-030 precedent, 0-delta; theme/lang stay REAL);
+the `admin`-category surfaces became **3 focused pages**: **`staff.html`** (display-only directory + `staffMenu`
+kebab on the EXISTING `data-row-menu` — View drawer/Edit-Duplicate modal **no password+no salary**/display-only
+RBAC matrix drawer+Save gate/Category+Activity drawers/Deactivate-Delete confirms no-mutation/Reset-Invite gates;
+the ONE staff home, resolves settingsUsers dup), **`library.html`** (Materials subject catalog + Books media
+catalog tabs; count-literal views/downloads; category drawer; Add/Upload/Download/Publish/Delete gates — **no
+`type=file`**; `materials` folded), **`certificates.html`** (Templates + a **STATIC designer preview** [CSS-
+positioned spans, NO `<canvas>`/drag/upload/render-commands] + Requests tabs; Approve/Reject/Generate/Preview/
+Download/Send/Create/Upload gates — no PDF/window.open/mutation; `certificateRequests` folded). Settings General
+omits pay-rate/salary (non-numeric "managed in Finance" pointer) + folds Locations slice + figure-free
+**expense-heads** lookup (name/status, NO amount); Notifications = figure-free event×channel matrix; Integrations
+= **locked-placeholder** provider cards (name+status only) — payment-gateway/payout/WhatsApp/Email/backup/import/
+message-builder → future-backend gates, **NEVER `type=password`/API-key/secret/webhook**. New fixtures
+`staff-management`/`content-library`/`certificates`/`settings-management` (authored, no PII/pay/secret/file) +
+`ar/en.adm.js` (mirrored, **391 keys each, 0 divergence**); reused tabs/directory-card/filter-bar/preview-drawer/
+confirm-modal/settings-section — **no new hook/storage key/engine/CSS-framework** (only additive `.cert-stage`).
+`nav.config.js` = exactly **3 flips** (`staff`/`books`/`certificates` planned→implemented+route); `materials`/
+`certificateRequests`/six `settings*` stay `planned` (folded). **Verified**: build 103; smoke PASS (102 loads;
+additive Spec-031 honesty block: per-page no-`type=password`/`type=file`/canvas/drag/pdf/credential-input +
+figure-free + gates + tabs-render-and-switch + staff-kebab+RBAC-drawer + library-tabs + cert-static-designer +
+settings-6-tabs+real-theme; **payHit/tchPay/famPay/payFigure/child-view + 026/027/028/029/030 asserts
+BYTE-VERBATIM**); a11y critical=0 serious=0 (+12 rows); 219 screenshots 0 errors (11 sp031 frames). **Only
+`settings.html`/`.en` changed among existing bodies**; the 3 nav flips changed the shared sidebar (staff/books/
+certificates→anchors — PROVEN the only delta; every protected `#page-body` byte-identical); teacher-portal ×16 +
+all portal pages + index + finance/reports/teacher/family/student/dashboard **bodies** byte-identical;
+`package.json` 0-diff; no new dependency/engine/hook. Role laws green: teacher pay-free (portal byte-identical;
+admin staff omits salary), family zero-pay, student child-view, finance Spec-030 invariant. No salary/payout/
+compensation FIGURE, no computed metric, no chart/canvas, no credential/secret/`type=file`/`type=password`. Next:
+watcher commit.
+**History: Spec 030 — Admin Finance / Invoices / Payroll / Banks Deep Management is IMPLEMENTED**
+(committed HEAD `7c5ab7b`; artifacts + `tasks.md` (55 tasks) + 24 contracts at
 `academy-dashboard-discovery/specs/030-admin-finance-invoices-payroll-banks/`). **Count HELD 97 → 97 — ZERO
 new pages; `nav.config.js` 0-diff.** `finance.html` became a **tabbed hub** (Overview·Salaries·Banks via the
 existing `data-tab`) — the FIRST sanctioned modification of finance.html, via a **declared Spec-009

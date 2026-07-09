@@ -152,6 +152,19 @@ const MATRIX = [
   { page: 'teacher-reports', lang: 'ar', theme: 'dark' },
   { page: 'teacher-profile', lang: 'ar', theme: 'light' },
   { page: 'teacher-library', lang: 'ar', theme: 'light' },
+  // Spec 031 — Users&Staff / Library (materials+books) / Certificates (templates+requests) / Settings hub
+  { page: 'staff', lang: 'ar', theme: 'light' },
+  { page: 'staff', lang: 'en', theme: 'light' },
+  { page: 'staff', lang: 'ar', theme: 'dark' },
+  { page: 'library', lang: 'ar', theme: 'light' },
+  { page: 'library', lang: 'ar', theme: 'light', hash: '#view=books' },
+  { page: 'library', lang: 'en', theme: 'light' },
+  { page: 'certificates', lang: 'ar', theme: 'light' },
+  { page: 'certificates', lang: 'ar', theme: 'light', hash: '#view=requests' },
+  { page: 'certificates', lang: 'ar', theme: 'dark' },
+  { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations' },
+  { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=security' },
+  { page: 'settings', lang: 'en', theme: 'light', hash: '#view=users' },
 ];
 
 (async () => {

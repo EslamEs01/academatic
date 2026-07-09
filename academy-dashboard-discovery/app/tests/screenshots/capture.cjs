@@ -245,6 +245,18 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'banks', mgmtModal: 'fin.bank.addTitle', variant: 'sp030-add-bank-modal' },
   { page: 'finance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'salaries', variant: 'sp030-salaries-dark' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile', view: 'salaries', variant: 'sp030-mobile' },
+  // Spec 031 — admin management/content/certificates/settings deep management
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-staff' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'st-perm', variant: 'sp031-staff-rbac' },
+  { page: 'library', lang: 'en', theme: 'light', vp: 'desktop', view: 'books', variant: 'sp031-library-en' },
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', view: 'books', openDrawer: 'lib-cats', variant: 'sp031-library-cats' },
+  { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-certificates' },
+  { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', view: 'requests', variant: 'sp031-cert-requests' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-settings' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', variant: 'sp031-integrations' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', mgmtModal: 'adm.set.heads.addTitle', variant: 'sp031-add-head-modal' },
+  { page: 'settings', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'security', variant: 'sp031-settings-dark' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp031-mobile' },
   // Spec 027 — admin deep management: honest modals / drawer-pickers / row-kebab / gates
   { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', studentKebab: true, variant: 'sp027-row-kebab' },
   { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', openDrawer: 'stu-enroll', variant: 'sp027-enroll-picker' },

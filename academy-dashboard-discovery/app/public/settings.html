@@ -373,15 +373,15 @@
   </div><div class="cat-panel" id="catpanel-admin" role="tabpanel" tabindex="-1" aria-labelledby="railcat-admin" data-nav-panel="admin" hidden>
     <div class="cat-title">الإدارة</div>
     <nav class="panel-nav" aria-label="الإدارة">
-      <div class="space-y-1"><button type="button" class="nav-item is-planned" data-nav="staff" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span class="label">الفريق والصلاحيات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="materials" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+      <div class="space-y-1"><a href="staff.html" class="nav-item" data-nav="staff" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span class="label">الفريق والصلاحيات</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="materials" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span class="label">المواد التعليمية</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="books" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">المكتبة</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="certificates" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">الشهادات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="certificateRequests" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
+    </button><a href="library.html" class="nav-item" data-nav="books" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg><span class="label">المكتبة</span>
+  </a><a href="certificates.html" class="nav-item" data-nav="certificates" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">الشهادات</span>
+  </a><button type="button" class="nav-item is-planned" data-nav="certificateRequests" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
       <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg><span class="label">طلبات الشهادات</span><span class="nav-soon">قريبًا</span>
     </button></div>
       
@@ -465,58 +465,32 @@
       
     </div>
     
-    <div style="max-width:760px">
-      <section class="set-section" id="set-profile">
+    <div style="max-width:860px"><div class="tabs-wrap" data-tabs="settings">
+    <div class="tabs" role="tablist" aria-label="أقسام الإعدادات">
+      <button class="tab is-active" role="tab" id="tab-settings-general" data-tab="general" aria-controls="tabpanel-settings-general" aria-selected="true" tabindex="0"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>عام</span></button>
+      <button class="tab" role="tab" id="tab-settings-notifications" data-tab="notifications" aria-controls="tabpanel-settings-notifications" aria-selected="false" tabindex="-1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>الإشعارات</span></button>
+      <button class="tab" role="tab" id="tab-settings-customization" data-tab="customization" aria-controls="tabpanel-settings-customization" aria-selected="false" tabindex="-1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>التخصيص</span></button>
+      <button class="tab" role="tab" id="tab-settings-security" data-tab="security" aria-controls="tabpanel-settings-security" aria-selected="false" tabindex="-1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>الأمان</span></button>
+      <button class="tab" role="tab" id="tab-settings-users" data-tab="users" aria-controls="tabpanel-settings-users" aria-selected="false" tabindex="-1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span>المستخدمون</span></button>
+      <button class="tab" role="tab" id="tab-settings-integrations" data-tab="integrations" aria-controls="tabpanel-settings-integrations" aria-selected="false" tabindex="-1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span>التكاملات</span></button>
+    </div>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-settings-general" data-tabpanel="general" aria-labelledby="tab-settings-general"><section class="set-section" id="set-gen-identity">
     <div class="flex items-center gap-3 mb-2">
       <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
-      <div>
-        <h2 class="text-[15px] font-bold text-ink">ملف الأكاديمية</h2>
-        <p class="text-[12px]" style="color:var(--c-ink-3)">الاسم والشعار ومعلومات التواصل.</p>
+      <div><h2 class="text-[15px] font-bold text-ink">هوية الأكاديمية</h2>
       </div>
-    </div>
-    <div class="set-row">
-    <div class="min-w-0">
-      <div class="set-label">اسم الأكاديمية</div>
-      
-    </div>
-    <div class="shrink-0"><span class="font-medium text-[13px] text-ink">أكاديمية مشكاة</span></div>
-  </div><div class="set-row">
-    <div class="min-w-0">
-      <div class="set-label">البريد الإلكتروني</div>
-      
-    </div>
-    <div class="shrink-0"><span class="font-medium text-[13px] text-ink">admin@example.edu</span></div>
-  </div><div class="set-row">
-    <div class="min-w-0">
-      <div class="set-label">حفظ التغييرات</div>
-      
-    </div>
-    <div class="shrink-0"><button type="button" class="btn btn-primary btn-sm"   data-demo-action data-toast="سيتوفّر حفظ التغييرات بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ التغييرات</span></button></div>
-  </div>
-    
-  </section><section class="set-section" id="set-appearance">
+    </div><div class="set-row"><div class="min-w-0"><div class="set-label">اسم الأكاديمية</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">أكاديمية آفاق</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">النطاق</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">demo.academy</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">البريد</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">info@demo.academy</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">الهاتف</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">05xx-xx-0000</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">واتساب</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">05xx-xx-0000</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">قواعد أجور المعلمين تُدار ضمن قسم المالية.</div></div></div><div class="flex flex-wrap gap-2 mt-2"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.gen.logoReason" aria-disabled="true" title="رفع الشعار يتم عبر الخادم — لا يوجد رفع فعلي هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>شعار الأكاديمية</span></button><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.gen.saveReason" aria-disabled="true" title="الحفظ يحتاج ربط الخادم — لا يُحفَظ شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ التغييرات</span></button></div></section><section class="set-section" id="set-gen-loc">
     <div class="flex items-center gap-3 mb-2">
-      <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg></span>
-      <div>
-        <h2 class="text-[15px] font-bold text-ink">المظهر</h2>
-        <p class="text-[12px]" style="color:var(--c-ink-3)">السمة واللغة الافتراضية للوحة التحكم.</p>
+      <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-map-pin"></use></svg></span>
+      <div><h2 class="text-[15px] font-bold text-ink">الموقع</h2>
       </div>
-    </div>
-    <div class="set-row">
-    <div class="min-w-0">
-      <div class="set-label">السمة</div>
-      
-    </div>
-    <div class="shrink-0"><div class="tabs"><button type="button" class="tab" data-set-theme="light" data-theme-opt="light"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg><span>فاتح</span></button><button type="button" class="tab" data-set-theme="dark" data-theme-opt="dark"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-moon"></use></svg><span>داكن</span></button><button type="button" class="tab" data-set-theme="system" data-theme-opt="system"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-monitor"></use></svg><span>حسب النظام</span></button></div></div>
-  </div><div class="set-row">
-    <div class="min-w-0">
-      <div class="set-label">اللغة</div>
-      
-    </div>
-    <div class="shrink-0"><div class="tabs"><button type="button" class="tab" data-set-lang="ar" data-lang-opt="ar"><span>العربية</span></button><button type="button" class="tab" data-set-lang="en" data-lang-opt="en"><span>English</span></button></div></div>
-  </div>
-    
-  </section><section class="set-section" id="set-notif">
+    </div><div class="set-row"><div class="min-w-0"><div class="set-label">الدولة</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">السعودية</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">المدينة</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">الرياض</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">المنطقة الزمنية</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">GMT+3</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">العنوان</div></div><div class="shrink-0"><span class="font-medium text-[13px] text-ink">حي النخيل، الرياض</span></div></div></section><section class="set-section" id="set-gen-heads">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg></span>
+      <div><h2 class="text-[15px] font-bold text-ink">بنود المصروفات</h2>
+      <p class="text-[12px]" style="color:var(--c-ink-3)">قائمة تصنيف — الاسم والحالة فقط، دون أي مبالغ.</p></div>
+    </div><div class="set-row"><div class="min-w-0"><div class="set-label">الإيجار</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">المرافق</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">اللوازم</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">التسويق</div></div><div class="shrink-0"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>غير نشط</span></span></div></div><div class="mt-2"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="adm.set.heads.addTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة بند</span></button></div></section></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-settings-notifications" data-tabpanel="notifications" aria-labelledby="tab-settings-notifications" hidden><section class="set-section" id="set-notif">
     <div class="flex items-center gap-3 mb-2">
       <span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg></span>
       <div>
@@ -544,7 +518,65 @@
     <div class="shrink-0"><button type="button" class="toggle" disabled aria-disabled="true" title="تتطلب وحدة الفوترة (خارج النطاق الحالي)." aria-label="تتطلب وحدة الفوترة (خارج النطاق الحالي)."><span class="knob"></span></button></div>
   </div>
     
-  </section><section class="set-section" id="set-account">
+  </section><section class="set-section" id="set-notif-matrix">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg></span>
+      <div><h2 class="text-[15px] font-bold text-ink">مصفوفة الإشعارات</h2>
+      </div>
+    </div><div class="set-row">
+    <div class="min-w-0"><div class="set-label">تحديثات الدورات</div>
+      <div class="set-help">التطبيق</div></div>
+    <div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُفعّل</span></span></div>
+  </div><div class="set-row">
+    <div class="min-w-0"><div class="set-label">تحديثات الحصص</div>
+      <div class="set-help">التطبيق</div></div>
+    <div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُفعّل</span></span></div>
+  </div><div class="set-row">
+    <div class="min-w-0"><div class="set-label">تذكير الحصص</div>
+      <div class="set-help">واتساب</div></div>
+    <div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُفعّل</span></span></div>
+  </div><div class="set-row">
+    <div class="min-w-0"><div class="set-label">الفواتير</div>
+      <div class="set-help">البريد</div></div>
+    <div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>مُفعّل</span></span></div>
+  </div><div class="set-row">
+    <div class="min-w-0"><div class="set-label">إشعار الرواتب</div>
+      <div class="set-help">التطبيق</div></div>
+    <div class="shrink-0"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>متوقف</span></span></div>
+  </div><div class="set-row">
+    <div class="min-w-0"><div class="set-label">حالة العائلة</div>
+      <div class="set-help">البريد</div></div>
+    <div class="shrink-0"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>متوقف</span></span></div>
+  </div><div class="mt-2"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.notif.saveReason" aria-disabled="true" title="الحفظ يحتاج ربط الخادم — لا يُحفَظ شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ التغييرات</span></button></div></section></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-settings-customization" data-tabpanel="customization" aria-labelledby="tab-settings-customization" hidden><section class="set-section" id="set-appearance">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg></span>
+      <div>
+        <h2 class="text-[15px] font-bold text-ink">المظهر</h2>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">السمة واللغة الافتراضية للوحة التحكم.</p>
+      </div>
+    </div>
+    <div class="set-row">
+    <div class="min-w-0">
+      <div class="set-label">السمة</div>
+      
+    </div>
+    <div class="shrink-0"><div class="tabs"><button type="button" class="tab" data-set-theme="light" data-theme-opt="light"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg><span>فاتح</span></button><button type="button" class="tab" data-set-theme="dark" data-theme-opt="dark"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-moon"></use></svg><span>داكن</span></button><button type="button" class="tab" data-set-theme="system" data-theme-opt="system"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-monitor"></use></svg><span>حسب النظام</span></button></div></div>
+  </div><div class="set-row">
+    <div class="min-w-0">
+      <div class="set-label">اللغة</div>
+      
+    </div>
+    <div class="shrink-0"><div class="tabs"><button type="button" class="tab" data-set-lang="ar" data-lang-opt="ar"><span>العربية</span></button><button type="button" class="tab" data-set-lang="en" data-lang-opt="en"><span>English</span></button></div></div>
+  </div>
+    
+  </section><section class="set-section" id="set-cust-brand">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="medallion m-soft tone-violet medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
+      <div><h2 class="text-[15px] font-bold text-ink">ألوان العلامة والحالات</h2>
+      </div>
+    </div><div class="set-row"><div class="min-w-0"><div class="set-label">اللون الأساسي</div></div><div class="shrink-0 flex items-center gap-2"><span style="display:inline-block;width:18px;height:18px;border-radius:5px;border:1px solid var(--c-line);background:#6d5efc"></span><span class="text-[12px] tabular" style="color:var(--c-ink-3)">#6d5efc</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">اللون الثانوي</div></div><div class="shrink-0 flex items-center gap-2"><span style="display:inline-block;width:18px;height:18px;border-radius:5px;border:1px solid var(--c-line);background:#12b5a5"></span><span class="text-[12px] tabular" style="color:var(--c-ink-3)">#12b5a5</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">حصة جارية</div></div><div class="shrink-0 flex items-center gap-2"><span style="display:inline-block;width:18px;height:18px;border-radius:5px;border:1px solid var(--c-line);background:#3aa0ff"></span><span class="text-[12px] tabular" style="color:var(--c-ink-3)">#3aa0ff</span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">حضور</div></div><div class="shrink-0 flex items-center gap-2"><span style="display:inline-block;width:18px;height:18px;border-radius:5px;border:1px solid var(--c-line);background:#2fbf71"></span><span class="text-[12px] tabular" style="color:var(--c-ink-3)">#2fbf71</span></div></div><div class="flex flex-wrap gap-2 mt-2"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.cust.brandSaveReason" aria-disabled="true" title="حفظ الألوان يحتاج ربط الخادم — لا يُحفَظ شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الألوان</span></button><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.cust.msgBuilderReason" aria-disabled="true" title="مُنشئ الرسائل يُتاح عبر الخادم لاحقًا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span>مُنشئ الرسائل</span></button></div></section></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-settings-security" data-tabpanel="security" aria-labelledby="tab-settings-security" hidden><section class="set-section" id="set-account">
     <div class="flex items-center gap-3 mb-2">
       <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg></span>
       <div>
@@ -566,8 +598,18 @@
     <div class="shrink-0"><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إعادة ضبط البيانات التجريبية؟" data-confirm-msg="سيعيد هذا ضبط القيم التجريبية في الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إعادة الضبط" data-confirm-toast="سيتوفّر إعادة الضبط بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>إعادة ضبط البيانات التجريبية</span></button></div>
   </div>
     
-  </section>
-      <section class="set-section" id="set-roles">
+  </section><section class="set-section" id="set-sec-policies">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-reports"></use></svg></span>
+      <div><h2 class="text-[15px] font-bold text-ink">السياسات</h2>
+      </div>
+    </div><div class="mb-3"><div class="font-bold text-[13px] text-ink mb-1">سياسة العائلات</div><p class="text-[12.5px]" style="color:var(--c-ink-2);line-height:1.6">تُوضّح هذه السياسة شروط الاشتراك والحضور والإلغاء للعائلات. النص للعرض فقط ويُحرَّر عبر الخادم.</p></div><div class="mb-3"><div class="font-bold text-[13px] text-ink mb-1">سياسة المعلمين</div><p class="text-[12.5px]" style="color:var(--c-ink-2);line-height:1.6">تُوضّح هذه السياسة التزامات المعلمين بالجدول والتحضير والتقييم. النص للعرض فقط ويُحرَّر عبر الخادم.</p></div><div class="flex flex-wrap gap-2 mt-1"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.sec.polEditReason" aria-disabled="true" title="تحرير السياسات يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>تعديل السياسة</span></button><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.sec.backupReason" aria-disabled="true" title="النسخ الاحتياطي والاستعادة يتمان عبر الخادم — لا يوجد تنزيل/رفع هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>نسخة احتياطية</span></button><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.sec.importReason" aria-disabled="true" title="الاستيراد يتم عبر الخادم — لا يوجد رفع ملفات هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>استيراد بيانات</span></button></div></section></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-settings-users" data-tabpanel="users" aria-labelledby="tab-settings-users" hidden><section class="set-section" id="set-users-open">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg></span>
+      <div><h2 class="text-[15px] font-bold text-ink">المستخدمون والأدوار</h2>
+      <p class="text-[12px]" style="color:var(--c-ink-3)">ملخص للعرض فقط — الإدارة الكاملة في صفحة المستخدمين والطاقم.</p></div>
+    </div><a class="btn btn-secondary btn-sm" href="staff.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-staff"></use></svg><span>فتح دليل المستخدمين والطاقم</span></a></section><section class="set-section" id="set-roles">
     <div class="flex items-center gap-3 mb-2">
       <span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg></span>
       <div>
@@ -599,8 +641,91 @@
       <div class="font-bold text-[12.5px] text-ink mb-1.5">الإعدادات</div>
       <div class="perm-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>عرض</span></div><div class="perm-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>إدارة</span></div>
     </div></div>
-  </section>
+  </section></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-settings-integrations" data-tabpanel="integrations" aria-labelledby="tab-settings-integrations" hidden><section class="set-section" id="set-integ">
+    <div class="flex items-center gap-3 mb-2">
+      <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div><h2 class="text-[15px] font-bold text-ink">التكاملات</h2>
+      <p class="text-[12px]" style="color:var(--c-ink-3)">بطاقات مزوّدين للعرض فقط — دون بيانات اعتماد أو أسرار.</p></div>
+    </div><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">حالة واتساب: غير مربوط</p><div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"><div class="card p-4 flex flex-col gap-3" data-integration="ig1">
+    <div class="flex items-center gap-3">
+      <span class="medallion m-soft tone-neutral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div class="min-w-0"><h3 class="font-bold text-ink text-[14px] truncate">Stripe</h3>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">دفع</p></div>
+      <div class="ms-auto"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>متاح للربط</span></span></div>
     </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.connectReason" aria-disabled="true" title="الربط يتم عبر الخادم — لا تُعرض بيانات اعتماد هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>ربط</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button>
+    </div>
+  </div><div class="card p-4 flex flex-col gap-3" data-integration="ig2">
+    <div class="flex items-center gap-3">
+      <span class="medallion m-soft tone-neutral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div class="min-w-0"><h3 class="font-bold text-ink text-[14px] truncate">PayPal</h3>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">دفع</p></div>
+      <div class="ms-auto"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>متاح للربط</span></span></div>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.connectReason" aria-disabled="true" title="الربط يتم عبر الخادم — لا تُعرض بيانات اعتماد هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>ربط</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button>
+    </div>
+  </div><div class="card p-4 flex flex-col gap-3" data-integration="ig3">
+    <div class="flex items-center gap-3">
+      <span class="medallion m-soft tone-neutral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div class="min-w-0"><h3 class="font-bold text-ink text-[14px] truncate">Paymob</h3>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">دفع</p></div>
+      <div class="ms-auto"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>غير مربوط</span></span></div>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.connectReason" aria-disabled="true" title="الربط يتم عبر الخادم — لا تُعرض بيانات اعتماد هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>ربط</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button>
+    </div>
+  </div><div class="card p-4 flex flex-col gap-3" data-integration="ig4">
+    <div class="flex items-center gap-3">
+      <span class="medallion m-soft tone-neutral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div class="min-w-0"><h3 class="font-bold text-ink text-[14px] truncate">Paymob Payout</h3>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">صرف</p></div>
+      <div class="ms-auto"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>غير مربوط</span></span></div>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.connectReason" aria-disabled="true" title="الربط يتم عبر الخادم — لا تُعرض بيانات اعتماد هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>ربط</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button>
+    </div>
+  </div><div class="card p-4 flex flex-col gap-3" data-integration="ig5">
+    <div class="flex items-center gap-3">
+      <span class="medallion m-soft tone-neutral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div class="min-w-0"><h3 class="font-bold text-ink text-[14px] truncate">Payoneer</h3>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">صرف</p></div>
+      <div class="ms-auto"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>غير مربوط</span></span></div>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.connectReason" aria-disabled="true" title="الربط يتم عبر الخادم — لا تُعرض بيانات اعتماد هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>ربط</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button>
+    </div>
+  </div><div class="card p-4 flex flex-col gap-3" data-integration="ig6">
+    <div class="flex items-center gap-3">
+      <span class="medallion m-soft tone-neutral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div class="min-w-0"><h3 class="font-bold text-ink text-[14px] truncate">واتساب (مجاني)</h3>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">واتساب</p></div>
+      <div class="ms-auto"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>متاح للربط</span></span></div>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.connectReason" aria-disabled="true" title="الربط يتم عبر الخادم — لا تُعرض بيانات اعتماد هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>ربط</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button>
+    </div>
+  </div><div class="card p-4 flex flex-col gap-3" data-integration="ig7">
+    <div class="flex items-center gap-3">
+      <span class="medallion m-soft tone-neutral medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
+      <div class="min-w-0"><h3 class="font-bold text-ink text-[14px] truncate">البريد / SMTP</h3>
+        <p class="text-[12px]" style="color:var(--c-ink-3)">بريد</p></div>
+      <div class="ms-auto"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>غير مربوط</span></span></div>
+    </div>
+    <div class="flex flex-wrap gap-1.5">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.connectReason" aria-disabled="true" title="الربط يتم عبر الخادم — لا تُعرض بيانات اعتماد هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>ربط</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button>
+    </div>
+  </div></div></section></section>
+  </div></div>
   </div>
       </main>
     </div>

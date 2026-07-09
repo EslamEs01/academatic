@@ -36,6 +36,10 @@ import { renderFinance } from '../src/js/pages/finance.js';
 import { renderSessionsAnalysis } from '../src/js/pages/sessions-analysis.js';
 import { renderPublicHoliday } from '../src/js/pages/public-holiday.js';
 import { renderScheduledActions } from '../src/js/pages/scheduled-actions.js';
+// Spec 031 — admin management/content/certificates deep management (admin shell)
+import { renderStaff } from '../src/js/pages/staff.js';
+import { renderLibrary } from '../src/js/pages/library.js';
+import { renderCertificates } from '../src/js/pages/certificates.js';
 // Spec 012 — role portal foundation (portal shell, not the admin shell)
 import { portalShellMarkup } from '../src/js/components/portal-shell.js';
 import { renderPortalsHub } from '../src/js/pages/portals.js';
@@ -106,6 +110,10 @@ const PAGES = [
   { base: 'sessions-analysis', activeId: 'sessionsAnalysis', titleKey: 'sa.title', crumbKey: 'nav.sessionsAnalysis', render: renderSessionsAnalysis },
   { base: 'public-holiday', activeId: 'publicHoliday', titleKey: 'ph.title', crumbKey: 'nav.publicHoliday', render: renderPublicHoliday },
   { base: 'scheduled-actions', activeId: 'scheduledActions', titleKey: 'sca.title', crumbKey: 'nav.scheduledActions', render: renderScheduledActions },
+  // Spec 031 — Users&Staff / Content library (materials+books) / Certificates (templates+requests)
+  { base: 'staff', activeId: 'staff', titleKey: 'topbar.title.staff', crumbKey: 'topbar.crumb.staff', render: renderStaff },
+  { base: 'library', activeId: 'books', titleKey: 'topbar.title.library', crumbKey: 'topbar.crumb.library', render: renderLibrary },
+  { base: 'certificates', activeId: 'certificates', titleKey: 'topbar.title.certificates', crumbKey: 'topbar.crumb.certificates', render: renderCertificates },
   // Spec 012 — role portal foundation (portal shell; NOT admin nav pages; hub = the documented demo entry)
   { base: 'portals', shell: 'portal', role: 'hub', activeId: null, titleKey: 'prt.title.hub', render: renderPortalsHub },
   { base: 'student-portal', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: null, titleKey: 'prt.title.student', render: renderStudentPortal },

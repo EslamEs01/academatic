@@ -349,3 +349,39 @@ settings route to future-backend/031 — never mocked; no secret/API-key rendere
 and family payment stay excluded (pay-free / zero-pay laws). **Only `finance.html`/`.en` changed**; teacher-
 portal ×16 + teacher-performance + family + student + reports + index byte-identical; `package.json`/
 `nav.config.js`/`enhance.js`/`finance-status.js` 0-diff. Build 97; smoke PASS; a11y 0/0; screenshots 0 errors.
+
+## Spec 031 — Admin Management / Content / Certificates / Settings / Materials
+
+Deepened the remaining **non-finance** admin domain — staff/users/RBAC, materials, books/library, certificates
+(+requests), and the six settings sub-domains + integrations — **without faking any settings save, user/permission
+mutation, file upload/download, certificate/PDF generation, integration connection, or backup**. Count **97 → 103**:
+the settings sub-domains **fold into the existing `settings.html`** as a 6-tab hub (0-delta, the finance-hub
+precedent), and the `admin`-category surfaces become three focused pages.
+
+- **`staff.html`** (`staff`→implemented): display-only staff directory + a per-row kebab (View drawer · Edit/
+  Duplicate backendRequired modal — **no password, no salary field** · display-only RBAC matrix drawer + Save
+  gate · Category/Activity drawers · Deactivate/Delete confirms that mutate nothing · Reset/Invite future-backend
+  gates). The single staff home (the `settingsUsers` nav folds here via a Users-tab deep-link).
+- **`library.html`** (`books`→implemented; `materials` folds in): a Content hub with **Materials** (bilingual
+  subject catalog, name-only modals) and **Books** (media rows with authored view/download **count literals**,
+  type/category filters, category drawer). Add-Material/Upload/Download/Publish/Delete are gates — **no `type=file`,
+  no download link**.
+- **`certificates.html`** (`certificates`→implemented; `certificateRequests` folds in): **Templates** (+ a
+  **static, non-draggable designer preview** — CSS-positioned label spans over a band; no `<canvas>`, no
+  jQuery-UI, no upload, no server render commands) and **Requests** queue. Approve/Reject/Generate/Preview/
+  Download/Send/Create/Upload are gates — **no PDF, no `window.open`, no status mutation**.
+- **`settings.html` hub**: 6 tabs (General · Notifications · Customization · Security · Users · Integrations).
+  The existing **theme/language controls stay genuinely functional**; every Save/Connect/Test is a
+  backendRequired gate. General omits pay-rate/salary (a non-numeric "managed in Finance" pointer) and folds the
+  Locations slice + a figure-free **expense-heads** lookup (name/status, no amount). Notifications = a figure-free
+  event×channel matrix. Integrations = **locked-placeholder** provider cards (name + status only) — payment-
+  gateway/payout/WhatsApp/Email credentials route to future-backend, **never a `type=password`/API-key/webhook**.
+
+**Django note**: each surface is baked static HTML over `{% for %}` display records; the settings hub + library +
+certificates tabs are `data-tabpanel`s; every write (Add/Edit/Delete/Approve/Generate/Upload/Connect/Save) is a
+`data-modal-trigger`/`data-confirm`/`data-disabled-reason` final behind `{% if backend %}` — nothing persists,
+generates, uploads, connects, or produces a file. The staff kebab reuses the existing `data-row-menu` dispatch (a
+`staff` branch — no new hook). **Only `settings.html` changed among existing page bodies**; the 3 nav promotions
+changed the shared sidebar (staff/books/certificates → anchors); teacher-portal ×16 + family + student + index +
+finance/reports bodies byte-identical; `package.json`/no new dependency/engine/hook 0-diff. Build 103; smoke PASS;
+a11y 0/0; screenshots 0 errors.

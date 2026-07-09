@@ -139,6 +139,24 @@ function teacherMenu(id) {
     <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('trn.act.delTitle'))}" data-confirm-msg="${esc(t('trn.act.delMsg'))}" data-confirm-cta="${esc(t('trn.act.delCta'))}" data-confirm-toast="${esc(t('trn.act.delToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('trn.act.del')}</span></button>
   </div>`;
 }
+/* Spec 031 — staff-card kebab. View/Permissions/Category/Activity open read-only drawers;
+ * Edit/Duplicate open honest backendRequired modals; Reset-password is a future-backend gate;
+ * Deactivate/Delete confirm and mutate NOTHING. NO password, NO salary. Routed by the EXISTING
+ * data-row-menu dispatch (a 'staff' branch) — no new hook, no persistence. */
+function staffMenu(id) {
+  return `<div>
+    <button class="menu-item" role="menuitem" data-drawer="st-view-${esc(id)}">${icon('user', 'ico')}<span>${t('adm.staff.view')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="adm.staff.editTitle" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('adm.common.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="st-perm">${icon('lock', 'ico')}<span>${t('adm.staff.perm.open')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="st-cat">${icon('filter', 'ico')}<span>${t('adm.staff.cat.open')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="st-activity">${icon('reports', 'ico')}<span>${t('adm.staff.activity.open')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="adm.staff.duplicateTitle" data-modal-note-key="common.backendRequiredNote">${icon('user-plus', 'ico')}<span>${t('adm.staff.dup')}</span></button>
+    <button class="menu-item" role="menuitem" aria-disabled="true" data-disabled-reason data-reason-key="adm.staff.resetReason" title="${esc(t('adm.staff.resetReason'))}">${icon('rotate-cw', 'ico')}<span>${t('adm.staff.reset')}</span></button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('adm.staff.deactTitle'))}" data-confirm-msg="${esc(t('adm.staff.deactMsg'))}" data-confirm-cta="${esc(t('adm.staff.deactCta'))}" data-confirm-toast="${esc(t('adm.staff.deactToast'))}">${icon('pause-circle', 'ico')}<span>${t('adm.staff.deact')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('adm.staff.delTitle'))}" data-confirm-msg="${esc(t('adm.staff.delMsg'))}" data-confirm-cta="${esc(t('adm.staff.delCta'))}" data-confirm-toast="${esc(t('adm.staff.delToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('adm.staff.del')}</span></button>
+  </div>`;
+}
 /* Spec 026 — the honest fallback: an action with no real destination announces that
  * it needs the server, never claims a preview/save happened. Feeds every demo-action
  * without a custom toast, the noop menu items, and the no-dead-button catch-all. */
@@ -554,7 +572,7 @@ document.addEventListener('click', (e) => {
   if (trg.hasAttribute('data-row-menu')) {
     const rid = trg.getAttribute('data-row-menu');
     const kind = trg.getAttribute('data-row-menu-kind');
-    return void openPopover(trg, kind === 'family' ? familyMenu(rid) : kind === 'student' ? studentMenu(rid) : kind === 'teacher' ? teacherMenu(rid) : rowMenu(rid));
+    return void openPopover(trg, kind === 'family' ? familyMenu(rid) : kind === 'student' ? studentMenu(rid) : kind === 'teacher' ? teacherMenu(rid) : kind === 'staff' ? staffMenu(rid) : rowMenu(rid));
   }
   if (trg.hasAttribute('data-modal-trigger')) { closeMenu(); return openModal(trg); }
   switch (trg.getAttribute('data-action')) {

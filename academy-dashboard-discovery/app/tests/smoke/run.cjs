@@ -9,6 +9,8 @@ const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedu
   'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
   // Spec 026 — the three new admin ops pages
   'sessions-analysis', 'public-holiday', 'scheduled-actions',
+  // Spec 031 — Users&Staff / Content library / Certificates (settings folds into the existing settings page)
+  'staff', 'library', 'certificates',
   'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
   'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
@@ -1053,6 +1055,77 @@ const FILTER_SPEC = {
         ok(salVisible, `${page}/${lang}: Salaries tab did not become visible on click`);
         const ovTab = await p.$('[data-tabs="finance"] [data-tab="overview"]');
         if (ovTab) { await ovTab.click(); await p.waitForTimeout(120); }
+      }
+
+      // ── Spec 031 — admin management/content/certificates/settings honesty ──
+      // Display is allowed; every write/secret/file/generation is a gate. Provider names
+      // (Paymob/Payoneer/Stripe) + "no secrets shown" reason text are LEGITIMATE on the
+      // settings Integrations tab, so credential checks target real INPUTS (DOM), not words.
+      if (page === 'staff' || page === 'library' || page === 'certificates' || page === 'settings') {
+        const a31 = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const html = body.innerHTML;
+          const txt = body.innerText;
+          const q = (s) => body.querySelectorAll(s).length;
+          const credInputs = [...body.querySelectorAll('input,textarea')]
+            .filter((i) => /pass|secret|api|key|token|webhook|card|cvv/i.test((i.getAttribute('name') || '') + ' ' + (i.getAttribute('id') || ''))).length;
+          return {
+            passwordInputs: q('input[type="password"]'),
+            fileInputs: q('input[type="file"]'),
+            canvas: q('canvas'),
+            credInputs,
+            gates: q('[data-disabled-reason]'),
+            noPdf: !/\.pdf"|\.csv"|\.xlsx"|blob:|createObjectURL|window\.open|download=/i.test(html),
+            noDrag: !/ui-draggable|draggable="true"|json_data|apexcharts|chart\.js|<canvas/i.test(html),
+            currency: (txt.match(/ريال|\bSAR\b|جنيه|\bEGP\b|\bAED\b|\bEUR\b|[$€£]/g) || []).length,
+            tabIds: [...body.querySelectorAll('[data-tabs] [data-tab]')].map((b) => b.getAttribute('data-tab')),
+            rows: q('[data-row]'),
+            rowMenuStaff: q('[data-row-menu-kind="staff"]'),
+            modalTriggers: q('[data-modal-trigger]'),
+            permTpl: q('template[data-preview="st-perm"]'),
+            certStage: q('.cert-stage'),
+            themeCtl: q('[data-set-theme]'),
+          };
+        });
+        // shared: no credential/file/canvas/pdf affordance; figure-free
+        ok(a31.passwordInputs === 0 && a31.fileInputs === 0, `${page}/${lang}: renders a type=password/type=file input (${a31.passwordInputs}/${a31.fileInputs}) — forbidden`);
+        ok(a31.canvas === 0 && a31.noDrag, `${page}/${lang}: a <canvas>/draggable-designer/chart-engine leaked into the 031 body`);
+        ok(a31.credInputs === 0, `${page}/${lang}: a credential-like input (password/secret/api/key/token/webhook) is rendered — 031 shows locked placeholders only`);
+        ok(a31.noPdf, `${page}/${lang}: a real file/pdf/download/window.open affordance leaked into the 031 body`);
+        ok(a31.currency === 0, `${page}/${lang}: a currency/pay figure appears in the 031 body — must be figure-free`);
+        if (page === 'staff') {
+          ok(a31.rows >= 5, `staff/${lang}: staff directory rows missing (${a31.rows})`);
+          ok(a31.rowMenuStaff >= 5, `staff/${lang}: per-row staff kebab missing (${a31.rowMenuStaff})`);
+          ok(a31.modalTriggers >= 1, `staff/${lang}: Add-member backendRequired modal missing`);
+          ok(a31.permTpl === 1, `staff/${lang}: display-only RBAC permission drawer missing`);
+        }
+        if (page === 'library') {
+          ok(JSON.stringify(a31.tabIds) === JSON.stringify(['materials', 'books']), `library/${lang}: content tabs wrong (${JSON.stringify(a31.tabIds)})`);
+          ok(a31.rows >= 6, `library/${lang}: book rows missing (${a31.rows})`);
+          ok(a31.gates >= 3, `library/${lang}: upload/download/publish gates missing (${a31.gates})`);
+        }
+        if (page === 'certificates') {
+          ok(JSON.stringify(a31.tabIds) === JSON.stringify(['templates', 'requests']), `certificates/${lang}: tabs wrong (${JSON.stringify(a31.tabIds)})`);
+          ok(a31.certStage === 1, `certificates/${lang}: static designer stage missing`);
+          ok(a31.gates >= 4, `certificates/${lang}: approve/reject/generate gates missing (${a31.gates})`);
+        }
+        if (page === 'settings') {
+          ok(JSON.stringify(a31.tabIds) === JSON.stringify(['general', 'notifications', 'customization', 'security', 'users', 'integrations']), `settings/${lang}: hub tabs wrong (${JSON.stringify(a31.tabIds)})`);
+          ok(a31.themeCtl >= 1, `settings/${lang}: real theme control missing — theme/lang must stay functional`);
+          ok(a31.gates >= 4, `settings/${lang}: settings save/connect/test gates missing (${a31.gates})`);
+        }
+        // a real static tab actually switches, then restore the first tab (localStorage safety)
+        const grp = page === 'settings' ? 'settings' : page === 'library' ? 'library' : page === 'certificates' ? 'certificates' : null;
+        if (grp) {
+          const secondTab = page === 'settings' ? 'notifications' : page === 'library' ? 'books' : 'requests';
+          const tb = await p.$(`[data-tabs="${grp}"] [data-tab="${secondTab}"]`);
+          if (tb) { await tb.click(); await p.waitForTimeout(120); }
+          const vis = await p.evaluate((tt) => { const s = document.querySelector(`[data-tabpanel="${tt}"]`); return !!s && !s.hidden; }, secondTab);
+          ok(vis, `${page}/${lang}: ${secondTab} tab did not become visible on click`);
+          const firstTab = page === 'settings' ? 'general' : page === 'library' ? 'materials' : 'templates';
+          const ft = await p.$(`[data-tabs="${grp}"] [data-tab="${firstTab}"]`);
+          if (ft) { await ft.click(); await p.waitForTimeout(100); }
+        }
       }
 
       // Spec 009 — Dashboard/Reports integration: no new finance chrome in the body,

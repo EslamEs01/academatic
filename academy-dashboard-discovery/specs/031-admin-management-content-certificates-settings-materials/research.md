@@ -1,0 +1,64 @@
+# Research & Decisions — Spec 031 (D1–D48)
+
+Format: **Decision · Rationale · Alternatives**. Grounded in the 8-agent audit + current-source reads (`settings.js`, `settings-section.js`, `fixtures/settings.js`, `tabs.js`, `finance.js`, `nav.config.js`, `build-html.mjs`, `enhance.js`).
+
+## Gate & baseline
+- **D1 — Evidence gate sufficient?** Decision: **Yes.** Rationale: 8-agent read-only audit path-cited every capability; gaps (Message-Builder 504, Locations page absence, RBAC count) recorded and resolved as excluded/gated/folded. Alt: re-crawl — rejected (no new legacy access; existing evidence complete).
+- **D2 — Spec 030 committed baseline?** Decision: **Yes**, HEAD `7c5ab7b` ("finance tabbed hub…"). Rationale: `git log` confirms; tree clean before 031 spec. Alt: n/a.
+- **D3 — Count = 97?** Decision: **Yes** (verified `find public -name '*.html' | wc -l` = 97; build reproduces 96+index). Alt: n/a.
+- **D4 — Final HTML target?** Decision: **103** (+6 = staff/library/certificates ×AR/EN; settings folds 0-delta). Rationale: settings-category folds into settings.html; the three admin-category surfaces are page-candidate-justified. Alt: 97 (fold all — rejected: folding admin-category items into a settings-category page breaks the rail IA and cramps a 170-row RBAC matrix); 105 (materials standalone too — rejected: wasteful, materials is thin and combines cleanly with books).
+
+## Fold strategy
+- **D5 — Settings hub fold?** Decision: wrap `renderSettings()` panels in `tabs({group:'settings', items:[general,notifications,customization,security,users,integrations]})`; preserve the real theme/lang controls. Rationale: exact finance.html precedent (`finance.js:275-283`); `settings.html` already exists + honest. Alt: keep flat scroll (rejected: 6 sub-domains need structure); new pages per sub-domain (rejected: count + the directive's no-pages list).
+- **D6 — Staff: page or settings tab?** Decision: **standalone `staff.html`**. Rationale: directory + kebab + ~170-row RBAC matrix + 3 drawers is too large for a settings tab and belongs to the `admin` rail category (distinct from settings); route `staff.html` already reserved (`nav.config.js:143`). Alt: settings "Users" tab (rejected: cramped, cross-category).
+- **D7 — Materials: page or fold?** Decision: **fold into `library.html`** as the Materials tab. Rationale: materials is a thin name/name_ar catalog — a lonely page; combines with books under one Content page for count discipline. Alt: standalone `materials.html` (rejected: wasteful).
+- **D8 — Books/library: page or fold?** Decision: **standalone `library.html`** hosting Materials + Books tabs; `books`→implemented→library.html. Rationale: books = media catalog + categories + filters (page-worthy); route `library.html` reserved. Alt: fold into settings (rejected: cross-category, cramped).
+- **D9 — Certificates: page or fold?** Decision: **standalone `certificates.html`** hosting Templates(+static designer) + Requests tabs. Rationale: templates + designer + approval queue = distinct workflow/entity; route `certificates.html` reserved; too large/distinct for settings. Alt: fold into library (rejected: mixes content-catalog with certificate-issuance).
+- **D10 — certificateRequests: fold or page?** Decision: **fold into `certificates.html`** as the Requests tab (stays `planned`). Rationale: requests is the demand side of the same certificate workflow; one page, two tabs. Alt: standalone (rejected: count; workflow cohesion).
+
+## Settings sub-domain fold details
+- **D11 — settingsGeneral fold?** Decision: General tab (identity rows + Locations slice + course-automation display + expense-heads lookup; Save/logo = gate; **pay-rate/salary omitted**).
+- **D12 — settingsIntegrations fold?** Decision: Integrations tab (locked-placeholder provider cards + Connect/Test/Configure future-backend gates; **no credentials**).
+- **D13 — settingsCustomization fold?** Decision: Customization tab (theme/lang REAL, preserved; brand/status colors display + Save gate; Message-Builder excluded).
+- **D14 — settingsNotifications fold?** Decision: Notifications tab (figure-free event×role×channel matrix + Save gate; extends `#set-notif`).
+- **D15 — settingsSecurity fold?** Decision: Security tab (2FA gate extending `#set-account` + Family/Teacher policy display-only text + edit gate; backup/import excluded/gate).
+- **D16 — settingsUsers duplicate resolution (B-16)?** Decision: `staff.html` is the ONE staff home; the settings **Users** tab shows the compact RBAC preview (`rolesSection`) + a real deep-link to `staff.html`; `settingsUsers` nav stays `planned` (folded). Rationale: single source of truth; honest deep-link, no duplicate directory. Alt: two staff surfaces (rejected: B-16 forbids).
+- **D17 — Expense-heads placement?** Decision: **fold as a name/status lookup inside the settings General tab** (no amount). Rationale: `030/future-owner-register.md` re-deferred it to 031, figure-free; no sidebar item in legacy (in-page link only). Alt: standalone page (rejected: no IA slot, thin, finance-adjacent).
+- **D18 — Locations slice placement?** Decision: **fold into settings General** (country/city/timezone/address display slice). Rationale: B-02/M-04 — no crawled page, RBAC-group-name only; legacy general settings already carries these fields. Alt: dedicated Locations page (rejected: no evidence).
+- **D19 — backup/import/message-builder strategy?** Decision: Security tab hosts a **backup/import locked/excluded gate** (no `type=file`, no `backup_email`, no template); **Message-Builder = generic future-backend gate** (504, no invented fields). Rationale: destructive/credential/no-evidence. Alt: build them (rejected: law).
+- **D20 — payment-gateway/payout-provider settings gate?** Decision: **future-backend** locked-placeholder cards in Integrations (name + status only, no config surface, no credentials). Rationale: Spec-030 boundary + secret risk. Alt: config forms (rejected: `type=password`/webhook/secret).
+- **D21 — WhatsApp/email locked-placeholder?** Decision: Integrations tab cards showing authored status only (no phone input, no pairing wizard, no `smtp_password`, no real PII); Connect/Test = future-backend gate. Rationale: credential/PII risk. Alt: pairing wizard (rejected).
+
+## Behavior strategies
+- **D22 — Staff Add/Edit modal fields?** Decision: name/username/phone/email/role-select/status-select ONLY in a backendRequired modal; **no `type=password`, no salary field**. Alt: full legacy form (rejected: law).
+- **D23 — RBAC matrix?** Decision: display-only grouped matrix (≈17 groups, authored granted/not chips) + Save gate; toggling mutates nothing. Alt: functional checkboxes (rejected: no engine).
+- **D24 — Category-scope / activity-log?** Decision: read-only drawers; category assign = gate. Alt: functional assign (rejected).
+- **D25 — Materials/books upload/download/publish/delete?** Decision: all backendRequired/disabled-reason gates; **no `type=file`, no download href, no publish mutation**. Alt: real controls (rejected: law).
+- **D26 — Certificate designer?** Decision: **static baked preview** of an authored template layout (positioned labels over a background image `div`, CSS only) — no drag, no `<canvas>`, no jQuery-UI, no upload, no `json_data`/FPDF. Alt: interactive designer (rejected: fake-gen).
+- **D27 — Certificate PDF/preview/download/send gate?** Decision: Approve/Reject/Generate/Preview/Download/Send/Create/Upload = gates; **no `.pdf`/`blob:`/`window.open`, no send, no status mutation**. Alt: real preview (rejected).
+- **D28 — No `type=file` strategy?** Decision: every upload (Add-Material/thumbnail/logo/import/upload-cert) = disabled-with-reason gate; smoke `noFile` on all 031 bodies.
+- **D29 — No `type=password`/secret/API/webhook?** Decision: credentials never rendered; integration cards = locked placeholders; smoke `noSecret`.
+- **D30 — No fake settings save?** Decision: Save = gate; toggles authored-state only; smoke `FAKE`-guard clean + no-mutation snapshot.
+- **D31 — No fake user/RBAC mutation?** Decision: Add/Edit=modal, Delete/Deactivate/Activate=confirm, Save-permissions=gate; no chip/row/`checked` change before/after; smoke no-mutation snapshot.
+- **D32 — No fake certificate/file generation?** Decision: static preview + gates; smoke `noCanvas`/`noDrag`/`noPdf`/`noFile`.
+
+## Implementation mechanics
+- **D33 — Fixture strategy?** Decision: 4 new display-only fixtures (`staff-management`, `content-library`, `certificates`, `settings-management`); authored fake data; no computed/pay/PII/secret/file values; count literals only.
+- **D34 — Locale strategy?** Decision: new mirrored `ar.adm.js`/`en.adm.js`; registered via 2 imports + 2 `deepMerge` in `i18n.js`; dotted keys (`adm.staff.*`, `adm.lib.*`, `adm.cert.*`, `adm.set.*`); AR/EN key-parity enforced; no raw keys.
+- **D35 — CSS strategy?** Decision: **additive only** — a few classes if needed (staff card, RBAC matrix grid, locked-placeholder card, static designer preview); reuse `.set-section`/`.tbl`/`.sheet-*`/chips; no new animation engine; no new tokens. Alt: broad restyle (rejected).
+- **D36 — Closed hook strategy?** Decision: reuse the closed `data-*` set; `staffMenu` = one branch on the existing `data-row-menu` dispatch; **no new hook, no new storage key** (tabs reuse the existing `academy.schedView.<group>` key pattern).
+- **D37 — Menu coverage proof?** Decision: `admin-management-menu-coverage-inventory.md` stays authoritative; the Spec-010/029 nav block re-verifies 6 rail categories + link-integrity + planned-truthfulness; the 3 nav flips satisfy the build guard.
+- **D38 — C-01…C-40 resolution?** Decision: mapped in the `action-completion-contract.md` (C-01…C-35 BUILD/FOLD/GATE; C-36…C-40 future/owned-elsewhere).
+- **D39 — Future-owner/exclusion?** Decision: `future-owner-register.md` binds; reset/invite/gateway/payout/SMTP/backup/import/message-builder → future-backend; canvas/`type=file`/`type=password`/pay/PII → excluded.
+- **D40 — Smoke strategy?** Decision: additive 031 honesty block modeled on finance `f30` (`run.cjs:1019-1056`): tabs render, gates present, `noSecret`/`noFile`/`noPdf`/`noCanvas`/`noDrag`/`noBackup`/`figureFree`/no-mutation/`FAKE`-clean, count=103, coverage re-pin; **protected regexes byte-verbatim**.
+- **D41 — A11y strategy?** Decision: add rows for staff/library(materials+books tabs)/certificates(templates+requests tabs)/settings hub tabs + a modal + a drawer + dark + mobile 390; critical=0 serious=0.
+- **D42 — Screenshot strategy?** Decision: frames for staff directory + RBAC drawer, library materials/books + category drawer, certificates templates + static designer + requests gate, settings hub + integrations locked card + create/edit modal + mobile 390 + dark; update `REVIEW.md`.
+- **D43 — Role-law protection?** Decision: teacher pay-free/family zero-pay/student child-view/finance-invariant regexes byte-verbatim; 031 touches admin surfaces only.
+- **D44 — Spec 026/027/028/029/030 protection?** Decision: those pages byte-identical (031 modifies only settings.js + adds 3 pages + shared nav/enhance/i18n/locale/css); their smoke asserts byte-verbatim.
+- **D45 — Impact protection?** Decision: only settings.html changes among existing HTML; the 3 new pages are additive; `package.json` 0-diff; no dependency/engine/hook. (Shared-asset hashes may change from new locales/CSS — expected.)
+- **D46 — Allowed/forbidden files?** Decision: per `plan.md` project-structure + `scope-guard.md`. Allowed: settings.js, 3 new pages, 4 fixtures, ar/en.adm.js, nav.config.js (3 flips), enhance.js (1 branch), i18n.js (2 lines), app.css (additive), build-html.mjs (3 entries), tests, docs. Forbidden: package.json, deps, backend/auth, any engine, `type=file`/`type=password`/credential UI, other role pages.
+- **D47 — Risks & stop conditions?** Decision: per `plan.md` risk table + `scope-guard.md` stop list (any fake persistence/secret/file/PDF/mutation/pay-figure/`type=file`/`type=password`/PII/href="#"/dead-button/package.json-change/new-engine ⇒ STOP).
+- **D48 — No-forgotten-admin-page proof?** Decision: after 031, every 031-owned menu item is implemented (staff/books/certificates + settings) or folded (materials/certificateRequests/settings*/heads/locations/integrations facets) or future-backend (gateway/payout/SMTP/backup/import/message-builder) — 0 unclassified, 0 dead placeholder; the coverage inventory + the Spec-010/029 nav block prove it; Spec 032 does the final sitewide sweep.
+
+## Consolidated technology decisions
+- **Tabs** = `components/tabs.js` (existing). **Cards/tables** = `directory-card`/`table`/`ui`. **Drawers** = `preview-drawer` + `<template data-preview>`. **Modals** = `data-modal-trigger`. **Confirms** = `confirm-modal`. **Gates** = `finance-actions.disabledAction` pattern / `data-disabled-reason`. **No new dependency, no chart lib, no canvas, no rich-text editor, no file input.**
