@@ -15,6 +15,7 @@ import { outcomeChip } from '../components/outcome-status.js';
 import { statusChip } from '../components/status-chip.js';
 import { statusTile } from '../components/status-tile.js';
 import { noResults } from '../components/states.js';
+import { queueBand } from '../components/ops-bands.js';
 import { button, avatar } from '../components/ui.js';
 
 const SUBJECTS = ['math', 'arabic', 'programming', 'physics', 'english', 'science'];
@@ -78,10 +79,11 @@ export function renderSessions() {
   const attHref = getLang() === 'en' ? 'attendance.en.html' : 'attendance.html';
 
   return `
-    ${pageHeader({ titleKey: 'sess.title', subKey: 'sess.sub', secondary: button({ labelKey: 'att.viewAttendance', variant: 'secondary', icon: 'clipboard-check', href: attHref }), primary: button({ labelKey: 'sess.newSession', variant: 'primary', icon: 'plus', attrs: 'data-demo-action' }), summaryHTML: summary(data.rows) })}
+    ${pageHeader({ titleKey: 'sess.title', subKey: 'sess.sub', secondary: button({ labelKey: 'att.viewAttendance', variant: 'secondary', icon: 'clipboard-check', href: attHref }), primary: button({ labelKey: 'sess.newSession', variant: 'primary', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="sess.newSession" data-modal-note-key="common.backendRequiredNote"' }), summaryHTML: summary(data.rows) })}
     ${filters}
     <div id="sessions-views">${views}</div>
     ${noResults()}
+    ${queueBand()}
     ${templates}
   `;
 }

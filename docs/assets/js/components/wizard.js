@@ -30,7 +30,7 @@ export function wizard({ steps, ariaKey = 'fam.wiz.title', backKey = 'fam.wiz.ba
       ? `<button type="button" class="btn btn-secondary btn-sm" data-step-prev disabled aria-label="${esc(t(backKey))}">${icon('chevronStart', 'ico ico-sm')}<span>${t(backKey)}</span></button>`
       : `<button type="button" class="btn btn-secondary btn-sm" data-step-prev>${icon('chevronStart', 'ico ico-sm')}<span>${t(backKey)}</span></button>`;
     const fwd = i === last
-      ? button({ labelKey: saveKey, variant: 'primary', size: 'sm', icon: 'check', attrs: `data-demo-action data-toast="${esc(t(saveToastKey))}"` })
+      ? button({ labelKey: saveKey, variant: 'primary', size: 'sm', icon: 'check', attrs: `data-modal-trigger data-modal-title-key="${esc(saveKey)}" data-modal-note-key="common.backendRequiredNote"` })
       : `<button type="button" class="btn btn-primary btn-sm" data-step-next><span>${t(nextKey)}</span>${icon('chevronEnd', 'ico ico-sm')}</button>`;
     return `<section class="wiz-step" id="wiz-step-${esc(s.id)}" data-step="${esc(s.id)}" role="tabpanel" aria-labelledby="wiz-tab-${esc(s.id)}" tabindex="0"${i === 0 ? '' : ' hidden'}>
       <div class="wiz-step-head">

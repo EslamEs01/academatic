@@ -49,7 +49,7 @@ export default {
   lang: { label: 'Language', ar: 'العربية', en: 'English' },
   menu: {
     account: 'Profile', settings: 'Settings', logout: 'Sign out', help: 'Help & support',
-    logoutConfirm: { title: 'Sign out?', msg: 'Your demo session will end. No real data is saved.', cta: 'Sign out', toast: 'Signed out (demo).' },
+    logoutConfirm: { title: 'Sign out?', msg: 'Your demo session will end. No real data is saved.', cta: 'Sign out', toast: 'Signing out will be available once the server is connected.' },
   },
 
   welcome: {
@@ -108,7 +108,7 @@ export default {
     title: 'Component gallery',
     subtitle: 'Design-system proof: base components across both directions and all themes.',
     sec: { buttons: 'Buttons', chips: 'Status chips', tiles: 'Status tiles', kpi: 'KPI cards', medallions: 'Medallions', fields: 'Form fields', avatars: 'Avatars', badges: 'Badges', table: 'Table', report: 'Report cards', states: 'Interface states', menu: 'Menus', toast: 'Toasts' },
-    demoToast: 'Changes saved successfully.',
+    demoToast: 'A demo toast — component preview only.',
     showToast: 'Show toast',
   },
 

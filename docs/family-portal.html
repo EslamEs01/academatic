@@ -244,6 +244,7 @@
       <div class="pt-head-end">
         <span class="pt-greet">مرحبًا، <strong>أبو سلمان الغامدي</strong></span>
         <span class="pt-role-chip"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>وليّ أمر</span></span>
+        <button type="button" class="icon-btn" data-action="notifications" aria-label="الإشعارات" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg></button>
         <button type="button" class="icon-btn" data-action="theme-menu" aria-label="تبديل السمة" aria-haspopup="menu">
           <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg>
         </button>
@@ -253,188 +254,211 @@
       <a class="pt-switch" href="portals.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span>تبديل الدور</span></a>
       </div>
     </header>
+    <details class="pt-nav-drawer">
+      <summary><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg><span>القائمة</span></summary>
+      <nav class="pt-nav" aria-label="قائمة لوحة الدور"><a class="pt-nav-item is-active" href="family-portal.html" aria-current="page"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-home"></use></svg><span>الرئيسية</span></a><a class="pt-nav-item" href="family-children.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>الأبناء</span></a><a class="pt-nav-item" href="family-schedule.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span>الجدول</span></a><a class="pt-nav-item" href="family-progress.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>التقدم</span></a><a class="pt-nav-item" href="family-billing.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span>الفواتير</span></a><a class="pt-nav-item" href="family-requests.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>الطلبات</span></a><a class="pt-nav-item" href="family-materials.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>المواد</span></a><a class="pt-nav-item" href="family-profile.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>الملف</span></a></nav>
+      <div class="pt-nav-exit"><a class="pt-nav-item pt-nav-hub" href="portals.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span>العودة إلى المركز</span></a></div>
+    </details>
+    <div class="pt-layout">
+      <aside class="pt-sidenav">
+        <div class="pt-ident">
+        <span class="avatar avatar-sm av-violet" aria-hidden="true">أ</span>
+        <div class="pt-ident-text">
+          <div class="pt-ident-name">أبو سلمان الغامدي</div>
+          <span class="pt-role-chip" style="font-size:11px"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>وليّ أمر</span></span>
+        </div>
+      </div>
+        <nav class="pt-nav" aria-label="قائمة لوحة الدور"><a class="pt-nav-item is-active" href="family-portal.html" aria-current="page"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-home"></use></svg><span>الرئيسية</span></a><a class="pt-nav-item" href="family-children.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>الأبناء</span></a><a class="pt-nav-item" href="family-schedule.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span>الجدول</span></a><a class="pt-nav-item" href="family-progress.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>التقدم</span></a><a class="pt-nav-item" href="family-billing.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span>الفواتير</span></a><a class="pt-nav-item" href="family-requests.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>الطلبات</span></a><a class="pt-nav-item" href="family-materials.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>المواد</span></a><a class="pt-nav-item" href="family-profile.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>الملف</span></a></nav>
+        <a class="pt-nav-item pt-nav-hub" href="portals.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span>العودة إلى المركز</span></a>
+      </aside>
     <main class="pt-main" id="page" tabindex="-1">
       <div class="pt-body" id="page-body">
-    <section class="pt-hero">
-      <h1 class="pt-hero-hi">مرحبًا، أبو سلمان الغامدي 🌿</h1>
-      <p class="pt-hero-sub">كل ما يخص أبنائك في مكان واحد: جلسات اليوم، التقدّم، وملاحظات المعلّمين.</p>
+    <section class="pt-idhero">
+    <div class="pt-idhero-top">
+      <span class="avatar  av-violet" aria-hidden="true">أ</span>
+      <div style="flex:1;min-width:0">
+        <h1 class="pt-idhero-hi">مرحبًا، أبو سلمان الغامدي 🌿</h1>
+        <p class="pt-idhero-sub">ملخّص عائلتك اليوم — من يحتاج انتباهك، وأين وصل كل ابن.</p>
+      </div>
+    </div>
+    <div class="pt-idhero-stats"><div class="pt-idhero-stat">
+    <div class="pt-idhero-stat-top"><span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg></span><span class="pt-idhero-stat-num tabular">٥</span></div>
+    <div class="pt-idhero-stat-label">الأبناء</div>
+    <div class="pt-idhero-stat-story">خمسة أبناء في مكان واحد</div>
+  </div><div class="pt-idhero-stat">
+    <div class="pt-idhero-stat-top"><span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg></span><span class="pt-idhero-stat-num tabular">٣</span></div>
+    <div class="pt-idhero-stat-label">جلسات قادمة</div>
+    <div class="pt-idhero-stat-story">جلسات مجدولة اليوم عبر الأبناء</div>
+  </div><div class="pt-idhero-stat">
+    <div class="pt-idhero-stat-top"><span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg></span><span class="pt-idhero-stat-num tabular">١</span></div>
+    <div class="pt-idhero-stat-label">تحتاج متابعة</div>
+    <div class="pt-idhero-stat-story">ابن واحد يحتاج متابعتك</div>
+  </div></div>
+  </section>
+
+    <section class="pt-section">
+      <div class="pt-sec-head">
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg>جلسات اليوم</h2>
+    <span class="pt-sec-hint">جلسات أبنائك المجدولة اليوم</span>
+  </div>
+      <div class="pt-rail"><div class="pt-stop is-now">
+    <span class="pt-stop-dot"></span>
+    <div class="pt-stop-main">
+      <div class="pt-stop-row"><span class="pt-stop-time tabular">09:00</span><span class="pt-stop-tag"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg>سلمان الغامدي</span><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></div>
+      <div class="pt-stop-title">أساسيات الرياضيات</div>
+      <div class="pt-stop-sub">سارة القحطاني · قاعة أ</div>
+    </div>
+  </div><div class="pt-stop is-now">
+    <span class="pt-stop-dot"></span>
+    <div class="pt-stop-main">
+      <div class="pt-stop-row"><span class="pt-stop-time tabular">09:30</span><span class="pt-stop-tag"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg>وليد الغامدي</span><span class="chip tone-live"><span class="live-dot"></span><span>جارية الآن</span></span></div>
+      <div class="pt-stop-title">نادي الرياضيات</div>
+      <div class="pt-stop-sub">سارة القحطاني · قاعة ج</div>
+    </div>
+  </div><div class="pt-stop is-next">
+    <span class="pt-stop-dot"></span>
+    <div class="pt-stop-main">
+      <div class="pt-stop-row"><span class="pt-stop-time tabular">11:00</span><span class="pt-stop-tag"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg>دانة الحربي</span><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div>
+      <div class="pt-stop-title">أساسيات الكيمياء</div>
+      <div class="pt-stop-sub">خالد العنزي · معمل ٢</div>
+    </div>
+  </div></div>
     </section>
 
     <section class="pt-section">
       <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg>أبنائي <span class="pt-role-chip" style="font-size:11px">٥</span></h2>
-        <span class="pt-sec-hint">التبديل الكامل بين الأبناء يأتي مع لوحة العائلة في المواصفة ٠١٤</span>
-      </div>
-      <div class="pt-cards"><div class="pt-card" style="border-color:var(--pt-accent)">
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg>أبنائي <span class="pt-role-chip" style="font-size:11px">٥</span></h2>
+    <span class="pt-sec-hint">افتح ملف كل ابن لرؤية تفاصيله</span>
+  </div>
+      <div class="pt-cards"><div class="pt-card pt-lift">
     <div class="pt-card-row">
       <span class="avatar avatar-sm av-violet" aria-hidden="true">س</span>
       <div style="flex:1;min-width:0">
         <div class="pt-card-title">سلمان الغامدي</div>
-        <div class="pt-card-sub">المستوى الثاني</div>
+        <div class="pt-card-sub">الرياضيات — تقدّم ثابت</div>
       </div>
       <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span>
     </div>
     <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:78%"></span></div>
+      <div class="pt-bar is-live"><span style="width:78%"></span></div>
       <span class="tabular pt-card-sub" style="font-weight:700">٧٨٪</span>
     </div>
-  </div><div class="pt-card" >
+    <a class="pt-drill" href="family-child.html#child=st1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>فتح ملف الابن</span></a>
+  </div><div class="pt-card pt-lift">
     <div class="pt-card-row">
       <span class="avatar avatar-sm av-violet" aria-hidden="true">د</span>
       <div style="flex:1;min-width:0">
         <div class="pt-card-title">دانة الحربي</div>
-        <div class="pt-card-sub">تأسيسي</div>
+        <div class="pt-card-sub">العلوم — يحتاج بعض المتابعة</div>
       </div>
       <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span>
     </div>
     <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:33%"></span></div>
+      <div class="pt-bar is-live"><span style="width:33%"></span></div>
       <span class="tabular pt-card-sub" style="font-weight:700">٣٣٪</span>
     </div>
-  </div><div class="pt-card" >
+    <a class="pt-drill" href="family-child.html#child=st6"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>فتح ملف الابن</span></a>
+  </div><div class="pt-card pt-lift">
     <div class="pt-card-row">
       <span class="avatar avatar-sm av-sky" aria-hidden="true">و</span>
       <div style="flex:1;min-width:0">
         <div class="pt-card-title">وليد الغامدي</div>
-        <div class="pt-card-sub">المستوى الأول</div>
+        <div class="pt-card-sub">الرياضيات — غياب أخير، متابعة لطيفة</div>
       </div>
       <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span>
     </div>
     <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:41%"></span></div>
+      <div class="pt-bar is-live"><span style="width:41%"></span></div>
       <span class="tabular pt-card-sub" style="font-weight:700">٤١٪</span>
     </div>
-  </div><div class="pt-card" >
+    <a class="pt-drill" href="family-child.html#child=st11"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>فتح ملف الابن</span></a>
+  </div><div class="pt-card pt-lift">
     <div class="pt-card-row">
       <span class="avatar avatar-sm av-success" aria-hidden="true">ر</span>
       <div style="flex:1;min-width:0">
         <div class="pt-card-title">ريناد الغامدي</div>
-        <div class="pt-card-sub">تأسيسي</div>
+        <div class="pt-card-sub">العلوم — بداية جيدة</div>
       </div>
       <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span>
     </div>
     <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:28%"></span></div>
+      <div class="pt-bar is-live"><span style="width:28%"></span></div>
       <span class="tabular pt-card-sub" style="font-weight:700">٢٨٪</span>
     </div>
-  </div><div class="pt-card" >
+    <a class="pt-drill" href="family-child.html#child=st12"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>فتح ملف الابن</span></a>
+  </div><div class="pt-card pt-lift">
     <div class="pt-card-row">
       <span class="avatar avatar-sm av-amber" aria-hidden="true">س</span>
       <div style="flex:1;min-width:0">
         <div class="pt-card-title">سلمى الغامدي</div>
-        <div class="pt-card-sub">المستوى الأول</div>
+        <div class="pt-card-sub">الإنجليزية — فترة تجريبية</div>
       </div>
       <span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>تجريبية</span></span>
     </div>
     <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:15%"></span></div>
+      <div class="pt-bar is-live"><span style="width:15%"></span></div>
       <span class="tabular pt-card-sub" style="font-weight:700">١٥٪</span>
     </div>
+    <a class="pt-drill" href="family-child.html#child=st13"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>فتح ملف الابن</span></a>
   </div></div>
     </section>
 
     <section class="pt-section">
       <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg>جلسات اليوم</h2>
-        <span class="pt-sec-hint">جلسات أبنائك المجدولة اليوم</span>
-      </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="pt-time tabular">09:00</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">أساسيات الرياضيات</div>
-        <div class="pt-card-sub">سارة القحطاني · قاعة أ</div>
-      </div>
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg>الفواتير والطلبات</h2>
+    <span class="pt-sec-hint">الحالة فقط — التنفيذ يتطلب الخادم</span>
+  </div>
+      <div class="pt-story">
+    <span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg></span>
+    <div class="pt-story-main">
+      <div class="pt-story-title">الفواتير مسوّاة</div>
+      <div class="pt-story-sub">لا فواتير متأخرة — الحالة فقط، دون أرقام.</div>
     </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="pt-time tabular">09:30</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">نادي الرياضيات</div>
-        <div class="pt-card-sub">سارة القحطاني · قاعة ج</div>
-      </div>
+  </div><div class="pt-story">
+    <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg></span>
+    <div class="pt-story-main">
+      <div class="pt-story-title">لا طلبات مفتوحة</div>
+      <div class="pt-story-sub">طلباتك ومتابعاتك مع الأكاديمية ستظهر هنا عند فتحها.</div>
     </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="pt-time tabular">11:00</span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">أساسيات الكيمياء</div>
-        <div class="pt-card-sub">خالد العنزي · معمل ٢</div>
-      </div>
-    </div>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg>الحضور والتقدّم</h2>
-        <span class="pt-sec-hint">ملخص توضيحي ثابت من سجلات الحضور</span>
-      </div>
-      <div class="pt-cards pt-cards-3">
-        <div class="pt-card"><div class="pt-card-row"><span class="medallion m-soft tone-success "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span><div><div class="pt-gauge-num tabular" style="font-size:22px">١٢</div><div class="pt-card-sub">حضور مكتمل</div></div></div></div>
-        <div class="pt-card"><div class="pt-card-row"><span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg></span><div><div class="pt-gauge-num tabular" style="font-size:22px">٣</div><div class="pt-card-sub">قادمة</div></div></div></div>
-        <div class="pt-card"><div class="pt-card-row"><span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg></span><div><div class="pt-gauge-num tabular" style="font-size:22px">١</div><div class="pt-card-sub">تحتاج متابعة</div></div></div></div>
-      </div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg>ملاحظات المعلّمين</h2>
-        <span class="pt-sec-hint">آخر ملاحظات ما بعد الجلسات</span>
-      </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">سلمان الغامدي — سارة القحطاني</div>
-        <p class="pt-card-sub">أنهينا اليوم مراجعة الكسور — تركيز ممتاز، وسنبدأ المعادلات في الجلسة القادمة.</p>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-primary "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">دانة الحربي — خالد العنزي</div>
-        <p class="pt-card-sub">بداية جميلة في أساسيات العلوم — يحتاج تشجيعًا بسيطًا على المشاركة الصوتية.</p>
-      </div>
-    </div>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-cards pt-cards-3"><div class="pt-card pt-planned">
+  </div>
+      <div class="pt-cards">
+        <div class="pt-card pt-planned pt-guide">
     <div class="pt-card-row">
       <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg></span>
       <div style="flex:1;min-width:0">
-        <div class="pt-card-title">الفواتير والاشتراك</div>
-        <div class="pt-card-sub">عرض فواتير العائلة وسدادها يتطلب نظام الفوترة الفعلي.</div>
+        <div class="pt-card-title">الفواتير والحساب</div>
+        <div class="pt-card-sub">عرض الفواتير التفصيلية يتطلب نظام الفوترة الفعلي.</div>
       </div>
     </div>
+    <div class="pt-guide-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>ماذا يحدث عند التفعيل: يُحفظ الإجراء فعليًا ويُخطر المسؤول المعني.</span></div>
     <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span>
-  </div><div class="pt-card pt-planned">
+  </div>
+        <div class="pt-card pt-planned pt-guide">
     <div class="pt-card-row">
       <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg></span>
       <div style="flex:1;min-width:0">
-        <div class="pt-card-title">لقاءات المتابعة</div>
-        <div class="pt-card-sub">جدولة لقاءات المتابعة مع الأكاديمية ستظهر هنا.</div>
+        <div class="pt-card-title">طلب لقاء</div>
+        <div class="pt-card-sub">حجز لقاء متابعة مع الأكاديمية يتطلب الخادم.</div>
       </div>
     </div>
+    <div class="pt-guide-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>ماذا يحدث عند التفعيل: يُحفظ الإجراء فعليًا ويُخطر المسؤول المعني.</span></div>
     <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قيد التخطيط</span></span>
-  </div><div class="pt-card pt-planned">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">الخطط والاشتراكات</div>
-        <div class="pt-card-sub">تفاصيل خطط أبنائك واشتراكاتهم ستُعرض هنا.</div>
+  </div>
       </div>
-    </div>
-    <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قيد التخطيط</span></span>
-  </div></div>
     </section>
 
-    <div class="pt-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span><strong>هذا أساس بوابة العائلة</strong> — لوحة العائلة الكاملة (جلسات اليوم بإجراءاتها، السجل، اللقاءات وأكثر) تأتي في المواصفة ٠١٤.</span></div>
+    <section class="pt-section">
+      <div class="pt-sec-head">
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg>روابط سريعة</h2>
+    <span class="pt-sec-hint">صفحات لوحتك — تصل تباعًا</span>
+  </div>
+      <div class="pt-qtiles"><a class="pt-qtile pt-lift" href="family-children.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>الأبناء</span></a><a class="pt-qtile pt-lift" href="family-schedule.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span>الجدول</span></a><a class="pt-qtile pt-lift" href="family-progress.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>التقدم</span></a><a class="pt-qtile pt-lift" href="family-billing.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg><span>الفواتير</span></a><a class="pt-qtile pt-lift" href="family-requests.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>الطلبات</span></a><a class="pt-qtile pt-lift" href="family-materials.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>المواد</span></a><a class="pt-qtile pt-lift" href="family-profile.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>الملف</span></a></div>
+    </section>
+
+    <div class="pt-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span><strong>لوحة العائلة — النسخة الأولى</strong> — لوحة مدمجة: افتح ملف أي ابن للتفاصيل، والصفحات الكاملة تصل تباعًا.</span></div>
   </div>
     </main>
+    </div>
     <footer class="pt-foot"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>معاينة تجريبية بالبيانات الثابتة — بدون تسجيل دخول أو حفظ.</span></footer>
   </div>
   <script type="module" src="./assets/js/enhance.js"></script>

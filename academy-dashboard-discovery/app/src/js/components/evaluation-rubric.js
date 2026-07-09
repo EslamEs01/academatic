@@ -6,8 +6,8 @@
  * A DISTINCT rating vocabulary (separate from the lifecycle + session maps). */
 import { t } from '../i18n.js';
 import { icon } from '../icons.js';
-import { esc } from '../dom.js';
-import { chip, button } from './ui.js';
+import { chip } from './ui.js';
+import { confirmAction } from './confirm-modal.js';
 
 /* ratingId → { tone, icon, labelKey } — icon + label always, tone never the only signal */
 const RATING = {
@@ -57,7 +57,7 @@ export function evaluationRubric(ev) {
     </div>
 
     <div class="flex flex-wrap items-center gap-2 mt-4">
-      ${button({ labelKey: 'eval.approve', variant: 'primary', size: 'sm', icon: 'check-circle', attrs: `data-demo-action data-toast="${esc(t('eval.approveToast'))}"` })}
+      ${confirmAction({ labelKey: 'eval.approve', variant: 'primary', size: 'sm', icon: 'check-circle', titleKey: 'eval.approve', msgKey: 'common.backendRequiredNote', confirmKey: 'eval.approve', toastKey: 'eval.approveToast' })}
       <span class="text-[12px]" style="color:var(--c-ink-3)">${t('eval.note')}</span>
     </div>
   `;

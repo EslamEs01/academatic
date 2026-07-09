@@ -32,12 +32,27 @@ import { renderGroup } from '../src/js/pages/group.js';
 import { renderTeacher } from '../src/js/pages/teacher.js';
 import { renderTeacherPerformance } from '../src/js/pages/teacher-performance.js';
 import { renderFinance } from '../src/js/pages/finance.js';
+// Spec 026 — admin control / sessions / operations
+import { renderSessionsAnalysis } from '../src/js/pages/sessions-analysis.js';
+import { renderPublicHoliday } from '../src/js/pages/public-holiday.js';
+import { renderScheduledActions } from '../src/js/pages/scheduled-actions.js';
+// Spec 031 — admin management/content/certificates deep management (admin shell)
+import { renderStaff } from '../src/js/pages/staff.js';
+import { renderLibrary } from '../src/js/pages/library.js';
+import { renderCertificates } from '../src/js/pages/certificates.js';
 // Spec 012 — role portal foundation (portal shell, not the admin shell)
 import { portalShellMarkup } from '../src/js/components/portal-shell.js';
 import { renderPortalsHub } from '../src/js/pages/portals.js';
 import { renderStudentPortal } from '../src/js/pages/student-portal.js';
 import { renderFamilyPortal } from '../src/js/pages/family-portal.js';
 import { renderTeacherPortal } from '../src/js/pages/teacher-portal.js';
+import { renderTeacherSchedule } from '../src/js/pages/teacher-schedule.js';
+import { renderTeacherStudents } from '../src/js/pages/teacher-students.js';
+import { renderTeacherOutcomes } from '../src/js/pages/teacher-outcomes.js';
+import { renderTeacherTasks } from '../src/js/pages/teacher-tasks.js';
+import { renderTeacherReports } from '../src/js/pages/teacher-reports.js';
+import { renderTeacherProfile } from '../src/js/pages/teacher-profile.js';
+import { renderTeacherLibrary } from '../src/js/pages/teacher-library.js';
 import { renderFamilyChild } from '../src/js/pages/family-child.js';
 import { renderStudentSchedule } from '../src/js/pages/student-schedule.js';
 import { renderStudentHomework } from '../src/js/pages/student-homework.js';
@@ -92,6 +107,13 @@ const PAGES = [
   { base: 'teacher-performance', activeId: 'teacherKpi', titleKey: 'topbar.title.teacherPerf', crumbKey: 'topbar.crumb.teacherPerf', render: renderTeacherPerformance },
   // Spec 009 — finance, billing & payments shell
   { base: 'finance', activeId: 'finance', titleKey: 'topbar.title.finance', crumbKey: 'topbar.crumb.finance', render: renderFinance },
+  { base: 'sessions-analysis', activeId: 'sessionsAnalysis', titleKey: 'sa.title', crumbKey: 'nav.sessionsAnalysis', render: renderSessionsAnalysis },
+  { base: 'public-holiday', activeId: 'publicHoliday', titleKey: 'ph.title', crumbKey: 'nav.publicHoliday', render: renderPublicHoliday },
+  { base: 'scheduled-actions', activeId: 'scheduledActions', titleKey: 'sca.title', crumbKey: 'nav.scheduledActions', render: renderScheduledActions },
+  // Spec 031 — Users&Staff / Content library (materials+books) / Certificates (templates+requests)
+  { base: 'staff', activeId: 'staff', titleKey: 'topbar.title.staff', crumbKey: 'topbar.crumb.staff', render: renderStaff },
+  { base: 'library', activeId: 'books', titleKey: 'topbar.title.library', crumbKey: 'topbar.crumb.library', render: renderLibrary },
+  { base: 'certificates', activeId: 'certificates', titleKey: 'topbar.title.certificates', crumbKey: 'topbar.crumb.certificates', render: renderCertificates },
   // Spec 012 — role portal foundation (portal shell; NOT admin nav pages; hub = the documented demo entry)
   { base: 'portals', shell: 'portal', role: 'hub', activeId: null, titleKey: 'prt.title.hub', render: renderPortalsHub },
   { base: 'student-portal', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: null, titleKey: 'prt.title.student', render: renderStudentPortal },
@@ -111,6 +133,14 @@ const PAGES = [
   { base: 'family-requests', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'requests', titleKey: 'prt.title.famRequests', render: renderFamilyRequests },
   { base: 'family-materials', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'materials', titleKey: 'prt.title.famMaterials', render: renderFamilyMaterials },
   { base: 'family-profile', shell: 'portal', role: 'family', personaKey: 'data.fam.fam1.name', activeId: 'profile', titleKey: 'prt.title.famProfile', render: renderFamilyProfile },
+  // Spec 025 — the seven teacher internal pages (portal shell, role teacher, persona sara; nav planned→implemented)
+  { base: 'teacher-schedule', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'schedule', titleKey: 'prt.tch.pg.sched.title', render: renderTeacherSchedule },
+  { base: 'teacher-students', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'students', titleKey: 'prt.tch.pg.students.title', render: renderTeacherStudents },
+  { base: 'teacher-outcomes', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'outcomes', titleKey: 'prt.tch.pg.outcomes.title', render: renderTeacherOutcomes },
+  { base: 'teacher-tasks', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'tasks', titleKey: 'prt.tch.pg.tasks.title', render: renderTeacherTasks },
+  { base: 'teacher-reports', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'reports', titleKey: 'prt.tch.pg.reports.title', render: renderTeacherReports },
+  { base: 'teacher-profile', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'profile', titleKey: 'prt.tch.pg.profile.title', render: renderTeacherProfile },
+  { base: 'teacher-library', shell: 'portal', role: 'teacher', personaKey: 'data.t.sara', activeId: 'library', titleKey: 'prt.tch.pg.library.title', render: renderTeacherLibrary },
 ];
 
 const THEME_SNIPPET = `(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();`;

@@ -57,7 +57,9 @@ export function gatedActions(i) {
     A.push(confirmBtn('att.act.cancel', 'x-circle', 'att.act.cancel'));
     A.push(confirmBtn('att.act.reschedule', 'calendar-clock', 'att.act.reschedule', false));
   } else if (o === 'attended') {
-    A.push(demoBtn('att.act.feedback', 'file-text', 'att.act.feedbackToast'));
+    // Spec 029 (R-E) — "Add feedback" is a Create action → honest backendRequired modal (not a
+    // fire-and-forget toast); mirrors the Spec-026 Add/Create-primary treatment. No persistence.
+    A.push(button({ labelKey: 'att.act.feedback', variant: 'secondary', size: 'sm', icon: 'file-text', attrs: 'data-modal-trigger data-modal-title-key="att.act.feedback" data-modal-note-key="common.backendRequiredNote"' }));
     A.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
     A.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
   } else if (o === 'studentAbsent' || o === 'teacherAbsent' || o === 'cancelled') {

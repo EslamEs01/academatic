@@ -124,6 +124,14 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeConfirm: true, variant: 'confirm' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeFilter: true,  variant: 'filter' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile' },
+  // Spec 026 — the three new admin ops pages + one create modal + one details drawer + mobile + dark
+  { page: 'sessions-analysis', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'sessions-analysis', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'public-holiday', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'public-holiday', lang: 'ar', theme: 'dark',  vp: 'desktop' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'desktop', sessCreateModal: true, variant: 'create-modal' },
   // Spec 010 — Coverage, Navigation IA & Polish (acceptance frames). The six rail categories
   // expanded (AR light) are already covered above via the default control view + cat: families/
   // teachers/reports/admin/settings; the reports-category frame shows the finance sub-section.
@@ -201,6 +209,65 @@ const MATRIX = [
   { page: 'family-portal',    lang: 'ar', theme: 'light', vp: 'desktop', variant: 'tiles-now-links' },
   // Spec 017 — Shell v2: the native mobile nav disclosure, captured OPEN (amendment A1 proof)
   { page: 'teacher-portal', lang: 'ar', theme: 'light', vp: 'mobile', roleDrawer: true, variant: 'drawer-open' },
+  // Spec 025 — the seven teacher internal pages: all seven AR desktop + reports EN + schedule dark + schedule mobile
+  { page: 'teacher-schedule', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-schedule', lang: 'ar', theme: 'dark', vp: 'desktop' },
+  { page: 'teacher-schedule', lang: 'ar', theme: 'light', vp: 'mobile' },
+  { page: 'teacher-students', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-outcomes', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-tasks', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-reports', lang: 'en', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-profile', lang: 'ar', theme: 'light', vp: 'desktop' },
+  { page: 'teacher-library', lang: 'ar', theme: 'light', vp: 'desktop' },
+  // Spec 028 — admin teacher deep management: kebab · edit modal · assign-teacher/course pickers · availability · category drawer · status confirm
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', teacherKebab: true, variant: 'sp028-kebab' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-categories', variant: 'sp028-categories' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', mgmtModal: 'trn.act.edit', variant: 'sp028-edit-modal' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-assign-course', variant: 'sp028-assign-course' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'timetable', openDrawer: 'trn-availability', variant: 'sp028-availability' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', mgmtConfirm: true, variant: 'sp028-confirm' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-assign-teacher', variant: 'sp028-assign-teacher' },
+  { page: 'group', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'grp-assign-teacher', variant: 'sp028-assign-teacher-dark' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp028-mobile' },
+  { page: 'teacher', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp028-en' },
+  // Spec 029 — Reports feedback/forms fold: review rows · read-only detail drawer · categories drawer ·
+  // create-feedback modal · forms drawer · export/print gates (in the action cluster) · mobile · dark
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'rep-fb-fb1', variant: 'sp029-feedback-drawer' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'rep-fbcat', variant: 'sp029-categories' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', mgmtModal: 'rep.fb.createTitle', variant: 'sp029-create-feedback' },
+  { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'rep-form-frm1', variant: 'sp029-form-drawer-en' },
+  { page: 'reports', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'rep-fb-fb1', variant: 'sp029-feedback-drawer-dark' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp029-mobile' },
+  // Spec 030 — finance tabbed hub: Salaries + Banks folded in (figure-free) · Add-bank modal · export gate · mobile · dark
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'salaries', variant: 'sp030-salaries' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'banks', variant: 'sp030-banks-en' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'banks', mgmtModal: 'fin.bank.addTitle', variant: 'sp030-add-bank-modal' },
+  { page: 'finance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'salaries', variant: 'sp030-salaries-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile', view: 'salaries', variant: 'sp030-mobile' },
+  // Spec 031 — admin management/content/certificates/settings deep management
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-staff' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'st-perm', variant: 'sp031-staff-rbac' },
+  { page: 'library', lang: 'en', theme: 'light', vp: 'desktop', view: 'books', variant: 'sp031-library-en' },
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', view: 'books', openDrawer: 'lib-cats', variant: 'sp031-library-cats' },
+  { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-certificates' },
+  { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', view: 'requests', variant: 'sp031-cert-requests' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-settings' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', variant: 'sp031-integrations' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', mgmtModal: 'adm.set.heads.addTitle', variant: 'sp031-add-head-modal' },
+  { page: 'settings', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'security', variant: 'sp031-settings-dark' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp031-mobile' },
+  // Spec 027 — admin deep management: honest modals / drawer-pickers / row-kebab / gates
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', studentKebab: true, variant: 'sp027-row-kebab' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'courses', openDrawer: 'stu-enroll', variant: 'sp027-enroll-picker' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-cat', variant: 'sp027-reclassify' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', mgmtModal: 'fam.act.edit', variant: 'sp027-edit-modal' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-enroll', variant: 'sp027-add-students' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-assign', variant: 'sp027-add-students' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', mgmtConfirm: true, variant: 'sp027-suspend-confirm' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp027-mobile' },
+  { page: 'course', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp027-en' },
+  { page: 'group', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp027-dark' },
 ];
 
 (async () => {
@@ -256,6 +323,13 @@ const MATRIX = [
     if (s.attnFilter) { await page.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]').catch(() => {}); await page.waitForTimeout(280); }
     // Spec 017 — open the role-nav native disclosure (mobile)
     if (s.roleDrawer) { await page.click('.pt-nav-drawer > summary').catch(() => {}); await page.waitForTimeout(260); }
+    if (s.sessCreateModal) { await page.click('[data-modal-trigger]').catch(() => {}); await page.waitForTimeout(340); }
+    // Spec 027 — deep-management surfaces (view/hash flags above position the trigger's tab first)
+    if (s.studentKebab) { await page.click('#students-table [data-row-menu][data-row-menu-kind="student"]').catch(() => {}); await page.waitForTimeout(320); }
+    if (s.teacherKebab) { await page.click('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]').catch(() => {}); await page.waitForTimeout(320); }
+    if (s.openDrawer) { await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440); }
+    if (s.mgmtModal) { await page.click(`[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`).catch(() => {}); await page.waitForTimeout(340); }
+    if (s.mgmtConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
     // Spec 013 — area close-ups are element-scoped (Playwright auto-scrolls the element into view)
@@ -264,7 +338,7 @@ const MATRIX = [
       if (el) await el.screenshot({ path: path.join(OUT, name) });
       else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
     } else {
-      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm });
+      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.teacherKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm });
     }
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);

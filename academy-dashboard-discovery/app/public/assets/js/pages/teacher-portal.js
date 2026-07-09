@@ -67,7 +67,7 @@ function followUpCard(f) {
 export function renderTeacherPortal() {
   const tr = me();
   const sessions = mySessions();
-  const perfHref = getLang() === 'en' ? 'teacher-performance.en.html' : 'teacher-performance.html';
+  const perfHref = getLang() === 'en' ? 'teacher-reports.en.html' : 'teacher-reports.html';
   const lv = LIVING_HOME.teacher;
 
   return `

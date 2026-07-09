@@ -26,13 +26,9 @@ function disabledAction({ labelKey, icon, reasonKey }) {
 
 /** The full action cluster (wraps on mobile). */
 export function reportActions() {
-  const print = button({
-    labelKey: 'rep.act.print',
-    icon: 'printer',
-    variant: 'secondary',
-    size: 'sm',
-    attrs: `data-demo-action data-toast="${esc(t('rep.act.printToast'))}"`,
-  });
+  // Spec 029 (R-G) — Print is a backendRequired export gate (disabled-with-reason), consistent
+  // with CSV/PDF/Share: printing a real file needs the server, so it never fires a "success" toast.
+  const print = disabledAction({ labelKey: 'rep.act.print', icon: 'printer', reasonKey: 'rep.reason.export' });
 
   const exportCsv = disabledAction({ labelKey: 'rep.act.exportCsv', icon: 'download', reasonKey: 'rep.reason.export' });
   const exportPdf = disabledAction({ labelKey: 'rep.act.exportPdf', icon: 'file-text', reasonKey: 'rep.reason.export' });

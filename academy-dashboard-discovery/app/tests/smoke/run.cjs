@@ -7,20 +7,28 @@ const { PORT } = require('../../scripts/serve.cjs');
 const BASE = `http://localhost:${PORT}`;
 const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedule', 'students', 'teachers', 'courses', 'settings',
   'families', 'add-family', 'family', 'student', 'attendance', 'groups', 'course', 'group', 'teacher', 'teacher-performance',
+  // Spec 026 — the three new admin ops pages
+  'sessions-analysis', 'public-holiday', 'scheduled-actions',
+  // Spec 031 — Users&Staff / Content library / Certificates (settings folds into the existing settings page)
+  'staff', 'library', 'certificates',
   'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
-  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile'];
+  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
+  'teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-profile', 'teacher-library'];
 
 // Spec 012 — the role-portal surface (portal shell, not the admin shell). Admin-shell
 // assertions are scoped to admin pages; portal pages get their own block below. The
 // future-role portal-ABSENCE assertion stays enforced verbatim on every ADMIN page.
 const PORTAL_PAGES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
-  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile']);
+  'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
+  'teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-profile', 'teacher-library']);
 // Spec 019 — the six student internal pages (all consume the student shell with a full 7-item, all-implemented registry)
 const STUDENT_INTERNAL = new Set(['student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile']);
 // Spec 020 — the seven family internal pages (all consume the family shell with a full 8-item, all-implemented registry)
 const FAMILY_INTERNAL = new Set(['family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile']);
+// Spec 025 — the seven teacher internal pages (all consume the teacher shell with a full 8-item, all-implemented registry)
+const TEACHER_INTERNAL = new Set(['teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-profile', 'teacher-library']);
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
@@ -133,6 +141,25 @@ const FILTER_SPEC = {
       ok(page !== 'schedule' || info.hasTimetable, `${page}/${lang}: schedule is missing the baked timetable grid`);
       ok(info.absAssets.length === 0, `${page}/${lang}: non-relative asset paths ${JSON.stringify(info.absAssets)}`);
 
+      // Spec 026 — Global Action Completion: no action may claim it happened. Every
+      // data-toast / data-confirm-toast / data-confirm-msg must be honest (backendRequired
+      // wording), never the old fake «(تجريبي)»/"(demo)"/"preview action"/«بنجاح»/"successfully".
+      const actionInfo = await p.evaluate(() => {
+        const FAKE = /\(تجريبي\)|\(demo\)|إجراء تجريبي|preview action|بنجاح|\bsuccessfully\b/i;
+        const bad = [];
+        document.querySelectorAll('[data-toast],[data-confirm-toast],[data-confirm-msg]').forEach((el) => {
+          ['data-toast', 'data-confirm-toast', 'data-confirm-msg'].forEach((a) => {
+            const v = el.getAttribute(a);
+            if (v && FAKE.test(v)) bad.push(`${a}="${v.slice(0, 44)}"`);
+          });
+        });
+        // a create/add primary must open a modal or a gate — never a bare unhandled data-action
+        const fakeCreate = [...document.querySelectorAll('[data-action="new-session"],[data-action="add-session"],[data-action="apply-filter"],[data-action="clear-filter"]')].length;
+        return { bad, fakeCreate };
+      });
+      ok(actionInfo.bad.length === 0, `${page}/${lang}: misleading success wording on an action: ${JSON.stringify(actionInfo.bad.slice(0, 3))}`);
+      ok(actionInfo.fakeCreate === 0, `${page}/${lang}: ${actionInfo.fakeCreate} unhandled create/filter data-action(s) (must open a modal/gate or be a real filter)`);
+
       // behavioral no-dead-button: a filter button and a pager must produce feedback
       if (page === 'dashboard') {
         const clickFeedback = async (sel) => {
@@ -145,7 +172,9 @@ const FILTER_SPEC = {
           await p.waitForTimeout(120);
           return fb ? null : `${sel} produced no feedback (dead button)`;
         };
-        for (const sel of ['.select-btn', '.pager:not(.is-current)', '[data-action="theme-menu"]',
+        // Spec 026 (DU-20): the dashboard's fake .select-btn filter controls were removed (Option B) —
+        // the honest replacement is a real "view all sessions" link; the remaining controls still must feed back.
+        for (const sel of ['.pager:not(.is-current)', '[data-action="theme-menu"]',
           '[data-action="apps-grid"]', '[data-action="quick-actions"]', '.nav-item.is-planned']) {
           const r = await clickFeedback(sel);
           ok(!r, `${page}/${lang}: ${r}`);
@@ -273,6 +302,89 @@ const FILTER_SPEC = {
         }
       }
 
+      // Spec 027 — deep management: every new action opens a real modal / drawer-picker /
+      // confirm / gate; NO fake create/enroll/assign/move/save. (One sanctioned amendment.)
+      if (page === 'students') {
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        const kb = await p.evaluate(() => {
+          const rows = [...document.querySelectorAll('#students-table [data-row]')];
+          const kebabs = [...document.querySelectorAll('#students-table [data-row-menu][data-row-menu-kind="student"]')];
+          return { rows: rows.length, kebabs: kebabs.length };
+        });
+        ok(kb.kebabs > 0 && kb.kebabs === kb.rows, `${page}/${lang}: students table missing the per-row student kebab (${kb.kebabs}/${kb.rows})`);
+        const kebab = await p.$('#students-table [data-row-menu][data-row-menu-kind="student"]');
+        if (kebab) { await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150); }
+        const menu = await p.evaluate(() => {
+          const pop = document.querySelector('.popover');
+          if (!pop) return { open: false };
+          return {
+            open: true,
+            link: !!pop.querySelector('a[href*="student"]'),
+            editModal: !!pop.querySelector('[data-modal-trigger][data-modal-title-key="sp.act.edit"]'),
+            confirms: pop.querySelectorAll('[data-confirm]').length,
+            demo: pop.querySelectorAll('[data-demo-action]').length,
+          };
+        });
+        ok(menu.open && menu.link && menu.editModal && menu.confirms >= 2 && menu.demo === 0,
+          `${page}/${lang}: student row kebab is not honest (View link + Edit modal + Suspend/Remove confirm, no demo) — ${JSON.stringify(menu)}`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'student') {
+        const s = await p.evaluate(() => {
+          const tpl = document.querySelector('template[data-preview="stu-enroll"]');
+          const body = document.querySelector('#page-body') || document.body;
+          return {
+            enroll: !!document.querySelector('[data-drawer="stu-enroll"]'),
+            assign: !!document.querySelector('[data-drawer="stu-assign"]'),
+            move: !!document.querySelector('[data-drawer="stu-move"]'),
+            crossGate: !!(document.querySelector('template[data-preview="stu-move"]') || {}).content?.querySelector?.('[data-reason-key="sp.move.crossReason"]'),
+            editModal: !!document.querySelector('[data-modal-trigger][data-modal-title-key="sp.act.edit"]'),
+            suspend: !!document.querySelector('[data-confirm][data-confirm-title]'),
+            tplGate: !!(tpl && tpl.content.querySelector('[data-disabled-reason]')),
+            noScore: !/\b(percentile|leaderboard)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML),
+          };
+        });
+        ok(s.enroll && s.assign && s.move, `${page}/${lang}: student missing enroll/assign/move picker triggers`);
+        ok(s.editModal, `${page}/${lang}: student Edit is not an honest modal trigger`);
+        ok(s.suspend, `${page}/${lang}: student missing the suspend confirm`);
+        ok(s.tplGate, `${page}/${lang}: enroll picker is not a display-only list with a backendRequired gate`);
+        ok(s.crossGate, `${page}/${lang}: cross-family transfer must be an honest gate inside the move picker`);
+        ok(s.noScore, `${page}/${lang}: results/evaluation must not add a computed score/rank/chart`);
+      }
+      if (page === 'course' || page === 'group') {
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        const did = page === 'course' ? 'crs-enroll' : 'grp-assign';
+        const ek = page === 'course' ? 'crs.act.edit' : 'grp.act.edit';
+        const c = await p.evaluate(({ did2, ek2 }) => ({
+          edit: !!document.querySelector(`[data-modal-trigger][data-modal-title-key="${ek2}"]`),
+          addDrawer: !!document.querySelector(`[data-drawer="${did2}"]`),
+          tpl: !!document.querySelector(`template[data-preview="${did2}"]`),
+          createGroup: !!document.querySelector('[data-modal-trigger][data-modal-title-key="crs.act.createGroup"]'),
+        }), { did2: did, ek2: ek });
+        ok(c.edit, `${page}/${lang}: ${page} Edit is not an honest modal trigger`);
+        ok(c.addDrawer && c.tpl, `${page}/${lang}: ${page} add-students picker (drawer + baked template) missing`);
+        if (page === 'course') ok(c.createGroup, `${page}/${lang}: course missing the create-group modal trigger`);
+        const trg = await p.$(`[data-drawer="${did}"]`);
+        if (trg) { await trg.scrollIntoViewIfNeeded(); await trg.click(); await p.waitForTimeout(230); }
+        const drw = await p.evaluate(() => {
+          const d = document.querySelector('.drawer.sheet');
+          if (!d) return { open: false };
+          return { open: true, gate: !!d.querySelector('[data-disabled-reason]') };
+        });
+        ok(drw.open && drw.gate, `${page}/${lang}: ${page} add-students picker is not an honest drawer w/ backendRequired gate (${JSON.stringify(drw)})`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'family') {
+        const fm = await p.evaluate(() => ({
+          edit: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.edit"]'),
+          addChild: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.addChild"]'),
+          reclassDrawer: !!document.querySelector('[data-drawer="fam-cat"]'),
+          reclassTpl: !!(document.querySelector('template[data-preview="fam-cat"]') || {}).content?.querySelector?.('[data-disabled-reason]'),
+        }));
+        ok(fm.edit && fm.addChild, `${page}/${lang}: family banner missing edit/add-child modal triggers`);
+        ok(fm.reclassDrawer && fm.reclassTpl, `${page}/${lang}: family category reclassify drawer/template (w/ backendRequired gate) missing`);
+      }
+
       // Spec 004 — add-family wizard: 5 baked steps · labeled fields · Next/Back · Save toasts
       if (page === 'add-family') {
         const wiz = await p.evaluate(() => {
@@ -294,10 +406,12 @@ const FILTER_SPEC = {
         ok(ret, `${page}/${lang}: data-step-prev did not return to the identity step`);
         await p.click('[data-step-go="review"]').catch(() => {});
         await p.waitForTimeout(130);
-        const saveBtn = await p.$('[data-step="review"] [data-demo-action]');
-        if (saveBtn) { await saveBtn.click(); await p.waitForTimeout(160); }
-        const toasted = await p.evaluate(() => !!document.querySelector('.toast'));
-        ok(toasted, `${page}/${lang}: wizard Save did not show a demo toast`);
+        // Spec 026 (DU-07): wizard Save now opens an HONEST backendRequired modal (data-modal-trigger),
+        // never a fake "saved" toast. Verify the modal opens.
+        const saveBtn = await p.$('[data-step="review"] [data-modal-trigger]');
+        if (saveBtn) { await saveBtn.click(); await p.waitForTimeout(200); }
+        const modaled = await p.evaluate(() => !!document.querySelector('.modal-scrim'));
+        ok(modaled, `${page}/${lang}: wizard Save must open an honest backendRequired modal (not a fake save toast)`);
         await p.keyboard.press('Escape');
       }
 
@@ -544,6 +658,83 @@ const FILTER_SPEC = {
         await p.keyboard.press('Escape');
       }
 
+      // Spec 028 — admin teacher deep management: honest kebab / modals / assign pickers /
+      // availability / category drawer / status confirms; NO computed score, NO pay figure in
+      // the #page-body (the shared finance nav «الرواتب» lives in the sidebar, not the body).
+      // (One sanctioned amendment; the payHit/tchPay protected asserts below stay byte-verbatim.)
+      const PAY28 = /راتب|رواتب|salary|payroll|payout|compensation|أتعاب|جنيه|ريال|\bEGP\b|\bAED\b|\bEUR\b/i;
+      if (page === 'teachers') {
+        await p.setViewportSize({ width: 1366, height: 1280 });
+        const kb = await p.evaluate((paySrc) => {
+          const PAY = new RegExp(paySrc, 'i');
+          const cards = [...document.querySelectorAll('#teachers-grid .dir-card')];
+          const kebabs = [...document.querySelectorAll('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]')];
+          const body = document.getElementById('page-body');
+          return { cards: cards.length, kebabs: kebabs.length, pay: PAY.test(body.innerText),
+            cat: !!document.querySelector('[data-drawer="trn-categories"]'), catTpl: !!document.querySelector('template[data-preview="trn-categories"]') };
+        }, PAY28.source);
+        ok(kb.kebabs > 0 && kb.kebabs === kb.cards, `${page}/${lang}: teacher cards missing the row kebab (${kb.kebabs}/${kb.cards})`);
+        ok(!kb.pay, `${page}/${lang}: admin teachers page body shows a pay/salary figure — forbidden`);
+        ok(kb.cat && kb.catTpl, `${page}/${lang}: teacher-categories manage drawer/template missing`);
+        const kebab = await p.$('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]');
+        if (kebab) { await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150); }
+        const menu = await p.evaluate(() => {
+          const pop = document.querySelector('.popover');
+          if (!pop) return { open: false };
+          return { open: true, link: !!pop.querySelector('a[href*="teacher"]'),
+            editModal: !!pop.querySelector('[data-modal-trigger][data-modal-title-key="trn.act.edit"]'),
+            confirms: pop.querySelectorAll('[data-confirm]').length, demo: pop.querySelectorAll('[data-demo-action]').length };
+        });
+        ok(menu.open && menu.link && menu.editModal && menu.confirms >= 2 && menu.demo === 0,
+          `${page}/${lang}: teacher kebab is not honest (View link + Edit modal + confirms, no demo) — ${JSON.stringify(menu)}`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'teacher') {
+        const t28 = await p.evaluate((paySrc) => {
+          const PAY = new RegExp(paySrc, 'i');
+          const body = document.getElementById('page-body');
+          const gate = (id) => { const x = document.querySelector(`template[data-preview="${id}"]`); return !!(x && x.content.querySelector('[data-disabled-reason]')); };
+          return {
+            editModal: !!document.querySelector('.profile-banner [data-modal-trigger][data-modal-title-key="trn.act.edit"]'),
+            noteModal: !!document.querySelector('.profile-banner [data-modal-trigger][data-modal-title-key="trn.act.note"]'),
+            assignCourse: !!document.querySelector('[data-drawer="trn-assign-course"]') && gate('trn-assign-course'),
+            assignGroup: !!document.querySelector('[data-drawer="trn-assign-group"]') && gate('trn-assign-group'),
+            availability: !!document.querySelector('[data-drawer="trn-availability"]') && gate('trn-availability'),
+            confirms: document.querySelectorAll('.profile-banner [data-confirm]').length,
+            pay: PAY.test(body.innerText),
+          };
+        }, PAY28.source);
+        ok(t28.editModal && t28.noteModal, `${page}/${lang}: teacher Edit/Note are not honest modal triggers`);
+        ok(t28.assignCourse && t28.assignGroup, `${page}/${lang}: assign-course/group pickers (drawer + backendRequired gate) missing`);
+        ok(t28.availability, `${page}/${lang}: availability drawer (with backendRequired gate) missing`);
+        ok(t28.confirms >= 3, `${page}/${lang}: teacher banner missing status/delete confirms (got ${t28.confirms})`);
+        ok(!t28.pay, `${page}/${lang}: admin teacher profile body shows a pay/salary figure — forbidden`);
+        await p.click('[data-drawer="trn-assign-course"]').catch(() => {});
+        await p.waitForTimeout(220);
+        const drw = await p.evaluate(() => { const d = document.querySelector('.drawer.sheet'); return d ? { open: true, gate: !!d.querySelector('[data-disabled-reason]') } : { open: false }; });
+        ok(drw.open && drw.gate, `${page}/${lang}: assign-course picker not an honest drawer w/ backendRequired gate (${JSON.stringify(drw)})`);
+        await p.keyboard.press('Escape');
+      }
+      if (page === 'teacher-performance') {
+        const perf = await p.evaluate((paySrc) => {
+          const PAY = new RegExp(paySrc, 'i');
+          const body = document.getElementById('page-body');
+          return { noChart: !/\b(percentile|leaderboard)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML), pay: PAY.test(body.innerText) };
+        }, PAY28.source);
+        ok(perf.noChart, `${page}/${lang}: teacher-performance board must carry no computed percentile/leaderboard/chart`);
+        ok(!perf.pay, `${page}/${lang}: teacher-performance board body shows a pay/salary figure — forbidden`);
+      }
+      if (page === 'course' || page === 'group') {
+        const did = page === 'course' ? 'crs-assign-teacher' : 'grp-assign-teacher';
+        const c = await p.evaluate((id) => ({ trigger: !!document.querySelector(`[data-drawer="${id}"]`), tpl: !!document.querySelector(`template[data-preview="${id}"]`) }), did);
+        ok(c.trigger && c.tpl, `${page}/${lang}: assign-teacher picker (${did}) trigger + template missing`);
+        const trg = await p.$(`[data-drawer="${did}"]`);
+        if (trg) { await trg.scrollIntoViewIfNeeded(); await trg.click(); await p.waitForTimeout(230); }
+        const drw = await p.evaluate(() => { const d = document.querySelector('.drawer.sheet'); return d ? { open: true, gate: !!d.querySelector('[data-disabled-reason]') } : { open: false }; });
+        ok(drw.open && drw.gate, `${page}/${lang}: ${page} assign-teacher picker not an honest drawer w/ backendRequired gate (${JSON.stringify(drw)})`);
+        await p.keyboard.press('Escape');
+      }
+
       // Spec 007 — Teacher Performance board: promoted nav · KPI tiles · comparison rows → teacher.html · queue · counts-not-scores · filter
       if (page === 'teacher-performance') {
         const a = await p.evaluate(() => {
@@ -637,8 +828,8 @@ const FILTER_SPEC = {
         ok(a.tiles === 8, `${page}/${lang}: expected exactly 8 baked operations-overview tiles in #ops-overview, got ${a.tiles}`);
         for (const [k, v] of Object.entries(a.sources)) ok(v, `${page}/${lang}: missing real source link (${k})`);
         ok(a.userXTexts.length >= 2, `${page}/${lang}: teacherAbsent vs studentAbsent are not two distinct chips (${JSON.stringify(a.userXTexts)})`);
-        ok(a.demo, `${page}/${lang}: missing Print demo action`);
-        ok(a.disabledReason >= 3, `${page}/${lang}: expected ≥3 disabled-with-reason actions (CSV/PDF/Share), got ${a.disabledReason}`);
+        ok(!a.demo, `${page}/${lang}: reports must not use a fake demo-action (Spec 029 R-G — Print is a backendRequired export gate, not a demo toast)`);
+        ok(a.disabledReason >= 4, `${page}/${lang}: expected ≥4 disabled-with-reason export gates (Print/CSV/PDF/Share), got ${a.disabledReason}`);
         ok(a.confirm, `${page}/${lang}: missing Schedule confirm action`);
         ok(a.realExport === 0, `${page}/${lang}: found a real export/download link (must be demo only)`);
         ok(!a.forbidden, `${page}/${lang}: reports body shows a forbidden finance/chart/score/rank token`);
@@ -653,6 +844,59 @@ const FILTER_SPEC = {
         const modal = await p.evaluate(() => !!document.querySelector('.modal-scrim, .drawer.sheet'));
         ok(modal, `${page}/${lang}: the Schedule action did not open a confirm modal`);
         await p.keyboard.press('Escape');
+
+        // ── Spec 029 — Feedback review + Forms/surveys folded into reports.html (no new page) ──
+        const f29 = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const fbSec = document.getElementById('reports-feedback');
+          const fmSec = document.getElementById('reports-forms');
+          const fbRows = document.querySelectorAll('#reports-feedback-grid [data-row]').length;
+          const fbDrawers = document.querySelectorAll('template[data-preview^="rep-fb-"]').length;
+          const catDrawer = !!document.querySelector('template[data-preview="rep-fbcat"]');
+          const fbCreate = !!document.querySelector('[data-modal-trigger][data-modal-title-key="rep.fb.createTitle"]');
+          const catManage = !!document.querySelector('[data-drawer="rep-fbcat"]');
+          const fmRows = document.querySelectorAll('#reports-forms-grid [data-row]').length;
+          const fmDrawers = document.querySelectorAll('template[data-preview^="rep-form-"]').length;
+          const fmCreate = !!document.querySelector('[data-modal-trigger][data-modal-title-key="rep.form.createTitle"]');
+          // the folded feedback+forms region must carry NO chart/canvas and NO computed %/score/rank
+          const seg = (fbSec ? fbSec.innerHTML : '') + (fmSec ? fmSec.innerHTML : '');
+          const noChart = !/<canvas|chart\.js|apexcharts|amcharts|data-chart|<svg[^>]*class="[^"]*chart/i.test(seg);
+          const noComputed = !/\b(percentile|leaderboard|\bscored?\b|\brank(ed|ing)?\b)\b/i.test(body.innerText);
+          // progress form is a REAL deep-link to the existing student Evaluation tab (not a duplicate engine)
+          const evalLink = [...body.querySelectorAll('a[href]')].some((a) => /student(\.en)?\.html#view=evaluation$/.test(a.getAttribute('href') || ''));
+          return { fbSec: !!fbSec, fmSec: !!fmSec, fbRows, fbDrawers, catDrawer, fbCreate, catManage, fmRows, fmDrawers, fmCreate, noChart, noComputed, evalLink };
+        });
+        ok(f29.fbSec && f29.fmSec, `${page}/${lang}: reports is missing the folded Feedback and/or Forms section`);
+        ok(f29.fbRows >= 6 && f29.fbDrawers === f29.fbRows, `${page}/${lang}: feedback rows/drawers mismatch (rows=${f29.fbRows}, drawers=${f29.fbDrawers})`);
+        ok(f29.catDrawer && f29.catManage, `${page}/${lang}: feedback Manage-categories drawer/trigger missing`);
+        ok(f29.fbCreate, `${page}/${lang}: Create-feedback must be an honest backendRequired modal trigger`);
+        ok(f29.fmRows >= 4 && f29.fmDrawers === f29.fmRows, `${page}/${lang}: form rows/drawers mismatch (rows=${f29.fmRows}, drawers=${f29.fmDrawers})`);
+        ok(f29.fmCreate, `${page}/${lang}: Create-form must be an honest backendRequired modal trigger`);
+        ok(f29.noChart, `${page}/${lang}: feedback/forms region must not add a chart/canvas`);
+        ok(f29.noComputed, `${page}/${lang}: reports body must not add a computed score/rank/percentile`);
+        ok(f29.evalLink, `${page}/${lang}: forms section missing the real deep-link to the student Evaluation tab`);
+        // a feedback detail drawer opens READ-ONLY (sheet rows + Approve/Delete confirms, no persisting inputs)
+        const fbTrg = await p.$('#reports-feedback-grid [data-drawer^="rep-fb-"]');
+        if (fbTrg) { await fbTrg.scrollIntoViewIfNeeded(); await fbTrg.click(); await p.waitForTimeout(200); }
+        const fbDrw = await p.evaluate(() => {
+          const d = document.querySelector('.drawer.sheet');
+          if (!d) return { open: false };
+          return {
+            open: true,
+            rows: d.querySelectorAll('.sheet-row').length,
+            confirms: d.querySelectorAll('[data-confirm]').length,
+            inputs: d.querySelectorAll('input,textarea,select').length, // read-only: none persist
+          };
+        });
+        ok(fbDrw.open && fbDrw.rows >= 4 && fbDrw.confirms >= 2 && fbDrw.inputs === 0,
+          `${page}/${lang}: feedback detail drawer is not read-only with Approve/Delete confirms (${JSON.stringify(fbDrw)})`);
+        await p.keyboard.press('Escape');
+        // the feedback type filter narrows the grid client-side (real static filter)
+        const fbBefore = await p.$$eval('#reports-feedback-grid [data-row]', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="type"]', 'teacher').catch(() => {});
+        await p.waitForTimeout(150);
+        const fbAfter = await p.$$eval('#reports-feedback-grid [data-row]', (els) => els.filter((e) => !e.hidden).length);
+        ok(fbAfter > 0 && fbAfter < fbBefore, `${page}/${lang}: feedback type filter did not narrow the rows (${fbBefore} → ${fbAfter})`);
       }
 
       // Spec 009 — Finance shell: 4 status tiles equal invoice-list row counts per status
@@ -725,8 +969,8 @@ const FILTER_SPEC = {
         }
         // (d) honest actions: ≥3 disabled-with-reason + ≥1 demo in the action cluster; ≥1 confirm among
         // rows; the cancelled invoice's row disables record-payment (never a confirm control there)
-        ok(a.disabledInCluster >= 3, `${page}/${lang}: expected ≥3 disabled-with-reason controls in the finance action cluster, got ${a.disabledInCluster}`);
-        ok(a.demoInCluster >= 1, `${page}/${lang}: expected ≥1 demo action in the finance action cluster, got ${a.demoInCluster}`);
+        ok(a.disabledInCluster >= 4, `${page}/${lang}: expected ≥4 disabled-with-reason controls in the finance action cluster (Create/CSV/PDF/Print), got ${a.disabledInCluster}`);
+        ok(a.demoInCluster === 0, `${page}/${lang}: finance action cluster must have 0 demo-actions (Spec 030 F-J — Print is a backendRequired export gate, not a demo toast), got ${a.demoInCluster}`);
         ok(a.rowConfirm >= 1, `${page}/${lang}: expected ≥1 [data-confirm] record-payment control among invoice rows`);
         ok(a.cancelledFound, `${page}/${lang}: no cancelled invoice row found`);
         ok(a.cancelledDisabledRecord, `${page}/${lang}: the cancelled invoice's row is missing a disabled-with-reason record-payment control`);
@@ -773,6 +1017,115 @@ const FILTER_SPEC = {
         });
         ok(narrowed.shown === narrowed.overdue,
           `${page}/${lang}: overdue tile did not visually narrow the invoice list (shown=${narrowed.shown}, expected=${narrowed.overdue})`);
+
+        // ── Spec 030 — finance tabbed hub: Salaries + Banks folded in (no new page; figure-free) ──
+        const f30 = await p.evaluate(() => {
+          const tabsWrap = document.querySelector('[data-tabs="finance"]');
+          const tabIds = [...document.querySelectorAll('[data-tabs="finance"] [role="tab"][data-tab]')].map((tb) => tb.getAttribute('data-tab'));
+          const panels = [...document.querySelectorAll('[data-tabs="finance"] [data-tabpanel]')];
+          const visible = panels.filter((pn) => !pn.hidden).length;
+          const salPanel = document.querySelector('[data-tabpanel="salaries"]');
+          const bankPanel = document.querySelector('[data-tabpanel="banks"]');
+          const salRows = salPanel ? salPanel.querySelectorAll('.card').length : 0;
+          const bankRows = bankPanel ? bankPanel.querySelectorAll('.card').length : 0;
+          const salGates = salPanel ? salPanel.querySelectorAll('[data-disabled-reason]').length : 0;
+          const addBank = bankPanel ? !!bankPanel.querySelector('[data-modal-trigger][data-modal-title-key="fin.bank.addTitle"]') : false;
+          const bankGates = bankPanel ? bankPanel.querySelectorAll('[data-disabled-reason]').length : 0;
+          // figure-free: the salaries + banks panels carry NO currency/amount figure (salary/payout WORDS are fine).
+          // Use textContent (not innerText) — the panels are hidden by default, and innerText would be ''.
+          const figTxt = (salPanel ? salPanel.textContent : '') + ' ' + (bankPanel ? bankPanel.textContent : '');
+          const salFigureFree = !/ريال|ر\.س|\bSAR\b|جنيه|\bEGP\b|\bAED\b|\bEUR\b|[$€£]|[0-9]+[.,][0-9]/.test(figTxt);
+          // no credential/secret/upload anywhere in the finance body
+          const bodyHTML = document.getElementById('page-body').innerHTML;
+          const noSecret = !/type="password"|api[- ]?key|webhook|secret|paymob|payoneer/i.test(bodyHTML);
+          const noFile = !/type="file"/i.test(bodyHTML);
+          return { hasTabs: !!tabsWrap, tabIds, visible, salRows, bankRows, salGates, addBank, bankGates, salFigureFree, noSecret, noFile };
+        });
+        ok(f30.hasTabs && JSON.stringify(f30.tabIds) === JSON.stringify(['overview', 'salaries', 'banks']), `${page}/${lang}: finance hub tabs missing/incorrect (${JSON.stringify(f30.tabIds)})`);
+        ok(f30.visible === 1, `${page}/${lang}: exactly one finance tabpanel must be visible, got ${f30.visible}`);
+        ok(f30.salRows >= 6, `${page}/${lang}: salaries board missing status-first rows (${f30.salRows})`);
+        ok(f30.salGates >= 4, `${page}/${lang}: salaries board missing Generate/Approve/Mark-paid/Export gates (${f30.salGates})`);
+        ok(f30.salFigureFree, `${page}/${lang}: salaries/banks panel shows a pay amount figure — must be status-first FIGURE-FREE`);
+        ok(f30.bankRows >= 4 && f30.addBank && f30.bankGates >= 2, `${page}/${lang}: banks board incomplete (${JSON.stringify({ bankRows: f30.bankRows, addBank: f30.addBank, bankGates: f30.bankGates })})`);
+        ok(f30.noSecret && f30.noFile, `${page}/${lang}: finance body must not render a credential/secret/type=file affordance`);
+        // the Salaries tab actually switches (real static tab), then restore Overview (localStorage safety)
+        const salTab = await p.$('[data-tabs="finance"] [data-tab="salaries"]');
+        if (salTab) { await salTab.click(); await p.waitForTimeout(150); }
+        const salVisible = await p.evaluate(() => { const s = document.querySelector('[data-tabpanel="salaries"]'); return !!s && !s.hidden; });
+        ok(salVisible, `${page}/${lang}: Salaries tab did not become visible on click`);
+        const ovTab = await p.$('[data-tabs="finance"] [data-tab="overview"]');
+        if (ovTab) { await ovTab.click(); await p.waitForTimeout(120); }
+      }
+
+      // ── Spec 031 — admin management/content/certificates/settings honesty ──
+      // Display is allowed; every write/secret/file/generation is a gate. Provider names
+      // (Paymob/Payoneer/Stripe) + "no secrets shown" reason text are LEGITIMATE on the
+      // settings Integrations tab, so credential checks target real INPUTS (DOM), not words.
+      if (page === 'staff' || page === 'library' || page === 'certificates' || page === 'settings') {
+        const a31 = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const html = body.innerHTML;
+          const txt = body.innerText;
+          const q = (s) => body.querySelectorAll(s).length;
+          const credInputs = [...body.querySelectorAll('input,textarea')]
+            .filter((i) => /pass|secret|api|key|token|webhook|card|cvv/i.test((i.getAttribute('name') || '') + ' ' + (i.getAttribute('id') || ''))).length;
+          return {
+            passwordInputs: q('input[type="password"]'),
+            fileInputs: q('input[type="file"]'),
+            canvas: q('canvas'),
+            credInputs,
+            gates: q('[data-disabled-reason]'),
+            noPdf: !/\.pdf"|\.csv"|\.xlsx"|blob:|createObjectURL|window\.open|download=/i.test(html),
+            noDrag: !/ui-draggable|draggable="true"|json_data|apexcharts|chart\.js|<canvas/i.test(html),
+            currency: (txt.match(/ريال|\bSAR\b|جنيه|\bEGP\b|\bAED\b|\bEUR\b|[$€£]/g) || []).length,
+            tabIds: [...body.querySelectorAll('[data-tabs] [data-tab]')].map((b) => b.getAttribute('data-tab')),
+            rows: q('[data-row]'),
+            rowMenuStaff: q('[data-row-menu-kind="staff"]'),
+            modalTriggers: q('[data-modal-trigger]'),
+            permTpl: q('template[data-preview="st-perm"]'),
+            certStage: q('.cert-stage'),
+            themeCtl: q('[data-set-theme]'),
+          };
+        });
+        // shared: no credential/file/canvas/pdf affordance; figure-free
+        ok(a31.passwordInputs === 0 && a31.fileInputs === 0, `${page}/${lang}: renders a type=password/type=file input (${a31.passwordInputs}/${a31.fileInputs}) — forbidden`);
+        ok(a31.canvas === 0 && a31.noDrag, `${page}/${lang}: a <canvas>/draggable-designer/chart-engine leaked into the 031 body`);
+        ok(a31.credInputs === 0, `${page}/${lang}: a credential-like input (password/secret/api/key/token/webhook) is rendered — 031 shows locked placeholders only`);
+        ok(a31.noPdf, `${page}/${lang}: a real file/pdf/download/window.open affordance leaked into the 031 body`);
+        ok(a31.currency === 0, `${page}/${lang}: a currency/pay figure appears in the 031 body — must be figure-free`);
+        if (page === 'staff') {
+          ok(a31.rows >= 5, `staff/${lang}: staff directory rows missing (${a31.rows})`);
+          ok(a31.rowMenuStaff >= 5, `staff/${lang}: per-row staff kebab missing (${a31.rowMenuStaff})`);
+          ok(a31.modalTriggers >= 1, `staff/${lang}: Add-member backendRequired modal missing`);
+          ok(a31.permTpl === 1, `staff/${lang}: display-only RBAC permission drawer missing`);
+        }
+        if (page === 'library') {
+          ok(JSON.stringify(a31.tabIds) === JSON.stringify(['materials', 'books']), `library/${lang}: content tabs wrong (${JSON.stringify(a31.tabIds)})`);
+          ok(a31.rows >= 6, `library/${lang}: book rows missing (${a31.rows})`);
+          ok(a31.gates >= 3, `library/${lang}: upload/download/publish gates missing (${a31.gates})`);
+        }
+        if (page === 'certificates') {
+          ok(JSON.stringify(a31.tabIds) === JSON.stringify(['templates', 'requests']), `certificates/${lang}: tabs wrong (${JSON.stringify(a31.tabIds)})`);
+          ok(a31.certStage === 1, `certificates/${lang}: static designer stage missing`);
+          ok(a31.gates >= 4, `certificates/${lang}: approve/reject/generate gates missing (${a31.gates})`);
+        }
+        if (page === 'settings') {
+          ok(JSON.stringify(a31.tabIds) === JSON.stringify(['general', 'notifications', 'customization', 'security', 'users', 'integrations']), `settings/${lang}: hub tabs wrong (${JSON.stringify(a31.tabIds)})`);
+          ok(a31.themeCtl >= 1, `settings/${lang}: real theme control missing — theme/lang must stay functional`);
+          ok(a31.gates >= 4, `settings/${lang}: settings save/connect/test gates missing (${a31.gates})`);
+        }
+        // a real static tab actually switches, then restore the first tab (localStorage safety)
+        const grp = page === 'settings' ? 'settings' : page === 'library' ? 'library' : page === 'certificates' ? 'certificates' : null;
+        if (grp) {
+          const secondTab = page === 'settings' ? 'notifications' : page === 'library' ? 'books' : 'requests';
+          const tb = await p.$(`[data-tabs="${grp}"] [data-tab="${secondTab}"]`);
+          if (tb) { await tb.click(); await p.waitForTimeout(120); }
+          const vis = await p.evaluate((tt) => { const s = document.querySelector(`[data-tabpanel="${tt}"]`); return !!s && !s.hidden; }, secondTab);
+          ok(vis, `${page}/${lang}: ${secondTab} tab did not become visible on click`);
+          const firstTab = page === 'settings' ? 'general' : page === 'library' ? 'materials' : 'templates';
+          const ft = await p.$(`[data-tabs="${grp}"] [data-tab="${firstTab}"]`);
+          if (ft) { await ft.click(); await p.waitForTimeout(100); }
+        }
       }
 
       // Spec 009 — Dashboard/Reports integration: no new finance chrome in the body,
@@ -966,7 +1319,7 @@ const FILTER_SPEC = {
             .map((a) => a.getAttribute('href'));
           return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible, idHero, railStops, flowSteps, storyRows, childViewLinks };
         });
-        const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : STUDENT_INTERNAL.has(page) ? 'student' : FAMILY_INTERNAL.has(page) ? 'family' : page.replace('-portal', '');
+        const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : STUDENT_INTERNAL.has(page) ? 'student' : FAMILY_INTERNAL.has(page) ? 'family' : TEACHER_INTERNAL.has(page) ? 'teacher' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
         ok(!prt.adminMarkup, `${page}/${lang}: ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) leaked into a portal page`);
         if (page !== 'portals') ok(prt.switchLink, `${page}/${lang}: portal header is missing the demo role-switch link to the hub`);
@@ -1038,6 +1391,19 @@ const FILTER_SPEC = {
           }
           if (page === 'family-profile') ok(prt.plannedBackend === 3, `${page}/${lang}: the family profile must show exactly 3 backendRequired gates (photo/save/password), got ${prt.plannedBackend}`);
         }
+        // Spec 025 — a teacher INTERNAL page: teacher shell, display-only (zero forms), a real content
+        // floor (≥3 cards), zero body anchors (the sidebar owns navigation; every unavailable action is
+        // a non-anchor backendRequired gate), and — the teacher hard rule — ZERO pay vocabulary (the
+        // payHit lineage, byte-verbatim). teacher-profile carries exactly the three write gates.
+        if (TEACHER_INTERNAL.has(page)) {
+          ok(prt.formControls === 0, `${page}/${lang}: teacher internal page must contain zero form controls, got ${prt.formControls}`);
+          const tcards = await p.$$eval('#page-body .pt-card', (els) => els.length);
+          ok(tcards >= 3, `${page}/${lang}: expected a real content floor (≥3 cards), got ${tcards}`);
+          ok(prt.bodyAnchors === 0, `${page}/${lang}: teacher internal page body must contribute zero anchors, got ${prt.bodyAnchors}`);
+          const tchPay = /\b(salary|salaries|payouts?|earnings?|compensation)\b/i.test(prt.bodyText) || /راتب|رواتب|أجر|مستحقات|غرامة|مكافأة/.test(prt.bodyText);
+          ok(!tchPay, `${page}/${lang}: a teacher internal page contains pay vocabulary — forbidden (teacher pay-free GLOBAL)`);
+          if (page === 'teacher-profile') ok(prt.plannedBackend === 3, `${page}/${lang}: the teacher profile must show exactly 3 backendRequired gates (photo/save/password), got ${prt.plannedBackend}`);
+        }
         // Spec 018 — the COMPACT family home (re-scoped from the 014 long-home floors): the 7-band
         // recipe (4–7 sections), 4 KPI cards, the five REAL child drill-down links (body anchors === 5,
         // one per fam1 child, targeting family-child), a form-free body, the two rendered gates
@@ -1099,7 +1465,8 @@ const FILTER_SPEC = {
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
         const expPlanned = { 'student-portal': 2, 'family-portal': 2, 'teacher-portal': 1, portals: 0, 'family-child': 0,
           'student-schedule': 0, 'student-homework': 1, 'student-materials': 1, 'student-progress': 0, 'student-history': 0, 'student-profile': 3,
-          'family-children': 0, 'family-schedule': 0, 'family-progress': 0, 'family-billing': 1, 'family-requests': 1, 'family-materials': 1, 'family-profile': 3 }[page];
+          'family-children': 0, 'family-schedule': 0, 'family-progress': 0, 'family-billing': 1, 'family-requests': 1, 'family-materials': 1, 'family-profile': 3,
+          'teacher-schedule': 0, 'teacher-students': 0, 'teacher-outcomes': 1, 'teacher-tasks': 0, 'teacher-reports': 0, 'teacher-profile': 3, 'teacher-library': 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
         ok(prt.plannedBad === 0, `${page}/${lang}: ${prt.plannedBad} planned card(s) navigate or lack a labeled availability chip`);
         if (page === 'portals') {
@@ -1128,8 +1495,8 @@ const FILTER_SPEC = {
           ok(prt.flowSteps === 4, `${page}/${lang}: expected the 4-step outcome flow strip (prepare→attend→record→review), got ${prt.flowSteps}`);
           ok(prt.storyRows === 0, `${page}/${lang}: the teacher home carries no family status stories, got ${prt.storyRows}`);
           ok(prt.bodyAnchors === 1, `${page}/${lang}: the teacher page body must contribute exactly ONE anchor (the performance link), got ${prt.bodyAnchors}`);
-          ok(prt.anchorTargets.every((h) => /(^|\/)teacher-performance\.(en\.)?html$/.test(h)),
-            `${page}/${lang}: the teacher body anchor must target the performance board, got ${JSON.stringify(prt.anchorTargets)}`);
+          ok(prt.anchorTargets.every((h) => /(^|\/)teacher-reports\.(en\.)?html$/.test(h)),
+            `${page}/${lang}: the teacher body anchor must target the teacher-reports page (Spec 025 repoint), got ${JSON.stringify(prt.anchorTargets)}`);
           ok(prt.formControls === 0, `${page}/${lang}: the teacher page must contain zero form controls, got ${prt.formControls}`);
           ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (outcome save), got ${prt.plannedBackend}`);
           ok(prt.plannedPlanned === 0, `${page}/${lang}: expected 0 planned teacher gates on the compact home, got ${prt.plannedPlanned}`);
@@ -1203,29 +1570,33 @@ const FILTER_SPEC = {
             `${page}/${lang}: student shell anchors outside {7 student pages, hub}: ${JSON.stringify(uniq)}`);
           ok(prt.shellAnchors.length === 17,
             `${page}/${lang}: sanctioned student shell-anchor multiset must be 17 (7×2 + hub×3), got ${prt.shellAnchors.length}`);
-        } else {
-          const navWant = { 'teacher-portal': 8 }[page];   // Spec 024 B-05: +1 planned «مكتبتي/Library» item (home + 7 planned)
+        } else if (page === 'teacher-portal' || TEACHER_INTERNAL.has(page)) {
+          // Spec 025 — after the flip, EVERY teacher page carries the full 8-item registry, ALL
+          // implemented: aside + drawer each render 8 links; the current page is the active one;
+          // the shell-anchor multiset is 19 (8 nav ×2 + hub×3). NO planned nav anchors; no chat/pay nav.
           const selfHref = `${page}${lang === 'en' ? '.en' : ''}.html`;
           const hubHref = `portals${lang === 'en' ? '.en' : ''}.html`;
+          const tchBases = ['teacher-portal', 'teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-library', 'teacher-profile'];
+          const wantTch = tchBases.map((b) => `${b}${lang === 'en' ? '.en' : ''}.html`).concat(hubHref).sort();
           ok(prt.sidenavs === 1, `${page}/${lang}: expected exactly one role sidebar, got ${prt.sidenavs}`);
-          ok(prt.navAside === navWant && prt.navDrawer === navWant,
-            `${page}/${lang}: nav registry count mismatch (aside ${prt.navAside} / drawer ${prt.navDrawer}, want ${navWant})`);
+          ok(prt.navAside === 8 && prt.navDrawer === 8,
+            `${page}/${lang}: teacher registry count mismatch (aside ${prt.navAside} / drawer ${prt.navDrawer}, want 8)`);
           ok(prt.drawerSummary, `${page}/${lang}: the native mobile nav disclosure (details>summary) is missing`);
           ok(prt.navCurrentHrefs.length === 2 && prt.navCurrentHrefs.every((h) => h === selfHref),
-            `${page}/${lang}: expected the home entry active once per nav instance (2×self), got ${JSON.stringify(prt.navCurrentHrefs)}`);
+            `${page}/${lang}: expected this page active once per nav instance (2×self), got ${JSON.stringify(prt.navCurrentHrefs)}`);
           ok(prt.plannedNavAnchors === 0, `${page}/${lang}: planned nav entries must never be anchors, got ${prt.plannedNavAnchors}`);
-          ok(prt.navListAnchors === 1, `${page}/${lang}: expected exactly one link (home) in the sidebar nav list, got ${prt.navListAnchors}`);
+          ok(prt.navListAnchors === 8, `${page}/${lang}: expected all 8 teacher nav items implemented as links, got ${prt.navListAnchors}`);
           const uniq = [...new Set(prt.shellAnchors)].sort();
-          ok(JSON.stringify(uniq) === JSON.stringify([hubHref, selfHref].sort()),
-            `${page}/${lang}: shell anchors outside the registry set {self, hub}: ${JSON.stringify(uniq)}`);
-          ok(prt.shellAnchors.length === 5,
-            `${page}/${lang}: sanctioned shell-anchor multiset must be 5 (self×2 + hub×3), got ${prt.shellAnchors.length}`);
+          ok(JSON.stringify(uniq) === JSON.stringify(wantTch),
+            `${page}/${lang}: teacher shell anchors outside {8 teacher pages, hub}: ${JSON.stringify(uniq)}`);
+          ok(prt.shellAnchors.length === 19,
+            `${page}/${lang}: sanctioned teacher shell-anchor multiset must be 19 (8×2 + hub×3), got ${prt.shellAnchors.length}`);
         }
 
         // Spec 018 — the compact role homes + family-child are table-free and mobile-clean; the three
         // homes also carry the HARD COMPACTNESS CEILING (the endless page can never return).
         const isCompactHome = page === 'student-portal' || page === 'family-portal' || page === 'teacher-portal';
-        const isInternalPage = STUDENT_INTERNAL.has(page) || FAMILY_INTERNAL.has(page);
+        const isInternalPage = STUDENT_INTERNAL.has(page) || FAMILY_INTERNAL.has(page) || TEACHER_INTERNAL.has(page);
         const isRoleContent = isCompactHome || page === 'family-child' || isInternalPage;
         if (isRoleContent) {
           const tables = await p.$$eval('#page-body table', (els) => els.length);
@@ -1265,9 +1636,13 @@ const FILTER_SPEC = {
           const shownRows = rows.filter((r) => getComputedStyle(r).display !== 'none');
           const leaked = rows.filter((r) => r.hasAttribute('hidden') && getComputedStyle(r).display !== 'none').length;
           const hidden = rows.filter((r) => r.hasAttribute('hidden')).length;
-          // correctness: with a known facet, every still-visible row must match the applied value.
-          // If the filter silently failed to engage, non-matching rows stay visible → mismatch > 0.
-          const mismatch = f ? shownRows.filter((r) => (r.getAttribute('data-' + f.facet) || '').toLowerCase() !== f.value).length : 0;
+          // correctness: with a known facet, every still-visible row IN THAT FACET'S DOMAIN must match
+          // the applied value. If the filter silently failed to engage, matching-domain rows stay
+          // visible → mismatch > 0. (Spec 029: reports now hosts TWO independent facet domains — the
+          // area facet over the category cards AND a type/status facet over the folded feedback rows;
+          // rows that do not carry the applied facet attribute are outside this filter's domain and are
+          // not judged here. A broken area filter still trips this: the area cards DO carry data-area.)
+          const mismatch = f ? shownRows.filter((r) => r.hasAttribute('data-' + f.facet) && (r.getAttribute('data-' + f.facet) || '').toLowerCase() !== f.value).length : 0;
           return { leaked, hidden, shown: shownRows.length, total: rows.length, mismatch };
         }, spec.facet ? { facet: spec.facet, value: spec.value } : null);
         ok(vis.leaked === 0, `${page}/${lang}: ${vis.leaked} filtered-out row(s) attribute-hidden but still visually rendered — the [data-row][hidden] fix failed`);

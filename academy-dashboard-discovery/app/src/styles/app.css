@@ -1124,3 +1124,8 @@
     .pt-stop.is-now .pt-stop-dot { animation: lv-pulse 2.4s var(--ease) infinite; }
   }
 }
+
+/* Spec 031 — static certificate-designer preview (display-only; NO canvas, NO drag).
+ * Merge-field labels are absolutely positioned at authored %-coordinates over a band. */
+.cert-stage { position: relative; height: 210px; border-radius: 12px; border: 1px dashed var(--c-line); background: linear-gradient(135deg, var(--c-surface-2), var(--c-surface)); overflow: hidden; }
+.cert-field { position: absolute; transform: translate(-50%, -50%); font-size: 12px; font-weight: 700; color: var(--c-ink-2); background: var(--c-surface); border: 1px solid var(--c-line); border-radius: 6px; padding: 2px 8px; white-space: nowrap; }

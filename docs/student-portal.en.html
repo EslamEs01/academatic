@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Student portal · Mishkah Academy</title>
+  <title>Child view · Mishkah Academy</title>
   <script>(function(){try{var th=localStorage.getItem('academy.theme');if(th==='light'||th==='dark')document.documentElement.setAttribute('data-theme',th);}catch(e){}})();</script>
   <link rel="stylesheet" href="./assets/app.css" />
 </head>
@@ -238,12 +238,13 @@
         <span class="medallion m-grad tone-violet-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg></span>
         <div class="pt-brand-text">
           <div class="pt-brand-name">Mishkah Academy</div>
-          <div class="pt-portal-name">Student portal</div>
+          <div class="pt-portal-name">Child view</div>
         </div>
       </div>
       <div class="pt-head-end">
         <span class="pt-greet">Hi, <strong>Salman Al-Ghamdi</strong></span>
-        <span class="pt-role-chip"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span>Student</span></span>
+        <span class="pt-role-chip"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span>Family child</span></span>
+        <button type="button" class="icon-btn" data-action="notifications" aria-label="Notifications" aria-haspopup="menu"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg></button>
         <button type="button" class="icon-btn" data-action="theme-menu" aria-label="Toggle theme" aria-haspopup="menu">
           <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg>
         </button>
@@ -253,167 +254,147 @@
       <a class="pt-switch" href="portals.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span>Switch role</span></a>
       </div>
     </header>
+    <details class="pt-nav-drawer">
+      <summary><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-menu"></use></svg><span>Menu</span></summary>
+      <nav class="pt-nav" aria-label="Role dashboard navigation"><a class="pt-nav-item is-active" href="student-portal.en.html" aria-current="page"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-home"></use></svg><span>Home</span></a><a class="pt-nav-item" href="student-schedule.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span>Schedule</span></a><a class="pt-nav-item" href="student-homework.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span>Homework</span></a><a class="pt-nav-item" href="student-materials.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>Materials</span></a><a class="pt-nav-item" href="student-progress.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>Progress</span></a><a class="pt-nav-item" href="student-history.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span>History</span></a><a class="pt-nav-item" href="student-profile.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>Profile</span></a></nav>
+      <div class="pt-nav-exit"><a class="pt-nav-item pt-nav-hub" href="portals.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span>Back to hub</span></a></div>
+    </details>
+    <div class="pt-layout">
+      <aside class="pt-sidenav">
+        <div class="pt-ident">
+        <span class="avatar avatar-sm av-sky" aria-hidden="true">S</span>
+        <div class="pt-ident-text">
+          <div class="pt-ident-name">Salman Al-Ghamdi</div>
+          <span class="pt-role-chip" style="font-size:11px"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-students"></use></svg><span>Family child</span></span>
+        </div>
+      </div>
+        <nav class="pt-nav" aria-label="Role dashboard navigation"><a class="pt-nav-item is-active" href="student-portal.en.html" aria-current="page"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-home"></use></svg><span>Home</span></a><a class="pt-nav-item" href="student-schedule.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span>Schedule</span></a><a class="pt-nav-item" href="student-homework.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span>Homework</span></a><a class="pt-nav-item" href="student-materials.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>Materials</span></a><a class="pt-nav-item" href="student-progress.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>Progress</span></a><a class="pt-nav-item" href="student-history.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span>History</span></a><a class="pt-nav-item" href="student-profile.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>Profile</span></a></nav>
+        <a class="pt-nav-item pt-nav-hub" href="portals.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg><span>Back to hub</span></a>
+      </aside>
     <main class="pt-main" id="page" tabindex="-1">
       <div class="pt-body" id="page-body">
-    <section class="pt-hero">
-      <h1 class="pt-hero-hi">Hi, Salman Al-Ghamdi 🌟</h1>
-      <p class="pt-hero-sub">A new learning day! Your sessions, courses and progress — all in one place.</p>
+    <section class="pt-idhero">
+    <div class="pt-idhero-top">
+      <span class="avatar  av-sky" aria-hidden="true">S</span>
+      <div style="flex:1;min-width:0">
+        <h1 class="pt-idhero-hi">Hi, Salman Al-Ghamdi 🌟</h1>
+        <p class="pt-idhero-sub">Child view — Salman’s learning day: his sessions, progress and homework in one place.</p>
+      </div>
+    </div>
+    <div class="pt-idhero-stats"><div class="pt-idhero-stat">
+    <div class="pt-idhero-stat-top"><span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span><span class="pt-idhero-stat-num tabular">9</span></div>
+    <div class="pt-idhero-stat-label">Sessions attended</div>
+    <div class="pt-idhero-stat-story">Nine sessions attended steadily</div>
+  </div><div class="pt-idhero-stat">
+    <div class="pt-idhero-stat-top"><span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span><span class="pt-idhero-stat-num tabular">78%</span></div>
+    <div class="pt-idhero-stat-label">Overall progress</div>
+    <div class="pt-idhero-stat-story">Steady progress at his level</div>
+  </div><div class="pt-idhero-stat">
+    <div class="pt-idhero-stat-top"><span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span><span class="pt-idhero-stat-num tabular">3</span></div>
+    <div class="pt-idhero-stat-label">Open homework</div>
+    <div class="pt-idhero-stat-story">Three homework items open</div>
+  </div></div>
+  </section>
+
+    <section class="pt-section">
+      <div class="pt-sec-head">
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg>Today’s learning</h2>
+    <span class="pt-sec-hint">Today’s sessions from your schedule</span>
+  </div>
+      <div class="pt-rail"><div class="pt-stop is-now">
+    <span class="pt-stop-dot"></span>
+    <div class="pt-stop-main">
+      <div class="pt-stop-row"><span class="pt-stop-time tabular">09:00</span><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></div>
+      <div class="pt-stop-title">Mathematics Foundations</div>
+      <div class="pt-stop-sub">with Sara Al-Qahtani · Hall A</div>
+    </div>
+  </div><div class="pt-stop is-now">
+    <span class="pt-stop-dot"></span>
+    <div class="pt-stop-main">
+      <div class="pt-stop-row"><span class="pt-stop-time tabular">09:30</span><span class="chip tone-live"><span class="live-dot"></span><span>Live now</span></span></div>
+      <div class="pt-stop-title">Math Club</div>
+      <div class="pt-stop-sub">with Sara Al-Qahtani · Hall C</div>
+    </div>
+  </div></div>
     </section>
 
     <section class="pt-section">
       <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg>Today’s learning</h2>
-        <span class="pt-sec-hint">Today’s sessions from your schedule</span>
-      </div>
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg>Today’s homework</h2>
+    <span class="pt-sec-hint">The most important things waiting</span>
+  </div>
       <div class="pt-cards"><div class="pt-card">
     <div class="pt-card-row">
-      <span class="pt-time tabular">09:00</span>
+      <span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span>
       <div style="flex:1;min-width:0">
-        <div class="pt-card-title">Mathematics Foundations</div>
-        <div class="pt-card-sub">with Sara Al-Qahtani · Hall A</div>
+        <div class="pt-card-title">Worksheet: adding fractions</div>
+        <div class="pt-card-sub">Mathematics</div>
       </div>
-      <span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+    </div>
+    <div class="pt-tags">
+      <span class="pt-tag is-accent"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>Due: tomorrow</span>
+      <span class="pt-tag">New</span>
     </div>
   </div><div class="pt-card">
     <div class="pt-card-row">
-      <span class="pt-time tabular">09:30</span>
+      <span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span>
       <div style="flex:1;min-width:0">
-        <div class="pt-card-title">Math Club</div>
-        <div class="pt-card-sub">with Sara Al-Qahtani · Hall C</div>
+        <div class="pt-card-title">Mini project: printing patterns</div>
+        <div class="pt-card-sub">Intro to Programming</div>
       </div>
-      <span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
+    </div>
+    <div class="pt-tags">
+      <span class="pt-tag is-accent"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>Due: Thursday</span>
+      <span class="pt-tag">In progress</span>
     </div>
   </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head"><h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg>My next session</h2></div>
-      <div class="pt-card">
-        <div class="pt-card-row">
-          <span class="pt-time tabular">09:30</span>
-          <div style="flex:1;min-width:0">
-            <div class="pt-card-title">Math Club</div>
-            <div class="pt-card-sub">with Sara Al-Qahtani · Room Hall C</div>
-          </div>
-        </div>
-        <div class="pt-note" style="padding:10px 12px"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>A join button will appear here once live sessions are wired up — this is a demo preview.</span></div>
-      </div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg>My courses</h2>
-        <span class="pt-sec-hint">What I’m learning now</span>
-      </div>
-      <div class="pt-cards"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">Mathematics Foundations</div>
-        <div class="pt-card-sub">Level 3</div>
-      </div>
-    </div>
-    <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:78%"></span></div>
-      <span class="tabular" style="font-weight:700;color:var(--pt-accent-ink)">78%</span>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-sky "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">Intro to Programming</div>
-        <div class="pt-card-sub">Level 1</div>
-      </div>
-    </div>
-    <div class="pt-gauge">
-      <div class="pt-bar"><span style="width:41%"></span></div>
-      <span class="tabular" style="font-weight:700;color:var(--pt-accent-ink)">41%</span>
-    </div>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg>My progress</h2>
-        <span class="pt-sec-hint">A quick look at my level — fixed illustrative numbers</span>
-      </div>
-      <div class="pt-card">
-        <div class="pt-gauge">
-          <span class="pt-gauge-num tabular">78%</span>
-          <div style="flex:1">
-            <div class="pt-card-sub" style="margin-bottom:6px">Overall progress</div>
-            <div class="pt-bar"><span style="width:78%"></span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-sec-head">
-        <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg>My achievements <span class="pt-role-chip" style="font-size:10.5px">New</span></h2>
-      </div>
-      <p class="pt-sec-hint">A brand-new portal experience — collect badges as you go. The old system never had this!</p>
-      <div class="pt-cards pt-cards-3"><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg></span>
-      <div>
-        <div class="pt-card-title">Persistence badge</div>
-        <div class="pt-card-sub">Completed 5 sessions in a row</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-      <div>
-        <div class="pt-card-title">Progress badge</div>
-        <div class="pt-card-sub">Your math level went up</div>
-      </div>
-    </div>
-  </div><div class="pt-card">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-amber "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg></span>
-      <div>
-        <div class="pt-card-title">Attendance badge</div>
-        <div class="pt-card-sub">Full attendance this week</div>
-      </div>
-    </div>
-  </div></div>
-    </section>
-
-    <section class="pt-section">
-      <div class="pt-cards pt-cards-3"><div class="pt-card pt-planned">
+      <div class="pt-cards"><div class="pt-card pt-planned pt-guide">
     <div class="pt-card-row">
       <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span>
       <div style="flex:1;min-width:0">
-        <div class="pt-card-title">Homework &amp; tasks</div>
-        <div class="pt-card-sub">Your daily assignments with due dates will live here.</div>
+        <div class="pt-card-title">Submit homework</div>
+        <div class="pt-card-sub">Uploading your homework requires the real backend.</div>
       </div>
     </div>
-    <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Planned</span></span>
-  </div><div class="pt-card pt-planned">
+    <div class="pt-guide-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>What happens when live: the action is saved for real and the right person is notified.</span></div>
+    <span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>Backend required</span></span>
+  </div></div>
+    </section>
+
+    <section class="pt-section">
+      <div class="pt-sec-head">
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg>My week &amp; history</h2>
+    <span class="pt-sec-hint">A quick glance — the full pages arrive soon</span>
+  </div>
+      <div class="pt-card pt-cele">
+        <div class="pt-tags"><span class="pt-tag">Saturday · <span class="tabular">1</span></span><span class="pt-tag">Monday · <span class="tabular">1</span></span><span class="pt-tag">Tuesday · <span class="tabular">1</span></span></div>
+        <div class="pt-card-sub">Your sessions across the week at a glance</div>
+      </div>
+      <div class="pt-cards"><div class="pt-card pt-planned pt-guide">
     <div class="pt-card-row">
-      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg></span>
+      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
       <div style="flex:1;min-width:0">
-        <div class="pt-card-title">Learning materials</div>
-        <div class="pt-card-sub">Your course files and resources in one library.</div>
+        <div class="pt-card-title">Full history</div>
+        <div class="pt-card-sub">Browsing all your past sessions will arrive in the dashboard later.</div>
       </div>
     </div>
-    <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Planned</span></span>
-  </div><div class="pt-card pt-planned">
-    <div class="pt-card-row">
-      <span class="medallion m-soft tone-muted "><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-      <div style="flex:1;min-width:0">
-        <div class="pt-card-title">Leaderboard</div>
-        <div class="pt-card-sub">Friendly competition with classmates — a new experience on its way.</div>
-      </div>
-    </div>
+    <div class="pt-guide-line"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>What happens when live: the action is saved for real and the right person is notified.</span></div>
     <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Planned</span></span>
   </div></div>
     </section>
 
-    <div class="pt-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span><strong>This is the student portal foundation</strong> — The full student dashboard (homework, materials, complete achievements and more) arrives in Spec 013.</span></div>
+    <section class="pt-section">
+      <div class="pt-sec-head">
+    <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg>Quick links</h2>
+    <span class="pt-sec-hint">Your dashboard pages — arriving soon</span>
+  </div>
+      <div class="pt-qtiles"><a class="pt-qtile pt-lift" href="student-schedule.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-schedule"></use></svg><span>Schedule</span></a><a class="pt-qtile pt-lift" href="student-homework.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span>Homework</span></a><a class="pt-qtile pt-lift" href="student-materials.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>Materials</span></a><a class="pt-qtile pt-lift" href="student-progress.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>Progress</span></a><a class="pt-qtile pt-lift" href="student-history.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span>History</span></a><a class="pt-qtile pt-lift" href="student-profile.en.html"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>Profile</span></a></div>
+    </section>
+
+    <div class="pt-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span><strong>Child view — part of the family account</strong> — A compact dashboard: a quick overview here, with full details on your dashboard pages soon.</span></div>
   </div>
     </main>
+    </div>
     <footer class="pt-foot"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>Fixture-only demo preview — no login, nothing is saved.</span></footer>
   </div>
   <script type="module" src="./assets/js/enhance.js"></script>

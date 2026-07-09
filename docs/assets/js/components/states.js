@@ -52,6 +52,6 @@ export function emptyState() {
       <h3 class="text-[15px] font-bold text-ink mb-1">${t('state.empty.title')}</h3>
       <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">${t('state.empty.msg')}</p>
     </div>
-    ${button({ labelKey: 'state.empty.cta', variant: 'primary', icon: 'plus', size: 'sm', attrs: 'data-action="add-session"' })}
+    ${button({ labelKey: 'state.empty.cta', variant: 'primary', icon: 'plus', size: 'sm', attrs: 'data-modal-trigger data-modal-title-key="state.empty.cta" data-modal-note-key="common.backendRequiredNote"' })}
   </div>`;
 }

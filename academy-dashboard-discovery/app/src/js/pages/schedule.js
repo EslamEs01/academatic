@@ -11,6 +11,7 @@ import { tabs } from '../components/tabs.js';
 import { scheduleList } from '../components/schedule-list.js';
 import { timetableGrid } from '../components/timetable-grid.js';
 import { appointmentTemplate } from '../components/appointment-details.js';
+import { scheduleRequestsBand } from '../components/ops-bands.js';
 import { noResults } from '../components/states.js';
 
 const SUBJECTS = ['math', 'arabic', 'programming', 'physics', 'english', 'science'];
@@ -70,6 +71,7 @@ export function renderSchedule() {
     ${filters}
     <div id="schedule-views">${views}</div>
     ${noResults()}
+    ${scheduleRequestsBand()}
     ${templates}
   `;
 }

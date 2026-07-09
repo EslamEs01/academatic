@@ -632,3 +632,171 @@ B-02 Locations→031 · B-04 live-room→future-backend · B-06 teacher chat→f
 
 ### Failure sweep
 None. Forbidden files (build-html.mjs, package.json, nav.config.js, enhance.js, topbar.js) 0-diff. Teacher pay-free three layers green; family zero-pay green. No `href="#"`, no new hook/storage key. Admin pages untouched.
+
+## Spec 025 — Teacher Internal Pages (2026-07-07)
+
+The seven teacher internal pages built behind the teacher portal nav (each AR+EN → 77→91 public HTML). Static, pay-free, honest gates; no backend, no fake actions. Smoke PASS (90 loads); a11y critical=0 serious=0; 170 screenshots / 0 console errors.
+
+### Pages (grounded in the Spec 015 T1–T27 map)
+- **teacher-schedule** (T14): today dayRail (roster counts + «جارية الآن» status + prep hint) + week day-grouped agenda cards (truthful rest days, no grid clone); live-room + availability = backendRequired gates.
+- **teacher-students** (T8): view-only roster cards (st1/st6/st11/st13 — course/group + learning signal) + follow-up storyRow; zero form controls, zero body anchors.
+- **teacher-outcomes** (T22/T3): prepare→attend→record→review flowStrip + the five classes-end capture fields display-only + recorded examples (out1/out11); save = backendRequired.
+- **teacher-tasks** (T11/T16): task board (priority/status + due) + monthly-plan preview; complete = backendRequired; no tickets chart/average.
+- **teacher-reports** (T9+T20/T21): **academic-only** — authored counts (24 sessions / 4 students / 3 on-track), student-progress cards, 5 rubric dimension lines (no scales/scores), export = backendRequired. **The teacher-home performance anchor's repoint target.**
+- **teacher-profile** (T23): identity + subjects + availability windows + preferences; exactly 3 backendRequired write gates (photo/save/password).
+- **teacher-library** (T15): resource cards (type/status/course) from TEACHER_PREVIEW.materials; upload/download = backendRequired.
+
+### Nav conversion + anchor repoint
+The 7 planned ROLE_NAV.teacher items → implemented (navListAnchors 1→8, plannedNavAnchors===0, shell-anchor multiset 5→19 — teacher is now a full role app like family). The teacher-home performance anchor repointed `teacher-performance`→`teacher-reports` (closing the Spec-024 B-07 admin-shell adjacency).
+
+### Pay-free / honesty
+Teacher pay-free GLOBAL verified at 3 layers (source incl. comments + built + smoke `payHit` byte-verbatim; 0 hits on the 7 teacher-owned pages + teacher-portal). Reports academic-only (no chart/computed-score). Live-room = backendRequired gate (B-04); no teacher chat page/nav (B-06→026); every unavailable action an honest gate; zero `href="#"`, zero form controls, zero body anchors.
+
+### Failure sweep
+None. Admin (40) + index + all family + all student pages byte-identical (only teacher-portal pair changed — nav+anchor). package.json / enhance.js / topbar.js / portal-shell.js / nav.config.js 0-diff. One sanctioned smoke amendment (TEACHER_INTERNAL set + teacher nav/body asserts + anchor re-pin + expPlanned entries); payHit/famPay/admin asserts byte-verbatim. Dark/RTL/mobile-390 clean.
+
+## Spec 026 — Admin Control / Sessions / Operations + Global Action Completion Pass (2026-07-07)
+
+Two layers: (A) three new admin ops pages + two folded ops bands + nav flips; (B) a global action-completion pass making every misleading admin «preview action» toast an honest `backendRequired` outcome. Static, honest, no backend, no fake persistence. **91 → 97 HTML.** Smoke PASS (96 loads); a11y critical=0 serious=0; screenshots clean.
+
+### Layer A — new admin ops pages (grounded in legacy management-* captures)
+- **sessions-analysis** (`management-sessions-analysis`): display-only outcome KPI board — helper tiles + regular/trial outcome rows (authored count + total-time), **no computed score/rank/chart**; Export = honest backendRequired gate.
+- **public-holiday** (`management-public-holiday`): authored holiday-window list (from→to, scope, status chip) + summary tallies; Set-holiday + Bulk-absence = backendRequired gates; no fake bulk cancel.
+- **scheduled-actions** (`management-scheduled-actions`): authored queued lifecycle-actions (suspend/activate/cancel-classes, scheduled + auto-return dates) + roll-up; Create = backendRequired gate; no scheduler engine.
+- **Folds** (0 new pages): total-queues → an ops queue band on **sessions**; schedule-requests → an inbox-preview band on **schedule**; add-queue / accept / reject are clickable `data-disabled-reason` backendRequired gates.
+- **Nav**: 3 planned items (`sessionsAnalysis`/`publicHoliday`/`scheduledActions`) flipped planned→implemented (real `<a>` links); the other 5 (leads/tasks/messages/announcements/time-convertor) stay honest `data-coming-soon` planned gates → owner specs.
+
+### Layer B — global action completion (all pages)
+- **Honest core**: `enhance.js` `acknowledge()` now says "available once the server is connected" (never «إجراء تجريبي»/"preview action"); `openModal()` generalized to show a Create/Edit title + a backendRequired note (reuses the existing `data-modal-trigger` — no new dispatch hook, no new storage key).
+- **Create/Add primaries** (New session ×2, Add student/teacher/course/group, wizard Save, Add-another-child) → open the honest backendRequired modal (`data-modal-trigger` + title/note keys), never a fake "saved" toast.
+- **Inline verbs + confirms** (Edit/Notify/Message/Note/Print/Attend/Feedback/Reverse/Cancel/Suspend/Stop/Remove/Record/Mark/Remind/Reset/Schedule) → 78 toast rewordings + 12 confirm-body rewordings to honest "will be available once the server is connected" (never «تم…»/"saved/cancelled/done/(demo)").
+- **DU-20 dashboard "Today's Sessions"**: the fake Apply/Clear/select-btn filter (unwired) removed (Option B); replaced with New-session (honest modal) + a real "view all sessions" link to the working sessions page.
+
+### Honesty / role laws / impact
+No fake create/save/delete/upload/download/export/print/attendance/outcome/chat/live-room. `href="#"` = 0 sitewide; 0 «preview action»; 0 fake-success toast wording in any built page. Teacher pay-free (portal pages 0 pay tokens; teacher-performance is the admin B-07 board), family zero-pay, student child-view, admin finance Spec-009-invariant (finance «رواتب» nav byte-identical to HEAD) — all green. Portal 49 files + index byte-identical; package.json 0-diff; no new dependency/engine/hook/storage key. One sanctioned smoke amendment (3 pages + action-completion asserts; DU-20/DU-07 assertions updated to the new honest behavior).
+
+## Spec 027 — Admin Families / Students / Courses / Groups Deep Management (2026-07-08)
+
+Deepened the 9 already-honest admin management pages (families/family/add-family/students/student/courses/course/groups/group) into real usable admin screens — **zero new pages (97 → 97)**, every delta a modal / drawer-picker / row-kebab / tab / gate on an existing page. Static, honest, no backend, no fake persistence. Smoke PASS (96 loads); a11y critical=0 serious=0; 187 screenshots, 0 console errors.
+
+### What became deep (M-A…M-M, M-R, M-S)
+- **Family** (`family__*__sp027-edit-modal`, `__sp027-reclassify`): Edit family / Add child / Add note upgraded from shallow toasts → honest `data-modal-trigger` backendRequired modals; **category reclassify** = a display-only assignment-preview drawer (`fam-cat`: the 4 tiers with the family's current tier marked + member counts) whose "Save category" is a backendRequired gate. Suspend/Stop stay confirm-gates; billing stays the owner-030 gate (the admin plan hour-rate stays a single-value, no-math literal).
+- **Student** (`students__*__sp027-row-kebab`, `student__*__sp027-enroll-picker`, `__sp027-suspend-confirm`): the previously-absent **students-table row kebab** (View profile · Edit modal · Suspend/Remove confirm) via a new `studentMenu` variant on the EXISTING `data-row-menu` hook (no new dispatch hook); Edit/Add-note → modals; **enroll-in-course / assign-to-group / move-between-groups** = display-only candidate-list drawer pickers (`stu-enroll`/`stu-assign`/`stu-move`) with a backendRequired final gate; **cross-family transfer** = an honest gate inside the move picker (no invented fields); **schedule-search** = an availability-preview gate. Results/Evaluation stay display-only (**no computed score/rank/chart added**). Message stays the honest 026/future gate.
+- **Course** (`course__*__sp027-add-students`, `__sp027-en`): Edit-course → modal; **Add-students** = `crs-enroll` display-only picker → backendRequired; **create-group-from-course** → modal. Assign-teacher (→028) / Print (→029) stay reference gates; materials (→031) deferred.
+- **Group** (`group__*__sp027-add-students`, `__sp027-dark`): Edit-group → modal; **Add-students** = `grp-assign` display-only picker → backendRequired; Remove stays confirm; **move** = honest gate; capacity stays the pre-existing grounded total (no invented seat field). Assign-teacher (→028) / Print (→029) stay gates.
+
+### Honesty / role laws / impact
+No fake create/save/delete/enroll/assign/move/remove/upload/export/print; no DOM/roster mutation; no persisted picker selection. `href="#"` = 0; no dead buttons; no raw keys. Reused ONLY the closed Spec-026 `data-*` set (`data-modal-trigger`+title/note · `data-drawer` baked `<template>` · `data-confirm` · `data-disabled-reason` · `data-row-menu`+`-kind`) — **no new dispatch hook, no new storage key, no new engine, no new page, no CSS redesign** (pickers reuse `sheet-card`/`sheet-row`, kebab reuses `icon-btn`). Family zero-pay, student child-view (no «لوحة الطالب»), teacher pay-free (reference only), admin finance Spec-009 invariant — all byte-verbatim green. Portal + admin-ops (sessions-analysis/public-holiday/scheduled-actions) + index byte-identical; package.json 0-diff. One sanctioned smoke amendment (+83 lines, additions only; payHit/famPay/payFigure/child-view/admin-finance + the 026 action-completion asserts byte-verbatim).
+
+## Spec 028 — Admin Teachers / Performance Deep Management (2026-07-08)
+
+Deepened the admin teacher surfaces (teachers · teacher · teacher-performance) + the course/group **assign-teacher** references — the Spec-027 M-N handoff — into real usable admin screens. **Zero new pages (97 → 97)**; all-teachers-timetable **folds into the existing `schedule.html` teacher-lens** (no new page, `schedule.js` byte-unchanged). Static, honest, no backend, no fake persistence. Smoke PASS (96 loads); a11y critical=0 serious=0; 197 screenshots, 0 console errors.
+
+### What became deep
+- **Teachers list** (`teachers__*__sp028-kebab`, `__sp028-categories`): a per-card **row kebab** (previously absent — View profile real link · Edit modal · On-Vacation/Deactivate confirm · Delete confirm) via a new `teacherMenu` on the EXISTING `data-row-menu` hook (an optional `menuId`/`menuKind` slot on `directory-card.js` — every non-teacher `directoryCard` caller stays byte-identical); a **Manage-categories** header drawer (`trn-categories`: display-only category list + a Create-category modal + an assign-members backendRequired gate) — the `teacherCategories` nav item stays **planned** (no page).
+- **Teacher detail** (`teacher__*__sp028-edit-modal`, `__sp028-assign-course`, `__sp028-availability`, `__sp028-confirm`, `__sp028-en`): Edit + Add-note → honest `data-modal-trigger` modals; Notify → confirm (kept); **assign-course / assign-group** → display-only `trn-assign-course`/`trn-assign-group` picker drawers → backendRequired; **On-Vacation / Deactivate / Delete** → confirms; **availability-window editor** (`trn-availability`: weekly day/time rows + Add/Update/Delete backendRequired gates, no invented recurrence); Reset-password / Login-as → future-backend gates; Message → 026/future gate; Print → 029 gate.
+- **Course / Group** (`course__*__sp028-assign-teacher`, `group__*__sp028-assign-teacher-dark`): the M-N assign-teacher gate → a display-only single-teacher `crs-assign-teacher`/`grp-assign-teacher` picker drawer → backendRequired (separate from the Spec-027 `grp-assign` student drawer).
+- **Teacher performance**: preserved display-only (counts + labeled signals + facet filters + real profile links) — **no computed score/rank/chart** added; the unused `rating` fixture field stays unsurfaced.
+
+### Honesty / role laws / impact
+No fake teacher create/edit/delete/status-change/assign/schedule/availability mutation; no persisted picker selection; no roster/relationship change. **Zero pay/salary/payroll/compensation/payout figures** on the admin teacher surfaces (the shared «الرواتب» finance nav in the sidebar is the pre-existing Spec-009-sanctioned link, outside `#page-body`); no Salary/Payout fieldset; no compensations tab. Reused ONLY the closed Spec-026 `data-*` set + Spec-027 drawer-picker/kebab precedents — **no new dispatch hook, no storage key, no engine, no page, no CSS**. **Teacher portal pay-free**: the 16 `teacher-*` portal files stay **byte-identical**; `teacher-performance.html` is the Spec-024-B-07 sanctioned admin exempt board (never linked from the portal). Family zero-pay, student child-view, admin finance Spec-009 invariant — all byte-verbatim green. Only teachers/teacher/course/group HTML changed (×2 lang); `teacher-performance` + all portal + admin-ops + the 9 Spec-027 pages + index byte-identical; `package.json` 0-diff. One sanctioned smoke amendment (+77 lines, additions only; payHit/tchPay/famPay/payFigure/child-view/admin-finance + 026/027 asserts byte-verbatim).
+
+## Spec 029 — Admin Reports / Analytics / Feedback / Forms Deep Management + Admin Menu Coverage Gate
+
+**Frames**: `reports__*__sp029-feedback-drawer`, `__sp029-categories`, `__sp029-create-feedback`,
+`__sp029-form-drawer-en`, `__sp029-feedback-drawer-dark`, `__sp029-mobile` (203 total · 0 console errors).
+
+### What became deep (no new page — 97 → 97; feedback + forms folded into reports.html)
+- **Feedback review** (`sp029-feedback-drawer`, `__-dark`): authored rows across teacher/class/family/student
+  — a CATEGORICAL remark pill (never a number) + status chip + a real type/status `filterBar`; each row opens
+  a **read-only** detail drawer whose finals are backendRequired confirms (Approve · Delete). No computed
+  percentage/score/rank; no plotting visuals.
+- **Feedback categories** (`sp029-categories`): a Manage-categories drawer (`rep-fbcat`) — display-only list +
+  a Create-category modal + an assign-members `data-disabled-reason` gate; the nav item stays **planned/folded**
+  (mirrors `teacherCategories`/`familyCategories`).
+- **Create feedback** (`sp029-create-feedback`): an honest `data-modal-trigger` backendRequired modal (nothing
+  saved).
+- **Forms / surveys** (`sp029-form-drawer-en`): a display-only list (authored question/response **literals** —
+  no aggregation) + a Create-form modal + a read-only detail drawer + a real deep-link to the EXISTING student
+  Evaluation tab (the monthly progress form — no duplicate engine).
+- **Mobile** (`sp029-mobile`, 390px): the folded feedback/forms sections reflow with no horizontal overflow.
+
+### Honesty / role laws / impact
+Every 029 write ends at a `backendRequired` modal/confirm/gate — no fake report/export/download/PDF/CSV/print,
+no fake feedback submit/approve/delete, no fake form persistence, no DOM mutation. **No chart engine / `<canvas>`
+/ computed percentage / score / rank / percentile** anywhere; `sparkline.js` not repurposed. **Export/print
+honesty**: reports Print → disabled-with-reason gate (R-G); native disabled-reason gates on sessions-analysis /
+course / group / student / teacher kept (already honest); teacher-performance stays export-free/display-only.
+**Write honesty**: outcome "Add feedback" → backendRequired modal (R-E, via the ONE canonical outcome drawer →
+attendance/sessions/course/group/teacher); student "Approve" → backendRequired confirm (R-F). **No finance
+figure** in any 029 body (reports `#page-body` forbidden-token grep covers salary/payroll/invoice/etc.);
+finance source **0-diff**. **Admin-menu coverage**: 43 items classified, 0 unclassified; `nav.config.js` 0-diff;
+runtime-enforced by the existing Spec-010 nav block. **14 HTML changed**
+(reports/attendance/sessions/course/group/teacher/student ×2); teacher-performance + 16 teacher-portal + family
++ finance + index byte-identical; `package.json` 0-diff. Teacher pay-free / family zero-pay / student child-view
+/ admin finance Spec-009 invariant all byte-verbatim green. Additive smoke amendment (Spec-029 asserts + R-G
+re-pin + one facet-scoped filter-correctness refinement); a11y critical=0 serious=0.
+
+## Spec 030 — Admin Finance / Invoices / Payroll / Banks Deep Management
+
+**Frames**: `finance__*__sp030-salaries`, `__sp030-banks-en`, `__sp030-add-bank-modal`, `__sp030-salaries-dark`,
+`__sp030-mobile` (208 total · 0 console errors).
+
+### What became deep (no new page — 97 → 97; nav.config.js 0-diff; finance.html tabbed hub)
+- **Salaries tab** (`sp030-salaries`, `__-dark`): teacher + staff **STATUS-FIRST, FIGURE-FREE** boards — name +
+  status chip + period ONLY (no salary/fixed/fine/gift/hour-rate/total figure). Run-salaries / Approve /
+  Mark-disbursed / Export = honest `data-disabled-reason` gates.
+- **Banks tab** (`sp030-banks-en`): bank name/status list + an Add-bank `backendRequired` modal
+  (`sp030-add-bank-modal`, name only) + Import-statement / Reconcile gates — no credentials, account numbers,
+  balances, or `type=password`.
+- **Overview tab** (unchanged, byte-behavior-identical): 4 status tiles + 9 invoice rows + read-only drawers +
+  recent payments (now with Add/Reconcile gates) + the 9 figure-free planned cards. Print reclassified to a
+  disabled-with-reason gate (F-J).
+- **Mobile** (`sp030-mobile`, 390px): the finance hub tabs + salary board reflow with no horizontal overflow.
+
+### Honesty / no-fake-money / role laws / impact
+Every finance write is a `backendRequired`/`disabled-with-reason` gate or a `data-confirm` that mutates
+nothing — no fake payment / mark-paid / salary generation / payout / bank import / reconciliation / export /
+print. **Two figure classes**: invoice/payment amount literals allowed (Spec-009-sanctioned); **salary/payout/
+compensation figures never shown** (salaries/payouts/class-report are figure-free boards or honest planned
+gates). No computed aggregate (Net Income / P&L / totals / balance), no group-by/sum, no chart/`<canvas>`, no
+`type=file`, no `type=password`, no API-key/webhook/secret/paymob/payoneer. Payout-providers + payment-gateway
+credentials → future-backend/031 (never mocked); teacher-portal salary twin + family payment → excluded.
+**Declared Spec-009 supersession**: lifted the finance-source freeze + the `demoInCluster>=1` assertion (F-J);
+kept byte-verbatim the 4-tiles / 9-invoices / 6-payments / **9-planned-cards** / 9-drawers / forbidden regex /
+no-mutation-on-confirm / no-receipt asserts. **Only `finance.html`/`.en` changed**; `package.json`/
+`nav.config.js`/`enhance.js`/`finance-status.js` 0-diff; teacher-portal ×16 + teacher-performance + family +
+student + reports + index byte-identical. Additive smoke amendment; a11y critical=0 serious=0.
+
+## Spec 031 — Admin Management / Content / Certificates / Settings / Materials
+
+**Frames**: `sp031-staff`, `sp031-staff-rbac`, `sp031-library-en`, `sp031-library-cats`, `sp031-certificates`,
+`sp031-cert-requests`, `sp031-settings`, `sp031-integrations`, `sp031-add-head-modal`, `sp031-settings-dark`,
+`sp031-mobile` (219 total · 0 console errors).
+
+### What became deep (97 → 103; settings folds 0-delta; +staff/library/certificates)
+- **Users & Staff** (`sp031-staff`, `-rbac`): display-only directory + per-row kebab (View drawer · Edit/Duplicate
+  backendRequired modal with **no password / no salary** · display-only RBAC matrix drawer + Save gate · Category/
+  Activity drawers · Deactivate/Delete confirms that mutate nothing · Reset/Invite future-backend gates). The ONE
+  staff home (resolves the settingsUsers duplicate; the settings Users tab deep-links here).
+- **Materials & Library** (`sp031-library-en`, `-cats`): Content hub — Materials (bilingual subject catalog,
+  name-only modals) + Books (media rows with authored view/download **count literals**, filters, category drawer).
+  Add-Material/Upload/Download/Publish/Delete are gates — **no `type=file`, no download link, no fake publish**.
+- **Certificates** (`sp031-certificates`, `-cert-requests`): Templates (+ a **static, non-draggable designer
+  preview** — no `<canvas>`, no drag, no upload) + Requests queue. Approve/Reject/Generate/Preview/Download/Send/
+  Create/Upload = gates — **no PDF, no `window.open`, no status mutation**.
+- **Settings hub** (`sp031-settings`, `-integrations`, `-add-head-modal`, `-settings-dark`): 6 tabs (General ·
+  Notifications · Customization · Security · Users · Integrations). **Theme/language stay REAL**; every Save/
+  Connect/Test is a gate. General omits pay-rate/salary, folds Locations + a figure-free expense-heads lookup.
+  Notifications = figure-free matrix. Integrations = **locked-placeholder** provider cards (name + status only —
+  no credentials, no `type=password`, no webhook). Message-builder/backup/import = future-backend gates.
+- **Mobile** (`sp031-mobile`, 390px): staff directory reflows with no horizontal overflow.
+
+### Honesty / role laws / impact
+Every write is a `backendRequired`/`disabled-with-reason` gate or a `data-confirm` that mutates nothing — no fake
+settings save / user-RBAC mutation / upload-download / certificate-PDF generation / integration connect / backup.
+**0** `type=password`/`type=file`/api-key/secret/webhook/`<canvas>`/`.pdf`/`window.open` in any 031 body; **0**
+salary/pay figure (staff omits salary; heads name/status; notif `salaries` figure-free). Only `settings.html`
+changed among existing bodies; the 3 nav flips changed the shared sidebar (staff/books/certificates → anchors,
+proven the only change); teacher-portal ×16 + family + student + index + finance/reports bodies byte-identical.
+Protected role-law + 026-030 smoke asserts byte-verbatim. a11y critical=0 serious=0.

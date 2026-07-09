@@ -53,7 +53,7 @@ export function renderCourses() {
     ],
   });
   return `
-    ${pageHeader({ titleKey: 'cur.title', subKey: 'cur.sub', primary: button({ labelKey: 'crs.act.add', variant: 'primary', icon: 'plus', attrs: `data-demo-action data-toast="${t('crs.act.addToast')}"` }), summaryHTML: summary })}
+    ${pageHeader({ titleKey: 'cur.title', subKey: 'cur.sub', primary: button({ labelKey: 'crs.act.add', variant: 'primary', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="crs.act.add" data-modal-note-key="common.backendRequiredNote"' }), summaryHTML: summary })}
     ${filters}
     ${cardGrid(rows.map(card), { cols: 'sm:grid-cols-2 xl:grid-cols-3', id: 'courses-grid' })}
     ${noResults()}

@@ -6,13 +6,14 @@ import { TEACHERS, TEACHER_AVAIL } from '../fixtures/teachers.js';
 import { teacherCounts } from '../fixtures/teacher-links.js';
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
-import { facetAttrs } from '../dom.js';
+import { esc, facetAttrs } from '../dom.js';
 import { pageHeader, summaryCards } from '../components/page-header.js';
 import { filterBar } from '../components/filter-bar.js';
 import { cardGrid } from '../components/card-grid.js';
 import { directoryCard, statMini } from '../components/directory-card.js';
-import { avatar } from '../components/ui.js';
+import { avatar, button } from '../components/ui.js';
 import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { TEACHER_CATEGORIES } from '../fixtures/teacher-management.js';
 import { noResults } from '../components/states.js';
 import { teacherStatusChip, TEACHER_STATUS_ORDER } from '../components/teacher-status.js';
 import { workloadChip, signalChip, needsFollowUp, WORKLOAD_ORDER } from '../components/teacher-signals.js';
@@ -38,6 +39,7 @@ function card(tr) {
     statusHTML: teacherStatusChip(tr.statusId),
     tagsHTML: tags, statsHTML: stats, drawerId: tr.id,
     ctaHref: teacherHref(), ctaKey: 'trn.viewProfile', ctaIcon: 'user',
+    menuId: tr.id, menuKind: 'teacher',
   });
 }
 
@@ -56,6 +58,20 @@ function preview(tr) {
     ${sheetRow(t('trn.perf.sessions'), `<span class="tabular">${num(tr.sessions)}</span>`)}
     ${sheetRow(t('trn.perf.hours'), `<span class="tabular">${num(tr.hours)}</span>`)}`;
   return previewTemplate(tr.id, { title: t('trn.detailsTitle'), headIcon: 'trainers', tone: 'primary', bodyHTML: body });
+}
+
+/* Spec 028 — teacher-categories (M-K): a display-only category list + a Create-category modal +
+ * an assign-members backendRequired gate, in a baked <template data-preview="trn-categories">
+ * drawer reached from the header. The teacherCategories nav item stays planned — no page. */
+function categoriesDrawer() {
+  const rows = TEACHER_CATEGORIES.map((c) => sheetRow(t(c.nameKey), t('trn.cat.members', { n: num(c.count) }))).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('trn.cat.hint')}</p>
+    ${rows}
+    <div class="flex flex-wrap gap-2 mt-4">
+      ${button({ labelKey: 'trn.cat.createTitle', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="trn.cat.createTitle" data-modal-note-key="common.backendRequiredNote"' })}
+      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="trn.cat.assignReason" aria-disabled="true" title="${esc(t('trn.cat.assignReason'))}">${icon('user-check', 'ico ico-sm')}<span>${t('trn.cat.assign')}</span></button>
+    </div>`;
+  return previewTemplate('trn-categories', { titleKey: 'trn.cat.title', headIcon: 'filter', tone: 'primary', bodyHTML: body });
 }
 
 export function renderTeachers() {
@@ -77,10 +93,11 @@ export function renderTeachers() {
     ],
   });
   return `
-    ${pageHeader({ titleKey: 'trn.title', subKey: 'trn.sub', primary: addTeacherAction(), summaryHTML: summary })}
+    ${pageHeader({ titleKey: 'trn.title', subKey: 'trn.sub', secondary: button({ labelKey: 'trn.cat.manage', variant: 'secondary', size: 'sm', icon: 'filter', attrs: 'data-drawer="trn-categories"' }), primary: addTeacherAction(), summaryHTML: summary })}
     ${filters}
     ${cardGrid(rows.map(card), { cols: 'sm:grid-cols-2 xl:grid-cols-3', id: 'teachers-grid' })}
     ${noResults()}
     ${rows.map(preview).join('')}
+    ${categoriesDrawer()}
   `;
 }

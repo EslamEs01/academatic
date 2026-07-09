@@ -37,14 +37,14 @@ export default {
     newTime: 'New time',
 
     act: {
-      attend: 'Mark attended', attendToast: 'Marked attended (demo) — nothing is saved.',
-      notify: 'Notify family', notifyToast: 'Notification sent (demo).',
-      feedback: 'Add note', feedbackToast: 'Add-note opened (demo).',
-      reverse: 'Reverse', reverseToast: 'Outcome reversed (demo).',
-      cancel: 'Cancel session', cancelTitle: 'Cancel this session?', cancelMsg: 'A front-end demo only — it does not affect any real data.', cancelCta: 'Cancel session', cancelToast: 'Cancelled (demo).',
-      reschedule: 'Reschedule', rescheduleTitle: 'Reschedule this session?', rescheduleMsg: 'A front-end demo only — no real time is booked.', rescheduleCta: 'Reschedule', rescheduleToast: 'Reschedule opened (demo).',
-      studentAbsent: 'Mark student absent', studentAbsentTitle: 'Mark the student absent?', studentAbsentMsg: 'A front-end demo only — nothing is saved.', studentAbsentCta: 'Mark absent', studentAbsentToast: 'Student marked absent (demo).',
-      teacherAbsent: 'Mark teacher absent', teacherAbsentTitle: 'Mark the teacher absent?', teacherAbsentMsg: 'A front-end demo only — nothing is saved.', teacherAbsentCta: 'Mark absent', teacherAbsentToast: 'Teacher marked absent (demo).',
+      attend: 'Mark attended', attendToast: 'Marking attendance will be available once the server is connected.',
+      notify: 'Notify family', notifyToast: 'Sending the notification will be available once the server is connected.',
+      feedback: 'Add note', feedbackToast: 'Saving the note will be available once the server is connected.',
+      reverse: 'Reverse', reverseToast: 'Reversing the outcome will be available once the server is connected.',
+      cancel: 'Cancel session', cancelTitle: 'Cancel this session?', cancelMsg: 'This will be available once the server is connected — nothing changes yet.', cancelCta: 'Cancel session', cancelToast: 'Cancelling the session will be available once the server is connected.',
+      reschedule: 'Reschedule', rescheduleTitle: 'Reschedule this session?', rescheduleMsg: 'This will be available once the server is connected — no time is booked yet.', rescheduleCta: 'Reschedule', rescheduleToast: 'Rescheduling will be available once the server is connected.',
+      studentAbsent: 'Mark student absent', studentAbsentTitle: 'Mark the student absent?', studentAbsentMsg: 'This will be available once the server is connected — nothing is saved yet.', studentAbsentCta: 'Mark absent', studentAbsentToast: 'Marking the student absent will be available once the server is connected.',
+      teacherAbsent: 'Mark teacher absent', teacherAbsentTitle: 'Mark the teacher absent?', teacherAbsentMsg: 'This will be available once the server is connected — nothing is saved yet.', teacherAbsentCta: 'Mark absent', teacherAbsentToast: 'Marking the teacher absent will be available once the server is connected.',
       addToCredit: 'Add to credit',
     },
     reason: {

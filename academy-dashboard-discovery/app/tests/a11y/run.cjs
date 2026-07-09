@@ -12,6 +12,9 @@ const MATRIX = [
   { page: 'reports', lang: 'ar', theme: 'light' },
   { page: 'reports', lang: 'ar', theme: 'dark' },
   { page: 'reports', lang: 'en', theme: 'light' },
+  // Spec 029 — the folded Feedback review + Forms/surveys sections in EN dark (drawer/modal
+  // machinery is centrally covered by finance/sessions; this scans the new baked content)
+  { page: 'reports', lang: 'en', theme: 'dark' },
   { page: 'gallery', lang: 'ar', theme: 'light' },
   { page: 'gallery', lang: 'ar', theme: 'dark' },
   // Spec 002 pages
@@ -43,6 +46,8 @@ const MATRIX = [
   { page: 'student', lang: 'ar', theme: 'dark' },
   { page: 'student', lang: 'ar', theme: 'light', hash: '#view=results' },
   { page: 'student', lang: 'ar', theme: 'light', hash: '#view=evaluation' },
+  // Spec 027 — the Courses tab surfaces the enroll/assign/move picker triggers + the availability gate
+  { page: 'student', lang: 'ar', theme: 'light', hash: '#view=courses' },
   { page: 'student', lang: 'en', theme: 'light' },
   // Spec 005 — attendance & session outcomes (AR light + dark + EN)
   { page: 'attendance', lang: 'ar', theme: 'light' },
@@ -64,6 +69,8 @@ const MATRIX = [
   { page: 'teachers', lang: 'en', theme: 'light' },
   { page: 'teacher', lang: 'ar', theme: 'light' },
   { page: 'teacher', lang: 'ar', theme: 'light', hash: '#view=sessions-outcomes' },
+  // Spec 028 — the Timetable tab surfaces the availability-editor trigger
+  { page: 'teacher', lang: 'ar', theme: 'light', hash: '#view=timetable' },
   { page: 'teacher', lang: 'en', theme: 'light' },
   { page: 'teacher-performance', lang: 'ar', theme: 'light' },
   { page: 'teacher-performance', lang: 'ar', theme: 'dark' },
@@ -73,6 +80,19 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'dark' },
   { page: 'finance', lang: 'en', theme: 'light' },
   { page: 'finance', lang: 'en', theme: 'dark' },
+  // Spec 030 — the folded Salaries + Banks tabs of the finance hub (activate via #view hash)
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=salaries' },
+  { page: 'finance', lang: 'ar', theme: 'dark', hash: '#view=banks' },
+  { page: 'finance', lang: 'en', theme: 'light', hash: '#view=salaries' },
+  // Spec 026 — the three new admin ops pages (AR light+dark; sessions-analysis as the EN sample)
+  { page: 'sessions-analysis', lang: 'ar', theme: 'light' },
+  { page: 'sessions-analysis', lang: 'ar', theme: 'dark' },
+  { page: 'sessions-analysis', lang: 'en', theme: 'light' },
+  { page: 'public-holiday', lang: 'ar', theme: 'light' },
+  { page: 'public-holiday', lang: 'ar', theme: 'dark' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'light' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'dark' },
+  // the shared modal + drawer machinery is covered by finance (drawer/confirm) + sessions (outcome drawer)
   // Spec 012 — role portal foundation (portal shell surfaces)
   { page: 'portals', lang: 'ar', theme: 'light' },
   { page: 'portals', lang: 'ar', theme: 'dark' },
@@ -121,6 +141,30 @@ const MATRIX = [
   { page: 'family-materials', lang: 'ar', theme: 'dark' },
   { page: 'family-profile', lang: 'ar', theme: 'light' },
   { page: 'family-profile', lang: 'ar', theme: 'dark' },
+  // Spec 025 — the seven teacher internal pages (AR light covers all seven; reports/schedule AR dark; schedule as the EN sample)
+  { page: 'teacher-schedule', lang: 'ar', theme: 'light' },
+  { page: 'teacher-schedule', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-schedule', lang: 'en', theme: 'light' },
+  { page: 'teacher-students', lang: 'ar', theme: 'light' },
+  { page: 'teacher-outcomes', lang: 'ar', theme: 'light' },
+  { page: 'teacher-tasks', lang: 'ar', theme: 'light' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'light' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-profile', lang: 'ar', theme: 'light' },
+  { page: 'teacher-library', lang: 'ar', theme: 'light' },
+  // Spec 031 — Users&Staff / Library (materials+books) / Certificates (templates+requests) / Settings hub
+  { page: 'staff', lang: 'ar', theme: 'light' },
+  { page: 'staff', lang: 'en', theme: 'light' },
+  { page: 'staff', lang: 'ar', theme: 'dark' },
+  { page: 'library', lang: 'ar', theme: 'light' },
+  { page: 'library', lang: 'ar', theme: 'light', hash: '#view=books' },
+  { page: 'library', lang: 'en', theme: 'light' },
+  { page: 'certificates', lang: 'ar', theme: 'light' },
+  { page: 'certificates', lang: 'ar', theme: 'light', hash: '#view=requests' },
+  { page: 'certificates', lang: 'ar', theme: 'dark' },
+  { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations' },
+  { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=security' },
+  { page: 'settings', lang: 'en', theme: 'light', hash: '#view=users' },
 ];
 
 (async () => {

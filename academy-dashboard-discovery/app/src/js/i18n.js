@@ -19,6 +19,10 @@ import arFin from '../locales/ar.fin.js';
 import enFin from '../locales/en.fin.js';
 import arPrt from '../locales/ar.prt.js';
 import enPrt from '../locales/en.prt.js';
+import arOps from '../locales/ar.ops.js';
+import enOps from '../locales/en.ops.js';
+import arAdm from '../locales/ar.adm.js';
+import enAdm from '../locales/en.adm.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -51,6 +55,12 @@ deepMerge(ar, arFin);
 deepMerge(en, enFin);
 deepMerge(ar, arPrt);
 deepMerge(en, enPrt);
+// Spec 026 keys live in *.ops.js (admin control / sessions / operations pages)
+deepMerge(ar, arOps);
+deepMerge(en, enOps);
+// Spec 031 keys live in *.adm.js (admin management/content/certificates/settings hub)
+deepMerge(ar, arAdm);
+deepMerge(en, enAdm);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

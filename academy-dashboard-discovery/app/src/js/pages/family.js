@@ -16,7 +16,7 @@ import { avatar, chip, button } from '../components/ui.js';
 import { profileBanner } from '../components/profile-banner.js';
 import { familyStatusChip } from '../components/family-status.js';
 import { tabs } from '../components/tabs.js';
-import { sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
 import { scheduleAgenda } from '../components/schedule-agenda.js';
 import { appointmentTemplate } from '../components/appointment-details.js';
 import { attentionFlag } from '../components/attention-flag.js';
@@ -63,6 +63,7 @@ function overviewPanel(fam) {
     ${sheetRow(t('fam.ov.location'), `${t(fam.location.cityKey)} · ${t(fam.location.countryKey)}`)}
     ${sheetRow(t('fam.ov.joined'), t(fam.joinedDateKey))}
     ${sheetRow(t('fam.ov.category'), chip({ labelKey: CAT_NAME[fam.categoryId], tone: 'neutral', icon: 'filter' }))}
+    <div class="mt-3">${button({ labelKey: 'fam.cat.reclass', variant: 'secondary', size: 'sm', icon: 'filter', attrs: 'data-drawer="fam-cat"' })}</div>
   </div>`;
   const attn = fam.attention
     ? `<div class="info-card" style="margin-top:16px">
@@ -98,7 +99,7 @@ function overviewPanel(fam) {
 }
 
 function studentsPanel(kids) {
-  const add = button({ labelKey: 'fam.child.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: `data-demo-action data-toast="${esc(t('fam.child.addToast'))}"` });
+  const add = button({ labelKey: 'fam.child.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="fam.child.add" data-modal-note-key="common.backendRequiredNote"' });
   const body = kids.length
     ? kids.map(childRow).join('')
     : `<div class="empty-row">${t('fam.child.noneMsg')}</div>`;
@@ -139,8 +140,23 @@ function notesPanel(fam) {
   return `<div class="info-card">
     <div class="ic-title">${icon('file-text', 'ico')}<span>${t('fam.notes.title')}</span></div>
     <p class="narrative">${t(fam.notesKey)}</p>
-    <div class="mt-4">${button({ labelKey: 'common.add', variant: 'secondary', size: 'sm', icon: 'edit', attrs: `data-demo-action data-toast="${esc(t('fam.act.editToast'))}"` })}</div>
+    <div class="mt-4">${button({ labelKey: 'fam.notes.add', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="fam.notes.add" data-modal-note-key="common.backendRequiredNote"' })}</div>
   </div>`;
+}
+
+/* Family-category reassignment (Spec 027, M-K) — a display-only assignment PREVIEW:
+ * the category list with the family's current tier marked + member counts; the
+ * "Save category" final is a backendRequired gate (no reassignment persists). */
+function categoryDrawer(fam) {
+  const rows = FAMILY_CATEGORIES.map((c) => {
+    const cur = c.id === fam.categoryId;
+    const name = `${t(c.nameKey)}${cur ? ` <span class="chip tone-completed">${icon('check-circle', 'ico')}<span>${t('fam.cat.current')}</span></span>` : ''}`;
+    return sheetRow(name, t('fam.cat.members', { n: num(c.count) }));
+  }).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('fam.cat.reclassHint')}</p>
+    ${rows}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="fam.cat.reclassReason" aria-disabled="true" title="${esc(t('fam.cat.reclassReason'))}">${icon('check', 'ico ico-sm')}<span>${t('fam.cat.save')}</span></button>`;
+  return previewTemplate('fam-cat', { titleKey: 'fam.cat.reclassTitle', headIcon: 'filter', tone: 'primary', bodyHTML: body });
 }
 
 export function renderFamily() {
@@ -161,8 +177,8 @@ export function renderFamily() {
       { value: t(fam.joinedDateKey), labelKey: 'fam.kpi.joined' },
     ],
     actionsHTML:
-      button({ labelKey: 'fam.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: `data-demo-action data-toast="${esc(t('fam.act.editToast'))}"` })
-      + button({ labelKey: 'fam.act.addChild', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: `data-demo-action data-toast="${esc(t('fam.child.addToast'))}"` })
+      button({ labelKey: 'fam.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="fam.act.edit" data-modal-note-key="common.backendRequiredNote"' })
+      + button({ labelKey: 'fam.act.addChild', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="fam.act.addChild" data-modal-note-key="common.backendRequiredNote"' })
       + confirmAction({ labelKey: 'fam.act.suspend', icon: 'pause-circle', titleKey: 'fam.act.suspendTitle', msgKey: 'fam.act.suspendMsg', confirmKey: 'fam.act.suspendCta', toastKey: 'fam.act.suspendToast' })
       + confirmAction({ labelKey: 'fam.act.stop', variant: 'danger', icon: 'x-circle', danger: true, titleKey: 'fam.act.stopTitle', msgKey: 'fam.act.stopMsg', confirmKey: 'fam.act.stopCta', toastKey: 'fam.act.stopToast' }),
   });
@@ -187,5 +203,5 @@ export function renderFamily() {
 
   const templates = blocks.map((b) => appointmentTemplate(apptItem(b, fam))).join('');
 
-  return `${banner}${views}${templates}`;
+  return `${banner}${views}${templates}${categoryDrawer(fam)}`;
 }

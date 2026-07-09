@@ -104,15 +104,67 @@ function familyMenu(id) {
   const href = getLang() === 'en' ? 'family.en.html' : 'family.html';
   return `<div>
     <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('fam.card.viewProfile')}</span></a>
-    <button class="menu-item" role="menuitem" data-demo-action data-toast="${esc(t('fam.act.editToast'))}">${icon('edit', 'ico')}<span>${t('fam.act.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="fam.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('fam.act.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="fam.cat.reclassTitle" data-modal-note-key="common.backendRequiredNote">${icon('filter', 'ico')}<span>${t('fam.cat.reclass')}</span></button>
     <div class="menu-sep"></div>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('fam.act.suspendTitle'))}" data-confirm-msg="${esc(t('fam.act.suspendMsg'))}" data-confirm-cta="${esc(t('fam.act.suspendCta'))}" data-confirm-toast="${esc(t('fam.act.suspendToast'))}">${icon('pause-circle', 'ico')}<span>${t('fam.act.suspend')}</span></button>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('fam.act.stopTitle'))}" data-confirm-msg="${esc(t('fam.act.stopMsg'))}" data-confirm-cta="${esc(t('fam.act.stopCta'))}" data-confirm-toast="${esc(t('fam.act.stopToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('fam.act.stop')}</span></button>
   </div>`;
 }
+/* students-table row kebab (Spec 027, M-I) — mirrors familyMenu: "view profile"
+ * navigates; edit opens the honest backendRequired modal; suspend/remove confirm.
+ * Routed by the EXISTING data-row-menu dispatch (a 'student' branch) — no new hook. */
+function studentMenu(id) {
+  const href = getLang() === 'en' ? 'student.en.html' : 'student.html';
+  return `<div>
+    <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('stu.viewProfile')}</span></a>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="sp.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('sp.act.edit')}</span></button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('sp.act.suspendTitle'))}" data-confirm-msg="${esc(t('sp.act.suspendMsg'))}" data-confirm-cta="${esc(t('sp.act.suspendCta'))}" data-confirm-toast="${esc(t('sp.act.suspendToast'))}">${icon('pause-circle', 'ico')}<span>${t('sp.act.suspend')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('sp.act.removeTitle'))}" data-confirm-msg="${esc(t('sp.act.removeMsg'))}" data-confirm-cta="${esc(t('sp.act.removeCta'))}" data-confirm-toast="${esc(t('sp.act.removeToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('sp.act.remove')}</span></button>
+  </div>`;
+}
+/* teachers-card kebab (Spec 028) — mirrors familyMenu/studentMenu: "view profile"
+ * navigates; edit opens the honest backendRequired modal; on-vacation/deactivate confirm;
+ * delete confirm-danger. Routed by the EXISTING data-row-menu dispatch (a 'teacher'
+ * branch) — no new hook. NO pay/status mutation. */
+function teacherMenu(id) {
+  const href = getLang() === 'en' ? 'teacher.en.html' : 'teacher.html';
+  return `<div>
+    <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('trn.viewProfile')}</span></a>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="trn.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('trn.act.edit')}</span></button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('trn.act.vacationTitle'))}" data-confirm-msg="${esc(t('trn.act.vacationMsg'))}" data-confirm-cta="${esc(t('trn.act.vacationCta'))}" data-confirm-toast="${esc(t('trn.act.vacationToast'))}">${icon('moon', 'ico')}<span>${t('trn.act.vacation')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('trn.act.deactivateTitle'))}" data-confirm-msg="${esc(t('trn.act.deactivateMsg'))}" data-confirm-cta="${esc(t('trn.act.deactivateCta'))}" data-confirm-toast="${esc(t('trn.act.deactivateToast'))}">${icon('pause-circle', 'ico')}<span>${t('trn.act.deactivate')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('trn.act.delTitle'))}" data-confirm-msg="${esc(t('trn.act.delMsg'))}" data-confirm-cta="${esc(t('trn.act.delCta'))}" data-confirm-toast="${esc(t('trn.act.delToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('trn.act.del')}</span></button>
+  </div>`;
+}
+/* Spec 031 — staff-card kebab. View/Permissions/Category/Activity open read-only drawers;
+ * Edit/Duplicate open honest backendRequired modals; Reset-password is a future-backend gate;
+ * Deactivate/Delete confirm and mutate NOTHING. NO password, NO salary. Routed by the EXISTING
+ * data-row-menu dispatch (a 'staff' branch) — no new hook, no persistence. */
+function staffMenu(id) {
+  return `<div>
+    <button class="menu-item" role="menuitem" data-drawer="st-view-${esc(id)}">${icon('user', 'ico')}<span>${t('adm.staff.view')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="adm.staff.editTitle" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('adm.common.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="st-perm">${icon('lock', 'ico')}<span>${t('adm.staff.perm.open')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="st-cat">${icon('filter', 'ico')}<span>${t('adm.staff.cat.open')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="st-activity">${icon('reports', 'ico')}<span>${t('adm.staff.activity.open')}</span></button>
+    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="adm.staff.duplicateTitle" data-modal-note-key="common.backendRequiredNote">${icon('user-plus', 'ico')}<span>${t('adm.staff.dup')}</span></button>
+    <button class="menu-item" role="menuitem" aria-disabled="true" data-disabled-reason data-reason-key="adm.staff.resetReason" title="${esc(t('adm.staff.resetReason'))}">${icon('rotate-cw', 'ico')}<span>${t('adm.staff.reset')}</span></button>
+    <div class="menu-sep"></div>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('adm.staff.deactTitle'))}" data-confirm-msg="${esc(t('adm.staff.deactMsg'))}" data-confirm-cta="${esc(t('adm.staff.deactCta'))}" data-confirm-toast="${esc(t('adm.staff.deactToast'))}">${icon('pause-circle', 'ico')}<span>${t('adm.staff.deact')}</span></button>
+    <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('adm.staff.delTitle'))}" data-confirm-msg="${esc(t('adm.staff.delMsg'))}" data-confirm-cta="${esc(t('adm.staff.delCta'))}" data-confirm-toast="${esc(t('adm.staff.delToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('adm.staff.del')}</span></button>
+  </div>`;
+}
+/* Spec 026 — the honest fallback: an action with no real destination announces that
+ * it needs the server, never claims a preview/save happened. Feeds every demo-action
+ * without a custom toast, the noop menu items, and the no-dead-button catch-all. */
 function acknowledge(el) {
   const label = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 36);
-  return getLang() === 'en' ? `“${label}” — preview action` : `«${label}» — إجراء تجريبي`;
+  return getLang() === 'en'
+    ? `“${label}” — available once the server is connected`
+    : `«${label}» — يُتاح بعد ربط الخادم`;
 }
 
 /* ---- theme icon + rail + settings appearance active states ---- */
@@ -358,14 +410,21 @@ function openConfirm(el) {
   scrimEl.querySelector('[data-confirm-go]').focus();
 }
 
-/* generic demo modal (gallery + data-modal-trigger) */
-function openModal() {
+/* generic modal (gallery + data-modal-trigger). Spec 026: a Create/Edit trigger may carry
+ * data-modal-title-key + data-modal-note-key so the modal shows the entity title + an honest
+ * "needs the server to complete" note (no fake fields, no fake Save) — an honest backendRequired
+ * final. Falls back to the gallery demo copy when no keys are provided. */
+function openModal(trigger) {
+  const titleKey = trigger && trigger.getAttribute && trigger.getAttribute('data-modal-title-key');
+  const noteKey = trigger && trigger.getAttribute && trigger.getAttribute('data-modal-note-key');
+  const title = titleKey ? t(titleKey) : t('gallery.title');
+  const note = noteKey ? t(noteKey) : t('gallery.subtitle');
   const scrimEl = document.createElement('div');
   scrimEl.className = 'modal-scrim';
-  scrimEl.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(t('gallery.title'))}">
-    <div class="flex items-center gap-3 mb-3"><span class="medallion m-soft tone-primary">${icon('sparkles', 'ico')}</span>
-      <h3 class="text-[16px] font-bold text-ink">${t('gallery.title')}</h3></div>
-    <p class="text-[13px] mb-5" style="color:var(--c-ink-3)">${t('gallery.subtitle')}</p>
+  scrimEl.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+    <div class="flex items-center gap-3 mb-3"><span class="medallion m-soft tone-primary">${icon(titleKey ? 'clock' : 'sparkles', 'ico')}</span>
+      <h3 class="text-[16px] font-bold text-ink">${esc(title)}</h3></div>
+    <p class="text-[13px] mb-5" style="color:var(--c-ink-3)">${esc(note)}</p>
     <div class="flex justify-end gap-2.5"><button class="btn btn-primary btn-sm" data-close="1"><span>${t('common.close')}</span></button></div></div>`;
   const close = () => { scrimEl.remove(); document.removeEventListener('keydown', esc2); };
   const esc2 = (e) => { if (e.key === 'Escape') close(); };
@@ -510,8 +569,12 @@ document.addEventListener('click', (e) => {
     return;
   }
   if (trg.matches('a[href="#"]')) e.preventDefault();
-  if (trg.hasAttribute('data-row-menu')) { const rid = trg.getAttribute('data-row-menu'); return void openPopover(trg, trg.getAttribute('data-row-menu-kind') === 'family' ? familyMenu(rid) : rowMenu(rid)); }
-  if (trg.hasAttribute('data-modal-trigger')) return openModal();
+  if (trg.hasAttribute('data-row-menu')) {
+    const rid = trg.getAttribute('data-row-menu');
+    const kind = trg.getAttribute('data-row-menu-kind');
+    return void openPopover(trg, kind === 'family' ? familyMenu(rid) : kind === 'student' ? studentMenu(rid) : kind === 'teacher' ? teacherMenu(rid) : kind === 'staff' ? staffMenu(rid) : rowMenu(rid));
+  }
+  if (trg.hasAttribute('data-modal-trigger')) { closeMenu(); return openModal(trg); }
   switch (trg.getAttribute('data-action')) {
     case 'theme-menu': return void openPopover(trg, themeMenu());
     case 'lang-menu': return void openPopover(trg, langMenu());

@@ -24,14 +24,14 @@ export const NAV_CATEGORIES = [
       item({ id: 'sessions', labelKey: 'nav.sessions', icon: 'sessions', route: 'sessions.html', badge: SESSIONS.total }),
       item({ id: 'schedule', labelKey: 'nav.schedule', icon: 'schedule', route: 'schedule.html' }),
       item({ id: 'attendance', labelKey: 'nav.attendance', icon: 'clipboard-check', route: 'attendance.html' }),
-      item({ id: 'sessionsAnalysis', labelKey: 'nav.sessionsAnalysis', icon: 'trending-up', status: 'planned' }),
+      item({ id: 'sessionsAnalysis', labelKey: 'nav.sessionsAnalysis', icon: 'trending-up', route: 'sessions-analysis.html' }),
       item({ id: 'messages', labelKey: 'nav.messages', icon: 'messages', status: 'planned' }),
       item({ id: 'leads', labelKey: 'nav.leads', icon: 'inbox', status: 'planned' }),
       item({ id: 'tasks', labelKey: 'nav.tasks', icon: 'tasks', status: 'planned' }),
       item({ id: 'announcements', labelKey: 'nav.announcements', icon: 'megaphone', status: 'planned' }),
       item({ id: 'timeConverter', labelKey: 'nav.timeConverter', icon: 'clock', status: 'planned' }),
-      item({ id: 'publicHoliday', labelKey: 'nav.publicHoliday', icon: 'calendar', status: 'planned' }),
-      item({ id: 'scheduledActions', labelKey: 'nav.scheduledActions', icon: 'tasks', status: 'planned' }),
+      item({ id: 'publicHoliday', labelKey: 'nav.publicHoliday', icon: 'calendar', route: 'public-holiday.html' }),
+      item({ id: 'scheduledActions', labelKey: 'nav.scheduledActions', icon: 'tasks', route: 'scheduled-actions.html' }),
     ],
   },
   {
@@ -96,10 +96,10 @@ export const NAV_CATEGORIES = [
   {
     id: 'admin', labelKey: 'cat.admin', icon: 'grid',
     items: [
-      item({ id: 'staff', labelKey: 'nav.staff', icon: 'staff', status: 'planned' }),
+      item({ id: 'staff', labelKey: 'nav.staff', icon: 'staff', route: 'staff.html' }),
       item({ id: 'materials', labelKey: 'nav.materials', icon: 'materials', status: 'planned' }),
-      item({ id: 'books', labelKey: 'nav.books', icon: 'curricula', status: 'planned' }),
-      item({ id: 'certificates', labelKey: 'nav.certificates', icon: 'certificates', status: 'planned' }),
+      item({ id: 'books', labelKey: 'nav.books', icon: 'curricula', route: 'library.html' }),
+      item({ id: 'certificates', labelKey: 'nav.certificates', icon: 'certificates', route: 'certificates.html' }),
       item({ id: 'certificateRequests', labelKey: 'nav.certificateRequests', icon: 'certificates', status: 'planned' }),
     ],
   },
@@ -140,7 +140,7 @@ export const FUTURE_ROUTES = {
   sessionsAnalysis: 'sessions-analysis.html', messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
   announcements: 'announcements.html', studentResult: 'student-results.html',
   studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html',
-  materials: 'materials.html', books: 'library.html', certificates: 'certificates.html', staff: 'staff.html',
+  materials: 'library.html', // Spec 031 — materials folds into the library.html Materials tab (no standalone page)
   dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',
 };
 

@@ -1,36 +1,23 @@
 /* Sessions module: header + integrated filter/action toolbar + modern table.
  * Row actions use a kebab menu (never a row of colored pill buttons). */
-import { t, num } from '../i18n.js';
+import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
 import { medallion, button, avatar } from './ui.js';
 import { statusChip } from './status-chip.js';
 
-function selectBtn(labelKey, leadIcon) {
-  const lead = leadIcon ? icon(leadIcon, 'ico ico-sm') + ' ' : '';
-  return `<button type="button" class="select-btn gap-2">
-    <span class="inline-flex items-center gap-1.5">${lead}<span>${t(labelKey)}</span></span>
-    ${icon('chevron-down', 'chev')}
-  </button>`;
-}
-
+/* Spec 026 (DU-20) — the dashboard "Today's Sessions" toolbar is a COMPACT overview, not the
+ * full sessions manager. The former Apply/Clear/select controls only imitated a filter (no
+ * data-filter-form wiring) → removed. New session opens an honest backendRequired modal; the
+ * real, working filter lives on sessions.html, reached by a real "view all" link. */
 function toolbar() {
+  const sessHref = getLang() === 'en' ? 'sessions.en.html' : 'sessions.html';
   return `<div class="flex flex-wrap items-center gap-2.5 mb-4">
     <div class="flex items-center gap-2.5">
-      ${button({ labelKey: 'sessions.newSession', variant: 'primary', icon: 'plus', size: 'sm', attrs: 'data-action="new-session"' })}
-      <button type="button" class="chip tone-upcoming" data-action="clear-filter" style="height:32px">
-        <span>${t('sessions.filterActive')}</span> ${icon('x', 'ico')}
-      </button>
+      ${button({ labelKey: 'sessions.newSession', variant: 'primary', icon: 'plus', size: 'sm', attrs: 'data-modal-trigger data-modal-title-key="sessions.newSession" data-modal-note-key="common.backendRequiredNote"' })}
     </div>
     <div class="flex flex-wrap items-center gap-2.5 ms-auto">
-      <div class="input-wrap" style="min-width:190px">
-        ${icon('search', 'lead-ico')}
-        <input class="input" type="search" placeholder="${esc(t('sessions.searchPlaceholder'))}" aria-label="${esc(t('sessions.searchPlaceholder'))}" />
-      </div>
-      ${selectBtn('sessions.subjectLabel')}
-      ${selectBtn('sessions.dateValue', 'calendar')}
-      ${selectBtn('sessions.anytime', 'clock')}
-      ${button({ labelKey: 'sessions.apply', variant: 'dark', size: 'sm', attrs: 'data-action="apply-filter"' })}
+      <a href="${esc(sessHref)}" class="btn btn-secondary btn-sm">${icon('sessions', 'ico ico-sm')}<span>${t('dash.viewAllSessions')}</span></a>
     </div>
   </div>`;
 }
