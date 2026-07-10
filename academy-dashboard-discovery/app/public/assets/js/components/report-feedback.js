@@ -4,16 +4,20 @@
  * primitives (filterBar · previewTemplate/sheetRow · card-grid · confirmAction · chip):
  *   - feedbackSection(): authored FEEDBACK rows (teacher/class/family/student) with a real
  *     static type/status filter, a read-only detail drawer per row (Approve/Delete = confirm
- *     backendRequired finals), a Create-feedback modal, and a Manage-categories drawer.
+ *     backendRequired finals), a Create-feedback FORM drawer (Spec 032 FC-27: real inert
+ *     fields, Save = backendRequired gate), and a Manage-categories drawer with an inline
+ *     create form (FC-26).
  *   - formsSection(): authored FORMS list (question/response counts are literals — NO
- *     aggregation), a Create-form modal, a read-only detail drawer per form, and a real
+ *     aggregation), a Create-form FORM drawer (FC-28: name/day + two baked field-builder
+ *     rows, Save = backendRequired gate), a read-only detail drawer per form, and a real
  *     deep-link to the existing student Evaluation tab (the monthly progress form).
  * no plotting visuals, no computed proportion / numeric mark / ordering, no persistence, no money figure. */
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc, facetAttrs } from '../dom.js';
 import { button, chip } from './ui.js';
-import { previewTemplate, sheetRow } from './preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from './preview-drawer.js';
+import { field, optsFrom } from './form-field.js';
 import { confirmAction } from './confirm-modal.js';
 import { filterBar } from './filter-bar.js';
 import { cardGrid } from './card-grid.js';
@@ -22,6 +26,15 @@ import {
   FEEDBACK, FEEDBACK_CATEGORIES, FORMS, FB_TYPES,
   FB_REMARK_TONE, FB_STATUS, FORM_STATUS,
 } from '../fixtures/report-feedback.js';
+import { FORM_STATUS_OPTS, DAY_OPTS, FIELD_TYPE_OPTS } from '../fixtures/form-options.js';
+
+/* Spec 032 — select options derived from the authored Spec-029 fixtures (display-only
+ * literals; remarks stay CATEGORICAL — never a number, nothing computed). */
+const FB_CAT_OPTS = FEEDBACK_CATEGORIES.map((c, i) => ({ value: c.id, labelKey: c.nameKey, selected: i === 0 }));
+const FB_REMARK_OPTS = optsFrom(Object.keys(FB_REMARK_TONE), 'rep.fb.rmk');
+const FB_TYPE_OPTS = optsFrom(FB_TYPES, 'rep.fb.type');
+const FB_SUBJ_OPTS = [...new Set(FEEDBACK.map((f) => f.subjectKey))].map((k, i) => ({ value: k.split('.').pop(), labelKey: k, selected: i === 0 }));
+const YESNO_OPTS = [{ value: 'yes', labelKey: 'rep.form.f.req.yes', selected: true }, { value: 'no', labelKey: 'rep.form.f.req.no' }];
 
 const REMARK_ICON = { excellent: 'sparkles', good: 'check-circle', sometimes: 'clock', rarely: 'alert-triangle' };
 const studentEvalHref = () => (getLang() === 'en' ? 'student.en.html#view=evaluation' : 'student.html#view=evaluation');
@@ -77,19 +90,41 @@ function feedbackDrawer(f) {
   return previewTemplate('rep-fb-' + f.id, { titleKey: 'rep.fb.detailTitle', headIcon: 'inbox', tone: 'primary', bodyHTML: body });
 }
 
-/* Manage-categories drawer — list + Create-category modal + assign-members backendRequired gate.
- * Mirrors teachers.js categoriesDrawer(); the nav item stays planned/folded (no page). */
+/* Manage-categories drawer — list + a REAL inline create form (Spec 032, FC-26) + the
+ * assign-members backendRequired gate. Mirrors teachers.js categoriesDrawer(); the nav item
+ * stays planned/folded (no page). The inline create's Save uses the btn-SECONDARY gate
+ * pattern so the assign button stays this drawer's ONLY btn-primary[data-disabled-reason]. */
 function categoriesDrawer() {
   const rows = FEEDBACK_CATEGORIES
     .map((c) => sheetRow(t(c.nameKey), `${t('rep.fbcat.members', { n: num(c.count) })}`))
     .join('');
+  const createForm = `<div style="border-top:1px solid var(--c-line);margin-top:16px;padding-top:12px">
+      <div class="font-bold text-ink text-[13.5px] mb-3">${icon('plus', 'ico ico-sm')} ${t('rep.fbcat.createTitle')}</div>
+      <div class="wiz-grid">
+        ${field({ labelKey: 'rep.fbcat.f.name', name: 'fbcatCreate-name', placeholderKey: 'rep.fbcat.f.namePh' })}
+        ${field({ labelKey: 'rep.fb.lbl.status', name: 'fbcatCreate-status', type: 'select', options: FORM_STATUS_OPTS })}
+        ${field({ labelKey: 'rep.fbcat.f.desc', name: 'fbcatCreate-desc', type: 'textarea', full: true })}
+      </div>
+    </div>`;
   const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('rep.fbcat.hint')}</p>
     ${rows}
+    ${createForm}
     <div class="flex flex-wrap gap-2 mt-4">
-      ${button({ labelKey: 'rep.fbcat.createTitle', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="rep.fbcat.createTitle" data-modal-note-key="common.backendRequiredNote"' })}
+      <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="rep.fbcat.createReason" title="${esc(t('rep.fbcat.createReason'))}">${icon('check', 'ico ico-sm')}<span>${t('common.save')}</span></button>
       <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="rep.fbcat.assignReason" aria-disabled="true" title="${esc(t('rep.fbcat.assignReason'))}">${icon('user-check', 'ico ico-sm')}<span>${t('rep.fbcat.assign')}</span></button>
     </div>`;
   return previewTemplate('rep-fbcat', { titleKey: 'rep.fbcat.title', headIcon: 'filter', tone: 'primary', bodyHTML: body });
+}
+
+/* Spec 032 (FC-27) — Create-feedback FORM drawer: real INERT fields (type/subject/
+ * category/remark/note) + the ONE clickable backendRequired final (formDrawer). */
+function fbCreateDrawer() {
+  const fields = field({ labelKey: 'rep.fb.filterType', name: 'fbCreate-type', type: 'select', options: FB_TYPE_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.subject', name: 'fbCreate-subject', type: 'select', options: FB_SUBJ_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.category', name: 'fbCreate-category', type: 'select', options: FB_CAT_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.remark', name: 'fbCreate-remark', type: 'select', options: FB_REMARK_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.note', name: 'fbCreate-note', type: 'textarea', placeholderKey: 'rep.fb.f.notePh', full: true });
+  return formDrawer('fb-create', { titleKey: 'rep.fb.createTitle', headIcon: 'plus', fields });
 }
 
 export function feedbackSection() {
@@ -107,7 +142,7 @@ export function feedbackSection() {
     </div>
     <div class="flex flex-wrap items-center gap-2">
       ${button({ labelKey: 'rep.fbcat.manage', variant: 'ghost', size: 'sm', icon: 'filter', attrs: 'data-drawer="rep-fbcat"' })}
-      ${button({ labelKey: 'rep.fb.create', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="rep.fb.createTitle" data-modal-note-key="common.backendRequiredNote"' })}
+      ${button({ labelKey: 'rep.fb.create', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-drawer="fb-create" data-modal-trigger data-modal-title-key="rep.fb.createTitle"' })}
     </div>
   </div>`;
   return `<section class="mt-8" id="reports-feedback">
@@ -117,6 +152,7 @@ export function feedbackSection() {
     ${noResults()}
     ${FEEDBACK.map(feedbackDrawer).join('')}
     ${categoriesDrawer()}
+    ${fbCreateDrawer()}
   </section>`;
 }
 
@@ -139,7 +175,9 @@ function formRow(fm) {
   </div>`;
 }
 
-function formDrawer(fm) {
+/* read-only detail drawer for one existing form (renamed from the local `formDrawer`
+ * so the shared Spec-032 formDrawer helper keeps its name) */
+function formDetailDrawer(fm) {
   const body = `
     ${sheetRow(t('rep.form.lbl.questions'), `<span class="tabular">${num(fm.questions)}</span>`)}
     ${sheetRow(t('rep.form.lbl.responses'), `<span class="tabular">${num(fm.responses)}</span>`)}
@@ -150,13 +188,33 @@ function formDrawer(fm) {
   return previewTemplate('rep-form-' + fm.id, { titleKey: 'rep.form.detailTitle', headIcon: 'clipboard-check', tone: 'primary', bodyHTML: body });
 }
 
+/* Spec 032 (FC-28) — Create-form FORM drawer: name/day + TWO baked repeatable
+ * field-builder rows (label · type · options · required). Authored INERT controls
+ * only — question/response counts stay literals, NO aggregation, no response math. */
+function builderRow(n) {
+  const p = `formCreate-field${n}`;
+  return `<div class="field field-full" style="border-top:1px solid var(--c-line);margin-top:4px;padding-top:12px">
+      <span class="field-label">${t('rep.form.f.row', { n: num(n) })}</span>
+    </div>`
+    + field({ labelKey: 'rep.form.f.fieldLabel', name: `${p}Label` })
+    + field({ labelKey: 'rep.form.f.fieldType', name: `${p}Type`, type: 'select', options: FIELD_TYPE_OPTS })
+    + field({ labelKey: 'rep.form.f.fieldOptions', name: `${p}Options`, placeholderKey: 'rep.form.f.fieldOptionsPh' })
+    + field({ labelKey: 'rep.form.f.fieldRequired', name: `${p}Required`, type: 'select', options: YESNO_OPTS });
+}
+function formCreateDrawer() {
+  const fields = field({ labelKey: 'rep.form.f.name', name: 'formCreate-name', placeholderKey: 'rep.form.f.namePh' })
+    + field({ labelKey: 'rep.form.f.day', name: 'formCreate-day', type: 'select', options: DAY_OPTS })
+    + builderRow(1) + builderRow(2);
+  return formDrawer('form-create', { titleKey: 'rep.form.createTitle', headIcon: 'clipboard-check', fields });
+}
+
 export function formsSection() {
   const header = `<div class="flex flex-wrap items-start justify-between gap-3 mb-3">
     <div>
       <h2 class="section-title">${esc(t('rep.form.title'))}</h2>
       <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">${esc(t('rep.form.sub'))}</p>
     </div>
-    ${button({ labelKey: 'rep.form.create', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="rep.form.createTitle" data-modal-note-key="common.backendRequiredNote"' })}
+    ${button({ labelKey: 'rep.form.create', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-drawer="form-create" data-modal-trigger data-modal-title-key="rep.form.createTitle"' })}
   </div>`;
   // the monthly student progress form is the EXISTING student Evaluation tab — a real deep-link,
   // never a duplicate form engine (Spec 029 R-D).
@@ -168,6 +226,7 @@ export function formsSection() {
     ${header}
     ${cardGrid(FORMS.map(formRow), { cols: 'sm:grid-cols-2 lg:grid-cols-3', id: 'reports-forms-grid' })}
     ${progress}
-    ${FORMS.map(formDrawer).join('')}
+    ${FORMS.map(formDetailDrawer).join('')}
+    ${formCreateDrawer()}
   </section>`;
 }

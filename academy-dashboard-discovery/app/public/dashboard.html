@@ -464,7 +464,7 @@
       <h1 class="font-bold mb-2" style="font-size:26px;letter-spacing:-.6px">صباح الخير، نورة 👋</h1>
       <p class="text-[13.5px] mb-5 max-w-md" style="color:rgba(255,255,255,.9)">لديك ٢٤ جلسة اليوم، و٣ جلسات جارية الآن. كل شيء يسير بسلاسة.</p>
       <div class="flex flex-wrap gap-2.5">
-        <button type="button" class="btn btn-on-grad"   data-modal-trigger data-modal-title-key="welcome.action.newSession" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>جلسة جديدة</span></button>
+        <button type="button" class="btn btn-on-grad"   data-drawer="sess-new"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>جلسة جديدة</span></button>
         <a href="./schedule.html#view=timetable" class="btn btn-ghost-grad" ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span>عرض الجدول</span></a>
       </div>
     </div>
@@ -575,7 +575,7 @@
     </div>
     <div class="px-4"><div class="flex flex-wrap items-center gap-2.5 mb-4">
     <div class="flex items-center gap-2.5">
-      <button type="button" class="btn btn-primary btn-sm"   data-modal-trigger data-modal-title-key="sessions.newSession" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>جلسة جديدة</span></button>
+      <button type="button" class="btn btn-primary btn-sm"   data-drawer="sess-new"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>جلسة جديدة</span></button>
     </div>
     <div class="flex flex-wrap items-center gap-2.5 ms-auto">
       <a href="sessions.html" class="btn btn-secondary btn-sm"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-sessions"></use></svg><span>عرض كل الجلسات</span></a>
@@ -917,7 +917,7 @@
       <h3 class="text-[15px] font-bold text-ink mb-1">لا توجد جلسات بعد</h3>
       <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">ابدأ بإضافة أول جلسة لهذا اليوم وستظهر هنا مباشرة.</p>
     </div>
-    <button type="button" class="btn btn-primary btn-sm"   data-modal-trigger data-modal-title-key="state.empty.cta" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة جلسة</span></button>
+    <a class="btn btn-primary btn-sm" href="sessions.html"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة جلسة</span></a>
   </div>
       </div>
     </section>
@@ -976,6 +976,31 @@
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
       <div class="sheet-body"><div class="mb-3"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>قادمة</span></span></div><div class="sheet-row"><span class="k">التاريخ</span><span class="v">اليوم</span></div><div class="sheet-row"><span class="k">الوقت</span><span class="v"><span class="tabular">13:15</span></span></div><div class="sheet-row"><span class="k">المدة</span><span class="v">٥٠ دقيقة</span></div><div class="sheet-row"><span class="k">المعلم</span><span class="v">ريم المطيري</span></div><div class="sheet-row"><span class="k">الطلاب</span><span class="v"><span class="tabular">٩ / ٢٠</span></span></div><div class="sheet-row"><span class="k">المادة</span><span class="v">برنامج مسائي</span></div><div class="sheet-row"><span class="k">القاعة</span><span class="v">قاعة د</span></div><div class="sheet-row"><span class="k">ملاحظات</span><span class="v">تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.</span></div><div class="flex flex-wrap gap-2 mt-5"><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="سيتوفّر تعديل الجلسة بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-settings"></use></svg><span>تعديل / إعادة جدولة</span></button><button type="button" class="btn btn-secondary btn-sm" data-demo-action data-toast="سيتوفّر إرسال التنبيه بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg><span>تنبيه</span></button><button type="button" class="btn btn-danger btn-sm" data-confirm data-confirm-danger data-confirm-title="إلغاء هذه الجلسة؟" data-confirm-msg="سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن." data-confirm-cta="إلغاء الجلسة" data-confirm-toast="سيتوفّر إلغاء الجلسة بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إلغاء الجلسة</span></button></div></div>
+    </div>
+  </template>
+    <template data-preview="sess-new">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">جلسة جديدة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-sessNew-course">الدورة</label><span class="select-wrap"><select id="f-sessNew-course" name="sessNew-course" class="select-input">
+      <option value="c1" selected>الرياضيات</option><option value="c2">اللغة العربية</option><option value="c3">مقدمة في البرمجة</option><option value="c4">الفيزياء</option><option value="c5">الإنجليزية</option><option value="c6">العلوم العامة</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-sessNew-teacher">المعلم</label><span class="select-wrap"><select id="f-sessNew-teacher" name="sessNew-teacher" class="select-input">
+      <option value="sara" selected>سارة القحطاني</option><option value="mohammed">محمد الدوسري</option><option value="layan">ليان الشمري</option><option value="abdullah">عبدالله الحربي</option><option value="reem">ريم المطيري</option><option value="nora">نورة الزهراني</option><option value="khalid">خالد العنزي</option><option value="huda">هدى المالكي</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-sessNew-date">التاريخ</label><input id="f-sessNew-date" name="sessNew-date" type="text" class="input" placeholder="2025-03-15" value="" /></div><div class="field"><label class="field-label" for="f-sessNew-time">الوقت</label><input id="f-sessNew-time" name="sessNew-time" type="text" class="input" placeholder="16:30" value="" /></div><div class="field"><label class="field-label" for="f-sessNew-duration">المدة</label><span class="select-wrap"><select id="f-sessNew-duration" name="sessNew-duration" class="select-input">
+      <option value="m30" selected>٣٠ دقيقة</option><option value="m45">٤٥ دقيقة</option><option value="m60">٦٠ دقيقة</option><option value="m90">٩٠ دقيقة</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-sessNew-fromCredit">مصدر رصيد الجلسة</label><span class="select-wrap"><select id="f-sessNew-fromCredit" name="sessNew-fromCredit" class="select-input">
+      <option value="package" selected>من رصيد الباقة</option><option value="extra">جلسة إضافية</option><option value="trial">جلسة تجريبية</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-sessNew-status">الحالة</label><span class="select-wrap"><select id="f-sessNew-status" name="sessNew-status" class="select-input">
+      <option value="upcoming" selected>قادمة</option><option value="live">جارية الآن</option><option value="completed">مكتملة</option><option value="cancelled">ملغاة</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button>
+    </div></div>
     </div>
   </template>
   </div>

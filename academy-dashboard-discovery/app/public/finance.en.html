@@ -912,7 +912,7 @@
       <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">List of bank accounts — display-only; linking, import and matching need the real bank connection.</p>
     </div>
     <div class="report-actions flex items-center flex-wrap gap-2 mb-4" role="group" aria-label="Bank accounts">
-    <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fin.bank.addTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add bank account</span></button>
+    <button type="button" class="btn btn-secondary btn-sm"   data-drawer="bank-add" data-modal-trigger data-modal-title-key="fin.bank.addTitle"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add bank account</span></button>
     <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="fin.bank.importReason" aria-disabled="true" title="Importing statements needs the real bank connection — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Import statement</span></button>
     <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="fin.bank.reconcileReason" aria-disabled="true" title="Bank reconciliation needs the real bank connection — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Reconcile</span></button>
   </div>
@@ -928,7 +928,22 @@
   </div><div class="card p-3.5 flex items-center justify-between gap-3">
     <div class="font-bold text-ink text-[13.5px]">Alinma Bank</div>
     <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Inactive</span></span>
-  </div></div></section>
+  </div></div>
+    <template data-preview="bank-add">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Add bank account</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-bankAdd-bankName">Bank name</label><input id="f-bankAdd-bankName" name="bankAdd-bankName" type="text" class="input" placeholder="e.g. Al Rajhi Bank" value="" /></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></div>
+    </div>
+  </template></section>
   </div>
   </div>
       </main>

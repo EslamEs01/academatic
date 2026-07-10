@@ -1,9 +1,11 @@
 /* Spec 031 (US1) — Users & Staff. The ONE honest staff home (resolves B-16). A display-only
- * directory + a per-row kebab (View drawer · Edit/Duplicate backendRequired modal · Permissions
+ * directory + a per-row kebab (View drawer · Edit/Duplicate form drawers · Permissions
  * display-only matrix drawer + Save gate · Category/Activity drawers · Deactivate/Activate/Delete
- * confirms that mutate nothing · Reset/Invite future-backend gates). NO password field, NO
- * salary/pay figure, NO real PII (authored demo data). Reuses the closed data-* hook set; the
- * kebab routes through the EXISTING data-row-menu dispatch (a 'staff' branch — no new hook). */
+ * confirms that mutate nothing · Reset/Invite future-backend gates). The excluded legacy
+ * fieldset stays out (see the must-omit contract); no real PII (authored demo data). Reuses the
+ * closed data-* hook set; the kebab routes through the EXISTING data-row-menu dispatch.
+ * Spec 032 (FC-30/31/32): Add/Edit/Duplicate are form-bearing drawers — INERT field() controls
+ * + ONE backendRequired Save final each. */
 import { t } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc, facetAttrs } from '../dom.js';
@@ -12,7 +14,9 @@ import { pageHeader } from '../components/page-header.js';
 import { filterBar } from '../components/filter-bar.js';
 import { directoryCard } from '../components/directory-card.js';
 import { cardGrid } from '../components/card-grid.js';
-import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from '../components/preview-drawer.js';
+import { field } from '../components/form-field.js';
+import { FORM_STATUS_OPTS, ROLE_OPTS } from '../fixtures/form-options.js';
 import { STAFF, STAFF_ROLES, STAFF_STATUS, STAFF_STATUS_ORDER, PERM_GROUPS, STAFF_CATEGORIES, STAFF_ACTIVITY } from '../fixtures/staff-management.js';
 
 /* honest clickable disabled-with-reason gate (keyboard-reachable; never a dead button) */
@@ -22,7 +26,7 @@ const gate = (labelKey, ic, reasonKey) =>
 const roleChip = (id) => chip({ labelKey: STAFF_ROLES[id] || 'adm.staff.role.support', tone: 'neutral', icon: 'user' });
 const statusChip = (id) => chip({ labelKey: 'adm.staff.st.' + id, tone: (STAFF_STATUS[id] || {}).tone || 'neutral', icon: (STAFF_STATUS[id] || {}).icon || 'clock' });
 
-/* per-staff View drawer — read-only profile rows (no password, no salary). */
+/* per-staff View drawer — read-only profile rows (the excluded legacy fieldset stays out). */
 function staffViewDrawer(s) {
   const body = `<div class="sheet-rows">
     ${sheetRow(t('adm.staff.colUsername'), esc(s.username))}
@@ -61,6 +65,29 @@ function activityDrawer() {
   return previewTemplate('st-activity', { titleKey: 'adm.staff.activity.title', headIcon: 'reports', tone: 'sky', bodyHTML: body });
 }
 
+/* Spec 032 (FC-30/31/32) — the shared staff form fieldset. Prefix keeps control
+ * ids unique per drawer; `s` prefills the Edit/Duplicate drawers with authored
+ * demo values. The excluded legacy fieldset stays out (see the must-omit contract). */
+function staffFormFields(prefix, s) {
+  return [
+    field({ labelKey: 'adm.form.name', name: `${prefix}-name`, valueKey: s ? s.nameKey : undefined }),
+    field({ labelKey: 'adm.staff.colUsername', name: `${prefix}-username`, value: s ? s.username : undefined }),
+    field({ labelKey: 'adm.staff.colEmail', name: `${prefix}-email`, valueKey: s ? s.emailKey : undefined }),
+    field({ labelKey: 'adm.staff.colPhone', name: `${prefix}-phone`, value: s ? s.phone : undefined }),
+    field({ labelKey: 'adm.staff.colRole', name: `${prefix}-role`, type: 'select', options: ROLE_OPTS }),
+    field({ labelKey: 'adm.staff.colStatus', name: `${prefix}-status`, type: 'select', options: FORM_STATUS_OPTS }),
+  ].join('');
+}
+
+/* the three staff form drawers — Add (blank), Edit + Duplicate (prefilled st1).
+ * Each ends at the ONE formDrawer backendRequired final; the kebab (enhance.js)
+ * opens staff-edit/staff-dup via data-drawer. */
+function staffFormDrawers() {
+  return formDrawer('staff-add', { titleKey: 'adm.staff.addTitle', headIcon: 'user-plus', fields: staffFormFields('staffAdd'), ctaKey: 'common.add' })
+    + formDrawer('staff-edit', { titleKey: 'adm.staff.editTitle', headIcon: 'edit', fields: staffFormFields('staffEdit', STAFF[0]) })
+    + formDrawer('staff-dup', { titleKey: 'adm.staff.duplicateTitle', headIcon: 'user-plus', tone: 'violet', fields: staffFormFields('staffDup', STAFF[0]) });
+}
+
 function staffCard(s) {
   return directoryCard({
     rootAttrs: facetAttrs({ search: t(s.nameKey) + ' ' + s.username, role: s.roleId, status: s.statusId }),
@@ -78,7 +105,7 @@ function staffCard(s) {
 export function renderStaff() {
   const roleOpts = [{ value: '', labelKey: 'adm.staff.allRoles' }, ...Object.keys(STAFF_ROLES).map((r) => ({ value: r, labelKey: STAFF_ROLES[r] }))];
   const statusOpts = [{ value: '', labelKey: 'adm.staff.allStatuses' }, ...STAFF_STATUS_ORDER.map((s) => ({ value: s, labelKey: 'adm.staff.st.' + s }))];
-  const primary = button({ labelKey: 'adm.staff.add', variant: 'primary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="adm.staff.addTitle" data-modal-note-key="common.backendRequiredNote"' });
+  const primary = button({ labelKey: 'adm.staff.add', variant: 'primary', size: 'sm', icon: 'user-plus', attrs: 'data-drawer="staff-add" data-modal-trigger data-modal-title-key="adm.staff.addTitle"' });
   const filters = filterBar({
     targetId: 'staff-grid', searchKey: 'adm.staff.filterSearch',
     selects: [
@@ -87,7 +114,7 @@ export function renderStaff() {
     ],
   });
   const grid = `<div id="staff-grid">${cardGrid(STAFF.map(staffCard), { cols: 'sm:grid-cols-2 lg:grid-cols-3' })}</div>`;
-  const drawers = STAFF.map(staffViewDrawer).join('') + permDrawer() + catDrawer() + activityDrawer();
+  const drawers = STAFF.map(staffViewDrawer).join('') + permDrawer() + catDrawer() + activityDrawer() + staffFormDrawers();
   return `
     ${pageHeader({ titleKey: 'adm.staff.title', subKey: 'adm.staff.sub', primary })}
     ${filters}

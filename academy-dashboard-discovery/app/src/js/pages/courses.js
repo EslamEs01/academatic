@@ -14,6 +14,7 @@ import { cardGrid } from '../components/card-grid.js';
 import { medallion, button } from '../components/ui.js';
 import { attentionFlag } from '../components/attention-flag.js';
 import { noResults } from '../components/states.js';
+import { courseFormTemplate } from '../components/course-group-actions.js';
 
 const SUBJECTS = ['math', 'arabic', 'programming', 'physics', 'english', 'science'];
 const LEVELS = ['foundation', 'l1', 'l2', 'l3', 'advanced'];
@@ -53,9 +54,10 @@ export function renderCourses() {
     ],
   });
   return `
-    ${pageHeader({ titleKey: 'cur.title', subKey: 'cur.sub', primary: button({ labelKey: 'crs.act.add', variant: 'primary', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="crs.act.add" data-modal-note-key="common.backendRequiredNote"' }), summaryHTML: summary })}
+    ${pageHeader({ titleKey: 'cur.title', subKey: 'cur.sub', primary: button({ labelKey: 'crs.act.add', variant: 'primary', icon: 'plus', attrs: 'data-drawer="crs-add"' }), summaryHTML: summary })}
     ${filters}
     ${cardGrid(rows.map(card), { cols: 'sm:grid-cols-2 xl:grid-cols-3', id: 'courses-grid' })}
     ${noResults()}
+    ${courseFormTemplate('crs-add')}
   `;
 }

@@ -11,6 +11,7 @@ import { button } from '../components/ui.js';
 import { familyCard } from '../components/family-card.js';
 import { noResults } from '../components/states.js';
 import { FAMILY_STATUS } from '../components/family-status.js';
+import { famEditDrawer, famCatDrawer } from './family.js';
 
 export function renderFamilies() {
   const rows = FAMILIES.rows;
@@ -34,10 +35,15 @@ export function renderFamilies() {
 
   const cards = rows.map((f) => familyCard(f, studentsOfFamily(f.id)));
 
+  /* Spec 032 (FC-04/FC-05) — this page hosts the card kebab (Edit / Reclassify),
+   * so the shared fam-edit form drawer + fam-cat picker drawer are baked here
+   * once (same builders as family.html — no duplicate template per card). */
   return `
     ${pageHeader({ titleKey: 'fam.title', subKey: 'fam.sub', primary: button({ labelKey: 'fam.add', variant: 'primary', icon: 'user-plus', href: addHref }), summaryHTML: summary })}
     ${filters}
     ${cardGrid(cards, { cols: 'sm:grid-cols-2 xl:grid-cols-3', id: 'families-grid' })}
     ${noResults()}
+    ${famEditDrawer()}
+    ${famCatDrawer(rows[0])}
   `;
 }

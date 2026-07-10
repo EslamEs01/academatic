@@ -165,19 +165,73 @@ const MATRIX = [
   { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations' },
   { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=security' },
   { page: 'settings', lang: 'en', theme: 'light', hash: '#view=users' },
+  // ── Spec 032 — form-completion freeze rows (additive) ──
+  // (a) OPEN-FORM interaction rows: axe scans the page WITH the form drawer open
+  // (focus-trap / labelled controls / dialog semantics on the rebuilt FC surfaces)
+  { page: 'staff', lang: 'ar', theme: 'light', open: '[data-drawer="staff-add"]' },
+  { page: 'family', lang: 'ar', theme: 'light', open: '[data-drawer="fam-edit"]' },
+  { page: 'teachers', lang: 'ar', theme: 'light', open: '[data-drawer="trn-add"]' },
+  { page: 'courses', lang: 'ar', theme: 'light', open: '[data-drawer="crs-add"]' },
+  { page: 'groups', lang: 'ar', theme: 'light', open: '[data-drawer="grp-add"]' },
+  { page: 'certificates', lang: 'ar', theme: 'light', open: '[data-drawer="cert-tpl"]' },
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=banks', open: '[data-drawer="bank-add"]' },
+  { page: 'reports', lang: 'ar', theme: 'light', open: '[data-drawer="fb-create"]' },
+  { page: 'library', lang: 'ar', theme: 'light', open: '[data-drawer="mat-add"]' },
+  { page: 'settings', lang: 'ar', theme: 'light', open: '[data-drawer="head-add"]' },
+  { page: 'staff', lang: 'en', theme: 'light', open: '[data-drawer="staff-add"]' },
+  { page: 'family', lang: 'ar', theme: 'dark', open: '[data-drawer="fam-edit"]' },
+  // the picker-drawer proof (candidate list + honest gate, open state)
+  { page: 'teacher', lang: 'ar', theme: 'light', open: '[data-drawer="trn-assign-course"]' },
+  // (b) MOBILE-390 rows for the key surfaces (the matrix had no mobile row before 032)
+  { page: 'dashboard', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'sessions', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'students', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'finance', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'reports', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'student-portal', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'family-portal', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'teacher-portal', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'sessions-analysis', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'public-holiday', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'scheduled-actions', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'staff', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'library', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'certificates', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  { page: 'settings', lang: 'ar', theme: 'light', viewport: 'mobile' },
+  // mobile OPEN-FORM proofs (the .wiz-grid must reflow to one column, controls stay labelled)
+  { page: 'teachers', lang: 'ar', theme: 'light', viewport: 'mobile', open: '[data-drawer="trn-add"]' },
+  { page: 'students', lang: 'ar', theme: 'light', viewport: 'mobile', open: '[data-drawer="stu-add"]' },
+  // (c) dark rows for the newer teacher-internal family members that had none
+  { page: 'teacher-students', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-outcomes', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-tasks', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-profile', lang: 'ar', theme: 'dark' },
+  { page: 'teacher-library', lang: 'ar', theme: 'dark' },
+  // (d) missing-EN rows for internals that only had AR coverage
+  { page: 'student-progress', lang: 'en', theme: 'light' },
+  { page: 'student-profile', lang: 'en', theme: 'light' },
+  { page: 'family-progress', lang: 'en', theme: 'light' },
+  { page: 'family-billing', lang: 'en', theme: 'light' },
+  { page: 'teacher-outcomes', lang: 'en', theme: 'light' },
+  { page: 'teacher-profile', lang: 'en', theme: 'light' },
 ];
+
+// Spec 032 — mobile viewport for the new rows (the pre-032 matrix is desktop-only)
+const VIEWPORTS = { mobile: { width: 390, height: 844 } };
 
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
   let critical = 0, serious = 0;
 
   for (const s of MATRIX) {
-    const ctx = await browser.newContext();
+    // Spec 032 — a row may pin a mobile viewport and/or open a form/picker drawer before the scan
+    const ctx = await browser.newContext(s.viewport ? { viewport: VIEWPORTS[s.viewport] } : {});
     await ctx.addInitScript((theme) => { localStorage.setItem('academy.theme', theme); }, s.theme);
     const p = await ctx.newPage();
     const file = s.lang === 'en' ? `${s.page}.en.html` : `${s.page}.html`;
     await p.goto(`${BASE}/${file}${s.hash || ''}`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(250);
+    if (s.open) { await p.click(s.open).catch(() => {}); await p.waitForTimeout(420); }
 
     const { violations } = await new AxeBuilder({ page: p })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
@@ -186,7 +240,7 @@ const MATRIX = [
     const crit = violations.filter((v) => v.impact === 'critical');
     const ser = violations.filter((v) => v.impact === 'serious');
     critical += crit.length; serious += ser.length;
-    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}`;
+    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}${s.viewport ? ' @' + s.viewport : ''}${s.open ? ' open:' + s.open : ''}`;
     if (crit.length) console.error(`  ✗ ${tag}: ${crit.length} CRITICAL — ${crit.map((v) => v.id).join(', ')}`);
     if (ser.length) console.warn(`  ⚠ ${tag}: ${ser.length} serious — ${ser.map((v) => v.id).join(', ')}`);
     if (!crit.length && !ser.length) console.log(`  ✓ ${tag}: clean`);

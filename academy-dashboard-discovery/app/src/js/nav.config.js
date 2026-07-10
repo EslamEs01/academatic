@@ -135,11 +135,14 @@ export const FUTURE_ROLE = [
   { id: 'student-portal', reason: 'Student portal split out of the legacy guardian-proxied portal as its own surface — foundation Spec 012 (student-portal.html); deep experience is Spec 013; never an admin nav item.' },
 ];
 
-/* intended routes when a planned item is promoted (NI9 / NI12) */
+/* intended routes when a planned item is promoted (NI9 / NI12).
+ * Spec 032 stale-map cleanup: sessionsAnalysis removed (implemented with its own
+ * route since Spec 026 — no longer a future route). */
 export const FUTURE_ROUTES = {
-  sessionsAnalysis: 'sessions-analysis.html', messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
+  messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
   announcements: 'announcements.html', studentResult: 'student-results.html',
-  studentEvaluation: 'student-evaluation.html', teacherCategories: 'teacher-categories.html',
+  studentEvaluation: 'student-evaluation.html',
+  teacherCategories: 'teachers.html', // Spec 028 — folds into the teachers.html trn-categories drawer (no standalone page)
   materials: 'library.html', // Spec 031 — materials folds into the library.html Materials tab (no standalone page)
   dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',
 };

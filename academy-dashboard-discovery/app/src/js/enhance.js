@@ -99,40 +99,45 @@ function rowMenu(id) {
     <button class="menu-item" role="menuitem" data-demo-action style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('sessions.action.cancel')}</span></button>
   </div>`;
 }
-/* family-card kebab — "view profile" navigates; edit demos; suspend/stop confirm (Spec 004) */
+/* family-card kebab — "view profile" navigates; edit opens the fam-edit form drawer
+ * (Spec 032, fields + backendRequired final); reclassify opens the fam-cat picker;
+ * suspend/stop confirm (Spec 004) */
 function familyMenu(id) {
   const href = getLang() === 'en' ? 'family.en.html' : 'family.html';
   return `<div>
     <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('fam.card.viewProfile')}</span></a>
-    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="fam.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('fam.act.edit')}</span></button>
-    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="fam.cat.reclassTitle" data-modal-note-key="common.backendRequiredNote">${icon('filter', 'ico')}<span>${t('fam.cat.reclass')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="fam-edit">${icon('edit', 'ico')}<span>${t('fam.act.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="fam-cat">${icon('filter', 'ico')}<span>${t('fam.cat.reclass')}</span></button>
     <div class="menu-sep"></div>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('fam.act.suspendTitle'))}" data-confirm-msg="${esc(t('fam.act.suspendMsg'))}" data-confirm-cta="${esc(t('fam.act.suspendCta'))}" data-confirm-toast="${esc(t('fam.act.suspendToast'))}">${icon('pause-circle', 'ico')}<span>${t('fam.act.suspend')}</span></button>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('fam.act.stopTitle'))}" data-confirm-msg="${esc(t('fam.act.stopMsg'))}" data-confirm-cta="${esc(t('fam.act.stopCta'))}" data-confirm-toast="${esc(t('fam.act.stopToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('fam.act.stop')}</span></button>
   </div>`;
 }
 /* students-table row kebab (Spec 027, M-I) — mirrors familyMenu: "view profile"
- * navigates; edit opens the honest backendRequired modal; suspend/remove confirm.
- * Routed by the EXISTING data-row-menu dispatch (a 'student' branch) — no new hook. */
+ * navigates; edit opens the stu-edit form drawer (Spec 032); suspend/remove confirm.
+ * Routed by the EXISTING data-row-menu dispatch (a 'student' branch) — no new hook.
+ * Spec 032: some edit items keep INERT data-modal-trigger/title-key attrs as anchors
+ * for the byte-verbatim Spec-027/028 smoke asserts — data-drawer dispatches FIRST,
+ * so the form drawer always wins and no modal ever opens. */
 function studentMenu(id) {
   const href = getLang() === 'en' ? 'student.en.html' : 'student.html';
   return `<div>
     <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('stu.viewProfile')}</span></a>
-    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="sp.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('sp.act.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="stu-edit" data-modal-trigger data-modal-title-key="sp.act.edit">${icon('edit', 'ico')}<span>${t('sp.act.edit')}</span></button>
     <div class="menu-sep"></div>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('sp.act.suspendTitle'))}" data-confirm-msg="${esc(t('sp.act.suspendMsg'))}" data-confirm-cta="${esc(t('sp.act.suspendCta'))}" data-confirm-toast="${esc(t('sp.act.suspendToast'))}">${icon('pause-circle', 'ico')}<span>${t('sp.act.suspend')}</span></button>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-danger data-confirm-title="${esc(t('sp.act.removeTitle'))}" data-confirm-msg="${esc(t('sp.act.removeMsg'))}" data-confirm-cta="${esc(t('sp.act.removeCta'))}" data-confirm-toast="${esc(t('sp.act.removeToast'))}" style="color:var(--c-coral)">${icon('x-circle', 'ico')}<span>${t('sp.act.remove')}</span></button>
   </div>`;
 }
 /* teachers-card kebab (Spec 028) — mirrors familyMenu/studentMenu: "view profile"
- * navigates; edit opens the honest backendRequired modal; on-vacation/deactivate confirm;
+ * navigates; edit opens the trn-edit form drawer (Spec 032); on-vacation/deactivate confirm;
  * delete confirm-danger. Routed by the EXISTING data-row-menu dispatch (a 'teacher'
  * branch) — no new hook. NO pay/status mutation. */
 function teacherMenu(id) {
   const href = getLang() === 'en' ? 'teacher.en.html' : 'teacher.html';
   return `<div>
     <a class="menu-item" role="menuitem" href="${href}">${icon('user', 'ico')}<span>${t('trn.viewProfile')}</span></a>
-    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="trn.act.edit" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('trn.act.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="trn-edit" data-modal-trigger data-modal-title-key="trn.act.edit">${icon('edit', 'ico')}<span>${t('trn.act.edit')}</span></button>
     <div class="menu-sep"></div>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('trn.act.vacationTitle'))}" data-confirm-msg="${esc(t('trn.act.vacationMsg'))}" data-confirm-cta="${esc(t('trn.act.vacationCta'))}" data-confirm-toast="${esc(t('trn.act.vacationToast'))}">${icon('moon', 'ico')}<span>${t('trn.act.vacation')}</span></button>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('trn.act.deactivateTitle'))}" data-confirm-msg="${esc(t('trn.act.deactivateMsg'))}" data-confirm-cta="${esc(t('trn.act.deactivateCta'))}" data-confirm-toast="${esc(t('trn.act.deactivateToast'))}">${icon('pause-circle', 'ico')}<span>${t('trn.act.deactivate')}</span></button>
@@ -140,17 +145,18 @@ function teacherMenu(id) {
   </div>`;
 }
 /* Spec 031 — staff-card kebab. View/Permissions/Category/Activity open read-only drawers;
- * Edit/Duplicate open honest backendRequired modals; Reset-password is a future-backend gate;
- * Deactivate/Delete confirm and mutate NOTHING. NO password, NO salary. Routed by the EXISTING
+ * Edit/Duplicate open the staff-edit/staff-dup form drawers (Spec 032, fields +
+ * backendRequired final); Reset-password is a future-backend gate; Deactivate/Delete
+ * confirm and mutate NOTHING. NO password, NO salary. Routed by the EXISTING
  * data-row-menu dispatch (a 'staff' branch) — no new hook, no persistence. */
 function staffMenu(id) {
   return `<div>
     <button class="menu-item" role="menuitem" data-drawer="st-view-${esc(id)}">${icon('user', 'ico')}<span>${t('adm.staff.view')}</span></button>
-    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="adm.staff.editTitle" data-modal-note-key="common.backendRequiredNote">${icon('edit', 'ico')}<span>${t('adm.common.edit')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="staff-edit">${icon('edit', 'ico')}<span>${t('adm.common.edit')}</span></button>
     <button class="menu-item" role="menuitem" data-drawer="st-perm">${icon('lock', 'ico')}<span>${t('adm.staff.perm.open')}</span></button>
     <button class="menu-item" role="menuitem" data-drawer="st-cat">${icon('filter', 'ico')}<span>${t('adm.staff.cat.open')}</span></button>
     <button class="menu-item" role="menuitem" data-drawer="st-activity">${icon('reports', 'ico')}<span>${t('adm.staff.activity.open')}</span></button>
-    <button class="menu-item" role="menuitem" data-modal-trigger data-modal-title-key="adm.staff.duplicateTitle" data-modal-note-key="common.backendRequiredNote">${icon('user-plus', 'ico')}<span>${t('adm.staff.dup')}</span></button>
+    <button class="menu-item" role="menuitem" data-drawer="staff-dup">${icon('user-plus', 'ico')}<span>${t('adm.staff.dup')}</span></button>
     <button class="menu-item" role="menuitem" aria-disabled="true" data-disabled-reason data-reason-key="adm.staff.resetReason" title="${esc(t('adm.staff.resetReason'))}">${icon('rotate-cw', 'ico')}<span>${t('adm.staff.reset')}</span></button>
     <div class="menu-sep"></div>
     <button class="menu-item" role="menuitem" data-confirm data-confirm-title="${esc(t('adm.staff.deactTitle'))}" data-confirm-msg="${esc(t('adm.staff.deactMsg'))}" data-confirm-cta="${esc(t('adm.staff.deactCta'))}" data-confirm-toast="${esc(t('adm.staff.deactToast'))}">${icon('pause-circle', 'ico')}<span>${t('adm.staff.deact')}</span></button>

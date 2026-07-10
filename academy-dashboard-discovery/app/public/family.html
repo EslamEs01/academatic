@@ -464,7 +464,7 @@
           <div class="pb-meta"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>مميّزة</span></span></div>
         </div>
       </div>
-      <div class="pb-actions"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fam.act.edit" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>تعديل</span></button><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fam.act.addChild" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إيقاف هذه العائلة مؤقتًا؟" data-confirm-msg="سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن." data-confirm-cta="إيقاف مؤقت" data-confirm-toast="سيتوفّر الإيقاف المؤقت بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>إيقاف مؤقت</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="إيقاف اشتراك هذه العائلة؟" data-confirm-msg="سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن." data-confirm-cta="إيقاف" data-confirm-toast="سيتوفّر إيقاف الاشتراك بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إيقاف الاشتراك</span></button></div>
+      <div class="pb-actions"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="fam-edit" data-modal-trigger data-modal-title-key="fam.act.edit"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>تعديل</span></button><button type="button" class="btn btn-secondary btn-sm"   data-drawer="fam-child" data-modal-trigger data-modal-title-key="fam.act.addChild"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إيقاف هذه العائلة مؤقتًا؟" data-confirm-msg="سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن." data-confirm-cta="إيقاف مؤقت" data-confirm-toast="سيتوفّر الإيقاف المؤقت بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>إيقاف مؤقت</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="إيقاف اشتراك هذه العائلة؟" data-confirm-msg="سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن." data-confirm-cta="إيقاف" data-confirm-toast="سيتوفّر إيقاف الاشتراك بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>إيقاف الاشتراك</span></button></div>
     </div>
     <div class="pb-kpis"><div class="stat-mini"><div class="v">٥</div><div class="l">الأبناء</div></div><div class="stat-mini"><div class="v">٩</div><div class="l">دورات نشطة</div></div><div class="stat-mini"><div class="v">٦</div><div class="l">جلسات الأسبوع</div></div><div class="stat-mini"><div class="v">مارس ٢٠٢٣</div><div class="l">الانضمام</div></div></div>
   </section><div class="tabs-wrap" data-tabs="family">
@@ -504,7 +504,7 @@
   </div></section>
     <section class="tabpanel" role="tabpanel" id="tabpanel-family-students" data-tabpanel="students" aria-labelledby="tab-family-students" hidden><div class="flex items-center justify-between gap-3 mb-3">
       <h2 class="section-title">أبناء العائلة <span class="text-[13px] font-medium" style="color:var(--c-ink-3)">· ٥ من الأبناء</span></h2>
-      <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fam.child.add" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن</span></button>
+      <button type="button" class="btn btn-secondary btn-sm"   data-drawer="fam-child"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن</span></button>
     </div><a href="student.html" class="people-row">
     <span class="avatar avatar-sm av-violet" aria-hidden="true">س</span>
     <div class="min-w-0 flex-1">
@@ -636,7 +636,7 @@
     <section class="tabpanel" role="tabpanel" id="tabpanel-family-notes" data-tabpanel="notes" aria-labelledby="tab-family-notes" hidden><div class="info-card">
     <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>ملاحظات العائلة</span></div>
     <p class="narrative">عائلة منتظمة الحضور، خمسة أبناء في مستويات مختلفة.</p>
-    <div class="mt-4"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fam.notes.add" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>إضافة ملاحظة</span></button></div>
+    <div class="mt-4"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="fam-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>إضافة ملاحظة</span></button></div>
   </div></section>
   </div><template data-preview="b14">
     <div class="sheet-card">
@@ -713,9 +713,62 @@
         </div>
         <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
-      <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">اعرض الفئات وأعِد تصنيف العائلة — يتم الحفظ بعد ربط الخادم.</p>
+      <div class="sheet-body"><div class="wiz-grid" style="margin-bottom:12px"><div class="field field-full"><label class="field-label" for="f-famCat-category">الفئة</label><span class="select-wrap"><select id="f-famCat-category" name="famCat-category" class="select-input">
+      <option value="premium" selected>مميّزة</option><option value="standard">أساسية</option><option value="trial">تجريبية</option><option value="scholarship">منح</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">اعرض الفئات وأعِد تصنيف العائلة — يتم الحفظ بعد ربط الخادم.</p>
     <div class="sheet-row"><span class="k">مميّزة <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>الفئة الحالية</span></span></span><span class="v">٢ عائلة</span></div><div class="sheet-row"><span class="k">أساسية</span><span class="v">٤ عائلة</span></div><div class="sheet-row"><span class="k">تجريبية</span><span class="v">١ عائلة</span></div><div class="sheet-row"><span class="k">منح</span><span class="v">١ عائلة</span></div>
     <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="fam.cat.reclassReason" aria-disabled="true" title="يتوفّر تغيير الفئة بعد ربط الخادم (لا يُحفَظ شيء الآن)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ التصنيف</span></button></div>
+    </div>
+  </template><template data-preview="fam-edit">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تعديل بيانات العائلة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-famEdit-firstName">الاسم الأول</label><input id="f-famEdit-firstName" name="famEdit-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-lastName">اسم العائلة</label><input id="f-famEdit-lastName" name="famEdit-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-firstNameAr">الاسم الأول (بالعربية)</label><input id="f-famEdit-firstNameAr" name="famEdit-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-lastNameAr">اسم العائلة (بالعربية)</label><input id="f-famEdit-lastNameAr" name="famEdit-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-email">البريد الإلكتروني</label><input id="f-famEdit-email" name="famEdit-email" type="text" class="input" placeholder="name@example.edu" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-phone">الهاتف</label><input id="f-famEdit-phone" name="famEdit-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-status">الحالة</label><span class="select-wrap"><select id="f-famEdit-status" name="famEdit-status" class="select-input">
+      <option value="active" selected>نشطة</option><option value="trial">تجريبية</option><option value="suspended">موقوفة مؤقتًا</option><option value="stopped">متوقفة</option><option value="inactive">غير نشطة</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-famEdit-category">الفئة</label><span class="select-wrap"><select id="f-famEdit-category" name="famEdit-category" class="select-input">
+      <option value="premium" selected>مميّزة</option><option value="standard">أساسية</option><option value="trial">تجريبية</option><option value="scholarship">منح</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-famEdit-notes">ملاحظات</label><textarea id="f-famEdit-notes" name="famEdit-notes" class="input" rows="3" placeholder="أضِف ملاحظة عن العائلة…"></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button>
+    </div></div>
+    </div>
+  </template><template data-preview="fam-child">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">إضافة ابن</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-famChild-name">اسم الابن</label><input id="f-famChild-name" name="famChild-name" type="text" class="input" placeholder="اسم الابن" value="" /></div><div class="field"><label class="field-label" for="f-famChild-nameAr">اسم الابن (بالعربية)</label><input id="f-famChild-nameAr" name="famChild-nameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famChild-language">لغة التعلّم</label><span class="select-wrap"><select id="f-famChild-language" name="famChild-language" class="select-input">
+      <option value="ar" selected>العربية</option><option value="en">English</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-famChild-gender">الجنس</label><span class="select-wrap"><select id="f-famChild-gender" name="famChild-gender" class="select-input">
+      <option value="male" selected>ذكر</option><option value="female">أنثى</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-famChild-birthDate">تاريخ الميلاد</label><input id="f-famChild-birthDate" name="famChild-birthDate" type="text" class="input" placeholder="مثال: ٢٠١٤/٠٥/١٢" value="" /></div><div class="field field-full"><label class="field-label" for="f-famChild-teacherNote">ملاحظة للمعلّم</label><textarea id="f-famChild-teacherNote" name="famChild-teacherNote" class="input" rows="3" placeholder=""></textarea></div><div class="field field-full"><label class="field-label" for="f-famChild-adminNote">ملاحظة إدارية</label><textarea id="f-famChild-adminNote" name="famChild-adminNote" class="input" rows="3" placeholder=""></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
+    </div></div>
+    </div>
+  </template><template data-preview="fam-note">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">إضافة ملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-famNote-note">ملاحظات</label><textarea id="f-famNote-note" name="famNote-note" class="input" rows="3" placeholder="أضِف ملاحظة عن العائلة…"></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
+    </div></div>
     </div>
   </template></div>
       </main>

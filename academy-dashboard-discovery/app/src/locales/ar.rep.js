@@ -144,6 +144,8 @@ export default {
         n12: 'بحاجة إلى دعم إضافي في بعض المفاهيم.',
       },
       date: { d1: 'قبل يومين', d2: 'قبل ٣ أيام', d3: 'الأسبوع الماضي', d4: 'أمس', d5: 'اليوم' },
+      /* Spec 032 — FC-25/27 form-drawer copy (labels reuse rep.fb.lbl.* أعلاه) */
+      f: { notePh: 'اكتب الملاحظة هنا…' },
     },
 
     /* Spec 029 — Feedback categories (folded drawer; nav stays planned) */
@@ -155,6 +157,9 @@ export default {
       members: '{n} عنصر',
       assign: 'إسناد أعضاء',
       assignReason: 'إسناد الأعضاء يحتاج ربط الخادم — خارج النطاق الحالي.',
+      /* Spec 032 — FC-26 inline create-form copy */
+      createReason: 'إنشاء الفئة يحتاج ربط الخادم — لا يُحفَظ شيء الآن.',
+      f: { name: 'اسم الفئة', namePh: 'مثال: جودة التدريس', desc: 'الوصف' },
       name: {
         teaching: 'جودة التدريس', communication: 'التواصل', session: 'الجلسة',
         meeting: 'اجتماع العائلة', progress: 'تقدّم الطالب',
@@ -189,6 +194,18 @@ export default {
         teacherReview: 'مراجعة المدرّس', exit: 'استبيان المغادرة',
       },
       created: { c1: 'هذا الشهر', c2: 'الشهر الماضي', c3: 'هذا الأسبوع', c4: 'قبل شهرين' },
+      /* Spec 032 — FC-28 create-form drawer copy (حقول معروضة فقط — لا تجميع للردود) */
+      f: {
+        name: 'اسم النموذج', namePh: 'مثال: استبيان نهاية الشهر',
+        day: 'اليوم',
+        row: 'الحقل {n}',
+        fieldLabel: 'عنوان الحقل',
+        fieldType: 'نوع الحقل',
+        fieldOptions: 'الخيارات',
+        fieldOptionsPh: 'خيارات مفصولة بفواصل',
+        fieldRequired: 'إلزامي؟',
+        req: { yes: 'نعم', no: 'لا' },
+      },
     },
   },
 };

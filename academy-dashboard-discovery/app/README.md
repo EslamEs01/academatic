@@ -385,3 +385,60 @@ generates, uploads, connects, or produces a file. The staff kebab reuses the exi
 changed the shared sidebar (staff/books/certificates → anchors); teacher-portal ×16 + family + student + index +
 finance/reports bodies byte-identical; `package.json`/no new dependency/engine/hook 0-diff. Build 103; smoke PASS;
 a11y 0/0; screenshots 0 errors.
+
+## Spec 032 — Final QA / Create-Edit Forms Completion / Production Freeze
+
+The last frontend-completion spec. Its one rule: **every Add / Create / New / Edit / Duplicate action opens a
+real form UI first** — a drawer with visible, grounded input/select/textarea fields — and only the final
+Save/Submit/Issue is a `backendRequired` gate. The 40 create/edit actions (FC-01…FC-40) used to open a
+field-less "available once the server is connected" note as their first-and-only response (`openModal` rendered
+title + note + Close only); each now opens a form-bearing drawer. **Count held 97 → 103 (no change from Spec
+031): 0 new pages** — all 40 forms are drawers folded into existing pages.
+
+**Mechanism (Option B).** One additive helper — `formDrawer(id, {titleKey, headIcon, fields, ctaKey, reasonKey})`
+in `components/preview-drawer.js` — wraps the existing `previewTemplate()`: it renders `fields` (a concatenation of
+the existing `field()` controls) inside a `.wiz-grid` and appends exactly ONE clickable `data-disabled-reason`
+Save final. Each field-less `data-modal-trigger` create/edit trigger becomes a `data-drawer="X"` trigger that opens
+the baked `<template data-preview="X">`, reusing the CLOSED `data-drawer` → `openSheet` → `template[data-preview]`
+clone path verbatim (the `openPanel` focus-trap already covers `input`/`select`). Kebab-menu items in `enhance.js`
+gained `data-drawer="X"` (data-drawer dispatches first, so the drawer always wins). **No new hook, no new storage
+key, no new engine, no new CSS class, no new page, no `package.json`/`build-html.mjs` change.**
+
+**MUST-OMIT (never rendered on any form):** password · salary/hour-rate/fine/pay-period · currency-with-salary ·
+gateway/payout/SMTP/Zoom credentials · 2FA OTP · computed Total. **MUST-GATE (stay `data-disabled-reason`, no
+working control):** all `type=file` uploads (teacher CV, certificate background, library file/thumbnail, settings
+logo) · certificate canvas/PDF (static preview only) · WhatsApp pairing · Record-Payment. Fields are INERT — no
+behavior hook, no persistence; every Save mutates nothing.
+
+- **Sessions** (`sess-new`, folded into `sessions.html`/`dashboard.html`): course/teacher/date/time/duration/
+  credit-source/status.
+- **Families/Students**: `fam-edit` (name±ar/email/phone/status/category/notes) · `fam-child` · `fam-note` ·
+  `stu-edit` · `stu-note` · `stu-add` (+ trial block); the add-family wizard's "Add child" reveals a real third
+  child row via a native `<details>` disclosure (no new hook).
+- **Courses/Groups**: `crs-add`/`crs-edit` (material/teacher/start-date/schedule — **no teacher-rate**) ·
+  `grp-add` (course prefilled = create-group-from-course)/`grp-edit` — **no per-group rate**.
+- **Teachers**: `trn-add`/`trn-edit` (name±ar/email/phone/status/subjects/level/course/city/country/notes +
+  CV-upload **gate**) · `trn-note`; **no salary/hour-rate/fine/meeting-provider/payout/auth-secret field**.
+- **Reports/Feedback**: `fb-add` (nested in the outcome sheet) · `fb-create` · `form-create` (repeatable
+  field-builder rows) · `rep-fbcat` hybrid create form.
+- **Finance**: `bank-add` (bank-name only — **no credentials/balance/figure**).
+- **Staff**: `staff-add`/`staff-edit`/`staff-dup` (name/username/email/phone/role/status — **no password/salary/
+  OTP**).
+- **Certificates**: `cert-tpl` (name + **static** designer preview + background-upload gate — no `<canvas>`, no
+  drag, no PDF) · `cert-create` (student/course/template/date/message + PDF-preview gate).
+- **Library/Settings**: `mat-add`/`mat-edit` · `lib-item` (+ file/thumbnail gates) · `lib-cats` create form ·
+  `head-add` (name/status — **no amount**); Customization Save + Policy Edit stay honest panel gates.
+
+**Django note**: each form drawer maps to a Django `ModelForm` rendered inside a `{% block drawer %}` `<template>`;
+the visible fields are `{{ form.field }}` widgets, the final Save is `<button ... {% if not backend %}disabled{% endif
+%}>` — nothing persists until the backend is wired. The `formDrawer()` body is a plain field list, so swapping the
+INERT controls for real form widgets is a one-file change per surface.
+
+**Coverage / freeze**: admin menu **50 items, 0 unclassified** (`nav.config.js` route rules 0-diff; 2 stale
+`FUTURE_ROUTES` doc-entries cleaned); route/page **103 pages, 0 orphan, 0 missing mirror** (`build-html.mjs` PAGES
+0-diff). The 14 candidate-list pickers stay list-then-gate; the 3 hybrid category drawers gained real create forms.
+Teacher-portal ×16 + family + student + index bodies byte-identical; the protected role-law + 026–031 smoke asserts
+are byte-verbatim (the ONE amendment: the finance invoice-drawer count now scopes to `inv*` templates so the
+additive `bank-add` form isn't miscounted). Build 103; smoke PASS + a new form-completion block (0 field-less
+create/edit modal, 0 MUST-OMIT leak, 0 MUST-GATE control, pickers + hybrids re-pinned); a11y critical=0 serious=0
+(+ open-form / mobile-390 / dark / EN rows); 258 screenshots 0 console errors (39 new open-form frames).

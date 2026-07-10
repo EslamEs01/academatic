@@ -535,7 +535,21 @@
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
     </div>
   </div>
-  <div class="mt-3"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fam.wiz.children.add" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن آخر</span></button></div>
+  <details class="mt-3">
+    <summary class="btn btn-secondary btn-sm" style="list-style:none;cursor:pointer;-webkit-user-select:none;user-select:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن آخر</span></summary>
+    <div class="mt-3"><div class="child-row">
+    <div class="text-[12px] font-bold mb-2.5" style="color:var(--c-ink-3)">الابن ٣</div>
+    <div class="wiz-grid">
+      <div class="field field-full"><label class="field-label" for="f-child-3-name">اسم الابن</label><input id="f-child-3-name" name="child-3-name" type="text" class="input" placeholder="اسم الابن" value="" /></div>
+      <div class="field"><label class="field-label" for="f-child-3-level">المستوى</label><span class="select-wrap"><select id="f-child-3-level" name="child-3-level" class="select-input">
+      <option value="foundation" selected>تأسيسي</option><option value="l1">المستوى الأول</option><option value="l2">المستوى الثاني</option><option value="l3">المستوى الثالث</option><option value="advanced">متقدّم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
+      <div class="field"><label class="field-label" for="f-child-3-subject">المادة</label><span class="select-wrap"><select id="f-child-3-subject" name="child-3-subject" class="select-input">
+      <option value="math" selected>الرياضيات</option><option value="arabic">اللغة العربية</option><option value="programming">البرمجة</option><option value="physics">الفيزياء</option><option value="english">الإنجليزية</option><option value="science">العلوم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
+    </div>
+  </div></div>
+  </details>
       <div class="wiz-nav"><button type="button" class="btn btn-secondary btn-sm" data-step-prev><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-chevronStart"></use></svg><span>السابق</span></button><button type="button" class="btn btn-primary btn-sm" data-step-next><span>التالي</span><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button></div>
     </section><section class="wiz-step" id="wiz-step-billing" data-step="billing" role="tabpanel" aria-labelledby="wiz-tab-billing" tabindex="0" hidden>
       <div class="wiz-step-head">

@@ -1,6 +1,7 @@
 /* Spec 031 — Admin management/content/certificates/settings copy (Arabic).
  * Namespace `adm.*` + topbar titles/crumbs for the 3 new pages. Mirrored 1:1 with en.adm.js.
- * NO pay/salary figure, NO credential wording, NO fake-success wording. */
+ * The excluded legacy fieldset stays out (see the must-omit contract); NO credential wording,
+ * NO fake-success wording. Spec 032 adds the `adm.form.*` shared form-drawer labels. */
 export default {
   topbar: {
     title: { staff: 'المستخدمون والطاقم', library: 'المواد والمكتبة', certificates: 'الشهادات' },
@@ -8,6 +9,8 @@ export default {
   },
   adm: {
     common: { save: 'حفظ التغييرات', backendReason: 'يُتاح بعد ربط الخادم', add: 'إضافة', edit: 'تعديل', view: 'عرض', empty: 'لا توجد عناصر لعرضها' },
+
+    form: { name: 'الاسم', datePh: 'مثال: 2026-08-01' },
 
     staff: {
       title: 'المستخدمون والطاقم',
@@ -56,7 +59,8 @@ export default {
       download: 'تنزيل', downloadReason: 'التنزيل يحتاج ربط الخادم — لا يُنشأ ملف.',
       publish: 'نشر', publishReason: 'النشر يحتاج ربط الخادم — لا يتغيّر شيء الآن.',
       del: 'حذف', delTitle: 'حذف العنصر؟', delMsg: 'الحذف يحتاج ربط الخادم — لا يُحذف شيء الآن.', delCta: 'حذف', delToast: 'يُتاح الحذف بعد ربط الخادم.',
-      categories: 'إدارة الفئات', catAdd: 'إضافة فئة', catAddTitle: 'إضافة فئة', catEditTitle: 'تعديل الفئة', catName: 'اسم الفئة', catCount: 'عدد العناصر', catDrawerTitle: 'فئات المكتبة',
+      categories: 'إدارة الفئات', catAdd: 'إضافة فئة', catAddTitle: 'إضافة فئة', catEditTitle: 'تعديل الفئة', catName: 'اسم الفئة', catStatus: 'الحالة', catCount: 'عدد العناصر', catDrawerTitle: 'فئات المكتبة',
+      itemAddTitle: 'إضافة عنصر للمكتبة', thumb: 'الصورة المصغرة', thumbReason: 'الصورة المصغرة تُرفَع عبر الخادم — لا يوجد رفع فعلي هنا.',
       filterSearch: 'ابحث في المكتبة…', filterType: 'النوع', filterCat: 'الفئة', allTypes: 'كل الأنواع', allCats: 'كل الفئات',
       emptyMaterials: 'لا توجد مواد.', emptyBooks: 'لا توجد عناصر.',
     },
@@ -67,6 +71,7 @@ export default {
       tpl: { completion: 'شهادة إتمام', excellence: 'شهادة تفوّق', attendance: 'شهادة مواظبة', quran: 'شهادة حفظ القرآن' },
       tplUsage: 'صدرت {n} مرة', tplUsageLabel: 'الاستخدام',
       tplCreate: 'قالب جديد', tplCreateTitle: 'إنشاء قالب شهادة', tplEditTitle: 'تعديل القالب',
+      tplFormTitle: 'قالب الشهادة', tplBg: 'صورة الخلفية', tplBgReason: 'تغيير خلفية القالب يتم عبر الخادم — لا يوجد رفع فعلي هنا.',
       tplDel: 'حذف', tplDelTitle: 'حذف القالب؟', tplDelMsg: 'الحذف يحتاج ربط الخادم — لا يُحذف شيء الآن.', tplDelCta: 'حذف', tplDelToast: 'يُتاح الحذف بعد ربط الخادم.',
       designer: { title: 'معاينة مصمّم القالب', note: 'معاينة ثابتة لتوزيع الحقول — دون سحب أو رفع أو توليد ملف. التصميم الفعلي يتم عبر الخادم.' },
       field: { student: 'اسم الطالب', course: 'اسم الدورة', teacher: 'اسم المعلم', date: 'التاريخ' },
@@ -86,6 +91,7 @@ export default {
       download: 'تنزيل', downloadReason: 'التنزيل يحتاج ربط الخادم — لا يُنشأ ملف.',
       send: 'إرسال', sendReason: 'الإرسال يتم عبر الخادم — لا يُرسَل شيء الآن.',
       create: 'إصدار شهادة', createReason: 'إصدار الشهادة يتم عبر الخادم بعد ربطه.',
+      createTplLabel: 'القالب', createMsg: 'رسالة الشهادة', createMsgPh: 'نص يظهر على الشهادة…',
       uploadCert: 'رفع شهادة', uploadCertReason: 'رفع الملفات يتم عبر الخادم — لا يوجد رفع فعلي هنا.',
       view: 'عرض الطلب', detailTitle: 'تفاصيل الطلب',
       iss: { i1: 'شهادة إتمام — الفصل الأول', i2: 'شهادة مواظبة — الفصل الأول' }, issTitle: 'الشهادات الصادرة', issOptions: 'خيارات',

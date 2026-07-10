@@ -9,11 +9,13 @@
 import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
-import { previewTemplate, sheetRow } from './preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from './preview-drawer.js';
+import { field, optsFrom } from './form-field.js';
 import { appointmentRows } from './appointment-details.js';
 import { outcomeChip } from './outcome-status.js';
 import { button } from './ui.js';
 import { confirmAction } from './confirm-modal.js';
+import { FEEDBACK_CATEGORIES, FB_REMARK_TONE } from '../fixtures/report-feedback.js';
 
 const schedHref = () => (getLang() === 'en' ? 'schedule.en.html#view=timetable' : 'schedule.html#view=timetable');
 const flag = (ic, labelKey) => `<span class="attention-flag">${icon(ic, 'ico ico-sm')}<span>${t(labelKey)}</span></span>`;
@@ -46,6 +48,22 @@ export function outcomeSection(i) {
 const demoBtn = (labelKey, ic, toastKey) => button({ labelKey, variant: 'secondary', size: 'sm', icon: ic, attrs: `data-demo-action data-toast="${esc(t(toastKey))}"` });
 const confirmBtn = (labelKey, ic, base, danger = true) => confirmAction({ labelKey, variant: danger ? 'danger' : 'secondary', icon: ic, danger, titleKey: `${base}Title`, msgKey: `${base}Msg`, confirmKey: `${base}Cta`, toastKey: `${base}Toast` });
 
+/* Spec 032 (FC-25) — the "Add feedback" FORM drawer: real INERT fields + the ONE
+ * clickable backendRequired final (formDrawer). Options derive from the authored
+ * Spec-029 feedback fixtures — categorical remarks only, never a number. The
+ * template is baked NESTED inside the attended outcome template's action cluster:
+ * inert while baked, it enters the live document with the open outcome sheet, so
+ * enhance.js resolves it right when the trigger is clickable (the lookup happens
+ * before the panel swap). No new hook — the existing data-drawer → openSheet path. */
+const FB_CAT_OPTS = FEEDBACK_CATEGORIES.map((c, i) => ({ value: c.id, labelKey: c.nameKey, selected: i === 0 }));
+const FB_REMARK_OPTS = optsFrom(Object.keys(FB_REMARK_TONE), 'rep.fb.rmk');
+function fbAddDrawer() {
+  const fields = field({ labelKey: 'rep.fb.lbl.category', name: 'fbAdd-category', type: 'select', options: FB_CAT_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.remark', name: 'fbAdd-remark', type: 'select', options: FB_REMARK_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.note', name: 'fbAdd-note', type: 'textarea', placeholderKey: 'rep.fb.f.notePh', full: true });
+  return formDrawer('fb-add', { titleKey: 'rep.fb.createTitle', headIcon: 'file-text', fields });
+}
+
 /** the status-gated, DEMO-only action cluster (per outcome-actions-contract) */
 export function gatedActions(i) {
   const o = i.outcomeId;
@@ -57,9 +75,10 @@ export function gatedActions(i) {
     A.push(confirmBtn('att.act.cancel', 'x-circle', 'att.act.cancel'));
     A.push(confirmBtn('att.act.reschedule', 'calendar-clock', 'att.act.reschedule', false));
   } else if (o === 'attended') {
-    // Spec 029 (R-E) — "Add feedback" is a Create action → honest backendRequired modal (not a
-    // fire-and-forget toast); mirrors the Spec-026 Add/Create-primary treatment. No persistence.
-    A.push(button({ labelKey: 'att.act.feedback', variant: 'secondary', size: 'sm', icon: 'file-text', attrs: 'data-modal-trigger data-modal-title-key="att.act.feedback" data-modal-note-key="common.backendRequiredNote"' }));
+    // Spec 029 (R-E) → Spec 032 (FC-25) — "Add feedback" is a Create action; the field-less
+    // modal became a real form drawer (category/remark/note) whose Save is the honest
+    // backendRequired final. The fb-add template rides inside this cluster. No persistence.
+    A.push(button({ labelKey: 'att.act.feedback', variant: 'secondary', size: 'sm', icon: 'file-text', attrs: 'data-drawer="fb-add"' }) + fbAddDrawer());
     A.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
     A.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
   } else if (o === 'studentAbsent' || o === 'teacherAbsent' || o === 'cancelled') {

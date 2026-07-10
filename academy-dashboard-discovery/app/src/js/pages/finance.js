@@ -18,7 +18,8 @@ import { pageHeader } from '../components/page-header.js';
 import { filterBar } from '../components/filter-bar.js';
 import { cardGrid } from '../components/card-grid.js';
 import { noResults } from '../components/states.js';
-import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from '../components/preview-drawer.js';
+import { field } from '../components/form-field.js';
 import { reportCard } from '../components/report-card.js';
 import { financeActions, invoiceRowActions, invoiceDrawerActions } from '../components/finance-actions.js';
 import { invoiceStatusChip, paymentStatusChip, INVOICE_STATUS_ORDER } from '../components/finance-status.js';
@@ -238,8 +239,16 @@ function salariesSection() {
     ${salaryBoard('staff', 'fin.sal.staff')}`;
 }
 
-/* ── Spec 030 — Banks tab: name + status ONLY (no credentials/numbers/balances). Add/Edit =
- * backendRequired modal; Import statement / Reconcile = backendRequired gates. ── */
+/* ── Spec 030 — Banks tab: name + status ONLY (no credentials/numbers/balances). Spec 032
+ * FC-29: Add-bank = a NAME-ONLY form drawer (the excluded legacy fieldset stays omitted per
+ * the must-omit contract) whose Save final is the standard clickable backendRequired gate —
+ * nothing persists; Import statement / Reconcile stay backendRequired gates. ── */
+const bankAddDrawer = () =>
+  formDrawer('bank-add', {
+    titleKey: 'fin.bank.addTitle',
+    headIcon: 'plus',
+    fields: field({ labelKey: 'fin.bank.form.name', name: 'bankAdd-bankName', placeholderKey: 'fin.bank.form.namePh', full: true }),
+  });
 function bankRow(b) {
   return `<div class="card p-3.5 flex items-center justify-between gap-3">
     <div class="font-bold text-ink text-[13.5px]">${t(b.nameKey)}</div>
@@ -248,7 +257,7 @@ function bankRow(b) {
 }
 function banksSection() {
   const actions = `<div class="report-actions flex items-center flex-wrap gap-2 mb-4" role="group" aria-label="${esc(t('fin.bank.title'))}">
-    ${button({ labelKey: 'fin.bank.add', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="fin.bank.addTitle" data-modal-note-key="common.backendRequiredNote"' })}
+    ${button({ labelKey: 'fin.bank.add', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-drawer="bank-add" data-modal-trigger data-modal-title-key="fin.bank.addTitle"' })}
     ${gate('fin.bank.import', 'file-text', 'fin.bank.importReason')}
     ${gate('fin.bank.reconcile', 'check-circle', 'fin.bank.reconcileReason')}
   </div>`;
@@ -257,7 +266,8 @@ function banksSection() {
       <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">${esc(t('fin.bank.sub'))}</p>
     </div>
     ${actions}
-    ${cardGrid(BANKS.map(bankRow), { cols: 'sm:grid-cols-2 lg:grid-cols-3' })}`;
+    ${cardGrid(BANKS.map(bankRow), { cols: 'sm:grid-cols-2 lg:grid-cols-3' })}
+    ${bankAddDrawer()}`;
 }
 
 export function renderFinance() {

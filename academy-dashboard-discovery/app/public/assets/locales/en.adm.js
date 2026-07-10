@@ -1,6 +1,7 @@
 /* Spec 031 — Admin management/content/certificates/settings copy (English).
- * Mirror of ar.adm.js (identical key set). NO pay/salary figure, NO credential wording,
- * NO fake-success wording. */
+ * Mirror of ar.adm.js (identical key set). The excluded legacy fieldset stays out
+ * (see the must-omit contract); NO credential wording, NO fake-success wording.
+ * Spec 032 adds the `adm.form.*` shared form-drawer labels. */
 export default {
   topbar: {
     title: { staff: 'Users & Staff', library: 'Materials & Library', certificates: 'Certificates' },
@@ -8,6 +9,8 @@ export default {
   },
   adm: {
     common: { save: 'Save changes', backendReason: 'Available once the server is connected', add: 'Add', edit: 'Edit', view: 'View', empty: 'Nothing to show' },
+
+    form: { name: 'Name', datePh: 'e.g. 2026-08-01' },
 
     staff: {
       title: 'Users & Staff',
@@ -56,7 +59,8 @@ export default {
       download: 'Download', downloadReason: 'Download needs the server — no file is produced.',
       publish: 'Publish', publishReason: 'Publishing needs the server — nothing changes now.',
       del: 'Delete', delTitle: 'Delete item?', delMsg: 'Deletion needs the server — nothing is deleted now.', delCta: 'Delete', delToast: 'Deletion is available once the server is connected.',
-      categories: 'Manage categories', catAdd: 'Add category', catAddTitle: 'Add category', catEditTitle: 'Edit category', catName: 'Category name', catCount: 'Items', catDrawerTitle: 'Library categories',
+      categories: 'Manage categories', catAdd: 'Add category', catAddTitle: 'Add category', catEditTitle: 'Edit category', catName: 'Category name', catStatus: 'Status', catCount: 'Items', catDrawerTitle: 'Library categories',
+      itemAddTitle: 'Add library item', thumb: 'Thumbnail', thumbReason: 'The thumbnail is uploaded on the server — no real upload here.',
       filterSearch: 'Search the library…', filterType: 'Type', filterCat: 'Category', allTypes: 'All types', allCats: 'All categories',
       emptyMaterials: 'No subjects.', emptyBooks: 'No items.',
     },
@@ -67,6 +71,7 @@ export default {
       tpl: { completion: 'Completion certificate', excellence: 'Excellence certificate', attendance: 'Attendance certificate', quran: 'Quran memorization certificate' },
       tplUsage: 'Issued {n} times', tplUsageLabel: 'Usage',
       tplCreate: 'New template', tplCreateTitle: 'Create certificate template', tplEditTitle: 'Edit template',
+      tplFormTitle: 'Certificate template', tplBg: 'Background image', tplBgReason: 'Changing the template background happens on the server — no real upload here.',
       tplDel: 'Delete', tplDelTitle: 'Delete template?', tplDelMsg: 'Deletion needs the server — nothing is deleted now.', tplDelCta: 'Delete', tplDelToast: 'Deletion is available once the server is connected.',
       designer: { title: 'Template designer preview', note: 'Static preview of field placement — no drag, no upload, no file generation. Real design happens on the server.' },
       field: { student: 'Student name', course: 'Course name', teacher: 'Teacher name', date: 'Date' },
@@ -86,6 +91,7 @@ export default {
       download: 'Download', downloadReason: 'Download needs the server — no file is produced.',
       send: 'Send', sendReason: 'Sending happens on the server — nothing is sent now.',
       create: 'Issue certificate', createReason: 'Issuing happens on the server once connected.',
+      createTplLabel: 'Template', createMsg: 'Certificate message', createMsgPh: 'Text shown on the certificate…',
       uploadCert: 'Upload certificate', uploadCertReason: 'File upload happens on the server — no real upload here.',
       view: 'View request', detailTitle: 'Request details',
       iss: { i1: 'Completion certificate — Term 1', i2: 'Attendance certificate — Term 1' }, issTitle: 'Issued certificates', issOptions: 'Options',

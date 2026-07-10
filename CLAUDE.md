@@ -1,6 +1,49 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 031 — Admin Management / Content / Certificates / Settings / Materials Deep Management is
-IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (74 tasks) + 24 contracts at
+Active feature: **Spec 032 — Final QA / Full Admin Menu Coverage / Create-Edit Forms Completion / Production
+Freeze is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (50 tasks) + 18 contracts +
+`implementation-status.md` at
+`academy-dashboard-discovery/specs/032-final-qa-full-admin-menu-production-freeze/`). **THE FINAL FRONTEND
+PRODUCTION-FREEZE SPEC.** **Count HELD 103 → 103 — ZERO new pages** (`package.json`/`build-html.mjs` PAGES
+0-diff). The one rule: **every Add/Create/New/Edit/Duplicate opens a REAL form UI with visible grounded fields
+FIRST; only the final Save/Submit/Issue is a `backendRequired` gate** — the 40 field-less "too-early gate"
+create/edit actions (FC-01…FC-40; `openModal` used to render title+note+Close only) became **24 form-bearing
+drawers** (+ wizard child-row + picker-reuse + a real link). **Mechanism = Option B**: one additive helper
+`formDrawer(id,{titleKey,headIcon,fields,ctaKey,reasonKey})` in `components/preview-drawer.js` wrapping the
+existing `previewTemplate()` — renders `field()` controls in a `.wiz-grid` + exactly ONE clickable
+`data-disabled-reason` final; each field-less `data-modal-trigger` → `data-drawer="X"` opening a baked
+`<template data-preview="X">`, reusing the CLOSED `data-drawer`→`openSheet`→`template[data-preview]` clone path.
+Kebab items in `enhance.js` carry `data-drawer` (dispatched FIRST — the drawer always wins); the legacy
+`data-modal-trigger`/`-title-key` attrs are kept INERT as anchors so the 027–031 presence-asserts stay
+byte-verbatim. **NO new hook/storage key/engine/CSS-class/page/dependency.** Forms by owner: **sessions**
+`sess-new` (course/teacher/date/time/duration/credit/status); **family/student** `fam-edit`/`fam-child`/
+`fam-note`/`fam-cat`+select/`stu-edit`/`stu-note`/`stu-add` + the add-family wizard "Add child" native
+`<details>` child-row (FC-10); **courses/groups** `crs-add`/`crs-edit`/`grp-add`(prefilled=create-from-course)/
+`grp-edit`; **teachers** `trn-add`/`trn-edit`/`trn-note`/`trn-categories` create-form + a CV-upload GATE;
+**reports** `fb-add`(nested in the outcome sheet)/`fb-create`/`form-create`(repeatable field-builder rows)/
+`rep-fbcat` create-form; **finance** `bank-add` (name only); **staff** `staff-add`/`staff-edit`/`staff-dup`;
+**certificates** `cert-tpl` (name + STATIC designer preview + background-upload GATE, no `<canvas>`/drag/PDF) +
+`cert-create` (+ PDF-preview GATE); **library/settings** `mat-add`/`mat-edit`/`lib-item`(+file/thumbnail GATE)/
+`lib-cats` create-form/`head-add` (name/status). FC-40 empty-state CTA → real link to `sessions.html`.
+Customization-save + Policy-edit stay honest panel gates. **MUST-OMIT (0 rendered anywhere)**: password ·
+salary/hour-rate/fine/pay-period · currency-with-salary · gateway/payout/SMTP/zoom credentials · 2FA-otp ·
+computed Total. **MUST-GATE (stay `data-disabled-reason`)**: every `type=file` upload · certificate canvas/PDF ·
+WhatsApp pairing · Record-Payment. Fields INERT — no persistence/mutation. **14 candidate-list pickers**
+re-pinned (list+gate); **3 hybrid category drawers** (`trn-categories`/`rep-fbcat`/`lib-cats`) gained real create
+forms. New fixture `fixtures/form-options.js` + mirrored `fopt.*` (extra) + per-domain `*.form.*` keys in the
+existing 11 locale pairs (0 divergence). Admin menu **50 items 0-unclassified**; route/page **103/0-orphan/
+0-missing-mirror**; 2 stale `FUTURE_ROUTES` doc-entries cleaned (`sessionsAnalysis` removed, `teacherCategories`
+→ `teachers.html`). **Verified**: build 103; smoke PASS (102 loads; additive form-completion block —
+`fieldlessCreateEdit===0`, per-page MUST-OMIT/GATE greps, 14 pickers + 3 hybrids + nested fb-add + admin-menu-50 +
+route-freeze-103; **payHit/tchPay/famPay/payFigure/child-view/finance-forbidden/no-mutation/FAKE + 026-031 asserts
+BYTE-VERBATIM**, the ONE amendment = finance invoice-drawer count scoped to `inv*`, still 9); a11y critical=0
+serious=0 (+open-form focus-trap/dialog/mobile-390/dark/EN rows); 258 screenshots 0 errors (39 `sp032-*`
+open-form frames). Only the **21 form-host bases** (×2 = 42 HTML) changed; teacher-portal ×16 + family + student +
+all portal internals + index BYTE-IDENTICAL; `package.json`/`build-html.mjs`/finance-source 0-diff. Role laws
+green: teacher pay-free (portal byte-identical; admin teacher/staff form-drawer templates carry NO pay field),
+family zero-pay, student child-view, finance no-fake-money, settings no-fake-settings. **No commit/no push** —
+watcher commits. **This is the production freeze; no further frontend spec.**
+**History: Spec 031 — Admin Management / Content / Certificates / Settings / Materials Deep Management is
+IMPLEMENTED** (committed baseline HEAD `80449be`; artifacts + `tasks.md` (74 tasks) + 24 contracts at
 `academy-dashboard-discovery/specs/031-admin-management-content-certificates-settings-materials/`). **Count 97 →
 103** (+6). Settings-category items **fold into `settings.html`** as a 6-tab hub (General·Notifications·
 Customization·Security·Users·Integrations — the finance.html/Spec-030 precedent, 0-delta; theme/lang stay REAL);

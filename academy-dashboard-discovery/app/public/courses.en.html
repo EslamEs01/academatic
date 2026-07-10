@@ -462,7 +462,7 @@
         <h1 class="page-title">Courses</h1>
         <p class="page-sub">A structured overview of courses, levels, and their status.</p>
       </div>
-      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-modal-trigger data-modal-title-key="crs.act.add" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New course</span></button></div>
+      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-drawer="crs-add"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New course</span></button></div>
     </div>
     <div class="mb-6"><div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
     <div class="card p-4 flex items-center gap-3">
@@ -582,6 +582,29 @@
     </div>
     
   </div></div>
+    <template data-preview="crs-add">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">New course</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-crsAdd-material">Subject</label><span class="select-wrap"><select id="f-crsAdd-material" name="crsAdd-material" class="select-input">
+      <option value="math" selected>Mathematics</option><option value="arabic">Arabic</option><option value="programming">Programming</option><option value="physics">Physics</option><option value="english">English</option><option value="science">Science</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-crsAdd-teacher">Teacher</label><span class="select-wrap"><select id="f-crsAdd-teacher" name="crsAdd-teacher" class="select-input">
+      <option value="sara" selected>Sara Al-Qahtani</option><option value="mohammed">Mohammed Al-Dosari</option><option value="layan">Layan Al-Shamri</option><option value="reem">Reem Al-Mutairi</option><option value="nora">Noura Al-Zahrani</option><option value="khalid">Khalid Al-Anazi</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-crsAdd-startDate">Start date</label><input id="f-crsAdd-startDate" name="crsAdd-startDate" type="text" class="input" placeholder="e.g. 2026-09-01" value="" /></div><div class="field"><label class="field-label" for="f-crsAdd-scheduleDay">Weekly session day</label><span class="select-wrap"><select id="f-crsAdd-scheduleDay" name="crsAdd-scheduleDay" class="select-input">
+      <option value="sat" selected>Saturday</option><option value="sun">Sunday</option><option value="mon">Monday</option><option value="tue">Tuesday</option><option value="wed">Wednesday</option><option value="thu">Thursday</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-crsAdd-scheduleTime">Session time</label><input id="f-crsAdd-scheduleTime" name="crsAdd-scheduleTime" type="text" class="input" placeholder="e.g. 16:30" value="" /></div><div class="field"><label class="field-label" for="f-crsAdd-scheduleDuration">Session duration</label><span class="select-wrap"><select id="f-crsAdd-scheduleDuration" name="crsAdd-scheduleDuration" class="select-input">
+      <option value="m30" selected>30 minutes</option><option value="m45">45 minutes</option><option value="m60">60 minutes</option><option value="m90">90 minutes</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
+    </div></div>
+    </div>
+  </template>
   </div>
       </main>
     </div>

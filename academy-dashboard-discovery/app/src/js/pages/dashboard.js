@@ -18,7 +18,7 @@ import { t, num, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
 import { welcomeZone } from '../components/welcome.js';
 import { kpiRow } from '../components/kpi-card.js';
-import { sessionsModule } from '../components/table.js';
+import { sessionsModule, sessionFormDrawer } from '../components/table.js';
 import { statusTile } from '../components/status-tile.js';
 import { statusChip } from '../components/status-chip.js';
 import { statusOf } from '../components/status-map.js';
@@ -122,5 +122,6 @@ export function renderDashboard() {
     </section>
 
     ${SESSIONS.rows.map((s) => appointmentTemplate({ ...s, students: s.present })).join('')}
+    ${sessionFormDrawer()}
   `;
 }

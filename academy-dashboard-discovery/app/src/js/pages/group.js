@@ -21,7 +21,7 @@ import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
 import { ADD_STUDENTS } from '../fixtures/management.js';
 import { ASSIGN_TEACHERS } from '../fixtures/teacher-management.js';
 import { groupStatusChip } from '../components/group-status.js';
-import { groupActions } from '../components/course-group-actions.js';
+import { groupActions, groupFormTemplate } from '../components/course-group-actions.js';
 import { blocksOf, outcomesOf, cohortTimetablePanel, cohortOutcomesPanel, cohortTemplates } from '../components/cohort-panels.js';
 
 const TEACHER_BY_ID = Object.fromEntries(TEACHERS.rows.map((x) => [x.id, x]));
@@ -149,5 +149,7 @@ export function renderGroup() {
     },
   });
 
-  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${assignPicker()}${teacherPicker()}`;
+  /* Spec 032 — FC-19 edit form (grp-edit; reuses the grp-add field set — no legacy edit
+   * route; the course select is prefilled with this group's course). Final = gate. */
+  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${assignPicker()}${teacherPicker()}${groupFormTemplate('grp-edit', { courseId: g.courseId })}`;
 }

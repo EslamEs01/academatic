@@ -5,16 +5,42 @@ import { icon } from '../icons.js';
 import { esc } from '../dom.js';
 import { medallion, button, avatar } from './ui.js';
 import { statusChip } from './status-chip.js';
+import { formDrawer } from './preview-drawer.js';
+import { field, optsFrom } from './form-field.js';
+import { DURATION_OPTS } from '../fixtures/form-options.js';
+import { COURSES } from '../fixtures/courses.js';
+import { TEACHERS } from '../fixtures/teachers.js';
+
+/* Spec 032 (FC-01/02/03) — the ONE shared "New session" form drawer. Baked once
+ * per host page (sessions.html + dashboard.html); every New-session trigger
+ * opens it via data-drawer="sess-new". Fields are INERT (see the must-omit
+ * contract) — options come from existing fixtures; the only final is the
+ * formDrawer backendRequired Save gate. */
+export function sessionFormDrawer() {
+  const courseOpts = COURSES.rows.map((c, i) => ({ value: c.id, labelKey: c.titleKey, selected: i === 0 }));
+  const teacherOpts = TEACHERS.rows.map((x, i) => ({ value: x.id, labelKey: x.nameKey, selected: i === 0 }));
+  const fields = [
+    field({ labelKey: 'sess.form.course', name: 'sessNew-course', type: 'select', options: courseOpts, full: true }),
+    field({ labelKey: 'sess.form.teacher', name: 'sessNew-teacher', type: 'select', options: teacherOpts }),
+    field({ labelKey: 'sess.form.date', name: 'sessNew-date', placeholderKey: 'sess.form.datePh' }),
+    field({ labelKey: 'sess.form.time', name: 'sessNew-time', placeholderKey: 'sess.form.timePh' }),
+    field({ labelKey: 'sess.form.duration', name: 'sessNew-duration', type: 'select', options: DURATION_OPTS }),
+    field({ labelKey: 'sess.form.fromCredit', name: 'sessNew-fromCredit', type: 'select', options: optsFrom(['package', 'extra', 'trial'], 'sess.form.credit') }),
+    field({ labelKey: 'sess.fStatus', name: 'sessNew-status', type: 'select', options: optsFrom(['upcoming', 'live', 'completed', 'cancelled'], 'status') }),
+  ].join('');
+  return formDrawer('sess-new', { titleKey: 'sess.newSession', headIcon: 'plus', fields });
+}
 
 /* Spec 026 (DU-20) — the dashboard "Today's Sessions" toolbar is a COMPACT overview, not the
  * full sessions manager. The former Apply/Clear/select controls only imitated a filter (no
- * data-filter-form wiring) → removed. New session opens an honest backendRequired modal; the
- * real, working filter lives on sessions.html, reached by a real "view all" link. */
+ * data-filter-form wiring) → removed. New session opens the shared sess-new form drawer
+ * (Spec 032 FC-02: fields + backendRequired Save gate); the real, working filter lives on
+ * sessions.html, reached by a real "view all" link. */
 function toolbar() {
   const sessHref = getLang() === 'en' ? 'sessions.en.html' : 'sessions.html';
   return `<div class="flex flex-wrap items-center gap-2.5 mb-4">
     <div class="flex items-center gap-2.5">
-      ${button({ labelKey: 'sessions.newSession', variant: 'primary', icon: 'plus', size: 'sm', attrs: 'data-modal-trigger data-modal-title-key="sessions.newSession" data-modal-note-key="common.backendRequiredNote"' })}
+      ${button({ labelKey: 'sessions.newSession', variant: 'primary', icon: 'plus', size: 'sm', attrs: 'data-drawer="sess-new"' })}
     </div>
     <div class="flex flex-wrap items-center gap-2.5 ms-auto">
       <a href="${esc(sessHref)}" class="btn btn-secondary btn-sm">${icon('sessions', 'ico ico-sm')}<span>${t('dash.viewAllSessions')}</span></a>

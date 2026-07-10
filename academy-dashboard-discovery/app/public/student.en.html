@@ -464,7 +464,7 @@
           <div class="pb-meta"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span><a href="family.en.html" class="chip tone-neutral" style="text-decoration:none"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>Abu Salman Al-Ghamdi</span></a><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg><span>Level 2</span></span><span class="flex items-center gap-2" style="flex-basis:100%;max-width:280px;margin-top:4px"><span style="flex:1"><div class="progress-track" role="img" aria-hidden="true"><div class="progress-fill" style="width:78%;background:var(--c-success)"></div></div></span><span class="text-[12px] font-bold tabular" style="color:var(--c-ink-2)">78%</span></span></div>
         </div>
       </div>
-      <div class="pb-actions"><button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="Messaging will be available once the server is connected."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg><span>Message</span></button><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="sp.act.edit" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>Edit</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="Suspend this student?" data-confirm-msg="This will be available once the server is connected — nothing changes yet." data-confirm-cta="Suspend" data-confirm-toast="Suspending the student will be available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>Suspend student</span></button></div>
+      <div class="pb-actions"><button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="Messaging will be available once the server is connected."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg><span>Message</span></button><button type="button" class="btn btn-secondary btn-sm"   data-drawer="stu-edit" data-modal-trigger data-modal-title-key="sp.act.edit"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>Edit</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="Suspend this student?" data-confirm-msg="This will be available once the server is connected — nothing changes yet." data-confirm-cta="Suspend" data-confirm-toast="Suspending the student will be available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>Suspend student</span></button></div>
     </div>
     <div class="pb-kpis"><div class="stat-mini"><div class="v">Level 2</div><div class="l">Level</div></div><div class="stat-mini"><div class="v">3</div><div class="l">Courses</div></div><div class="stat-mini"><div class="v">2</div><div class="l">Certificates</div></div><div class="stat-mini"><div class="v">3</div><div class="l">Sessions this week</div></div></div>
   </section><div class="tabs-wrap" data-tabs="student">
@@ -715,7 +715,7 @@
     <section class="tabpanel" role="tabpanel" id="tabpanel-student-notes" data-tabpanel="notes" aria-labelledby="tab-student-notes" hidden><div class="info-card">
     <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Student notes</span></div>
     <p class="narrative">A consistent, high-performing student showing steady progress.</p>
-    <div class="mt-4"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="sp.act.addNote" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>Add note</span></button></div>
+    <div class="mt-4"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="stu-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>Add note</span></button></div>
   </div></section>
   </div><template data-preview="b14">
     <div class="sheet-card">
@@ -788,6 +788,40 @@
       <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">Pick the new group — moved once the server is connected.</p>
     <div class="sheet-row"><span class="k">Math Group A</span><span class="v">Level 2</span></div><div class="sheet-row"><span class="k">Programming Group B</span><span class="v">Level 1</span></div><div class="sheet-row"><span class="k">Arabic Group A</span><span class="v">Level 1</span></div><button type="button" class="btn btn-secondary btn-sm w-full" style="margin-top:8px" data-disabled-reason data-reason-key="sp.move.crossReason" aria-disabled="true" title="Transferring between families needs the backend (out of current scope)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>Move to another family</span></button>
     <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="sp.move.reason" aria-disabled="true" title="Moving will be available once the server is connected — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Move</span></button></div>
+    </div>
+  </template><template data-preview="stu-edit">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Edit student details</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-stuEdit-name">Student name</label><input id="f-stuEdit-name" name="stuEdit-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-nameAr">Student name (Arabic)</label><input id="f-stuEdit-nameAr" name="stuEdit-nameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-language">Learning language</label><span class="select-wrap"><select id="f-stuEdit-language" name="stuEdit-language" class="select-input">
+      <option value="ar" selected>العربية</option><option value="en">English</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuEdit-gender">Gender</label><span class="select-wrap"><select id="f-stuEdit-gender" name="stuEdit-gender" class="select-input">
+      <option value="male" selected>Male</option><option value="female">Female</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuEdit-birthDate">Date of birth</label><input id="f-stuEdit-birthDate" name="stuEdit-birthDate" type="text" class="input" placeholder="e.g. 2012-03-08" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-family">Family</label><span class="select-wrap"><select id="f-stuEdit-family" name="stuEdit-family" class="select-input">
+      <option value="fam1" selected>Abu Salman Al-Ghamdi</option><option value="fam2">Umm Joury Al-Qahtani</option><option value="fam3">Abu Yasser Al-Dosari</option><option value="fam4">Umm Lama Al-Otaibi</option><option value="fam5">Abu Faisal Al-Shehri</option><option value="fam6">Abu Abdulrahman Bawazir</option><option value="fam7">Umm Sara Al-Mutairi</option><option value="fam8">Abu Khalid Al-Subaie</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-stuEdit-teacherNote">Note for the teacher</label><textarea id="f-stuEdit-teacherNote" name="stuEdit-teacherNote" class="input" rows="3" placeholder=""></textarea></div><div class="field field-full"><label class="field-label" for="f-stuEdit-adminNote">Admin note</label><textarea id="f-stuEdit-adminNote" name="stuEdit-adminNote" class="input" rows="3" placeholder=""></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></div>
+    </div>
+  </template><template data-preview="stu-note">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Add note</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-stuNote-note">Note text</label><textarea id="f-stuNote-note" name="stuNote-note" class="input" rows="3" placeholder="Write a note about the student…"></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
+    </div></div>
     </div>
   </template></div>
       </main>

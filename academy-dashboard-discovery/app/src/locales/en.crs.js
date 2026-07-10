@@ -41,6 +41,13 @@ export default {
       export: 'Exporting the summary needs the backend (out of current scope).',
     },
     enroll: { title: 'Add students to the course', hint: 'Pick students from the list — enrolled once the server is connected.', cta: 'Add students' },
+    /* Spec 032 — form-drawer field labels (crs-add / crs-edit; display-only fields, saving needs the server) */
+    form: {
+      material: 'Subject', teacher: 'Teacher',
+      startDate: 'Start date', startDatePh: 'e.g. 2026-09-01',
+      scheduleDay: 'Weekly session day', scheduleTime: 'Session time', scheduleTimePh: 'e.g. 16:30', scheduleDuration: 'Session duration',
+      delOld: 'Old sessions on edit', delOldNo: 'Keep old sessions', delOldYes: 'Delete old sessions',
+    },
     studentTitle: 'Course & group', familyTitle: "Children's courses & groups",
     familyHint: '{c} active courses · {g} groups', familyNone: 'No active courses yet',
   },
@@ -73,6 +80,12 @@ export default {
       move: 'Moving students between groups needs the backend (out of current scope).',
     },
     assign: { title: 'Add students to the group', hint: 'Pick students — assigned once the server is connected.', cta: 'Add students' },
+    /* Spec 032 — form-drawer field labels (grp-add / grp-edit; display-only fields, saving needs the server) */
+    form: {
+      name: 'Group name', namePh: 'e.g. Math Group B',
+      course: 'Course', students: 'Candidate students',
+      suggestedHours: 'Suggested hours', suggestedHoursPh: 'e.g. 24',
+    },
   },
 
   data: {

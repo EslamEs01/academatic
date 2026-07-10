@@ -1,8 +1,10 @@
 /* Spec 031 (US3/US4) — Certificates. Two tabs: Templates (list + a STATIC designer preview)
  * and Requests (queue). The designer is a display-only preview (CSS-positioned label spans over
  * an authored band) — no plotting element, no drag-reposition, no serialized layout or server
- * render commands, no upload. Approve/Reject/Generate/Preview/Download/Send/Create/Upload are
+ * render commands; upload stays a gate. Approve/Reject/Generate/Preview/Download/Send/Upload are
  * backendRequired gates — no real document, no opening a file, no send, no status mutation.
+ * Spec 032 (FC-33/34/35): template Create/Edit share ONE form drawer and Issue-certificate is a
+ * form drawer — INERT fields, each ending at ONE backendRequired final.
  * Reuses the closed data-* hook set. */
 import { t, num } from '../i18n.js';
 import { icon } from '../icons.js';
@@ -10,13 +12,14 @@ import { esc, facetAttrs } from '../dom.js';
 import { chip, button, medallion } from '../components/ui.js';
 import { tabs } from '../components/tabs.js';
 import { pageHeader } from '../components/page-header.js';
-import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from '../components/preview-drawer.js';
+import { field } from '../components/form-field.js';
 import { CERT_TEMPLATES, CERT_DESIGNER, CERT_STATUS, CERT_REQUESTS, CERT_ISSUED } from '../fixtures/certificates.js';
 
 const gate = (labelKey, ic, reasonKey, variant = 'secondary') =>
   `<button type="button" class="btn btn-${variant} btn-sm" data-disabled-reason data-reason-key="${esc(reasonKey)}" aria-disabled="true" title="${esc(t(reasonKey))}">${icon(ic, 'ico ico-sm')}<span>${t(labelKey)}</span></button>`;
-const modalBtn = (labelKey, ic, titleKey, variant = 'secondary') =>
-  button({ labelKey, variant, size: 'sm', icon: ic, attrs: `data-modal-trigger data-modal-title-key="${esc(titleKey)}" data-modal-note-key="common.backendRequiredNote"` });
+const drawerBtn = (labelKey, ic, id, variant = 'secondary') =>
+  button({ labelKey, variant, size: 'sm', icon: ic, attrs: `data-drawer="${esc(id)}"` });
 const confirmDel = (labelKey, k) =>
   `<button type="button" class="btn btn-ghost btn-sm" data-confirm data-confirm-danger data-confirm-title="${esc(t(k + 'Title'))}" data-confirm-msg="${esc(t(k + 'Msg'))}" data-confirm-cta="${esc(t(k + 'Cta'))}" data-confirm-toast="${esc(t(k + 'Toast'))}">${icon('x-circle', 'ico ico-sm')}<span>${t(labelKey)}</span></button>`;
 
@@ -33,12 +36,26 @@ function templateCard(tpl) {
       </div>
     </div>
     <div class="flex flex-wrap gap-1.5">
-      ${modalBtn('adm.common.edit', 'edit', 'adm.cert.tplEditTitle', 'ghost')}
+      ${drawerBtn('adm.common.edit', 'edit', 'cert-tpl', 'ghost')}
       ${confirmDel('adm.cert.tplDel', 'adm.cert.tplDel')}
     </div>
   </div>`;
 }
-/* STATIC designer preview — positioned label spans over a band. No canvas, no drag, no upload. */
+/* Spec 032 (FC-33/34) — ONE shared template form drawer (Create + Edit open it):
+ * a real name field + the same STATIC designer preview (CSS-positioned spans —
+ * no plotting element, no drag) + the background-image affordance as an inline
+ * gate (upload stays a gate). Ends at the ONE formDrawer backendRequired final. */
+function certTplDrawer() {
+  const spans = CERT_DESIGNER.fields.map((f) =>
+    `<span class="cert-field" style="left:${f.x}%;top:${f.y}%">${t(f.labelKey)}</span>`).join('');
+  const fields = field({ labelKey: 'adm.form.name', name: 'certTpl-name', valueKey: 'adm.cert.tpl.completion', full: true })
+    + `<div class="field field-full"><span class="field-label">${t('adm.cert.designer.title')}</span>
+        <div class="cert-stage" style="height:150px" role="img" aria-label="${esc(t('adm.cert.designer.title'))}">${spans}</div>
+        <p class="text-[12px] mt-1.5" style="color:var(--c-ink-3)">${t('adm.cert.designer.note')}</p></div>`
+    + `<div class="field field-full">${gate('adm.cert.tplBg', 'materials', 'adm.cert.tplBgReason')}</div>`;
+  return formDrawer('cert-tpl', { titleKey: 'adm.cert.tplFormTitle', headIcon: 'certificates', tone: 'violet', fields });
+}
+/* STATIC designer preview — positioned label spans over a band. No plotting element, no drag; upload stays a gate. */
 function designerPreview() {
   const fields = CERT_DESIGNER.fields.map((f) =>
     `<span class="cert-field" style="left:${f.x}%;top:${f.y}%">${t(f.labelKey)}</span>`).join('');
@@ -50,10 +67,11 @@ function designerPreview() {
   </section>`;
 }
 function templatesPanel() {
-  const add = modalBtn('adm.cert.tplCreate', 'plus', 'adm.cert.tplCreateTitle', 'primary');
+  const add = drawerBtn('adm.cert.tplCreate', 'plus', 'cert-tpl', 'primary');
   return `<div class="flex items-center flex-wrap gap-2 mb-3">${add}</div>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">${CERT_TEMPLATES.map(templateCard).join('')}</div>
-    ${designerPreview()}`;
+    ${designerPreview()}
+    ${certTplDrawer()}`;
 }
 
 /* ---------------- Requests tab ---------------- */
@@ -91,9 +109,25 @@ function requestRow(r) {
     </div></td>
   </tr>`;
 }
+/* Spec 032 (FC-35) — the Issue-certificate form drawer (replaces the bare gate):
+ * fixture-derived selects + date/message controls + the document-preview
+ * affordance as an inline gate. The Issue final = the formDrawer gate. */
+function certCreateDrawer() {
+  const studentOpts = CERT_REQUESTS.map((r, i) => ({ value: r.id, labelKey: r.studentKey, selected: i === 0 }));
+  const courseOpts = [...new Set(CERT_REQUESTS.map((r) => r.courseKey))].map((k, i) => ({ value: k.split('.').pop(), labelKey: k, selected: i === 0 }));
+  const tplOpts = CERT_TEMPLATES.map((tp, i) => ({ value: tp.id, labelKey: tp.nameKey, selected: i === 0 }));
+  const fields = [
+    field({ labelKey: 'adm.cert.colStudent', name: 'certCreate-student', type: 'select', options: studentOpts }),
+    field({ labelKey: 'adm.cert.colCourse', name: 'certCreate-course', type: 'select', options: courseOpts }),
+    field({ labelKey: 'adm.cert.createTplLabel', name: 'certCreate-template', type: 'select', options: tplOpts }),
+    field({ labelKey: 'adm.cert.colDate', name: 'certCreate-date', placeholderKey: 'adm.form.datePh' }),
+    field({ labelKey: 'adm.cert.createMsg', name: 'certCreate-message', type: 'textarea', placeholderKey: 'adm.cert.createMsgPh', full: true }),
+  ].join('') + `<div class="field field-full">${gate('adm.cert.preview', 'search', 'adm.cert.previewReason')}</div>`;
+  return formDrawer('cert-create', { titleKey: 'adm.cert.create', headIcon: 'certificates', fields, ctaKey: 'adm.cert.create', reasonKey: 'adm.cert.createReason' });
+}
 function requestsPanel() {
   const toolbar = `<div class="flex items-center flex-wrap gap-2 mb-3">
-    ${gate('adm.cert.create', 'plus', 'adm.cert.createReason', 'primary')}
+    ${drawerBtn('adm.cert.create', 'plus', 'cert-create', 'primary')}
     ${gate('adm.cert.uploadCert', 'download', 'adm.cert.uploadCertReason')}
   </div>`;
   const table = `<section class="card overflow-hidden"><div class="overflow-x-auto"><table class="tbl">
@@ -104,7 +138,7 @@ function requestsPanel() {
     </tr></thead>
     <tbody>${CERT_REQUESTS.map(requestRow).join('')}</tbody>
   </table></div></section>`;
-  const drawers = CERT_REQUESTS.map(requestDrawer).join('');
+  const drawers = CERT_REQUESTS.map(requestDrawer).join('') + certCreateDrawer();
   return `${toolbar}${table}${drawers}`;
 }
 

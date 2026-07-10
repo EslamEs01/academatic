@@ -462,7 +462,7 @@
         <h1 class="page-title">Students</h1>
         <p class="page-sub">Student directory — search, filter, sort, and preview a profile.</p>
       </div>
-      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-modal-trigger data-modal-title-key="stu.add" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New student</span></button></div>
+      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary"   data-drawer="stu-add"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New student</span></button></div>
     </div>
     <div class="mb-6"><div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
     <div class="card p-4 flex items-center gap-3">
@@ -972,6 +972,54 @@
     <div class="sheet-row"><span class="k">Progress</span><span class="v"><span class="tabular">52%</span></span></div>
     <div class="sheet-row"><span class="k">Enrolled courses</span><span class="v"><span class="tabular">2</span></span></div>
     <a href="student.en.html" class="btn btn-primary btn-sm w-full" style="margin-top:14px"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg><span>View academic profile</span></a></div>
+    </div>
+  </template>
+    <template data-preview="stu-add">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">New student</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-stuAdd-name">Student name</label><input id="f-stuAdd-name" name="stuAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuAdd-nameAr">Student name (Arabic)</label><input id="f-stuAdd-nameAr" name="stuAdd-nameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuAdd-language">Learning language</label><span class="select-wrap"><select id="f-stuAdd-language" name="stuAdd-language" class="select-input">
+      <option value="ar" selected>العربية</option><option value="en">English</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuAdd-gender">Gender</label><span class="select-wrap"><select id="f-stuAdd-gender" name="stuAdd-gender" class="select-input">
+      <option value="male" selected>Male</option><option value="female">Female</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuAdd-birthDate">Date of birth</label><input id="f-stuAdd-birthDate" name="stuAdd-birthDate" type="text" class="input" placeholder="e.g. 2012-03-08" value="" /></div><div class="field"><label class="field-label" for="f-stuAdd-family">Family</label><span class="select-wrap"><select id="f-stuAdd-family" name="stuAdd-family" class="select-input">
+      <option value="fam1" selected>Abu Salman Al-Ghamdi</option><option value="fam2">Umm Joury Al-Qahtani</option><option value="fam3">Abu Yasser Al-Dosari</option><option value="fam4">Umm Lama Al-Otaibi</option><option value="fam5">Abu Faisal Al-Shehri</option><option value="fam6">Abu Abdulrahman Bawazir</option><option value="fam7">Umm Sara Al-Mutairi</option><option value="fam8">Abu Khalid Al-Subaie</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuAdd-trialMaterial">Trial session subject</label><span class="select-wrap"><select id="f-stuAdd-trialMaterial" name="stuAdd-trialMaterial" class="select-input">
+      <option value="math" selected>Mathematics</option><option value="arabic">Arabic</option><option value="programming">Programming</option><option value="physics">Physics</option><option value="english">English</option><option value="science">Science</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuAdd-trialTeacher">Trial session teacher</label><span class="select-wrap"><select id="f-stuAdd-trialTeacher" name="stuAdd-trialTeacher" class="select-input">
+      <option value="sara" selected>Sara Al-Qahtani</option><option value="mohammed">Mohammed Al-Dosari</option><option value="layan">Layan Al-Shamri</option><option value="abdullah">Abdullah Al-Harbi</option><option value="reem">Reem Al-Mutairi</option><option value="nora">Noura Al-Zahrani</option><option value="khalid">Khalid Al-Anazi</option><option value="huda">Huda Al-Maliki</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuAdd-trialDuration">Trial session duration</label><span class="select-wrap"><select id="f-stuAdd-trialDuration" name="stuAdd-trialDuration" class="select-input">
+      <option value="m30" selected>30 minutes</option><option value="m45">45 minutes</option><option value="m60">60 minutes</option><option value="m90">90 minutes</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
+    </div></div>
+    </div>
+  </template>
+    <template data-preview="stu-edit">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Edit student details</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-stuEdit-name">Student name</label><input id="f-stuEdit-name" name="stuEdit-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-nameAr">Student name (Arabic)</label><input id="f-stuEdit-nameAr" name="stuEdit-nameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-language">Learning language</label><span class="select-wrap"><select id="f-stuEdit-language" name="stuEdit-language" class="select-input">
+      <option value="ar" selected>العربية</option><option value="en">English</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuEdit-gender">Gender</label><span class="select-wrap"><select id="f-stuEdit-gender" name="stuEdit-gender" class="select-input">
+      <option value="male" selected>Male</option><option value="female">Female</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuEdit-birthDate">Date of birth</label><input id="f-stuEdit-birthDate" name="stuEdit-birthDate" type="text" class="input" placeholder="e.g. 2012-03-08" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-family">Family</label><span class="select-wrap"><select id="f-stuEdit-family" name="stuEdit-family" class="select-input">
+      <option value="fam1" selected>Abu Salman Al-Ghamdi</option><option value="fam2">Umm Joury Al-Qahtani</option><option value="fam3">Abu Yasser Al-Dosari</option><option value="fam4">Umm Lama Al-Otaibi</option><option value="fam5">Abu Faisal Al-Shehri</option><option value="fam6">Abu Abdulrahman Bawazir</option><option value="fam7">Umm Sara Al-Mutairi</option><option value="fam8">Abu Khalid Al-Subaie</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-stuEdit-teacherNote">Note for the teacher</label><textarea id="f-stuEdit-teacherNote" name="stuEdit-teacherNote" class="input" rows="3" placeholder=""></textarea></div><div class="field field-full"><label class="field-label" for="f-stuEdit-adminNote">Admin note</label><textarea id="f-stuEdit-adminNote" name="stuEdit-adminNote" class="input" rows="3" placeholder=""></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></div>
     </div>
   </template>
   </div>

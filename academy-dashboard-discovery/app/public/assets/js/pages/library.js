@@ -1,8 +1,10 @@
 /* Spec 031 (US2) — Materials & Library. A Content hub with two tabs: Materials (bilingual
- * subject catalog, name-only modals) and Books (media catalog with filters + a category
- * drawer). Display-only; views/downloads are authored count LITERALS. Add-Material/Upload/
- * Download/Publish/Delete are backendRequired gates — NO type=file, NO download link, NO fake
- * publish/delete. Reuses the closed data-* hook set. */
+ * subject catalog) and Books (media catalog with filters + a category drawer). Display-only;
+ * views/downloads are authored count LITERALS. Download/Publish/Delete are backendRequired
+ * gates — no real upload control (upload stays a gate), NO download link, NO fake
+ * publish/delete. Spec 032 (FC-36/37/38): Add/Edit subject + Add library item are form
+ * drawers (INERT fields + ONE backendRequired final each); the categories drawer gains a
+ * real inline create form. Reuses the closed data-* hook set. */
 import { t, num } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc, facetAttrs } from '../dom.js';
@@ -10,15 +12,17 @@ import { chip, button } from '../components/ui.js';
 import { tabs } from '../components/tabs.js';
 import { pageHeader } from '../components/page-header.js';
 import { filterBar } from '../components/filter-bar.js';
-import { previewTemplate } from '../components/preview-drawer.js';
+import { previewTemplate, formDrawer } from '../components/preview-drawer.js';
+import { field } from '../components/form-field.js';
+import { FORM_STATUS_OPTS } from '../fixtures/form-options.js';
 import { SUBJECTS, BOOKS, BOOK_TYPES, BOOK_STATUS, BOOK_CATEGORIES } from '../fixtures/content-library.js';
 
 const gate = (labelKey, ic, reasonKey) =>
   `<button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="${esc(reasonKey)}" aria-disabled="true" title="${esc(t(reasonKey))}">${icon(ic, 'ico ico-sm')}<span>${t(labelKey)}</span></button>`;
 const ghostGate = (labelKey, ic, reasonKey) =>
   `<button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="${esc(reasonKey)}" aria-disabled="true" title="${esc(t(reasonKey))}">${icon(ic, 'ico ico-sm')}<span>${t(labelKey)}</span></button>`;
-const modalBtn = (labelKey, ic, titleKey, variant = 'secondary') =>
-  button({ labelKey, variant, size: 'sm', icon: ic, attrs: `data-modal-trigger data-modal-title-key="${esc(titleKey)}" data-modal-note-key="common.backendRequiredNote"` });
+const drawerBtn = (labelKey, ic, id, variant = 'secondary') =>
+  button({ labelKey, variant, size: 'sm', icon: ic, attrs: `data-drawer="${esc(id)}"` });
 const confirmBtn = (labelKey, ic, k) =>
   `<button type="button" class="btn btn-ghost btn-sm" data-confirm data-confirm-danger data-confirm-title="${esc(t(k + 'Title'))}" data-confirm-msg="${esc(t(k + 'Msg'))}" data-confirm-cta="${esc(t(k + 'Cta'))}" data-confirm-toast="${esc(t(k + 'Toast'))}">${icon(ic, 'ico ico-sm')}<span>${t(labelKey)}</span></button>`;
 
@@ -31,18 +35,27 @@ function subjectRow(s) {
     <td><span class="font-bold text-ink">${t(s.nameKey)}</span></td>
     <td><span style="color:var(--c-ink-2)">${t(s.nameArKey)}</span></td>
     <td class="text-end"><div class="flex flex-wrap gap-1.5 justify-end">
-      ${modalBtn('adm.common.edit', 'edit', 'adm.lib.matEditTitle', 'ghost')}
+      ${drawerBtn('adm.common.edit', 'edit', 'mat-edit', 'ghost')}
       ${confirmBtn('adm.lib.matDel', 'x-circle', 'adm.lib.matDel')}
     </div></td>
   </tr>`;
 }
+/* Spec 032 (FC-36/37) — the subject form drawers: Add (blank) + Edit (prefilled
+ * with the first authored subject). INERT fields + ONE backendRequired final each. */
+function matFormDrawer(id, prefix, titleKey, s) {
+  const fields = field({ labelKey: 'adm.lib.matName', name: `${prefix}-name`, valueKey: s ? s.nameKey : undefined, full: true })
+    + field({ labelKey: 'adm.lib.matNameAr', name: `${prefix}-nameAr`, valueKey: s ? s.nameArKey : undefined, full: true });
+  return formDrawer(id, { titleKey, headIcon: s ? 'edit' : 'plus', tone: 'teal', fields, ctaKey: s ? 'common.save' : 'common.add' });
+}
 function materialsPanel() {
-  const add = modalBtn('adm.lib.matAdd', 'plus', 'adm.lib.matAddTitle', 'primary');
+  const add = drawerBtn('adm.lib.matAdd', 'plus', 'mat-add', 'primary');
   return `<div class="flex items-center flex-wrap gap-2 mb-3">${add}</div>
     <section class="card overflow-hidden"><div class="overflow-x-auto"><table class="tbl">
       <thead><tr><th>${t('adm.lib.matName')}</th><th>${t('adm.lib.matNameAr')}</th><th class="text-end"><span class="sr-only">${t('adm.common.edit')}</span></th></tr></thead>
       <tbody>${SUBJECTS.map(subjectRow).join('')}</tbody>
-    </table></div></section>`;
+    </table></div></section>
+    ${matFormDrawer('mat-add', 'matAdd', 'adm.lib.matAddTitle')}
+    ${matFormDrawer('mat-edit', 'matEdit', 'adm.lib.matEditTitle', SUBJECTS[0])}`;
 }
 
 /* ---------------- Books tab (media catalog) ---------------- */
@@ -62,16 +75,42 @@ function bookRow(b) {
     </div></td>
   </tr>`;
 }
+/* Spec 032 (FC-38, lib-cats part) — the categories drawer keeps its read-only
+ * list and gains a REAL inline create form (name + status) whose final is the
+ * ONE backendRequired btn-primary gate in this template. */
 function categoryDrawer() {
   const rows = BOOK_CATEGORIES.map((c) => `<div class="sheet-row"><span class="k">${t(c.nameKey)}</span><span class="v tabular">${num(c.count)}</span></div>`).join('');
-  const body = `<div class="sheet-rows">${rows}</div><div class="mt-4">${modalBtn('adm.lib.catAdd', 'plus', 'adm.lib.catAddTitle')}</div>`;
+  const form = `<div class="mt-4">
+    <div class="font-bold text-[12.5px] text-ink mb-1.5">${t('adm.lib.catAdd')}</div>
+    <div class="wiz-grid">
+      ${field({ labelKey: 'adm.lib.catName', name: 'libCats-name', full: true })}
+      ${field({ labelKey: 'adm.lib.catStatus', name: 'libCats-status', type: 'select', options: FORM_STATUS_OPTS, full: true })}
+    </div>
+    <div class="flex items-center justify-end mt-3">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="${esc(t('common.backendRequiredNote'))}">${icon('plus', 'ico ico-sm')}<span>${t('adm.lib.catAdd')}</span></button>
+    </div>
+  </div>`;
+  const body = `<div class="sheet-rows">${rows}</div>${form}`;
   return previewTemplate('lib-cats', { titleKey: 'adm.lib.catDrawerTitle', headIcon: 'filter', tone: 'teal', bodyHTML: body });
+}
+/* Spec 032 (FC-38) — the Add-library-item form drawer: title + fixture-derived
+ * type/category selects; the item source + thumbnail affordances stay inline
+ * gates (upload stays a gate). Ends at the ONE formDrawer backendRequired final. */
+function libItemDrawer() {
+  const typeOpts = Object.keys(BOOK_TYPES).map((k, i) => ({ value: k, labelKey: BOOK_TYPES[k].labelKey, selected: i === 0 }));
+  const catOpts = BOOK_CATEGORIES.map((c, i) => ({ value: c.id, labelKey: c.nameKey, selected: i === 0 }));
+  const fields = [
+    field({ labelKey: 'adm.lib.colName', name: 'libItem-name', full: true }),
+    field({ labelKey: 'adm.lib.colType', name: 'libItem-type', type: 'select', options: typeOpts }),
+    field({ labelKey: 'adm.lib.colCategory', name: 'libItem-category', type: 'select', options: catOpts }),
+  ].join('') + `<div class="field field-full"><div class="flex flex-wrap gap-2">${gate('adm.lib.upload', 'file-text', 'adm.lib.uploadReason')}${gate('adm.lib.thumb', 'award', 'adm.lib.thumbReason')}</div></div>`;
+  return formDrawer('lib-item', { titleKey: 'adm.lib.itemAddTitle', headIcon: 'curricula', fields, ctaKey: 'common.add' });
 }
 function booksPanel() {
   const typeOpts = [{ value: '', labelKey: 'adm.lib.allTypes' }, ...Object.keys(BOOK_TYPES).map((k) => ({ value: k, labelKey: BOOK_TYPES[k].labelKey }))];
   const catOpts = [{ value: '', labelKey: 'adm.lib.allCats' }, ...BOOK_CATEGORIES.map((c) => ({ value: c.nameKey, labelKey: c.nameKey }))];
   const toolbar = `<div class="flex items-center flex-wrap gap-2 mb-3">
-    ${gate('adm.lib.addMaterial', 'plus', 'adm.lib.addMaterialReason')}
+    ${drawerBtn('adm.lib.addMaterial', 'plus', 'lib-item', 'primary')}
     ${button({ labelKey: 'adm.lib.categories', variant: 'secondary', size: 'sm', icon: 'filter', attrs: 'data-drawer="lib-cats"' })}
   </div>`;
   const filters = filterBar({
@@ -89,7 +128,7 @@ function booksPanel() {
     </tr></thead>
     <tbody id="books-rows">${BOOKS.map(bookRow).join('')}</tbody>
   </table></div></section>`;
-  return `${toolbar}${filters}${table}${categoryDrawer()}`;
+  return `${toolbar}${filters}${table}${categoryDrawer()}${libItemDrawer()}`;
 }
 
 export function renderLibrary() {

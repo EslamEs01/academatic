@@ -149,6 +149,8 @@ export default {
       status: { active: 'نشط', inactive: 'غير نشط' },
       add: 'إضافة حساب بنكي',
       addTitle: 'إضافة حساب بنكي',
+      /* Spec 032 (FC-29) — add-bank drawer: bank name only */
+      form: { name: 'اسم البنك', namePh: 'مثال: مصرف الراجحي' },
       import: 'استيراد كشف حساب',
       importReason: 'استيراد كشوف الحسابات يتطلب ربط البنك الفعلي — خارج النطاق الحالي.',
       reconcile: 'مطابقة',

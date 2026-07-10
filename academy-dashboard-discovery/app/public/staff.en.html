@@ -462,7 +462,7 @@
         <h1 class="page-title">Users & Staff</h1>
         <p class="page-sub">Staff directory and permissions — display only; every action needs the server.</p>
       </div>
-      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary btn-sm"   data-modal-trigger data-modal-title-key="adm.staff.addTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>Add member</span></button></div>
+      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-primary btn-sm"   data-drawer="staff-add" data-modal-trigger data-modal-title-key="adm.staff.addTitle"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>Add member</span></button></div>
     </div>
     
     <form class="filterbar" data-filter-form data-target="#staff-grid">
@@ -718,6 +718,60 @@
         <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
       </div>
       <div class="sheet-body"><div class="grid gap-1.5"><div class="perm-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>created — Course · Today</span></div><div class="perm-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>updated — Student · Today</span></div><div class="perm-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>signed in — Login · Yesterday</span></div><div class="perm-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>updated — Class · Yesterday</span></div></div></div>
+    </div>
+  </template><template data-preview="staff-add">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Add staff member</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-staffAdd-name">Name</label><input id="f-staffAdd-name" name="staffAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-staffAdd-username">Username</label><input id="f-staffAdd-username" name="staffAdd-username" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-staffAdd-email">Email</label><input id="f-staffAdd-email" name="staffAdd-email" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-staffAdd-phone">Phone</label><input id="f-staffAdd-phone" name="staffAdd-phone" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-staffAdd-role">Role</label><span class="select-wrap"><select id="f-staffAdd-role" name="staffAdd-role" class="select-input">
+      <option value="manager" selected>Manager</option><option value="accountant">Accountant</option><option value="supervisor">Supervisor</option><option value="support">Support</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-staffAdd-status">Status</label><span class="select-wrap"><select id="f-staffAdd-status" name="staffAdd-status" class="select-input">
+      <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
+    </div></div>
+    </div>
+  </template><template data-preview="staff-edit">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Edit member</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-staffEdit-name">Name</label><input id="f-staffEdit-name" name="staffEdit-name" type="text" class="input" placeholder="" value="Rana Mansour" /></div><div class="field"><label class="field-label" for="f-staffEdit-username">Username</label><input id="f-staffEdit-username" name="staffEdit-username" type="text" class="input" placeholder="" value="r.mansour" /></div><div class="field"><label class="field-label" for="f-staffEdit-email">Email</label><input id="f-staffEdit-email" name="staffEdit-email" type="text" class="input" placeholder="" value="r.mansour@demo.academy" /></div><div class="field"><label class="field-label" for="f-staffEdit-phone">Phone</label><input id="f-staffEdit-phone" name="staffEdit-phone" type="text" class="input" placeholder="" value="05xx-xx-1180" /></div><div class="field"><label class="field-label" for="f-staffEdit-role">Role</label><span class="select-wrap"><select id="f-staffEdit-role" name="staffEdit-role" class="select-input">
+      <option value="manager" selected>Manager</option><option value="accountant">Accountant</option><option value="supervisor">Supervisor</option><option value="support">Support</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-staffEdit-status">Status</label><span class="select-wrap"><select id="f-staffEdit-status" name="staffEdit-status" class="select-input">
+      <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></div>
+    </div>
+  </template><template data-preview="staff-dup">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-violet medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Duplicate with permissions</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-staffDup-name">Name</label><input id="f-staffDup-name" name="staffDup-name" type="text" class="input" placeholder="" value="Rana Mansour" /></div><div class="field"><label class="field-label" for="f-staffDup-username">Username</label><input id="f-staffDup-username" name="staffDup-username" type="text" class="input" placeholder="" value="r.mansour" /></div><div class="field"><label class="field-label" for="f-staffDup-email">Email</label><input id="f-staffDup-email" name="staffDup-email" type="text" class="input" placeholder="" value="r.mansour@demo.academy" /></div><div class="field"><label class="field-label" for="f-staffDup-phone">Phone</label><input id="f-staffDup-phone" name="staffDup-phone" type="text" class="input" placeholder="" value="05xx-xx-1180" /></div><div class="field"><label class="field-label" for="f-staffDup-role">Role</label><span class="select-wrap"><select id="f-staffDup-role" name="staffDup-role" class="select-input">
+      <option value="manager" selected>Manager</option><option value="accountant">Accountant</option><option value="supervisor">Supervisor</option><option value="support">Support</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-staffDup-status">Status</label><span class="select-wrap"><select id="f-staffDup-status" name="staffDup-status" class="select-input">
+      <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></div>
     </div>
   </template>
   </div>
