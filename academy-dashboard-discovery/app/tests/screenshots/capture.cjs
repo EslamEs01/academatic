@@ -310,6 +310,31 @@ const MATRIX = [
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', openDrawer: 'head-add', variant: 'sp032-head-add' },
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'mobile', view: 'general', openDrawer: 'head-add', variant: 'sp032-head-add-mobile' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-assign-course', variant: 'sp032-picker-proof' },
+  // Spec 034 — Control Center pages: inbox/board/compose/converter + open forms + mobile/dark/EN
+  { page: 'messages', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-messages' },
+  { page: 'messages', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-messages-en' },
+  { page: 'messages', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-messages-dark' },
+  { page: 'messages', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'msg-group', variant: 'sp034-messages-group' },
+  { page: 'messages', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-messages-mobile' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-leads' },
+  { page: 'leads', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-leads-en' },
+  { page: 'leads', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-leads-dark' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'lead-new', variant: 'sp034-leads-create' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'lead-l1', variant: 'sp034-leads-detail' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-leads-mobile' },
+  { page: 'tasks', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-tasks' },
+  { page: 'tasks', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-tasks-en' },
+  { page: 'tasks', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-tasks-dark' },
+  { page: 'tasks', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'task-new', variant: 'sp034-tasks-create' },
+  { page: 'tasks', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-tasks-mobile' },
+  { page: 'announcements', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-announcements' },
+  { page: 'announcements', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-announcements-en' },
+  { page: 'announcements', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-announcements-dark' },
+  { page: 'announcements', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-announcements-mobile' },
+  { page: 'time-converter', lang: 'ar', theme: 'light', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter' },
+  { page: 'time-converter', lang: 'en', theme: 'light', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter-en' },
+  { page: 'time-converter', lang: 'ar', theme: 'dark', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter-dark' },
+  { page: 'time-converter', lang: 'ar', theme: 'light', vp: 'mobile', tcConvert: true, variant: 'sp034-timeconverter-mobile' },
 ];
 
 (async () => {
@@ -378,6 +403,14 @@ const MATRIX = [
     }
     if (s.nestedDrawer) { await page.click(`.drawer.sheet [data-drawer="${s.nestedDrawer}"]`).catch(() => {}); await page.waitForTimeout(460); }
     if (s.disclose) { await page.click('[data-wizard] details > summary').catch(() => {}); await page.waitForTimeout(260); }
+    // Spec 034 — drive the time converter so the screenshot shows a real computed result
+    if (s.tcConvert) {
+      await page.selectOption('[data-tc-source]', 'Africa/Cairo').catch(() => {});
+      await page.selectOption('[data-tc-target]', 'America/New_York').catch(() => {});
+      await page.fill('[data-tc-date]', '2026-06-20').catch(() => {});
+      await page.fill('[data-tc-time]', '15:00').catch(() => {});
+      await page.waitForTimeout(200);
+    }
     if (s.mgmtModal) { await page.click(`[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`).catch(() => {}); await page.waitForTimeout(340); }
     if (s.mgmtConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
 

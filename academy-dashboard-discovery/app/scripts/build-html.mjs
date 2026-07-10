@@ -40,6 +40,12 @@ import { renderScheduledActions } from '../src/js/pages/scheduled-actions.js';
 import { renderStaff } from '../src/js/pages/staff.js';
 import { renderLibrary } from '../src/js/pages/library.js';
 import { renderCertificates } from '../src/js/pages/certificates.js';
+// Spec 034 — Control Center pages (admin shell)
+import { renderMessages } from '../src/js/pages/messages.js';
+import { renderLeads } from '../src/js/pages/leads.js';
+import { renderTasks } from '../src/js/pages/tasks.js';
+import { renderAnnouncements } from '../src/js/pages/announcements.js';
+import { renderTimeConverter } from '../src/js/pages/time-converter.js';
 // Spec 012 — role portal foundation (portal shell, not the admin shell)
 import { portalShellMarkup } from '../src/js/components/portal-shell.js';
 import { renderPortalsHub } from '../src/js/pages/portals.js';
@@ -110,6 +116,12 @@ const PAGES = [
   { base: 'sessions-analysis', activeId: 'sessionsAnalysis', titleKey: 'sa.title', crumbKey: 'nav.sessionsAnalysis', render: renderSessionsAnalysis },
   { base: 'public-holiday', activeId: 'publicHoliday', titleKey: 'ph.title', crumbKey: 'nav.publicHoliday', render: renderPublicHoliday },
   { base: 'scheduled-actions', activeId: 'scheduledActions', titleKey: 'sca.title', crumbKey: 'nav.scheduledActions', render: renderScheduledActions },
+  // Spec 034 — Control Center pages (nav planned→implemented)
+  { base: 'messages', activeId: 'messages', titleKey: 'msg.title', crumbKey: 'nav.messages', render: renderMessages },
+  { base: 'leads', activeId: 'leads', titleKey: 'lead.title', crumbKey: 'nav.leads', render: renderLeads },
+  { base: 'tasks', activeId: 'tasks', titleKey: 'task.title', crumbKey: 'nav.tasks', render: renderTasks },
+  { base: 'announcements', activeId: 'announcements', titleKey: 'ann.title', crumbKey: 'nav.announcements', render: renderAnnouncements },
+  { base: 'time-converter', activeId: 'timeConverter', titleKey: 'tz.title', crumbKey: 'nav.timeConverter', render: renderTimeConverter },
   // Spec 031 — Users&Staff / Content library (materials+books) / Certificates (templates+requests)
   { base: 'staff', activeId: 'staff', titleKey: 'topbar.title.staff', crumbKey: 'topbar.crumb.staff', render: renderStaff },
   { base: 'library', activeId: 'books', titleKey: 'topbar.title.library', crumbKey: 'topbar.crumb.library', render: renderLibrary },

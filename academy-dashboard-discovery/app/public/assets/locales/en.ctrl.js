@@ -1,0 +1,137 @@
+/* Spec 034 — English keys for the Control Center pages (merged into en.js at runtime).
+ * Mirrors ar.ctrl.js exactly. Authored copy; no legacy/private wording; no PII/pay/secret. */
+export default {
+  cc: {
+    common: { backendNote: 'This action becomes available once the server is connected — nothing is saved or sent yet.', filterAll: 'All', search: 'Search…' },
+  },
+
+  /* ---- Messages ---- */
+  msg: {
+    title: 'Messages', sub: 'Inbox with families, teachers, and staff — display only.',
+    inbox: 'Conversations', thread: 'Conversation', empty: { title: 'Pick a conversation', msg: 'Open a conversation from the list to view its messages.' },
+    searchPh: 'Search conversations…', composePh: 'Write a message…',
+    status: { unread: 'Unread', read: 'Read' },
+    role: { family: 'Family', teacher: 'Teacher', staff: 'Staff' },
+    unreadN: '{n} new',
+    filterRole: 'Type', filterStatus: 'Status',
+    act: { send: 'Send', reply: 'Reply', newGroup: 'New group', addMember: 'Add member', attach: 'Attach file' },
+    reason: { backend: 'Sending is available once the messaging server is connected.', attach: 'File attachments are available once the server is connected.' },
+    group: { title: 'Create group', name: 'Group name', bio: 'Bio', staff: 'Staff', teachers: 'Teachers', students: 'Students' },
+    member: { title: 'Add member', staff: 'Staff', teachers: 'Teachers', students: 'Students' },
+    time: { t1: 'Tuesday', t2: 'Monday', t3: 'Today', t4: 'Sunday', t5: 'Today', b1: '9:10 AM', b2: '9:12 AM', b3: '9:20 AM' },
+    c: {
+      c1: { name: 'Al-Noor family', last: 'Thank you, we will confirm the time.', b1: 'Hello, can we reschedule the session?', b2: 'Of course — what time suits you?', b3: 'Wednesday evening if possible.' },
+      c2: { name: 'Ms. Sara Al-Qahtani', last: 'The lesson plan was updated.', b1: 'I sent you the next session summary.', b2: 'Great, thank you.' },
+      c3: { name: 'Al-Huda family', last: 'Awaiting your reply on the times.', b1: 'Hi, we would like to schedule a trial session.' },
+      c4: { name: 'Reception team', last: 'Request received.', b1: 'A new request needs follow-up.', b2: 'Followed up, thanks.' },
+      c5: { name: 'Mr. Mohamed Al-Dosari', last: 'Sent the attendance report.', b1: 'Is this week’s attendance report available?' },
+    },
+  },
+
+  /* ---- Leads / New Requests ---- */
+  lead: {
+    title: 'New Requests', sub: 'Track new enrollment requests and their status — display only.',
+    add: 'New request', searchPh: 'Search a request…',
+    kpi: { new: 'New requests', contacting: 'Contacting', qualified: 'Qualified', trials: 'Trial sessions' },
+    st: { pending: 'Pending', contacting: 'Contacting', noResponse: 'No response', qualified: 'Qualified', scheduled: 'Scheduled', trialTaken: 'Trial taken', trialMissed: 'Trial missed', duplicated: 'Duplicated', teacher: 'From teacher' },
+    src: { website: 'Website', referral: 'Referral', social: 'Social', campaign: 'Campaign' },
+    by: { reception: 'Reception', advisor: 'Advisor' },
+    filterStatus: 'Status', filterSource: 'Source',
+    col: { num: '#', date: 'Date', parent: 'Parent', email: 'Email', phone: 'Phone', status: 'Status', actions: '' },
+    detail: { title: 'Request details', students: 'Students', notesLog: 'Notes log', age: 'Age', noNotes: 'No notes yet.' },
+    note: { title: 'Add note', field: 'Note', ph: 'Write a short note…', save: 'Save note' },
+    statusForm: { title: 'Change status', field: 'New status', save: 'Update status' },
+    create: {
+      title: 'New enrollment request', main: 'Main information', more: 'Additional information',
+      firstName: 'First name', lastName: 'Last name', email: 'Email', phone: 'Phone',
+      friends: 'Number of friends', duration: 'Class duration', hearFrom: 'How did you hear about us?', classes: 'Number of classes',
+      gender: 'Parent gender', age: 'Student age', parentAge: 'Parent age', language: 'Language', timezone: 'Timezone',
+      trialDate: 'Trial date', trialTime: 'Trial time', coupon: 'Coupon code', country: 'Country', course: 'Course name', note: 'Note',
+      save: 'Submit request',
+    },
+    act: { convert: 'Convert to family', assign: 'Assign follow-up', view: 'View' },
+    reason: { backend: 'This action is available once the server is connected — nothing is saved yet.' },
+    empty: { title: 'No requests', msg: 'New requests will appear here once they arrive.' },
+    date: { d1: 'Jun 20', d2: 'Jun 19', d3: 'Jun 18', d4: 'Jun 17', d5: 'Jun 16', d6: 'Jun 15', d7: 'Jun 14', d8: 'Jun 13' },
+    l: {
+      l1: { parent: 'Noor Abdullah', s1: 'Salma', n1: 'Called once, awaiting reply.' },
+      l2: { parent: 'Huda Ibrahim', s1: 'Yousef', s2: 'Layan', n1: 'Interested in two courses.' },
+      l3: { parent: 'Sami Hassan', s1: 'Mazen' },
+      l4: { parent: 'Lina Khaled', s1: 'Tala', n1: 'Trial session booked.' },
+      l5: { parent: 'Omar Fouad', s1: 'Kenan' },
+      l6: { parent: 'Rana Salem', s1: 'Joud' },
+      l7: { parent: 'Yara Nabil', s1: 'Rayan' },
+      l8: { parent: 'Tarek Adel', s1: 'Faris' },
+    },
+  },
+
+  /* ---- Tasks ---- */
+  task: {
+    title: 'Tasks', sub: 'Team task board and status — display only.',
+    add: 'New task', addSection: 'Add section', searchPh: 'Search tasks…',
+    kpi: { total: 'Total', completed: 'Completed', pending: 'Pending', overdue: 'Overdue' },
+    st: { pending: 'Pending', inprogress: 'In progress', completed: 'Completed', overdue: 'Overdue' },
+    pri: { high: 'High', medium: 'Medium', low: 'Low' },
+    asg: { reception: 'Reception', advisor: 'Advisor', supervisor: 'Supervisor', content: 'Content' },
+    avg: { good: 'Good', fair: 'Fair' },
+    due: { d1: 'Jun 25', d2: 'Jun 24', d3: 'Jun 23', d4: 'Jun 22', d5: 'Jun 21', d6: 'Jun 20', d7: 'Jun 26' },
+    sec: { onboarding: 'Onboarding', followup: 'Follow-up', scheduling: 'Scheduling', content: 'Content' },
+    staffTable: { title: 'Team tasks', name: 'Member', total: 'Total', pending: 'Pending', overdue: 'Overdue', completed: 'Completed', average: 'Average' },
+    board: { title: 'Board', assignee: 'Assignee', due: 'Due' },
+    form: { title: 'Task', name: 'Task title', desc: 'Description', assignee: 'Assignee', status: 'Status', priority: 'Priority', due: 'Due date', section: 'Section', save: 'Save task' },
+    sectionForm: { title: 'Add section', name: 'Section name', save: 'Add' },
+    act: { edit: 'Edit', assign: 'Assign', move: 'Move' },
+    reason: { backend: 'This action is available once the server is connected — no task is saved yet.' },
+    empty: { title: 'No tasks', msg: 'Tasks will appear here once added.' },
+    t: {
+      t1: { title: 'Contact the Noor request', desc: 'First call and confirm interest.' },
+      t2: { title: 'Follow up Al-Huda family', desc: 'Send the available times.' },
+      t3: { title: 'Schedule a trial session', desc: 'Coordinate the time with the teacher.' },
+      t4: { title: 'Send the welcome pack', desc: 'Intro pack for the new family.' },
+      t5: { title: 'Update course content', desc: 'Review level-one materials.' },
+      t6: { title: 'Re-contact', desc: 'A request unanswered for two days.' },
+      t7: { title: 'Arrange the week schedule', desc: 'Distribute sessions across rooms.' },
+    },
+  },
+
+  /* ---- Announcements ---- */
+  ann: {
+    title: 'Announcements', sub: 'Academy announcements and their audience — display only.',
+    listTitle: 'Announcements', composeTitle: 'Create announcement', previewTitle: 'Preview',
+    ch: { dashboard: 'Dashboard', whatsapp: 'WhatsApp' },
+    st: { published: 'Published', scheduled: 'Scheduled', draft: 'Draft' },
+    aud: { allTeachers: 'All teachers', allFamilies: 'All families', activeStudents: 'Active students', trialFamilies: 'Trial families' },
+    field: { message: 'Announcement text', messagePh: 'Write the announcement…', channel: 'Channels', chAdvertisement: 'Dashboard advertisement', chWhatsapp: 'WhatsApp', private: 'Send privately', expire: 'Expire date', audienceT: 'Teacher category', audienceS: 'Student category', country: 'Country', hours: 'Timing', language: 'Language', media: 'Attach media' },
+    recipients: { title: 'Recipients', teachers: 'Teachers', students: 'Students' },
+    act: { publish: 'Publish', send: 'Send', schedule: 'Schedule' },
+    reason: { backend: 'Publishing is available once the notification server is connected — nothing is sent yet.', media: 'Media attachments are available once the server is connected.', whatsapp: 'WhatsApp sending is available once the provider is connected.' },
+    empty: { title: 'No announcements', msg: 'Announcements will appear here once created.' },
+    exp: { e1: 'Ends Jun 30', e2: 'Ends Jun 28', e3: 'Starts Jun 22', e4: 'Draft' },
+    a: {
+      a1: { msg: 'Eid Al-Adha break from Jun 15 to Jun 18.' },
+      a2: { msg: 'Weekly teachers meeting on Thursday.' },
+      a3: { msg: 'Reminder: the summer term starts soon.' },
+      a4: { msg: 'Welcome offer for new families.' },
+    },
+    rcp: { t1: 'Ms. Sara Al-Qahtani', t2: 'Mr. Mohamed Al-Dosari', t3: 'Ms. Reem Al-Mutairi', s1: 'Salman', s2: 'Layan', s3: 'Yousef' },
+  },
+
+  /* ---- Time Converter ---- */
+  tz: {
+    title: 'Time Converter', sub: 'Compare times across time zones for any date — a fully local tool.',
+    tab: { zone: 'Time zones', changes: 'Changes' },
+    field: { source: 'From zone', target: 'To zone', date: 'Date', time: 'Time' },
+    out: { title: 'Result', hint: 'Computed locally in your browser.' },
+    quick: { title: 'Common zones' },
+    changes: { title: 'Daylight-saving changes', zone: 'Zone', next: 'Next change', cur: 'Current offset', up: 'Upcoming offset' },
+    legend: { business: 'Business hours (9 AM–5 PM)', night: 'Night hours (10 PM–6 AM)' },
+    region: { africa: 'Africa', asia: 'Asia', europe: 'Europe', americas: 'Americas', oceania: 'Oceania' },
+    z: { cairo: 'Cairo', riyadh: 'Riyadh', dubai: 'Dubai', amman: 'Amman', istanbul: 'Istanbul', london: 'London', paris: 'Paris', berlin: 'Berlin', newyork: 'New York', chicago: 'Chicago', la: 'Los Angeles', sydney: 'Sydney' },
+    chg: {
+      london: { next: 'Oct 26, 2026', cur: '+1:00', up: '+0:00' },
+      paris: { next: 'Oct 26, 2026', cur: '+2:00', up: '+1:00' },
+      newyork: { next: 'Nov 1, 2026', cur: '−4:00', up: '−5:00' },
+      sydney: { next: 'Oct 5, 2026', cur: '+10:00', up: '+11:00' },
+    },
+  },
+};

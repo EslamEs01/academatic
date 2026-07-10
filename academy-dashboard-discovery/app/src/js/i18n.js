@@ -23,6 +23,8 @@ import arOps from '../locales/ar.ops.js';
 import enOps from '../locales/en.ops.js';
 import arAdm from '../locales/ar.adm.js';
 import enAdm from '../locales/en.adm.js';
+import arCtrl from '../locales/ar.ctrl.js';
+import enCtrl from '../locales/en.ctrl.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -61,6 +63,9 @@ deepMerge(en, enOps);
 // Spec 031 keys live in *.adm.js (admin management/content/certificates/settings hub)
 deepMerge(ar, arAdm);
 deepMerge(en, enAdm);
+// Spec 034 keys live in *.ctrl.js (Control Center: messages/leads/tasks/announcements/time-converter)
+deepMerge(ar, arCtrl);
+deepMerge(en, enCtrl);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

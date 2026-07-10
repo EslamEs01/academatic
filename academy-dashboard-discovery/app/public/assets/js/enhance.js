@@ -319,6 +319,55 @@ function stepNeighbor(wrap, dir) {
   const want = (location.hash.match(/step=([a-z0-9-]+)/i) || [])[1];
   if (want) selectStep(wrap, want);
 })();
+
+/* ---- Spec 034 — Time Converter (page-scoped; only runs where [data-time-converter]
+ * exists — inert on every other page). A REAL client-side tool: the conversion is
+ * computed locally with native Intl.DateTimeFormat({timeZone}) + Date; NO backend,
+ * NO network, NO dependency, NO new global data-* dispatch, NO storage key. ---- */
+(function initTimeConverter() {
+  const root = document.querySelector('[data-time-converter]');
+  if (!root) return;
+  const srcSel = root.querySelector('[data-tc-source]');
+  const tgtSel = root.querySelector('[data-tc-target]');
+  const dateIn = root.querySelector('[data-tc-date]');
+  const timeIn = root.querySelector('[data-tc-time]');
+  const out = root.querySelector('[data-tc-output]');
+  if (!srcSel || !tgtSel || !dateIn || !timeIn || !out) return;
+  // minutes the zone is ahead of UTC at the given instant (native Intl only)
+  const offsetMin = (instant, tz) => {
+    const parts = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).formatToParts(instant);
+    const o = {}; parts.forEach((p) => { o[p.type] = p.value; });
+    const asUTC = Date.UTC(+o.year, +o.month - 1, +o.day, +o.hour === 24 ? 0 : +o.hour, +o.minute, +o.second);
+    return Math.round((asUTC - instant.getTime()) / 60000);
+  };
+  const recompute = () => {
+    const dv = (dateIn.value || '').trim();
+    const tv = (timeIn.value || '').trim();
+    if (!dv || !tv) { out.textContent = out.getAttribute('data-tc-hint') || ''; return; }
+    const [y, mo, d] = dv.split('-').map(Number);
+    const [h, mi] = tv.split(':').map(Number);
+    if (!y || !mo || !d || Number.isNaN(h) || Number.isNaN(mi)) { out.textContent = out.getAttribute('data-tc-hint') || ''; return; }
+    const src = srcSel.value, tgt = tgtSel.value;
+    // interpret the entered wall-clock as local to the SOURCE zone → real instant → format in TARGET
+    const naive = new Date(Date.UTC(y, mo - 1, d, h, mi));
+    const real = new Date(naive.getTime() - offsetMin(naive, src) * 60000);
+    try {
+      out.textContent = new Intl.DateTimeFormat(getLang() === 'en' ? 'en-US' : 'ar-EG', { timeZone: tgt, dateStyle: 'full', timeStyle: 'short' }).format(real);
+    } catch (e) { out.textContent = out.getAttribute('data-tc-hint') || ''; }
+  };
+  root.addEventListener('change', (e) => { if (e.target.closest('[data-tc-source],[data-tc-target],[data-tc-date],[data-tc-time]')) recompute(); });
+  root.addEventListener('input', (e) => { if (e.target.closest('[data-tc-date],[data-tc-time]')) recompute(); });
+  // quick-chip: set the target zone then recompute (no navigation, no new hook)
+  root.addEventListener('click', (e) => {
+    const q = e.target.closest('[data-tc-quick]');
+    if (!q) return;
+    e.preventDefault();
+    tgtSel.value = q.getAttribute('data-tc-quick');
+    root.querySelectorAll('[data-tc-quick]').forEach((c) => c.classList.toggle('is-active', c === q));
+    recompute();
+  });
+  recompute();
+})();
 /* roving-tabindex keyboard for the wizard step indicator */
 document.addEventListener('keydown', (e) => {
   const dot = e.target.closest && e.target.closest('[data-step-go]');

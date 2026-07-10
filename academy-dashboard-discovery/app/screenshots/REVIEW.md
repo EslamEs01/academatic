@@ -846,3 +846,20 @@ form body; **0** salary/pay/hour-rate/fine/amount figure. The 14 candidate-list 
 family + student + index bodies byte-identical; `package.json`/`build-html.mjs` PAGES 0-diff; protected role-law
 + 026-031 smoke asserts byte-verbatim. Mobile 390: `.wiz-grid` reflows to one column, no horizontal overflow.
 a11y critical=0 serious=0 (open-form focus-trap/dialog rows added).
+
+## Spec 034 — Control Center Pages (Messages / Leads / Tasks / Announcements / Time Converter)
+
+**Frames**: 24 new `sp034-*` frames (282 total · 0 console errors) — each page desktop AR + EN + dark + mobile-390, plus open-form/drawer proofs and the time-converter active-conversion frame:
+`sp034-messages`(+`-en`/`-dark`/`-group`/`-mobile`), `sp034-leads`(+`-en`/`-dark`/`-create`/`-detail`/`-mobile`),
+`sp034-tasks`(+`-en`/`-dark`/`-create`/`-mobile`), `sp034-announcements`(+`-en`/`-dark`/`-mobile`),
+`sp034-timeconverter`(+`-en`/`-dark`/`-mobile`, all with a live computed result).
+
+### The five closed Control items (103 → 113; 5 nav «قريبًا» → real links)
+- **messages** (`sp034-messages`, `-group`): inbox list (contact/role/unread) + a default thread panel (authored bubbles) + a compose box; **Send/attach = backendRequired gates**; read-only thread sheets per conversation; Create-Group + Add-Member form drawers with the image upload as a **gate** (no `type=file`).
+- **leads** (`sp034-leads`, `-create`, `-detail`): authored KPI cards + a lead list (date/parent/email/phone) + 9 status filters + a lead-detail drawer (notes log + Add-Notes + Change-Status forms) + a Create-Request form (~19 grounded fields, **no money field**); Convert/Assign/Save/Update = gates.
+- **tasks** (`sp034-tasks`, `-create`): KPI strip + a display-only status board (no drag) + a per-staff table ("Average" = authored literal) + Create/Edit-task + Add-Section form drawers; Save/Assign/Move = gates.
+- **announcements** (`sp034-announcements`): announcements list (audience/channel/status chips) + a compose form (message/channels/private/expire/audience) + preview + recipients; **Publish/Send + WhatsApp + media = gates** (no `type=file`); does NOT duplicate the settings Notifications form.
+- **time-converter** (`sp034-timeconverter`): a **real working client tool** — source/target zone + date/time → live conversion via native `Intl` (Cairo 3 PM → New York 8 AM in the frame), common-zone quick chips, and an authored DST-changes tab. **No gate on the conversion; no network; no dependency.**
+
+### Honesty / impact
+Every write final is a `backendRequired` gate (or an inert disabled-with-reason button) — 0 fake send/convert/save/move/publish/delivery, 0 row/status/thread mutation, 0 fake-success wording. **0** `type=file`/`type=password`/credential/`<canvas>`/`.pdf`/`window.open`/money-figure in any of the 5 bodies. Only the 52 admin pages' shared sidebar changed (5 «قريبًا» → anchors); every admin `#page-body`, all portal pages, and index are byte-identical. `package.json` 0-diff. a11y critical=0 serious=0 (incl. mobile-390 + open-form rows).

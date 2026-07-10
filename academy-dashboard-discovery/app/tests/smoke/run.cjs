@@ -11,6 +11,8 @@ const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedu
   'sessions-analysis', 'public-holiday', 'scheduled-actions',
   // Spec 031 — Users&Staff / Content library / Certificates (settings folds into the existing settings page)
   'staff', 'library', 'certificates',
+  // Spec 034 — Control Center pages (messages/leads/tasks/announcements/time-converter)
+  'messages', 'leads', 'tasks', 'announcements', 'time-converter',
   'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
   'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
@@ -210,10 +212,17 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         // Spec 026 (DU-20): the dashboard's fake .select-btn filter controls were removed (Option B) —
         // the honest replacement is a real "view all sessions" link; the remaining controls still must feed back.
         for (const sel of ['.pager:not(.is-current)', '[data-action="theme-menu"]',
-          '[data-action="apps-grid"]', '[data-action="quick-actions"]', '.nav-item.is-planned']) {
+          '[data-action="apps-grid"]', '[data-action="quick-actions"]']) {
           const r = await clickFeedback(sel);
           ok(!r, `${page}/${lang}: ${r}`);
         }
+        // Spec 034: the Control category (default panel) no longer has a planned «قريبًا» item —
+        // all 5 flipped to implemented. Reveal a category that still has one (families →
+        // familyCategories) and verify the planned-item toast still fires — coverage preserved.
+        await p.click('[data-nav-category="families"]').catch(() => {});
+        await p.waitForTimeout(140);
+        const rPlanned = await clickFeedback('.cat-panel:not([hidden]) .nav-item.is-planned');
+        ok(!rPlanned, `${page}/${lang}: ${rPlanned}`);
         // disabled finance nav is aria-disabled (announced disabled to AT) but still fires its reason
         // toast on a real click; Playwright won't auto-click an aria-disabled node, so dispatch directly.
         const dis = await p.$('.nav-item.is-disabled');
@@ -1257,6 +1266,70 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         ok(navCount32 === 50, `${page}/${lang}: admin menu freeze expects exactly 50 classified nav items, got ${navCount32}`);
       }
 
+      // ===== Spec 034 — Control Center pages: real frontend shell first, gated finals =====
+      // (additive; the sitewide g32 file/canvas/pdf + base FAKE/dead-button/raw-key/href
+      //  checks already run on these pages too). Per page: the shell renders + every write
+      //  drawer is a form(≥1 control)+one backendRequired final; timeConverter is a real,
+      //  gate-free client tool whose output actually changes on input (no external request).
+      const CC_PAGES = new Set(['messages', 'leads', 'tasks', 'announcements', 'time-converter']);
+      if (CC_PAGES.has(page)) {
+        const cc = await p.evaluate((pg) => {
+          const body = document.getElementById('page-body');
+          const q = (s) => document.querySelectorAll(s).length;
+          const bq = (s) => body.querySelectorAll(s).length;
+          const tpl = (id) => document.querySelector(`template[data-preview="${id}"]`);
+          const tplCtrls = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('input,select,textarea').length : 0; };
+          const tplGate = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('[data-disabled-reason]').length : 0; };
+          // an honest final gate = clickable data-disabled-reason OR an inert disabled button (both carry a reason, enforced elsewhere)
+          const bodyGates = bq('[data-disabled-reason]') + bq('button[disabled]');
+          const o = { fileInputs: q('input[type="file"]'), pwInputs: q('input[type="password"]'), canvas: q('canvas'), demo: bq('[data-demo-action]'), bodyGates };
+          if (pg === 'messages') { o.rows = q('#msg-list [data-row]'); o.bubbles = q('.cc-bubble'); o.compose = bq('textarea'); o.groupCtrls = tplCtrls('msg-group'); o.groupGate = tplGate('msg-group'); o.memberTpl = !!tpl('msg-member'); }
+          else if (pg === 'leads') { o.kpi = bq('.medallion'); o.rows = q('#leads-table [data-row]'); o.statusFilter = q('select[data-filter="status"]'); o.newCtrls = tplCtrls('lead-new'); o.newGate = tplGate('lead-new'); o.detailTpl = q('template[data-preview^="lead-l"]'); }
+          else if (pg === 'tasks') { o.board = q('.cc-board-col'); o.cards = q('.cc-board .card'); o.newCtrls = tplCtrls('task-new'); o.newGate = tplGate('task-new'); o.sectionTpl = !!tpl('task-section'); }
+          else if (pg === 'announcements') { o.list = q('#ann-list .card, #ann-list [data-row]'); o.compose = bq('textarea'); }
+          else if (pg === 'time-converter') { o.root = q('[data-time-converter]'); o.src = q('[data-tc-source]'); o.tgt = q('[data-tc-target]'); o.dateIn = q('[data-tc-date]'); o.timeIn = q('[data-tc-time]'); o.output = q('[data-tc-output]'); o.quick = q('[data-tc-quick]'); o.tcGate = bq('[data-time-converter] [data-disabled-reason], [data-time-converter] button[disabled]'); }
+          return o;
+        }, page);
+        ok(cc.fileInputs === 0 && cc.pwInputs === 0 && cc.canvas === 0, `${page}/${lang}: Control page has a forbidden file/password/canvas affordance`);
+        ok(cc.demo === 0, `${page}/${lang}: Control page has a data-demo-action (fake action) in the body`);
+        if (page === 'messages') {
+          ok(cc.rows >= 3, `messages/${lang}: inbox rows missing (${cc.rows})`);
+          ok(cc.bubbles >= 2, `messages/${lang}: thread bubbles missing (${cc.bubbles})`);
+          ok(cc.compose >= 1 && cc.bodyGates >= 1, `messages/${lang}: compose+Send gate missing (compose=${cc.compose}, gates=${cc.bodyGates})`);
+          ok(cc.groupCtrls >= 2 && cc.groupGate >= 1, `messages/${lang}: Create-Group not a form+gate (ctrls=${cc.groupCtrls}, gate=${cc.groupGate})`);
+          ok(cc.memberTpl, `messages/${lang}: Add-Member drawer missing`);
+        } else if (page === 'leads') {
+          ok(cc.kpi >= 4, `leads/${lang}: KPI cards missing (${cc.kpi})`);
+          ok(cc.rows >= 6, `leads/${lang}: lead rows missing (${cc.rows})`);
+          ok(cc.statusFilter >= 1, `leads/${lang}: status filter missing`);
+          ok(cc.newCtrls >= 5 && cc.newGate >= 1, `leads/${lang}: Create-Request not a form+gate (ctrls=${cc.newCtrls}, gate=${cc.newGate})`);
+          ok(cc.detailTpl >= 1, `leads/${lang}: lead detail drawer missing`);
+        } else if (page === 'tasks') {
+          ok(cc.board >= 3, `tasks/${lang}: board columns missing (${cc.board})`);
+          ok(cc.cards >= 4, `tasks/${lang}: task cards missing (${cc.cards})`);
+          ok(cc.newCtrls >= 4 && cc.newGate >= 1, `tasks/${lang}: Create-task not a form+gate (ctrls=${cc.newCtrls}, gate=${cc.newGate})`);
+          ok(cc.sectionTpl, `tasks/${lang}: Add-Section drawer missing`);
+        } else if (page === 'announcements') {
+          ok(cc.list >= 3, `announcements/${lang}: announcement list missing (${cc.list})`);
+          ok(cc.compose >= 1 && cc.bodyGates >= 1, `announcements/${lang}: compose+Publish gate missing (compose=${cc.compose}, gates=${cc.bodyGates})`);
+        } else if (page === 'time-converter') {
+          ok(cc.root === 1 && cc.src >= 1 && cc.tgt >= 1 && cc.dateIn >= 1 && cc.timeIn >= 1 && cc.output >= 1 && cc.quick >= 1, `time-converter/${lang}: converter controls missing (${JSON.stringify(cc)})`);
+          ok(cc.tcGate === 0, `time-converter/${lang}: the converter tool must have NO backendRequired gate (it works locally), got ${cc.tcGate}`);
+          // behavioral: the conversion actually updates on input change, computed locally (no external request)
+          await p.selectOption('[data-tc-source]', 'Africa/Cairo').catch(() => {});
+          await p.selectOption('[data-tc-target]', 'America/New_York').catch(() => {});
+          await p.fill('[data-tc-date]', '2026-06-20').catch(() => {});
+          await p.fill('[data-tc-time]', '15:00').catch(() => {});
+          await p.waitForTimeout(130);
+          const o1 = await p.$eval('[data-tc-output]', (e) => e.textContent.trim()).catch(() => '');
+          await p.fill('[data-tc-time]', '18:00').catch(() => {});
+          await p.waitForTimeout(130);
+          const o2 = await p.$eval('[data-tc-output]', (e) => e.textContent.trim()).catch(() => '');
+          ok(!!o1 && !!o2 && o1 !== o2, `time-converter/${lang}: conversion output did not update on input change (o1="${o1}", o2="${o2}")`);
+          ok(ext.length === 0, `time-converter/${lang}: the converter triggered ${ext.length} external request(s) — must compute locally`);
+        }
+      }
+
       // Spec 009 — Dashboard/Reports integration: no new finance chrome in the body,
       // the sidebar carries exactly one finance link, the six wallet items stay locked.
       if (page === 'dashboard' || page === 'reports') {
@@ -1811,7 +1884,7 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
   // ===== Spec 032 — route/page count freeze: 51 bases × 2 languages + index = 103 =====
   {
     const pub = fs.readdirSync(path.join(__dirname, '../../public')).filter((f) => f.endsWith('.html'));
-    ok(pub.length === 103, `route freeze: public/ must hold exactly 103 HTML pages (51×2+index), got ${pub.length}`);
+    ok(pub.length === 113, `route freeze: public/ must hold exactly 113 HTML pages (56×2+index; Spec 034 +10), got ${pub.length}`);
     ok(pub.includes('index.html'), 'route freeze: index.html missing');
     for (const b of PAGES) {
       ok(pub.includes(`${b}.html`) && pub.includes(`${b}.en.html`), `route freeze: ${b} is missing a language mirror`);

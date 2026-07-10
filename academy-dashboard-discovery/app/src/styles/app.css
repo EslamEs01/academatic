@@ -1129,3 +1129,20 @@
  * Merge-field labels are absolutely positioned at authored %-coordinates over a band. */
 .cert-stage { position: relative; height: 210px; border-radius: 12px; border: 1px dashed var(--c-line); background: linear-gradient(135deg, var(--c-surface-2), var(--c-surface)); overflow: hidden; }
 .cert-field { position: absolute; transform: translate(-50%, -50%); font-size: 12px; font-weight: 700; color: var(--c-ink-2); background: var(--c-surface); border: 1px solid var(--c-line); border-radius: 6px; padding: 2px 8px; white-space: nowrap; }
+
+/* ---- Spec 034 — Control Center layouts (additive, scoped). Reuse card/chip/field
+ * tokens; only three new layout wrappers. ---- */
+.cc-msg { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 900px) { .cc-msg { grid-template-columns: 300px 1fr; } }
+.cc-msg-list { display: flex; flex-direction: column; gap: 8px; max-height: 560px; overflow-y: auto; }
+.cc-msg-thread { display: flex; flex-direction: column; gap: 10px; }
+.cc-bubble { max-width: 78%; padding: 9px 13px; border-radius: 14px; font-size: 13px; line-height: 1.5; }
+.cc-bubble.is-mine { margin-inline-start: auto; background: var(--c-primary-soft); color: var(--c-ink); border-end-end-radius: 4px; }
+.cc-bubble.is-them { margin-inline-end: auto; background: var(--c-surface-2); color: var(--c-ink); border-end-start-radius: 4px; }
+.cc-board { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 720px) { .cc-board { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1180px) { .cc-board { grid-template-columns: repeat(4, 1fr); } }
+.cc-board-col { background: var(--c-surface-2); border: 1px solid var(--c-line); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.cc-tz-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 760px) { .cc-tz-grid { grid-template-columns: repeat(2, 1fr); } }
+.cc-tz-out { font-size: 18px; font-weight: 700; color: var(--c-ink); min-height: 28px; }

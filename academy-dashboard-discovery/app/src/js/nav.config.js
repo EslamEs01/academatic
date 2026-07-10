@@ -25,11 +25,11 @@ export const NAV_CATEGORIES = [
       item({ id: 'schedule', labelKey: 'nav.schedule', icon: 'schedule', route: 'schedule.html' }),
       item({ id: 'attendance', labelKey: 'nav.attendance', icon: 'clipboard-check', route: 'attendance.html' }),
       item({ id: 'sessionsAnalysis', labelKey: 'nav.sessionsAnalysis', icon: 'trending-up', route: 'sessions-analysis.html' }),
-      item({ id: 'messages', labelKey: 'nav.messages', icon: 'messages', status: 'planned' }),
-      item({ id: 'leads', labelKey: 'nav.leads', icon: 'inbox', status: 'planned' }),
-      item({ id: 'tasks', labelKey: 'nav.tasks', icon: 'tasks', status: 'planned' }),
-      item({ id: 'announcements', labelKey: 'nav.announcements', icon: 'megaphone', status: 'planned' }),
-      item({ id: 'timeConverter', labelKey: 'nav.timeConverter', icon: 'clock', status: 'planned' }),
+      item({ id: 'messages', labelKey: 'nav.messages', icon: 'messages', route: 'messages.html' }),
+      item({ id: 'leads', labelKey: 'nav.leads', icon: 'inbox', route: 'leads.html' }),
+      item({ id: 'tasks', labelKey: 'nav.tasks', icon: 'tasks', route: 'tasks.html' }),
+      item({ id: 'announcements', labelKey: 'nav.announcements', icon: 'megaphone', route: 'announcements.html' }),
+      item({ id: 'timeConverter', labelKey: 'nav.timeConverter', icon: 'clock', route: 'time-converter.html' }),
       item({ id: 'publicHoliday', labelKey: 'nav.publicHoliday', icon: 'calendar', route: 'public-holiday.html' }),
       item({ id: 'scheduledActions', labelKey: 'nav.scheduledActions', icon: 'tasks', route: 'scheduled-actions.html' }),
     ],
@@ -136,11 +136,10 @@ export const FUTURE_ROLE = [
 ];
 
 /* intended routes when a planned item is promoted (NI9 / NI12).
- * Spec 032 stale-map cleanup: sessionsAnalysis removed (implemented with its own
- * route since Spec 026 — no longer a future route). */
+ * Spec 032 stale-map cleanup: sessionsAnalysis removed (implemented since Spec 026).
+ * Spec 034: messages/leads/tasks/announcements removed (now implemented Control routes). */
 export const FUTURE_ROUTES = {
-  messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
-  announcements: 'announcements.html', studentResult: 'student-results.html',
+  studentResult: 'student-results.html',
   studentEvaluation: 'student-evaluation.html',
   teacherCategories: 'teachers.html', // Spec 028 — folds into the teachers.html trn-categories drawer (no standalone page)
   materials: 'library.html', // Spec 031 — materials folds into the library.html Materials tab (no standalone page)

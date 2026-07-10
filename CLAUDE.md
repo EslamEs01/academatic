@@ -1,6 +1,38 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 032 — Final QA / Full Admin Menu Coverage / Create-Edit Forms Completion / Production
-Freeze is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (50 tasks) + 18 contracts +
+Active feature: **Spec 034 — Control Center Pages Completion (Messages / Leads / Tasks / Announcements / Time
+Converter) is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (58 tasks) + 17 contracts +
+`implementation-status.md` at `academy-dashboard-discovery/specs/034-control-center-pages/`). **FIRST Spec-033-
+roadmap follow-up.** **Count 103 → 113 (+10)** — 5 standalone page pairs (`messages`/`leads`/`tasks`/
+`announcements`/`time-converter`), the 5 Control «قريبًا» nav items flipped `planned → implemented` (0 «قريبًا»
+left in Control; admin-menu still 50 items; `FUTURE_ROUTES` trimmed of the 4 promoted routes). Four pages are
+honest SHELLS (real list/board/detail/compose UI; every backend-write final — Send/Reply/Convert/Assign/Save/
+Move/Publish — is a `backendRequired` gate; NO fake persistence/mutation/success); the fifth, **`time-converter`,
+is a GENUINELY WORKING client tool** (native `Intl.DateTimeFormat({timeZone})` via a page-scoped
+`initTimeConverter()` IIFE in `enhance.js` mirroring `initTabs`/`initWizard` — guarded → inert on every other
+page; NO new global `data-*` hook/storage key/dependency/network; NO gate on the conversion; Cairo 3PM→NY 8AM
+verified). **messages**: inbox+thread+compose (Send/attach gated) + read-only thread sheets + Create-Group/
+Add-Member drawers (image = GATE, no `type=file`). **leads**: authored KPI cards + list (date/parent/email/phone)
++ 9-status filters + detail drawer (notes log + Add-Notes + Change-Status forms) + Create-Request form (~19
+grounded fields, **no money field**). **tasks**: KPI strip + display-only board (no drag) + per-staff table
+(Average = authored literal) + Create/Edit + Add-Section drawers. **announcements**: list + compose (channels/
+audience/expire) + preview + recipients; Publish/Send/WhatsApp/media = GATES; does NOT duplicate the settings
+Notifications form. Mechanism = existing primitives only (pageHeader/summaryCards/cardGrid/filterBar/tabs/
+previewTemplate+formDrawer/field/confirmAction/chip) + the CLOSED `data-*` set; new `fixtures/control-center.js`
+(authored, no PII/pay/secret) + new mirrored pair `ar/en.ctrl.js` (registered in i18n.js; 12 locale pairs, 0
+divergence) + additive `.cc-*` CSS. **No `package.json`/dependency/backend/API/websocket/engine.** **Verified**:
+build 113; smoke PASS (112 loads; additive Control block — per-page shell + gated finals + `time-converter`
+output-updates-on-input + 0 external request; **payHit/tchPay/famPay/payFigure/child-view/finance/settings/FAKE/
+Spec-032-form-completion + 026-031 asserts BYTE-VERBATIM**; the ONE sanctioned amendment: route-freeze 103→113 +
+the dashboard planned-item feedback probe now reveals the families category since Control has no planned item);
+a11y critical=0 serious=0 (+5 pages light/dark/mobile-390 + open-form rows; fixed one tasks scrollable-region a11y
+warning); 282 screenshots 0 console errors (24 sp034 frames). Only the 52 admin pages' SHARED SIDEBAR changed
+(5 «قريبًا» → anchors); every admin `#page-body` + all portal pages ×16 + index BYTE-IDENTICAL; `enhance.js` =
++1 guarded IIFE, `build-html.mjs` = +5, `i18n.js` = +2/+2, `nav.config.js` = 5 flips + FUTURE_ROUTES trim.
+Role laws green: teacher pay-free, family zero-pay, student child-view, finance/settings invariants (Control pages
+are non-finance, carry no pay/credential/file/canvas/money token). **No commit/no push** — watcher commits. Next:
+Spec 035 (Families & Students nav completion) per the Spec-033 roadmap.
+**History: Spec 032 — Final QA / Full Admin Menu Coverage / Create-Edit Forms Completion / Production
+Freeze is IMPLEMENTED** (committed baseline HEAD `a438ac2`; artifacts + `tasks.md` (50 tasks) + 18 contracts +
 `implementation-status.md` at
 `academy-dashboard-discovery/specs/032-final-qa-full-admin-menu-production-freeze/`). **THE FINAL FRONTEND
 PRODUCTION-FREEZE SPEC.** **Count HELD 103 → 103 — ZERO new pages** (`package.json`/`build-html.mjs` PAGES
