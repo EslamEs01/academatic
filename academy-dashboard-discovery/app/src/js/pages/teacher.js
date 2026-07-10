@@ -6,7 +6,8 @@
  * Spec 003 scheduleAgenda + the schedule deep-link; Sessions & Outcomes REUSE the Spec 005
  * canonical outcome drawer + the attendance deep-link (teacherAbsent vs studentAbsent stay
  * DISTINCT). One representative teacher (sara) is baked. Display-only — NO teacher/assignment/
- * attendance engine, no computed rating, no pay/finance. */
+ * attendance engine, no computed rating, none of the excluded legacy fieldset (see
+ * must-omit contract). */
 import { TEACHER_BY_ID, TEACHERS, TEACHER_AVAIL } from '../fixtures/teachers.js';
 import { COURSE_BY_ID } from '../fixtures/courses.js';
 import { familyOf } from '../fixtures/families.js';
@@ -21,7 +22,7 @@ import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
 import { ASSIGN_COURSES, ASSIGN_GROUPS, AVAILABILITY_WINDOWS } from '../fixtures/teacher-management.js';
 import { teacherStatusChip } from '../components/teacher-status.js';
 import { workloadChip, signalChip, needsFollowUp } from '../components/teacher-signals.js';
-import { teacherActions } from '../components/teacher-actions.js';
+import { teacherActions, teacherEditDrawer, teacherNoteDrawer } from '../components/teacher-actions.js';
 import { courseStatusChip } from '../components/course-status.js';
 import { groupStatusChip } from '../components/group-status.js';
 import { outcomeChip } from '../components/outcome-status.js';
@@ -194,5 +195,8 @@ export function renderTeacher() {
     + pickerDrawer('trn-assign-group', { titleKey: 'trn.assignG.title', hintKey: 'trn.assignG.hint', candidates: ASSIGN_GROUPS, ctaKey: 'trn.assignG.cta', reasonKey: 'trn.reason.assign', headIcon: 'students' })
     + availabilityDrawer();
 
-  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${pickers}`;
+  /* Spec 032 — form drawers for the banner Edit/Add-note triggers (baked once per page) */
+  const forms = teacherEditDrawer() + teacherNoteDrawer();
+
+  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${pickers}${forms}`;
 }

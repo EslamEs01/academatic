@@ -2,6 +2,16 @@
 export default {
   common: { close: 'Close', confirm: 'Confirm', cancel: 'Cancel', save: 'Save', add: 'Add', view: 'View', edit: 'Edit', backendRequiredNote: 'This action needs the server connection to complete — nothing is saved yet.' },
 
+  /* ---- Spec 032 — shared form-drawer option labels (fixtures/form-options.js) ---- */
+  fopt: {
+    status: { active: 'Active', trial: 'Trial', suspended: 'Suspended', inactive: 'Inactive' },
+    gender: { male: 'Male', female: 'Female' },
+    role: { manager: 'Manager', accountant: 'Accountant', supervisor: 'Supervisor', support: 'Support' },
+    day: { sat: 'Saturday', sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday' },
+    dur: { m30: '30 minutes', m45: '45 minutes', m60: '60 minutes', m90: '90 minutes' },
+    ftype: { text: 'Text', select: 'Select list', yesno: 'Yes / No', note: 'Note' },
+  },
+
   filter: {
     apply: 'Apply', reset: 'Reset',
     count: 'Showing {shown} of {total}',
@@ -23,6 +33,12 @@ export default {
     colSubject: 'Subject', empty: { title: 'No sessions yet', msg: 'Add the first session for today and it will appear here instantly.' },
     note: 'This session runs per the academy’s approved schedule.', detailsTitle: 'Session details',
     agendaEmpty: 'No sessions today', tablistAria: 'Sessions views', today: 'Today',
+    /* Spec 032 — the sess-new form drawer */
+    form: {
+      course: 'Course', teacher: 'Teacher', date: 'Date', time: 'Time', duration: 'Duration',
+      fromCredit: 'Session credit source', datePh: '2025-03-15', timePh: '16:30',
+      credit: { package: 'From package credit', extra: 'Extra session', trial: 'Trial session' },
+    },
   },
 
   sch: {

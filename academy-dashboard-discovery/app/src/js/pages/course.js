@@ -23,7 +23,7 @@ import { groupStatusChip } from '../components/group-status.js';
 import { familyStatusChip } from '../components/family-status.js';
 import { attentionFlag } from '../components/attention-flag.js';
 import { learningPath } from '../components/learning-path.js';
-import { courseActions } from '../components/course-group-actions.js';
+import { courseActions, courseFormTemplate, groupFormTemplate } from '../components/course-group-actions.js';
 import { blocksOf, outcomesOf, cohortTimetablePanel, cohortOutcomesPanel, cohortTemplates } from '../components/cohort-panels.js';
 
 const TEACHER_BY_ID = Object.fromEntries(TEACHERS.rows.map((x) => [x.id, x]));
@@ -148,5 +148,8 @@ export function renderCourse() {
     },
   });
 
-  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${enrollPicker()}${teacherPicker()}`;
+  /* Spec 032 — FC-16 edit form (prefilled from c) + FC-17 create-group-from-course form
+   * (the grp-add course select is PREFILLED with this course — the prefilled group form IS
+   * the resolution; no distinct legacy endpoint). Both finals are backendRequired gates. */
+  return `${banner}${views}${cohortTemplates(blocks, outcomes)}${enrollPicker()}${teacherPicker()}${courseFormTemplate('crs-edit', { course: c })}${groupFormTemplate('grp-add', { courseId: c.id, titleKey: 'crs.act.createGroup' })}`;
 }

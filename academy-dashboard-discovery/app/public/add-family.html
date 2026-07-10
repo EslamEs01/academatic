@@ -275,17 +275,17 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span class="label">الحضور</span>
   </a><a href="sessions-analysis.html" class="nav-item" data-nav="sessionsAnalysis" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">تحليل الجلسات</span>
-  </a><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">المحادثات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">الطلبات الجديدة</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">المهام</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">الإعلانات والإشعارات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">محوّل الوقت</span><span class="nav-soon">قريبًا</span>
-    </button><a href="public-holiday.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
+  </a><a href="messages.html" class="nav-item" data-nav="messages" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">المحادثات</span>
+  </a><a href="leads.html" class="nav-item" data-nav="leads" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">الطلبات الجديدة</span>
+  </a><a href="tasks.html" class="nav-item" data-nav="tasks" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">المهام</span>
+  </a><a href="announcements.html" class="nav-item" data-nav="announcements" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">الإعلانات والإشعارات</span>
+  </a><a href="time-converter.html" class="nav-item" data-nav="timeConverter" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">محوّل الوقت</span>
+  </a><a href="public-holiday.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">العطلات الرسمية</span>
   </a><a href="scheduled-actions.html" class="nav-item" data-nav="scheduledActions" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">الإجراءات المجدولة</span>
@@ -535,7 +535,21 @@
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
     </div>
   </div>
-  <div class="mt-3"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fam.wiz.children.add" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن آخر</span></button></div>
+  <details class="mt-3">
+    <summary class="btn btn-secondary btn-sm" style="list-style:none;cursor:pointer;-webkit-user-select:none;user-select:none"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة ابن آخر</span></summary>
+    <div class="mt-3"><div class="child-row">
+    <div class="text-[12px] font-bold mb-2.5" style="color:var(--c-ink-3)">الابن ٣</div>
+    <div class="wiz-grid">
+      <div class="field field-full"><label class="field-label" for="f-child-3-name">اسم الابن</label><input id="f-child-3-name" name="child-3-name" type="text" class="input" placeholder="اسم الابن" value="" /></div>
+      <div class="field"><label class="field-label" for="f-child-3-level">المستوى</label><span class="select-wrap"><select id="f-child-3-level" name="child-3-level" class="select-input">
+      <option value="foundation" selected>تأسيسي</option><option value="l1">المستوى الأول</option><option value="l2">المستوى الثاني</option><option value="l3">المستوى الثالث</option><option value="advanced">متقدّم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
+      <div class="field"><label class="field-label" for="f-child-3-subject">المادة</label><span class="select-wrap"><select id="f-child-3-subject" name="child-3-subject" class="select-input">
+      <option value="math" selected>الرياضيات</option><option value="arabic">اللغة العربية</option><option value="programming">البرمجة</option><option value="physics">الفيزياء</option><option value="english">الإنجليزية</option><option value="science">العلوم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
+    </div>
+  </div></div>
+  </details>
       <div class="wiz-nav"><button type="button" class="btn btn-secondary btn-sm" data-step-prev><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-chevronStart"></use></svg><span>السابق</span></button><button type="button" class="btn btn-primary btn-sm" data-step-next><span>التالي</span><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-chevronEnd"></use></svg></button></div>
     </section><section class="wiz-step" id="wiz-step-billing" data-step="billing" role="tabpanel" aria-labelledby="wiz-tab-billing" tabindex="0" hidden>
       <div class="wiz-step-head">

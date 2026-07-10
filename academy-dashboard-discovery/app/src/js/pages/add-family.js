@@ -3,6 +3,7 @@
  * (data-step-next/prev). Every field is labeled (form-field). "Save" = demo toast.
  * NO form library, NO validation, NO persistence. Maps to Django {% if step %}. */
 import { t, num } from '../i18n.js';
+import { icon } from '../icons.js';
 import { pageHeader } from '../components/page-header.js';
 import { wizard } from '../components/wizard.js';
 import { field, optsFrom } from '../components/form-field.js';
@@ -41,9 +42,16 @@ function childRow(n) {
     </div>
   </div>`;
 }
+/* Spec 032 (FC-10) — "Add another child" is a native <details> disclosure whose
+ * summary reuses the secondary-button styling and whose body is a REAL third
+ * child row (same field() controls as rows 1–2). Static-first: no field-less
+ * modal, no new hook, no JS — opening it simply reveals the baked fields. */
 const childrenStep = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('fam.wiz.children.hint')}</p>
   ${childRow(1)}${childRow(2)}
-  <div class="mt-3">${button({ labelKey: 'fam.wiz.children.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="fam.wiz.children.add" data-modal-note-key="common.backendRequiredNote"' })}</div>`;
+  <details class="mt-3">
+    <summary class="btn btn-secondary btn-sm" style="list-style:none;cursor:pointer;-webkit-user-select:none;user-select:none">${icon('user-plus', 'ico ico-sm')}<span>${t('fam.wiz.children.add')}</span></summary>
+    <div class="mt-3">${childRow(3)}</div>
+  </details>`;
 
 const billingStep = `<div class="wiz-grid">
   ${field({ labelKey: 'fam.wiz.f.planType', name: 'planType', type: 'select', options: CAT_OPTS })}

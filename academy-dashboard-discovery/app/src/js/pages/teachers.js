@@ -1,7 +1,7 @@
 /* Teachers page — admin directory (card grid), ENRICHED for Spec 007 with academic context:
  * a labeled teacher-status chip, courses/groups/active-students counts, an upcoming-sessions
  * hint, a workload hint, a conditional follow-up flag, and a real "View profile" link to
- * teacher.html. NOT a teacher dashboard/portal; no pay figures, no computed rating. */
+ * teacher.html. NOT a teacher dashboard/portal; no excluded legacy figure, no computed rating. */
 import { TEACHERS, TEACHER_AVAIL } from '../fixtures/teachers.js';
 import { teacherCounts } from '../fixtures/teacher-links.js';
 import { t, num, getLang } from '../i18n.js';
@@ -17,7 +17,9 @@ import { TEACHER_CATEGORIES } from '../fixtures/teacher-management.js';
 import { noResults } from '../components/states.js';
 import { teacherStatusChip, TEACHER_STATUS_ORDER } from '../components/teacher-status.js';
 import { workloadChip, signalChip, needsFollowUp, WORKLOAD_ORDER } from '../components/teacher-signals.js';
-import { addTeacherAction } from '../components/teacher-actions.js';
+import { addTeacherAction, teacherEditDrawer, teacherAddDrawer } from '../components/teacher-actions.js';
+import { field } from '../components/form-field.js';
+import { FORM_STATUS_OPTS } from '../fixtures/form-options.js';
 
 const SUBJECTS = ['math', 'arabic', 'programming', 'physics', 'english', 'science'];
 const teacherHref = () => (getLang() === 'en' ? 'teacher.en.html' : 'teacher.html');
@@ -60,16 +62,23 @@ function preview(tr) {
   return previewTemplate(tr.id, { title: t('trn.detailsTitle'), headIcon: 'trainers', tone: 'primary', bodyHTML: body });
 }
 
-/* Spec 028 — teacher-categories (M-K): a display-only category list + a Create-category modal +
- * an assign-members backendRequired gate, in a baked <template data-preview="trn-categories">
- * drawer reached from the header. The teacherCategories nav item stays planned — no page. */
+/* Spec 028 + Spec 032 (FC-24) — teacher-categories: a display-only category list + a REAL
+ * inline Create-category form (name/status/description INERT fields; the single primary Save
+ * final is a clickable backendRequired gate) + an assign-members btn-secondary gate, in a baked
+ * <template data-preview="trn-categories"> drawer reached from the header. The teacherCategories
+ * nav item stays planned — no page; nothing persists or mutates. */
 function categoriesDrawer() {
   const rows = TEACHER_CATEGORIES.map((c) => sheetRow(t(c.nameKey), t('trn.cat.members', { n: num(c.count) }))).join('');
+  const createFields = field({ labelKey: 'trn.form.catName', name: 'trnCategories-catName', full: true })
+    + field({ labelKey: 'trn.fStatus', name: 'trnCategories-catStatus', type: 'select', options: FORM_STATUS_OPTS, full: true })
+    + field({ labelKey: 'trn.form.catDesc', name: 'trnCategories-catDesc', type: 'textarea', placeholderKey: 'trn.form.notesPh', full: true });
   const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('trn.cat.hint')}</p>
     ${rows}
-    <div class="flex flex-wrap gap-2 mt-4">
-      ${button({ labelKey: 'trn.cat.createTitle', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="trn.cat.createTitle" data-modal-note-key="common.backendRequiredNote"' })}
-      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="trn.cat.assignReason" aria-disabled="true" title="${esc(t('trn.cat.assignReason'))}">${icon('user-check', 'ico ico-sm')}<span>${t('trn.cat.assign')}</span></button>
+    <div class="ic-title mt-4 mb-2">${icon('plus', 'ico')}<span>${t('trn.cat.createTitle')}</span></div>
+    <div class="wiz-grid">${createFields}</div>
+    <div class="flex flex-wrap items-center justify-end gap-2 mt-4">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="trn.cat.assignReason" aria-disabled="true" title="${esc(t('trn.cat.assignReason'))}">${icon('user-check', 'ico ico-sm')}<span>${t('trn.cat.assign')}</span></button>
+      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="common.backendRequiredNote" aria-disabled="true" title="${esc(t('common.backendRequiredNote'))}">${icon('check', 'ico ico-sm')}<span>${t('common.save')}</span></button>
     </div>`;
   return previewTemplate('trn-categories', { titleKey: 'trn.cat.title', headIcon: 'filter', tone: 'primary', bodyHTML: body });
 }
@@ -99,5 +108,7 @@ export function renderTeachers() {
     ${noResults()}
     ${rows.map(preview).join('')}
     ${categoriesDrawer()}
+    ${teacherEditDrawer()}
+    ${teacherAddDrawer()}
   `;
 }

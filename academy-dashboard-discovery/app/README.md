@@ -385,3 +385,76 @@ generates, uploads, connects, or produces a file. The staff kebab reuses the exi
 changed the shared sidebar (staff/books/certificates → anchors); teacher-portal ×16 + family + student + index +
 finance/reports bodies byte-identical; `package.json`/no new dependency/engine/hook 0-diff. Build 103; smoke PASS;
 a11y 0/0; screenshots 0 errors.
+
+## Spec 032 — Final QA / Create-Edit Forms Completion / Production Freeze
+
+The last frontend-completion spec. Its one rule: **every Add / Create / New / Edit / Duplicate action opens a
+real form UI first** — a drawer with visible, grounded input/select/textarea fields — and only the final
+Save/Submit/Issue is a `backendRequired` gate. The 40 create/edit actions (FC-01…FC-40) used to open a
+field-less "available once the server is connected" note as their first-and-only response (`openModal` rendered
+title + note + Close only); each now opens a form-bearing drawer. **Count held 97 → 103 (no change from Spec
+031): 0 new pages** — all 40 forms are drawers folded into existing pages.
+
+**Mechanism (Option B).** One additive helper — `formDrawer(id, {titleKey, headIcon, fields, ctaKey, reasonKey})`
+in `components/preview-drawer.js` — wraps the existing `previewTemplate()`: it renders `fields` (a concatenation of
+the existing `field()` controls) inside a `.wiz-grid` and appends exactly ONE clickable `data-disabled-reason`
+Save final. Each field-less `data-modal-trigger` create/edit trigger becomes a `data-drawer="X"` trigger that opens
+the baked `<template data-preview="X">`, reusing the CLOSED `data-drawer` → `openSheet` → `template[data-preview]`
+clone path verbatim (the `openPanel` focus-trap already covers `input`/`select`). Kebab-menu items in `enhance.js`
+gained `data-drawer="X"` (data-drawer dispatches first, so the drawer always wins). **No new hook, no new storage
+key, no new engine, no new CSS class, no new page, no `package.json`/`build-html.mjs` change.**
+
+**MUST-OMIT (never rendered on any form):** password · salary/hour-rate/fine/pay-period · currency-with-salary ·
+gateway/payout/SMTP/Zoom credentials · 2FA OTP · computed Total. **MUST-GATE (stay `data-disabled-reason`, no
+working control):** all `type=file` uploads (teacher CV, certificate background, library file/thumbnail, settings
+logo) · certificate canvas/PDF (static preview only) · WhatsApp pairing · Record-Payment. Fields are INERT — no
+behavior hook, no persistence; every Save mutates nothing.
+
+- **Sessions** (`sess-new`, folded into `sessions.html`/`dashboard.html`): course/teacher/date/time/duration/
+  credit-source/status.
+- **Families/Students**: `fam-edit` (name±ar/email/phone/status/category/notes) · `fam-child` · `fam-note` ·
+  `stu-edit` · `stu-note` · `stu-add` (+ trial block); the add-family wizard's "Add child" reveals a real third
+  child row via a native `<details>` disclosure (no new hook).
+- **Courses/Groups**: `crs-add`/`crs-edit` (material/teacher/start-date/schedule — **no teacher-rate**) ·
+  `grp-add` (course prefilled = create-group-from-course)/`grp-edit` — **no per-group rate**.
+- **Teachers**: `trn-add`/`trn-edit` (name±ar/email/phone/status/subjects/level/course/city/country/notes +
+  CV-upload **gate**) · `trn-note`; **no salary/hour-rate/fine/meeting-provider/payout/auth-secret field**.
+- **Reports/Feedback**: `fb-add` (nested in the outcome sheet) · `fb-create` · `form-create` (repeatable
+  field-builder rows) · `rep-fbcat` hybrid create form.
+- **Finance**: `bank-add` (bank-name only — **no credentials/balance/figure**).
+- **Staff**: `staff-add`/`staff-edit`/`staff-dup` (name/username/email/phone/role/status — **no password/salary/
+  OTP**).
+- **Certificates**: `cert-tpl` (name + **static** designer preview + background-upload gate — no `<canvas>`, no
+  drag, no PDF) · `cert-create` (student/course/template/date/message + PDF-preview gate).
+- **Library/Settings**: `mat-add`/`mat-edit` · `lib-item` (+ file/thumbnail gates) · `lib-cats` create form ·
+  `head-add` (name/status — **no amount**); Customization Save + Policy Edit stay honest panel gates.
+
+**Django note**: each form drawer maps to a Django `ModelForm` rendered inside a `{% block drawer %}` `<template>`;
+the visible fields are `{{ form.field }}` widgets, the final Save is `<button ... {% if not backend %}disabled{% endif
+%}>` — nothing persists until the backend is wired. The `formDrawer()` body is a plain field list, so swapping the
+INERT controls for real form widgets is a one-file change per surface.
+
+**Coverage / freeze**: admin menu **50 items, 0 unclassified** (`nav.config.js` route rules 0-diff; 2 stale
+`FUTURE_ROUTES` doc-entries cleaned); route/page **103 pages, 0 orphan, 0 missing mirror** (`build-html.mjs` PAGES
+0-diff). The 14 candidate-list pickers stay list-then-gate; the 3 hybrid category drawers gained real create forms.
+Teacher-portal ×16 + family + student + index bodies byte-identical; the protected role-law + 026–031 smoke asserts
+are byte-verbatim (the ONE amendment: the finance invoice-drawer count now scopes to `inv*` templates so the
+additive `bank-add` form isn't miscounted). Build 103; smoke PASS + a new form-completion block (0 field-less
+create/edit modal, 0 MUST-OMIT leak, 0 MUST-GATE control, pickers + hybrids re-pinned); a11y critical=0 serious=0
+(+ open-form / mobile-390 / dark / EN rows); 258 screenshots 0 console errors (39 new open-form frames).
+
+## Spec 034 — Control Center Pages Completion (Messages / Leads / Tasks / Announcements / Time Converter)
+
+The first Spec-033-roadmap follow-up. It closes the five Control-category «قريبًا» items by building **five real standalone frontend pages** (AR + EN each) and flipping their nav items `planned → implemented`. **Count 103 → 113 (+10).** Four are honest **shells** (real list/board/detail/compose UI; every backend-write final is a `backendRequired` gate — no fake send/convert/save/move/publish, no persistence/mutation); the fifth, `time-converter`, is a **genuinely working client-side tool** (native `Intl`, no gate, no dependency, no network).
+
+- **messages.html** — inbox list + thread panel + compose (Send/attach gated) + read-only thread sheets + Create-Group/Add-Member form drawers (image upload gated; **no `type=file`**).
+- **leads.html** — authored KPI cards + a lead list (date/parent/email/phone) + 9 status filters + a lead-detail drawer (notes log + Add-Notes + Change-Status forms) + a Create-Request form (~19 grounded fields; **no money field**); Convert/Assign/Save/Update = gates.
+- **tasks.html** — a KPI strip + a display-only status board (no drag) + a per-staff table ("Average" = authored literal) + Create/Edit-task + Add-Section form drawers; Save/Assign/Move = gates.
+- **announcements.html** — an announcements list + a compose form (message/channels/private/expire/audience) + a preview + a recipient display; **Publish/Send + WhatsApp + media = gates** (**no `type=file`**); the notification-*settings* matrix stays in `settings.html` (not duplicated).
+- **time-converter.html** — a real client tool: source/target timezone + date/time → live conversion computed with native `Intl.DateTimeFormat({ timeZone })` via a **page-scoped `initTimeConverter()` IIFE** in `enhance.js` (mirrors `initTabs`/`initWizard`; guarded → inert on every other page; **no new global `data-*` hook, no storage key, no dependency**). Plus common-zone quick chips and an authored DST-changes tab. **No gate on the conversion.**
+
+**Mechanism**: existing primitives only (pageHeader/summaryCards/cardGrid/filterBar/tabs/previewTemplate+formDrawer/field/optsFrom/confirmAction/chip) + the CLOSED `data-*` hook set; one new authored fixture (`fixtures/control-center.js`) + one new mirrored locale pair (`ar/en.ctrl.js`, registered in `i18n.js`) + additive `.cc-*` CSS. The one runtime addition is the guarded `initTimeConverter` IIFE. **No `package.json` change, no dependency, no backend/API/websocket/engine.**
+
+**Django note**: messages → a `Conversation`/`Message` list + compose `ModelForm`; leads → a `Lead` list + filters + Create/Notes/Status `ModelForm`s; tasks → a `Task`/`Section` board + create `ModelForm`; announcements → a broadcast `ModelForm` + audience querysets; each write posts (gated until the backend is wired). `time-converter` needs no Django model — the browser's `Intl` tz database performs the conversion.
+
+**Verified**: build 113; smoke PASS (112 loads; additive Control block — per-page shell + gated finals, `time-converter` output-updates-on-input + 0 external request; protected role-law + Spec-032 form-completion + 026–031 asserts BYTE-VERBATIM; the one sanctioned amendment moved the dashboard planned-item feedback probe to a category that still has a planned item, since Control no longer does); a11y critical=0 serious=0 (+5 pages light/dark/mobile-390 + open-form rows); 282 screenshots 0 console errors (24 sp034 frames). Only the 52 admin pages' shared sidebar changed (5 «قريبًا» → anchors); every admin `#page-body` + all portal pages + index byte-identical; `package.json`/no new dependency 0-diff.

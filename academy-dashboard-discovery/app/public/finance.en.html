@@ -275,17 +275,17 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span class="label">Attendance</span>
   </a><a href="sessions-analysis.en.html" class="nav-item" data-nav="sessionsAnalysis" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Sessions analysis</span>
-  </a><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">Messages</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">New Requests</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Tasks</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">Announcements</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">Time converter</span><span class="nav-soon">Soon</span>
-    </button><a href="public-holiday.en.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
+  </a><a href="messages.en.html" class="nav-item" data-nav="messages" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">Messages</span>
+  </a><a href="leads.en.html" class="nav-item" data-nav="leads" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">New Requests</span>
+  </a><a href="tasks.en.html" class="nav-item" data-nav="tasks" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Tasks</span>
+  </a><a href="announcements.en.html" class="nav-item" data-nav="announcements" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">Announcements</span>
+  </a><a href="time-converter.en.html" class="nav-item" data-nav="timeConverter" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">Time converter</span>
+  </a><a href="public-holiday.en.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">Public holidays</span>
   </a><a href="scheduled-actions.en.html" class="nav-item" data-nav="scheduledActions" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Scheduled actions</span>
@@ -912,7 +912,7 @@
       <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">List of bank accounts — display-only; linking, import and matching need the real bank connection.</p>
     </div>
     <div class="report-actions flex items-center flex-wrap gap-2 mb-4" role="group" aria-label="Bank accounts">
-    <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="fin.bank.addTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add bank account</span></button>
+    <button type="button" class="btn btn-secondary btn-sm"   data-drawer="bank-add" data-modal-trigger data-modal-title-key="fin.bank.addTitle"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add bank account</span></button>
     <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="fin.bank.importReason" aria-disabled="true" title="Importing statements needs the real bank connection — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Import statement</span></button>
     <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="fin.bank.reconcileReason" aria-disabled="true" title="Bank reconciliation needs the real bank connection — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Reconcile</span></button>
   </div>
@@ -928,7 +928,22 @@
   </div><div class="card p-3.5 flex items-center justify-between gap-3">
     <div class="font-bold text-ink text-[13.5px]">Alinma Bank</div>
     <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Inactive</span></span>
-  </div></div></section>
+  </div></div>
+    <template data-preview="bank-add">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Add bank account</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-bankAdd-bankName">Bank name</label><input id="f-bankAdd-bankName" name="bankAdd-bankName" type="text" class="input" placeholder="e.g. Al Rajhi Bank" value="" /></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></div>
+    </div>
+  </template></section>
   </div>
   </div>
       </main>

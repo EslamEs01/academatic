@@ -48,6 +48,13 @@ export default {
       export: 'تصدير الملخّص يتطلب ربط الخادم (خارج النطاق الحالي).',
     },
     enroll: { title: 'إضافة طلاب إلى الدورة', hint: 'اختر الطلاب من القائمة — يتم التسجيل بعد ربط الخادم.', cta: 'إضافة الطلاب' },
+    /* Spec 032 — form-drawer field labels (crs-add / crs-edit؛ حقول عرض فقط، الحفظ بعد ربط الخادم) */
+    form: {
+      material: 'المادة', teacher: 'المعلم',
+      startDate: 'تاريخ البدء', startDatePh: 'مثال: 2026-09-01',
+      scheduleDay: 'يوم الجلسة الأسبوعي', scheduleTime: 'وقت الجلسة', scheduleTimePh: 'مثال: 16:30', scheduleDuration: 'مدة الجلسة',
+      delOld: 'الجلسات القديمة عند التعديل', delOldNo: 'الإبقاء على الجلسات القديمة', delOldYes: 'حذف الجلسات القديمة',
+    },
     /* student/family integration hints */
     studentTitle: 'الدورة والمجموعة', familyTitle: 'دورات الأبناء ومجموعاتهم',
     familyHint: '{c} دورات نشطة · {g} مجموعات', familyNone: 'لا توجد دورات نشطة بعد',
@@ -82,6 +89,12 @@ export default {
       move: 'نقل الطلاب بين المجموعات يتطلب ربط الخادم (خارج النطاق الحالي).',
     },
     assign: { title: 'إضافة طلاب إلى المجموعة', hint: 'اختر الطلاب — يتم الإسناد بعد ربط الخادم.', cta: 'إضافة الطلاب' },
+    /* Spec 032 — form-drawer field labels (grp-add / grp-edit؛ حقول عرض فقط، الحفظ بعد ربط الخادم) */
+    form: {
+      name: 'اسم المجموعة', namePh: 'مثال: مجموعة الرياضيات ب',
+      course: 'الدورة', students: 'الطلاب المرشّحون',
+      suggestedHours: 'عدد الساعات المقترَح', suggestedHoursPh: 'مثال: 24',
+    },
   },
 
   /* fixture group names (grp1/2/3 reuse the existing data.grp.math/prog/eng) */

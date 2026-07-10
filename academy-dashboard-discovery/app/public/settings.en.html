@@ -275,17 +275,17 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span class="label">Attendance</span>
   </a><a href="sessions-analysis.en.html" class="nav-item" data-nav="sessionsAnalysis" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Sessions analysis</span>
-  </a><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">Messages</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">New Requests</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Tasks</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">Announcements</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">Time converter</span><span class="nav-soon">Soon</span>
-    </button><a href="public-holiday.en.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
+  </a><a href="messages.en.html" class="nav-item" data-nav="messages" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">Messages</span>
+  </a><a href="leads.en.html" class="nav-item" data-nav="leads" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">New Requests</span>
+  </a><a href="tasks.en.html" class="nav-item" data-nav="tasks" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Tasks</span>
+  </a><a href="announcements.en.html" class="nav-item" data-nav="announcements" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">Announcements</span>
+  </a><a href="time-converter.en.html" class="nav-item" data-nav="timeConverter" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">Time converter</span>
+  </a><a href="public-holiday.en.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">Public holidays</span>
   </a><a href="scheduled-actions.en.html" class="nav-item" data-nav="scheduledActions" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Scheduled actions</span>
@@ -489,7 +489,23 @@
       <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg></span>
       <div><h2 class="text-[15px] font-bold text-ink">Expense heads</h2>
       <p class="text-[12px]" style="color:var(--c-ink-3)">A classification lookup — name and status only, no amounts.</p></div>
-    </div><div class="set-row"><div class="min-w-0"><div class="set-label">Rent</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">Utilities</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">Supplies</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">Marketing</div></div><div class="shrink-0"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Inactive</span></span></div></div><div class="mt-2"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="adm.set.heads.addTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add head</span></button></div></section></section>
+    </div><div class="set-row"><div class="min-w-0"><div class="set-label">Rent</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">Utilities</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">Supplies</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">Marketing</div></div><div class="shrink-0"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Inactive</span></span></div></div><div class="mt-2"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="head-add"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add head</span></button></div></section><template data-preview="head-add">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Add expense head</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-headAdd-name">Name</label><input id="f-headAdd-name" name="headAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-headAdd-status">Status</label><span class="select-wrap"><select id="f-headAdd-status" name="headAdd-status" class="select-input">
+      <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
+    </div></div>
+    </div>
+  </template></section>
     <section class="tabpanel" role="tabpanel" id="tabpanel-settings-notifications" data-tabpanel="notifications" aria-labelledby="tab-settings-notifications" hidden><section class="set-section" id="set-notif">
     <div class="flex items-center gap-3 mb-2">
       <span class="medallion m-soft tone-sky medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bell"></use></svg></span>

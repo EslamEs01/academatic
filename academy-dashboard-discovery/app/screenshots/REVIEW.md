@@ -800,3 +800,66 @@ salary/pay figure (staff omits salary; heads name/status; notif `salaries` figur
 changed among existing bodies; the 3 nav flips changed the shared sidebar (staff/books/certificates → anchors,
 proven the only change); teacher-portal ×16 + family + student + index + finance/reports bodies byte-identical.
 Protected role-law + 026-030 smoke asserts byte-verbatim. a11y critical=0 serious=0.
+
+## Spec 032 — Create-Edit Forms Completion / Production Freeze
+
+**Frames**: 39 new `sp032-*` open-form frames (258 total · 0 console errors) — one open drawer per rebuilt
+create/edit surface across desktop AR + select EN + dark + mobile 390, plus a picker-drawer proof and the
+nested feedback-form proof: `sp032-sess-new`, `sp032-fam-edit`(+`-dark`), `sp032-fam-child`, `sp032-fam-note`,
+`sp032-wizard-child3`, `sp032-stu-add`(+`-mobile`), `sp032-stu-edit`, `sp032-stu-note`, `sp032-crs-add`(+`-en`),
+`sp032-crs-edit`, `sp032-create-group`, `sp032-grp-add`, `sp032-grp-edit`, `sp032-trn-add`(+`-mobile`),
+`sp032-trn-edit`, `sp032-trn-note`, `sp032-trn-categories-form`, `sp032-fb-create`, `sp032-form-create-en`,
+`sp032-fbcat-form`, `sp032-fb-add`, `sp032-bank-add`(+`-dark`), `sp032-staff-add`(+`-en`), `sp032-staff-edit`,
+`sp032-staff-dup`, `sp032-cert-tpl`(+`-dark`), `sp032-cert-create`, `sp032-mat-add`, `sp032-lib-item`,
+`sp032-head-add`(+`-mobile`), `sp032-picker-proof`.
+
+### The core change: a real form before every gate (FC-01…FC-40)
+Every Add/Create/New/Edit/Duplicate action used to open a field-less "backendRequired" note as its first-and-only
+response. Now each opens a **form-bearing drawer**: a baked `<template data-preview>` whose body is a `.wiz-grid`
+of INERT `field()` controls (via the new additive `formDrawer()` helper in `preview-drawer.js`, wrapping the
+existing `previewTemplate`) followed by exactly ONE clickable `data-disabled-reason` backendRequired final. The
+40 field-less create/edit gates became 24 shared form drawers; **0 field-less create/edit modal remains**. No new
+hook, no new storage key, no new engine, no new page (count held at 103).
+
+### What the forms show (and what they never show)
+- **Sessions** (`sess-new`): course/teacher/date/time/duration/credit-source/status. **Family/Student**: fam-edit
+  (name±ar/email/phone/status/category/notes — **no password**), fam-child, fam-note, stu-edit, stu-note, stu-add
+  (+ trial block); the add-family wizard's "Add child" now reveals a real third child row via a native `<details>`.
+- **Courses/Groups**: crs-add/crs-edit (material/teacher/start-date/schedule — **no teacher-rate field**),
+  grp-add (course prefilled for create-from-course)/grp-edit — **no per-group rate field**.
+- **Teachers** (`sp032-trn-add`): name±ar/email/phone/status/subjects/level/course/city/country/notes + a CV-upload
+  **gate** — **no salary/hour-rate/fine/meeting-provider/payout/auth-secret field anywhere**.
+- **Reports**: fb-add (nested in the outcome sheet)/fb-create/form-create (repeatable field-builder rows)/rep-fbcat.
+- **Finance** (`bank-add`): bank-name only — **no credentials, no balance, no figure**. **Staff**: add/edit/dup
+  (name/username/email/phone/role/status — **no password, no salary, no OTP**).
+- **Certificates** (`cert-tpl`): name + a **static** designer preview (CSS-positioned field labels) + a background-
+  upload **gate** — no `<canvas>`, no drag, no PDF. cert-create (student/course/template/date/message + preview gate).
+- **Library/Settings**: mat-add/mat-edit, lib-item (+ upload/thumbnail gates), lib-cats create form, head-add
+  (name/status — **no amount**). Customization Save + Policy Edit stay honest panel gates over already-visible fields.
+
+### Honesty / role laws / impact
+Fields are INERT (no behavior hook, no persistence); every final Save/Submit/Issue is a `data-disabled-reason`
+backendRequired gate — no fake save/create/edit/assign/upload/PDF/payment/permission/integration. **0**
+`type=password`/`type=file`/`<canvas>`/`.pdf`/`window.open`/`blob:`/`download=`/credential-named control in any
+form body; **0** salary/pay/hour-rate/fine/amount figure. The 14 candidate-list pickers stay list-then-gate; the
+3 hybrid category drawers (`trn-categories`/`rep-fbcat`/`lib-cats`) gained real create forms. Teacher-portal ×16 +
+family + student + index bodies byte-identical; `package.json`/`build-html.mjs` PAGES 0-diff; protected role-law
++ 026-031 smoke asserts byte-verbatim. Mobile 390: `.wiz-grid` reflows to one column, no horizontal overflow.
+a11y critical=0 serious=0 (open-form focus-trap/dialog rows added).
+
+## Spec 034 — Control Center Pages (Messages / Leads / Tasks / Announcements / Time Converter)
+
+**Frames**: 24 new `sp034-*` frames (282 total · 0 console errors) — each page desktop AR + EN + dark + mobile-390, plus open-form/drawer proofs and the time-converter active-conversion frame:
+`sp034-messages`(+`-en`/`-dark`/`-group`/`-mobile`), `sp034-leads`(+`-en`/`-dark`/`-create`/`-detail`/`-mobile`),
+`sp034-tasks`(+`-en`/`-dark`/`-create`/`-mobile`), `sp034-announcements`(+`-en`/`-dark`/`-mobile`),
+`sp034-timeconverter`(+`-en`/`-dark`/`-mobile`, all with a live computed result).
+
+### The five closed Control items (103 → 113; 5 nav «قريبًا» → real links)
+- **messages** (`sp034-messages`, `-group`): inbox list (contact/role/unread) + a default thread panel (authored bubbles) + a compose box; **Send/attach = backendRequired gates**; read-only thread sheets per conversation; Create-Group + Add-Member form drawers with the image upload as a **gate** (no `type=file`).
+- **leads** (`sp034-leads`, `-create`, `-detail`): authored KPI cards + a lead list (date/parent/email/phone) + 9 status filters + a lead-detail drawer (notes log + Add-Notes + Change-Status forms) + a Create-Request form (~19 grounded fields, **no money field**); Convert/Assign/Save/Update = gates.
+- **tasks** (`sp034-tasks`, `-create`): KPI strip + a display-only status board (no drag) + a per-staff table ("Average" = authored literal) + Create/Edit-task + Add-Section form drawers; Save/Assign/Move = gates.
+- **announcements** (`sp034-announcements`): announcements list (audience/channel/status chips) + a compose form (message/channels/private/expire/audience) + preview + recipients; **Publish/Send + WhatsApp + media = gates** (no `type=file`); does NOT duplicate the settings Notifications form.
+- **time-converter** (`sp034-timeconverter`): a **real working client tool** — source/target zone + date/time → live conversion via native `Intl` (Cairo 3 PM → New York 8 AM in the frame), common-zone quick chips, and an authored DST-changes tab. **No gate on the conversion; no network; no dependency.**
+
+### Honesty / impact
+Every write final is a `backendRequired` gate (or an inert disabled-with-reason button) — 0 fake send/convert/save/move/publish/delivery, 0 row/status/thread mutation, 0 fake-success wording. **0** `type=file`/`type=password`/credential/`<canvas>`/`.pdf`/`window.open`/money-figure in any of the 5 bodies. Only the 52 admin pages' shared sidebar changed (5 «قريبًا» → anchors); every admin `#page-body`, all portal pages, and index are byte-identical. `package.json` 0-diff. a11y critical=0 serious=0 (incl. mobile-390 + open-form rows).

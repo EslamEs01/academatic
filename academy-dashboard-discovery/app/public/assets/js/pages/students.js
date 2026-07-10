@@ -12,9 +12,13 @@ import { filterBar } from '../components/filter-bar.js';
 import { dataTable, tableFooter } from '../components/data-table.js';
 import { avatar, button } from '../components/ui.js';
 import { progressBar } from '../components/sparkline.js';
-import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from '../components/preview-drawer.js';
+import { field } from '../components/form-field.js';
+import { GENDER_OPTS, LANGUAGE_OPTS, SUBJECT_OPTS, DURATION_OPTS } from '../fixtures/form-options.js';
+import { TEACHERS } from '../fixtures/teachers.js';
 import { noResults } from '../components/states.js';
 import { FAMILY_STATUS, familyStatusChip } from '../components/family-status.js';
+import { stuEditDrawer } from './student.js';
 
 const SUBJECTS = ['math', 'arabic', 'programming', 'physics', 'english', 'science'];
 const progressTone = (p) => (p >= 70 ? 'success' : p >= 40 ? 'sky' : 'amber');
@@ -45,6 +49,26 @@ function row(s) {
       <button type="button" class="icon-btn" data-row-menu="${esc(s.id)}" data-row-menu-kind="student" aria-haspopup="menu" aria-label="${esc(t('stu.rowMenu'))}">${icon('ellipsis', 'ico')}</button>
     </div></td>
   </tr>`;
+}
+
+/* Spec 032 (FC-14) — the Add-student form drawer: the core child fields plus the
+ * authored trial block (subject / teacher / duration selects — fixture-derived).
+ * INERT fields + the ONE formDrawer backendRequired final; nothing persists. */
+function stuAddDrawer() {
+  const famOpts = FAMILIES.rows.map((f, i) => ({ value: f.id, labelKey: f.guardian.nameKey, selected: i === 0 }));
+  const teacherOpts = TEACHERS.rows.map((x, i) => ({ value: x.id, labelKey: x.nameKey, selected: i === 0 }));
+  const fields = [
+    field({ labelKey: 'sp.form.name', name: 'stuAdd-name' }),
+    field({ labelKey: 'sp.form.nameAr', name: 'stuAdd-nameAr' }),
+    field({ labelKey: 'sp.form.language', name: 'stuAdd-language', type: 'select', options: LANGUAGE_OPTS }),
+    field({ labelKey: 'sp.form.gender', name: 'stuAdd-gender', type: 'select', options: GENDER_OPTS }),
+    field({ labelKey: 'sp.form.birthDate', name: 'stuAdd-birthDate', placeholderKey: 'sp.form.birthDatePh' }),
+    field({ labelKey: 'stu.col.family', name: 'stuAdd-family', type: 'select', options: famOpts }),
+    field({ labelKey: 'sp.form.trialMaterial', name: 'stuAdd-trialMaterial', type: 'select', options: SUBJECT_OPTS }),
+    field({ labelKey: 'sp.form.trialTeacher', name: 'stuAdd-trialTeacher', type: 'select', options: teacherOpts }),
+    field({ labelKey: 'sp.form.trialDuration', name: 'stuAdd-trialDuration', type: 'select', options: DURATION_OPTS }),
+  ].join('');
+  return formDrawer('stu-add', { titleKey: 'stu.add', headIcon: 'plus', fields, ctaKey: 'common.add' });
 }
 
 function preview(s) {
@@ -83,10 +107,12 @@ export function renderStudents() {
   ];
   const table = dataTable({ id: 'students-table', head, rows: rows.map(row), footerHTML: tableFooter({ shown: rows.length, total: rows.length }) });
   return `
-    ${pageHeader({ titleKey: 'stu.title', subKey: 'stu.sub', primary: button({ labelKey: 'stu.add', variant: 'primary', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="stu.add" data-modal-note-key="common.backendRequiredNote"' }), summaryHTML: summary })}
+    ${pageHeader({ titleKey: 'stu.title', subKey: 'stu.sub', primary: button({ labelKey: 'stu.add', variant: 'primary', icon: 'plus', attrs: 'data-drawer="stu-add"' }), summaryHTML: summary })}
     ${filters}
     ${table}
     ${noResults()}
     ${rows.map(preview).join('')}
+    ${stuAddDrawer()}
+    ${stuEditDrawer()}
   `;
 }

@@ -131,7 +131,8 @@ const MATRIX = [
   { page: 'public-holiday', lang: 'ar', theme: 'dark',  vp: 'desktop' },
   { page: 'scheduled-actions', lang: 'ar', theme: 'light', vp: 'desktop' },
   { page: 'scheduled-actions', lang: 'ar', theme: 'light', vp: 'mobile' },
-  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'desktop', sessCreateModal: true, variant: 'create-modal' },
+  // Spec 032 — the New-session action now opens the sess-new FORM drawer (same frame name)
+  { page: 'sessions', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'sess-new', variant: 'create-modal' },
   // Spec 010 — Coverage, Navigation IA & Polish (acceptance frames). The six rail categories
   // expanded (AR light) are already covered above via the default control view + cat: families/
   // teachers/reports/admin/settings; the reports-category frame shows the finance sub-section.
@@ -268,6 +269,72 @@ const MATRIX = [
   { page: 'students', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp027-mobile' },
   { page: 'course', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp027-en' },
   { page: 'group', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp027-dark' },
+  // Spec 032 — form-completion freeze: one OPEN-FORM frame per rebuilt create/edit surface
+  // (desktop AR + select EN + dark + mobile 390) + picker-drawer + nested-feedback proofs
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'sess-new', variant: 'sp032-sess-new' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-edit', variant: 'sp032-fam-edit' },
+  { page: 'family', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'fam-edit', variant: 'sp032-fam-edit-dark' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-child', variant: 'sp032-fam-child' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-note', variant: 'sp032-fam-note' },
+  { page: 'add-family', lang: 'ar', theme: 'light', vp: 'desktop', step: 'children', disclose: true, variant: 'sp032-wizard-child3' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'stu-add', variant: 'sp032-stu-add' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'mobile', openDrawer: 'stu-add', variant: 'sp032-stu-add-mobile' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'stu-edit', variant: 'sp032-stu-edit' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'stu-note', variant: 'sp032-stu-note' },
+  { page: 'courses', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-add', variant: 'sp032-crs-add' },
+  { page: 'courses', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'crs-add', variant: 'sp032-crs-add-en' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-edit', variant: 'sp032-crs-edit' },
+  { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-add', variant: 'sp032-create-group' },
+  { page: 'groups', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-add', variant: 'sp032-grp-add' },
+  { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-edit', variant: 'sp032-grp-edit' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-add', variant: 'sp032-trn-add' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile', openDrawer: 'trn-add', variant: 'sp032-trn-add-mobile' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-edit', variant: 'sp032-trn-edit' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-note', variant: 'sp032-trn-note' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-categories', variant: 'sp032-trn-categories-form' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fb-create', variant: 'sp032-fb-create' },
+  { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'form-create', variant: 'sp032-form-create-en' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'rep-fbcat', variant: 'sp032-fbcat-form' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', outcomeDrawer: true, nestedDrawer: 'fb-add', variant: 'sp032-fb-add' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'banks', openDrawer: 'bank-add', variant: 'sp032-bank-add' },
+  { page: 'finance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'banks', openDrawer: 'bank-add', variant: 'sp032-bank-add-dark' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'staff-add', variant: 'sp032-staff-add' },
+  { page: 'staff', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'staff-add', variant: 'sp032-staff-add-en' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', staffKebabDrawer: 'staff-edit', variant: 'sp032-staff-edit' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', staffKebabDrawer: 'staff-dup', variant: 'sp032-staff-dup' },
+  { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'cert-tpl', variant: 'sp032-cert-tpl' },
+  { page: 'certificates', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'cert-tpl', variant: 'sp032-cert-tpl-dark' },
+  { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', view: 'requests', openDrawer: 'cert-create', variant: 'sp032-cert-create' },
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'mat-add', variant: 'sp032-mat-add' },
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', view: 'books', openDrawer: 'lib-item', variant: 'sp032-lib-item' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', openDrawer: 'head-add', variant: 'sp032-head-add' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'mobile', view: 'general', openDrawer: 'head-add', variant: 'sp032-head-add-mobile' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-assign-course', variant: 'sp032-picker-proof' },
+  // Spec 034 — Control Center pages: inbox/board/compose/converter + open forms + mobile/dark/EN
+  { page: 'messages', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-messages' },
+  { page: 'messages', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-messages-en' },
+  { page: 'messages', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-messages-dark' },
+  { page: 'messages', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'msg-group', variant: 'sp034-messages-group' },
+  { page: 'messages', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-messages-mobile' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-leads' },
+  { page: 'leads', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-leads-en' },
+  { page: 'leads', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-leads-dark' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'lead-new', variant: 'sp034-leads-create' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'lead-l1', variant: 'sp034-leads-detail' },
+  { page: 'leads', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-leads-mobile' },
+  { page: 'tasks', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-tasks' },
+  { page: 'tasks', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-tasks-en' },
+  { page: 'tasks', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-tasks-dark' },
+  { page: 'tasks', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'task-new', variant: 'sp034-tasks-create' },
+  { page: 'tasks', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-tasks-mobile' },
+  { page: 'announcements', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp034-announcements' },
+  { page: 'announcements', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp034-announcements-en' },
+  { page: 'announcements', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp034-announcements-dark' },
+  { page: 'announcements', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp034-announcements-mobile' },
+  { page: 'time-converter', lang: 'ar', theme: 'light', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter' },
+  { page: 'time-converter', lang: 'en', theme: 'light', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter-en' },
+  { page: 'time-converter', lang: 'ar', theme: 'dark', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter-dark' },
+  { page: 'time-converter', lang: 'ar', theme: 'light', vp: 'mobile', tcConvert: true, variant: 'sp034-timeconverter-mobile' },
 ];
 
 (async () => {
@@ -328,6 +395,22 @@ const MATRIX = [
     if (s.studentKebab) { await page.click('#students-table [data-row-menu][data-row-menu-kind="student"]').catch(() => {}); await page.waitForTimeout(320); }
     if (s.teacherKebab) { await page.click('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]').catch(() => {}); await page.waitForTimeout(320); }
     if (s.openDrawer) { await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440); }
+    // Spec 032 — staff kebab → form drawer; the fb-add form nested in the open outcome sheet;
+    // the add-family wizard native child-disclosure
+    if (s.staffKebabDrawer) {
+      await page.click('#staff-grid [data-row-menu][data-row-menu-kind="staff"]').catch(() => {}); await page.waitForTimeout(280);
+      await page.click(`.popover [data-drawer="${s.staffKebabDrawer}"]`).catch(() => {}); await page.waitForTimeout(440);
+    }
+    if (s.nestedDrawer) { await page.click(`.drawer.sheet [data-drawer="${s.nestedDrawer}"]`).catch(() => {}); await page.waitForTimeout(460); }
+    if (s.disclose) { await page.click('[data-wizard] details > summary').catch(() => {}); await page.waitForTimeout(260); }
+    // Spec 034 — drive the time converter so the screenshot shows a real computed result
+    if (s.tcConvert) {
+      await page.selectOption('[data-tc-source]', 'Africa/Cairo').catch(() => {});
+      await page.selectOption('[data-tc-target]', 'America/New_York').catch(() => {});
+      await page.fill('[data-tc-date]', '2026-06-20').catch(() => {});
+      await page.fill('[data-tc-time]', '15:00').catch(() => {});
+      await page.waitForTimeout(200);
+    }
     if (s.mgmtModal) { await page.click(`[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`).catch(() => {}); await page.waitForTimeout(340); }
     if (s.mgmtConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
 
@@ -338,7 +421,7 @@ const MATRIX = [
       if (el) await el.screenshot({ path: path.join(OUT, name) });
       else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
     } else {
-      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.teacherKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm });
+      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.teacherKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm && !s.staffKebabDrawer && !s.nestedDrawer });
     }
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);

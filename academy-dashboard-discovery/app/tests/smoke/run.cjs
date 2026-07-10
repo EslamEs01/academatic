@@ -11,6 +11,8 @@ const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedu
   'sessions-analysis', 'public-holiday', 'scheduled-actions',
   // Spec 031 — Users&Staff / Content library / Certificates (settings folds into the existing settings page)
   'staff', 'library', 'certificates',
+  // Spec 034 — Control Center pages (messages/leads/tasks/announcements/time-converter)
+  'messages', 'leads', 'tasks', 'announcements', 'time-converter',
   'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
   'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
@@ -64,6 +66,41 @@ const FILTER_SPEC = {
   reports: { facet: 'area', value: 'attendance', apply: (p) => p.selectOption('select[data-filter="area"]', 'attendance') },
   schedule: { facet: null, value: null, apply: (p) => p.selectOption('select[data-filter="teacher"]', { index: 1 }) },
 };
+
+// ===== Spec 032 — Create-Edit Forms Completion freeze (FC-01…FC-40). Every Add/Create/
+// Edit/Duplicate action now opens a form-bearing drawer: a baked <template data-preview>
+// whose body holds ≥1 INERT input/select/textarea + a clickable data-disabled-reason
+// backendRequired final (no fake save, no persistence, no mutation). This map pins every
+// rebuilt form drawer to its host page(s); the block below audits each template body,
+// re-pins the candidate-list pickers + the 3 hybrid category-create drawers, and enforces
+// the MUST-OMIT / MUST-GATE contracts on every form body. ADDITIVE ONLY — every protected
+// Spec-026…031 assert in this file stays byte-verbatim. =====
+const FORM_DRAWERS_032 = {
+  sessions: ['sess-new'], dashboard: ['sess-new'],
+  families: ['fam-edit', 'fam-cat'], family: ['fam-edit', 'fam-child', 'fam-note', 'fam-cat'],
+  students: ['stu-edit', 'stu-add'], student: ['stu-edit', 'stu-note'],
+  courses: ['crs-add'], course: ['crs-edit', 'grp-add'],
+  groups: ['grp-add'], group: ['grp-edit'],
+  teachers: ['trn-edit', 'trn-add', 'trn-categories'], teacher: ['trn-edit', 'trn-note'],
+  reports: ['fb-create', 'form-create', 'rep-fbcat'],
+  finance: ['bank-add'], staff: ['staff-add', 'staff-edit', 'staff-dup'],
+  certificates: ['cert-tpl', 'cert-create'], library: ['mat-add', 'mat-edit', 'lib-item', 'lib-cats'],
+  settings: ['head-add'], attendance: [],
+};
+// the outcome drawer's Add-feedback form (FC-25) is NESTED inside the attended outcome
+// templates (resolvable while the outcome sheet is open) on these pages
+const NESTED_FB_032 = new Set(['attendance', 'sessions', 'course', 'group', 'teacher']);
+// the candidate-list pickers re-pinned by Spec 032 (list + honest gate; no fake assign)
+const PICKERS_032 = {
+  student: ['stu-enroll', 'stu-assign', 'stu-move'],
+  course: ['crs-enroll', 'crs-assign-teacher'],
+  group: ['grp-assign', 'grp-assign-teacher'],
+  teacher: ['trn-assign-course', 'trn-assign-group', 'trn-availability'],
+  teachers: ['trn-categories'], family: ['fam-cat'],
+  reports: ['rep-fbcat'], library: ['lib-cats'], staff: ['st-perm'],
+};
+// the 3 hybrid category drawers whose embedded Create is now a REAL form (FC-24/26/38)
+const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], library: ['lib-cats'] };
 
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
@@ -175,10 +212,17 @@ const FILTER_SPEC = {
         // Spec 026 (DU-20): the dashboard's fake .select-btn filter controls were removed (Option B) —
         // the honest replacement is a real "view all sessions" link; the remaining controls still must feed back.
         for (const sel of ['.pager:not(.is-current)', '[data-action="theme-menu"]',
-          '[data-action="apps-grid"]', '[data-action="quick-actions"]', '.nav-item.is-planned']) {
+          '[data-action="apps-grid"]', '[data-action="quick-actions"]']) {
           const r = await clickFeedback(sel);
           ok(!r, `${page}/${lang}: ${r}`);
         }
+        // Spec 034: the Control category (default panel) no longer has a planned «قريبًا» item —
+        // all 5 flipped to implemented. Reveal a category that still has one (families →
+        // familyCategories) and verify the planned-item toast still fires — coverage preserved.
+        await p.click('[data-nav-category="families"]').catch(() => {});
+        await p.waitForTimeout(140);
+        const rPlanned = await clickFeedback('.cat-panel:not([hidden]) .nav-item.is-planned');
+        ok(!rPlanned, `${page}/${lang}: ${rPlanned}`);
         // disabled finance nav is aria-disabled (announced disabled to AT) but still fires its reason
         // toast on a real click; Playwright won't auto-click an aria-disabled node, so dispatch directly.
         const dis = await p.$('.nav-item.is-disabled');
@@ -934,7 +978,10 @@ const FILTER_SPEC = {
           const cancelledRow = document.querySelector('#invoice-list [data-row][data-status="cancelled"]');
           const cancelledDisabledRecord = cancelledRow ? !!cancelledRow.querySelector('.fr-actions [data-disabled-reason]') : false;
           const cancelledConfirmRecord = cancelledRow ? !!cancelledRow.querySelector('.fr-actions [data-confirm]') : false;
-          const drawers = document.querySelectorAll('template[data-preview]').length;
+          // Spec 032 (the ONE declared scope amendment): count the INVOICE drawer templates by
+          // their inv* ids — the additive bank-add FORM drawer (FC-29) now also bakes a template
+          // on this page; the "one drawer template per invoice" intent below stays exactly 9.
+          const drawers = document.querySelectorAll('template[data-preview^="inv"]').length;
           const hrefHash = body.querySelectorAll('a[href="#"]').length;
           const receiptTokens = /receipt|upload|type="file"|إيصال|مرفق/i.test(body.innerHTML);
           const plannedCards = [...document.querySelectorAll('.report-card')];
@@ -1125,6 +1172,161 @@ const FILTER_SPEC = {
           const firstTab = page === 'settings' ? 'general' : page === 'library' ? 'materials' : 'templates';
           const ft = await p.$(`[data-tabs="${grp}"] [data-tab="${firstTab}"]`);
           if (ft) { await ft.click(); await p.waitForTimeout(100); }
+        }
+      }
+
+      // ===== Spec 032 — form-completion + MUST-OMIT/MUST-GATE + picker re-pin (additive) =====
+      if (FORM_DRAWERS_032[page] || PICKERS_032[page]) {
+        const f32 = await p.evaluate(({ formIds, pickerIds, hybridIds, expectNestedFb }) => {
+          const out = { missing: [], fieldless: [], noGate: [], multiPrimary: [], omitLeak: [], nestedFbAdd: 0, pickerBad: [], hybridBad: [] };
+          const OMIT = /pass|secret|api[-_]?key|token|webhook|otp|salary|hour[-_]?rate|fine|payout|iban|cvv/i;
+          const audit = (content, id) => {
+            const ctrls = content.querySelectorAll('input,select,textarea').length;
+            const gates = content.querySelectorAll('[data-disabled-reason],[data-confirm]').length;
+            const primaries = content.querySelectorAll('.btn-primary[data-disabled-reason]').length;
+            if (ctrls === 0) out.fieldless.push(id);
+            if (gates === 0) out.noGate.push(id);
+            if (primaries > 1) out.multiPrimary.push(id);
+            const badType = content.querySelectorAll('input[type="password"],input[type="file"]').length;
+            const badName = [...content.querySelectorAll('input,select,textarea')]
+              .filter((i) => OMIT.test((i.getAttribute('name') || '') + ' ' + (i.getAttribute('id') || ''))).length;
+            if (badType + badName > 0) out.omitLeak.push(id);
+            if (content.querySelector('canvas')) out.omitLeak.push(id + ':canvas');
+          };
+          for (const id of formIds) {
+            const tpl = document.querySelector(`template[data-preview="${id}"]`);
+            if (!tpl) { out.missing.push(id); continue; }
+            audit(tpl.content, id);
+          }
+          // the nested fb-add form (FC-25) lives inside the attended outcome templates
+          if (expectNestedFb) {
+            document.querySelectorAll('template[data-preview]').forEach((tpl) => {
+              const inner = tpl.content.querySelector('template[data-preview="fb-add"]');
+              if (inner) { out.nestedFbAdd++; audit(inner.content, 'fb-add'); }
+            });
+          }
+          // picker re-pin: each candidate-list drawer still renders content + an honest final
+          for (const id of pickerIds) {
+            const tpl = document.querySelector(`template[data-preview="${id}"]`);
+            if (!tpl || !tpl.content.querySelector('[data-disabled-reason]')
+              || (tpl.content.textContent || '').trim().length < 40) out.pickerBad.push(id);
+          }
+          // the 3 hybrid category drawers now carry a REAL create form (≥2 controls)
+          for (const id of hybridIds) {
+            const tpl = document.querySelector(`template[data-preview="${id}"]`);
+            if (!tpl || tpl.content.querySelectorAll('input,select,textarea').length < 2) out.hybridBad.push(id);
+          }
+          return out;
+        }, { formIds: FORM_DRAWERS_032[page] || [], pickerIds: PICKERS_032[page] || [], hybridIds: HYBRID_032[page] || [], expectNestedFb: NESTED_FB_032.has(page) });
+        ok(f32.missing.length === 0, `${page}/${lang}: Spec-032 form drawer template(s) missing: ${JSON.stringify(f32.missing)}`);
+        ok(f32.fieldless.length === 0, `${page}/${lang}: field-less create/edit drawer(s) (fieldlessCreateEdit must be 0): ${JSON.stringify(f32.fieldless)}`);
+        ok(f32.noGate.length === 0, `${page}/${lang}: form drawer(s) without a backendRequired final: ${JSON.stringify(f32.noGate)}`);
+        ok(f32.multiPrimary.length === 0, `${page}/${lang}: form drawer(s) with more than one primary final: ${JSON.stringify(f32.multiPrimary)}`);
+        ok(f32.omitLeak.length === 0, `${page}/${lang}: MUST-OMIT leak inside a form body (secret/pay/upload-typed or -named control): ${JSON.stringify(f32.omitLeak)}`);
+        ok(!NESTED_FB_032.has(page) || f32.nestedFbAdd >= 1, `${page}/${lang}: the outcome drawer's fb-add feedback form template is missing`);
+        ok(f32.pickerBad.length === 0, `${page}/${lang}: candidate-list picker(s) lost their list/honest-final: ${JSON.stringify(f32.pickerBad)}`);
+        ok(f32.hybridBad.length === 0, `${page}/${lang}: hybrid category drawer(s) missing the real create form: ${JSON.stringify(f32.hybridBad)}`);
+        // behavioral proof — the first VISIBLE page-level trigger opens a sheet with real
+        // controls + the gate final (kebab-hosted triggers are covered structurally above)
+        if (page === 'finance') { const bt = await p.$('[data-tabs="finance"] [data-tab="banks"]'); if (bt) { await bt.click(); await p.waitForTimeout(150); } }
+        const openable32 = await p.evaluate((ids) => {
+          for (const id of ids) {
+            const trg = document.querySelector(`[data-drawer="${id}"]`);
+            if (trg && trg.offsetParent) return id;
+          }
+          return null;
+        }, FORM_DRAWERS_032[page] || []);
+        if (openable32) {
+          await p.click(`[data-drawer="${openable32}"]`);
+          await p.waitForTimeout(280);
+          const sheet32 = await p.evaluate(() => {
+            const d = document.querySelector('.drawer.sheet');
+            if (!d) return { open: false };
+            return { open: true, ctrls: d.querySelectorAll('input,select,textarea').length, gate: !!d.querySelector('[data-disabled-reason]') };
+          });
+          ok(sheet32.open && sheet32.ctrls >= 1 && sheet32.gate,
+            `${page}/${lang}: form drawer "${openable32}" did not open with visible controls + a backendRequired final (${JSON.stringify(sheet32)})`);
+          await p.keyboard.press('Escape');
+          await p.waitForTimeout(320); // the panel removes 260ms after close — let it fully unmount
+        }
+        if (page === 'finance') { const ot = await p.$('[data-tabs="finance"] [data-tab="overview"]'); if (ot) { await ot.click(); await p.waitForTimeout(120); } }
+      }
+      // Spec 032 — sitewide MUST-GATE freeze (DOM-scoped input checks; library's data-type="file"
+      // facet attribute is legitimately NOT an input) + admin-menu item-count freeze (50 items).
+      const g32 = await p.evaluate(() => ({
+        pw: document.querySelectorAll('input[type="password"]').length,
+        file: document.querySelectorAll('input[type="file"]').length,
+        canvas: document.querySelectorAll('canvas').length,
+        pdfish: /window\.open|blob:|createObjectURL|\.pdf"|[^-\w]download=/i.test((document.getElementById('page-body') || document.body).innerHTML),
+      }));
+      ok(g32.pw === 0 && g32.file === 0 && g32.canvas === 0, `${page}/${lang}: forbidden live input/canvas affordance (pw=${g32.pw}, file=${g32.file}, canvas=${g32.canvas})`);
+      ok(!g32.pdfish, `${page}/${lang}: a pdf/window.open/blob/download affordance leaked into the body`);
+      if (!PORTAL_PAGES.has(page)) {
+        const navCount32 = await p.evaluate(() => document.querySelectorAll('.nav-panel .nav-item').length);
+        ok(navCount32 === 50, `${page}/${lang}: admin menu freeze expects exactly 50 classified nav items, got ${navCount32}`);
+      }
+
+      // ===== Spec 034 — Control Center pages: real frontend shell first, gated finals =====
+      // (additive; the sitewide g32 file/canvas/pdf + base FAKE/dead-button/raw-key/href
+      //  checks already run on these pages too). Per page: the shell renders + every write
+      //  drawer is a form(≥1 control)+one backendRequired final; timeConverter is a real,
+      //  gate-free client tool whose output actually changes on input (no external request).
+      const CC_PAGES = new Set(['messages', 'leads', 'tasks', 'announcements', 'time-converter']);
+      if (CC_PAGES.has(page)) {
+        const cc = await p.evaluate((pg) => {
+          const body = document.getElementById('page-body');
+          const q = (s) => document.querySelectorAll(s).length;
+          const bq = (s) => body.querySelectorAll(s).length;
+          const tpl = (id) => document.querySelector(`template[data-preview="${id}"]`);
+          const tplCtrls = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('input,select,textarea').length : 0; };
+          const tplGate = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('[data-disabled-reason]').length : 0; };
+          // an honest final gate = clickable data-disabled-reason OR an inert disabled button (both carry a reason, enforced elsewhere)
+          const bodyGates = bq('[data-disabled-reason]') + bq('button[disabled]');
+          const o = { fileInputs: q('input[type="file"]'), pwInputs: q('input[type="password"]'), canvas: q('canvas'), demo: bq('[data-demo-action]'), bodyGates };
+          if (pg === 'messages') { o.rows = q('#msg-list [data-row]'); o.bubbles = q('.cc-bubble'); o.compose = bq('textarea'); o.groupCtrls = tplCtrls('msg-group'); o.groupGate = tplGate('msg-group'); o.memberTpl = !!tpl('msg-member'); }
+          else if (pg === 'leads') { o.kpi = bq('.medallion'); o.rows = q('#leads-table [data-row]'); o.statusFilter = q('select[data-filter="status"]'); o.newCtrls = tplCtrls('lead-new'); o.newGate = tplGate('lead-new'); o.detailTpl = q('template[data-preview^="lead-l"]'); }
+          else if (pg === 'tasks') { o.board = q('.cc-board-col'); o.cards = q('.cc-board .card'); o.newCtrls = tplCtrls('task-new'); o.newGate = tplGate('task-new'); o.sectionTpl = !!tpl('task-section'); }
+          else if (pg === 'announcements') { o.list = q('#ann-list .card, #ann-list [data-row]'); o.compose = bq('textarea'); }
+          else if (pg === 'time-converter') { o.root = q('[data-time-converter]'); o.src = q('[data-tc-source]'); o.tgt = q('[data-tc-target]'); o.dateIn = q('[data-tc-date]'); o.timeIn = q('[data-tc-time]'); o.output = q('[data-tc-output]'); o.quick = q('[data-tc-quick]'); o.tcGate = bq('[data-time-converter] [data-disabled-reason], [data-time-converter] button[disabled]'); }
+          return o;
+        }, page);
+        ok(cc.fileInputs === 0 && cc.pwInputs === 0 && cc.canvas === 0, `${page}/${lang}: Control page has a forbidden file/password/canvas affordance`);
+        ok(cc.demo === 0, `${page}/${lang}: Control page has a data-demo-action (fake action) in the body`);
+        if (page === 'messages') {
+          ok(cc.rows >= 3, `messages/${lang}: inbox rows missing (${cc.rows})`);
+          ok(cc.bubbles >= 2, `messages/${lang}: thread bubbles missing (${cc.bubbles})`);
+          ok(cc.compose >= 1 && cc.bodyGates >= 1, `messages/${lang}: compose+Send gate missing (compose=${cc.compose}, gates=${cc.bodyGates})`);
+          ok(cc.groupCtrls >= 2 && cc.groupGate >= 1, `messages/${lang}: Create-Group not a form+gate (ctrls=${cc.groupCtrls}, gate=${cc.groupGate})`);
+          ok(cc.memberTpl, `messages/${lang}: Add-Member drawer missing`);
+        } else if (page === 'leads') {
+          ok(cc.kpi >= 4, `leads/${lang}: KPI cards missing (${cc.kpi})`);
+          ok(cc.rows >= 6, `leads/${lang}: lead rows missing (${cc.rows})`);
+          ok(cc.statusFilter >= 1, `leads/${lang}: status filter missing`);
+          ok(cc.newCtrls >= 5 && cc.newGate >= 1, `leads/${lang}: Create-Request not a form+gate (ctrls=${cc.newCtrls}, gate=${cc.newGate})`);
+          ok(cc.detailTpl >= 1, `leads/${lang}: lead detail drawer missing`);
+        } else if (page === 'tasks') {
+          ok(cc.board >= 3, `tasks/${lang}: board columns missing (${cc.board})`);
+          ok(cc.cards >= 4, `tasks/${lang}: task cards missing (${cc.cards})`);
+          ok(cc.newCtrls >= 4 && cc.newGate >= 1, `tasks/${lang}: Create-task not a form+gate (ctrls=${cc.newCtrls}, gate=${cc.newGate})`);
+          ok(cc.sectionTpl, `tasks/${lang}: Add-Section drawer missing`);
+        } else if (page === 'announcements') {
+          ok(cc.list >= 3, `announcements/${lang}: announcement list missing (${cc.list})`);
+          ok(cc.compose >= 1 && cc.bodyGates >= 1, `announcements/${lang}: compose+Publish gate missing (compose=${cc.compose}, gates=${cc.bodyGates})`);
+        } else if (page === 'time-converter') {
+          ok(cc.root === 1 && cc.src >= 1 && cc.tgt >= 1 && cc.dateIn >= 1 && cc.timeIn >= 1 && cc.output >= 1 && cc.quick >= 1, `time-converter/${lang}: converter controls missing (${JSON.stringify(cc)})`);
+          ok(cc.tcGate === 0, `time-converter/${lang}: the converter tool must have NO backendRequired gate (it works locally), got ${cc.tcGate}`);
+          // behavioral: the conversion actually updates on input change, computed locally (no external request)
+          await p.selectOption('[data-tc-source]', 'Africa/Cairo').catch(() => {});
+          await p.selectOption('[data-tc-target]', 'America/New_York').catch(() => {});
+          await p.fill('[data-tc-date]', '2026-06-20').catch(() => {});
+          await p.fill('[data-tc-time]', '15:00').catch(() => {});
+          await p.waitForTimeout(130);
+          const o1 = await p.$eval('[data-tc-output]', (e) => e.textContent.trim()).catch(() => '');
+          await p.fill('[data-tc-time]', '18:00').catch(() => {});
+          await p.waitForTimeout(130);
+          const o2 = await p.$eval('[data-tc-output]', (e) => e.textContent.trim()).catch(() => '');
+          ok(!!o1 && !!o2 && o1 !== o2, `time-converter/${lang}: conversion output did not update on input change (o1="${o1}", o2="${o2}")`);
+          ok(ext.length === 0, `time-converter/${lang}: the converter triggered ${ext.length} external request(s) — must compute locally`);
         }
       }
 
@@ -1677,6 +1879,16 @@ const FILTER_SPEC = {
     const outside = at === -1 ? css : css.slice(0, at) + css.slice(end + 1);
     const leak = (outside.match(/animation(-name)?\s*:\s*[^;}]*\blv-(fill|fadeup|pulse)\b/g) || []).length;
     ok(leak === 0, `app.css: ${leak} living-layer animation(s) declared OUTSIDE the reduced-motion guard`);
+  }
+
+  // ===== Spec 032 — route/page count freeze: 51 bases × 2 languages + index = 103 =====
+  {
+    const pub = fs.readdirSync(path.join(__dirname, '../../public')).filter((f) => f.endsWith('.html'));
+    ok(pub.length === 113, `route freeze: public/ must hold exactly 113 HTML pages (56×2+index; Spec 034 +10), got ${pub.length}`);
+    ok(pub.includes('index.html'), 'route freeze: index.html missing');
+    for (const b of PAGES) {
+      ok(pub.includes(`${b}.html`) && pub.includes(`${b}.en.html`), `route freeze: ${b} is missing a language mirror`);
+    }
   }
 
   if (fails.length) { console.error('SMOKE FAILED:\n - ' + fails.join('\n - ')); process.exit(1); }

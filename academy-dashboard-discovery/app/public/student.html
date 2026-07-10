@@ -275,17 +275,17 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span class="label">الحضور</span>
   </a><a href="sessions-analysis.html" class="nav-item" data-nav="sessionsAnalysis" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">تحليل الجلسات</span>
-  </a><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">المحادثات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">الطلبات الجديدة</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">المهام</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">الإعلانات والإشعارات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">محوّل الوقت</span><span class="nav-soon">قريبًا</span>
-    </button><a href="public-holiday.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
+  </a><a href="messages.html" class="nav-item" data-nav="messages" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">المحادثات</span>
+  </a><a href="leads.html" class="nav-item" data-nav="leads" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">الطلبات الجديدة</span>
+  </a><a href="tasks.html" class="nav-item" data-nav="tasks" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">المهام</span>
+  </a><a href="announcements.html" class="nav-item" data-nav="announcements" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">الإعلانات والإشعارات</span>
+  </a><a href="time-converter.html" class="nav-item" data-nav="timeConverter" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">محوّل الوقت</span>
+  </a><a href="public-holiday.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">العطلات الرسمية</span>
   </a><a href="scheduled-actions.html" class="nav-item" data-nav="scheduledActions" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">الإجراءات المجدولة</span>
@@ -464,7 +464,7 @@
           <div class="pb-meta"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشطة</span></span><a href="family.html" class="chip tone-neutral" style="text-decoration:none"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>أبو سلمان الغامدي</span></a><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-graduation-cap"></use></svg><span>المستوى الثاني</span></span><span class="flex items-center gap-2" style="flex-basis:100%;max-width:280px;margin-top:4px"><span style="flex:1"><div class="progress-track" role="img" aria-hidden="true"><div class="progress-fill" style="width:78%;background:var(--c-success)"></div></div></span><span class="text-[12px] font-bold tabular" style="color:var(--c-ink-2)">٧٨%</span></span></div>
         </div>
       </div>
-      <div class="pb-actions"><button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="سيتوفّر التواصل بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg><span>مراسلة</span></button><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="sp.act.edit" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>تعديل</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إيقاف هذا الطالب مؤقتًا؟" data-confirm-msg="سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن." data-confirm-cta="إيقاف مؤقت" data-confirm-toast="سيتوفّر إيقاف الطالب بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>إيقاف الطالب</span></button></div>
+      <div class="pb-actions"><button type="button" class="btn btn-secondary btn-sm"   data-demo-action data-toast="سيتوفّر التواصل بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-message-circle"></use></svg><span>مراسلة</span></button><button type="button" class="btn btn-secondary btn-sm"   data-drawer="stu-edit" data-modal-trigger data-modal-title-key="sp.act.edit"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>تعديل</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إيقاف هذا الطالب مؤقتًا؟" data-confirm-msg="سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن." data-confirm-cta="إيقاف مؤقت" data-confirm-toast="سيتوفّر إيقاف الطالب بعد ربط الخادم." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>إيقاف الطالب</span></button></div>
     </div>
     <div class="pb-kpis"><div class="stat-mini"><div class="v">المستوى الثاني</div><div class="l">المستوى</div></div><div class="stat-mini"><div class="v">٣</div><div class="l">المواد</div></div><div class="stat-mini"><div class="v">٢</div><div class="l">الشهادات</div></div><div class="stat-mini"><div class="v">٣</div><div class="l">جلسات الأسبوع</div></div></div>
   </section><div class="tabs-wrap" data-tabs="student">
@@ -715,7 +715,7 @@
     <section class="tabpanel" role="tabpanel" id="tabpanel-student-notes" data-tabpanel="notes" aria-labelledby="tab-student-notes" hidden><div class="info-card">
     <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>ملاحظات الطالب</span></div>
     <p class="narrative">طالب متميّز ومنتظم، يُظهر تقدّمًا ثابتًا.</p>
-    <div class="mt-4"><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="sp.act.addNote" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>إضافة ملاحظة</span></button></div>
+    <div class="mt-4"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="stu-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>إضافة ملاحظة</span></button></div>
   </div></section>
   </div><template data-preview="b14">
     <div class="sheet-card">
@@ -788,6 +788,40 @@
       <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">اختر المجموعة الجديدة — يتم النقل بعد ربط الخادم.</p>
     <div class="sheet-row"><span class="k">مجموعة الرياضيات أ</span><span class="v">المستوى الثاني</span></div><div class="sheet-row"><span class="k">مجموعة البرمجة ب</span><span class="v">المستوى الأول</span></div><div class="sheet-row"><span class="k">مجموعة العربية أ</span><span class="v">المستوى الأول</span></div><button type="button" class="btn btn-secondary btn-sm w-full" style="margin-top:8px" data-disabled-reason data-reason-key="sp.move.crossReason" aria-disabled="true" title="النقل بين العائلات يتطلب ربط الخادم (خارج النطاق الحالي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-families"></use></svg><span>نقل إلى عائلة أخرى</span></button>
     <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="sp.move.reason" aria-disabled="true" title="يتوفّر النقل بعد ربط الخادم (لا يُحفَظ شيء الآن)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>نقل</span></button></div>
+    </div>
+  </template><template data-preview="stu-edit">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تعديل بيانات الطالب</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-stuEdit-name">اسم الطالب</label><input id="f-stuEdit-name" name="stuEdit-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-nameAr">اسم الطالب (بالعربية)</label><input id="f-stuEdit-nameAr" name="stuEdit-nameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-language">لغة التعلّم</label><span class="select-wrap"><select id="f-stuEdit-language" name="stuEdit-language" class="select-input">
+      <option value="ar" selected>العربية</option><option value="en">English</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuEdit-gender">الجنس</label><span class="select-wrap"><select id="f-stuEdit-gender" name="stuEdit-gender" class="select-input">
+      <option value="male" selected>ذكر</option><option value="female">أنثى</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-stuEdit-birthDate">تاريخ الميلاد</label><input id="f-stuEdit-birthDate" name="stuEdit-birthDate" type="text" class="input" placeholder="مثال: ٢٠١٢/٠٣/٠٨" value="" /></div><div class="field"><label class="field-label" for="f-stuEdit-family">العائلة</label><span class="select-wrap"><select id="f-stuEdit-family" name="stuEdit-family" class="select-input">
+      <option value="fam1" selected>أبو سلمان الغامدي</option><option value="fam2">أم جوري القحطاني</option><option value="fam3">أبو ياسر الدوسري</option><option value="fam4">أم لمى العتيبي</option><option value="fam5">أبو فيصل الشهري</option><option value="fam6">أبو عبدالرحمن باوزير</option><option value="fam7">أم سارة المطيري</option><option value="fam8">أبو خالد السبيعي</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-stuEdit-teacherNote">ملاحظة للمعلّم</label><textarea id="f-stuEdit-teacherNote" name="stuEdit-teacherNote" class="input" rows="3" placeholder=""></textarea></div><div class="field field-full"><label class="field-label" for="f-stuEdit-adminNote">ملاحظة إدارية</label><textarea id="f-stuEdit-adminNote" name="stuEdit-adminNote" class="input" rows="3" placeholder=""></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button>
+    </div></div>
+    </div>
+  </template><template data-preview="stu-note">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">إضافة ملاحظة</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-stuNote-note">نص الملاحظة</label><textarea id="f-stuNote-note" name="stuNote-note" class="input" rows="3" placeholder="اكتب ملاحظة عن الطالب…"></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
+    </div></div>
     </div>
   </template></div>
       </main>

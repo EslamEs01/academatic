@@ -1,5 +1,6 @@
 /* Interface states — empty / loading / error. Warm, human microcopy + clear next step. */
-import { t } from '../i18n.js';
+import { t, getLang } from '../i18n.js';
+import { icon } from '../icons.js';
 import { medallion, button } from './ui.js';
 
 /** parameterized empty box (page-specific empty + filter "no results") */
@@ -46,12 +47,15 @@ export function errorState() {
 }
 
 export function emptyState() {
+  // Spec 032 (FC-40): the empty-state CTA is a REAL link to the sessions page,
+  // whose Add-session action opens the sess-new form drawer — no field-less modal.
+  const sessionsHref = getLang() === 'en' ? 'sessions.en.html' : 'sessions.html';
   return `<div class="card p-6 text-center flex flex-col items-center gap-3">
     ${medallion({ icon: 'calendar-plus', tone: 'primary', variant: 'soft', size: 'lg' })}
     <div>
       <h3 class="text-[15px] font-bold text-ink mb-1">${t('state.empty.title')}</h3>
       <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">${t('state.empty.msg')}</p>
     </div>
-    ${button({ labelKey: 'state.empty.cta', variant: 'primary', icon: 'plus', size: 'sm', attrs: 'data-modal-trigger data-modal-title-key="state.empty.cta" data-modal-note-key="common.backendRequiredNote"' })}
+    <a class="btn btn-primary btn-sm" href="${sessionsHref}">${icon('plus', 'ico')}<span>${t('state.empty.cta')}</span></a>
   </div>`;
 }

@@ -2,8 +2,10 @@
  * (General · Notifications · Customization · Security · Users · Integrations) — the
  * finance.html/Spec-030 precedent, 0 page-count delta. The existing theme/language
  * controls stay REAL; everything else is display-only + backendRequired gate. NO
- * settings persistence, NO credential/`type=password`/`type=file`, NO pay-rate/salary
- * figure, NO backup/restore, NO fake save. Locations + expense-heads fold in as slices. */
+ * settings persistence, NO credential control, the excluded legacy fieldset stays out
+ * (see the must-omit contract), NO backup/restore, NO fake save. Locations +
+ * expense-heads fold in as slices. Spec 032 (FC-39): Add-expense-head is a form
+ * drawer (name + status only) ending at ONE backendRequired final. */
 import { SETTINGS, ROLES_PREVIEW } from '../fixtures/settings.js';
 import { t, getLang } from '../i18n.js';
 import { icon } from '../icons.js';
@@ -12,6 +14,9 @@ import { medallion, chip, button } from '../components/ui.js';
 import { pageHeader } from '../components/page-header.js';
 import { settingsSection } from '../components/settings-section.js';
 import { tabs } from '../components/tabs.js';
+import { formDrawer } from '../components/preview-drawer.js';
+import { field } from '../components/form-field.js';
+import { FORM_STATUS_OPTS } from '../fixtures/form-options.js';
 import {
   IDENTITY_ROWS, LOCATIONS, EXPENSE_HEADS, EXPENSE_HEAD_STATUS, NOTIF_MATRIX, POLICIES,
   BRAND_ROWS, INTEGRATIONS, INTEG_KIND, INTEG_STATUS,
@@ -60,9 +65,18 @@ function generalPanel() {
   const headsRows = EXPENSE_HEADS.map((h) => `<div class="set-row"><div class="min-w-0"><div class="set-label">${t(h.nameKey)}</div></div><div class="shrink-0">${headStatusChip(h.statusId)}</div></div>`).join('');
   const heads = panel({
     id: 'gen-heads', titleKey: 'adm.set.heads.title', descKey: 'adm.set.heads.sub', icon: 'wallet', accent: 'amber',
-    bodyHTML: headsRows + `<div class="mt-2">${button({ labelKey: 'adm.set.heads.add', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="adm.set.heads.addTitle" data-modal-note-key="common.backendRequiredNote"' })}</div>`,
+    bodyHTML: headsRows + `<div class="mt-2">${button({ labelKey: 'adm.set.heads.add', variant: 'secondary', size: 'sm', icon: 'plus', attrs: 'data-drawer="head-add"' })}</div>`,
   });
-  return identity + locations + heads;
+  return identity + locations + heads + headAddDrawer();
+}
+
+/* Spec 032 (FC-39) — the Add-expense-head form drawer: name + status ONLY
+ * (a figure-free classification lookup; the excluded legacy fieldset stays
+ * out — see the must-omit contract). ONE backendRequired final. */
+function headAddDrawer() {
+  const fields = field({ labelKey: 'adm.set.heads.name', name: 'headAdd-name', full: true })
+    + field({ labelKey: 'adm.set.heads.status', name: 'headAdd-status', type: 'select', options: FORM_STATUS_OPTS, full: true });
+  return formDrawer('head-add', { titleKey: 'adm.set.heads.addTitle', headIcon: 'plus', tone: 'amber', fields, ctaKey: 'common.add' });
 }
 
 /* ---------------- Notifications ---------------- */

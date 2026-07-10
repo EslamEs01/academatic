@@ -14,9 +14,11 @@ import { icon } from '../icons.js';
 import { esc } from '../dom.js';
 import { avatar, chip, button } from '../components/ui.js';
 import { profileBanner } from '../components/profile-banner.js';
-import { familyStatusChip } from '../components/family-status.js';
+import { FAMILY_STATUS, familyStatusChip } from '../components/family-status.js';
 import { tabs } from '../components/tabs.js';
-import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from '../components/preview-drawer.js';
+import { field, optsFrom } from '../components/form-field.js';
+import { GENDER_OPTS, LANGUAGE_OPTS } from '../fixtures/form-options.js';
 import { scheduleAgenda } from '../components/schedule-agenda.js';
 import { appointmentTemplate } from '../components/appointment-details.js';
 import { attentionFlag } from '../components/attention-flag.js';
@@ -99,7 +101,7 @@ function overviewPanel(fam) {
 }
 
 function studentsPanel(kids) {
-  const add = button({ labelKey: 'fam.child.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="fam.child.add" data-modal-note-key="common.backendRequiredNote"' });
+  const add = button({ labelKey: 'fam.child.add', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-drawer="fam-child"' });
   const body = kids.length
     ? kids.map(childRow).join('')
     : `<div class="empty-row">${t('fam.child.noneMsg')}</div>`;
@@ -140,23 +142,69 @@ function notesPanel(fam) {
   return `<div class="info-card">
     <div class="ic-title">${icon('file-text', 'ico')}<span>${t('fam.notes.title')}</span></div>
     <p class="narrative">${t(fam.notesKey)}</p>
-    <div class="mt-4">${button({ labelKey: 'fam.notes.add', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="fam.notes.add" data-modal-note-key="common.backendRequiredNote"' })}</div>
+    <div class="mt-4">${button({ labelKey: 'fam.notes.add', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-drawer="fam-note"' })}</div>
   </div>`;
 }
 
-/* Family-category reassignment (Spec 027, M-K) — a display-only assignment PREVIEW:
- * the category list with the family's current tier marked + member counts; the
- * "Save category" final is a backendRequired gate (no reassignment persists). */
-function categoryDrawer(fam) {
+/* Family-category reassignment (Spec 027, M-K / Spec 032, FC-05) — a display-only
+ * assignment PREVIEW: an INERT category select (Spec 032) over the category list
+ * with the family's current tier marked + member counts; the "Save category"
+ * final is a backendRequired gate (no reassignment persists). Exported so the
+ * families.html kebab host bakes the same drawer (once per page). */
+export function famCatDrawer(fam) {
+  const catOpts = FAMILY_CATEGORIES.map((c) => ({ value: c.id, labelKey: c.nameKey, selected: c.id === fam.categoryId }));
   const rows = FAMILY_CATEGORIES.map((c) => {
     const cur = c.id === fam.categoryId;
     const name = `${t(c.nameKey)}${cur ? ` <span class="chip tone-completed">${icon('check-circle', 'ico')}<span>${t('fam.cat.current')}</span></span>` : ''}`;
     return sheetRow(name, t('fam.cat.members', { n: num(c.count) }));
   }).join('');
-  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('fam.cat.reclassHint')}</p>
+  const body = `<div class="wiz-grid" style="margin-bottom:12px">${field({ labelKey: 'fam.ov.category', name: 'famCat-category', type: 'select', options: catOpts, full: true })}</div>
+    <p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('fam.cat.reclassHint')}</p>
     ${rows}
     <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="fam.cat.reclassReason" aria-disabled="true" title="${esc(t('fam.cat.reclassReason'))}">${icon('check', 'ico ico-sm')}<span>${t('fam.cat.save')}</span></button>`;
   return previewTemplate('fam-cat', { titleKey: 'fam.cat.reclassTitle', headIcon: 'filter', tone: 'primary', bodyHTML: body });
+}
+
+/* Spec 032 (FC-04/FC-06) — the shared Edit-family form drawer: INERT field()
+ * controls (the excluded legacy fieldset stays out — see the must-omit contract)
+ * + the ONE formDrawer backendRequired Save final. Exported so the families.html
+ * kebab host bakes the same drawer; triggers open it via data-drawer="fam-edit". */
+export function famEditDrawer() {
+  const statusOpts = optsFrom(Object.keys(FAMILY_STATUS), 'famStatus');
+  const catOpts = FAMILY_CATEGORIES.map((c, i) => ({ value: c.id, labelKey: c.nameKey, selected: i === 0 }));
+  const fields = [
+    field({ labelKey: 'fam.form.firstName', name: 'famEdit-firstName' }),
+    field({ labelKey: 'fam.form.lastName', name: 'famEdit-lastName' }),
+    field({ labelKey: 'fam.form.firstNameAr', name: 'famEdit-firstNameAr' }),
+    field({ labelKey: 'fam.form.lastNameAr', name: 'famEdit-lastNameAr' }),
+    field({ labelKey: 'fam.ov.email', name: 'famEdit-email', placeholderKey: 'fam.wiz.ph.email' }),
+    field({ labelKey: 'fam.ov.phone', name: 'famEdit-phone', placeholderKey: 'fam.wiz.ph.phone' }),
+    field({ labelKey: 'fam.fStatus', name: 'famEdit-status', type: 'select', options: statusOpts }),
+    field({ labelKey: 'fam.ov.category', name: 'famEdit-category', type: 'select', options: catOpts }),
+    field({ labelKey: 'fam.wiz.f.notes', name: 'famEdit-notes', type: 'textarea', placeholderKey: 'fam.wiz.ph.notes', full: true }),
+  ].join('');
+  return formDrawer('fam-edit', { titleKey: 'fam.form.editTitle', headIcon: 'edit', fields });
+}
+
+/* Spec 032 (FC-07/FC-08) — the Add-child form drawer (both Add-child triggers on
+ * this page open it). INERT fields + the formDrawer backendRequired final. */
+function famChildDrawer() {
+  const fields = [
+    field({ labelKey: 'fam.wiz.f.childName', name: 'famChild-name', placeholderKey: 'fam.wiz.ph.childName' }),
+    field({ labelKey: 'fam.form.childNameAr', name: 'famChild-nameAr' }),
+    field({ labelKey: 'fam.form.language', name: 'famChild-language', type: 'select', options: LANGUAGE_OPTS }),
+    field({ labelKey: 'fam.form.gender', name: 'famChild-gender', type: 'select', options: GENDER_OPTS }),
+    field({ labelKey: 'fam.form.birthDate', name: 'famChild-birthDate', placeholderKey: 'fam.form.birthDatePh' }),
+    field({ labelKey: 'fam.form.teacherNote', name: 'famChild-teacherNote', type: 'textarea', full: true }),
+    field({ labelKey: 'fam.form.adminNote', name: 'famChild-adminNote', type: 'textarea', full: true }),
+  ].join('');
+  return formDrawer('fam-child', { titleKey: 'fam.child.add', headIcon: 'user-plus', fields, ctaKey: 'common.add' });
+}
+
+/* Spec 032 (FC-09) — the Add-note form drawer: one real textarea + the gate. */
+function famNoteDrawer() {
+  const fields = field({ labelKey: 'fam.wiz.f.notes', name: 'famNote-note', type: 'textarea', placeholderKey: 'fam.wiz.ph.notes', full: true });
+  return formDrawer('fam-note', { titleKey: 'fam.notes.add', headIcon: 'edit', fields, ctaKey: 'common.add' });
 }
 
 export function renderFamily() {
@@ -177,8 +225,8 @@ export function renderFamily() {
       { value: t(fam.joinedDateKey), labelKey: 'fam.kpi.joined' },
     ],
     actionsHTML:
-      button({ labelKey: 'fam.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="fam.act.edit" data-modal-note-key="common.backendRequiredNote"' })
-      + button({ labelKey: 'fam.act.addChild', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-modal-trigger data-modal-title-key="fam.act.addChild" data-modal-note-key="common.backendRequiredNote"' })
+      button({ labelKey: 'fam.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-drawer="fam-edit" data-modal-trigger data-modal-title-key="fam.act.edit"' })
+      + button({ labelKey: 'fam.act.addChild', variant: 'secondary', size: 'sm', icon: 'user-plus', attrs: 'data-drawer="fam-child" data-modal-trigger data-modal-title-key="fam.act.addChild"' })
       + confirmAction({ labelKey: 'fam.act.suspend', icon: 'pause-circle', titleKey: 'fam.act.suspendTitle', msgKey: 'fam.act.suspendMsg', confirmKey: 'fam.act.suspendCta', toastKey: 'fam.act.suspendToast' })
       + confirmAction({ labelKey: 'fam.act.stop', variant: 'danger', icon: 'x-circle', danger: true, titleKey: 'fam.act.stopTitle', msgKey: 'fam.act.stopMsg', confirmKey: 'fam.act.stopCta', toastKey: 'fam.act.stopToast' }),
   });
@@ -203,5 +251,5 @@ export function renderFamily() {
 
   const templates = blocks.map((b) => appointmentTemplate(apptItem(b, fam))).join('');
 
-  return `${banner}${views}${templates}${categoryDrawer(fam)}`;
+  return `${banner}${views}${templates}${famCatDrawer(fam)}${famEditDrawer()}${famChildDrawer()}${famNoteDrawer()}`;
 }

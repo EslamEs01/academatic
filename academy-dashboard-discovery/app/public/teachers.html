@@ -275,17 +275,17 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span class="label">الحضور</span>
   </a><a href="sessions-analysis.html" class="nav-item" data-nav="sessionsAnalysis" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">تحليل الجلسات</span>
-  </a><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">المحادثات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">الطلبات الجديدة</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">المهام</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">الإعلانات والإشعارات</span><span class="nav-soon">قريبًا</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">محوّل الوقت</span><span class="nav-soon">قريبًا</span>
-    </button><a href="public-holiday.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
+  </a><a href="messages.html" class="nav-item" data-nav="messages" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">المحادثات</span>
+  </a><a href="leads.html" class="nav-item" data-nav="leads" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">الطلبات الجديدة</span>
+  </a><a href="tasks.html" class="nav-item" data-nav="tasks" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">المهام</span>
+  </a><a href="announcements.html" class="nav-item" data-nav="announcements" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">الإعلانات والإشعارات</span>
+  </a><a href="time-converter.html" class="nav-item" data-nav="timeConverter" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">محوّل الوقت</span>
+  </a><a href="public-holiday.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">العطلات الرسمية</span>
   </a><a href="scheduled-actions.html" class="nav-item" data-nav="scheduledActions" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">الإجراءات المجدولة</span>
@@ -462,7 +462,7 @@
         <h1 class="page-title">المعلمون</h1>
         <p class="page-sub">دليل المعلمين — التوفّر والحالة ولمحة عن الأداء.</p>
       </div>
-      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="trn-categories"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>إدارة الفئات</span></button><button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="trn.act.add" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة معلّم</span></button></div>
+      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="trn-categories"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>إدارة الفئات</span></button><button type="button" class="btn btn-secondary btn-sm"   data-drawer="trn-add"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>إضافة معلّم</span></button></div>
     </div>
     <div class="mb-6"><div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
     <div class="card p-4 flex items-center gap-3">
@@ -813,9 +813,61 @@
       </div>
       <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">الفئات الحالية — الإنشاء والإسناد يتمّان بعد ربط الخادم.</p>
     <div class="sheet-row"><span class="k">معلّمون أوائل</span><span class="v">٣ معلّم</span></div><div class="sheet-row"><span class="k">معلّمون مساعدون</span><span class="v">٣ معلّم</span></div><div class="sheet-row"><span class="k">فترة تجريبية</span><span class="v">٢ معلّم</span></div>
-    <div class="flex flex-wrap gap-2 mt-4">
-      <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="trn.cat.createTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة فئة معلّمين</span></button>
-      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="trn.cat.assignReason" aria-disabled="true" title="إسناد المعلّمين للفئة يتطلب ربط الخادم (خارج النطاق الحالي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>إسناد معلّمين للفئة</span></button>
+    <div class="ic-title mt-4 mb-2"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة فئة معلّمين</span></div>
+    <div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-trnCategories-catName">اسم الفئة</label><input id="f-trnCategories-catName" name="trnCategories-catName" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-trnCategories-catStatus">الحالة</label><span class="select-wrap"><select id="f-trnCategories-catStatus" name="trnCategories-catStatus" class="select-input">
+      <option value="active" selected>نشط</option><option value="trial">تجريبي</option><option value="suspended">موقوف مؤقتًا</option><option value="inactive">غير نشط</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-trnCategories-catDesc">وصف الفئة</label><textarea id="f-trnCategories-catDesc" name="trnCategories-catDesc" class="input" rows="3" placeholder="اكتب ملاحظة قصيرة…"></textarea></div></div>
+    <div class="flex flex-wrap items-center justify-end gap-2 mt-4">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="trn.cat.assignReason" aria-disabled="true" title="إسناد المعلّمين للفئة يتطلب ربط الخادم (خارج النطاق الحالي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>إسناد معلّمين للفئة</span></button>
+      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="common.backendRequiredNote" aria-disabled="true" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button>
+    </div></div>
+    </div>
+  </template>
+    <template data-preview="trn-edit">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">تعديل بيانات المعلّم</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-trnEdit-firstName">الاسم الأول (إنجليزي)</label><input id="f-trnEdit-firstName" name="trnEdit-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-lastName">اسم العائلة (إنجليزي)</label><input id="f-trnEdit-lastName" name="trnEdit-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-firstNameAr">الاسم الأول (عربي)</label><input id="f-trnEdit-firstNameAr" name="trnEdit-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-lastNameAr">اسم العائلة (عربي)</label><input id="f-trnEdit-lastNameAr" name="trnEdit-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-email">البريد الإلكتروني</label><input id="f-trnEdit-email" name="trnEdit-email" type="text" class="input" placeholder="name@example.com" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-phone">رقم الجوال</label><input id="f-trnEdit-phone" name="trnEdit-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-status">الحالة</label><span class="select-wrap"><select id="f-trnEdit-status" name="trnEdit-status" class="select-input">
+      <option value="active" selected>نشط</option><option value="trial">تجريبي</option><option value="suspended">موقوف مؤقتًا</option><option value="inactive">غير نشط</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnEdit-subjects">المواد</label><span class="select-wrap"><select id="f-trnEdit-subjects" name="trnEdit-subjects" class="select-input">
+      <option value="math" selected>الرياضيات</option><option value="arabic">اللغة العربية</option><option value="programming">البرمجة</option><option value="physics">الفيزياء</option><option value="english">الإنجليزية</option><option value="science">العلوم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnEdit-level">المستوى</label><span class="select-wrap"><select id="f-trnEdit-level" name="trnEdit-level" class="select-input">
+      <option value="foundation" selected>تأسيسي</option><option value="l1">المستوى الأول</option><option value="l2">المستوى الثاني</option><option value="l3">المستوى الثالث</option><option value="advanced">متقدّم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnEdit-courses">الدورة المسندة</label><span class="select-wrap"><select id="f-trnEdit-courses" name="trnEdit-courses" class="select-input">
+      <option value="c1" selected>الرياضيات</option><option value="c2">اللغة العربية</option><option value="c3">مقدمة في البرمجة</option><option value="c5">الإنجليزية</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-trnEdit-notes">ملاحظات</label><textarea id="f-trnEdit-notes" name="trnEdit-notes" class="input" rows="3" placeholder="اكتب ملاحظة قصيرة…"></textarea></div><div class="field field-full"><span class="field-label">السيرة الذاتية والشهادات</span>
+    <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="trn.form.cvReason" title="رفع الملفات يتطلب ربط الخادم (خارج النطاق الحالي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>رفع الملفات</span></button></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button>
+    </div></div>
+    </div>
+  </template>
+    <template data-preview="trn-add">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">إضافة معلّم جديد</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-trnAdd-firstName">الاسم الأول (إنجليزي)</label><input id="f-trnAdd-firstName" name="trnAdd-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastName">اسم العائلة (إنجليزي)</label><input id="f-trnAdd-lastName" name="trnAdd-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-firstNameAr">الاسم الأول (عربي)</label><input id="f-trnAdd-firstNameAr" name="trnAdd-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastNameAr">اسم العائلة (عربي)</label><input id="f-trnAdd-lastNameAr" name="trnAdd-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-email">البريد الإلكتروني</label><input id="f-trnAdd-email" name="trnAdd-email" type="text" class="input" placeholder="name@example.com" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-phone">رقم الجوال</label><input id="f-trnAdd-phone" name="trnAdd-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-status">الحالة</label><span class="select-wrap"><select id="f-trnAdd-status" name="trnAdd-status" class="select-input">
+      <option value="active" selected>نشط</option><option value="trial">تجريبي</option><option value="suspended">موقوف مؤقتًا</option><option value="inactive">غير نشط</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnAdd-subjects">المواد</label><span class="select-wrap"><select id="f-trnAdd-subjects" name="trnAdd-subjects" class="select-input">
+      <option value="math" selected>الرياضيات</option><option value="arabic">اللغة العربية</option><option value="programming">البرمجة</option><option value="physics">الفيزياء</option><option value="english">الإنجليزية</option><option value="science">العلوم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnAdd-level">المستوى</label><span class="select-wrap"><select id="f-trnAdd-level" name="trnAdd-level" class="select-input">
+      <option value="foundation" selected>تأسيسي</option><option value="l1">المستوى الأول</option><option value="l2">المستوى الثاني</option><option value="l3">المستوى الثالث</option><option value="advanced">متقدّم</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnAdd-courses">الدورة المسندة</label><span class="select-wrap"><select id="f-trnAdd-courses" name="trnAdd-courses" class="select-input">
+      <option value="c1" selected>الرياضيات</option><option value="c2">اللغة العربية</option><option value="c3">مقدمة في البرمجة</option><option value="c5">الإنجليزية</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnAdd-city">المدينة</label><input id="f-trnAdd-city" name="trnAdd-city" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-country">الدولة</label><input id="f-trnAdd-country" name="trnAdd-country" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-trnAdd-notes">ملاحظات</label><textarea id="f-trnAdd-notes" name="trnAdd-notes" class="input" rows="3" placeholder="اكتب ملاحظة قصيرة…"></textarea></div><div class="field field-full"><span class="field-label">السيرة الذاتية والشهادات</span>
+    <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="trn.form.cvReason" title="رفع الملفات يتطلب ربط الخادم (خارج النطاق الحالي)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>رفع الملفات</span></button></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
     </div></div>
     </div>
   </template>

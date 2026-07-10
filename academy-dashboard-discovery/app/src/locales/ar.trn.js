@@ -1,7 +1,7 @@
 /* Spec 007 — Arabic keys (Teacher Performance & Academic KPIs).
  * Merged into ar.js at runtime by i18n.js (deepMerge — nested blocks extend, so the
  * existing trn.* directory/availability/perf keys in ar.extra.js are preserved).
- * No legacy/private wording, no numeric statuses, no pay/finance wording. */
+ * No legacy/private wording, no numeric statuses, no excluded-fieldset wording. */
 export default {
   topbar: {
     title: { teacher: 'تفاصيل المعلّم', teacherPerf: 'أداء المعلّمين' },
@@ -69,6 +69,24 @@ export default {
 
     /* availability-window editor (Timetable tab) — day/time only, no recurrence */
     availEdit: { open: 'أوقات التوفّر', title: 'أوقات توفّر المعلّم', hint: 'أوقات التوفّر الأسبوعية — يتم الحفظ بعد ربط الخادم.', add: 'إضافة وقت', reason: 'تعديل أوقات التوفّر يتطلب ربط الخادم (خارج النطاق الحالي).' },
+
+    /* Spec 032 — teacher form drawers (trn-edit / trn-add / trn-note / category create).
+     * INERT demo fields; every Save is a backendRequired gate. The excluded legacy
+     * fieldset (see must-omit contract) is omitted; upload stays a gate. */
+    form: {
+      editTitle: 'تعديل بيانات المعلّم',
+      addTitle: 'إضافة معلّم جديد',
+      firstName: 'الاسم الأول (إنجليزي)', lastName: 'اسم العائلة (إنجليزي)',
+      firstNameAr: 'الاسم الأول (عربي)', lastNameAr: 'اسم العائلة (عربي)',
+      email: 'البريد الإلكتروني', emailPh: 'name@example.com',
+      phone: 'رقم الجوال', phonePh: '05xxxxxxxx',
+      level: 'المستوى', courses: 'الدورة المسندة',
+      city: 'المدينة', country: 'الدولة',
+      note: 'نص الملاحظة', notesPh: 'اكتب ملاحظة قصيرة…',
+      cv: 'السيرة الذاتية والشهادات', cvGate: 'رفع الملفات',
+      cvReason: 'رفع الملفات يتطلب ربط الخادم (خارج النطاق الحالي).',
+      catName: 'اسم الفئة', catDesc: 'وصف الفئة',
+    },
 
     /* teacher categories (nav stays planned — no page) */
     cat: {

@@ -7,7 +7,7 @@
  * (no gradebook, no workflow). One representative student is baked (Django → student/<id>). */
 import { STUDENTS, STUDENT_BY_ID, studentsOfFamily } from '../fixtures/students.js';
 import { GROUP_BY_ID } from '../fixtures/groups.js';
-import { familyOf } from '../fixtures/families.js';
+import { FAMILIES, familyOf } from '../fixtures/families.js';
 import { outcomesOfStudent } from '../fixtures/attendance.js';
 import { enrollmentStatusChip } from '../components/enrollment-status.js';
 import { SCHEDULE_WEEK } from '../fixtures/schedule.js';
@@ -18,7 +18,9 @@ import { avatar, chip, button } from '../components/ui.js';
 import { profileBanner } from '../components/profile-banner.js';
 import { familyStatusChip } from '../components/family-status.js';
 import { tabs } from '../components/tabs.js';
-import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
+import { previewTemplate, sheetRow, formDrawer } from '../components/preview-drawer.js';
+import { field } from '../components/form-field.js';
+import { GENDER_OPTS, LANGUAGE_OPTS } from '../fixtures/form-options.js';
 import { scheduleAgenda } from '../components/schedule-agenda.js';
 import { appointmentTemplate } from '../components/appointment-details.js';
 import { attentionFlag } from '../components/attention-flag.js';
@@ -156,8 +158,33 @@ function notesPanel(st) {
   return `<div class="info-card">
     <div class="ic-title">${icon('file-text', 'ico')}<span>${t('sp.notes.title')}</span></div>
     <p class="narrative">${t(st.notesKey)}</p>
-    <div class="mt-4">${button({ labelKey: 'sp.act.addNote', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="sp.act.addNote" data-modal-note-key="common.backendRequiredNote"' })}</div>
+    <div class="mt-4">${button({ labelKey: 'sp.act.addNote', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-drawer="stu-note"' })}</div>
   </div>`;
+}
+
+/* Spec 032 (FC-11/FC-12) — the shared Edit-student form drawer: INERT field()
+ * controls + the ONE formDrawer backendRequired Save final (the trial-schedule
+ * block is omitted on edit per the inventory). Exported so the students.html
+ * kebab host bakes the same drawer; triggers open it via data-drawer="stu-edit". */
+export function stuEditDrawer() {
+  const famOpts = FAMILIES.rows.map((f, i) => ({ value: f.id, labelKey: f.guardian.nameKey, selected: i === 0 }));
+  const fields = [
+    field({ labelKey: 'sp.form.name', name: 'stuEdit-name' }),
+    field({ labelKey: 'sp.form.nameAr', name: 'stuEdit-nameAr' }),
+    field({ labelKey: 'sp.form.language', name: 'stuEdit-language', type: 'select', options: LANGUAGE_OPTS }),
+    field({ labelKey: 'sp.form.gender', name: 'stuEdit-gender', type: 'select', options: GENDER_OPTS }),
+    field({ labelKey: 'sp.form.birthDate', name: 'stuEdit-birthDate', placeholderKey: 'sp.form.birthDatePh' }),
+    field({ labelKey: 'sp.ov.family', name: 'stuEdit-family', type: 'select', options: famOpts }),
+    field({ labelKey: 'sp.form.teacherNote', name: 'stuEdit-teacherNote', type: 'textarea', full: true }),
+    field({ labelKey: 'sp.form.adminNote', name: 'stuEdit-adminNote', type: 'textarea', full: true }),
+  ].join('');
+  return formDrawer('stu-edit', { titleKey: 'sp.form.editTitle', headIcon: 'edit', fields });
+}
+
+/* Spec 032 (FC-13) — the Add-note form drawer: one real textarea + the gate. */
+function stuNoteDrawer() {
+  const fields = field({ labelKey: 'sp.form.note', name: 'stuNote-note', type: 'textarea', placeholderKey: 'sp.form.notePh', full: true });
+  return formDrawer('stu-note', { titleKey: 'sp.act.addNote', headIcon: 'edit', fields, ctaKey: 'common.add' });
 }
 
 /* Spec 027 — enroll / assign / move picker (M-A/M-B/M-C): a display-only candidate
@@ -193,7 +220,7 @@ export function renderStudent() {
     ],
     actionsHTML:
       button({ labelKey: 'sp.act.message', variant: 'secondary', size: 'sm', icon: 'message-circle', attrs: `data-demo-action data-toast="${esc(t('sp.act.messageToast'))}"` })
-      + button({ labelKey: 'sp.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-modal-trigger data-modal-title-key="sp.act.edit" data-modal-note-key="common.backendRequiredNote"' })
+      + button({ labelKey: 'sp.act.edit', variant: 'secondary', size: 'sm', icon: 'edit', attrs: 'data-drawer="stu-edit" data-modal-trigger data-modal-title-key="sp.act.edit"' })
       + confirmAction({ labelKey: 'sp.act.suspend', icon: 'pause-circle', titleKey: 'sp.act.suspendTitle', msgKey: 'sp.act.suspendMsg', confirmKey: 'sp.act.suspendCta', toastKey: 'sp.act.suspendToast' }),
   });
 
@@ -227,5 +254,5 @@ export function renderStudent() {
     + pickerDrawer('stu-assign', { titleKey: 'sp.assign.title', hintKey: 'sp.assign.hint', candidates: ASSIGN_GROUPS, ctaKey: 'sp.assign.cta', reasonKey: 'sp.assign.reason', headIcon: 'students' })
     + pickerDrawer('stu-move', { titleKey: 'sp.move.title', hintKey: 'sp.move.hint', candidates: MOVE_GROUPS, ctaKey: 'sp.move.cta', reasonKey: 'sp.move.reason', headIcon: 'arrow-left', extraHTML: crossGate });
 
-  return `${banner}${views}${templates}${pickers}`;
+  return `${banner}${views}${templates}${pickers}${stuEditDrawer()}${stuNoteDrawer()}`;
 }

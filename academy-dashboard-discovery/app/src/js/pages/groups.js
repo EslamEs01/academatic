@@ -14,6 +14,7 @@ import { filterBar } from '../components/filter-bar.js';
 import { groupRow } from '../components/group-row.js';
 import { medallion, button } from '../components/ui.js';
 import { noResults } from '../components/states.js';
+import { groupFormTemplate } from '../components/course-group-actions.js';
 
 const LEVELS = ['foundation', 'l1', 'l2', 'l3', 'advanced'];
 const TEACHER_BY_ID = Object.fromEntries(TEACHERS.rows.map((x) => [x.id, x]));
@@ -66,10 +67,11 @@ export function renderGroups() {
   });
 
   return `
-    ${pageHeader({ titleKey: 'grp.title', subKey: 'grp.sub', primary: button({ labelKey: 'grp.act.add', variant: 'primary', icon: 'plus', attrs: 'data-modal-trigger data-modal-title-key="grp.act.add" data-modal-note-key="common.backendRequiredNote"' }) })}
+    ${pageHeader({ titleKey: 'grp.title', subKey: 'grp.sub', primary: button({ labelKey: 'grp.act.add', variant: 'primary', icon: 'plus', attrs: 'data-drawer="grp-add"' }) })}
     <div class="outcome-tiles">${TILES.map(tile).join('')}</div>
     ${filters}
     <div id="groups-list">${items.map(groupRow).join('')}</div>
     ${noResults()}
+    ${groupFormTemplate('grp-add')}
   `;
 }

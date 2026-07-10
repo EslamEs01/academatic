@@ -3,6 +3,16 @@
 export default {
   common: { close: 'إغلاق', confirm: 'تأكيد', cancel: 'إلغاء', save: 'حفظ', add: 'إضافة', view: 'عرض', edit: 'تعديل', backendRequiredNote: 'هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن.' },
 
+  /* ---- Spec 032 — shared form-drawer option labels (fixtures/form-options.js) ---- */
+  fopt: {
+    status: { active: 'نشط', trial: 'تجريبي', suspended: 'موقوف مؤقتًا', inactive: 'غير نشط' },
+    gender: { male: 'ذكر', female: 'أنثى' },
+    role: { manager: 'مدير', accountant: 'محاسب', supervisor: 'مشرف', support: 'دعم' },
+    day: { sat: 'السبت', sun: 'الأحد', mon: 'الاثنين', tue: 'الثلاثاء', wed: 'الأربعاء', thu: 'الخميس' },
+    dur: { m30: '٣٠ دقيقة', m45: '٤٥ دقيقة', m60: '٦٠ دقيقة', m90: '٩٠ دقيقة' },
+    ftype: { text: 'نص', select: 'قائمة اختيار', yesno: 'نعم / لا', note: 'ملاحظة' },
+  },
+
   filter: {
     apply: 'تطبيق', reset: 'إعادة ضبط',
     count: 'عرض {shown} من {total}',
@@ -25,6 +35,12 @@ export default {
     colSubject: 'المادة', empty: { title: 'لا توجد جلسات بعد', msg: 'ابدأ بإضافة أول جلسة لهذا اليوم وستظهر هنا مباشرة.' },
     note: 'تُدار هذه الجلسة وفق الجدول المعتمد للأكاديمية.', detailsTitle: 'تفاصيل الجلسة',
     agendaEmpty: 'لا جلسات اليوم', tablistAria: 'طرق عرض الجلسات', today: 'اليوم',
+    /* Spec 032 — the sess-new form drawer */
+    form: {
+      course: 'الدورة', teacher: 'المعلم', date: 'التاريخ', time: 'الوقت', duration: 'المدة',
+      fromCredit: 'مصدر رصيد الجلسة', datePh: '2025-03-15', timePh: '16:30',
+      credit: { package: 'من رصيد الباقة', extra: 'جلسة إضافية', trial: 'جلسة تجريبية' },
+    },
   },
 
   /* ---- Schedule page ---- */

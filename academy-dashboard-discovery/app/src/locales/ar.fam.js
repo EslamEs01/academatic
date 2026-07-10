@@ -78,6 +78,17 @@ export default {
       stopTitle: 'إيقاف اشتراك هذه العائلة؟', stopMsg: 'سيتوفّر هذا الإجراء بعد ربط الخادم — لا يتغيّر أي شيء الآن.', stopCta: 'إيقاف', stopToast: 'سيتوفّر إيقاف الاشتراك بعد ربط الخادم.',
     },
 
+    /* Spec 032 — form-drawer labels (FC-04…FC-09); mirrored in en.fam.js */
+    form: {
+      editTitle: 'تعديل بيانات العائلة',
+      firstName: 'الاسم الأول', lastName: 'اسم العائلة',
+      firstNameAr: 'الاسم الأول (بالعربية)', lastNameAr: 'اسم العائلة (بالعربية)',
+      childNameAr: 'اسم الابن (بالعربية)',
+      language: 'لغة التعلّم', gender: 'الجنس',
+      birthDate: 'تاريخ الميلاد', birthDatePh: 'مثال: ٢٠١٤/٠٥/١٢',
+      teacherNote: 'ملاحظة للمعلّم', adminNote: 'ملاحظة إدارية',
+    },
+
     /* add-family wizard */
     wiz: {
       title: 'إضافة عائلة', sub: 'أنشئ حساب العائلة وأضِف أبناءها عبر خطوات بسيطة.',
@@ -129,6 +140,17 @@ export default {
     assign: { action: 'إسناد إلى مجموعة', title: 'إسناد الطالب إلى مجموعة', hint: 'اختر مجموعة — يتم الإسناد بعد ربط الخادم.', cta: 'إسناد', reason: 'يتوفّر الإسناد بعد ربط الخادم (لا يُحفَظ شيء الآن).' },
     move: { action: 'نقل بين المجموعات', title: 'نقل الطالب بين المجموعات', hint: 'اختر المجموعة الجديدة — يتم النقل بعد ربط الخادم.', cta: 'نقل', reason: 'يتوفّر النقل بعد ربط الخادم (لا يُحفَظ شيء الآن).', crossFamily: 'نقل إلى عائلة أخرى', crossReason: 'النقل بين العائلات يتطلب ربط الخادم (خارج النطاق الحالي).' },
     search: { action: 'بحث في الأوقات المتاحة', reason: 'مطابقة الأوقات المتاحة تتطلب ربط الخادم (خارج النطاق الحالي).' },
+
+    /* Spec 032 — form-drawer labels (FC-11…FC-14); mirrored in en.fam.js */
+    form: {
+      editTitle: 'تعديل بيانات الطالب',
+      name: 'اسم الطالب', nameAr: 'اسم الطالب (بالعربية)',
+      language: 'لغة التعلّم', gender: 'الجنس',
+      birthDate: 'تاريخ الميلاد', birthDatePh: 'مثال: ٢٠١٢/٠٣/٠٨',
+      teacherNote: 'ملاحظة للمعلّم', adminNote: 'ملاحظة إدارية',
+      note: 'نص الملاحظة', notePh: 'اكتب ملاحظة عن الطالب…',
+      trialMaterial: 'مادة الجلسة التجريبية', trialTeacher: 'معلّم الجلسة التجريبية', trialDuration: 'مدة الجلسة التجريبية',
+    },
   },
 
   /* student Results tab (fixture-only — no gradebook) */

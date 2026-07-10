@@ -148,6 +148,8 @@ export default {
       status: { active: 'Active', inactive: 'Inactive' },
       add: 'Add bank account',
       addTitle: 'Add bank account',
+      /* Spec 032 (FC-29) — add-bank drawer: bank name only */
+      form: { name: 'Bank name', namePh: 'e.g. Al Rajhi Bank' },
       import: 'Import statement',
       importReason: 'Importing statements needs the real bank connection — out of current scope.',
       reconcile: 'Reconcile',

@@ -146,6 +146,8 @@ export default {
         n12: 'Needs extra support on a few concepts.',
       },
       date: { d1: '2 days ago', d2: '3 days ago', d3: 'Last week', d4: 'Yesterday', d5: 'Today' },
+      /* Spec 032 — FC-25/27 form-drawer copy (labels reuse rep.fb.lbl.* above) */
+      f: { notePh: 'Write the note here…' },
     },
 
     /* Spec 029 — Feedback categories (folded drawer; nav stays planned) */
@@ -157,6 +159,9 @@ export default {
       members: '{n} items',
       assign: 'Assign members',
       assignReason: 'Assigning members needs the server connection — out of current scope.',
+      /* Spec 032 — FC-26 inline create-form copy */
+      createReason: 'Creating the category needs the server connection — nothing is saved yet.',
+      f: { name: 'Category name', namePh: 'e.g. Teaching quality', desc: 'Description' },
       name: {
         teaching: 'Teaching quality', communication: 'Communication', session: 'Session',
         meeting: 'Family meeting', progress: 'Student progress',
@@ -191,6 +196,18 @@ export default {
         teacherReview: 'Teacher review', exit: 'Exit survey',
       },
       created: { c1: 'This month', c2: 'Last month', c3: 'This week', c4: '2 months ago' },
+      /* Spec 032 — FC-28 create-form drawer copy (display-only fields — responses are never aggregated) */
+      f: {
+        name: 'Form name', namePh: 'e.g. End-of-month survey',
+        day: 'Day',
+        row: 'Field {n}',
+        fieldLabel: 'Field label',
+        fieldType: 'Field type',
+        fieldOptions: 'Options',
+        fieldOptionsPh: 'Comma-separated options',
+        fieldRequired: 'Required?',
+        req: { yes: 'Yes', no: 'No' },
+      },
     },
   },
 };

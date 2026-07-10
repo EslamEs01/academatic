@@ -70,6 +70,17 @@ export default {
       stopTitle: 'Stop this family’s subscription?', stopMsg: 'This will be available once the server is connected — nothing changes yet.', stopCta: 'Stop', stopToast: 'Stopping the subscription will be available once the server is connected.',
     },
 
+    /* Spec 032 — form-drawer labels (FC-04…FC-09); mirrors ar.fam.js */
+    form: {
+      editTitle: 'Edit family details',
+      firstName: 'First name', lastName: 'Family name',
+      firstNameAr: 'First name (Arabic)', lastNameAr: 'Family name (Arabic)',
+      childNameAr: 'Child name (Arabic)',
+      language: 'Learning language', gender: 'Gender',
+      birthDate: 'Date of birth', birthDatePh: 'e.g. 2014-05-12',
+      teacherNote: 'Note for the teacher', adminNote: 'Admin note',
+    },
+
     wiz: {
       title: 'Add family', sub: 'Create the family account and add its children in a few simple steps.',
       stepLabel: 'Step {n} of {total}',
@@ -119,6 +130,17 @@ export default {
     assign: { action: 'Assign to group', title: 'Assign the student to a group', hint: 'Pick a group — assigned once the server is connected.', cta: 'Assign', reason: 'Assigning will be available once the server is connected — nothing is saved yet.' },
     move: { action: 'Move between groups', title: 'Move the student between groups', hint: 'Pick the new group — moved once the server is connected.', cta: 'Move', reason: 'Moving will be available once the server is connected — nothing is saved yet.', crossFamily: 'Move to another family', crossReason: 'Transferring between families needs the backend (out of current scope).' },
     search: { action: 'Search available times', reason: 'Matching available times needs the backend (out of current scope).' },
+
+    /* Spec 032 — form-drawer labels (FC-11…FC-14); mirrors ar.fam.js */
+    form: {
+      editTitle: 'Edit student details',
+      name: 'Student name', nameAr: 'Student name (Arabic)',
+      language: 'Learning language', gender: 'Gender',
+      birthDate: 'Date of birth', birthDatePh: 'e.g. 2012-03-08',
+      teacherNote: 'Note for the teacher', adminNote: 'Admin note',
+      note: 'Note text', notePh: 'Write a note about the student…',
+      trialMaterial: 'Trial session subject', trialTeacher: 'Trial session teacher', trialDuration: 'Trial session duration',
+    },
   },
 
   res: {

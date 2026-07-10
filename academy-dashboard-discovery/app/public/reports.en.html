@@ -275,17 +275,17 @@
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg><span class="label">Attendance</span>
   </a><a href="sessions-analysis.en.html" class="nav-item" data-nav="sessionsAnalysis" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span class="label">Sessions analysis</span>
-  </a><button type="button" class="nav-item is-planned" data-nav="messages" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">Messages</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="leads" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">New Requests</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="tasks" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Tasks</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="announcements" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">Announcements</span><span class="nav-soon">Soon</span>
-    </button><button type="button" class="nav-item is-planned" data-nav="timeConverter" data-nav-status="planned" data-coming-soon data-soon-key="nav.comingSoon">
-      <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">Time converter</span><span class="nav-soon">Soon</span>
-    </button><a href="public-holiday.en.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
+  </a><a href="messages.en.html" class="nav-item" data-nav="messages" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-messages"></use></svg><span class="label">Messages</span>
+  </a><a href="leads.en.html" class="nav-item" data-nav="leads" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg><span class="label">New Requests</span>
+  </a><a href="tasks.en.html" class="nav-item" data-nav="tasks" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Tasks</span>
+  </a><a href="announcements.en.html" class="nav-item" data-nav="announcements" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-megaphone"></use></svg><span class="label">Announcements</span>
+  </a><a href="time-converter.en.html" class="nav-item" data-nav="timeConverter" data-nav-status="implemented">
+    <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span class="label">Time converter</span>
+  </a><a href="public-holiday.en.html" class="nav-item" data-nav="publicHoliday" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg><span class="label">Public holidays</span>
   </a><a href="scheduled-actions.en.html" class="nav-item" data-nav="scheduledActions" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg><span class="label">Scheduled actions</span>
@@ -673,7 +673,7 @@
     </div>
     <div class="flex flex-wrap items-center gap-2">
       <button type="button" class="btn btn-ghost btn-sm"   data-drawer="rep-fbcat"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>Manage categories</span></button>
-      <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="rep.fb.createTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New feedback</span></button>
+      <button type="button" class="btn btn-secondary btn-sm"   data-drawer="fb-create" data-modal-trigger data-modal-title-key="rep.fb.createTitle"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New feedback</span></button>
     </div>
   </div>
     <form class="filterbar" data-filter-form data-target="#reports-feedback-grid">
@@ -1111,9 +1111,42 @@
       </div>
       <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">Predefined categories to group feedback — display-only.</p>
     <div class="sheet-row"><span class="k">Teaching quality</span><span class="v">5 items</span></div><div class="sheet-row"><span class="k">Communication</span><span class="v">3 items</span></div><div class="sheet-row"><span class="k">Session</span><span class="v">4 items</span></div><div class="sheet-row"><span class="k">Family meeting</span><span class="v">2 items</span></div><div class="sheet-row"><span class="k">Student progress</span><span class="v">3 items</span></div>
+    <div style="border-top:1px solid var(--c-line);margin-top:16px;padding-top:12px">
+      <div class="font-bold text-ink text-[13.5px] mb-3"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg> Add category</div>
+      <div class="wiz-grid">
+        <div class="field"><label class="field-label" for="f-fbcatCreate-name">Category name</label><input id="f-fbcatCreate-name" name="fbcatCreate-name" type="text" class="input" placeholder="e.g. Teaching quality" value="" /></div>
+        <div class="field"><label class="field-label" for="f-fbcatCreate-status">Status</label><span class="select-wrap"><select id="f-fbcatCreate-status" name="fbcatCreate-status" class="select-input">
+      <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
+        <div class="field field-full"><label class="field-label" for="f-fbcatCreate-desc">Description</label><textarea id="f-fbcatCreate-desc" name="fbcatCreate-desc" class="input" rows="3" placeholder=""></textarea></div>
+      </div>
+    </div>
     <div class="flex flex-wrap gap-2 mt-4">
-      <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="rep.fbcat.createTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add category</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="rep.fbcat.createReason" title="Creating the category needs the server connection — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
       <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="rep.fbcat.assignReason" aria-disabled="true" title="Assigning members needs the server connection — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>Assign members</span></button>
+    </div></div>
+    </div>
+  </template>
+    <template data-preview="fb-create">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Add feedback</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-fbCreate-type">Type</label><span class="select-wrap"><select id="f-fbCreate-type" name="fbCreate-type" class="select-input">
+      <option value="teacher" selected>Teacher</option><option value="class">Session</option><option value="family">Family</option><option value="student">Student</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-fbCreate-subject">Subject</label><span class="select-wrap"><select id="f-fbCreate-subject" name="fbCreate-subject" class="select-input">
+      <option value="sara" selected>Ms. Sara</option><option value="mohammed">Mr. Mohammed</option><option value="layan">Ms. Layan</option><option value="mathGrp">Math group</option><option value="progGrp">Programming group</option><option value="engGrp">English group</option><option value="fam1">Al-Otaibi family</option><option value="fam2">Al-Shammari family</option><option value="fam3">Al-Qahtani family</option><option value="st1">Salman</option><option value="st6">Lina</option><option value="st11">Yousef</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-fbCreate-category">Category</label><span class="select-wrap"><select id="f-fbCreate-category" name="fbCreate-category" class="select-input">
+      <option value="fc1" selected>Teaching quality</option><option value="fc2">Communication</option><option value="fc3">Session</option><option value="fc4">Family meeting</option><option value="fc5">Student progress</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-fbCreate-remark">Remark</label><span class="select-wrap"><select id="f-fbCreate-remark" name="fbCreate-remark" class="select-input">
+      <option value="excellent" selected>Excellent</option><option value="good">Good</option><option value="watch">Needs follow-up</option><option value="concern">Needs attention</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-fbCreate-note">Note</label><textarea id="f-fbCreate-note" name="fbCreate-note" class="input" rows="3" placeholder="Write the note here…"></textarea></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
     </div></div>
     </div>
   </template>
@@ -1124,7 +1157,7 @@
       <h2 class="section-title">Forms &amp; surveys</h2>
       <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">Predefined forms — display-only, managed once the server is connected.</p>
     </div>
-    <button type="button" class="btn btn-secondary btn-sm"   data-modal-trigger data-modal-title-key="rep.form.createTitle" data-modal-note-key="common.backendRequiredNote"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New form</span></button>
+    <button type="button" class="btn btn-secondary btn-sm"   data-drawer="form-create" data-modal-trigger data-modal-title-key="rep.form.createTitle"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>New form</span></button>
   </div>
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" id="reports-forms-grid" data-grid><div class="card p-3.5" data-row data-status="active" data-search="monthly progress report">
     <div class="flex items-center justify-between gap-2 mb-2">
@@ -1276,6 +1309,35 @@
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Closed</span></span></span></div>
     <div class="sheet-row"><span class="k">Created</span><span class="v">2 months ago</span></div>
     </div>
+    </div>
+  </template>
+    <template data-preview="form-create">
+    <div class="sheet-card">
+      <div class="sheet-head">
+        <div class="flex items-center gap-2.5">
+          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
+          <h2 class="text-[15px] font-bold text-ink">Create form</h2>
+        </div>
+        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </div>
+      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-formCreate-name">Form name</label><input id="f-formCreate-name" name="formCreate-name" type="text" class="input" placeholder="e.g. End-of-month survey" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-day">Day</label><span class="select-wrap"><select id="f-formCreate-day" name="formCreate-day" class="select-input">
+      <option value="sat" selected>Saturday</option><option value="sun">Sunday</option><option value="mon">Monday</option><option value="tue">Tuesday</option><option value="wed">Wednesday</option><option value="thu">Thursday</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full" style="border-top:1px solid var(--c-line);margin-top:4px;padding-top:12px">
+      <span class="field-label">Field 1</span>
+    </div><div class="field"><label class="field-label" for="f-formCreate-field1Label">Field label</label><input id="f-formCreate-field1Label" name="formCreate-field1Label" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-field1Type">Field type</label><span class="select-wrap"><select id="f-formCreate-field1Type" name="formCreate-field1Type" class="select-input">
+      <option value="text" selected>Text</option><option value="select">Select list</option><option value="yesno">Yes / No</option><option value="note">Note</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-formCreate-field1Options">Options</label><input id="f-formCreate-field1Options" name="formCreate-field1Options" type="text" class="input" placeholder="Comma-separated options" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-field1Required">Required?</label><span class="select-wrap"><select id="f-formCreate-field1Required" name="formCreate-field1Required" class="select-input">
+      <option value="yes" selected>Yes</option><option value="no">No</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full" style="border-top:1px solid var(--c-line);margin-top:4px;padding-top:12px">
+      <span class="field-label">Field 2</span>
+    </div><div class="field"><label class="field-label" for="f-formCreate-field2Label">Field label</label><input id="f-formCreate-field2Label" name="formCreate-field2Label" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-field2Type">Field type</label><span class="select-wrap"><select id="f-formCreate-field2Type" name="formCreate-field2Type" class="select-input">
+      <option value="text" selected>Text</option><option value="select">Select list</option><option value="yesno">Yes / No</option><option value="note">Note</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-formCreate-field2Options">Options</label><input id="f-formCreate-field2Options" name="formCreate-field2Options" type="text" class="input" placeholder="Comma-separated options" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-field2Required">Required?</label><span class="select-wrap"><select id="f-formCreate-field2Required" name="formCreate-field2Required" class="select-input">
+      <option value="yes" selected>Yes</option><option value="no">No</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></div>
     </div>
   </template>
   </section>

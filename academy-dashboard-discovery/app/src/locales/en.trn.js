@@ -61,6 +61,24 @@ export default {
     /* availability-window editor (Timetable tab) — day/time only, no recurrence */
     availEdit: { open: 'Availability', title: 'Teacher availability', hint: 'Weekly availability windows — saved once the server is connected.', add: 'Add window', reason: 'Editing availability requires the backend (out of current scope).' },
 
+    /* Spec 032 — teacher form drawers (trn-edit / trn-add / trn-note / category create).
+     * INERT demo fields; every Save is a backendRequired gate. The excluded legacy
+     * fieldset (see must-omit contract) is omitted; upload stays a gate. */
+    form: {
+      editTitle: 'Edit teacher details',
+      addTitle: 'Add a new teacher',
+      firstName: 'First name (English)', lastName: 'Last name (English)',
+      firstNameAr: 'First name (Arabic)', lastNameAr: 'Last name (Arabic)',
+      email: 'Email', emailPh: 'name@example.com',
+      phone: 'Mobile number', phonePh: '05xxxxxxxx',
+      level: 'Level', courses: 'Assigned course',
+      city: 'City', country: 'Country',
+      note: 'Note text', notesPh: 'Write a short note…',
+      cv: 'CV & certificates', cvGate: 'Upload files',
+      cvReason: 'Uploading files requires the backend (out of current scope).',
+      catName: 'Category name', catDesc: 'Category description',
+    },
+
     /* teacher categories (nav stays planned — no page) */
     cat: {
       manage: 'Manage categories', title: 'Teacher categories', hint: 'Current categories — creating and assigning happen once the server is connected.',
