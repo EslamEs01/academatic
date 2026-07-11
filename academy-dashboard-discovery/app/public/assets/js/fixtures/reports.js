@@ -116,3 +116,41 @@ export const REPORTS = [
 
 /* Django-parity alias (the template iterates `report_categories`). */
 export const REPORT_CATEGORIES = REPORTS;
+
+/* ── Spec 037 — Monthly Reports board (reports.html#view=monthly) ──────────────
+ * DISPLAY-ONLY authored monthly roll-ups. Every `count` is a hand-authored fixture
+ * literal (NOT a computed aggregate), every status is a categorical signal id (reuses
+ * the reportSignalChip vocabulary). No money figure, no computed metric/percentage,
+ * no chart. Grouped by month for scannability (no live filterBar — the page already
+ * owns one filterBar in the overview tab and enhance.js has a single global
+ * [data-no-results], so the new tab stays a pure display board). */
+export const MONTHLY_REPORT_MONTHS = ['may', 'apr', 'mar'];
+export const MONTHLY_SUMMARY = [
+  { icon: 'sessions', tone: 'sky', value: 142, labelKey: 'rep.monthly.sum.sessions' },
+  { icon: 'clipboard-check', tone: 'success', value: 128, labelKey: 'rep.monthly.sum.attended' },
+  { icon: 'alert-triangle', tone: 'amber', value: 6, labelKey: 'rep.monthly.sum.followUp' },
+];
+export const MONTHLY_REPORTS = [
+  { id: 'mr-may-1', monthId: 'may', areaKey: 'rep.cat.sessions.title', count: 142, statusId: 'healthy', noteKey: 'rep.monthly.n.sessMay' },
+  { id: 'mr-may-2', monthId: 'may', areaKey: 'rep.cat.attendance.title', count: 128, statusId: 'healthy', noteKey: 'rep.monthly.n.attMay' },
+  { id: 'mr-may-3', monthId: 'may', areaKey: 'rep.cat.studentsFamilies.title', count: 6, statusId: 'needsFollowUp', noteKey: 'rep.monthly.n.stuMay' },
+  { id: 'mr-apr-1', monthId: 'apr', areaKey: 'rep.cat.sessions.title', count: 135, statusId: 'healthy', noteKey: 'rep.monthly.n.sessApr' },
+  { id: 'mr-apr-2', monthId: 'apr', areaKey: 'rep.cat.teachers.title', count: 3, statusId: 'needsFollowUp', noteKey: 'rep.monthly.n.tchApr' },
+  { id: 'mr-apr-3', monthId: 'apr', areaKey: 'rep.cat.coursesGroups.title', count: 18, statusId: 'healthy', noteKey: 'rep.monthly.n.crsApr' },
+  { id: 'mr-mar-1', monthId: 'mar', areaKey: 'rep.cat.sessions.title', count: 130, statusId: 'healthy', noteKey: 'rep.monthly.n.sessMar' },
+  { id: 'mr-mar-2', monthId: 'mar', areaKey: 'rep.cat.attendance.title', count: 121, statusId: 'healthy', noteKey: 'rep.monthly.n.attMar' },
+];
+
+/* ── Spec 037 — Data Analysis board (reports.html#view=analysis) ───────────────
+ * DISPLAY-ONLY authored insight cards. `count` = authored literal; `trendId` =
+ * an AUTHORED CATEGORICAL label (improving/steady/declining) — NOT a computed
+ * trend/percentage. No analytics engine, no chart/<canvas>, no finance figure,
+ * no computed metric/rank/score. Finance-flavoured analysis (expenses/invoices)
+ * is deliberately excluded → owned by Spec 038 (reports body stays finance-free). */
+export const DATA_INSIGHTS = [
+  { id: 'da1', areaKey: 'rep.cat.sessions.title', count: 142, trendId: 'improving', statusId: 'healthy', noteKey: 'rep.analysis.n.sessions' },
+  { id: 'da2', areaKey: 'rep.cat.attendance.title', count: 128, trendId: 'steady', statusId: 'healthy', noteKey: 'rep.analysis.n.attendance' },
+  { id: 'da3', areaKey: 'rep.cat.coursesGroups.title', count: 18, trendId: 'improving', statusId: 'healthy', noteKey: 'rep.analysis.n.courses' },
+  { id: 'da4', areaKey: 'rep.cat.teachers.title', count: 12, trendId: 'steady', statusId: 'healthy', noteKey: 'rep.analysis.n.teachers' },
+  { id: 'da5', areaKey: 'rep.cat.studentsFamilies.title', count: 6, trendId: 'declining', statusId: 'needsFollowUp', noteKey: 'rep.analysis.n.students' },
+];

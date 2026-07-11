@@ -46,6 +46,8 @@ import { renderLeads } from '../src/js/pages/leads.js';
 import { renderTasks } from '../src/js/pages/tasks.js';
 import { renderAnnouncements } from '../src/js/pages/announcements.js';
 import { renderTimeConverter } from '../src/js/pages/time-converter.js';
+// Spec 035 — Families & Students nav completion (schedule-search standalone page)
+import { renderScheduleSearch } from '../src/js/pages/schedule-search.js';
 // Spec 012 — role portal foundation (portal shell, not the admin shell)
 import { portalShellMarkup } from '../src/js/components/portal-shell.js';
 import { renderPortalsHub } from '../src/js/pages/portals.js';
@@ -126,6 +128,8 @@ const PAGES = [
   { base: 'staff', activeId: 'staff', titleKey: 'topbar.title.staff', crumbKey: 'topbar.crumb.staff', render: renderStaff },
   { base: 'library', activeId: 'books', titleKey: 'topbar.title.library', crumbKey: 'topbar.crumb.library', render: renderLibrary },
   { base: 'certificates', activeId: 'certificates', titleKey: 'topbar.title.certificates', crumbKey: 'topbar.crumb.certificates', render: renderCertificates },
+  // Spec 035 — Schedule Search (families-category nav completion; the only new page base)
+  { base: 'schedule-search', activeId: 'scheduleSearch', titleKey: 'ssr.title', crumbKey: 'nav.scheduleSearch', render: renderScheduleSearch },
   // Spec 012 — role portal foundation (portal shell; NOT admin nav pages; hub = the documented demo entry)
   { base: 'portals', shell: 'portal', role: 'hub', activeId: null, titleKey: 'prt.title.hub', render: renderPortalsHub },
   { base: 'student-portal', shell: 'portal', role: 'student', personaKey: 'data.stud.a.name', activeId: null, titleKey: 'prt.title.student', render: renderStudentPortal },

@@ -14,6 +14,7 @@ import { cardGrid } from '../components/card-grid.js';
 import { filterBar } from '../components/filter-bar.js';
 import { noResults } from '../components/states.js';
 import { chip } from '../components/ui.js';
+import { tabs } from '../components/tabs.js';
 import { reportCard } from '../components/report-card.js';
 import { reportActions } from '../components/report-actions.js';
 import { feedbackSection, formsSection } from '../components/report-feedback.js';
@@ -21,7 +22,7 @@ import { reportSignalChip } from '../components/report-status.js';
 import { outcomeChip } from '../components/outcome-status.js';
 import { statusChip } from '../components/status-chip.js';
 import { groupStatusChip } from '../components/group-status.js';
-import { REPORTS, REPORT_SUMMARY } from '../fixtures/reports.js';
+import { REPORTS, REPORT_SUMMARY, MONTHLY_REPORTS, MONTHLY_REPORT_MONTHS, MONTHLY_SUMMARY, DATA_INSIGHTS } from '../fixtures/reports.js';
 
 /* language-aware href: 'attendance.html#x' → 'attendance.en.html#x' on the EN build */
 const localizeHref = (href) => {
@@ -255,14 +256,112 @@ function detailSections() {
   </section>`;
 }
 
+/* ── Spec 037 — a backendRequired gate button (display-only final) ──────────── */
+function gate(labelKey, reasonKey, ic) {
+  return `<button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="${esc(reasonKey)}" aria-disabled="true" title="${esc(t(reasonKey))}">${icon(ic, 'ico ico-sm')}<span>${esc(t(labelKey))}</span></button>`;
+}
+
+/* ── Spec 037 — Monthly Reports display board (#view=monthly) ──────────────────
+ * Authored monthly roll-ups grouped by month. Count literals + categorical signal
+ * chips only. No filterBar (the page owns one in overview + a single global
+ * [data-no-results]); scannable via month sections. No money/computed/chart. */
+function monthlyRow(r) {
+  return `<div class="mr-row">
+    <span class="mr-area font-bold text-[13.5px] text-ink">${esc(t(r.areaKey))}</span>
+    <span class="mr-count tabular text-[13px]" style="color:var(--c-ink-2)">${num(r.count)}</span>
+    ${reportSignalChip(r.statusId)}
+    <span class="mr-note text-[12.5px]" style="color:var(--c-ink-3)">${esc(t(r.noteKey))}</span>
+  </div>`;
+}
+function monthlyPanel() {
+  const tiles = summaryCards(MONTHLY_SUMMARY.map((s) => ({ icon: s.icon, tone: s.tone, value: num(s.value), labelKey: s.labelKey })));
+  const sections = MONTHLY_REPORT_MONTHS.map((mid) => {
+    const rows = MONTHLY_REPORTS.filter((r) => r.monthId === mid);
+    if (!rows.length) return '';
+    return `<div class="card p-4 mr-section" id="mr-${esc(mid)}">
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <h3 class="section-title">${esc(t('rep.monthly.m.' + mid))}</h3>
+        ${gate('rep.monthly.export', 'rep.monthly.exportReason', 'file-text')}
+      </div>
+      <div class="mr-rows">${rows.map(monthlyRow).join('')}</div>
+    </div>`;
+  }).join('');
+  return `<section class="mt-4" id="mr-grid">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+      <div>
+        <h2 class="section-title">${esc(t('rep.monthly.title'))}</h2>
+        <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">${esc(t('rep.monthly.sub'))}</p>
+      </div>
+      ${gate('rep.monthly.generate', 'rep.monthly.generateReason', 'plus')}
+    </div>
+    ${tiles}
+    <div class="mt-4 grid gap-4">${sections}</div>
+  </section>`;
+}
+
+/* ── Spec 037 — Data Analysis display board (#view=analysis) ───────────────────
+ * Authored insight cards + AUTHORED categorical trend labels (NOT computed).
+ * No analytics engine, no chart/<canvas>, no finance figure, no computed metric. */
+const TREND = {
+  improving: { tone: 'completed', icon: 'trending-up' },
+  steady: { tone: 'neutral', icon: 'clock' },
+  declining: { tone: 'amber', icon: 'alert-triangle' },
+};
+function trendChip(id) {
+  const tr = TREND[id] || TREND.steady;
+  return chip({ label: t('rep.analysis.trend.' + id), tone: tr.tone, icon: tr.icon });
+}
+function insightCard(d) {
+  return `<div class="card p-4 da-card">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <span class="font-bold text-ink text-[14px]">${esc(t(d.areaKey))}</span>
+      ${reportSignalChip(d.statusId)}
+    </div>
+    <div class="flex items-center gap-2 mb-2">
+      <span class="font-bold tabular text-ink" style="font-size:20px;line-height:1">${num(d.count)}</span>
+      ${trendChip(d.trendId)}
+    </div>
+    <p class="text-[12.5px]" style="color:var(--c-ink-3)">${esc(t(d.noteKey))}</p>
+  </div>`;
+}
+function analysisPanel() {
+  return `<section class="mt-4" id="da-grid">
+    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+      <div>
+        <h2 class="section-title">${esc(t('rep.analysis.title'))}</h2>
+        <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">${esc(t('rep.analysis.sub'))}</p>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        ${gate('rep.analysis.run', 'rep.analysis.runReason', 'rotate-cw')}
+        ${gate('rep.analysis.export', 'rep.analysis.exportReason', 'file-text')}
+      </div>
+    </div>
+    ${cardGrid(DATA_INSIGHTS.map(insightCard), { cols: 'sm:grid-cols-2 lg:grid-cols-3', id: 'da-cards' })}
+  </section>`;
+}
+
 export function renderReports() {
-  return `
-    ${pageHeader({ titleKey: 'reportsPage.title', subKey: 'reportsPage.subtitle' })}
+  /* Spec 037 — the existing reports body becomes the Overview tab (byte-identical
+   * content); Monthly + Analysis are new display-only tabs (#view=monthly / analysis). */
+  const overview = `
     ${reportActions()}
     ${operationsOverview()}
     ${categorySection()}
     ${detailSections()}
     ${feedbackSection()}
     ${formsSection()}
+  `;
+  return `
+    ${pageHeader({ titleKey: 'reportsPage.title', subKey: 'reportsPage.subtitle' })}
+    ${tabs({
+      group: 'reports',
+      ariaKey: 'reportsPage.title',
+      items: [
+        { id: 'overview', labelKey: 'rep.tab.overview', icon: 'reports' },
+        { id: 'monthly', labelKey: 'rep.tab.monthly', icon: 'calendar' },
+        { id: 'analysis', labelKey: 'rep.tab.analysis', icon: 'trending-up' },
+      ],
+      panels: { overview, monthly: monthlyPanel(), analysis: analysisPanel() },
+    })}
   `;
 }

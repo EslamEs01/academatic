@@ -25,6 +25,8 @@ import arAdm from '../locales/ar.adm.js';
 import enAdm from '../locales/en.adm.js';
 import arCtrl from '../locales/ar.ctrl.js';
 import enCtrl from '../locales/en.ctrl.js';
+import arSsr from '../locales/ar.ssr.js';
+import enSsr from '../locales/en.ssr.js';
 
 function deepMerge(target, src) {
   for (const k in src) {
@@ -66,6 +68,8 @@ deepMerge(en, enAdm);
 // Spec 034 keys live in *.ctrl.js (Control Center: messages/leads/tasks/announcements/time-converter)
 deepMerge(ar, arCtrl);
 deepMerge(en, enCtrl);
+deepMerge(ar, arSsr);
+deepMerge(en, enSsr);
 
 const DICTS = { ar, en };
 const KEY = 'academy.lang';

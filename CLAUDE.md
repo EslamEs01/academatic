@@ -1,5 +1,95 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 034 — Control Center Pages Completion (Messages / Leads / Tasks / Announcements / Time
+Active feature: **Spec 037 — Reports / Analytics Nav Completion + Missing-Pages Correctives is IMPLEMENTED**
+(awaiting the watcher commit; artifacts + `plan.md` (D1–D38) + `tasks.md` (54 tasks) + 20 contracts +
+`implementation-status.md` at `academy-dashboard-discovery/specs/037-reports-analytics-nav-completion/`). **FOURTH
+Spec-033-roadmap follow-up.** **Count HELD 115 → 115 (0 new pages; admin-menu 50).** The two Reports «قريبًا» items
+flipped `planned → implemented` (reports category now 0 «قريبًا»; `FUTURE_ROUTES.monthlyReports`/`dataAnalysis`
+dropped): **monthlyReports** → display-only tab `reports.html#view=monthly` (authored month-grouped rows + summary
+cards + status chips), **dataAnalysis** → display-only tab `reports.html#view=analysis` (authored insight cards +
+AUTHORED categorical trend labels). A **full Admin missing-pages audit** (all 50 items; 0 truly-missing, 0 ownerless)
+also **strengthened the 3 maintainer-flagged Spec-035 items**: **familyCategories** → labeled Categories board
+`families.html#view=categories` (authored `FAMILY_CATEGORIES.count` + reclassify drawer + Create gate),
+**studentResult** → cross-student Results board `students.html#view=results`, **studentEvaluation** → cross-student
+Evaluation board `students.html#view=evaluation` (both with per-student deep-links to the UNCHANGED single-student
+`student.html#view=results`/`evaluation` tabs). Mechanism = existing `tabs()`+`#view=` fold ONLY: each page's existing
+body became the first/default tab verbatim (reports→overview [7 `.report-card` preserved], families→directory,
+students→directory); the new tabs are **pure display boards** (no filterBar — honoring enhance.js's single global
+`[data-no-results]`). **NO computed score/rank/GPA/percentage/rubric-total/trend-math, NO `<canvas>`/chart; reports
+body finance-free** (finance analysis → 038). Every write final (Export/Generate/Run/Create/Reclassify) =
+`backendRequired` gate. **`package.json`/`enhance.js`/`build-html.mjs`/`i18n.js` 0-diff** (extended the existing
+`ar/en.rep.js` + `ar/en.fam.js`). **Verified**: build 115; smoke PASS (nav037 anchors + reports 0-planned +
+reports/families/students tab widgets + overview 7-card preserved + no computed/canvas/money + per-student deep-links
++ the 5 `#view=` deep-links open on fresh load AR/EN; the nav035 route asserts updated to the refined routes —
+sanctioned amendment); a11y critical=0 serious=0 (+16 rows); 321 screenshots 0 console errors (+19 sp037). Locale
+parity `rep` 251/251 · `fam` 393/393 (0 divergence). `student.html`/`family.html` + `result-summary`/
+`evaluation-rubric` byte-identical; only reports/families/students bodies + the shared sidebar changed. Baseline: the
+uncommitted-but-green Spec 035 + 036 working tree (maintainer-approved green-tree implement). **No commit / no push**
+— watcher commits (recommend 035 → 036 → 037 as three separate commits). Next per the Spec-033 roadmap: 038 finance ·
+039 content deep-links · 040 settings deep-links · 041 final re-freeze.
+**History: Spec 036 — Teachers Nav Completion (Add Teacher / Teacher Categories / Sessions KPI / Monthly
+Performance) is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (46 tasks) + 17 contracts +
+`implementation-status.md` at `academy-dashboard-discovery/specs/036-teachers-nav-completion/`). **THIRD Spec-033-
+roadmap follow-up.** **Count HELD 115 → 115 (0 new pages).** The four Teachers-category «قريبًا» items flipped
+`planned → implemented` (0 «قريبًا» left in teachers; admin-menu still 50; `FUTURE_ROUTES.teacherCategories`
+dropped). **addTeacher** + **teacherCategories** = fold-anchors → `teachers.html` (reuse the existing `trn-add` /
+`trn-categories` drawers; addTeacher stays pay-free + password-free, CV=gate; Save/assign = backendRequired; bodies
+byte-identical). **sessionsKpi** + **monthlyPerf** = two display-only TABS folded into `teacher-performance.html`
+(the existing board became the **overview** tab via the shared `tabs()` widget; `#view=sessions-kpi` /
+`#view=monthly`): authored session COUNTS (`teacherCounts`) + categorical quality/trend chips; the legacy "Classes
+KPI"/"Monthly Performance" computed `Percentage` is deliberately NOT reproduced (NO computed score/rank/percentage/
+chart/`<canvas>`). Mechanism = existing primitives only (`tabs()`+`#view=` · `cardGrid`/`statMini`/`chip` · the
+`trn-add`/`trn-categories` drawers) + new authored `fixtures/teacher-performance.js` + new keys in the existing
+mirrored `ar/en.trn.js` (`trn.board.tab.*`/`trn.sessKpi.*`/`trn.monthly.*`; the `trn.kpi` profile block untouched —
+a naming collision was caught + fixed by renaming to `trn.sessKpi`, keeping `teacher.html` body byte-identical). The
+two new tabs are static display boards (no filterBar) to honor enhance.js's single global `[data-no-results]`
+contract. **Teacher pay-free GLOBAL** upheld: 0 salary/rate/hour_rate/fine/payout/currency token on any teacher
+surface; the legacy Add-Teacher Salary/Payout/Zoom/password sections stay excluded FOREVER; teacher-portal ×16
+byte-identical; `teacher-performance.html` is the sanctioned admin exempt board. **No `package.json`/dependency/
+backend/API/websocket/engine; `enhance.js` 0-diff; `build-html.mjs` 0-diff (no new page); `i18n.js` 0-diff (extended
+the existing trn pair).** **Verified**: build 115; smoke PASS (additive Teachers block — 4 nav-flip anchors +
+teachers 0-planned + admin-menu 50 + teacher-performance 3-tab widget with no computed/pay + `#view=sessions-kpi`/
+`#view=monthly` deep-links open the right tab on fresh load + `trn-add`/`trn-categories` reachable+gated;
+**payHit/pay-guards/famPay/payFigure/child-view/finance/settings/Spec-032/026–035 asserts BYTE-VERBATIM**; the ONE
+sanctioned amendment = the dashboard planned-item probe repointed teachers→admin, route-freeze stays 115); a11y
+critical=0 serious=0 (+teacher-performance `#view=sessions-kpi`/`#view=monthly` light/dark/mobile-390 rows);
+screenshots 0 console errors (+9 sp036 frames). `teachers.html`/`teacher.html` `#page-body` BYTE-IDENTICAL (fold
+anchors = nav-only, stash-rebuild proven); only `teacher-performance.html`/`.en` bodies change (tabs) + the shared
+sidebar; all portal pages ×16 + index byte-identical. Baseline note: implemented on the uncommitted-but-green Spec
+035 working tree (user-approved); recommend the watcher commit Spec 035 first, then Spec 036 as a separate commit.
+**No commit / no push** — watcher commits. Next: the remaining reports/admin/settings nav items per the Spec-033
+roadmap.
+**History: Spec 035 — Families & Students Nav Completion (Family Categories / Schedule Search / Student
+Results / Student Evaluation) is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (50 tasks) + 16
+contracts + `implementation-status.md` at `academy-dashboard-discovery/specs/035-families-students-nav-completion/`).
+**SECOND Spec-033-roadmap follow-up.** **Count 113 → 115 (+2)** — one new page base (`schedule-search`, +2 files);
+the four Families-category «قريبًا» items flipped `planned → implemented` (0 «قريبًا» left in families; admin-menu
+still 50; `FUTURE_ROUTES` trimmed of studentResult/studentEvaluation). **familyCategories** = fold-anchor →
+`families.html` (existing category filter + display-only `fam-cat` reclassify drawer, gated Save; body byte-identical).
+**scheduleSearch** = a NEW standalone display-only availability finder (grounded in legacy `management/search-schedule`):
+filterBar (teacher/subject/day/time-window/availability) + authored results board + per-slot read-only drawers +
+empty state; client-side facet over authored fixtures (NO engine/network/pay); Book/Assign = `backendRequired` gates
+(no fake booking/mutation). **studentResult** = deep-link `student.html#view=results`; **studentEvaluation** =
+deep-link `student.html#view=evaluation` — the existing display-only Results/Evaluation tabs (NO computed score/rank/
+chart; `result-summary.js`/`evaluation-rubric.js` BYTE-IDENTICAL). Mechanism = existing primitives only (pageHeader/
+summaryCards/filterBar/facetAttrs/previewTemplate/chip/noResults) + the CLOSED `data-*` set; new
+`fixtures/schedule-search.js` + mirrored `ar/en.ssr.js` (registered in `i18n.js`; 13 pairs, 0 divergence); `sidebar.js`
+`langRoute()` made HASH-AWARE (backward-compatible — routes without a hash byte-identical) so EN deep-links resolve to
+`student.en.html#view=…`. **No `package.json`/dependency/backend/API/websocket/engine; `enhance.js` 0-diff; no
+`app.css` change.** **Verified**: build 115; smoke PASS (114 loads; additive Families/Students block — route-freeze
+115 + 4 nav-flip anchors + families 0-planned + admin-menu 50 + schedule-search form/results/gates/empty/facet-narrow
++ 0 external request + no pay/file/password/canvas + student `#view=results`/`#view=evaluation` deep-links open the
+right tab; **payHit/famPay/payFigure/child-view/finance/settings/Spec-032/026–034 asserts BYTE-VERBATIM**; the TWO
+sanctioned amendments = route-freeze 113→115 (+ `schedule-search` PAGES entry) + the dashboard planned-item probe
+repointed families→teachers since families now has 0 planned); a11y critical=0 serious=0 (+schedule-search light/dark/
+mobile-390/open-drawer rows; student `#view=results`/`#view=evaluation` rows already present); screenshots 0 console
+errors (+11 sp035 frames). Only the 52 admin pages' SHARED SIDEBAR changed (4 «قريبًا» → anchors — PROVEN
+`#page-body`-onward BYTE-IDENTICAL for families/family/students/student ×2 lang); all portal pages ×16 + index
+byte-identical; `nav.config.js` = 4 flips + FUTURE_ROUTES trim, `build-html.mjs` = +1 import/entry, `i18n.js` = +2/+2,
+`sidebar.js` = hash-aware langRoute. Role laws green: teacher pay-free, family zero-pay, student child-view (portal
+untouched; the deep-links target the ADMIN `student.html` profile tabs, not the portal), finance/settings invariants.
+**No commit / no push** — watcher commits. Next: the remaining teachers/reports/admin/settings nav items per the
+Spec-033 roadmap.
+**History: Spec 034 — Control Center Pages Completion (Messages / Leads / Tasks / Announcements / Time
 Converter) is IMPLEMENTED** (awaiting the watcher commit; artifacts + `tasks.md` (58 tasks) + 17 contracts +
 `implementation-status.md` at `academy-dashboard-discovery/specs/034-control-center-pages/`). **FIRST Spec-033-
 roadmap follow-up.** **Count 103 → 113 (+10)** — 5 standalone page pairs (`messages`/`leads`/`tasks`/

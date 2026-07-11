@@ -1146,3 +1146,15 @@
 .cc-tz-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
 @media (min-width: 760px) { .cc-tz-grid { grid-template-columns: repeat(2, 1fr); } }
 .cc-tz-out { font-size: 18px; font-weight: 700; color: var(--c-ink); min-height: 28px; }
+
+/* ── Spec 037 — Reports Monthly board + Students/Families corrective boards (additive, display-only) ── */
+.mr-rows { display: flex; flex-direction: column; gap: 10px; }
+.mr-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 8px 0; border-top: 1px solid var(--c-line); }
+.mr-row:first-child { border-top: 0; }
+.mr-row .mr-area { flex: 1 1 150px; min-width: 0; }
+.mr-row .mr-note { flex: 1 1 100%; }
+@media (min-width: 640px) { .mr-row .mr-note { flex: 2 1 220px; order: 9; } }
+.brd-rows { display: flex; flex-direction: column; gap: 8px; }
+.brd-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 12px; border: 1px solid var(--c-line); border-radius: 12px; background: var(--c-surface); }
+.brd-row .brd-main { flex: 1 1 200px; min-width: 0; }
+.brd-row .brd-link { margin-inline-start: auto; }

@@ -10,7 +10,8 @@ import { esc, facetAttrs } from '../dom.js';
 import { pageHeader, summaryCards } from '../components/page-header.js';
 import { filterBar } from '../components/filter-bar.js';
 import { dataTable, tableFooter } from '../components/data-table.js';
-import { avatar, button } from '../components/ui.js';
+import { avatar, button, chip } from '../components/ui.js';
+import { tabs } from '../components/tabs.js';
 import { progressBar } from '../components/sparkline.js';
 import { previewTemplate, sheetRow, formDrawer } from '../components/preview-drawer.js';
 import { field } from '../components/form-field.js';
@@ -106,13 +107,91 @@ export function renderStudents() {
     { label: t('stu.col.progress') }, { label: t('stu.col.courses') }, { label: `<span class="sr-only">${t('dir.viewProfile')}</span>`, end: true },
   ];
   const table = dataTable({ id: 'students-table', head, rows: rows.map(row), footerHTML: tableFooter({ shown: rows.length, total: rows.length }) });
-  return `
-    ${pageHeader({ titleKey: 'stu.title', subKey: 'stu.sub', primary: button({ labelKey: 'stu.add', variant: 'primary', icon: 'plus', attrs: 'data-drawer="stu-add"' }), summaryHTML: summary })}
+
+  /* Spec 037 — the existing directory (filters + table) becomes the Directory tab;
+   * cross-student Results + Evaluation display boards are added as tabs
+   * (students.html#view=results / #view=evaluation). Single filterBar stays in
+   * Directory only. Per-student rows deep-link to the existing student.html tabs. */
+  const directory = `
     ${filters}
     ${table}
     ${noResults()}
+  `;
+  return `
+    ${pageHeader({ titleKey: 'stu.title', subKey: 'stu.sub', primary: button({ labelKey: 'stu.add', variant: 'primary', icon: 'plus', attrs: 'data-drawer="stu-add"' }), summaryHTML: summary })}
+    ${tabs({
+      group: 'students',
+      ariaKey: 'stu.title',
+      items: [
+        { id: 'directory', labelKey: 'stu.vtab.directory', icon: 'students' },
+        { id: 'results', labelKey: 'stu.vtab.results', icon: 'trending-up' },
+        { id: 'evaluation', labelKey: 'stu.vtab.evaluation', icon: 'sparkles' },
+      ],
+      panels: { directory, results: resultsPanel(rows), evaluation: evaluationPanel(rows) },
+    })}
     ${rows.map(preview).join('')}
     ${stuAddDrawer()}
     ${stuEditDrawer()}
   `;
+}
+
+/* Spec 037 — cross-student Results board (students.html#view=results). Per student:
+ * name + family + level + AUTHORED certificate-count literal + lifecycle status chip
+ * + a deep-link to the existing single-student Results tab. NO computed
+ * score/rank/GPA/percentage/average — no derivation, no cross-student aggregation. */
+function resultRow(s) {
+  const fam = familyOf(s.familyId);
+  const certs = (s.results && s.results.certificates) ? s.results.certificates.length : 0;
+  const meta = `${fam ? esc(t(fam.guardian.nameKey)) : ''} · ${esc(t(s.levelKey))}`;
+  return `<div class="brd-row">
+    <div class="brd-main flex items-center gap-2.5">
+      ${avatar({ nameKey: s.nameKey, accent: s.accent, size: 'sm' })}
+      <div class="min-w-0">
+        <div class="font-bold text-[13px] text-ink truncate">${t(s.nameKey)}</div>
+        <div class="text-[12px] truncate" style="color:var(--c-ink-3)">${meta}</div>
+      </div>
+    </div>
+    <span class="text-[12px] tabular" style="color:var(--c-ink-2)">${num(certs)} ${esc(t('stu.resBoard.certs'))}</span>
+    ${familyStatusChip(s.statusId)}
+    <a href="${studentHref()}#view=results" class="btn btn-secondary btn-sm brd-link">${icon('trending-up', 'ico ico-sm')}<span>${t('stu.resBoard.view')}</span></a>
+  </div>`;
+}
+function resultsPanel(rows) {
+  const body = rows.length ? rows.map(resultRow).join('') : `<div class="empty-row">${t('stu.resBoard.none')}</div>`;
+  return `<section class="mt-4">
+    <div class="mb-4"><h2 class="section-title">${esc(t('stu.resBoard.title'))}</h2>
+      <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">${esc(t('stu.resBoard.sub'))}</p></div>
+    <div class="brd-rows">${body}</div>
+  </section>`;
+}
+
+/* Spec 037 — cross-student Evaluation board (students.html#view=evaluation). Per
+ * student: name + level + AUTHORED categorical approved/pending chip + month + a
+ * deep-link to the existing single-student Evaluation tab. NO computed rubric
+ * total/score/rank/rating math. */
+function evalRow(s) {
+  const ev = s.evaluation;
+  const statusChip = ev && ev.approved
+    ? chip({ labelKey: 'eval.approved', tone: 'completed', icon: 'check-circle' })
+    : chip({ labelKey: 'eval.pending', tone: 'amber', icon: 'clock' });
+  const meta = `${esc(t(s.levelKey))}${ev ? ' · ' + esc(t(ev.monthKey)) : ''}`;
+  return `<div class="brd-row">
+    <div class="brd-main flex items-center gap-2.5">
+      ${avatar({ nameKey: s.nameKey, accent: s.accent, size: 'sm' })}
+      <div class="min-w-0">
+        <div class="font-bold text-[13px] text-ink truncate">${t(s.nameKey)}</div>
+        <div class="text-[12px] truncate" style="color:var(--c-ink-3)">${meta}</div>
+      </div>
+    </div>
+    ${statusChip}
+    <a href="${studentHref()}#view=evaluation" class="btn btn-secondary btn-sm brd-link">${icon('sparkles', 'ico ico-sm')}<span>${t('stu.evalBoard.view')}</span></a>
+  </div>`;
+}
+function evaluationPanel(rows) {
+  const body = rows.length ? rows.map(evalRow).join('') : `<div class="empty-row">${t('stu.evalBoard.none')}</div>`;
+  return `<section class="mt-4">
+    <div class="mb-4"><h2 class="section-title">${esc(t('stu.evalBoard.title'))}</h2>
+      <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">${esc(t('stu.evalBoard.sub'))}</p></div>
+    <div class="brd-rows">${body}</div>
+  </section>`;
 }
