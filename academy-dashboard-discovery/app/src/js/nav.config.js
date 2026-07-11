@@ -82,13 +82,13 @@ export const NAV_CATEGORIES = [
         titleKey: 'cat.finance',
         items: [
           item({ id: 'finance', labelKey: 'nav.finance', icon: 'wallet', route: 'finance.html' }),
-          item({ id: 'invoices', labelKey: 'nav.invoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-          item({ id: 'monthlyInvoices', labelKey: 'nav.monthlyInvoices', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-          item({ id: 'salaries', labelKey: 'nav.salaries', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-          item({ id: 'staffSalaries', labelKey: 'nav.staffSalaries', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-          item({ id: 'payments', labelKey: 'nav.payments', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-          item({ id: 'classSalaryReport', labelKey: 'nav.classSalaryReport', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
-          item({ id: 'banks', labelKey: 'nav.banks', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }),
+          item({ id: 'invoices', labelKey: 'nav.invoices', icon: 'wallet', route: 'finance.html#view=invoices' }), // Spec 038 — unlock → invoices tab (authored rows; writes gated)
+          item({ id: 'monthlyInvoices', labelKey: 'nav.monthlyInvoices', icon: 'wallet', route: 'finance.html#view=monthly-invoices' }), // Spec 038 — unlock → monthly board (no computed total)
+          item({ id: 'salaries', labelKey: 'nav.salaries', icon: 'wallet', route: 'finance.html#view=salaries' }), // Spec 038 — unlock → figure-free salaries tab
+          item({ id: 'staffSalaries', labelKey: 'nav.staffSalaries', icon: 'wallet', route: 'finance.html#view=salaries' }), // Spec 038 — unlock → staff board in the salaries tab
+          item({ id: 'payments', labelKey: 'nav.payments', icon: 'wallet', route: 'finance.html#view=payments' }), // Spec 038 — unlock → payments tab
+          item({ id: 'classSalaryReport', labelKey: 'nav.classSalaryReport', icon: 'wallet', status: 'disabled', reasonKey: 'nav.reason.finance' }), // Spec 038 — HONEST LOCK kept (a real class-salary report ⇒ computed per-class pay; needs the payroll backend)
+          item({ id: 'banks', labelKey: 'nav.banks', icon: 'wallet', route: 'finance.html#view=banks' }), // Spec 038 — unlock → banks tab (name+status, no balance)
         ],
       },
     ],

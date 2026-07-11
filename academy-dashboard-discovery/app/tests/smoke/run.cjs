@@ -1038,8 +1038,37 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         ok(a.plannedHasAvailability, `${page}/${lang}: a planned finance card is missing its availability chip`);
         // (i) no chart/score/rank/leaderboard/percentile token anywhere in the page body
         ok(!a.forbidden, `${page}/${lang}: finance page body shows a forbidden chart/score/rank/leaderboard/percentile token`);
+        // (i2) Spec 038 — finance is now a SIX-tab hub (overview/invoices/payments/monthly-invoices/salaries/banks)
+        const finTabs = await p.evaluate(() => [...document.querySelectorAll('[data-tabs="finance"] [data-tabpanel]')].map((p) => p.getAttribute('data-tabpanel')));
+        ok(JSON.stringify(finTabs) === JSON.stringify(['overview', 'invoices', 'payments', 'monthly-invoices', 'salaries', 'banks']),
+          `${page}/${lang}: finance must have exactly the six tabs overview/invoices/payments/monthly-invoices/salaries/banks, got ${JSON.stringify(finTabs)}`);
+        // (i3) Spec 038 — monthly-invoices board: the 9 invoices grouped by month (each once), no computed total
+        const finMonthly = await p.evaluate(() => {
+          const panel = document.querySelector('[data-tabpanel="monthly-invoices"]');
+          if (!panel) return { rows: -1, groups: -1, serials: [], amounts: -1, totalToken: true };
+          return {
+            rows: panel.querySelectorAll('.finm-row').length,
+            groups: panel.querySelectorAll('.finm-group').length,
+            serials: [...panel.querySelectorAll('.finm-row .finm-serial')].map((e) => e.textContent.trim()),
+            amounts: panel.querySelectorAll('.finm-row .finm-amount').length,
+            // no computed monthly total/subtotal: the panel must carry no total/sum wording
+            // (the invoice-drawer «المجموعة»=group label is NOT rendered in the monthly board).
+            totalToken: /إجمالي|المجموع|\btotal\b|subtotal|مجموع/i.test(panel.textContent),
+          };
+        });
+        // (i3) Spec 038 — monthly-invoices identity: exactly the nine authored INVOICES serials,
+        // grouped into their four authored month groups, each appearing exactly once; no computed total.
+        const EXPECTED_INV_SERIALS = ['INV-2026-041', 'INV-2026-052', 'INV-2026-043', 'INV-2026-054', 'INV-2026-044', 'INV-2026-035', 'INV-2026-046', 'INV-2026-047', 'INV-2026-028'];
+        const finUniq = [...new Set(finMonthly.serials)];
+        ok(finMonthly.rows === 9 && finMonthly.groups === 4, `${page}/${lang}: monthly-invoices board must show 9 invoice rows across 4 month groups, got ${JSON.stringify({ rows: finMonthly.rows, groups: finMonthly.groups })}`);
+        ok(finUniq.length === finMonthly.serials.length, `${page}/${lang}: monthly-invoices board has duplicate invoice serial(s): ${JSON.stringify(finMonthly.serials)}`);
+        ok(finMonthly.serials.length === 9 && EXPECTED_INV_SERIALS.every((s) => finUniq.includes(s)) && finUniq.every((s) => EXPECTED_INV_SERIALS.includes(s)), `${page}/${lang}: monthly-invoices serials must be exactly the nine authored INVOICES (no missing, no extra, no dup), got ${JSON.stringify(finMonthly.serials)}`);
+        ok(finMonthly.amounts === 9 && !finMonthly.totalToken, `${page}/${lang}: monthly-invoices board must show exactly 9 per-row amounts and NO computed total/subtotal, got ${JSON.stringify({ amounts: finMonthly.amounts, totalToken: finMonthly.totalToken })}`);
 
-        // (g) confirming a Record-payment action changes NO invoice status chip (before/after)
+        // (g) confirming a Record-payment action changes NO invoice status chip (before/after).
+        // Spec 038 — the invoice tiles + list now live in the #view=invoices tab; activate it before interacting.
+        await p.click('[data-tabs="finance"] [data-tab="invoices"]').catch(() => {});
+        await p.waitForTimeout(160);
         const chipsBefore = await p.$$eval('#invoice-list .fr-meta .chip', (els) => els.map((e) => e.textContent.trim()));
         const confirmBtn = await p.$('#invoice-list [data-row]:not([data-status="cancelled"]) [data-confirm]');
         if (confirmBtn) {
@@ -1093,7 +1122,7 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
           const noFile = !/type="file"/i.test(bodyHTML);
           return { hasTabs: !!tabsWrap, tabIds, visible, salRows, bankRows, salGates, addBank, bankGates, salFigureFree, noSecret, noFile };
         });
-        ok(f30.hasTabs && JSON.stringify(f30.tabIds) === JSON.stringify(['overview', 'salaries', 'banks']), `${page}/${lang}: finance hub tabs missing/incorrect (${JSON.stringify(f30.tabIds)})`);
+        ok(f30.hasTabs && JSON.stringify(f30.tabIds) === JSON.stringify(['overview', 'invoices', 'payments', 'monthly-invoices', 'salaries', 'banks']), `${page}/${lang}: finance hub tabs missing/incorrect (${JSON.stringify(f30.tabIds)})`); // Spec 038 — 3→6 tabs
         ok(f30.visible === 1, `${page}/${lang}: exactly one finance tabpanel must be visible, got ${f30.visible}`);
         ok(f30.salRows >= 6, `${page}/${lang}: salaries board missing status-first rows (${f30.salRows})`);
         ok(f30.salGates >= 4, `${page}/${lang}: salaries board missing Generate/Approve/Mark-paid/Export gates (${f30.salGates})`);
@@ -1542,7 +1571,10 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
           const isFinanceLink = (h) => /(^|\/)finance\.(en\.)?html$/.test(h || '');
           const sidebarFinanceLinks = [...document.querySelectorAll('.sidebar a[href]')].filter((x) => isFinanceLink(x.getAttribute('href'))).length;
           const bodyFinanceLinks = [...body.querySelectorAll('a[href]')].filter((x) => isFinanceLink(x.getAttribute('href'))).length;
-          const walletIds = ['invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport'];
+          // Spec 038 — the six billing items are unlocked to finance.html#view=… deep-links; only
+          // classSalaryReport stays an honest disabled+lock. (The unlocked hrefs carry a #view= hash,
+          // so `sidebarFinanceLinks` — which matches the bare finance.html link only — stays 1.)
+          const walletIds = ['classSalaryReport'];
           const walletOk = walletIds.every((id) => {
             const el = document.querySelector(`.nav-item[data-nav="${id}"]`);
             return !!el && el.getAttribute('data-nav-status') === 'disabled' && el.getAttribute('aria-disabled') === 'true' && !!el.querySelector('use[href="#i-lock"]');
@@ -1555,8 +1587,8 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         ok(!fin.arHit, `${page}/${lang}: #page-body contains a forbidden finance token (AR: فاتورة/فواتير/مدفوعات/رواتب/محاسبة/الفوترة)`);
         // (b) the sidebar carries exactly one finance link
         ok(fin.sidebarFinanceLinks === 1, `${page}/${lang}: expected exactly one sidebar finance link, got ${fin.sidebarFinanceLinks}`);
-        // (c) the six wallet items remain locked/disabled
-        ok(fin.walletOk, `${page}/${lang}: one or more of the six locked wallet nav items lost its disabled/lock state`);
+        // (c) Spec 038 — classSalaryReport remains the one honest locked/disabled finance item
+        ok(fin.walletOk, `${page}/${lang}: classSalaryReport lost its disabled/lock state (it must stay the one honest finance lock)`);
         // (d) zero finance.html links inside the page body
         ok(fin.bodyFinanceLinks === 0, `${page}/${lang}: #page-body must not contain a finance.html link`);
         // (e) structural money-widget guard (see the evaluate block): sanctioned counts only
@@ -1582,8 +1614,8 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         const banksInAdmin = !!adm?.querySelector('[data-nav="banks"]');
         const sessBadge = (document.querySelector('.nav-item[data-nav="sessions"] .nav-badge')?.textContent || '').trim();
         const famTitle = (document.querySelector('#catpanel-families .cat-title')?.textContent || '').trim();
-        // sitewide locked finance items (six billing + banks) — all disabled + reason + lock
-        const lockedFin = ['invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport', 'banks'];
+        // Spec 038 — the one remaining honest finance lock (classSalaryReport) — disabled + reason + lock
+        const lockedFin = ['classSalaryReport']; // Spec 038 — only classSalaryReport stays an honest lock; the other six finance items are unlocked to finance.html#view=… deep-links
         const lockedOk = lockedFin.every((id) => {
           const el = document.querySelector(`.nav-item[data-nav="${id}"]`);
           return !!el && el.getAttribute('data-nav-status') === 'disabled'
@@ -1598,10 +1630,11 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
       ok(nav010.railCats === 6, `${page}/${lang}: expected exactly 6 rail categories, got ${nav010.railCats} (no 7th finance rail category)`);
       ok(nav010.finLabel === expFinLabel, `${page}/${lang}: finance sub-section label should be "${expFinLabel}", got "${nav010.finLabel}"`);
       ok(JSON.stringify(nav010.finMembers) === JSON.stringify(expFinMembers), `${page}/${lang}: finance sub-section members/order wrong: ${JSON.stringify(nav010.finMembers)}`);
-      ok(JSON.stringify(nav010.finLinks) === JSON.stringify(['finance']), `${page}/${lang}: finance sub-section must have exactly one implemented link (finance), got ${JSON.stringify(nav010.finLinks)}`);
+      // Spec 038 — six finance items unlocked → implemented deep-links (finance + invoices/monthlyInvoices/salaries/staffSalaries/payments/banks, in DOM order); classSalaryReport stays locked.
+      ok(JSON.stringify(nav010.finLinks) === JSON.stringify(['finance', 'invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'banks']), `${page}/${lang}: finance sub-section implemented links wrong after Spec 038: ${JSON.stringify(nav010.finLinks)}`);
       ok(nav010.banksInReports && !nav010.banksInAdmin, `${page}/${lang}: banks must live in the reports finance sub-section, not admin (reports=${nav010.banksInReports}, admin=${nav010.banksInAdmin})`);
       ok(nav010.admItems.length === 5 && !nav010.admItems.includes('banks'), `${page}/${lang}: admin category should have 5 planned items and no banks, got ${JSON.stringify(nav010.admItems)}`);
-      ok(nav010.lockedOk, `${page}/${lang}: the seven locked finance items (six billing + banks) must stay disabled+reason+lock`);
+      ok(nav010.lockedOk, `${page}/${lang}: the one honest finance lock (classSalaryReport) must stay disabled+reason+lock`);
       // Spec 011 — the badge is localized: Arabic pages show Arabic-Indic digits, English pages Western,
       // both equal the fixture SESSIONS.total (num()/Intl.NumberFormat). Assert the locale-correct form.
       const expBadge = new Intl.NumberFormat(lang === 'en' ? 'en-US' : 'ar-EG').format(Number(SESSIONS_TOTAL));
@@ -2143,6 +2176,73 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         await ctx.close();
       }
     }
+  }
+
+  // ===== Spec 038 — finance six-tab deep-links: the nav routes finance.html#view=…
+  // (overview/invoices/payments/monthly-invoices/salaries/banks) must OPEN the matching tab on
+  // fresh load (fresh context per view). Re-assert no chart/canvas + no external request. =====
+  for (const lang of ['ar', 'en']) {
+    const file = lang === 'en' ? 'finance.en.html' : 'finance.html';
+    for (const view of ['overview', 'invoices', 'payments', 'monthly-invoices', 'salaries', 'banks']) {
+      const ctx = await browser.newContext();
+      const p = await ctx.newPage();
+      const dext = [];
+      p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
+      await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
+      await p.waitForTimeout(220);
+      const r = await p.evaluate(() => {
+        const vis = [...document.querySelectorAll('[data-tabs="finance"] [data-tabpanel]')].filter((x) => !x.hidden);
+        const body = document.getElementById('page-body');
+        return {
+          active: vis.length === 1 ? vis[0].getAttribute('data-tabpanel') : `n=${vis.length}`,
+          noChart: !/<canvas|chart\.js|data-chart|\bgraph\b|leaderboard|percentile/i.test(body.innerHTML),
+        };
+      });
+      ok(r.active === view, `finance/${lang}: nav deep-link #view=${view} did not open the ${view} tab (active=${r.active})`);
+      ok(r.noChart, `finance/${lang}: the ${view} tab must not add a chart/canvas/graph`);
+      ok(dext.length === 0, `finance/${lang}: deep-link #view=${view} triggered external request(s) ${JSON.stringify(dext.slice(0, 2))}`);
+      await ctx.close();
+    }
+  }
+  // Spec 038 — EXACT finance nav route coverage (AR + EN): each of the six unlocked items is a real
+  // implemented anchor to its finance.html#view=… deep-link (no aria-disabled, no lock icon);
+  // classSalaryReport stays a disabled+reason+lock non-anchor with NO route; finance-analysis has NO
+  // nav item/route; admin menu stays 50. (Finance sub-section order is protected byte-verbatim by the
+  // nav010 finMembers assert.)
+  for (const lang of ['ar', 'en']) {
+    const file = lang === 'en' ? 'finance.en.html' : 'finance.html';
+    const ctx = await browser.newContext();
+    const p = await ctx.newPage();
+    await p.goto(`${BASE}/${file}`, { waitUntil: 'networkidle' });
+    const nav = await p.evaluate(() => {
+      const info = (id) => {
+        const n = document.querySelector(`.nav-item[data-nav="${id}"]`);
+        if (!n) return null;
+        return {
+          a: n.tagName === 'A', href: n.getAttribute('href') || '', soon: n.hasAttribute('data-coming-soon'),
+          disabled: n.getAttribute('aria-disabled') === 'true', status: n.getAttribute('data-nav-status') || '',
+          reason: n.getAttribute('data-reason-key') || '', lock: !!n.querySelector('use[href="#i-lock"]'),
+        };
+      };
+      return {
+        invoices: info('invoices'), payments: info('payments'), monthlyInvoices: info('monthlyInvoices'),
+        salaries: info('salaries'), staffSalaries: info('staffSalaries'), banks: info('banks'),
+        csr: info('classSalaryReport'),
+        fa: info('financeAnalysis'), an: info('analysis'), ae: info('analysisExpenses'), ai: info('analysisInvoices'),
+        adminMenu: document.querySelectorAll('.nav-panel .nav-item').length,
+      };
+    });
+    const routeOk = (o, re) => !!o && o.a && !o.soon && !o.disabled && !o.lock && re.test(o.href);
+    ok(routeOk(nav.invoices, /(^|\/)finance\.(en\.)?html#view=invoices$/), `finance/${lang}: invoices must be a real anchor → finance.html#view=invoices, got ${JSON.stringify(nav.invoices)}`);
+    ok(routeOk(nav.payments, /(^|\/)finance\.(en\.)?html#view=payments$/), `finance/${lang}: payments must be a real anchor → finance.html#view=payments, got ${JSON.stringify(nav.payments)}`);
+    ok(routeOk(nav.monthlyInvoices, /(^|\/)finance\.(en\.)?html#view=monthly-invoices$/), `finance/${lang}: monthlyInvoices must be a real anchor → finance.html#view=monthly-invoices, got ${JSON.stringify(nav.monthlyInvoices)}`);
+    ok(routeOk(nav.salaries, /(^|\/)finance\.(en\.)?html#view=salaries$/), `finance/${lang}: salaries must be a real anchor → finance.html#view=salaries, got ${JSON.stringify(nav.salaries)}`);
+    ok(routeOk(nav.staffSalaries, /(^|\/)finance\.(en\.)?html#view=salaries$/), `finance/${lang}: staffSalaries must be a real anchor → finance.html#view=salaries, got ${JSON.stringify(nav.staffSalaries)}`);
+    ok(routeOk(nav.banks, /(^|\/)finance\.(en\.)?html#view=banks$/), `finance/${lang}: banks must be a real anchor → finance.html#view=banks, got ${JSON.stringify(nav.banks)}`);
+    ok(!!nav.csr && !nav.csr.a && nav.csr.disabled && nav.csr.status === 'disabled' && nav.csr.reason === 'nav.reason.finance' && nav.csr.lock && !nav.csr.href, `finance/${lang}: classSalaryReport must stay a disabled+nav.reason.finance+lock non-anchor with NO route, got ${JSON.stringify(nav.csr)}`);
+    ok(!nav.fa && !nav.an && !nav.ae && !nav.ai, `finance/${lang}: finance-analysis must have NO nav item/route (financeAnalysis/analysis/analysisExpenses/analysisInvoices all absent)`);
+    ok(nav.adminMenu === 50, `finance/${lang}: admin menu must stay 50 classified nav items, got ${nav.adminMenu}`);
+    await ctx.close();
   }
 
   await browser.close();

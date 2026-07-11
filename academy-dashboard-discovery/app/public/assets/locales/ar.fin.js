@@ -119,7 +119,20 @@ export default {
     },
 
     /* Spec 030 — finance hub tabs */
-    tab: { overview: 'نظرة عامة', salaries: 'الرواتب', banks: 'البنوك', aria: 'أقسام المالية' },
+    tab: { overview: 'نظرة عامة', invoices: 'الفواتير', payments: 'المدفوعات', monthlyInvoices: 'الفواتير الشهرية', salaries: 'الرواتب', banks: 'البنوك', aria: 'أقسام المالية' },
+    /* Spec 038 — Monthly Invoices display board (#view=monthly-invoices): the existing
+     * invoices grouped by month; per-row authored amount literals only, NO computed total. */
+    monthly: {
+      title: 'الفواتير الشهرية',
+      sub: 'الفواتير مجمّعة حسب الشهر — مبالغ مؤلّفة لكل فاتورة للعرض فقط، دون أي تجميع أو حساب.',
+      count: '{n} فاتورة',
+      generate: 'إنشاء دفعة شهرية',
+      generateReason: 'إنشاء الفواتير الشهرية يحتاج نظام الفوترة — لا يُنشأ شيء الآن.',
+      send: 'إرسال الفواتير',
+      sendReason: 'إرسال الفواتير يحتاج نظام الفوترة — خارج النطاق الحالي.',
+      export: 'تصدير الشهر',
+      exportReason: 'تصدير الفواتير الشهرية يحتاج وحدة الخادم — خارج النطاق الحالي.',
+    },
 
     /* Spec 030 — salaries board (STATUS-FIRST, FIGURE-FREE — no pay amount) */
     sal: {

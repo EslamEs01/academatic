@@ -109,6 +109,23 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=salaries' },
   { page: 'finance', lang: 'ar', theme: 'dark', hash: '#view=banks' },
   { page: 'finance', lang: 'en', theme: 'light', hash: '#view=salaries' },
+  // Spec 038 — the three new finance tabs (invoices/payments/monthly-invoices) × AR/EN × light/dark
+  // + mobile-390 + the invoice-drawer open state on #view=invoices.
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=invoices' },
+  { page: 'finance', lang: 'ar', theme: 'dark', hash: '#view=invoices' },
+  { page: 'finance', lang: 'en', theme: 'light', hash: '#view=invoices' },
+  { page: 'finance', lang: 'en', theme: 'dark', hash: '#view=invoices' },
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=payments' },
+  { page: 'finance', lang: 'ar', theme: 'dark', hash: '#view=payments' },
+  { page: 'finance', lang: 'en', theme: 'light', hash: '#view=payments' },
+  { page: 'finance', lang: 'en', theme: 'dark', hash: '#view=payments' },
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=monthly-invoices' },
+  { page: 'finance', lang: 'ar', theme: 'dark', hash: '#view=monthly-invoices' },
+  { page: 'finance', lang: 'en', theme: 'light', hash: '#view=monthly-invoices' },
+  { page: 'finance', lang: 'en', theme: 'dark', hash: '#view=monthly-invoices' },
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=invoices', viewport: 'mobile' },
+  { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=invoices', open: '[data-drawer="inv-inv1"]' },
+  { page: 'finance', lang: 'en', theme: 'dark', hash: '#view=invoices', open: '[data-drawer="inv-inv1"]' },
   // Spec 026 — the three new admin ops pages (AR light+dark; sessions-analysis as the EN sample)
   { page: 'sessions-analysis', lang: 'ar', theme: 'light' },
   { page: 'sessions-analysis', lang: 'ar', theme: 'dark' },

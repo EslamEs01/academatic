@@ -909,3 +909,20 @@ Teacher pay-free upheld: 0 salary/rate/payout/currency token on any teacher surf
 
 ### Honesty / impact
 `reports.html` Overview preserves the existing body verbatim (7 `.report-card`s); families → Directory tab, students → Directory tab, both verbatim. New tabs are pure display boards (no filterBar — honors enhance.js's single global `[data-no-results]`). `student.html`/`family.html` + `result-summary`/`evaluation-rubric` byte-identical; only `reports`/`families`/`students` bodies (×2 lang) + the shared sidebar change; portals ×16 + index byte-identical; `package.json`/`enhance.js`/`build-html.mjs`/`i18n.js` 0-diff. Admin-menu 50; reports category 0-planned. a11y critical=0 serious=0 (incl. mobile-390).
+
+## Spec 038 — Finance Nav Completion (115 → 115; finance hub 3 → 6 tabs; 6 nav locks unlocked, classSalaryReport kept locked)
+
+**Frames**: 13 new `sp038-*` frames (0 console errors) — the three new finance tabs + the classSalaryReport honest-lock proof:
+`sp038-invoices`(+`-en`/`-dark`/`-mobile`), `sp038-payments`(+`-en`/`-dark`), `sp038-monthly`(+`-en`/`-dark`/`-mobile`), `sp038-classsalary-lock`(+`-en`).
+
+### The six finance tabs
+- **overview** (existing frames): `financeActions()` (first `.report-actions`) + the 9 figure-free planned cards + the 9 baked `inv-*` drawers.
+- **invoices** (`sp038-invoices`): `finance.html#view=invoices` — the 4 status tiles + filterBar + single `#invoice-list` (9 authored rows, amount literals + status chips) **MOVED** here; Create/Generate/PDF/Send/Mark-Paid = gates; **no computed total**.
+- **payments** (`sp038-payments`): `finance.html#view=payments` — the single 6-row `.fin-pay-row` list MOVED here; Record/Confirm/Refund/Export = gates.
+- **monthly-invoices** (`sp038-monthly`): `finance.html#view=monthly-invoices` — the 9 invoices grouped by month (4 groups), `.finm-*` board, per-row literals + count-only per-month label, **no computed total**; Generate/Send/Export = gates.
+- **salaries** (existing `sp030-salaries`): `finance.html#view=salaries` — figure-free teacher + staff boards (name+status+period, **no pay figure**); salaries + staffSalaries both deep-link here.
+- **banks** (existing `sp030-banks`): `finance.html#view=banks` — name+status only (**no balance**).
+- **classSalaryReport** (`sp038-classsalary-lock`): the sidebar shows it as an honest `disabled`+reason+lock item (no route) — finance-analysis likewise deferred.
+
+### Honesty / impact
+Finance no-fake-money upheld: authored per-row SAR literals only, `FINANCE_SUMMARY` row-count-only, **0 computed** total/balance/profit/loss/revenue/VAT/tax/salary/payout, salaries/staff figure-free, banks no balance, every write a `backendRequired` gate, 0 gateway/`<canvas>`/`type=file`/`type=password`. MOVE-not-duplicate preserved 9 invoices / 6 payments / 4 tiles / 9 planned / 9 drawers. Only `finance.html`/`.en` body + the shared sidebar changed (proven vs a captured baseline `#page-body` md5 snapshot — non-destructive); every other admin body + portals ×16 + index + reports/families/students byte-identical; `fixtures/finance.js`/`package.json`/`enhance.js`/`build-html.mjs`/`i18n.js` 0-diff. Admin-menu 50; count 115. a11y critical=0 serious=0 (incl. mobile-390 + invoice/bank drawer states).

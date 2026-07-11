@@ -1,5 +1,37 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 037 — Reports / Analytics Nav Completion + Missing-Pages Correctives is IMPLEMENTED**
+Active feature: **Spec 038 — Finance Nav Completion (Invoices / Payments / Monthly Invoices / Salaries / Staff
+Salaries / Class Salary Report / Banks) is IMPLEMENTED** (awaiting the watcher commit; artifacts + `plan.md`
+(D1–D38) + `tasks.md` (39 tasks) + 21 contracts + `implementation-status.md` at
+`academy-dashboard-discovery/specs/038-finance-nav-completion/`). **FIFTH Spec-033-roadmap follow-up; baseline is
+now COMMITTED** (HEAD `56bc418` bundled Specs 035/036/037; clean tree — no green-tree caveat). **Count HELD 115 →
+115 (0 new pages; admin-menu 50).** The finance hub grew **3 → 6 tabs** (overview · invoices · payments ·
+monthly-invoices · salaries · banks) by **MOVING (not duplicating)** the existing surfaces: the invoice tiles +
+filterBar + single `#invoice-list` (9 rows) → **invoices** tab; the 6-row `.fin-pay-row` list → **payments** tab;
+Overview keeps `financeActions()` (first `.report-actions`) + the 9 figure-free planned cards + the 9 baked `inv-*`
+drawers. **monthlyInvoicesSection()** = a NEW derived board grouping the existing 9 INVOICES by authored `monthKey`
+(4 groups) with `.finm-*`/`#fin-monthly` (never `.fin-row`/`.report-card`), per-row amount literals, **no computed
+monthly total**, no filterBar. **6 nav locks unlocked** `disabled → implemented` (invoices/payments/monthlyInvoices/
+salaries/staffSalaries/banks → `finance.html#view=…`; staffSalaries → `#view=salaries`); **classSalaryReport stays an
+honest `disabled`+`nav.reason.finance`+lock** (a real class-salary report ⇒ computed per-class pay), **finance-analysis
+stays deferred** (no nav/route; `accountingExpenses` planned card remains) — both owned by a future backend billing/
+accounting spec. **Finance no-fake-money law upheld**: authored per-row SAR literals only, `FINANCE_SUMMARY`
+row-count-only, salaries/staff **figure-free** (0 pay figure), banks **no balance**, **0 computed** total/outstanding/
+balance/profit/loss/revenue/VAT/tax/salary/payout; every write (Create/Generate/PDF/Send/Mark-Paid/Record/Confirm/
+Refund/Export/Add-bank/Import/Reconcile) = `backendRequired` gate; 0 gateway/`type=file`/`type=password`/`<canvas>`.
+**`fixtures/finance.js`/`package.json`/`build-html.mjs`/`enhance.js`/`i18n.js` 0-diff** (extended the existing mirrored
+`ar/en.fin.js` with `fin.tab.{invoices,payments,monthlyInvoices}` + `fin.monthly.*`; additive `.finm-*` CSS).
+**Verified**: build 115; smoke PASS (finance 6-tab hub + 6 `#view=` deep-links fresh-context AR/EN + monthly 9-across-4
++ salaries figure-free + banks no-balance + classSalaryReport locked; the ONE sanctioned amendment = nav010
+`lockedFin`→`['classSalaryReport']` + `finLinks`→the 7-implemented list + the mechanical 3→6 finance-tab assert +
+interactive invoice checks moved to `#view=invoices`; every other protected finance assert — 9 invoices/6 payments/4
+tiles/9 planned/9 drawers/first-`.report-actions`/forbidden/no-receipt/no-mutation — BYTE-VERBATIM); a11y critical=0
+serious=0 (+finance invoices/payments/monthly × AR/EN light/dark + mobile + invoice/bank drawers); screenshots 0
+console errors (+sp038 finance frames + classSalaryReport lock proof). Locale parity `fin` 158/158. Impact: only
+`finance.html`/`.en` body + shared sidebar changed (proven vs a captured baseline `#page-body` md5 snapshot — a
+non-destructive worktree/snapshot comparison, NO stash); all other admin bodies + 16 portals + index + reports/
+families/students byte-identical. **No commit / no push** — watcher commits. Next per the Spec-033 roadmap: 039
+content deep-links (materials/certificateRequests) · 040 settings deep-links · 041 final re-freeze.
+**History: Spec 037 — Reports / Analytics Nav Completion + Missing-Pages Correctives is IMPLEMENTED**
 (awaiting the watcher commit; artifacts + `plan.md` (D1–D38) + `tasks.md` (54 tasks) + 20 contracts +
 `implementation-status.md` at `academy-dashboard-discovery/specs/037-reports-analytics-nav-completion/`). **FOURTH
 Spec-033-roadmap follow-up.** **Count HELD 115 → 115 (0 new pages; admin-menu 50).** The two Reports «قريبًا» items

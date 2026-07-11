@@ -120,9 +120,9 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop' },
   { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop' },
   { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop' },
-  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeDrawer: true,  variant: 'drawer' },
-  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeConfirm: true, variant: 'confirm' },
-  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeFilter: true,  variant: 'filter' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', financeDrawer: true,  variant: 'drawer' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', financeConfirm: true, variant: 'confirm' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', financeFilter: true,  variant: 'filter' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile' },
   // Spec 026 — the three new admin ops pages + one create modal + one details drawer + mobile + dark
   { page: 'sessions-analysis', lang: 'ar', theme: 'light', vp: 'desktop' },
@@ -377,6 +377,20 @@ const MATRIX = [
   { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation' },
   { page: 'students', lang: 'en', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation-en' },
   { page: 'students', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation-dark' },
+  // Spec 038 — finance six-tab hub: the three new tabs (invoices/payments/monthly-invoices) + classSalaryReport honest-lock proof
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', variant: 'sp038-invoices' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'invoices', variant: 'sp038-invoices-en' },
+  { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'invoices', variant: 'sp038-invoices-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'invoices', variant: 'sp038-invoices-mobile' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'payments', variant: 'sp038-payments' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'payments', variant: 'sp038-payments-en' },
+  { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'payments', variant: 'sp038-payments-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'monthly-invoices', variant: 'sp038-monthly' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'monthly-invoices', variant: 'sp038-monthly-en' },
+  { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'monthly-invoices', variant: 'sp038-monthly-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'monthly-invoices', variant: 'sp038-monthly-mobile' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp038-classsalary-lock' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp038-classsalary-lock-en' },
 ];
 
 (async () => {
