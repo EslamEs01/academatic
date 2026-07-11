@@ -1,6 +1,42 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 038 — Finance Nav Completion (Invoices / Payments / Monthly Invoices / Salaries / Staff
-Salaries / Class Salary Report / Banks) is IMPLEMENTED** (awaiting the watcher commit; artifacts + `plan.md`
+Active feature: **Spec 039 — Admin Content & Certificates Explicit Pages (Materials / Certificate Requests) is
+IMPLEMENTED** (awaiting the watcher commit; artifacts + `plan.md` + `research.md` + `data-model.md` +
+`quickstart.md` + `tasks.md` (21 tasks) + 15 contracts + `implementation-status.md` at
+`academy-dashboard-discovery/specs/039-content-certificates-explicit-pages/`). **SIXTH Spec-033-roadmap
+follow-up; baseline COMMITTED** (HEAD `4cbcb31` = Spec 038; clean tree). **Count HELD 115 → 115 (0 new pages;
+admin-menu 50).** Navigation-only unlock (Option B): the two admin content «قريبًا» locks became deep-links to
+the EXISTING Spec-031 tabs — **materials → `library.html#view=materials`** (Materials subject-catalog tab) and
+**certificateRequests → `certificates.html#view=requests`** (Requests queue tab); **books refined
+`library.html` → `library.html#view=books`** so the two library items open distinct tabs (Materials vs Content).
+**`FUTURE_ROUTES.materials` dropped.** Admin category now **5 items / 0 «قريبًا»**; **settings** is the ONLY
+planned-bearing category (6 items → Spec 040); `classSalaryReport` finance lock unchanged. The Materials/Books/
+Templates/Requests bodies + the static certificate designer preview (`role="img"`, no `<canvas>`/drag/upload/PDF)
+are **reused unchanged**; every write (material/content/category/template create-edit-delete-upload-publish-
+download + certificate approve/reject/generate/preview/download/send) stays a `backendRequired`/
+`data-disabled-reason` gate — no fake persistence/upload/PDF/issuance/WhatsApp-email; 0 `type=file`/`type=password`/
+`<canvas>`/`.pdf`/`window.open`. **The ONLY application-source edit = `src/js/nav.config.js`** (2 flips + books
+refinement + FUTURE_ROUTES trim); `pages/library.js`/`pages/certificates.js`/`fixtures/content-library.js`/
+`fixtures/certificates.js`/`ar,en.adm.js`/`enhance.js`/`components/tabs.js`/`components/sidebar.js`/`i18n.js`/
+`app.css`/`build-html.mjs`/`package.json` **0-diff**. **Verified**: build 115; smoke PASS (114 loads; +Spec-039
+block — materials/certificateRequests/books exact anchors AR/EN + library `#view=materials|books` / certificates
+`#view=requests` fresh-context deep-links open EXACTLY ONE visible tabpanel (the target) with 0 external request
++ admin 0-planned + settings 6-planned + admin-menu 50 + a Node-side **`nav.config` SOURCE audit**
+(`FUTURE_ROUTES.materials` REMOVED · `certificateRequests` never added · the 3 exact routes · `classSalaryReport`
+still an honest routeless lock) — the one requirement the DOM-only tests could not reach;
+the TWO sanctioned amendments = the dashboard planned-item probe repointed admin→settings + the admin `admItems`
+message corrected with an added `admPlanned===0` assert; every other protected assert — a31/g32 honesty, navCount 50,
+truth010.badPlanned, finance nav010, families/teachers/reports, pay/child-view/no-fake — BYTE-VERBATIM); a11y
+critical=0 serious=0 (+library `#view=materials|books` / certificates `#view=requests` × AR/EN light/dark + mobile
++ mat-edit/lib-item/lib-cats/cr-cr1/cert-create drawers + the Materials **delete-confirm** + **KEYBOARD tab
+switching** (roving tabindex ArrowRight/ArrowLeft)); screenshots **347 captured 0 console errors** (13 sp039 frames
+incl. the admin sidebar rendering Materials + Certificate Requests as real links, and the honest delete-confirm).
+Locale parity `adm` 403/403. Impact: **all 115 `#page-body` byte-identical** (proven against the COMMITTED HEAD
+`4cbcb31` via `git show` — non-destructive: NO stash/reset/checkout); the 64 admin pages differ only in the shared
+sidebar (2 «قريبًا» buttons → anchors + `books` gains `#view=books`), and the 51 non-admin pages (16 portals +
+index + portal internals) are byte-identical. **No commit / no push** — watcher commits. Next per the Spec-033
+roadmap: 040 settings deep-links · 041 final sidebar/route/production re-freeze.
+**History: Spec 038 — Finance Nav Completion (Invoices / Payments / Monthly Invoices / Salaries / Staff
+Salaries / Class Salary Report / Banks) is IMPLEMENTED and COMMITTED (HEAD `4cbcb31`)** (artifacts + `plan.md`
 (D1–D38) + `tasks.md` (39 tasks) + 21 contracts + `implementation-status.md` at
 `academy-dashboard-discovery/specs/038-finance-nav-completion/`). **FIFTH Spec-033-roadmap follow-up; baseline is
 now COMMITTED** (HEAD `56bc418` bundled Specs 035/036/037; clean tree — no green-tree caveat). **Count HELD 115 →

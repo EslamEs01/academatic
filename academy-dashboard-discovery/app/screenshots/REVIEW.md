@@ -926,3 +926,40 @@ Teacher pay-free upheld: 0 salary/rate/payout/currency token on any teacher surf
 
 ### Honesty / impact
 Finance no-fake-money upheld: authored per-row SAR literals only, `FINANCE_SUMMARY` row-count-only, **0 computed** total/balance/profit/loss/revenue/VAT/tax/salary/payout, salaries/staff figure-free, banks no balance, every write a `backendRequired` gate, 0 gateway/`<canvas>`/`type=file`/`type=password`. MOVE-not-duplicate preserved 9 invoices / 6 payments / 4 tiles / 9 planned / 9 drawers. Only `finance.html`/`.en` body + the shared sidebar changed (proven vs a captured baseline `#page-body` md5 snapshot — non-destructive); every other admin body + portals ×16 + index + reports/families/students byte-identical; `fixtures/finance.js`/`package.json`/`enhance.js`/`build-html.mjs`/`i18n.js` 0-diff. Admin-menu 50; count 115. a11y critical=0 serious=0 (incl. mobile-390 + invoice/bank drawer states).
+
+## Spec 039 — Admin Content & Certificates Explicit Pages (115 → 115; 2 «قريبًا» → deep-links; books refined)
+
+**Frames**: 13 new `sp039-*` frames (347 captured overall · **0 console errors**) — the content/certificate tabs now
+reachable from the sidebar:
+`sp039-materials-ar`/`-en`/`-dark`/`-m`, `sp039-books-en`, `sp039-requests-en`/`-dark`/`-m`, `sp039-request-review`
+(cr-cr1 drawer), `sp039-mat-edit`, `sp039-mat-delete` (honest delete-confirm), and `sp039-sidebar-ar`/`-en`
+(`__cat-admin` — the shared admin sidebar itself, proving Materials + Certificate Requests render as real links).
+
+### Sidebar proof (`sp039-sidebar-ar` / `-en`)
+The admin category panel shows **5 real links** — Staff & Roles · Materials · Library · Certificates · Certificate
+requests — with **no «قريبًا» badge and no lock icon** on any of them (was: Materials and Certificate requests as
+«قريبًا» buttons). Note both `materials` and `books` target `library.html`, so the active pill resolves to the
+page's baked `activeId` (Library) regardless of which of the two was clicked — the same shared-page behaviour as the
+Spec-038 finance items, not a regression.
+
+### Delete-confirm proof (`sp039-mat-delete`)
+The Materials row Delete opens «حذف المادة؟ — الحذف يحتاج ربط الخادم – لا يُحذف شيء الآن» ("deleting needs the
+server — nothing is deleted now"): an honest backendRequired confirm. **Nothing is removed from the table.**
+
+### What changed (navigation only)
+- **materials** (`sp039-materials-*`): `library.html#view=materials` — the Materials subject-catalog tab (bilingual
+  Name/name_ar; mat-add/mat-edit drawers; delete-confirm; gated). Reached from the sidebar (was «قريبًا»).
+- **books** (`sp039-books-en`): `library.html#view=books` — the Content Library item now opens the Books tab
+  explicitly (was `library.html`, which defaulted to Materials).
+- **certificateRequests** (`sp039-requests-*`, `sp039-request-review`): `certificates.html#view=requests` — the
+  Requests queue tab + read-only review drawer; Approve/Reject/Generate/Preview/Download/Send = gates. Reached from
+  the sidebar (was «قريبًا»).
+
+### Honesty / impact
+Nav-only unlock: the Materials/Books/Templates/Requests bodies + the static `role="img"` certificate designer
+preview (no `<canvas>`/drag/upload/PDF) are reused unchanged. Every write a `backendRequired`/`data-disabled-reason`
+gate; 0 `type=file`/`type=password`/`<canvas>`/`.pdf`/`window.open`. **The ONLY application-source edit is
+`src/js/nav.config.js`**; library/certificates/fixtures/locales/enhance/tabs/sidebar/i18n/app.css/build-html/
+package.json 0-diff. Impact: all 115 `#page-body` byte-identical (proven vs a captured pre-edit md5 snapshot —
+non-destructive); only the shared admin sidebar changed (2 «قريبًا» → anchors + `books` gains `#view=books`).
+Admin-menu 50; admin category 5 items / 0 planned; settings keeps 6 planned (Spec 040). a11y critical=0 serious=0.

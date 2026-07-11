@@ -219,6 +219,25 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', hash: '#view=banks', open: '[data-drawer="bank-add"]' },
   { page: 'reports', lang: 'ar', theme: 'light', open: '[data-drawer="fb-create"]' },
   { page: 'library', lang: 'ar', theme: 'light', open: '[data-drawer="mat-add"]' },
+  // ── Spec 039 — content/certificate deep-linked tabs + drawers (additive; no duplicate of the
+  //    existing library/certificates rows at #view=books / #view=requests / mat-add / cert-tpl / mobile) ──
+  { page: 'library', lang: 'en', theme: 'light', hash: '#view=materials' },
+  { page: 'library', lang: 'ar', theme: 'dark', hash: '#view=materials' },
+  { page: 'library', lang: 'en', theme: 'light', hash: '#view=books' },
+  { page: 'certificates', lang: 'en', theme: 'light', hash: '#view=requests' },
+  { page: 'certificates', lang: 'ar', theme: 'dark', hash: '#view=requests' },
+  { page: 'library', lang: 'ar', theme: 'light', open: '[data-drawer="mat-edit"]' },
+  { page: 'library', lang: 'ar', theme: 'light', hash: '#view=books', open: '[data-drawer="lib-item"]' },
+  { page: 'library', lang: 'ar', theme: 'light', hash: '#view=books', open: '[data-drawer="lib-cats"]' },
+  { page: 'certificates', lang: 'ar', theme: 'light', hash: '#view=requests', open: '[data-drawer="cr-cr1"]' },
+  { page: 'certificates', lang: 'ar', theme: 'light', hash: '#view=requests', open: '[data-drawer="cert-create"]' },
+  { page: 'library', lang: 'en', theme: 'light', hash: '#view=materials', viewport: 'mobile' },
+  { page: 'certificates', lang: 'en', theme: 'light', hash: '#view=requests', viewport: 'mobile' },
+  // the Materials row delete-confirmation (honest backendRequired confirm — no mutation)
+  { page: 'library', lang: 'ar', theme: 'light', hash: '#view=materials', open: '[data-tabpanel="materials"] [data-confirm]' },
+  // keyboard tab switching (roving tabindex): focus the deep-linked tab, ArrowRight → the sibling tab
+  { page: 'library', lang: 'ar', theme: 'light', hash: '#view=materials', keys: { focus: '#tab-library-materials', seq: ['ArrowRight'] } },
+  { page: 'certificates', lang: 'en', theme: 'light', hash: '#view=requests', keys: { focus: '#tab-certificates-requests', seq: ['ArrowLeft'] } },
   { page: 'settings', lang: 'ar', theme: 'light', open: '[data-drawer="head-add"]' },
   { page: 'staff', lang: 'en', theme: 'light', open: '[data-drawer="staff-add"]' },
   { page: 'family', lang: 'ar', theme: 'dark', open: '[data-drawer="fam-edit"]' },
@@ -304,6 +323,13 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
     await p.goto(`${BASE}/${file}${s.hash || ''}`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(250);
     if (s.open) { await p.click(s.open).catch(() => {}); await p.waitForTimeout(420); }
+    // Spec 039 — a row may drive the tablist from the KEYBOARD (roving tabindex) before the scan,
+    // so the tab reached by ArrowLeft/ArrowRight is audited in its focused, switched state.
+    if (s.keys) {
+      await p.focus(s.keys.focus).catch(() => {});
+      for (const k of s.keys.seq) { await p.keyboard.press(k).catch(() => {}); await p.waitForTimeout(200); }
+      await p.waitForTimeout(300);
+    }
 
     const { violations } = await new AxeBuilder({ page: p })
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
@@ -312,7 +338,7 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
     const crit = violations.filter((v) => v.impact === 'critical');
     const ser = violations.filter((v) => v.impact === 'serious');
     critical += crit.length; serious += ser.length;
-    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}${s.viewport ? ' @' + s.viewport : ''}${s.open ? ' open:' + s.open : ''}`;
+    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}${s.viewport ? ' @' + s.viewport : ''}${s.open ? ' open:' + s.open : ''}${s.keys ? ' keys:' + s.keys.seq.join('+') : ''}`;
     if (crit.length) console.error(`  ✗ ${tag}: ${crit.length} CRITICAL — ${crit.map((v) => v.id).join(', ')}`);
     if (ser.length) console.warn(`  ⚠ ${tag}: ${ser.length} serious — ${ser.map((v) => v.id).join(', ')}`);
     if (!crit.length && !ser.length) console.log(`  ✓ ${tag}: clean`);

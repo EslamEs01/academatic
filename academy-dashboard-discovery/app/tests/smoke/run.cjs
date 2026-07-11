@@ -220,11 +220,11 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
           const r = await clickFeedback(sel);
           ok(!r, `${page}/${lang}: ${r}`);
         }
-        // Spec 036: the teachers category no longer has a planned «قريبًا» item either
-        // (addTeacher/teacherCategories/sessionsKpi/monthlyPerf all flipped). Reveal a category
-        // that still has one (admin → materials/certificateRequests) and verify the planned-item
+        // Spec 039: the admin category no longer has a planned «قريبًا» item either
+        // (materials/certificateRequests flipped to deep-links). Reveal the category that still has
+        // one (settings → settingsGeneral/…/settingsUsers, owner Spec 040) and verify the planned-item
         // toast still fires — coverage preserved.
-        await p.click('[data-nav-category="admin"]').catch(() => {});
+        await p.click('[data-nav-category="settings"]').catch(() => {});
         await p.waitForTimeout(140);
         const rPlanned = await clickFeedback('.cat-panel:not([hidden]) .nav-item.is-planned');
         ok(!rPlanned, `${page}/${lang}: ${rPlanned}`);
@@ -1425,6 +1425,27 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         ok(nav037.reportsPlanned === 0, `${page}/${lang}: reports category still has ${nav037.reportsPlanned} planned «قريبًا» item(s) after Spec 037`);
       }
 
+      // ===== Spec 039 — Admin content/certificates nav completion (additive; protected asserts byte-verbatim) =====
+      // materials → library.html#view=materials and certificateRequests → certificates.html#view=requests are now
+      // real deep-links (no «قريبًا»); books refined → library.html#view=books so the two library items open
+      // distinct tabs. The admin category has ZERO planned items (asserted in nav010); settings stays the ONLY
+      // planned-bearing category (6 items, owner Spec 040). Verified on every admin page's shared sidebar.
+      if (!PORTAL_PAGES.has(page)) {
+        const nav039 = await p.evaluate(() => {
+          const info = (id) => { const n = document.querySelector(`.nav-item[data-nav="${id}"]`); return n ? { a: n.tagName === 'A', href: n.getAttribute('href') || '', soon: n.hasAttribute('data-coming-soon'), disabled: n.getAttribute('aria-disabled') === 'true', lock: !!n.querySelector('use[href="#i-lock"]') } : null; };
+          const set = document.querySelector('#catpanel-settings');
+          return {
+            mat: info('materials'), cr: info('certificateRequests'), bk: info('books'),
+            settingsPlanned: set ? set.querySelectorAll('.nav-item.is-planned, [data-coming-soon]').length : -1,
+          };
+        });
+        const anchorOk039 = (o, re) => !!o && o.a && !o.soon && !o.disabled && !o.lock && re.test(o.href);
+        ok(anchorOk039(nav039.mat, /(^|\/)library\.(en\.)?html#view=materials$/), `${page}/${lang}: materials must be a real deep-link → library.html#view=materials, got ${JSON.stringify(nav039.mat)}`);
+        ok(anchorOk039(nav039.cr, /(^|\/)certificates\.(en\.)?html#view=requests$/), `${page}/${lang}: certificateRequests must be a real deep-link → certificates.html#view=requests, got ${JSON.stringify(nav039.cr)}`);
+        ok(anchorOk039(nav039.bk, /(^|\/)library\.(en\.)?html#view=books$/), `${page}/${lang}: books must be a real deep-link → library.html#view=books, got ${JSON.stringify(nav039.bk)}`);
+        ok(nav039.settingsPlanned === 6, `${page}/${lang}: settings category should keep 6 planned «قريبًا» items (owner Spec 040), got ${nav039.settingsPlanned}`);
+      }
+
       // (b0) reports — three display tabs (overview + monthly + analysis); overview PRESERVES the 7
       // category cards; monthly/analysis are authored display boards with NO computed metric/chart/
       // canvas and NO finance figure (finance-free reports invariant re-checked in the new panels).
@@ -1610,6 +1631,7 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         const finMembers = finSub ? [...finSub.querySelectorAll('.nav-item')].map((n) => n.getAttribute('data-nav')) : [];
         const finLinks = finSub ? [...finSub.querySelectorAll('a.nav-item[data-nav-status="implemented"]')].map((n) => n.getAttribute('data-nav')) : [];
         const admItems = adm ? [...adm.querySelectorAll('.nav-item')].map((n) => n.getAttribute('data-nav')) : [];
+        const admPlanned = adm ? adm.querySelectorAll('.nav-item.is-planned, [data-coming-soon]').length : -1; // Spec 039 — admin category now has ZERO planned «قريبًا» items
         const banksInReports = !!rep?.querySelector('[data-nav="banks"]');
         const banksInAdmin = !!adm?.querySelector('[data-nav="banks"]');
         const sessBadge = (document.querySelector('.nav-item[data-nav="sessions"] .nav-badge')?.textContent || '').trim();
@@ -1622,7 +1644,7 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
             && el.getAttribute('data-reason-key') === 'nav.reason.finance'
             && !!el.querySelector('use[href="#i-lock"]');
         });
-        return { railCats, finLabel, finMembers, finLinks, admItems, banksInReports, banksInAdmin, sessBadge, famTitle, lockedOk };
+        return { railCats, finLabel, finMembers, finLinks, admItems, admPlanned, banksInReports, banksInAdmin, sessBadge, famTitle, lockedOk };
       });
       const expFinMembers = ['finance', 'invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'classSalaryReport', 'banks'];
       const expFamTitle = lang === 'en' ? 'Families & Students' : 'العائلات والطلاب';
@@ -1633,7 +1655,11 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
       // Spec 038 — six finance items unlocked → implemented deep-links (finance + invoices/monthlyInvoices/salaries/staffSalaries/payments/banks, in DOM order); classSalaryReport stays locked.
       ok(JSON.stringify(nav010.finLinks) === JSON.stringify(['finance', 'invoices', 'monthlyInvoices', 'salaries', 'staffSalaries', 'payments', 'banks']), `${page}/${lang}: finance sub-section implemented links wrong after Spec 038: ${JSON.stringify(nav010.finLinks)}`);
       ok(nav010.banksInReports && !nav010.banksInAdmin, `${page}/${lang}: banks must live in the reports finance sub-section, not admin (reports=${nav010.banksInReports}, admin=${nav010.banksInAdmin})`);
-      ok(nav010.admItems.length === 5 && !nav010.admItems.includes('banks'), `${page}/${lang}: admin category should have 5 planned items and no banks, got ${JSON.stringify(nav010.admItems)}`);
+      ok(nav010.admItems.length === 5 && !nav010.admItems.includes('banks'), `${page}/${lang}: admin category should have exactly 5 items and no banks, got ${JSON.stringify(nav010.admItems)}`);
+      // Spec 039 — materials/certificateRequests flipped to deep-links → the admin category now has ZERO
+      // planned «قريبًا» items (matches the families/teachers/reports precedent). Settings is now the only
+      // category still carrying planned items (owner Spec 040).
+      ok(nav010.admPlanned === 0, `${page}/${lang}: admin category still has ${nav010.admPlanned} planned «قريبًا» item(s) after Spec 039`);
       ok(nav010.lockedOk, `${page}/${lang}: the one honest finance lock (classSalaryReport) must stay disabled+reason+lock`);
       // Spec 011 — the badge is localized: Arabic pages show Arabic-Indic digits, English pages Western,
       // both equal the fixture SESSIONS.total (num()/Intl.NumberFormat). Assert the locale-correct form.
@@ -2245,7 +2271,96 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
     await ctx.close();
   }
 
+  // ===== Spec 039 — content/certificate deep-links: library.html#view=materials|books and
+  // certificates.html#view=requests must OPEN the matching tab on fresh load (fresh context per view,
+  // as the nav link is followed). Re-assert no canvas/chart + no type=file/password + no external request. =====
+  // Each view is loaded with the OPPOSITE tab pre-seeded as the stored view (localStorage
+  // academy.schedView.<group>), so the assertion is DISCRIMINATING: the hash must WIN over the stored view.
+  // Without this, `#view=materials` would pass even with JS disabled (materials is library's baked default tab).
+  const SP039_DEEPLINKS = [
+    { file: 'library', group: 'library', views: { materials: 'books', books: 'materials' } },
+    { file: 'certificates', group: 'certificates', views: { requests: 'templates' } },
+  ];
+  for (const lang of ['ar', 'en']) {
+    for (const s of SP039_DEEPLINKS) {
+      const file = lang === 'en' ? `${s.file}.en.html` : `${s.file}.html`;
+      for (const [view, other] of Object.entries(s.views)) {
+        const ctx = await browser.newContext();
+        await ctx.addInitScript(([g, o]) => { try { localStorage.setItem('academy.schedView.' + g, o); } catch (e) { /* ignore */ } }, [s.group, other]);
+        const p = await ctx.newPage();
+        const dext = [];
+        p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
+        await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
+        await p.waitForTimeout(220);
+        const r = await p.evaluate((group) => {
+          const vis = [...document.querySelectorAll(`[data-tabs="${group}"] [data-tabpanel]`)].filter((x) => !x.hidden);
+          const body = document.getElementById('page-body');
+          return {
+            active: vis.length === 1 ? vis[0].getAttribute('data-tabpanel') : `n=${vis.length}`,
+            noFake: !/<canvas|chart\.js|data-chart/i.test(body.innerHTML) && body.querySelectorAll('input[type=file],input[type=password]').length === 0,
+          };
+        }, s.group);
+        ok(r.active === view, `${s.file}/${lang}: nav deep-link #view=${view} did not open the ${view} tab (active=${r.active}; the URL hash must beat the stored view '${other}')`);
+        ok(r.noFake, `${s.file}/${lang}: the ${view} deep-link tab must not add a canvas/chart or type=file/password`);
+        ok(dext.length === 0, `${s.file}/${lang}: deep-link #view=${view} navigation triggered external request(s) ${JSON.stringify(dext.slice(0, 2))}`);
+        await ctx.close();
+      }
+    }
+  }
+  // Spec 039 — EXACT content/certificate nav route coverage (AR + EN): materials → library.html#view=materials
+  // and certificateRequests → certificates.html#view=requests are real implemented anchors (no «قريبًا»/
+  // aria-disabled/lock); books is refined → library.html#view=books; the admin category has 5 items / 0 planned;
+  // settings keeps its 6 planned items (owner Spec 040); the admin menu stays 50. (Read from the shared sidebar.)
+  for (const lang of ['ar', 'en']) {
+    const file = lang === 'en' ? 'library.en.html' : 'library.html';
+    const ctx = await browser.newContext();
+    const p = await ctx.newPage();
+    await p.goto(`${BASE}/${file}`, { waitUntil: 'networkidle' });
+    const nav = await p.evaluate(() => {
+      const info = (id) => {
+        const n = document.querySelector(`.nav-item[data-nav="${id}"]`);
+        if (!n) return null;
+        return { a: n.tagName === 'A', href: n.getAttribute('href') || '', soon: n.hasAttribute('data-coming-soon'), disabled: n.getAttribute('aria-disabled') === 'true', lock: !!n.querySelector('use[href="#i-lock"]') };
+      };
+      const adm = document.getElementById('catpanel-admin');
+      const set = document.getElementById('catpanel-settings');
+      return {
+        materials: info('materials'), certificateRequests: info('certificateRequests'), books: info('books'),
+        admItems: adm ? adm.querySelectorAll('.nav-item').length : -1,
+        admPlanned: adm ? adm.querySelectorAll('.nav-item.is-planned, [data-coming-soon]').length : -1,
+        settingsPlanned: set ? set.querySelectorAll('.nav-item.is-planned, [data-coming-soon]').length : -1,
+        adminMenu: document.querySelectorAll('.nav-panel .nav-item').length,
+      };
+    });
+    const routeOk = (o, re) => !!o && o.a && !o.soon && !o.disabled && !o.lock && re.test(o.href);
+    ok(routeOk(nav.materials, /(^|\/)library\.(en\.)?html#view=materials$/), `content/${lang}: materials must be a real anchor → library.html#view=materials, got ${JSON.stringify(nav.materials)}`);
+    ok(routeOk(nav.certificateRequests, /(^|\/)certificates\.(en\.)?html#view=requests$/), `content/${lang}: certificateRequests must be a real anchor → certificates.html#view=requests, got ${JSON.stringify(nav.certificateRequests)}`);
+    ok(routeOk(nav.books, /(^|\/)library\.(en\.)?html#view=books$/), `content/${lang}: books must be a real anchor → library.html#view=books, got ${JSON.stringify(nav.books)}`);
+    ok(nav.admItems === 5 && nav.admPlanned === 0, `content/${lang}: admin category must have 5 items and 0 planned, got items=${nav.admItems} planned=${nav.admPlanned}`);
+    ok(nav.settingsPlanned === 6, `content/${lang}: settings must keep 6 planned items (owner Spec 040), got ${nav.settingsPlanned}`);
+    ok(nav.adminMenu === 50, `content/${lang}: admin menu must stay 50 classified nav items, got ${nav.adminMenu}`);
+    await ctx.close();
+  }
+
   await browser.close();
+
+  // ===== Spec 039 — FUTURE_ROUTES source audit: `materials` was the last stale placeholder route
+  // (Spec 031 folded it into the library Materials tab). Now that materials is a real deep-link it must be
+  // GONE from the map, and certificateRequests must never have been added to it — a promoted item carries a
+  // real `route`, never a documented-future one. Asserted against the nav source, not the rendered DOM. =====
+  {
+    const navSrc = await import('../../src/js/nav.config.js');
+    const fr = navSrc.FUTURE_ROUTES;
+    ok(!('materials' in fr), `nav.config: FUTURE_ROUTES.materials must be removed after Spec 039, got ${JSON.stringify(fr.materials)}`);
+    ok(!('certificateRequests' in fr), `nav.config: certificateRequests must NOT be added to FUTURE_ROUTES (it is a real deep-link), got ${JSON.stringify(fr.certificateRequests)}`);
+    const byId = (cat, id) => navSrc.NAV_CATEGORIES.find((c) => c.id === cat).items.find((i) => i.id === id);
+    ok(byId('admin', 'materials').route === 'library.html#view=materials', 'nav.config: materials route must be library.html#view=materials');
+    ok(byId('admin', 'certificateRequests').route === 'certificates.html#view=requests', 'nav.config: certificateRequests route must be certificates.html#view=requests');
+    ok(byId('admin', 'books').route === 'library.html#view=books', 'nav.config: books route must be refined to library.html#view=books');
+    // the honest finance lock is untouched by Spec 039
+    const csr = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]).find((i) => i.id === 'classSalaryReport');
+    ok(csr.status === 'disabled' && csr.reasonKey === 'nav.reason.finance' && !csr.route, 'nav.config: classSalaryReport must stay an honest disabled lock with no route');
+  }
 
   // ===== Spec 022 — reduced-motion CSS audit: every auto-playing living-layer animation
   // (lv-fill / lv-fadeup / lv-pulse) must be quarantined inside the prefers-reduced-motion:

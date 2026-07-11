@@ -97,10 +97,10 @@ export const NAV_CATEGORIES = [
     id: 'admin', labelKey: 'cat.admin', icon: 'grid',
     items: [
       item({ id: 'staff', labelKey: 'nav.staff', icon: 'staff', route: 'staff.html' }),
-      item({ id: 'materials', labelKey: 'nav.materials', icon: 'materials', status: 'planned' }),
-      item({ id: 'books', labelKey: 'nav.books', icon: 'curricula', route: 'library.html' }),
+      item({ id: 'materials', labelKey: 'nav.materials', icon: 'materials', route: 'library.html#view=materials' }), // Spec 039 — unlock → library.html Materials tab (subject catalog; writes gated)
+      item({ id: 'books', labelKey: 'nav.books', icon: 'curricula', route: 'library.html#view=books' }), // Spec 039 — refine → open the Books tab explicitly (was library.html, which defaulted to Materials)
       item({ id: 'certificates', labelKey: 'nav.certificates', icon: 'certificates', route: 'certificates.html' }),
-      item({ id: 'certificateRequests', labelKey: 'nav.certificateRequests', icon: 'certificates', status: 'planned' }),
+      item({ id: 'certificateRequests', labelKey: 'nav.certificateRequests', icon: 'certificates', route: 'certificates.html#view=requests' }), // Spec 039 — unlock → certificates.html Requests tab (authored queue; dispositions gated)
     ],
   },
   {
@@ -141,7 +141,8 @@ export const FUTURE_ROLE = [
 export const FUTURE_ROUTES = {
   // Spec 035 — studentResult/studentEvaluation promoted to deep-links (student.html#view=results/evaluation);
   // familyCategories folded to families.html; scheduleSearch shipped as its own page. All removed from this map.
-  materials: 'library.html', // Spec 031 — materials folds into the library.html Materials tab (no standalone page)
+  // Spec 039 — materials promoted to a deep-link (library.html#view=materials) and certificateRequests to
+  // certificates.html#view=requests; both removed from this map (no standalone page — they open existing tabs).
   // Spec 037 — monthlyReports/dataAnalysis promoted to display-only tabs on reports.html
   // (#view=monthly / #view=analysis); their stale placeholder routes removed from this map.
 };
