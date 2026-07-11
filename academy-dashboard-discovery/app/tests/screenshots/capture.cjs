@@ -335,6 +335,48 @@ const MATRIX = [
   { page: 'time-converter', lang: 'en', theme: 'light', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter-en' },
   { page: 'time-converter', lang: 'ar', theme: 'dark', vp: 'desktop', tcConvert: true, variant: 'sp034-timeconverter-dark' },
   { page: 'time-converter', lang: 'ar', theme: 'light', vp: 'mobile', tcConvert: true, variant: 'sp034-timeconverter-mobile' },
+  // Spec 035 — Families & Students nav completion: schedule-search page + families fold + student deep-links
+  { page: 'schedule-search', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp035-schedule-search' },
+  { page: 'schedule-search', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp035-schedule-search-en' },
+  { page: 'schedule-search', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp035-schedule-search-dark' },
+  { page: 'schedule-search', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'ss-ss1', variant: 'sp035-schedule-search-detail' },
+  { page: 'schedule-search', lang: 'ar', theme: 'light', vp: 'desktop', ssEmpty: true, variant: 'sp035-schedule-search-empty' },
+  { page: 'schedule-search', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp035-schedule-search-mobile' },
+  { page: 'families', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp035-families-fold' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-cat', variant: 'sp035-family-cat-drawer' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'results', variant: 'sp035-student-results' },
+  { page: 'student', lang: 'en', theme: 'light', vp: 'desktop', view: 'results', variant: 'sp035-student-results-en' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp035-student-evaluation' },
+  // Spec 036 — Teachers nav completion: fold-anchor drawers (Add Teacher / Teacher Categories) + the two teacher-performance tabs
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-add', variant: 'sp036-add-teacher' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-categories', variant: 'sp036-teacher-categories' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'sessions-kpi', variant: 'sp036-sessions-kpi' },
+  { page: 'teacher-performance', lang: 'en', theme: 'light', vp: 'desktop', view: 'sessions-kpi', variant: 'sp036-sessions-kpi-en' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'sessions-kpi', variant: 'sp036-sessions-kpi-dark' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'mobile', view: 'sessions-kpi', variant: 'sp036-sessions-kpi-mobile' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'monthly', variant: 'sp036-monthly' },
+  { page: 'teacher-performance', lang: 'en', theme: 'light', vp: 'desktop', view: 'monthly', variant: 'sp036-monthly-en' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'monthly', variant: 'sp036-monthly-dark' },
+  // Spec 037 — Reports/Analytics display tabs + flagged-035 corrective boards
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp037-reports-overview' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', view: 'monthly', variant: 'sp037-monthly' },
+  { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', view: 'monthly', variant: 'sp037-monthly-en' },
+  { page: 'reports', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'monthly', variant: 'sp037-monthly-dark' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'mobile', view: 'monthly', variant: 'sp037-monthly-mobile' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', view: 'analysis', variant: 'sp037-analysis' },
+  { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', view: 'analysis', variant: 'sp037-analysis-en' },
+  { page: 'reports', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'analysis', variant: 'sp037-analysis-dark' },
+  { page: 'families', lang: 'ar', theme: 'light', vp: 'desktop', view: 'categories', variant: 'sp037-family-categories' },
+  { page: 'families', lang: 'en', theme: 'light', vp: 'desktop', view: 'categories', variant: 'sp037-family-categories-en' },
+  { page: 'families', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'categories', variant: 'sp037-family-categories-dark' },
+  { page: 'families', lang: 'ar', theme: 'light', vp: 'mobile', view: 'categories', variant: 'sp037-family-categories-mobile' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', view: 'results', variant: 'sp037-student-results' },
+  { page: 'students', lang: 'en', theme: 'light', vp: 'desktop', view: 'results', variant: 'sp037-student-results-en' },
+  { page: 'students', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'results', variant: 'sp037-student-results-dark' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'mobile', view: 'results', variant: 'sp037-student-results-mobile' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation' },
+  { page: 'students', lang: 'en', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation-en' },
+  { page: 'students', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation-dark' },
 ];
 
 (async () => {
@@ -395,6 +437,12 @@ const MATRIX = [
     if (s.studentKebab) { await page.click('#students-table [data-row-menu][data-row-menu-kind="student"]').catch(() => {}); await page.waitForTimeout(320); }
     if (s.teacherKebab) { await page.click('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]').catch(() => {}); await page.waitForTimeout(320); }
     if (s.openDrawer) { await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440); }
+    // Spec 035 — schedule-search: drive a no-match filter combo to capture the empty state
+    if (s.ssEmpty) {
+      await page.selectOption('select[data-filter="availability"]', 'booked').catch(() => {});
+      await page.selectOption('select[data-filter="teacher"]', 't6').catch(() => {});
+      await page.waitForTimeout(280);
+    }
     // Spec 032 — staff kebab → form drawer; the fb-add form nested in the open outcome sheet;
     // the add-family wizard native child-disclosure
     if (s.staffKebabDrawer) {

@@ -863,3 +863,49 @@ a11y critical=0 serious=0 (open-form focus-trap/dialog rows added).
 
 ### Honesty / impact
 Every write final is a `backendRequired` gate (or an inert disabled-with-reason button) — 0 fake send/convert/save/move/publish/delivery, 0 row/status/thread mutation, 0 fake-success wording. **0** `type=file`/`type=password`/credential/`<canvas>`/`.pdf`/`window.open`/money-figure in any of the 5 bodies. Only the 52 admin pages' shared sidebar changed (5 «قريبًا» → anchors); every admin `#page-body`, all portal pages, and index are byte-identical. `package.json` 0-diff. a11y critical=0 serious=0 (incl. mobile-390 + open-form rows).
+
+## Spec 035 — Families & Students Nav Completion (113 → 115; 4 nav «قريبًا» → real links/deep-links)
+
+**Frames**: 11 new `sp035-*` frames (0 console errors) — the new schedule-search page (desktop AR + EN + dark + detail-drawer + empty-state + mobile-390), the families fold owner + `fam-cat` reclassify drawer, and the two student deep-link tabs:
+`sp035-schedule-search`(+`-en`/`-dark`/`-detail`/`-empty`/`-mobile`), `sp035-families-fold`, `sp035-family-cat-drawer`,
+`sp035-student-results`(+`-en`), `sp035-student-evaluation`.
+
+### The four closed Families/Students items
+- **familyCategories** (`sp035-families-fold`, `sp035-family-cat-drawer`): the nav item is now a real `<a>` → `families.html` (the folded owner — category filter + the display-only `fam-cat` reclassify drawer whose "Save category" stays a `backendRequired` gate). No standalone page, no fake category create/save/mutation; `families.html`/`family.html` `#page-body` byte-identical.
+- **scheduleSearch** (`sp035-schedule-search`, `-detail`, `-empty`): a NEW standalone display-only availability finder (legacy `management/search-schedule`) — a teacher/subject/day/time-window/availability filter bar over authored candidate rows (teacher + subject + day + time + room + a labeled availability chip), per-slot read-only detail drawers, and an empty state. **Client-side facet filtering only (no engine, no network, no pay figure); Book/Assign = `backendRequired` gates** (no fake booking/assignment/mutation).
+- **studentResult** (`sp035-student-results`): the nav item deep-links to `student.html#view=results` — the existing display-only Results tab (per-course progress + certificates; **no gradebook/computed score/chart**).
+- **studentEvaluation** (`sp035-student-evaluation`): deep-links to `student.html#view=evaluation` — the existing display-only Evaluation rubric tab (categorical ratings; Approve stays a `backendRequired` gate; **no computed total**).
+
+### Honesty / impact
+Every write final is a `backendRequired` gate — 0 fake booking/assignment/category-save/mutation, 0 fake-success wording. **0** `type=file`/`type=password`/credential/`<canvas>`/pay-figure in the schedule-search body (the "Salaries" tokens are the shared, Spec-009-sanctioned finance sidebar labels, present on every admin page). `result-summary.js`/`evaluation-rubric.js` byte-identical; no computed score/rank/chart introduced. Only the 52 admin pages' shared sidebar changed (4 «قريبًا» → anchors — PROVEN: `#page-body`-onward byte-identical for families/family/students/student ×2 lang); all portal pages + index byte-identical; `package.json`/`enhance.js` 0-diff. a11y critical=0 serious=0 (incl. mobile-390 + open-drawer rows).
+
+## Spec 036 — Teachers Nav Completion (115 → 115; 4 nav «قريبًا» → real anchors/deep-links)
+
+**Frames**: 9 new `sp036-*` frames (0 console errors) — the two fold-anchor drawers on teachers.html + the two new teacher-performance tabs:
+`sp036-add-teacher` (trn-add drawer), `sp036-teacher-categories` (trn-categories drawer),
+`sp036-sessions-kpi`(+`-en`/`-dark`/`-mobile`), `sp036-monthly`(+`-en`/`-dark`).
+
+### The four closed Teachers items
+- **addTeacher** (`sp036-add-teacher`): nav is now a real `<a>` → teachers.html; the `trn-add` form drawer (names/email/phone/status/subjects/level/courses/city/country/notes + CV **gate**) is reachable; Save = backendRequired; **no salary/rate/fine/payout/password field**.
+- **teacherCategories** (`sp036-teacher-categories`): nav → teachers.html; `trn-categories` drawer (list + Create form + Save/assign gates) reachable; no fake mutation; stale FUTURE_ROUTES entry dropped.
+- **sessionsKpi** (`sp036-sessions-kpi`): `teacher-performance.html#view=sessions-kpi` — a display-only board of per-teacher session **counts** + a categorical quality chip. **No computed percentage/score/rank/chart, no pay.**
+- **monthlyPerf** (`sp036-monthly`): `teacher-performance.html#view=monthly` — a display-only board grouped by month (per-teacher categorical trend chip + authored note). **No computed figure, no pay.**
+
+### Honesty / impact
+Teacher pay-free upheld: 0 salary/rate/payout/currency token on any teacher surface (legacy Add-Teacher Salary/Payout/Zoom/password excluded forever). No computed score/rank/percentage/chart/`<canvas>` — the legacy "Classes KPI"/"Monthly Performance" `Percentage` is not reproduced. `teachers.html`/`teacher.html` `#page-body` byte-identical (fold anchors = nav-only); only `teacher-performance.html`/`.en` bodies change (tabs) + the shared sidebar; portals ×16 + index byte-identical; `package.json`/`enhance.js`/`build-html.mjs`/`i18n.js` 0-diff. a11y critical=0 serious=0 (incl. mobile-390).
+
+## Spec 037 — Reports / Analytics Nav Completion + Missing-Pages Correctives (115 → 115; 2 «قريبًا» → tabs + 3 flagged-035 items strengthened)
+
+**Frames**: 19 new `sp037-*` frames (0 console errors) — the reports Overview preservation + the two new reports tabs + the three flagged-035 corrective boards:
+`sp037-reports-overview`, `sp037-monthly`(+`-en`/`-dark`/`-mobile`), `sp037-analysis`(+`-en`/`-dark`),
+`sp037-family-categories`(+`-en`/`-dark`/`-mobile`), `sp037-student-results`(+`-en`/`-dark`/`-mobile`), `sp037-student-evaluation`(+`-en`/`-dark`).
+
+### The five surfaces
+- **monthlyReports** (`sp037-monthly`): `reports.html#view=monthly` — authored month-grouped rows (area + count + status chip) + summary cards; Export/Generate = gates. **No computed metric/chart/money.**
+- **dataAnalysis** (`sp037-analysis`): `reports.html#view=analysis` — authored insight cards + AUTHORED categorical trend labels; Run/Export = gates. **No engine/computed/chart; finance-free.**
+- **familyCategories** (`sp037-family-categories`): `families.html#view=categories` — labeled board of the authored `FAMILY_CATEGORIES` (name/desc/count/status) + reclassify drawer reachable + Create gate. No computed stat, no money.
+- **studentResult** (`sp037-student-results`): `students.html#view=results` — cross-student board (level + certificate-count + status chip + per-student deep-link to `student.html#view=results`). **No computed score/rank/GPA/percentage.**
+- **studentEvaluation** (`sp037-student-evaluation`): `students.html#view=evaluation` — cross-student board (approved/pending chip + month + per-student deep-link). **No computed rubric total.**
+
+### Honesty / impact
+`reports.html` Overview preserves the existing body verbatim (7 `.report-card`s); families → Directory tab, students → Directory tab, both verbatim. New tabs are pure display boards (no filterBar — honors enhance.js's single global `[data-no-results]`). `student.html`/`family.html` + `result-summary`/`evaluation-rubric` byte-identical; only `reports`/`families`/`students` bodies (×2 lang) + the shared sidebar change; portals ×16 + index byte-identical; `package.json`/`enhance.js`/`build-html.mjs`/`i18n.js` 0-diff. Admin-menu 50; reports category 0-planned. a11y critical=0 serious=0 (incl. mobile-390).

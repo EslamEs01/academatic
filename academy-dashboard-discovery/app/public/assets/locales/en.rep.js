@@ -49,6 +49,59 @@ export default {
       monthlyReason: 'Planned — monthly roll-ups arrive with the reporting backend.',
       analysisReason: 'Backend required — needs the reporting service to compute.',
     },
+
+    /* Spec 037 — reports.html tabs (overview / monthly / analysis) */
+    tab: { overview: 'Overview', monthly: 'Monthly Reports', analysis: 'Data Analysis' },
+
+    /* Spec 037 — Monthly Reports display board (#view=monthly). Authored counts,
+     * categorical status chips, grouped by month. No money/computed/chart. */
+    monthly: {
+      title: 'Monthly Reports',
+      sub: 'Month-by-month operations summaries — authored figures, display-only, managed once the server is connected.',
+      generate: 'Generate monthly report',
+      generateReason: 'Generating the monthly report needs the backend module — no file is created now.',
+      export: 'Export month',
+      exportReason: 'Exporting the monthly report needs the backend module — out of current scope.',
+      colArea: 'Area',
+      colCount: 'Count',
+      colStatus: 'Status',
+      note: 'Note',
+      m: { may: 'May 2026', apr: 'April 2026', mar: 'March 2026' },
+      sum: { sessions: 'Sessions logged (May)', attended: 'Attendance logged (May)', followUp: 'Cases needing follow-up' },
+      n: {
+        sessMay: 'May sessions ran steadily with a low cancellation rate.',
+        attMay: 'Attendance held steady across groups through May.',
+        stuMay: 'A few students need follow-up with their families.',
+        sessApr: 'April sessions completed, with make-ups covered.',
+        tchApr: 'Some teachers needed schedule follow-up.',
+        crsApr: 'Active courses stayed stable in April.',
+        sessMar: 'March sessions stayed within the usual range.',
+        attMar: 'March attendance was good, with a few individual notes.',
+      },
+    },
+
+    /* Spec 037 — Data Analysis display board (#view=analysis). Authored insight
+     * cards + AUTHORED categorical trend labels. No engine/computed/chart/finance. */
+    analysis: {
+      title: 'Data Analysis',
+      sub: 'A cross-area analytical review — authored categorical signals, display-only, with no computation or chart.',
+      run: 'Run analysis',
+      runReason: 'Running analysis needs the backend service — no computation happens now.',
+      export: 'Export analysis',
+      exportReason: 'Exporting the analysis needs the backend module — out of current scope.',
+      colArea: 'Area',
+      colCount: 'Count',
+      colTrend: 'Trend',
+      colStatus: 'Status',
+      trend: { improving: 'Improving', steady: 'Steady', declining: 'Declining' },
+      n: {
+        sessions: 'Session volume is improving versus earlier periods.',
+        attendance: 'Attendance is steady across areas.',
+        courses: 'Active courses are gradually widening.',
+        teachers: 'Teacher coverage is steady.',
+        students: 'A group of students needs closer follow-up.',
+      },
+    },
     ops: {
       title: 'Academic operations',
       sub: 'What needs follow-up across the academy — every number matches the dashboard.',

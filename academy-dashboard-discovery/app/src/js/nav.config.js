@@ -41,27 +41,27 @@ export const NAV_CATEGORIES = [
       item({ id: 'addFamily', labelKey: 'nav.addFamily', icon: 'user-plus', route: 'add-family.html' }),
       item({ id: 'students', labelKey: 'nav.students', icon: 'students', route: 'students.html' }),
       item({ id: 'courses', labelKey: 'nav.courses', icon: 'curricula', route: 'courses.html' }),
-      item({ id: 'familyCategories', labelKey: 'nav.familyCategories', icon: 'filter', status: 'planned' }),
+      item({ id: 'familyCategories', labelKey: 'nav.familyCategories', icon: 'filter', route: 'families.html#view=categories' }), // Spec 037 — deep-link to the labeled Family Categories board tab
       item({ id: 'groups', labelKey: 'nav.groups', icon: 'students', route: 'groups.html' }),
-      item({ id: 'scheduleSearch', labelKey: 'nav.scheduleSearch', icon: 'search', status: 'planned' }),
-      item({ id: 'studentResult', labelKey: 'nav.studentResult', icon: 'check-circle', status: 'planned' }),
-      item({ id: 'studentEvaluation', labelKey: 'nav.studentEvaluation', icon: 'sparkles', status: 'planned' }),
+      item({ id: 'scheduleSearch', labelKey: 'nav.scheduleSearch', icon: 'search', route: 'schedule-search.html' }), // Spec 035 — standalone availability-search page
+      item({ id: 'studentResult', labelKey: 'nav.studentResult', icon: 'check-circle', route: 'students.html#view=results' }), // Spec 037 — cross-student Results board tab (per-student drill-down → student.html#view=results)
+      item({ id: 'studentEvaluation', labelKey: 'nav.studentEvaluation', icon: 'sparkles', route: 'students.html#view=evaluation' }), // Spec 037 — cross-student Evaluation board tab (per-student drill-down → student.html#view=evaluation)
     ],
   },
   {
     id: 'teachers', labelKey: 'cat.teachers', icon: 'trainers',
     items: [
       item({ id: 'teachers', labelKey: 'nav.teachers', icon: 'trainers', route: 'teachers.html' }),
-      item({ id: 'addTeacher', labelKey: 'nav.addTeacher', icon: 'user-plus', status: 'planned' }),
-      item({ id: 'teacherCategories', labelKey: 'nav.teacherCategories', icon: 'filter', status: 'planned' }),
+      item({ id: 'addTeacher', labelKey: 'nav.addTeacher', icon: 'user-plus', route: 'teachers.html' }), // Spec 036 — fold-anchor to teachers.html (trn-add drawer)
+      item({ id: 'teacherCategories', labelKey: 'nav.teacherCategories', icon: 'filter', route: 'teachers.html' }), // Spec 036 — fold-anchor to teachers.html (trn-categories drawer)
     ],
     sections: [
       {
         titleKey: 'cat.teachersPerf',
         items: [
           item({ id: 'teacherKpi', labelKey: 'nav.teacherKpi', icon: 'trending-up', route: 'teacher-performance.html' }),
-          item({ id: 'sessionsKpi', labelKey: 'nav.sessionsKpi', icon: 'trending-up', status: 'planned' }),
-          item({ id: 'monthlyPerf', labelKey: 'nav.monthlyPerf', icon: 'reports', status: 'planned' }),
+          item({ id: 'sessionsKpi', labelKey: 'nav.sessionsKpi', icon: 'trending-up', route: 'teacher-performance.html#view=sessions-kpi' }), // Spec 036 — display tab on teacher-performance
+          item({ id: 'monthlyPerf', labelKey: 'nav.monthlyPerf', icon: 'reports', route: 'teacher-performance.html#view=monthly' }), // Spec 036 — display tab on teacher-performance
         ],
       },
     ],
@@ -70,8 +70,8 @@ export const NAV_CATEGORIES = [
     id: 'reports', labelKey: 'cat.reports', icon: 'reports',
     items: [
       item({ id: 'reports', labelKey: 'nav.reports', icon: 'reports', route: 'reports.html' }),
-      item({ id: 'monthlyReports', labelKey: 'nav.monthlyReports', icon: 'reports', status: 'planned' }),
-      item({ id: 'dataAnalysis', labelKey: 'nav.dataAnalysis', icon: 'trending-up', status: 'planned' }),
+      item({ id: 'monthlyReports', labelKey: 'nav.monthlyReports', icon: 'reports', route: 'reports.html#view=monthly' }), // Spec 037 — display-only Monthly Reports tab
+      item({ id: 'dataAnalysis', labelKey: 'nav.dataAnalysis', icon: 'trending-up', route: 'reports.html#view=analysis' }), // Spec 037 — display-only Data Analysis tab
     ],
     sections: [
       {
@@ -139,11 +139,11 @@ export const FUTURE_ROLE = [
  * Spec 032 stale-map cleanup: sessionsAnalysis removed (implemented since Spec 026).
  * Spec 034: messages/leads/tasks/announcements removed (now implemented Control routes). */
 export const FUTURE_ROUTES = {
-  studentResult: 'student-results.html',
-  studentEvaluation: 'student-evaluation.html',
-  teacherCategories: 'teachers.html', // Spec 028 — folds into the teachers.html trn-categories drawer (no standalone page)
+  // Spec 035 — studentResult/studentEvaluation promoted to deep-links (student.html#view=results/evaluation);
+  // familyCategories folded to families.html; scheduleSearch shipped as its own page. All removed from this map.
   materials: 'library.html', // Spec 031 — materials folds into the library.html Materials tab (no standalone page)
-  dataAnalysis: 'analytics.html', monthlyReports: 'monthly-reports.html',
+  // Spec 037 — monthlyReports/dataAnalysis promoted to display-only tabs on reports.html
+  // (#view=monthly / #view=analysis); their stale placeholder routes removed from this map.
 };
 
 /* build-time guard — a dead link cannot ship */

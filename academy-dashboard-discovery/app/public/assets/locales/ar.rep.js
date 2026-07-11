@@ -49,6 +49,59 @@ export default {
       monthlyReason: 'قيد التخطيط — التجميعات الشهرية تصل مع خدمة التقارير في الخادم.',
       analysisReason: 'يتطلب الخادم — يحتاج خدمة التقارير لإجراء الحساب.',
     },
+
+    /* Spec 037 — reports.html tabs (overview / monthly / analysis) */
+    tab: { overview: 'نظرة عامة', monthly: 'التقارير الشهرية', analysis: 'تحليل البيانات' },
+
+    /* Spec 037 — Monthly Reports display board (#view=monthly). Authored counts,
+     * categorical status chips, grouped by month. No money/computed/chart. */
+    monthly: {
+      title: 'التقارير الشهرية',
+      sub: 'ملخصات العمليات شهرًا بشهر — أرقام مؤلّفة للعرض فقط، تُدار بعد ربط الخادم.',
+      generate: 'إنشاء تقرير شهري',
+      generateReason: 'إنشاء التقرير الشهري يحتاج وحدة الخادم — لا يُنشأ ملف الآن.',
+      export: 'تصدير الشهر',
+      exportReason: 'تصدير التقرير الشهري يحتاج وحدة الخادم — خارج النطاق الحالي.',
+      colArea: 'المجال',
+      colCount: 'العدد',
+      colStatus: 'الحالة',
+      note: 'ملاحظة',
+      m: { may: 'مايو ٢٠٢٦', apr: 'أبريل ٢٠٢٦', mar: 'مارس ٢٠٢٦' },
+      sum: { sessions: 'جلسات مسجّلة (مايو)', attended: 'حضور مسجّل (مايو)', followUp: 'حالات تحتاج متابعة' },
+      n: {
+        sessMay: 'جلسات مايو سارت بانتظام وبمعدل إلغاء منخفض.',
+        attMay: 'حضور ثابت عبر المجموعات خلال مايو.',
+        stuMay: 'عدد من الطلاب بحاجة متابعة مع عائلاتهم.',
+        sessApr: 'جلسات أبريل مكتملة مع تعويض ما فات.',
+        tchApr: 'بعض المدرّسين بحاجة متابعة على الجدول.',
+        crsApr: 'المقررات النشطة مستقرة في أبريل.',
+        sessMar: 'جلسات مارس ضمن المعدل المعتاد.',
+        attMar: 'حضور مارس جيد مع ملاحظات فردية.',
+      },
+    },
+
+    /* Spec 037 — Data Analysis display board (#view=analysis). Authored insight
+     * cards + AUTHORED categorical trend labels. No engine/computed/chart/finance. */
+    analysis: {
+      title: 'تحليل البيانات',
+      sub: 'مراجعة تحليلية عبر المجالات — إشارات فئوية مؤلّفة للعرض فقط، بلا حساب أو رسم بياني.',
+      run: 'تشغيل تحليل',
+      runReason: 'تشغيل التحليل يحتاج خدمة الخادم — لا يُجرى حساب الآن.',
+      export: 'تصدير التحليل',
+      exportReason: 'تصدير التحليل يحتاج وحدة الخادم — خارج النطاق الحالي.',
+      colArea: 'المجال',
+      colCount: 'العدد',
+      colTrend: 'الاتجاه',
+      colStatus: 'الحالة',
+      trend: { improving: 'تحسّن', steady: 'مستقر', declining: 'تراجع' },
+      n: {
+        sessions: 'حجم الجلسات في تحسّن مقارنة بالفترات السابقة.',
+        attendance: 'الحضور مستقر عبر المجالات.',
+        courses: 'المقررات النشطة في اتساع تدريجي.',
+        teachers: 'تغطية المدرّسين مستقرة.',
+        students: 'مجموعة من الطلاب تحتاج متابعة أقرب.',
+      },
+    },
     ops: {
       title: 'العمليات الأكاديمية',
       sub: 'ما الذي يحتاج متابعة في الأكاديمية — كل رقم يطابق لوحة المعلومات.',

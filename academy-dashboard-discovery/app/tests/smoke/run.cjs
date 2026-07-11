@@ -13,6 +13,8 @@ const PAGES = ['dashboard', 'reports', 'finance', 'gallery', 'sessions', 'schedu
   'staff', 'library', 'certificates',
   // Spec 034 — Control Center pages (messages/leads/tasks/announcements/time-converter)
   'messages', 'leads', 'tasks', 'announcements', 'time-converter',
+  // Spec 035 — Schedule Search (families-category nav completion; the only new page base)
+  'schedule-search',
   'portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
   'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
   'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
@@ -65,6 +67,8 @@ const FILTER_SPEC = {
   'teacher-performance': { facet: 'workload', value: 'high', apply: (p) => p.selectOption('select[data-filter="workload"]', 'high') },
   reports: { facet: 'area', value: 'attendance', apply: (p) => p.selectOption('select[data-filter="area"]', 'attendance') },
   schedule: { facet: null, value: null, apply: (p) => p.selectOption('select[data-filter="teacher"]', { index: 1 }) },
+  // Spec 035 — schedule-search availability facet over authored candidate rows (client-side only)
+  'schedule-search': { facet: 'availability', value: 'available', apply: (p) => p.selectOption('select[data-filter="availability"]', 'available') },
 };
 
 // ===== Spec 032 — Create-Edit Forms Completion freeze (FC-01…FC-40). Every Add/Create/
@@ -216,10 +220,11 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
           const r = await clickFeedback(sel);
           ok(!r, `${page}/${lang}: ${r}`);
         }
-        // Spec 034: the Control category (default panel) no longer has a planned «قريبًا» item —
-        // all 5 flipped to implemented. Reveal a category that still has one (families →
-        // familyCategories) and verify the planned-item toast still fires — coverage preserved.
-        await p.click('[data-nav-category="families"]').catch(() => {});
+        // Spec 036: the teachers category no longer has a planned «قريبًا» item either
+        // (addTeacher/teacherCategories/sessionsKpi/monthlyPerf all flipped). Reveal a category
+        // that still has one (admin → materials/certificateRequests) and verify the planned-item
+        // toast still fires — coverage preserved.
+        await p.click('[data-nav-category="admin"]').catch(() => {});
         await p.waitForTimeout(140);
         const rPlanned = await clickFeedback('.cat-panel:not([hidden]) .nav-item.is-planned');
         ok(!rPlanned, `${page}/${lang}: ${rPlanned}`);
@@ -1330,6 +1335,197 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         }
       }
 
+      // ===== Spec 035 — Families & Students nav completion (additive; protected asserts byte-verbatim) =====
+      // (a) the four families-category items are now real anchors/deep-links (no «قريبًا»);
+      // the families category has ZERO planned items. Verified on every admin page's shared sidebar.
+      if (!PORTAL_PAGES.has(page)) {
+        const nav035 = await p.evaluate(() => {
+          const info = (id) => { const n = document.querySelector(`.nav-item[data-nav="${id}"]`); return n ? { a: n.tagName === 'A', href: n.getAttribute('href') || '', soon: n.hasAttribute('data-coming-soon') } : null; };
+          const fam = document.querySelector('#catpanel-families');
+          return {
+            fc: info('familyCategories'), ss: info('scheduleSearch'), sr: info('studentResult'), se: info('studentEvaluation'),
+            famPlanned: fam ? fam.querySelectorAll('.nav-item.is-planned, [data-coming-soon]').length : -1,
+          };
+        });
+        const anchorOk = (o, re) => !!o && o.a && !o.soon && re.test(o.href);
+        // Spec 037 sanctioned route refinements: familyCategories → families.html#view=categories
+        // (labeled Categories board tab); studentResult/studentEvaluation → students.html#view=results/
+        // evaluation (cross-student boards). Still real anchors/deep-links, no «قريبًا».
+        ok(anchorOk(nav035.fc, /(^|\/)families\.(en\.)?html#view=categories$/), `${page}/${lang}: familyCategories must be a real deep-link → families.html#view=categories, got ${JSON.stringify(nav035.fc)}`);
+        ok(anchorOk(nav035.ss, /(^|\/)schedule-search\.(en\.)?html$/), `${page}/${lang}: scheduleSearch must be a real anchor → schedule-search.html, got ${JSON.stringify(nav035.ss)}`);
+        ok(anchorOk(nav035.sr, /(^|\/)students\.(en\.)?html#view=results$/), `${page}/${lang}: studentResult must be a real deep-link → students.html#view=results, got ${JSON.stringify(nav035.sr)}`);
+        ok(anchorOk(nav035.se, /(^|\/)students\.(en\.)?html#view=evaluation$/), `${page}/${lang}: studentEvaluation must be a real deep-link → students.html#view=evaluation, got ${JSON.stringify(nav035.se)}`);
+        ok(nav035.famPlanned === 0, `${page}/${lang}: families category still has ${nav035.famPlanned} planned «قريبًا» item(s) after Spec 035`);
+      }
+
+      // ===== Spec 036 — Teachers nav completion (additive; protected + teacher-pay asserts byte-verbatim) =====
+      // (a) the four teachers-category items are now real anchors/deep-links (no «قريبًا»); the teachers
+      // category (items + cat.teachersPerf section) has ZERO planned items. Verified on every admin page.
+      if (!PORTAL_PAGES.has(page)) {
+        const nav036 = await p.evaluate(() => {
+          const info = (id) => { const n = document.querySelector(`.nav-item[data-nav="${id}"]`); return n ? { a: n.tagName === 'A', href: n.getAttribute('href') || '', soon: n.hasAttribute('data-coming-soon') } : null; };
+          const tp = document.querySelector('#catpanel-teachers');
+          return {
+            at: info('addTeacher'), tc: info('teacherCategories'), sk: info('sessionsKpi'), mp: info('monthlyPerf'),
+            teachersPlanned: tp ? tp.querySelectorAll('.nav-item.is-planned, [data-coming-soon]').length : -1,
+          };
+        });
+        const anchorOk036 = (o, re) => !!o && o.a && !o.soon && re.test(o.href);
+        ok(anchorOk036(nav036.at, /(^|\/)teachers\.(en\.)?html$/), `${page}/${lang}: addTeacher must be a real anchor → teachers.html, got ${JSON.stringify(nav036.at)}`);
+        ok(anchorOk036(nav036.tc, /(^|\/)teachers\.(en\.)?html$/), `${page}/${lang}: teacherCategories must be a real anchor → teachers.html, got ${JSON.stringify(nav036.tc)}`);
+        ok(anchorOk036(nav036.sk, /(^|\/)teacher-performance\.(en\.)?html#view=sessions-kpi$/), `${page}/${lang}: sessionsKpi must be a real deep-link → teacher-performance.html#view=sessions-kpi, got ${JSON.stringify(nav036.sk)}`);
+        ok(anchorOk036(nav036.mp, /(^|\/)teacher-performance\.(en\.)?html#view=monthly$/), `${page}/${lang}: monthlyPerf must be a real deep-link → teacher-performance.html#view=monthly, got ${JSON.stringify(nav036.mp)}`);
+        ok(nav036.teachersPlanned === 0, `${page}/${lang}: teachers category still has ${nav036.teachersPlanned} planned «قريبًا» item(s) after Spec 036`);
+      }
+
+      // ===== Spec 037 — Reports/Analytics nav completion + flagged-035 route refinements (additive) =====
+      // monthlyReports/dataAnalysis are now real display-tab deep-links (no «قريبًا»); the reports
+      // category has ZERO planned items. Verified on every admin page's shared sidebar.
+      if (!PORTAL_PAGES.has(page)) {
+        const nav037 = await p.evaluate(() => {
+          const info = (id) => { const n = document.querySelector(`.nav-item[data-nav="${id}"]`); return n ? { a: n.tagName === 'A', href: n.getAttribute('href') || '', soon: n.hasAttribute('data-coming-soon') } : null; };
+          const rep = document.querySelector('#catpanel-reports');
+          return {
+            mr: info('monthlyReports'), da: info('dataAnalysis'),
+            reportsPlanned: rep ? rep.querySelectorAll('.nav-item.is-planned, [data-coming-soon]').length : -1,
+          };
+        });
+        const anchorOk037 = (o, re) => !!o && o.a && !o.soon && re.test(o.href);
+        ok(anchorOk037(nav037.mr, /(^|\/)reports\.(en\.)?html#view=monthly$/), `${page}/${lang}: monthlyReports must be a real deep-link → reports.html#view=monthly, got ${JSON.stringify(nav037.mr)}`);
+        ok(anchorOk037(nav037.da, /(^|\/)reports\.(en\.)?html#view=analysis$/), `${page}/${lang}: dataAnalysis must be a real deep-link → reports.html#view=analysis, got ${JSON.stringify(nav037.da)}`);
+        ok(nav037.reportsPlanned === 0, `${page}/${lang}: reports category still has ${nav037.reportsPlanned} planned «قريبًا» item(s) after Spec 037`);
+      }
+
+      // (b0) reports — three display tabs (overview + monthly + analysis); overview PRESERVES the 7
+      // category cards; monthly/analysis are authored display boards with NO computed metric/chart/
+      // canvas and NO finance figure (finance-free reports invariant re-checked in the new panels).
+      if (page === 'reports') {
+        const rp = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const panel = (id) => body.querySelector(`[data-tabpanel="${id}"]`);
+          const mr = panel('monthly'), da = panel('analysis');
+          const newHTML = (mr ? mr.innerHTML : '') + (da ? da.innerHTML : '');
+          const newText = (mr ? mr.textContent : '') + (da ? da.textContent : '');
+          return {
+            tabs: body.querySelectorAll('[data-tabs="reports"]').length,
+            panels: ['overview', 'monthly', 'analysis'].filter((id) => panel(id)).length,
+            cards: body.querySelectorAll('#reports-grid .report-card').length,
+            canvas: body.querySelectorAll('canvas').length,
+            computed: /\b(score|rank|percentage|percentile|leaderboard|gpa)\b|<canvas|chart\.js|data-chart/i.test(newHTML),
+            money: /ريال|\bSAR\b|\bEGP\b|ج\.م/i.test(newText),
+            gates: (mr ? mr.querySelectorAll('[data-disabled-reason]').length : 0) + (da ? da.querySelectorAll('[data-disabled-reason]').length : 0),
+          };
+        });
+        ok(rp.tabs === 1 && rp.panels === 3, `reports/${lang}: expected the reports tabs widget with 3 panels (overview/monthly/analysis), got ${JSON.stringify(rp)}`);
+        ok(rp.cards === 7, `reports/${lang}: overview must preserve exactly 7 category cards, got ${rp.cards}`);
+        ok(rp.canvas === 0 && !rp.computed, `reports/${lang}: a computed metric/percentage/chart/canvas leaked into the monthly/analysis boards`);
+        ok(!rp.money, `reports/${lang}: a money/currency figure leaked into the reports monthly/analysis boards (must stay finance-free)`);
+        ok(rp.gates > 0, `reports/${lang}: the monthly/analysis boards must carry backendRequired gates`);
+      }
+
+      // (b1) families — Directory + Categories tabs; categories board lists authored categories +
+      // the reclassify drawer is reachable + a Create gate; no computed stat, no money figure.
+      if (page === 'families') {
+        const fp = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const cat = body.querySelector('[data-tabpanel="categories"]');
+          return {
+            tabs: body.querySelectorAll('[data-tabs="families"]').length,
+            panels: ['directory', 'categories'].filter((id) => body.querySelector(`[data-tabpanel="${id}"]`)).length,
+            catCards: cat ? cat.querySelectorAll('#fam-cats-grid .card').length : 0,
+            reclass: cat ? cat.querySelectorAll('[data-drawer="fam-cat"]').length : 0,
+            createGate: cat ? cat.querySelectorAll('[data-disabled-reason]').length : 0,
+            money: cat ? /ريال|\bSAR\b|\bEGP\b|ج\.م/i.test(cat.textContent) : false,
+          };
+        });
+        ok(fp.tabs === 1 && fp.panels === 2, `families/${lang}: expected the families tabs widget (directory/categories), got ${JSON.stringify(fp)}`);
+        ok(fp.catCards >= 4, `families/${lang}: categories board must list the authored categories, got ${fp.catCards}`);
+        ok(fp.reclass > 0 && fp.createGate > 0, `families/${lang}: categories board must expose the reclassify drawer + a Create gate`);
+        ok(!fp.money, `families/${lang}: a money/plan figure leaked into the categories board`);
+      }
+
+      // (b2) students — Directory + Results + Evaluation tabs; cross-student boards with per-student
+      // deep-links; NO computed score/rank/GPA/percentage/rubric-total, NO canvas.
+      if (page === 'students') {
+        const sp = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const res = body.querySelector('[data-tabpanel="results"]'), ev = body.querySelector('[data-tabpanel="evaluation"]');
+          const newHTML = (res ? res.innerHTML : '') + (ev ? ev.innerHTML : '');
+          return {
+            tabs: body.querySelectorAll('[data-tabs="students"]').length,
+            panels: ['directory', 'results', 'evaluation'].filter((id) => body.querySelector(`[data-tabpanel="${id}"]`)).length,
+            resLinks: res ? res.querySelectorAll('a[href*="#view=results"]').length : 0,
+            evLinks: ev ? ev.querySelectorAll('a[href*="#view=evaluation"]').length : 0,
+            canvas: body.querySelectorAll('canvas').length,
+            computed: /\b(score|rank|percentage|percentile|leaderboard|gpa)\b|<canvas|chart\.js|data-chart/i.test(newHTML),
+          };
+        });
+        ok(sp.tabs === 1 && sp.panels === 3, `students/${lang}: expected the students tabs widget (directory/results/evaluation), got ${JSON.stringify(sp)}`);
+        ok(sp.resLinks > 0 && sp.evLinks > 0, `students/${lang}: results/evaluation boards must carry per-student deep-links`);
+        ok(sp.canvas === 0 && !sp.computed, `students/${lang}: a computed score/rank/percentage/chart/canvas leaked into the results/evaluation boards`);
+      }
+
+      // (b) teacher-performance — three display-only tabs (overview + sessions-kpi + monthly); authored
+      // counts + categorical chips only; NO computed score/rank/percentage/chart/canvas, NO pay figure.
+      if (page === 'teacher-performance') {
+        const tp = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          return {
+            tabs: body.querySelectorAll('[data-tabs="perf"]').length,
+            panels: ['overview', 'sessions-kpi', 'monthly'].filter((id) => body.querySelector(`[data-tabpanel="${id}"]`)).length,
+            canvas: body.querySelectorAll('canvas').length,
+            computed: /\b(percentage|percentile|leaderboard|gpa)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML),
+            pay: /salary|salaries|راتب|رواتب|hour_rate|\brate\b|payout|payroll|ريال|\bSAR\b|fine_per_hour/i.test(body.innerText),
+          };
+        });
+        ok(tp.tabs === 1 && tp.panels === 3, `teacher-performance/${lang}: expected the perf tabs widget with 3 panels (overview/sessions-kpi/monthly), got ${JSON.stringify(tp)}`);
+        ok(tp.canvas === 0 && !tp.computed, `teacher-performance/${lang}: a computed score/rank/percentage/chart/canvas leaked into the board`);
+        ok(!tp.pay, `teacher-performance/${lang}: a pay/salary/rate/payout figure leaked into the teacher-performance body`);
+      }
+
+      // (b) schedule-search — a display-only availability finder: real search/filter form + authored
+      // results board + per-slot detail drawers + honest backendRequired Book/Assign gates. Client-side
+      // facet filtering ONLY (no engine, no network); NO pay figure, NO file/password/canvas.
+      if (page === 'schedule-search') {
+        const ss = await p.evaluate(() => {
+          const body = document.getElementById('page-body');
+          const q = (s) => body.querySelectorAll(s).length;
+          return {
+            search: q('[data-filter="search"]'), selects: q('select[data-filter]'),
+            results: q('#ss-results [data-row]'), gates: q('[data-disabled-reason]'),
+            demo: q('[data-demo-action]'), file: q('input[type="file"]'), pw: q('input[type="password"]'), canvas: q('canvas'),
+            drawers: document.querySelectorAll('template[data-preview^="ss-"]').length,
+            pay: /ريال|\bSAR\b|\$|\bsalary\b|\bsalaries\b|راتب|رواتب|payroll|أجر/i.test(body.innerText),
+          };
+        });
+        ok(ss.search >= 1 && ss.selects >= 5, `schedule-search/${lang}: search form controls missing (search=${ss.search}, selects=${ss.selects})`);
+        ok(ss.results >= 8, `schedule-search/${lang}: results board rows missing (${ss.results})`);
+        ok(ss.gates >= 1 && ss.demo === 0, `schedule-search/${lang}: Book/Assign finals must be backendRequired gates with no data-demo-action (gates=${ss.gates}, demo=${ss.demo})`);
+        ok(ss.file === 0 && ss.pw === 0 && ss.canvas === 0, `schedule-search/${lang}: forbidden file/password/canvas affordance in body`);
+        ok(ss.drawers >= 8, `schedule-search/${lang}: per-slot detail drawer templates not baked (${ss.drawers})`);
+        ok(!ss.pay, `schedule-search/${lang}: a pay/price figure leaked into the schedule-search body`);
+        // behavioral: a facet narrows visible rows
+        const before = await p.$$eval('#ss-results [data-row]', (els) => els.filter((e) => !e.hidden).length);
+        await p.selectOption('select[data-filter="availability"]', 'booked').catch(() => {});
+        await p.waitForTimeout(180);
+        const after = await p.$$eval('#ss-results [data-row]', (els) => els.filter((e) => !e.hidden).length);
+        ok(after > 0 && after < before, `schedule-search/${lang}: availability facet did not narrow rows (${before} → ${after})`);
+        // behavioral: a no-match combo reveals the empty state (t6 has no booked slot)
+        await p.selectOption('select[data-filter="teacher"]', 't6').catch(() => {});
+        await p.waitForTimeout(180);
+        const empty = await p.evaluate(() => {
+          const vis = [...document.querySelectorAll('#ss-results [data-row]')].filter((e) => !e.hidden).length;
+          const nr = document.querySelector('[data-no-results]');
+          return { vis, shown: nr ? getComputedStyle(nr).display !== 'none' : false };
+        });
+        ok(empty.vis === 0 && empty.shown, `schedule-search/${lang}: no-match filter did not reveal the empty state (visible=${empty.vis}, noResults=${empty.shown})`);
+        // reset filters to a clean state for the generic FILTER_SPEC correctness pass below
+        await p.selectOption('select[data-filter="teacher"]', 'all').catch(() => {});
+        await p.selectOption('select[data-filter="availability"]', 'all').catch(() => {});
+        await p.waitForTimeout(120);
+        ok(ext.length === 0, `schedule-search/${lang}: schedule-search triggered ${ext.length} external request(s) — must filter locally`);
+      }
+
       // Spec 009 — Dashboard/Reports integration: no new finance chrome in the body,
       // the sidebar carries exactly one finance link, the six wallet items stay locked.
       if (page === 'dashboard' || page === 'reports') {
@@ -1856,6 +2052,99 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
     }
   }
 
+  // ===== Spec 035 — studentResult/studentEvaluation deep-links: the nav route
+  // student.html#view=results / #view=evaluation must OPEN the matching display-only tab on load
+  // (the tabs widget honors the #view= hash). Also re-assert no computed score/rank/chart. =====
+  for (const lang of ['ar', 'en']) {
+    const file = lang === 'en' ? 'student.en.html' : 'student.html';
+    for (const view of ['results', 'evaluation']) {
+      // a FRESH context/load per view — enhance.js reads the #view= hash on load (a hash-only
+      // re-goto on the same document would not re-run it), exactly how the nav link is followed.
+      const ctx = await browser.newContext();
+      const p = await ctx.newPage();
+      const dext = [];
+      p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
+      await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
+      await p.waitForTimeout(220);
+      const r = await p.evaluate(() => {
+        const vis = [...document.querySelectorAll('[data-tabs="student"] [data-tabpanel]')].filter((x) => !x.hidden);
+        const body = document.getElementById('page-body');
+        return {
+          active: vis.length === 1 ? vis[0].getAttribute('data-tabpanel') : `n=${vis.length}`,
+          noScore: !/\b(percentile|leaderboard|gpa)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML),
+        };
+      });
+      ok(r.active === view, `student/${lang}: nav deep-link #view=${view} did not open the ${view} tab (active=${r.active})`);
+      ok(r.noScore, `student/${lang}: the ${view} deep-link tab must not add a computed score/rank/chart`);
+      ok(dext.length === 0, `student/${lang}: deep-link #view=${view} navigation triggered external request(s) ${JSON.stringify(dext.slice(0, 2))}`);
+      await ctx.close();
+    }
+  }
+
+  // ===== Spec 036 — sessionsKpi/monthlyPerf deep-links: teacher-performance.html#view=sessions-kpi /
+  // #view=monthly must OPEN the matching display-only tab on load (fresh context per view, as the nav
+  // link is followed). Re-assert display-only: no computed score/rank/percentage/chart, no pay. =====
+  for (const lang of ['ar', 'en']) {
+    const file = lang === 'en' ? 'teacher-performance.en.html' : 'teacher-performance.html';
+    for (const view of ['sessions-kpi', 'monthly']) {
+      const ctx = await browser.newContext();
+      const p = await ctx.newPage();
+      const dext = [];
+      p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
+      await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
+      await p.waitForTimeout(220);
+      const r = await p.evaluate(() => {
+        const vis = [...document.querySelectorAll('[data-tabs="perf"] [data-tabpanel]')].filter((x) => !x.hidden);
+        const body = document.getElementById('page-body');
+        return {
+          active: vis.length === 1 ? vis[0].getAttribute('data-tabpanel') : `n=${vis.length}`,
+          noScore: !/\b(percentage|percentile|leaderboard|gpa)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML),
+          noPay: !/salary|salaries|راتب|رواتب|hour_rate|\brate\b|payout|payroll|ريال|\bSAR\b|fine_per_hour/i.test(body.innerText),
+        };
+      });
+      ok(r.active === view, `teacher-performance/${lang}: nav deep-link #view=${view} did not open the ${view} tab (active=${r.active})`);
+      ok(r.noScore, `teacher-performance/${lang}: the ${view} tab must not add a computed score/rank/percentage/chart`);
+      ok(r.noPay, `teacher-performance/${lang}: the ${view} tab must not surface a pay/salary/rate/payout figure`);
+      ok(dext.length === 0, `teacher-performance/${lang}: deep-link #view=${view} navigation triggered external request(s) ${JSON.stringify(dext.slice(0, 2))}`);
+      await ctx.close();
+    }
+  }
+
+  // ===== Spec 037 — reports/families/students deep-links: the nav routes
+  // reports.html#view=monthly|analysis, families.html#view=categories,
+  // students.html#view=results|evaluation must OPEN the matching display tab on load
+  // (fresh context per view, as the nav link is followed). Re-assert no computed score/chart. =====
+  const SP037_DEEPLINKS = [
+    { file: 'reports', group: 'reports', views: ['monthly', 'analysis'] },
+    { file: 'families', group: 'families', views: ['categories'] },
+    { file: 'students', group: 'students', views: ['results', 'evaluation'] },
+  ];
+  for (const lang of ['ar', 'en']) {
+    for (const s of SP037_DEEPLINKS) {
+      const file = lang === 'en' ? `${s.file}.en.html` : `${s.file}.html`;
+      for (const view of s.views) {
+        const ctx = await browser.newContext();
+        const p = await ctx.newPage();
+        const dext = [];
+        p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
+        await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
+        await p.waitForTimeout(220);
+        const r = await p.evaluate((group) => {
+          const vis = [...document.querySelectorAll(`[data-tabs="${group}"] [data-tabpanel]`)].filter((x) => !x.hidden);
+          const body = document.getElementById('page-body');
+          return {
+            active: vis.length === 1 ? vis[0].getAttribute('data-tabpanel') : `n=${vis.length}`,
+            noScore: !/\b(percentile|leaderboard|gpa)\b|<canvas|chart\.js|data-chart/i.test(body.innerHTML),
+          };
+        }, s.group);
+        ok(r.active === view, `${s.file}/${lang}: nav deep-link #view=${view} did not open the ${view} tab (active=${r.active})`);
+        ok(r.noScore, `${s.file}/${lang}: the ${view} deep-link tab must not add a computed score/rank/chart`);
+        ok(dext.length === 0, `${s.file}/${lang}: deep-link #view=${view} navigation triggered external request(s) ${JSON.stringify(dext.slice(0, 2))}`);
+        await ctx.close();
+      }
+    }
+  }
+
   await browser.close();
 
   // ===== Spec 022 — reduced-motion CSS audit: every auto-playing living-layer animation
@@ -1884,7 +2173,7 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
   // ===== Spec 032 — route/page count freeze: 51 bases × 2 languages + index = 103 =====
   {
     const pub = fs.readdirSync(path.join(__dirname, '../../public')).filter((f) => f.endsWith('.html'));
-    ok(pub.length === 113, `route freeze: public/ must hold exactly 113 HTML pages (56×2+index; Spec 034 +10), got ${pub.length}`);
+    ok(pub.length === 115, `route freeze: public/ must hold exactly 115 HTML pages (57×2+index; Spec 035 +2 = schedule-search pair), got ${pub.length}`);
     ok(pub.includes('index.html'), 'route freeze: index.html missing');
     for (const b of PAGES) {
       ok(pub.includes(`${b}.html`) && pub.includes(`${b}.en.html`), `route freeze: ${b} is missing a language mirror`);

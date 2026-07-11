@@ -11,12 +11,19 @@ import { avatar } from './ui.js';
 import { PROFILE } from '../fixtures/profile.js';
 import { BRAND, NAV_CATEGORIES, categoryOf } from '../nav.config.js';
 
-/* relative + language-aware: from an English page, link to the `.en.html` variant */
+/* relative + language-aware: from an English page, link to the `.en.html` variant.
+ * Hash-aware so deep-link routes (e.g. `student.html#view=results`) transform the
+ * FILE part and keep the fragment: `student.en.html#view=results`. Routes without a
+ * hash behave exactly as before (byte-identical output). */
 function langRoute(route) {
-  if (getLang() === 'en' && route.endsWith('.html') && !route.endsWith('.en.html')) {
-    return route.replace(/\.html$/, '.en.html');
-  }
-  return route;
+  if (getLang() !== 'en') return route;
+  const hashIx = route.indexOf('#');
+  const file = hashIx === -1 ? route : route.slice(0, hashIx);
+  const hash = hashIx === -1 ? '' : route.slice(hashIx);
+  const enFile = (file.endsWith('.html') && !file.endsWith('.en.html'))
+    ? file.replace(/\.html$/, '.en.html')
+    : file;
+  return enFile + hash;
 }
 
 /* panel row — status-aware. implemented = <a>; planned/disabled = <button> (never a dead href) */

@@ -12,6 +12,16 @@ export default {
 
   stu: {
     col: { family: 'Family' }, fFamily: 'Family', allFamilies: 'All families', viewProfile: 'View academic profile', rowMenu: 'Student actions',
+    /* Spec 037 — students.html tabs + cross-student Results/Evaluation display boards */
+    vtab: { directory: 'Directory', results: 'Student Results', evaluation: 'Student Evaluation' },
+    resBoard: {
+      title: 'Student Results', sub: 'An overview of student results — display-only; open a student profile for the details.',
+      certs: 'certificates', view: 'Open results', none: 'No matching results.',
+    },
+    evalBoard: {
+      title: 'Student Evaluation', sub: 'An overview of monthly student evaluations — display-only; open a student profile for the details.',
+      view: 'Open evaluation', none: 'No matching evaluations.',
+    },
   },
 
   dash: {
@@ -37,6 +47,12 @@ export default {
       reclassHint: 'Review the categories and reassign this family — saved once the server is connected.',
       current: 'Current category', members: '{n} families', save: 'Save category',
       reclassReason: 'Changing the category will be available once the server is connected — nothing is saved yet.',
+    },
+    /* Spec 037 — families.html tabs (Directory + Categories) + Categories board */
+    cats: {
+      tabDirectory: 'Directory', tabCategories: 'Categories',
+      title: 'Family Categories', sub: 'The categories used to classify families — display-only, managed once the server is connected.',
+      create: 'Add category', createReason: 'Creating a category needs the server — nothing is saved yet.',
     },
     plan: { perHour: 'SAR/hour' },
     attn: { trialEnds: 'Trial ending soon', payment: 'Payment overdue' },

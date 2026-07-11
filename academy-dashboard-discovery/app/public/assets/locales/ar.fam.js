@@ -17,6 +17,16 @@ export default {
   /* students directory — Spec 004 additions (family link + facet) */
   stu: {
     col: { family: 'العائلة' }, fFamily: 'العائلة', allFamilies: 'كل العائلات', viewProfile: 'عرض الملف الأكاديمي', rowMenu: 'إجراءات الطالب',
+    /* Spec 037 — students.html tabs + cross-student Results/Evaluation display boards */
+    vtab: { directory: 'الدليل', results: 'نتائج الطلاب', evaluation: 'تقييم الطلاب' },
+    resBoard: {
+      title: 'نتائج الطلاب', sub: 'نظرة عامة على نتائج الطلاب — عرض فقط، افتح ملف الطالب للتفاصيل.',
+      certs: 'شهادات', view: 'فتح النتائج', none: 'لا نتائج مطابقة.',
+    },
+    evalBoard: {
+      title: 'تقييم الطلاب', sub: 'نظرة عامة على تقييمات الطلاب الشهرية — عرض فقط، افتح ملف الطالب للتفاصيل.',
+      view: 'فتح التقييم', none: 'لا تقييمات مطابقة.',
+    },
   },
 
   /* dashboard impact (minimal, fixture-backed) */
@@ -44,6 +54,12 @@ export default {
       reclassHint: 'اعرض الفئات وأعِد تصنيف العائلة — يتم الحفظ بعد ربط الخادم.',
       current: 'الفئة الحالية', members: '{n} عائلة', save: 'حفظ التصنيف',
       reclassReason: 'يتوفّر تغيير الفئة بعد ربط الخادم (لا يُحفَظ شيء الآن).',
+    },
+    /* Spec 037 — families.html tabs (Directory + Categories) + Categories board */
+    cats: {
+      tabDirectory: 'الدليل', tabCategories: 'الفئات',
+      title: 'فئات العائلات', sub: 'الفئات المعرّفة لتصنيف العائلات — عرض فقط، تُدار بعد ربط الخادم.',
+      create: 'إضافة فئة', createReason: 'إنشاء الفئة يحتاج ربط الخادم — لا يُحفَظ شيء الآن.',
     },
     plan: { perHour: 'ريال/ساعة' },
     attn: { trialEnds: 'الفترة التجريبية تنتهي قريبًا', payment: 'دفعة متأخرة' },
