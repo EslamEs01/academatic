@@ -564,3 +564,38 @@ links, and the honest Materials delete-confirm). Locale parity `adm` 403/403 (0 
 Impact: **all 115 `#page-body` byte-identical** (proven against the COMMITTED HEAD `4cbcb31` read via `git show` —
 non-destructive: no stash/reset/checkout); the 64 admin pages differ only in the shared sidebar, and the 51
 non-admin pages (16 portals + index + portal internals) are byte-identical. No commit / no push.
+
+## Spec 040 — Settings Deep Links & Subpages Completion (General / Notifications / Customization / Security / Users / Integrations)
+
+The sixth Spec-033-roadmap follow-up. It closes the last planned-bearing admin category: the six **Settings**
+«قريبًا» items become six real deep-linked domains — `settings.html#view=general|notifications|customization|
+security|users|integrations` — reachable as real sidebar links. **Count held 115 → 115 (0 new pages; admin-menu
+50).**
+
+The settings hub grew from **2 form controls to 73**, plus **49 boolean local-preview toggles**, **60
+structure-only rows**, and **60 `backendRequired` gates** spread across the six domains.
+
+- **Real writes stay exactly two**: theme and language, over their existing hooks/storage keys, explicitly
+  labelled a personal preference — not a settings save.
+- **Every other write is an honest gate**: Save/Connect/Test/Import/Backup finals are `data-disabled-reason`
+  gates; **zero new `data-confirm`** was added.
+- **24 sensitive provider credentials render as structure-only rows** — a label + a required badge + a purpose
+  line — never an input, never a value. **0 `type=password`, 0 `type=file`.**
+- **Teacher pay-free carried**: the legacy teacher-pay settings group and `rate_student_absent` stay excluded by
+  law.
+- **Import column contracts drop `password`, `hour_rate`, and `currency`.**
+
+After Spec 040 the product has **zero** planned «قريبًا» nav items sitewide; the only honest lock left is
+`classSalaryReport` (finance, routeless).
+
+**Django note**: each domain is a baked `data-tabpanel` over `{% for %}` display records; the 60 structure-only
+provider rows map to read-only `{{ field.label }}` + required-badge partials — no `ModelForm` field is rendered
+for a credential; theme/language stay real `<select>`/toggle controls bound to the existing session/cookie keys;
+every other Save/Connect/Test/Import/Backup is a `<button ... {% if not backend %}disabled{% endif %}>` final.
+
+**Verified**: build 115; smoke PASS; a11y critical=0 serious=0; screenshots 370 captured overall (23 new
+`sp040-*` frames), 0 console errors. The one baseline update: `dashboard__*__cat-settings` now shows six real
+links instead of six «قريبًا» buttons — expected, not a regression. `sidebar.js`'s `is-planned` +
+`data-coming-soon` render branch and `enhance.js`'s coming-soon toast handler are retained but now
+intentionally unexercised (zero-deletion law), mirroring `components/portal-shell.js:30`, whose `is-planned`
+branch has had zero instances since Spec 025.

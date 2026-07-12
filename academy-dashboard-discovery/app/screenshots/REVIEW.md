@@ -963,3 +963,44 @@ gate; 0 `type=file`/`type=password`/`<canvas>`/`.pdf`/`window.open`. **The ONLY 
 package.json 0-diff. Impact: all 115 `#page-body` byte-identical (proven vs a captured pre-edit md5 snapshot —
 non-destructive); only the shared admin sidebar changed (2 «قريبًا» → anchors + `books` gains `#view=books`).
 Admin-menu 50; admin category 5 items / 0 planned; settings keeps 6 planned (Spec 040). a11y critical=0 serious=0.
+
+## Spec 040 — Settings Deep Links & Subpages Completion (115 → 115; settings hub 6 «قريبًا» → 6 real deep-linked domains; product now 0 planned nav items)
+
+**Frames**: 23 new `sp040-*` frames (370 captured overall · **0 console errors**) — the six settings domains AR+EN,
+dark rows for notifications/security/integrations, mobile-390 rows for notifications/integrations/general, three
+open provider-credential drawers plus a mobile Paymob drawer, and the sidebar zero-planned proof:
+`sp040-general`(+`-en`/`-mobile`), `sp040-notifications`(+`-en`/`-dark`/`-mobile`), `sp040-customization`(+`-en`),
+`sp040-security`(+`-en`/`-dark`), `sp040-integrations`(+`-en`/`-dark`/`-mobile`), `sp040-users`(+`-en`),
+`sp040-integ-paymob`(+`-en`/`-mobile`), `sp040-integ-email`, `sp040-integ-whatsapp`,
+`sp040-sidebar-zero-soon`(+`-en`).
+
+### The one re-baseline (expected, not a regression)
+`dashboard__ar__cat-settings` / `dashboard__en__cat-settings` now capture the settings category panel as **six
+real `<a>` links** (General · Notifications · Customization · Security · Users · Integrations) instead of the
+prior six «قريبًا» locked buttons. Settings was the last planned-bearing admin category; this baseline update is
+the intended Spec 040 outcome, recorded here so it is never mistaken for a regression.
+
+### Provider-credential structure-only proof (`sp040-integ-paymob`/`-en`/`-mobile`, `sp040-integ-email`, `sp040-integ-whatsapp`)
+Every sensitive provider credential renders as a **structure-only row**: a label + a «مطلوب» ("required") badge +
+a one-line purpose description — **no `<input>`, no value**. **0** `type=password`, **0** `type=file`, **0**
+`<canvas>` across all six domains. The provider status chip always reads **«غير مُعدّ» / "Not configured"** —
+never «متصل» / "connected" — for Paymob, Email, and WhatsApp alike; Connect/Test/Save stay `data-disabled-reason`
+gates.
+
+### The six reachable domains (`settings.html#view=…`)
+- **general** (`sp040-general`)
+- **notifications** (`sp040-notifications`)
+- **customization** (`sp040-customization`)
+- **security** (`sp040-security`)
+- **users** (`sp040-users`)
+- **integrations** (`sp040-integrations`)
+
+### Honesty / retained-dead-code note / impact
+Theme + language stay the only real writes (existing hooks/keys, labelled a personal preference); every other
+write/connect/test/import/backup final is a `backendRequired`/`data-disabled-reason` gate — 0 fake save/connect/
+test/import/backup, 0 new `data-confirm`. **`sidebar.js`'s `is-planned` + `data-coming-soon` render branch and
+the `enhance.js` coming-soon toast handler are now INTENTIONALLY UNEXERCISED but RETAINED** under the standing
+zero-deletion law — the product has **zero** planned nav items left after Spec 040, mirroring
+`components/portal-shell.js:30`'s `is-planned` branch, which has had zero instances since Spec 025. Admin-menu
+still 50 items; the only remaining honest lock sitewide is `classSalaryReport` (finance, routeless). a11y
+critical=0 serious=0.

@@ -407,6 +407,36 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'monthly-invoices', variant: 'sp038-monthly-mobile' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp038-classsalary-lock' },
   { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp038-classsalary-lock-en' },
+
+  // ===== Spec 040 — the six completed settings domains + the ZERO-«قريبًا» sidebar proof =====
+  // A documented representative matrix: every domain and every high-risk state, without a
+  // combinatorial explosion. 23 frames.
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', variant: 'sp040-general' },
+  { page: 'settings', lang: 'en', theme: 'light', vp: 'desktop', view: 'general', variant: 'sp040-general-en' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'notifications', variant: 'sp040-notifications' },
+  { page: 'settings', lang: 'en', theme: 'light', vp: 'desktop', view: 'notifications', variant: 'sp040-notifications-en' },
+  { page: 'settings', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'notifications', variant: 'sp040-notifications-dark' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'notifications', variant: 'sp040-notifications-mobile' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'customization', variant: 'sp040-customization' },
+  { page: 'settings', lang: 'en', theme: 'light', vp: 'desktop', view: 'customization', variant: 'sp040-customization-en' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'security', variant: 'sp040-security' },
+  { page: 'settings', lang: 'en', theme: 'light', vp: 'desktop', view: 'security', variant: 'sp040-security-en' },
+  { page: 'settings', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'security', variant: 'sp040-security-dark' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', variant: 'sp040-integrations' },
+  { page: 'settings', lang: 'en', theme: 'light', vp: 'desktop', view: 'integrations', variant: 'sp040-integrations-en' },
+  { page: 'settings', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'integrations', variant: 'sp040-integrations-dark' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'integrations', variant: 'sp040-integrations-mobile' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'users', variant: 'sp040-users' },
+  // the three provider drawers that carry the sensitive STRUCTURE-ONLY rows — the visual proof that
+  // a credential is described, never rendered as an input.
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', openDrawer: 'integ-paymob', variant: 'sp040-drawer-paymob' },
+  { page: 'settings', lang: 'en', theme: 'light', vp: 'desktop', view: 'integrations', openDrawer: 'integ-paymob', variant: 'sp040-drawer-paymob-en' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', openDrawer: 'integ-email', variant: 'sp040-drawer-email' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', openDrawer: 'integ-whatsapp', variant: 'sp040-drawer-whatsapp' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'integrations', openDrawer: 'integ-paymob', variant: 'sp040-drawer-paymob-mobile' },
+  // the zero-«قريبًا» proof: the admin sidebar now renders all six settings items as REAL links.
+  { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'settings', variant: 'sp040-sidebar-zero-soon' },
+  { page: 'dashboard', lang: 'en', theme: 'light', vp: 'desktop', cat: 'settings', variant: 'sp040-sidebar-zero-soon-en' },
 ];
 
 (async () => {
