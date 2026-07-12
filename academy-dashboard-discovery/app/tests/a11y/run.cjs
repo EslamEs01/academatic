@@ -305,6 +305,31 @@ const MATRIX = [
   { page: 'family-billing', lang: 'en', theme: 'light' },
   { page: 'teacher-outcomes', lang: 'en', theme: 'light' },
   { page: 'teacher-profile', lang: 'en', theme: 'light' },
+
+  // ===== Spec 040 — the six completed settings views (the hub went from 2 form controls to 73) =====
+  // general / notifications / customization had ZERO a11y coverage before this spec.
+  { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=general' },
+  { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=general' },
+  { page: 'settings', lang: 'en', theme: 'light', hash: '#view=general' },
+  { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=notifications' },
+  { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=notifications' },
+  { page: 'settings', lang: 'en', theme: 'light', hash: '#view=notifications' },
+  { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=customization' },
+  { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=customization' },
+  { page: 'settings', lang: 'en', theme: 'light', hash: '#view=customization' },
+  { page: 'settings', lang: 'en', theme: 'dark', hash: '#view=security' },
+  { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=integrations' },
+  { page: 'settings', lang: 'en', theme: 'light', hash: '#view=integrations' },
+  // mobile-390: the 47-row notifications matrix and the 11-card integrations grid are the two
+  // heaviest surfaces — they must reflow with ZERO horizontal overflow.
+  { page: 'settings', lang: 'ar', theme: 'light', viewport: 'mobile', hash: '#view=notifications' },
+  { page: 'settings', lang: 'ar', theme: 'light', viewport: 'mobile', hash: '#view=integrations' },
+  { page: 'settings', lang: 'en', theme: 'light', viewport: 'mobile', hash: '#view=general' },
+  // open provider drawers: focus trap + role=dialog + every field labelled. integ-paymob carries the
+  // most sensitive structure rows (5); integ-email carries the two SMTP ones.
+  { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations', open: '[data-drawer="integ-paymob"]' },
+  { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations', open: '[data-drawer="integ-email"]' },
+  { page: 'settings', lang: 'en', theme: 'light', hash: '#view=integrations', open: '[data-drawer="integ-whatsapp"]' },
 ];
 
 // Spec 032 — mobile viewport for the new rows (the pre-032 matrix is desktop-only)

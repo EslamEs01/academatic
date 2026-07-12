@@ -89,7 +89,15 @@ const FORM_DRAWERS_032 = {
   reports: ['fb-create', 'form-create', 'rep-fbcat'],
   finance: ['bank-add'], staff: ['staff-add', 'staff-edit', 'staff-dup'],
   certificates: ['cert-tpl', 'cert-create'], library: ['mat-add', 'mat-edit', 'lib-item', 'lib-cats'],
-  settings: ['head-add'], attendance: [],
+  // Spec 040 — SANCTIONED STRENGTHENING T2: the 11 provider Configure drawers are REGISTERED.
+  // An unregistered drawer silently escapes the fieldless / noGate / multiPrimary / MUST-OMIT /
+  // canvas audit below — that would be a spec failure, not a pass.
+  settings: [
+    'head-add',
+    'integ-stripe', 'integ-paypal', 'integ-mollie', 'integ-xpay', 'integ-payoneer', 'integ-paymob',
+    'integ-custom', 'integ-paymob-payout', 'integ-payoneer-payout', 'integ-whatsapp', 'integ-email',
+  ],
+  attendance: [],
 };
 // the outcome drawer's Add-feedback form (FC-25) is NESTED inside the attended outcome
 // templates (resolvable while the outcome sheet is open) on these pages
@@ -220,14 +228,30 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
           const r = await clickFeedback(sel);
           ok(!r, `${page}/${lang}: ${r}`);
         }
-        // Spec 039: the admin category no longer has a planned «قريبًا» item either
-        // (materials/certificateRequests flipped to deep-links). Reveal the category that still has
-        // one (settings → settingsGeneral/…/settingsUsers, owner Spec 040) and verify the planned-item
-        // toast still fires — coverage preserved.
+        // ── Spec 040 — SUPERSESSION S2: the planned-item CLICK probe is RETIRED ──────────────
+        // Settings was the LAST planned-bearing category. Spec 040 flipped its six items to real
+        // deep-links, so sitewide planned === 0 and there is NO honest specimen left to click.
+        // Keeping a dishonest planned nav item purely to feed a test is forbidden, and the probe
+        // must NEVER be repointed at classSalaryReport — a `disabled` lock is categorically NOT a
+        // planned item, and it keeps its own probe below (byte-verbatim, still exercised).
+        //
+        // Precedent: components/portal-shell.js:30 has rendered an `is-planned` branch with ZERO
+        // instances since Spec 025, and the suite already expresses that as an honest VACUOUS
+        // assert (plannedNavAnchors === 0). "Zero coming-soon claims left" is a product milestone,
+        // not a coverage hole. The production render branches (sidebar.js `is-planned` +
+        // data-coming-soon, and the enhance.js coming-soon handler) are RETAINED, not deleted —
+        // zero-deletion law.
+        //
+        // Replacement coverage: (1) the sitewide zero-census below; (2) the six anchor asserts in
+        // the nav040 block; (3) the nav.config SOURCE audit (planned === 0) after browser.close().
         await p.click('[data-nav-category="settings"]').catch(() => {});
         await p.waitForTimeout(140);
-        const rPlanned = await clickFeedback('.cat-panel:not([hidden]) .nav-item.is-planned');
-        ok(!rPlanned, `${page}/${lang}: ${rPlanned}`);
+        const zeroPlanned = await p.evaluate(() => ({
+          planned: document.querySelectorAll('.nav-item.is-planned').length,
+          comingSoon: document.querySelectorAll('[data-coming-soon]').length,
+        }));
+        ok(zeroPlanned.planned === 0 && zeroPlanned.comingSoon === 0,
+          `${page}/${lang}: Spec 040 — the product must carry ZERO planned «قريبًا» nav items (got planned=${zeroPlanned.planned}, coming-soon=${zeroPlanned.comingSoon})`);
         // disabled finance nav is aria-disabled (announced disabled to AT) but still fires its reason
         // toast on a real click; Playwright won't auto-click an aria-disabled node, so dispatch directly.
         const dis = await p.$('.nav-item.is-disabled');
@@ -1193,7 +1217,74 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         if (page === 'settings') {
           ok(JSON.stringify(a31.tabIds) === JSON.stringify(['general', 'notifications', 'customization', 'security', 'users', 'integrations']), `settings/${lang}: hub tabs wrong (${JSON.stringify(a31.tabIds)})`);
           ok(a31.themeCtl >= 1, `settings/${lang}: real theme control missing — theme/lang must stay functional`);
-          ok(a31.gates >= 4, `settings/${lang}: settings save/connect/test gates missing (${a31.gates})`);
+          // Spec 040 — SANCTIONED STRENGTHENING T1: the completed hub renders 60 gates (4 general +
+          // 7 notifications + 3 customization + 12 security + 34 integrations). The floor is raised
+          // 4 → 20. Exact per-tab censuses live in the sp040 block below; this stays a floor.
+          ok(a31.gates >= 20, `settings/${lang}: settings save/connect/test gates missing (${a31.gates})`);
+
+          // ===== Spec 040 — the COMPLETE-FORMS census (exact, not a floor) =====
+          // The hub went from 2 rendered form controls to 73. Every number below is exact; a
+          // regression that silently drops a domain back to a stub fails here.
+          const sp040 = await p.evaluate(() => {
+            const body = document.querySelector('#page-body');
+            const panelOf = (id) => body.querySelector(`[data-tabpanel="${id}"]`);
+            const cens = (el) => ({
+              field: el.querySelectorAll('input,select,textarea').length
+                + [...el.querySelectorAll('template')].reduce((n, t) => n + t.content.querySelectorAll('input,select,textarea').length, 0),
+              toggle: el.querySelectorAll('.toggle').length
+                + [...el.querySelectorAll('template')].reduce((n, t) => n + t.content.querySelectorAll('.toggle').length, 0),
+              struct: el.querySelectorAll('.set-struct').length
+                + [...el.querySelectorAll('template')].reduce((n, t) => n + t.content.querySelectorAll('.set-struct').length, 0),
+            });
+            const inTpl = (sel) => [...body.querySelectorAll('template')].reduce((n, t) => n + t.content.querySelectorAll(sel).length, 0);
+            const allText = body.innerText + [...body.querySelectorAll('template')].map((t) => t.innerHTML.replace(/<[^>]+>/g, ' ')).join(' ');
+            // a status chip may NEVER read «متصل»/"connected" — not even "not connected". The census is
+            // CHIP-SCOPED and token-absolute: the honest backendRequired sentence "available once the
+            // server is connected" legitimately contains the word elsewhere in the body, so a body-wide
+            // /connected/i rejection would fail on an honest build.
+            const chips = [...body.querySelectorAll('.chip'), ...[...body.querySelectorAll('template')].flatMap((t) => [...t.content.querySelectorAll('.chip')])];
+            return {
+              general: cens(panelOf('general')), notifications: cens(panelOf('notifications')),
+              customization: cens(panelOf('customization')), security: cens(panelOf('security')),
+              users: cens(panelOf('users')), integrations: cens(panelOf('integrations')),
+              field: body.querySelectorAll('input,select,textarea').length + inTpl('input,select,textarea'),
+              toggle: body.querySelectorAll('.toggle').length + inTpl('.toggle'),
+              dataToggle: body.querySelectorAll('[data-toggle]').length + inTpl('[data-toggle]'),
+              struct: body.querySelectorAll('.set-struct').length + inTpl('.set-struct'),
+              drawers: body.querySelectorAll('template[data-preview]').length,
+              connectedChips: chips.filter((c) => /متصل|connected/i.test(c.textContent || '')).length,
+              fakeSuccess: (allText.match(/تم الحفظ|\bsaved\b|بنجاح|\bsuccessfully\b|تم الربط/gi) || []).length,
+              // the 11 excluded teacher-pay legacy names must not appear ANYWHERE on this page
+              payNames: (body.innerHTML.match(/rate_student_absent|salary_period_type|salary_period_day|applayFins|settings_data\[|hours-input|rate-input|fin\[/gi) || []).length,
+              // the legacy import-template EXAMPLE VALUES (a pay figure + the currency enum)
+              importExamples: (allText.match(/25\.50|30\.00|150\.00|\bUSD\b|\bGBP\b|\bEGP\b|\bAUD\b|\bCAD\b|\bAED\b/g) || []).length,
+              // real PII from the crawl corpus
+              realPii: (allText.match(/01015264856|أحمد محمد|chat\.whatsapp\.com|201508604112|afaaqonline1/g) || []).length,
+            };
+          });
+          const EXPECT = {
+            general: { field: 22, toggle: 7, struct: 0 }, notifications: { field: 13, toggle: 34, struct: 0 },
+            customization: { field: 16, toggle: 0, struct: 0 }, security: { field: 1, toggle: 0, struct: 34 },
+            users: { field: 0, toggle: 0, struct: 0 }, integrations: { field: 21, toggle: 8, struct: 26 },
+          };
+          for (const tab of Object.keys(EXPECT)) {
+            for (const k of ['field', 'toggle', 'struct']) {
+              ok(sp040[tab][k] === EXPECT[tab][k], `settings/${lang}: ${tab} ${k} census — expected ${EXPECT[tab][k]}, got ${sp040[tab][k]}`);
+            }
+          }
+          ok(sp040.field === 73, `settings/${lang}: the hub must render 73 form controls (was 2 before Spec 040), got ${sp040.field}`);
+          ok(sp040.struct === 60, `settings/${lang}: 60 structure-only rows expected (34 security + 26 integrations), got ${sp040.struct}`);
+          ok(sp040.drawers === 12, `settings/${lang}: 12 baked drawers expected (head-add + 11 integ-*), got ${sp040.drawers}`);
+          // 49 boolean controls = 47 interactive data-toggle previews + 2 HONESTLY DISABLED toggles
+          // (gen-monthlyPlan, ntf-inApp). A disabled control carries no toggle hook — that is correct,
+          // not a miscount: it cannot be previewed because it cannot be operated.
+          ok(sp040.toggle === 49, `settings/${lang}: 49 boolean controls expected, got ${sp040.toggle}`);
+          ok(sp040.dataToggle === 47, `settings/${lang}: 47 interactive data-toggle previews expected (49 booleans − 2 disabled), got ${sp040.dataToggle}`);
+          ok(sp040.connectedChips === 0, `settings/${lang}: a provider status chip reads "connected"/«متصل» — forbidden (got ${sp040.connectedChips})`);
+          ok(sp040.fakeSuccess === 0, `settings/${lang}: fake-success copy on the settings body (got ${sp040.fakeSuccess}) — use «لا يُخزَّن»/"nothing is stored", never "saved"`);
+          ok(sp040.payNames === 0, `settings/${lang}: an excluded teacher-pay legacy field name leaked (got ${sp040.payNames})`);
+          ok(sp040.importExamples === 0, `settings/${lang}: a legacy import example value (25.50/150.00/currency enum) leaked (got ${sp040.importExamples})`);
+          ok(sp040.realPii === 0, `settings/${lang}: real PII from the crawl corpus leaked (got ${sp040.realPii})`);
         }
         // a real static tab actually switches, then restore the first tab (localStorage safety)
         const grp = page === 'settings' ? 'settings' : page === 'library' ? 'library' : page === 'certificates' ? 'certificates' : null;
@@ -1443,7 +1534,46 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
         ok(anchorOk039(nav039.mat, /(^|\/)library\.(en\.)?html#view=materials$/), `${page}/${lang}: materials must be a real deep-link → library.html#view=materials, got ${JSON.stringify(nav039.mat)}`);
         ok(anchorOk039(nav039.cr, /(^|\/)certificates\.(en\.)?html#view=requests$/), `${page}/${lang}: certificateRequests must be a real deep-link → certificates.html#view=requests, got ${JSON.stringify(nav039.cr)}`);
         ok(anchorOk039(nav039.bk, /(^|\/)library\.(en\.)?html#view=books$/), `${page}/${lang}: books must be a real deep-link → library.html#view=books, got ${JSON.stringify(nav039.bk)}`);
-        ok(nav039.settingsPlanned === 6, `${page}/${lang}: settings category should keep 6 planned «قريبًا» items (owner Spec 040), got ${nav039.settingsPlanned}`);
+        // Spec 040 — SUPERSESSION S1 (a STRENGTHENING of the same truth contract): settings was the
+        // last planned-bearing category; its six items are now real deep-links.
+        ok(nav039.settingsPlanned === 0, `${page}/${lang}: settings must have 0 planned «قريبًا» items after Spec 040 (six real deep-links), got ${nav039.settingsPlanned}`);
+      }
+
+      // ===== Spec 040 — Settings nav completion + the ZERO-PLANNED milestone (additive) =====
+      // The six settings items were the LAST planned «قريبًا» claims in the product. Each is now a real
+      // deep-link into an EXISTING, completed tab of the settings hub. After this spec:
+      //   sitewide planned === 0 · [data-coming-soon] === 0 · exactly ONE honest lock (classSalaryReport).
+      // A disabled lock is NOT a planned item — the is-disabled reason-toast probe above still covers it.
+      if (!PORTAL_PAGES.has(page)) {
+        const nav040 = await p.evaluate(() => {
+          const info = (id) => { const n = document.querySelector(`.nav-item[data-nav="${id}"]`); return n ? { a: n.tagName === 'A', href: n.getAttribute('href') || '', soon: n.hasAttribute('data-coming-soon'), disabled: n.getAttribute('aria-disabled') === 'true', lock: !!n.querySelector('use[href="#i-lock"]') } : null; };
+          return {
+            gen: info('settingsGeneral'), integ: info('settingsIntegrations'), cust: info('settingsCustomization'),
+            notif: info('settingsNotifications'), sec: info('settingsSecurity'), usr: info('settingsUsers'),
+            planned: document.querySelectorAll('.nav-item.is-planned').length,
+            comingSoon: document.querySelectorAll('[data-coming-soon]').length,
+            locks: document.querySelectorAll('.nav-item.is-disabled').length,
+            menu: document.querySelectorAll('.nav-panel .nav-item').length,
+          };
+        });
+        // NB: `lock` is deliberately NOT part of this predicate. `settingsSecurity` legitimately uses a
+        // PADLOCK as its own nav icon, so an icon-based lock check false-positives on it. The real signal
+        // for an honest lock is a <button> with aria-disabled (+ data-disabled-reason) — never an icon —
+        // and `o.a && !o.disabled` already proves this item is a real, enabled anchor.
+        const anchorOk040 = (o, re) => !!o && o.a && !o.soon && !o.disabled && re.test(o.href);
+        const SIX = [
+          ['gen', 'general'], ['integ', 'integrations'], ['cust', 'customization'],
+          ['notif', 'notifications'], ['sec', 'security'], ['usr', 'users'],
+        ];
+        for (const [k, tab] of SIX) {
+          // NB the US spelling `customization` — the legacy route is UK `customisation`; carrying that
+          // `s` into the hash would produce a dead deep-link the tab machinery silently ignores.
+          const re = new RegExp(`(^|/)settings\\.(en\\.)?html#view=${tab}$`);
+          ok(anchorOk040(nav040[k], re), `${page}/${lang}: settings${tab} must be a real deep-link → settings.html#view=${tab}, got ${JSON.stringify(nav040[k])}`);
+        }
+        ok(nav040.planned === 0 && nav040.comingSoon === 0, `${page}/${lang}: Spec 040 — sitewide planned must be 0 (got planned=${nav040.planned}, coming-soon=${nav040.comingSoon})`);
+        ok(nav040.locks === 1, `${page}/${lang}: exactly ONE honest lock must remain (classSalaryReport), got ${nav040.locks}`);
+        ok(nav040.menu === 50, `${page}/${lang}: admin menu must stay 50, got ${nav040.menu}`);
       }
 
       // (b0) reports — three display tabs (overview + monthly + analysis); overview PRESERVES the 7
@@ -2307,6 +2437,40 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
       }
     }
   }
+
+  // ===== Spec 040 — the SIX settings deep-links must open their tab on a FRESH load (AR + EN) =====
+  // Each view is seeded with a DIFFERENT stored view, so the assertion is DISCRIMINATING: the URL hash
+  // must beat localStorage['academy.schedView.settings']. Without the seed, #view=general would pass
+  // trivially (general is the baked default tab). 6 views × 2 langs = 12 executions.
+  const SP040_VIEWS = {
+    general: 'integrations', notifications: 'general', customization: 'security',
+    security: 'users', users: 'notifications', integrations: 'customization',
+  };
+  for (const lang of ['ar', 'en']) {
+    const sfile = lang === 'en' ? 'settings.en.html' : 'settings.html';
+    for (const [view, other] of Object.entries(SP040_VIEWS)) {
+      const ctx = await browser.newContext();
+      await ctx.addInitScript((o) => { try { localStorage.setItem('academy.schedView.settings', o); } catch (e) { /* ignore */ } }, other);
+      const p = await ctx.newPage();
+      const dext = [];
+      p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
+      await p.goto(`${BASE}/${sfile}#view=${view}`, { waitUntil: 'networkidle' });
+      await p.waitForTimeout(220);
+      const r = await p.evaluate(() => {
+        const vis = [...document.querySelectorAll('[data-tabs="settings"] [data-tabpanel]')].filter((x) => !x.hidden);
+        const body = document.getElementById('page-body');
+        return {
+          active: vis.length === 1 ? vis[0].getAttribute('data-tabpanel') : `n=${vis.length}`,
+          noSecret: body.querySelectorAll('input[type=file],input[type=password],canvas').length === 0,
+        };
+      });
+      ok(r.active === view, `settings/${lang}: nav deep-link #view=${view} did not open exactly that tab (active=${r.active}; the hash must beat the stored view '${other}')`);
+      ok(r.noSecret, `settings/${lang}: the ${view} deep-link must not render a file/password input or a canvas`);
+      ok(dext.length === 0, `settings/${lang}: deep-link #view=${view} triggered external request(s) ${JSON.stringify(dext.slice(0, 2))}`);
+      await ctx.close();
+    }
+  }
+
   // Spec 039 — EXACT content/certificate nav route coverage (AR + EN): materials → library.html#view=materials
   // and certificateRequests → certificates.html#view=requests are real implemented anchors (no «قريبًا»/
   // aria-disabled/lock); books is refined → library.html#view=books; the admin category has 5 items / 0 planned;
@@ -2337,7 +2501,8 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
     ok(routeOk(nav.certificateRequests, /(^|\/)certificates\.(en\.)?html#view=requests$/), `content/${lang}: certificateRequests must be a real anchor → certificates.html#view=requests, got ${JSON.stringify(nav.certificateRequests)}`);
     ok(routeOk(nav.books, /(^|\/)library\.(en\.)?html#view=books$/), `content/${lang}: books must be a real anchor → library.html#view=books, got ${JSON.stringify(nav.books)}`);
     ok(nav.admItems === 5 && nav.admPlanned === 0, `content/${lang}: admin category must have 5 items and 0 planned, got items=${nav.admItems} planned=${nav.admPlanned}`);
-    ok(nav.settingsPlanned === 6, `content/${lang}: settings must keep 6 planned items (owner Spec 040), got ${nav.settingsPlanned}`);
+    // Spec 040 — SUPERSESSION S1 (second site).
+    ok(nav.settingsPlanned === 0, `content/${lang}: settings must have 0 planned items after Spec 040, got ${nav.settingsPlanned}`);
     ok(nav.adminMenu === 50, `content/${lang}: admin menu must stay 50 classified nav items, got ${nav.adminMenu}`);
     await ctx.close();
   }
@@ -2360,6 +2525,33 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
     // the honest finance lock is untouched by Spec 039
     const csr = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]).find((i) => i.id === 'classSalaryReport');
     ok(csr.status === 'disabled' && csr.reasonKey === 'nav.reason.finance' && !csr.route, 'nav.config: classSalaryReport must stay an honest disabled lock with no route');
+
+    // ===== Spec 040 — nav.config SOURCE audit (the one thing the DOM-only tests cannot reach) =====
+    // The six settings items are the LAST planned items in the product. Assert against the SOURCE that
+    // they carry real routes, that NOTHING anywhere is still `planned`, that exactly one honest lock
+    // survives, and that FUTURE_ROUTES stays empty (a promoted item carries a real route, never a
+    // documented-future one).
+    const SIX_ROUTES = {
+      settingsGeneral: 'settings.html#view=general',
+      settingsIntegrations: 'settings.html#view=integrations',
+      settingsCustomization: 'settings.html#view=customization',
+      settingsNotifications: 'settings.html#view=notifications',
+      settingsSecurity: 'settings.html#view=security',
+      settingsUsers: 'settings.html#view=users',
+    };
+    for (const [id, route] of Object.entries(SIX_ROUTES)) {
+      const it = byId('settings', id);
+      ok(it.status === 'implemented', `nav.config: ${id} must be implemented after Spec 040, got ${it.status}`);
+      ok(it.route === route, `nav.config: ${id} route must be ${route}, got ${it.route}`);
+    }
+    const allItems = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]);
+    const stillPlanned = allItems.filter((i) => i.status === 'planned');
+    ok(stillPlanned.length === 0, `nav.config: Spec 040 — ZERO nav items may remain planned, got ${stillPlanned.length} (${stillPlanned.map((i) => i.id).join(', ')})`);
+    const locks = allItems.filter((i) => i.status === 'disabled');
+    ok(locks.length === 1 && locks[0].id === 'classSalaryReport', `nav.config: exactly ONE honest lock must remain (classSalaryReport), got ${locks.map((i) => i.id).join(', ') || 'none'}`);
+    ok(Object.keys(fr).length === 0, `nav.config: FUTURE_ROUTES must stay empty after Spec 040, got ${JSON.stringify(fr)}`);
+    ok(navSrc.NAV_CATEGORIES.find((c) => c.id === 'settings').items.length === 7, 'nav.config: the settings category must keep exactly 7 items');
+    ok(allItems.length === 50, `nav.config: the admin menu must stay 50 items, got ${allItems.length}`);
   }
 
   // ===== Spec 022 — reduced-motion CSS audit: every auto-playing living-layer animation

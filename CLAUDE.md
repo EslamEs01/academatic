@@ -1,9 +1,73 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 039 — Admin Content & Certificates Explicit Pages (Materials / Certificate Requests) is
-IMPLEMENTED** (awaiting the watcher commit; artifacts + `plan.md` + `research.md` + `data-model.md` +
+Active feature: **Spec 040 — Settings Deep Links & Subpages Completion is IMPLEMENTED** (awaiting the watcher
+commit; artifacts + `plan.md` + `research.md` + `data-model.md` + `quickstart.md` + `tasks.md` (115 tasks) +
+25 contracts + `implementation-status.md` at
+`academy-dashboard-discovery/specs/040-settings-deep-links-subpages/`). **THE ZERO-PLANNED MILESTONE: sitewide
+planned 6 → 0 and `[data-coming-soon]` 6 → 0 — the last «قريبًا» claims in the product are gone**; exactly ONE
+honest lock remains (`classSalaryReport` = `disabled` + `nav.reason.finance` + no route; a lock is NOT a planned
+item). **Count HELD 115 → 115** (`PAGES` 57, 0 new page bases, admin-menu 50, settings 7 items → 7 implemented /
+0 planned, `FUTURE_ROUTES` stays `{}`). **NOT nav-only**: the six tabs existed but the hub rendered **2** form
+controls — it now renders **73** (General 22 · Notifications 13 · Customization 16 · Security 1 · Users 0 ·
+Integrations 21) + **49 booleans** (= 47 interactive `data-toggle` local previews + 2 honestly DISABLED toggles,
+which correctly carry no hook) + **60 structure-only rows** + **60 gates**. The six flips:
+`settingsGeneral|Integrations|Customization|Notifications|Security|Users` → `settings.html#view=general|
+integrations|customization|notifications|security|users` (US spelling — the legacy UK `customisation` would be a
+dead deep-link); EN via the hash-aware `langRoute()` ⇒ **`sidebar.js` 0-diff**. `settingsUsers` deep-links to the
+EXISTING Users tab (a real `staff.html` link + read-only RBAC preview) — `staff.js`/`staff-management.js`/
+`fixtures/settings.js` **0-diff**, no duplicate CRUD. **Laws upheld and verified on the BUILT output**: teacher
+pay-free (the legacy General›Teachers 10 pay controls + `rate_student_absent` omitted — 0 in body, source AND
+comments; the import templates' `hour_rate 25.50`/`30.00`, **`price 150.00`** and the currency enum are NOT
+ported — column NAMES only); no-secret (**24** sensitive provider fields are STRUCTURE-ONLY rows with no value
+slot; 0 `type=password`, 0 `type=file`, 0 credential-named input, 0 authored secret); no-fake (0 "Connected"
+chip — the closed vocabulary is «غير مُعدّ»/«يتطلّب ربط الخادم»/«غير متاح»; **0 new `data-confirm`**); no real PII
+(the corpus' real name/phone, live `chat.whatsapp.com` invite URL and unmasked phones are NOT ported; both
+WhatsApp-insights pages excluded → Spec 043). **Legacy defects REFUSED**: PayPal defaulting to **Live** → we
+default to Sandbox; all 11 cards shipping `is_enabled` **ON** with nothing configured → no card carries an enable
+control; "Send Backup" firing a real DB backup with **no confirm** + a silent SMTP redirect → a gate with standing
+scope/destination/permission/audit copy. Theme + language remain the ONLY real writes. **Protected tests: exactly
+2 supersessions + 2 strengthenings** — `settingsPlanned === 6 → 0` (`smoke:1446`/`:2340`); the `.nav-item.is-planned`
+**click probe RETIRED** (no honest specimen left; replaced by a sitewide `planned === 0 && comingSoon === 0`
+census — never a fake planned item, never repointed at the disabled lock, and the `sidebar.js`/`enhance.js`
+coming-soon branches are RETAINED-but-unexercised per the zero-deletion law, mirroring `portal-shell.js:30` since
+Spec 025); `a31.gates >= 4 → >= 20`; `FORM_DRAWERS_032.settings` → the exact **12**-id register (closing an omission
+that would have let 11 drawers escape the MUST-OMIT audit). **Additive**: 6 anchors ×AR/EN · exact per-tab censuses ·
+chip-scoped fake-connected census · pay-name/import-example/real-PII censuses · **12 fresh-context deep-links**
+(each seeded with a DIFFERENT stored tab so the hash must beat `localStorage`) · a `nav.config` SOURCE audit.
+**Verified**: build 115 · smoke **PASS** (114 loads) · a11y **critical=0 serious=0** (+19 rows incl. mobile-390
+matrix/grid + 3 open drawers) · screenshots **370 captured, 0 console errors** (23 `sp040` frames) · locale parity
+`adm` **679/679**, 0 divergence · the **13-file 0-diff wall** byte-identical · **impact: 2 bodies changed
+(`settings.html`/`.en`) · 62 sidebar-only · 51 byte-identical = 115** (proven non-destructively via `git show
+58a53e2` — NO stash/reset/checkout). **Evidence conflicts resolved from RAW HTML, not summaries**: families import
+15 columns (not 9) ⇒ 39−6 = **33** safe; integrations **21** safe fields (not 18 — WhatsApp's configure form really
+does carry phone/send_group/group_name); XPay's 4 methods are **Card/Fawry/Meeza Digital/Kiosk Aman** (a first-draft
+guess was caught and replaced); `data-toggle` before = 2, not 0. **No commit / no push** — watcher commits.
+**History: Spec 040 was SPECIFIED + PLANNED** (plan artifacts at
+`academy-dashboard-discovery/specs/040-settings-deep-links-subpages/`: `plan.md` · `research.md` · `data-model.md` ·
+`quickstart.md` · 25 contracts, alongside the 23 specify-phase artifacts). **SEVENTH
+Spec-033-roadmap follow-up; baseline COMMITTED and CLEAN** (HEAD `58a53e2` = Spec 039 implementation + the Spec 040
+specification; 115 public HTML; admin-menu 50). Spec 040 owns the **six remaining planned Settings nav items** —
+the LAST planned items sitewide. It is **NOT nav-only**: the six tabs already exist but the whole hub renders only
+**2 form fields**, against ~150 evidenced legacy controls. Plan = **six deep-links → `settings.html#view=<tab>`
+(general · notifications · customization · security · users · integrations) PLUS in-place form completion**
+(2 → **73** `field()` controls · 49 labelled `data-toggle` local previews · **60 structure-only rows** · ≈51 gates),
+at **115 → 115** pages · **0** new page bases · admin-menu **50 → 50** · settings planned **6 → 0** · **sitewide
+planned 6 → 0** · `FUTURE_ROUTES` stays `{}` · `classSalaryReport` remains the ONE honest `disabled` lock (a lock
+is NOT a planned item). Decisions: **settingsUsers → `#view=users`** (the existing Users tab = a real `staff.html`
+link + read-only RBAC preview; Spec 031 already made `staff.html` the ONE staff home — no duplicate CRUD);
+**the planned-item click probe is RETIRED** (0 planned items left ⇒ unreachable) and replaced by a sitewide
+`planned === 0` census + a `nav.config` SOURCE audit — never a fake planned item, never repointed at the disabled
+lock; **Message Builder → Spec 053** (only legacy evidence is a 504 — never invented). Laws upheld: the legacy
+General›Teachers **10 pay controls + `rate_student_absent` are EXCLUDED** (teacher pay-free); the **24 sensitive
+provider fields render as structure-only rows** (0 `type=password`, 0 `type=file`, 0 authored secret); the import
+`password` / `hour_rate` / `currency` columns are **REJECTED**; the legacy no-confirm real-DB **backup is a gate**;
+theme+language stay the ONLY real writes. **0 new hook / storage key / dependency / confirm**;
+`i18n.js`/`build-html.mjs`/`package.json`/`sidebar.js` **0-diff**. Impact: only **2 bodies** change
+(`settings.html`/`.en`); 62 pages differ in the shared sidebar only; 51 byte-identical.
+**History: Spec 039 — Admin Content & Certificates Explicit Pages (Materials / Certificate Requests) is
+IMPLEMENTED and COMMITTED** (HEAD `58a53e2`; artifacts + `plan.md` + `research.md` + `data-model.md` +
 `quickstart.md` + `tasks.md` (21 tasks) + 15 contracts + `implementation-status.md` at
 `academy-dashboard-discovery/specs/039-content-certificates-explicit-pages/`). **SIXTH Spec-033-roadmap
-follow-up; baseline COMMITTED** (HEAD `4cbcb31` = Spec 038; clean tree). **Count HELD 115 → 115 (0 new pages;
+follow-up; its baseline was HEAD `4cbcb31` = Spec 038.** **Count HELD 115 → 115 (0 new pages;
 admin-menu 50).** Navigation-only unlock (Option B): the two admin content «قريبًا» locks became deep-links to
 the EXISTING Spec-031 tabs — **materials → `library.html#view=materials`** (Materials subject-catalog tab) and
 **certificateRequests → `certificates.html#view=requests`** (Requests queue tab); **books refined

@@ -107,12 +107,19 @@ export const NAV_CATEGORIES = [
     id: 'settings', labelKey: 'cat.settings', icon: 'settings',
     items: [
       item({ id: 'settings', labelKey: 'nav.settings', icon: 'settings', route: 'settings.html' }),
-      item({ id: 'settingsGeneral', labelKey: 'nav.settingsGeneral', icon: 'settings', status: 'planned' }),
-      item({ id: 'settingsIntegrations', labelKey: 'nav.settingsIntegrations', icon: 'grid', status: 'planned' }),
-      item({ id: 'settingsCustomization', labelKey: 'nav.settingsCustomization', icon: 'sparkles', status: 'planned' }),
-      item({ id: 'settingsNotifications', labelKey: 'nav.settingsNotifications', icon: 'bell', status: 'planned' }),
-      item({ id: 'settingsSecurity', labelKey: 'nav.settingsSecurity', icon: 'lock', status: 'planned' }),
-      item({ id: 'settingsUsers', labelKey: 'nav.settingsUsers', icon: 'staff', status: 'planned' }),
+      // Spec 040 — the SIX settings deep-links. These were the LAST planned «قريبًا» items in the
+      // product: after this flip, sitewide planned === 0 and [data-coming-soon] === 0. Each opens an
+      // EXISTING, now-completed tab of the settings hub. Routes carry no `.en` — the hash-aware
+      // langRoute() (Spec 035) inserts it, so components/sidebar.js stays 0-diff.
+      // Spelling trap: the nav id is settingsCustomiz*ation* and the tab id is `customization`
+      // (US). The LEGACY route is /settings/customi*s*ation/ (UK) — carrying that `s` into the hash
+      // would yield a dead deep-link that the tab machinery silently ignores.
+      item({ id: 'settingsGeneral', labelKey: 'nav.settingsGeneral', icon: 'settings', route: 'settings.html#view=general' }),
+      item({ id: 'settingsIntegrations', labelKey: 'nav.settingsIntegrations', icon: 'grid', route: 'settings.html#view=integrations' }),
+      item({ id: 'settingsCustomization', labelKey: 'nav.settingsCustomization', icon: 'sparkles', route: 'settings.html#view=customization' }),
+      item({ id: 'settingsNotifications', labelKey: 'nav.settingsNotifications', icon: 'bell', route: 'settings.html#view=notifications' }),
+      item({ id: 'settingsSecurity', labelKey: 'nav.settingsSecurity', icon: 'lock', route: 'settings.html#view=security' }),
+      item({ id: 'settingsUsers', labelKey: 'nav.settingsUsers', icon: 'staff', route: 'settings.html#view=users' }),
     ],
   },
 ];
