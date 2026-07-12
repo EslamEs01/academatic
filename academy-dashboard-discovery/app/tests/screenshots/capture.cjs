@@ -120,9 +120,9 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop' },
   { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop' },
   { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop' },
-  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeDrawer: true,  variant: 'drawer' },
-  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeConfirm: true, variant: 'confirm' },
-  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', financeFilter: true,  variant: 'filter' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', financeDrawer: true,  variant: 'drawer' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', financeConfirm: true, variant: 'confirm' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', financeFilter: true,  variant: 'filter' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile' },
   // Spec 026 — the three new admin ops pages + one create modal + one details drawer + mobile + dark
   { page: 'sessions-analysis', lang: 'ar', theme: 'light', vp: 'desktop' },
@@ -307,6 +307,22 @@ const MATRIX = [
   { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', view: 'requests', openDrawer: 'cert-create', variant: 'sp032-cert-create' },
   { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'mat-add', variant: 'sp032-mat-add' },
   { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', view: 'books', openDrawer: 'lib-item', variant: 'sp032-lib-item' },
+  // ── Spec 039 — content/certificate deep-linked tabs reachable from the sidebar (additive) ──
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', view: 'materials', variant: 'sp039-materials-ar' },
+  { page: 'library', lang: 'en', theme: 'light', vp: 'desktop', view: 'materials', variant: 'sp039-materials-en' },
+  { page: 'library', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'materials', variant: 'sp039-materials-dark' },
+  { page: 'library', lang: 'en', theme: 'light', vp: 'desktop', view: 'books', variant: 'sp039-books-en' },
+  { page: 'certificates', lang: 'en', theme: 'light', vp: 'desktop', view: 'requests', variant: 'sp039-requests-en' },
+  { page: 'certificates', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'requests', variant: 'sp039-requests-dark' },
+  { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', view: 'requests', openDrawer: 'cr-cr1', variant: 'sp039-request-review' },
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'mat-edit', variant: 'sp039-mat-edit' },
+  { page: 'library', lang: 'en', theme: 'light', vp: 'mobile', view: 'materials', variant: 'sp039-materials-m' },
+  { page: 'certificates', lang: 'en', theme: 'light', vp: 'mobile', view: 'requests', variant: 'sp039-requests-m' },
+  // the Materials row delete-confirmation (honest gate — nothing is deleted)
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', view: 'materials', confirmSel: '[data-tabpanel="materials"] [data-confirm]', variant: 'sp039-mat-delete' },
+  // the shared admin sidebar itself: Materials + Certificate Requests now render as real links (no «قريبًا»/lock)
+  { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'admin', variant: 'sp039-sidebar-ar' },
+  { page: 'library', lang: 'en', theme: 'light', vp: 'desktop', cat: 'admin', variant: 'sp039-sidebar-en' },
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', openDrawer: 'head-add', variant: 'sp032-head-add' },
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'mobile', view: 'general', openDrawer: 'head-add', variant: 'sp032-head-add-mobile' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-assign-course', variant: 'sp032-picker-proof' },
@@ -377,6 +393,20 @@ const MATRIX = [
   { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation' },
   { page: 'students', lang: 'en', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation-en' },
   { page: 'students', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'evaluation', variant: 'sp037-student-evaluation-dark' },
+  // Spec 038 — finance six-tab hub: the three new tabs (invoices/payments/monthly-invoices) + classSalaryReport honest-lock proof
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'invoices', variant: 'sp038-invoices' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'invoices', variant: 'sp038-invoices-en' },
+  { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'invoices', variant: 'sp038-invoices-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'invoices', variant: 'sp038-invoices-mobile' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'payments', variant: 'sp038-payments' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'payments', variant: 'sp038-payments-en' },
+  { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'payments', variant: 'sp038-payments-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'monthly-invoices', variant: 'sp038-monthly' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', view: 'monthly-invoices', variant: 'sp038-monthly-en' },
+  { page: 'finance', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'monthly-invoices', variant: 'sp038-monthly-dark' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'monthly-invoices', variant: 'sp038-monthly-mobile' },
+  { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp038-classsalary-lock' },
+  { page: 'finance', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp038-classsalary-lock-en' },
 ];
 
 (async () => {
@@ -461,6 +491,8 @@ const MATRIX = [
     }
     if (s.mgmtModal) { await page.click(`[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`).catch(() => {}); await page.waitForTimeout(340); }
     if (s.mgmtConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
+    // Spec 039 — open an arbitrary confirm gate by selector (materials row delete)
+    if (s.confirmSel) { await page.click(s.confirmSel).catch(() => {}); await page.waitForTimeout(380); }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
     // Spec 013 — area close-ups are element-scoped (Playwright auto-scrolls the element into view)
@@ -469,7 +501,7 @@ const MATRIX = [
       if (el) await el.screenshot({ path: path.join(OUT, name) });
       else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
     } else {
-      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.teacherKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm && !s.staffKebabDrawer && !s.nestedDrawer });
+      await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.teacherKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm && !s.staffKebabDrawer && !s.nestedDrawer && !s.confirmSel });
     }
     results.push({ name, errors });
     if (errors.length) console.log(`  ⚠ ${name} console errors:\n   - ${errors.slice(0, 6).join('\n   - ')}`);

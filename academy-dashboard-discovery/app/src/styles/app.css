@@ -1158,3 +1158,12 @@
 .brd-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 12px; border: 1px solid var(--c-line); border-radius: 12px; background: var(--c-surface); }
 .brd-row .brd-main { flex: 1 1 200px; min-width: 0; }
 .brd-row .brd-link { margin-inline-start: auto; }
+
+/* ── Spec 038 — Finance Monthly Invoices board (additive, display-only; no computed total) ── */
+.finm-group + .finm-group { margin-top: 0; }
+.finm-rows { display: flex; flex-direction: column; gap: 6px; }
+.finm-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 8px 0; border-top: 1px solid var(--c-line); }
+.finm-row:first-child { border-top: 0; }
+.finm-row .finm-serial { flex: 0 0 auto; color: var(--c-ink-3); font-size: 12px; }
+.finm-row .finm-family { flex: 1 1 140px; font-size: 13px; }
+.finm-row .finm-amount { flex: 0 0 auto; font-size: 13px; color: var(--c-ink-2); }

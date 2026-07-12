@@ -503,3 +503,64 @@ The fourth Spec-033-roadmap follow-up: it closes the two remaining **Reports/Ana
 **Mechanism**: existing `tabs()` + `#view=` fold ONLY. The new tabs are **pure display boards** (no filterBar) to honor enhance.js's single global `[data-no-results]` contract without touching it (each page keeps its one existing filterBar in the Overview/Directory tab). New authored data in `fixtures/reports.js` (`MONTHLY_REPORTS`/`MONTHLY_SUMMARY`/`DATA_INSIGHTS`); `FAMILY_CATEGORIES` + per-student `results`/`evaluation` reused as-is; new keys in the existing mirrored `ar/en.rep.js` + `ar/en.fam.js`. **No `package.json`/dependency/backend/API/engine; `enhance.js` 0-diff; `build-html.mjs` 0-diff (no new page); `i18n.js` 0-diff (no new locale module).**
 
 **Verified**: build 115; smoke PASS (additive Reports/Analytics + correctives block — nav037 anchors + reports 0-planned + reports/families/students tab widgets + overview 7-card preserved + no computed/canvas/money in the new boards + per-student deep-links + the 5 `#view=` deep-links open on fresh load AR/EN; the nav035 route asserts updated to the refined routes — sanctioned amendment; protected role-law/finance/Spec-032 + 026–036 asserts BYTE-VERBATIM); a11y critical=0 serious=0 (+16 rows); 321 screenshots 0 console errors (+19 sp037 frames). Locale parity `rep` 251/251 · `fam` 393/393 (0 divergence). `student.html`/`family.html` + `result-summary`/`evaluation-rubric` byte-identical; only `reports`/`families`/`students` bodies (×2 lang) + the shared sidebar changed; all portal pages + index byte-identical; `package.json`/`enhance.js`/`build-html.mjs`/`i18n.js` 0-diff.
+
+## Spec 038 — Finance Nav Completion (Invoices / Payments / Monthly Invoices / Salaries / Staff Salaries / Class Salary Report / Banks)
+
+The fifth Spec-033-roadmap follow-up (on a **committed** baseline — HEAD `56bc418` bundled Specs 035/036/037). It completes the **Finance** sidebar by growing `finance.html` from **3 → 6 tabs** and unlocking six locked nav items — under the GLOBAL finance no-fake-money law. **Count held 115 → 115 (0 new pages; admin-menu 50).**
+
+- **invoices → `finance.html#view=invoices`** (count 0). The invoice tiles + filterBar + the single `#invoice-list` (9 authored rows, amount literals + status chips) are **MOVED** (not duplicated) from Overview into a focused Invoices tab. Create/Generate/PDF/Send/Mark-Paid = `backendRequired` gates; **no computed total**.
+- **payments → `finance.html#view=payments`** (count 0). The single 6-row `.fin-pay-row` list is MOVED into a Payments tab; serial links open the existing `inv-*` drawer; Record/Confirm/Refund/Export = gates; no settlement/gateway/mutation.
+- **monthlyInvoices → `finance.html#view=monthly-invoices`** (count 0). A NEW **derived** board grouping the existing 9 INVOICES by authored `monthKey` (4 month groups) using `.finm-*`/`#fin-monthly` (never `.fin-row`/`.report-card`), per-row amount literals + a per-month **count** label — **no computed monthly total**; Generate/Send/Export = gates; **`fixtures/finance.js` 0-diff**.
+- **salaries + staffSalaries → `finance.html#view=salaries`** (count 0). Both unlock to the existing **figure-free** teacher + staff status boards (name+status+period, **no pay amount**); Generate/Approve/Mark-paid/Export = gates.
+- **banks → `finance.html#view=banks`** (count 0). Existing name+status board (**no balance**); Add/Import/Reconcile = gates.
+- **classSalaryReport → honest lock kept** (`disabled` + `nav.reason.finance` + lock; no route). A real class-salary report implies computed per-class pay (forbidden) → owner = future backend billing/accounting spec.
+- **finance-analysis → deferred** (no nav item/route). analysis-expenses/analysis-invoices imply computed profit/loss/revenue/VAT → represented by the `accountingExpenses` planned card; owner = future backend spec.
+
+**Overview** keeps `financeActions()` (the first `.report-actions`, ≥4 gates) + the **9 figure-free planned cards** + the **9 baked `inv-*` drawers** (baked once, cloned from any tab). **Nav**: 6 unlocks `disabled → implemented`; classSalaryReport unchanged; no FUTURE_ROUTES edit; admin-menu 50.
+
+**No-fake-money**: authored per-row SAR literals only; `FINANCE_SUMMARY` row-count-only; **0 computed** total/outstanding/balance/net/profit/loss/revenue/VAT/tax/salary/payout; salaries/staff figure-free; banks no balance; every write gated; 0 payment gateway / `<canvas>` / `type=file` / `type=password` / `href="#"`. New copy = `fin.tab.{invoices,payments,monthlyInvoices}` + `fin.monthly.*` in the existing mirrored `ar/en.fin.js`; additive `.finm-*` CSS. **`fixtures/finance.js`/`package.json`/`build-html.mjs`/`enhance.js`/`i18n.js` 0-diff.**
+
+**Verified**: build 115; smoke PASS (finance 6-tab hub + the 6 `#view=` deep-links open on fresh load AR/EN + monthly board 9-invoices-across-4-months + salaries figure-free + banks no-balance + classSalaryReport locked; the ONE sanctioned amendment = nav010 `lockedFin`→`['classSalaryReport']` + `finLinks`→`['finance','invoices','monthlyInvoices','salaries','staffSalaries','payments','banks']` + the mechanical 3→6 finance-tab assert + interactive invoice checks moved to `#view=invoices`; every other protected finance assert — 9 invoices / 6 payments / 4 tiles / 9 planned / 9 drawers / first-`.report-actions` / forbidden / no-receipt / no-mutation — BYTE-VERBATIM); a11y critical=0 serious=0 (+finance invoices/payments/monthly-invoices × AR/EN light/dark + mobile-390 + invoice/bank drawer states); screenshots 0 console errors (+sp038 finance frames + classSalaryReport lock proof). Locale parity `fin` 158/158. Only `finance.html`/`.en` body + the shared sidebar changed (proven vs a captured baseline `#page-body` md5 snapshot — non-destructive, no stash); every other admin body + 16 portals + index + reports/families/students byte-identical.
+
+## Spec 039 — Admin Content & Certificates Explicit Pages (Materials / Certificate Requests)
+
+**115 → 115 (0 new pages; admin-menu 50).** Navigation-only unlock (Option B — deep-links to existing tabs). The
+two admin content «قريبًا» locks became real deep-links to surfaces that already existed (Spec 031):
+
+- **materials → `library.html#view=materials`** — the Materials subject-catalog tab (6 bilingual subjects; mat-add/
+  mat-edit drawers; delete-confirm; every write gated). No "Course" label regression.
+- **certificateRequests → `certificates.html#view=requests`** — the Requests queue tab (5 authored requests;
+  review drawer `cr-cr*`; create drawer `cert-create`; Approve/Reject/Generate/Preview/Download/Send = gates).
+- **books refined** `library.html` → **`library.html#view=books`** so the two library items open distinct tabs
+  (Materials vs Content Library). `FUTURE_ROUTES.materials` dropped.
+
+Admin category now **5 items / 0 «قريبًا»**; **settings** is the ONLY planned-bearing category (6 → Spec 040);
+`classSalaryReport` finance lock unchanged. The Materials/Books/Templates/Requests bodies + the static certificate
+designer preview (`role="img"`, no `<canvas>`/drag/upload/PDF) are **reused unchanged**.
+
+**No-fake / role-law**: every write stays a `backendRequired`/`data-disabled-reason` gate — no fake persistence/
+upload/delete/category-save/publish/download/approval/generation/issuance/WhatsApp-email; no view/download or
+request-status mutation; 0 `type=file`/`type=password`/`<canvas>`/`.pdf`/`window.open`/`href="#"`/raw key; static
+preview never called generated/saved/issued/delivered. Teacher/family library read-only; 16 portal bodies
+byte-identical; teacher pay-free / family zero-pay / student child-view / finance no-fake-money carried. Real
+persistence/upload/PDF-designer/generation/issuance/delivery stay future-backend.
+
+**The ONLY application-source edit = `src/js/nav.config.js`** (2 flips + books refinement + FUTURE_ROUTES trim);
+`pages/library.js`/`pages/certificates.js`/`fixtures/content-library.js`/`fixtures/certificates.js`/`ar,en.adm.js`/
+`enhance.js`/`components/tabs.js`/`components/sidebar.js`/`i18n.js`/`app.css`/`build-html.mjs`/`package.json` 0-diff.
+
+**Verified**: build 115; smoke PASS (114 loads; +Spec-039 block — materials/certificateRequests/books exact anchors
+AR/EN + library `#view=materials|books` / certificates `#view=requests` fresh-context deep-links open exactly one
+visible tabpanel (the target) with 0 external request + admin 0-planned + settings 6-planned + admin-menu 50 + a
+Node-side `nav.config` source audit (`FUTURE_ROUTES.materials` REMOVED, `certificateRequests` never added, the three
+exact routes, `classSalaryReport` still an honest routeless lock); the TWO sanctioned amendments = the dashboard
+planned-item probe repointed admin→settings + the admin `admItems` message corrected with an added `admPlanned===0`
+assert; every other protected assert — a31/g32 honesty, navCount 50, truth010.badPlanned, finance/families/teachers/
+reports, pay/child-view/no-fake — BYTE-VERBATIM); a11y **critical=0 serious=0** (+library/certificates deep-linked
+tabs × AR/EN light/dark + mobile-390 + mat-edit/lib-item/lib-cats/cr-cr1/cert-create drawers + the Materials
+delete-confirm + KEYBOARD tab switching (roving tabindex, ArrowRight/ArrowLeft)); screenshots **347 captured · 0
+console errors** (13 `sp039-*` frames incl. the admin sidebar rendering Materials + Certificate Requests as real
+links, and the honest Materials delete-confirm). Locale parity `adm` 403/403 (0 divergence; file 0-diff).
+Impact: **all 115 `#page-body` byte-identical** (proven against the COMMITTED HEAD `4cbcb31` read via `git show` —
+non-destructive: no stash/reset/checkout); the 64 admin pages differ only in the shared sidebar, and the 51
+non-admin pages (16 portals + index + portal internals) are byte-identical. No commit / no push.

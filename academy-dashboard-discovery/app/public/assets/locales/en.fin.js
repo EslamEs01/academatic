@@ -118,7 +118,20 @@ export default {
     },
 
     /* Spec 030 — finance hub tabs */
-    tab: { overview: 'Overview', salaries: 'Salaries', banks: 'Banks', aria: 'Finance sections' },
+    tab: { overview: 'Overview', invoices: 'Invoices', payments: 'Payments', monthlyInvoices: 'Monthly Invoices', salaries: 'Salaries', banks: 'Banks', aria: 'Finance sections' },
+    /* Spec 038 — Monthly Invoices display board (#view=monthly-invoices): the existing
+     * invoices grouped by month; per-row authored amount literals only, NO computed total. */
+    monthly: {
+      title: 'Monthly Invoices',
+      sub: 'Invoices grouped by month — authored per-invoice amounts, display-only, never aggregated or computed.',
+      count: '{n} invoices',
+      generate: 'Generate monthly batch',
+      generateReason: 'Generating monthly invoices needs the billing backend — nothing is created now.',
+      send: 'Send invoices',
+      sendReason: 'Sending invoices needs the billing backend — out of current scope.',
+      export: 'Export month',
+      exportReason: 'Exporting monthly invoices needs the backend module — out of current scope.',
+    },
 
     /* Spec 030 — salaries board (STATUS-FIRST, FIGURE-FREE — no pay amount) */
     sal: {

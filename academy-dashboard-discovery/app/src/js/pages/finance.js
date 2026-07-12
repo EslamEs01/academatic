@@ -270,26 +270,83 @@ function banksSection() {
     ${bankAddDrawer()}`;
 }
 
+/* ── Spec 038 — Monthly Invoices board (finance.html#view=monthly-invoices).
+ * A DERIVED display view: the existing 9 INVOICES rows grouped by their authored
+ * `monthKey` (4 month groups). Per-row authored amount literals + status chip + a
+ * COUNT-only per-month label — NO computed monthly total/subtotal/sum. New `.finm-*`
+ * classes + `#fin-monthly` id (never `.fin-row`/`#invoice-list`/`.fin-pay-row`/
+ * `.report-card`); no filterBar (the page owns one on the invoice list). Generate/
+ * Send/Export are backendRequired gates. Reuses the existing INVOICES fixture — 0 new data. ── */
+function monthlyInvoiceRow(inv) {
+  const fam = FAMILY_BY_ID[inv.familyId];
+  return `<div class="finm-row">
+    <span class="finm-serial tabular" dir="ltr">${esc(inv.serial)}</span>
+    <span class="finm-family min-w-0">${fam ? `<a href="${familyHref()}" class="link-more">${t(fam.guardian.nameKey)}</a>` : '—'}</span>
+    <span class="finm-amount tabular"><span dir="ltr">${num(inv.amount)}</span> ${t(inv.unitKey)}</span>
+    ${invoiceStatusChip(inv.statusId)}
+  </div>`;
+}
+function monthlyInvoicesSection() {
+  const order = [];
+  const byMonth = {};
+  for (const inv of INVOICES.rows) {
+    if (!byMonth[inv.monthKey]) { byMonth[inv.monthKey] = []; order.push(inv.monthKey); }
+    byMonth[inv.monthKey].push(inv);
+  }
+  const groups = order.map((mk) => `<div class="card p-4 finm-group">
+    <div class="flex items-center justify-between gap-2 mb-3">
+      <h3 class="section-title">${esc(t(mk))}</h3>
+      <span class="text-[12px] tabular" style="color:var(--c-ink-3)">${t('fin.monthly.count', { n: num(byMonth[mk].length) })}</span>
+    </div>
+    <div class="finm-rows">${byMonth[mk].map(monthlyInvoiceRow).join('')}</div>
+  </div>`).join('');
+  const actions = `<div class="report-actions flex items-center flex-wrap gap-2 mb-4" role="group" aria-label="${esc(t('fin.monthly.title'))}">
+    ${gate('fin.monthly.generate', 'settings', 'fin.monthly.generateReason')}
+    ${gate('fin.monthly.send', 'wallet', 'fin.monthly.sendReason')}
+    ${gate('fin.monthly.export', 'download', 'fin.monthly.exportReason')}
+  </div>`;
+  return `<section id="fin-monthly">
+    <div class="mb-3">
+      <h2 class="section-title">${esc(t('fin.monthly.title'))}</h2>
+      <p class="text-[12.5px] mt-0.5" style="color:var(--c-ink-3)">${esc(t('fin.monthly.sub'))}</p>
+    </div>
+    ${actions}
+    <div class="grid gap-4">${groups}</div>
+  </section>`;
+}
+
 export function renderFinance() {
-  // Overview tab — the existing Spec-009 finance content, behavior-identical (4 tiles + invoice
-  // list + payments + the 9 figure-free planned cards + baked invoice drawers).
+  // Spec 038 — six-tab finance hub. MOVE (do not duplicate): the invoice tiles + list and the
+  // payments list are RELOCATED into their focused tabs; Overview keeps financeActions() (the
+  // first .report-actions), the 9 figure-free planned cards, and the 9 baked invoice drawers
+  // (baked once here; cloned by data-drawer from the invoices/payments tabs). No new page.
   const overview = `
     ${financeActions()}
-    <div class="fin-tiles">${INVOICE_STATUS_ORDER.map(tile).join('')}</div>
-    ${invoiceSection()}
-    ${paymentsSection()}
     ${plannedSection()}
     ${INVOICES.rows.map(invoiceDrawer).join('')}
   `;
-  // Spec 030 — fold the finance sub-domains into a tabbed hub (no new page; nav 0-diff).
+  const invoices = `
+    <div class="fin-tiles">${INVOICE_STATUS_ORDER.map(tile).join('')}</div>
+    ${invoiceSection()}
+  `;
   const views = tabs({
     group: 'finance', ariaKey: 'fin.tab.aria',
     items: [
       { id: 'overview', labelKey: 'fin.tab.overview', icon: 'wallet' },
+      { id: 'invoices', labelKey: 'fin.tab.invoices', icon: 'file-text' },
+      { id: 'payments', labelKey: 'fin.tab.payments', icon: 'wallet' },
+      { id: 'monthly-invoices', labelKey: 'fin.tab.monthlyInvoices', icon: 'calendar' },
       { id: 'salaries', labelKey: 'fin.tab.salaries', icon: 'trainers' },
       { id: 'banks', labelKey: 'fin.tab.banks', icon: 'lock' },
     ],
-    panels: { overview, salaries: salariesSection(), banks: banksSection() },
+    panels: {
+      overview,
+      invoices,
+      payments: paymentsSection(),
+      'monthly-invoices': monthlyInvoicesSection(),
+      salaries: salariesSection(),
+      banks: banksSection(),
+    },
   });
   return `
     ${pageHeader({ titleKey: 'finPage.title', subKey: 'finPage.subtitle' })}
