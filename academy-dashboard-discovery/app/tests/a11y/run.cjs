@@ -207,12 +207,21 @@ const MATRIX = [
   { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations' },
   { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=security' },
   { page: 'settings', lang: 'en', theme: 'light', hash: '#view=users' },
+  { page: 'settings', lang: 'ar', theme: 'dark', hash: '#view=users' }, // Spec 041 (E-10): settingsUsers had only 1 row; the floor is >=2
   // ── Spec 032 — form-completion freeze rows (additive) ──
   // (a) OPEN-FORM interaction rows: axe scans the page WITH the form drawer open
   // (focus-trap / labelled controls / dialog semantics on the rebuilt FC surfaces)
   { page: 'staff', lang: 'ar', theme: 'light', open: '[data-drawer="staff-add"]' },
   { page: 'family', lang: 'ar', theme: 'light', open: '[data-drawer="fam-edit"]' },
-  { page: 'teachers', lang: 'ar', theme: 'light', open: '[data-drawer="trn-add"]' },
+  // Spec 041 — D-1 RELOCATION: the trn-add DRAWER no longer exists; the form is the #view=add TAB panel.
+  // Left as-is this row would have SILENTLY PASSED (the runner .catch()es a missing selector) while
+  // auditing the directory instead of the form.
+  { page: 'teachers', lang: 'ar', theme: 'light', hash: '#view=add' },
+  { page: 'teachers', lang: 'en', theme: 'light', hash: '#view=add' },
+  // The categories surface had ZERO a11y rows before 041 (only screenshots covered it) — a GAP, not a
+  // relocation. Two genuine rows are added to reach the >=2 floor.
+  { page: 'teachers', lang: 'ar', theme: 'light', hash: '#view=categories' },
+  { page: 'teachers', lang: 'en', theme: 'dark', hash: '#view=categories' },
   { page: 'courses', lang: 'ar', theme: 'light', open: '[data-drawer="crs-add"]' },
   { page: 'groups', lang: 'ar', theme: 'light', open: '[data-drawer="grp-add"]' },
   { page: 'certificates', lang: 'ar', theme: 'light', open: '[data-drawer="cert-tpl"]' },
@@ -290,7 +299,9 @@ const MATRIX = [
   { page: 'certificates', lang: 'ar', theme: 'light', viewport: 'mobile' },
   { page: 'settings', lang: 'ar', theme: 'light', viewport: 'mobile' },
   // mobile OPEN-FORM proofs (the .wiz-grid must reflow to one column, controls stay labelled)
-  { page: 'teachers', lang: 'ar', theme: 'light', viewport: 'mobile', open: '[data-drawer="trn-add"]' },
+  // Spec 041 — D-1 RELOCATION (mobile-390).
+  { page: 'teachers', lang: 'ar', theme: 'light', viewport: 'mobile', hash: '#view=add' },
+  { page: 'teachers', lang: 'ar', theme: 'light', viewport: 'mobile', hash: '#view=categories' },
   { page: 'students', lang: 'ar', theme: 'light', viewport: 'mobile', open: '[data-drawer="stu-add"]' },
   // (c) dark rows for the newer teacher-internal family members that had none
   { page: 'teacher-students', lang: 'ar', theme: 'dark' },
@@ -372,6 +383,16 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
 
   await browser.close();
   console.log(`\n[a11y] critical=${critical} serious=${serious}`);
-  if (critical > 0) { console.error('A11Y FAILED: critical violations present'); process.exit(1); }
+  /* Spec 041 — R-2 (a test-runner STRENGTHENING, not a protected-assert supersession).
+   * Until now this runner exited non-zero on `critical > 0` ONLY: `serious` was counted, printed and
+   * warned above — but never failed the suite. Every spec from 031 to 040 reported "critical=0
+   * serious=0" as a pass condition; the first half was enforced, the second half was an UNENFORCED
+   * CLAIM. A production freeze may not certify a result its own suite does not gate.
+   * The baseline was demonstrated at 0/0 BEFORE this gate was added, so it tightens an already-true
+   * invariant rather than hiding an existing failure. No threshold, no allowlist, no suppression. */
+  if (critical > 0 || serious > 0) {
+    console.error(`A11Y FAILED: ${critical} critical + ${serious} serious violation(s) — both are gated since Spec 041 (R-2)`);
+    process.exit(1);
+  }
   process.exit(0);
 })();

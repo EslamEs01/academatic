@@ -15,6 +15,10 @@ export default {
   dir: { preview: 'معاينة سريعة' },
 
   trn: {
+    /* Spec 041 — D-1: the teachers-page tablist. NOTE the namespace: trn.tab.* is teacher.html's
+     PROFILE tablist (and trn.tab.notes is also the notes FIELD label inside teacherFields()), and
+     trn.board.tab.* is teacher-performance. trn.list.* is this page's own, collision-free. */
+    list: { tab: { aria: 'أقسام صفحة المعلمين', directory: 'دليل المعلمين', add: 'إضافة معلّم', categories: 'فئات المعلمين' } },
     viewProfile: 'عرض الملف',
 
     /* NEW labeled maps — icon + label, never numeric/color-only */

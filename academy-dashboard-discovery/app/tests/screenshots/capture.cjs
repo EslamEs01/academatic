@@ -223,7 +223,7 @@ const MATRIX = [
   { page: 'teacher-library', lang: 'ar', theme: 'light', vp: 'desktop' },
   // Spec 028 — admin teacher deep management: kebab · edit modal · assign-teacher/course pickers · availability · category drawer · status confirm
   { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', teacherKebab: true, variant: 'sp028-kebab' },
-  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-categories', variant: 'sp028-categories' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'categories', variant: 'sp028-categories' }, // Spec 041 D-1: drawer → tab (historical name kept)
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', mgmtModal: 'trn.act.edit', variant: 'sp028-edit-modal' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-assign-course', variant: 'sp028-assign-course' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', view: 'timetable', openDrawer: 'trn-availability', variant: 'sp028-availability' },
@@ -287,11 +287,11 @@ const MATRIX = [
   { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-add', variant: 'sp032-create-group' },
   { page: 'groups', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-add', variant: 'sp032-grp-add' },
   { page: 'group', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'grp-edit', variant: 'sp032-grp-edit' },
-  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-add', variant: 'sp032-trn-add' },
-  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile', openDrawer: 'trn-add', variant: 'sp032-trn-add-mobile' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'add', variant: 'sp032-trn-add' }, // Spec 041 D-1: drawer → tab
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'mobile', view: 'add', variant: 'sp032-trn-add-mobile' }, // Spec 041 D-1: drawer → tab
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-edit', variant: 'sp032-trn-edit' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-note', variant: 'sp032-trn-note' },
-  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-categories', variant: 'sp032-trn-categories-form' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'categories', variant: 'sp032-trn-categories-form' }, // Spec 041 D-1: drawer → tab
   { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fb-create', variant: 'sp032-fb-create' },
   { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'form-create', variant: 'sp032-form-create-en' },
   { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'rep-fbcat', variant: 'sp032-fbcat-form' },
@@ -364,8 +364,8 @@ const MATRIX = [
   { page: 'student', lang: 'en', theme: 'light', vp: 'desktop', view: 'results', variant: 'sp035-student-results-en' },
   { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'evaluation', variant: 'sp035-student-evaluation' },
   // Spec 036 — Teachers nav completion: fold-anchor drawers (Add Teacher / Teacher Categories) + the two teacher-performance tabs
-  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-add', variant: 'sp036-add-teacher' },
-  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-categories', variant: 'sp036-teacher-categories' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'add', variant: 'sp036-add-teacher' }, // Spec 041 D-1: drawer → tab
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'categories', variant: 'sp036-teacher-categories' }, // Spec 041 D-1: drawer → tab
   { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'sessions-kpi', variant: 'sp036-sessions-kpi' },
   { page: 'teacher-performance', lang: 'en', theme: 'light', vp: 'desktop', view: 'sessions-kpi', variant: 'sp036-sessions-kpi-en' },
   { page: 'teacher-performance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'sessions-kpi', variant: 'sp036-sessions-kpi-dark' },
@@ -427,6 +427,11 @@ const MATRIX = [
   { page: 'settings', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'integrations', variant: 'sp040-integrations-dark' },
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'mobile',  view: 'integrations', variant: 'sp040-integrations-mobile' },
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'users', variant: 'sp040-users' },
+  { page: 'settings', lang: 'en', theme: 'light', vp: 'desktop', view: 'users', variant: 'sp041-users-en' }, // Spec 041 (E-10): settingsUsers had only 1 frame
+  { page: 'teachers', lang: 'en', theme: 'light', vp: 'desktop', view: 'add', variant: 'sp041-add-en' },
+  { page: 'teachers', lang: 'en', theme: 'light', vp: 'desktop', view: 'categories', variant: 'sp041-categories-en' },
+  { page: 'teachers', lang: 'ar', theme: 'dark',  vp: 'desktop', view: 'add', variant: 'sp041-add-dark' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'directory', variant: 'sp041-directory' },
   // the three provider drawers that carry the sensitive STRUCTURE-ONLY rows — the visual proof that
   // a credential is described, never rendered as an input.
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', openDrawer: 'integ-paymob', variant: 'sp040-drawer-paymob' },
@@ -542,5 +547,15 @@ const MATRIX = [
   await browser.close();
   const withErrors = results.filter((r) => r.errors.length).length;
   console.log(`\n[screenshots] ${results.length} captured · ${withErrors} with console errors`);
+  /* Spec 041 — R-3 (a test-runner STRENGTHENING, not a protected-assert supersession).
+   * This runner used to ALWAYS exit 0 — console errors were counted, printed, then ignored. "0 console
+   * errors" has been reported as a pass condition for many specs while being, mechanically, only a log
+   * line. The baseline was demonstrated at 0 BEFORE this gate was added. No filtering, no
+   * ignored-console allowlist. */
+  if (withErrors > 0) {
+    console.error('SCREENSHOTS FAILED: console error(s) captured — gated since Spec 041 (R-3)');
+    for (const r of results.filter((x) => x.errors.length)) console.error(`  ✗ ${r.name}: ${r.errors.slice(0, 2).join(' | ')}`);
+    process.exit(1);
+  }
   process.exit(0);
 })();
