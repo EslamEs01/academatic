@@ -234,10 +234,19 @@ document.addEventListener('keydown', (e) => {
   try { localStorage.setItem(CAT_KEY, target.getAttribute('data-nav-category')); } catch (err) { /* ignore */ }
 });
 
+/* Spec 041 — D-3 (declared wall supersession W-1: the ONE sanctioned edit to enhance.js).
+ * This helper used to build the mirrored URL from location.pathname ALONE, so a topbar language
+ * switch DESTROYED the fragment: finance.html#view=banks → finance.en.html, and the page silently
+ * reverted to its baked default tab. The sidebar was never affected (components/sidebar.js
+ * langRoute() has been hash-aware since Spec 035) — this was a topbar-only defect.
+ * Appending location.hash preserves EVERY fragment family the app uses: #view= (tabs), #step=
+ * (the add-family wizard) and #child= (family-child). location.search is deliberately NOT
+ * preserved: this helper has never carried it, the static app uses no query strings, and adding
+ * it would exceed the minimal fix. No new hook, storage key, dependency or hashchange listener. */
 function langUrl(lang) {
   const file = (location.pathname.split('/').pop() || 'dashboard.html');
   const base = file.replace('.en.html', '').replace('.html', '') || 'dashboard';
-  return lang === 'en' ? `${base}.en.html` : `${base}.html`;
+  return (lang === 'en' ? `${base}.en.html` : `${base}.html`) + location.hash;
 }
 
 /* ---- content tabs (List / Timetable) — toggles baked panels only ---- */

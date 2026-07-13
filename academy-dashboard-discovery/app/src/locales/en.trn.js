@@ -11,6 +11,8 @@ export default {
   dir: { preview: 'Quick preview' },
 
   trn: {
+    /* Spec 041 — D-1: the teachers-page tablist (see the AR note on the namespace choice). */
+    list: { tab: { aria: 'Teachers page sections', directory: 'Directory', add: 'Add teacher', categories: 'Categories' } },
     viewProfile: 'View profile',
 
     status: { active: 'Active', paused: 'Paused', inactive: 'Inactive' },

@@ -52,8 +52,11 @@ export const NAV_CATEGORIES = [
     id: 'teachers', labelKey: 'cat.teachers', icon: 'trainers',
     items: [
       item({ id: 'teachers', labelKey: 'nav.teachers', icon: 'trainers', route: 'teachers.html' }),
-      item({ id: 'addTeacher', labelKey: 'nav.addTeacher', icon: 'user-plus', route: 'teachers.html' }), // Spec 036 — fold-anchor to teachers.html (trn-add drawer)
-      item({ id: 'teacherCategories', labelKey: 'nav.teacherCategories', icon: 'filter', route: 'teachers.html' }), // Spec 036 — fold-anchor to teachers.html (trn-categories drawer)
+      // Spec 041 — D-1: these were Spec-036 "fold-anchors" pointing at the BARE teachers.html, identical to
+      // the `teachers` item above. Three nav items, one destination, no drawer opened on arrival: "Add Teacher"
+      // promised a form and delivered the directory. They are now real deep-links to real surfaces.
+      item({ id: 'addTeacher', labelKey: 'nav.addTeacher', icon: 'user-plus', route: 'teachers.html#view=add' }),
+      item({ id: 'teacherCategories', labelKey: 'nav.teacherCategories', icon: 'filter', route: 'teachers.html#view=categories' }),
     ],
     sections: [
       {

@@ -1,5 +1,60 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 040 — Settings Deep Links & Subpages Completion is IMPLEMENTED** (awaiting the watcher
+Active feature: **Spec 041 — Full Frontend Route & Sidebar Production Freeze is IMPLEMENTED** (awaiting the watcher
+commit; 34 artifacts + `plan.md` + `tasks.md` (142 tasks) + `implementation-status.md` at
+`academy-dashboard-discovery/specs/041-route-sidebar-production-freeze/`). Baseline HEAD `21502af` (Spec 040 · PR #13 ·
+merge `13d38af`). **An AUDIT + FREEZE spec that fixed THREE defects** — it is not a redesign.
+**D-1**: three sidebar items (`teachers`/`addTeacher`/`teacherCategories`) carried the IDENTICAL href
+`teachers.html` — "Add Teacher" promised a form and delivered the directory. Fixed by **the MOVE**: `teachers.html`
+gains a 3-tab hub (`directory`·`add`·`categories`) on the EXISTING `tabs()`/`#view=` engine; the `trn-add` +
+`trn-categories` FORMS moved into real tab panels and their drawers + both header triggers are GONE. The MOVE was
+**forced, not chosen**: a tab copy + a drawer copy collide on `f-trnAdd-*` ids the moment a `<template>` is cloned
+(**proven by mutation M-14: 13 duplicate ids**), a tab holding only an "open form" button is banned, and a header
+anchor cannot work (there is NO `hashchange` listener). `#view=add` renders **13 field() controls, 1 gated Save,
+0 drawer buttons, 0 file inputs**. `trn-edit` stays a drawer; `teacher.html` body byte-identical.
+**D-2**: the gallery orphan set is frozen at exactly `{gallery.html, gallery.en.html}` (0 source, 0 HTML change).
+**D-3**: `enhance.js langUrl()` built the mirrored URL from `location.pathname` ALONE, so a TOPBAR language switch
+DESTROYED the fragment (`finance.html#view=banks` → `finance.en.html`, silently reverting to the baked tab). Fixed by
+ONE expression (`+ location.hash`), preserving `#view=`/`#step=`/`#child=`; `location.search` deliberately not
+preserved; `sidebar.js` untouched (already hash-aware since Spec 035 — this was topbar-only). **D-3 changed ZERO HTML
+bytes** (`enhance.js` is a verbatim cpSync copy; there is no bundler and no `assets/app.js`).
+**Counts**: 115 · `PAGES` 57 · menu 50 · implemented 49 · planned 0 · disabled 1 · **route split 22/27/1 → 24/25/1**
+(=50) · `FUTURE_ROUTES` `{}` · one honest lock (`classSalaryReport`).
+**Budget**: **5 protected-test supersessions S1–S5** (`smoke:88`/`:111`/`:115`/`:747-752`/`:1494-1495` — each a
+**RELOCATION**: same 13 fields, same CV gate, same single backendRequired Save; only the HOST moved drawer→tab) +
+**2 wall supersessions** (W-1 `enhance.js` one expression · W-2 `teacher-actions.js` field-body extraction) +
+**2 runner STRENGTHENINGS** (not S6/S7) + **0 deleted assertions** — the four hand-written deep-link arrays
+(SP037/SP039/SP040/Spec-038 finance) are **RETAINED VERBATIM** (R-1); the derived matrix is strictly ADDITIVE.
+**THE HONEST FINDING**: two results the project has reported since Spec 031 were **never enforced** — `a11y/run.cjs`
+gated `critical` ONLY (`serious` was warned then ignored) and `capture.cjs` **always exited 0** (console errors were a
+log line). **R-2/R-3 make both machine gates** (proven by mutations M-15/M-16 → exit 1); the baseline was demonstrated
+at 0/0 and 0 errors BEFORE the gates were added.
+**Also fixed**: 8 test rows (`a11y:215`,`:293`; `capture:226,290,291,294,367,368`) opened the now-deleted drawers and,
+because both runners `.catch()` a missing selector, would have **silently passed while auditing the directory**. All
+relocated. `categories` had **ZERO** a11y rows (a GAP, not a relocation) → 2 added; settingsUsers +1 row +1 frame.
+**Additive freeze**: a group-aware derived matrix over all 49 routes · the repeated-destination census (exactly ONE
+sanctioned repeat: salaries+staffSalaries → `finance.html#view=salaries`) · **all 24 deep-links SEEDED** (48
+executions; before 041 only **9 of 22** were — a regression to `stored || hash` precedence would have passed the other
+13) · orphan-set guard · direct-surface proof · the PAY28 hidden-panel closure (the moved forms sit in `[hidden]`
+panels, invisible to the protected `innerText` grep; PAY28 stays byte-verbatim and an additive panel-scoped
+`textContent` grep closes the hole → teacher pay-free coverage is strictly LARGER than before).
+**THE SECOND HONEST FINDING (completion pass)**: the first implementation pass ran only **6 of 16 mutations** (a batch
+script timed out) yet reported "142/142". **Invalid.** The other 10 were executed one-per-**fresh isolated copy** of a
+proven-green tree — and **M-2 (`staff` → `library.html`, a REAL but WRONG page) passed the ENTIRE suite: exit 0, ZERO
+failures.** The derived matrix only proved a destination **EXISTS**; the **25 plain routes were pinned NOWHERE** — gap
+**G-1**, named in `plan.md` §9. **Task T061, whose sole job was to close it, was marked `[X]` with the claim "Done:
+50/50 match" — the block had NEVER been written.** Closed here by **T-03**: the additive **`ROUTES_50` register** in
+`smoke` pins every nav id to its exact route string (and fails on an unregistered/missing item), cross-checked **50/50**
+against the checked-in `route-inventory-contract.md` so the test cannot redefine its own expectation. **M-2 re-run ⇒ RED**
+(1 assertion). **Mutations now 16/16 RED**, residue **0**, primary tree never touched.
+**Carry-forward (PRE-EXISTING, not introduced)**: **30 duplicate ids** (`f-fbAdd-*` ×3 on 10 pages) exist at baseline
+`21502af` from the Spec-032 nested `fb-add` drawer. `teachers.html`/`.en` have **0**. The honest claim is "0 introduced,
+0 on the D-1 surface" — **not** "0 sitewide". No gate catches it; owner = the `fb-add` lineage.
+**Verified**: build 115 · smoke **PASS** · a11y **critical=0 serious=0 (now gated)** · screenshots **375, 0 console
+errors (now gated)** · 0-diff wall 12/12 · **impact: 2 bodies (`teachers.html`/`.en`) · 62 sidebar-only · 51
+byte-identical = 115** · route split **24/25/1** · menu 50 · planned 0 · lock 1 · **142/142 tasks · `[P]` 25**.
+**Tracked diff = 82 files** (6 source + 3 tests + 3 docs/config + 64 public HTML + 6 public/assets JS); the
+oft-quoted "9 files" is only the `-- src tests` SCOPE. **No commit / no push** — watcher commits.
+**History: Spec 040 — Settings Deep Links & Subpages Completion is IMPLEMENTED and COMMITTED** (HEAD `21502af`;
 commit; artifacts + `plan.md` + `research.md` + `data-model.md` + `quickstart.md` + `tasks.md` (115 tasks) +
 25 contracts + `implementation-status.md` at
 `academy-dashboard-discovery/specs/040-settings-deep-links-subpages/`). **THE ZERO-PLANNED MILESTONE: sitewide

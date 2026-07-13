@@ -24,10 +24,14 @@ const link = (labelKey, ic, href) => button({ labelKey, variant: 'secondary', si
 /* status-lifecycle confirm helper — keyBase → keyBaseTitle/Msg/Cta/Toast (Spec 028) */
 const confirmLife = (labelKey, ic, keyBase, danger = false) => confirmAction({ labelKey, icon: ic, size: 'sm', variant: danger ? 'danger' : 'secondary', danger, titleKey: `${keyBase}Title`, msgKey: `${keyBase}Msg`, confirmKey: `${keyBase}Cta`, toastKey: `${keyBase}Toast` });
 
-/** the teachers-page header primary action — opens the trn-add form drawer (Spec 032) */
-export function addTeacherAction() {
-  return drawerBtn('trn.act.add', 'user-plus', 'trn-add');
-}
+/* Spec 041 — D-1 (declared wall supersession W-2).
+ * `addTeacherAction()` is REMOVED. It rendered the teachers-page header primary that opened the
+ * `trn-add` drawer. Under the MOVE architecture the Add-Teacher form is a real TAB PANEL reached
+ * directly from the sidebar (`teachers.html#view=add`) and from the tablist, so a header button that
+ * opens a drawer is both redundant and dishonest. It could not be converted: `selectTab()` requires
+ * the control to sit INSIDE the `[data-tabs]` wrap, and a same-page `href="#view=add"` anchor would
+ * not switch the tab because there is NO hashchange listener. The CAPABILITY is not deleted — it
+ * moved (zero-deletion protects capabilities, not symbols). */
 
 /* ---- Spec 032 (Option B) — form-bearing teacher drawers ----
  * Baked <template data-preview> forms of INERT field() controls; the single
@@ -42,7 +46,12 @@ const courseOpts = () => COURSES.rows
 const cvGate = () => `<div class="field field-full"><span class="field-label">${t('trn.form.cv')}</span>
     <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="trn.form.cvReason" title="${esc(t('trn.form.cvReason'))}">${icon('file-text', 'ico ico-sm')}<span>${t('trn.form.cvGate')}</span></button></div>`;
 
-function teacherFields(p, withGeo = false) {
+/* Spec 041 — D-1: EXPORTED so the `#view=add` tab panel and the `trn-edit` drawer share ONE
+ * definition of the field body. Output and signature are unchanged: 13 field() controls when
+ * withGeo=true (firstName · lastName · firstNameAr · lastNameAr · email · phone · status · subjects
+ * · level · courses · city · country · notes) plus the CV upload GATE, which is emitted INSIDE this
+ * function. There is exactly one definition — never a tab copy and a drawer copy. */
+export function teacherFields(p, withGeo = false) {
   const geo = withGeo
     ? field({ labelKey: 'trn.form.city', name: `${p}-city` })
       + field({ labelKey: 'trn.form.country', name: `${p}-country` })
@@ -67,9 +76,21 @@ export function teacherEditDrawer() {
   return formDrawer('trn-edit', { titleKey: 'trn.form.editTitle', headIcon: 'edit', fields: teacherFields('trnEdit') });
 }
 
-/** trn-add — Add teacher form drawer (+ grounded geo create fields; baked on teachers.html) */
-export function teacherAddDrawer() {
-  return formDrawer('trn-add', { titleKey: 'trn.form.addTitle', headIcon: 'user-plus', ctaKey: 'common.add', fields: teacherFields('trnAdd', true) });
+/* Spec 041 — D-1: `teacherAddDrawer()` became `teacherAddPanel()`.
+ * The Add-Teacher form is no longer a `trn-add` <template data-preview> drawer: it is the BODY of the
+ * `#view=add` tab panel, rendered directly on a fresh load — no drawer, no second click.
+ * The drawer form could NOT be kept alongside the tab: `field()` emits id="f-<name>", and a
+ * <template> becomes live DOM the moment enhance.js clones it into the sheet, so a tab copy + a
+ * drawer copy would collide on `f-trnAdd-*`. Hence MOVE, never duplicate — and hence the old symbol
+ * is repurposed rather than left callable: a dead-but-callable formDrawer('trn-add', …) would
+ * re-arm exactly the duplicate-id collision the MOVE exists to prevent.
+ * The guarantee is unchanged: the same 13 field() controls, the same CV upload GATE, and EXACTLY ONE
+ * primary backendRequired Save. Nothing persists, nothing mutates. */
+export function teacherAddPanel() {
+  return `<div class="wiz-grid">${teacherFields('trnAdd', true)}</div>
+    <div class="flex items-center justify-end gap-2.5 mt-4">
+      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="${esc(t('common.backendRequiredNote'))}">${icon('check', 'ico')}<span>${t('common.add')}</span></button>
+    </div>`;
 }
 
 /** trn-note — Add follow-up note form drawer (baked on teacher.html) */

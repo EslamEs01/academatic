@@ -321,9 +321,9 @@
     <nav class="panel-nav" aria-label="Teachers">
       <div class="space-y-1"><a href="teachers.en.html" class="nav-item is-active" data-nav="teachers" data-nav-status="implemented" aria-current="page">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg><span class="label">Teachers</span>
-  </a><a href="teachers.en.html" class="nav-item" data-nav="addTeacher" data-nav-status="implemented">
+  </a><a href="teachers.en.html#view=add" class="nav-item" data-nav="addTeacher" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span class="label">Add teacher</span>
-  </a><a href="teachers.en.html" class="nav-item" data-nav="teacherCategories" data-nav-status="implemented">
+  </a><a href="teachers.en.html#view=categories" class="nav-item" data-nav="teacherCategories" data-nav-status="implemented">
     <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span class="label">Teacher categories</span>
   </a></div>
       
@@ -462,7 +462,7 @@
         <h1 class="page-title">Teachers</h1>
         <p class="page-sub">Teacher directory — availability, status, and a performance glance.</p>
       </div>
-      <div class="flex items-center gap-2.5 shrink-0"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="trn-categories"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>Manage categories</span></button><button type="button" class="btn btn-secondary btn-sm"   data-drawer="trn-add"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>Add teacher</span></button></div>
+      
     </div>
     <div class="mb-6"><div class="grid gap-4 grid-cols-1 sm:grid-cols-3">
     <div class="card p-4 flex items-center gap-3">
@@ -480,7 +480,13 @@
       <div><div class="text-[22px] font-bold tabular text-ink" style="line-height:1">63%</div>
         <div class="text-[12px] mt-1" style="color:var(--c-ink-3)">Avg utilization</div></div>
     </div></div></div>
-    <form class="filterbar" data-filter-form data-target="#teachers-grid">
+    <div class="tabs-wrap" data-tabs="teachers">
+    <div class="tabs" role="tablist" aria-label="Teachers page sections">
+      <button class="tab is-active" role="tab" id="tab-teachers-directory" data-tab="directory" aria-controls="tabpanel-teachers-directory" aria-selected="true" tabindex="0"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg><span>Directory</span></button>
+      <button class="tab" role="tab" id="tab-teachers-add" data-tab="add" aria-controls="tabpanel-teachers-add" aria-selected="false" tabindex="-1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg><span>Add teacher</span></button>
+      <button class="tab" role="tab" id="tab-teachers-categories" data-tab="categories" aria-controls="tabpanel-teachers-categories" aria-selected="false" tabindex="-1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>Categories</span></button>
+    </div>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-teachers-directory" data-tabpanel="directory" aria-labelledby="tab-teachers-directory"><form class="filterbar" data-filter-form data-target="#teachers-grid">
     <div class="input-wrap" style="flex:1 1 220px;min-width:180px">
       <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
       <input class="input" type="search" data-filter="search" placeholder="Search teachers…" aria-label="Search teachers…" />
@@ -802,27 +808,6 @@
     <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">6</span></span></div></div>
     </div>
   </template>
-    <template data-preview="trn-categories">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher categories</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">Current categories — creating and assigning happen once the server is connected.</p>
-    <div class="sheet-row"><span class="k">Senior teachers</span><span class="v">3 teachers</span></div><div class="sheet-row"><span class="k">Associate teachers</span><span class="v">3 teachers</span></div><div class="sheet-row"><span class="k">Trial period</span><span class="v">2 teachers</span></div>
-    <div class="ic-title mt-4 mb-2"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add teacher category</span></div>
-    <div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-trnCategories-catName">Category name</label><input id="f-trnCategories-catName" name="trnCategories-catName" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-trnCategories-catStatus">Status</label><span class="select-wrap"><select id="f-trnCategories-catStatus" name="trnCategories-catStatus" class="select-input">
-      <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
-    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-trnCategories-catDesc">Category description</label><textarea id="f-trnCategories-catDesc" name="trnCategories-catDesc" class="input" rows="3" placeholder="Write a short note…"></textarea></div></div>
-    <div class="flex flex-wrap items-center justify-end gap-2 mt-4">
-      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="trn.cat.assignReason" aria-disabled="true" title="Assigning teachers to a category requires the backend (out of current scope)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>Assign teachers to category</span></button>
-      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="common.backendRequiredNote" aria-disabled="true" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
-    </div></div>
-    </div>
-  </template>
     <template data-preview="trn-edit">
     <div class="sheet-card">
       <div class="sheet-head">
@@ -846,17 +831,8 @@
       <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
     </div></div>
     </div>
-  </template>
-    <template data-preview="trn-add">
-    <div class="sheet-card">
-      <div class="sheet-head">
-        <div class="flex items-center gap-2.5">
-          <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-plus"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Add a new teacher</h2>
-        </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-trnAdd-firstName">First name (English)</label><input id="f-trnAdd-firstName" name="trnAdd-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastName">Last name (English)</label><input id="f-trnAdd-lastName" name="trnAdd-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-firstNameAr">First name (Arabic)</label><input id="f-trnAdd-firstNameAr" name="trnAdd-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastNameAr">Last name (Arabic)</label><input id="f-trnAdd-lastNameAr" name="trnAdd-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-email">Email</label><input id="f-trnAdd-email" name="trnAdd-email" type="text" class="input" placeholder="name@example.com" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-phone">Mobile number</label><input id="f-trnAdd-phone" name="trnAdd-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-status">Status</label><span class="select-wrap"><select id="f-trnAdd-status" name="trnAdd-status" class="select-input">
+  </template></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-teachers-add" data-tabpanel="add" aria-labelledby="tab-teachers-add" hidden><div class="wiz-grid"><div class="field"><label class="field-label" for="f-trnAdd-firstName">First name (English)</label><input id="f-trnAdd-firstName" name="trnAdd-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastName">Last name (English)</label><input id="f-trnAdd-lastName" name="trnAdd-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-firstNameAr">First name (Arabic)</label><input id="f-trnAdd-firstNameAr" name="trnAdd-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastNameAr">Last name (Arabic)</label><input id="f-trnAdd-lastNameAr" name="trnAdd-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-email">Email</label><input id="f-trnAdd-email" name="trnAdd-email" type="text" class="input" placeholder="name@example.com" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-phone">Mobile number</label><input id="f-trnAdd-phone" name="trnAdd-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-status">Status</label><span class="select-wrap"><select id="f-trnAdd-status" name="trnAdd-status" class="select-input">
       <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnAdd-subjects">Subjects</label><span class="select-wrap"><select id="f-trnAdd-subjects" name="trnAdd-subjects" class="select-input">
       <option value="math" selected>Mathematics</option><option value="arabic">Arabic</option><option value="programming">Programming</option><option value="physics">Physics</option><option value="english">English</option><option value="science">Science</option>
@@ -868,9 +844,18 @@
     <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="trn.form.cvReason" title="Uploading files requires the backend (out of current scope)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Upload files</span></button></div></div>
     <div class="flex items-center justify-end gap-2.5 mt-4">
       <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
-    </div></div>
-    </div>
-  </template>
+    </div></section>
+    <section class="tabpanel" role="tabpanel" id="tabpanel-teachers-categories" data-tabpanel="categories" aria-labelledby="tab-teachers-categories" hidden><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">Current categories — creating and assigning happen once the server is connected.</p>
+    <div class="card p-4 mb-3"><div class="sheet-row"><span class="k">Senior teachers</span><span class="v">3 teachers</span></div><div class="sheet-row"><span class="k">Associate teachers</span><span class="v">3 teachers</span></div><div class="sheet-row"><span class="k">Trial period</span><span class="v">2 teachers</span></div></div>
+    <div class="ic-title mt-4 mb-2"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add teacher category</span></div>
+    <div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-trnCategories-catName">Category name</label><input id="f-trnCategories-catName" name="trnCategories-catName" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-trnCategories-catStatus">Status</label><span class="select-wrap"><select id="f-trnCategories-catStatus" name="trnCategories-catStatus" class="select-input">
+      <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
+    </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-trnCategories-catDesc">Category description</label><textarea id="f-trnCategories-catDesc" name="trnCategories-catDesc" class="input" rows="3" placeholder="Write a short note…"></textarea></div></div>
+    <div class="flex flex-wrap items-center justify-end gap-2 mt-4">
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="trn.cat.assignReason" aria-disabled="true" title="Assigning teachers to a category requires the backend (out of current scope)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>Assign teachers to category</span></button>
+      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="common.backendRequiredNote" aria-disabled="true" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
+    </div></section>
+  </div>
   </div>
       </main>
     </div>

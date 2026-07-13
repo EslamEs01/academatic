@@ -1004,3 +1004,23 @@ zero-deletion law — the product has **zero** planned nav items left after Spec
 `components/portal-shell.js:30`'s `is-planned` branch, which has had zero instances since Spec 025. Admin-menu
 still 50 items; the only remaining honest lock sitewide is `classSalaryReport` (finance, routeless). a11y
 critical=0 serious=0.
+
+## Spec 041 — Route & Sidebar Production Freeze
+
+**Frames**: 375 captured · **0 console errors** — and, for the first time, **that result is machine-gated**
+(`capture.cjs` used to `process.exit(0)` unconditionally; R-3 now fails the run on any captured console error).
+
+**Relocated (D-1)** — the `trn-add` / `trn-categories` **drawers no longer exist**; their forms moved into real tab
+panels. Six frames were repointed, keeping their historical names so the review history stays traceable:
+`sp032-trn-add`, `sp032-trn-add-mobile`, `sp036-add-teacher` → `view: 'add'`;
+`sp028-categories`, `sp032-trn-categories-form`, `sp036-teacher-categories` → `view: 'categories'`.
+
+⚠ **Why this mattered**: left as `openDrawer:` rows they would have **silently passed** — the runner `.catch()`es a
+missing selector, so they would have captured the teachers **directory** while claiming to capture the add form.
+
+**New**: `sp041-add-en`, `sp041-categories-en`, `sp041-add-dark`, `sp041-directory`, `sp041-users-en`
+(settingsUsers had only 1 frame; the floor is ≥2).
+
+**What the teacher frames prove**: `#view=add` renders the **real 13-control form directly** on a fresh load — no
+drawer, no "open form" button, no second click — ending at exactly one backendRequired Save, with the CV upload
+still an honest gate (0 `type=file`).

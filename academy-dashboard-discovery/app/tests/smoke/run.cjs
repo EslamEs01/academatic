@@ -85,7 +85,12 @@ const FORM_DRAWERS_032 = {
   students: ['stu-edit', 'stu-add'], student: ['stu-edit', 'stu-note'],
   courses: ['crs-add'], course: ['crs-edit', 'grp-add'],
   groups: ['grp-add'], group: ['grp-edit'],
-  teachers: ['trn-edit', 'trn-add', 'trn-categories'], teacher: ['trn-edit', 'trn-note'],
+  // Spec 041 — S1 (RELOCATION, not a weakening): `trn-add` and `trn-categories` are no longer DRAWERS on
+  // teachers.html. Under D-1 their forms MOVED into real tab panels (#view=add / #view=categories), reached
+  // directly from the sidebar with no second click. The guarantee is unchanged — same 13 fields, same CV gate,
+  // exactly one backendRequired Save — only the HOST moved. The compensating assertions live in the sp041
+  // direct-surface block. `teacher` (teacher.html) is UNTOUCHED.
+  teachers: ['trn-edit'], teacher: ['trn-edit', 'trn-note'],
   reports: ['fb-create', 'form-create', 'rep-fbcat'],
   finance: ['bank-add'], staff: ['staff-add', 'staff-edit', 'staff-dup'],
   certificates: ['cert-tpl', 'cert-create'], library: ['mat-add', 'mat-edit', 'lib-item', 'lib-cats'],
@@ -108,11 +113,16 @@ const PICKERS_032 = {
   course: ['crs-enroll', 'crs-assign-teacher'],
   group: ['grp-assign', 'grp-assign-teacher'],
   teacher: ['trn-assign-course', 'trn-assign-group', 'trn-availability'],
-  teachers: ['trn-categories'], family: ['fam-cat'],
+  // Spec 041 — S2 (RELOCATION): the teachers entry is removed — the category surface is a TAB panel now,
+  // not a picker drawer. family/reports/library/staff are byte-verbatim.
+  family: ['fam-cat'],
   reports: ['rep-fbcat'], library: ['lib-cats'], staff: ['st-perm'],
 };
 // the 3 hybrid category drawers whose embedded Create is now a REAL form (FC-24/26/38)
-const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], library: ['lib-cats'] };
+// Spec 041 — S3 (RELOCATION): the teachers entry is removed. The "category list + a REAL embedded create
+// form" guarantee did not disappear — it moved to the #view=categories tab panel and is asserted there.
+// reports/library are byte-verbatim.
+const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
 
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
@@ -744,11 +754,26 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
           const kebabs = [...document.querySelectorAll('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]')];
           const body = document.getElementById('page-body');
           return { cards: cards.length, kebabs: kebabs.length, pay: PAY.test(body.innerText),
-            cat: !!document.querySelector('[data-drawer="trn-categories"]'), catTpl: !!document.querySelector('template[data-preview="trn-categories"]') };
+            // Spec 041 — S4 (RELOCATION): the category surface is no longer a drawer + template. It is the
+            // #view=categories TAB PANEL, rendered directly on a fresh load. We assert the SAME guarantee at
+            // its new host: the list + the REAL inline create form + the assign gate + exactly ONE primary Save.
+            catPanel: (() => {
+              const el = document.querySelector('[data-tabs="teachers"] [data-tabpanel="categories"]');
+              if (!el) return null;
+              return {
+                fields: el.querySelectorAll('input,select,textarea').length,
+                gates: el.querySelectorAll('[data-disabled-reason]').length,
+                primary: el.querySelectorAll('.btn-primary[data-disabled-reason]').length,
+                rows: el.querySelectorAll('.sheet-row').length,
+              };
+            })(),
+            noCatDrawer: document.querySelectorAll('[data-drawer="trn-categories"],template[data-preview="trn-categories"]').length };
         }, PAY28.source);
         ok(kb.kebabs > 0 && kb.kebabs === kb.cards, `${page}/${lang}: teacher cards missing the row kebab (${kb.kebabs}/${kb.cards})`);
         ok(!kb.pay, `${page}/${lang}: admin teachers page body shows a pay/salary figure — forbidden`);
-        ok(kb.cat && kb.catTpl, `${page}/${lang}: teacher-categories manage drawer/template missing`);
+        ok(kb.catPanel && kb.catPanel.fields >= 3 && kb.catPanel.primary === 1 && kb.catPanel.gates >= 2 && kb.catPanel.rows > 0,
+          `${page}/${lang}: the #view=categories TAB PANEL must carry the category list + the real create form + the assign gate + exactly ONE primary Save (Spec 041 S4), got ${JSON.stringify(kb.catPanel)}`);
+        ok(kb.noCatDrawer === 0, `${page}/${lang}: the trn-categories DRAWER/template must be gone — its form moved into the categories tab (Spec 041 S4)`);
         const kebab = await p.$('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]');
         if (kebab) { await kebab.scrollIntoViewIfNeeded(); await kebab.click(); await p.waitForTimeout(150); }
         const menu = await p.evaluate(() => {
@@ -1491,8 +1516,11 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
           };
         });
         const anchorOk036 = (o, re) => !!o && o.a && !o.soon && re.test(o.href);
-        ok(anchorOk036(nav036.at, /(^|\/)teachers\.(en\.)?html$/), `${page}/${lang}: addTeacher must be a real anchor → teachers.html, got ${JSON.stringify(nav036.at)}`);
-        ok(anchorOk036(nav036.tc, /(^|\/)teachers\.(en\.)?html$/), `${page}/${lang}: teacherCategories must be a real anchor → teachers.html, got ${JSON.stringify(nav036.tc)}`);
+        // Spec 041 — S5 (RELOCATION): these were Spec-036 "fold-anchors" to the BARE teachers.html — the same
+        // href as the `teachers` item, so three nav items shared one destination and "Add Teacher" delivered
+        // the directory. They are now real deep-links to the real surfaces.
+        ok(anchorOk036(nav036.at, /(^|\/)teachers\.(en\.)?html#view=add$/), `${page}/${lang}: addTeacher must be a real deep-link → teachers.html#view=add, got ${JSON.stringify(nav036.at)}`);
+        ok(anchorOk036(nav036.tc, /(^|\/)teachers\.(en\.)?html#view=categories$/), `${page}/${lang}: teacherCategories must be a real deep-link → teachers.html#view=categories, got ${JSON.stringify(nav036.tc)}`);
         ok(anchorOk036(nav036.sk, /(^|\/)teacher-performance\.(en\.)?html#view=sessions-kpi$/), `${page}/${lang}: sessionsKpi must be a real deep-link → teacher-performance.html#view=sessions-kpi, got ${JSON.stringify(nav036.sk)}`);
         ok(anchorOk036(nav036.mp, /(^|\/)teacher-performance\.(en\.)?html#view=monthly$/), `${page}/${lang}: monthlyPerf must be a real deep-link → teacher-performance.html#view=monthly, got ${JSON.stringify(nav036.mp)}`);
         ok(nav036.teachersPlanned === 0, `${page}/${lang}: teachers category still has ${nav036.teachersPlanned} planned «قريبًا» item(s) after Spec 036`);
@@ -2504,6 +2532,289 @@ const HYBRID_032 = { teachers: ['trn-categories'], reports: ['rep-fbcat'], libra
     // Spec 040 — SUPERSESSION S1 (second site).
     ok(nav.settingsPlanned === 0, `content/${lang}: settings must have 0 planned items after Spec 040, got ${nav.settingsPlanned}`);
     ok(nav.adminMenu === 50, `content/${lang}: admin menu must stay 50 classified nav items, got ${nav.adminMenu}`);
+    await ctx.close();
+  }
+
+  // ===== Spec 041 — the ROUTE FREEZE: a DERIVED, group-aware matrix over NAV_CATEGORIES =====
+  // STRICTLY ADDITIVE (R-1): SP037_DEEPLINKS / SP039_DEEPLINKS / SP040_VIEWS / the Spec-038 finance
+  // block are all RETAINED VERBATIM above — they remain the domain-specific regression coverage.
+  // This block is the generic FREEZE layer: it derives every route from the nav source, so a new or
+  // edited nav item cannot escape the audit by not being hand-listed.
+  {
+    const navSrc = await import('../../src/js/nav.config.js');
+    const all = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]);
+    const impl = all.filter((i) => i.status === 'implemented');
+    ok(impl.length === 49, `route-matrix: 49 implemented routes expected, got ${impl.length}`);
+
+    // The tab-group id is NOT derivable from the route string (teacher-performance → group "perf").
+    // The map is asserted COMPLETE: every deep-link file has an entry, and there are no orphan entries.
+    const GROUPS = {
+      'families.html': 'families', 'students.html': 'students', 'teacher-performance.html': 'perf',
+      'reports.html': 'reports', 'finance.html': 'finance', 'library.html': 'library',
+      'certificates.html': 'certificates', 'settings.html': 'settings', 'teachers.html': 'teachers',
+    };
+    const deep = impl.filter((i) => i.route.includes('#view='));
+    const plain = impl.filter((i) => !i.route.includes('#'));
+    ok(deep.length === 24, `route-matrix: 24 deep-links expected after Spec 041 D-1, got ${deep.length}`);
+    ok(plain.length === 25, `route-matrix: 25 plain routes expected after Spec 041 D-1, got ${plain.length}`);
+    const lock = all.filter((i) => i.status === 'disabled');
+    ok(lock.length === 1 && lock[0].id === 'classSalaryReport' && !lock[0].route,
+      `route-matrix: exactly ONE route-less honest lock (classSalaryReport), got ${JSON.stringify(lock.map((l) => l.id))}`);
+    ok(deep.length + plain.length + lock.length === 50, 'route-matrix: 24 + 25 + 1 must equal the 50-item menu');
+
+    const files = new Set(fs.readdirSync(require('path').join(__dirname, '../../public')).filter((f) => f.endsWith('.html')));
+    const usedGroups = new Set();
+    for (const it of impl) {
+      const [file, frag] = it.route.split('#');
+      // (a) the destination file must EXIST — in both languages
+      ok(files.has(file), `route-matrix: ${it.id} → ${file} does not exist`);
+      ok(files.has(file.replace('.html', '.en.html')), `route-matrix: ${it.id} → the EN twin of ${file} does not exist`);
+      if (!frag) continue;
+      const view = frag.replace('view=', '');
+      const group = GROUPS[file];
+      ok(!!group, `route-matrix: ${it.id} → ${file} has no tab-group entry in the GROUPS map (the map must be complete)`);
+      usedGroups.add(file);
+      // (b) the fragment must resolve to a REAL [data-tab] AND a REAL [data-tabpanel] in the OWNING group
+      for (const L of ['', '.en']) {
+        const html = fs.readFileSync(require('path').join(__dirname, '../../public', file.replace('.html', `${L}.html`)), 'utf8');
+        ok(html.includes(`data-tab="${view}"`), `route-matrix: ${it.id} → ${file}${L} has no [data-tab="${view}"]`);
+        ok(html.includes(`data-tabpanel="${view}"`), `route-matrix: ${it.id} → ${file}${L} has no [data-tabpanel="${view}"]`);
+      }
+    }
+    for (const f of Object.keys(GROUPS)) ok(usedGroups.has(f), `route-matrix: GROUPS has an ORPHAN entry '${f}' that no deep-link uses`);
+
+    // (c) repeated-destination census — exactly ONE sanctioned repeat is tolerated, and it is named.
+    const byDest = {};
+    for (const it of impl) (byDest[it.route] = byDest[it.route] || []).push(it.id);
+    const repeats = Object.entries(byDest).filter(([, ids]) => ids.length > 1);
+    ok(repeats.length === 1, `route-matrix: exactly ONE sanctioned repeated destination is allowed, got ${JSON.stringify(repeats)}`);
+    ok(repeats[0][0] === 'finance.html#view=salaries' && repeats[0][1].sort().join(',') === 'salaries,staffSalaries',
+      `route-matrix: the ONLY sanctioned repeat is S-1 (salaries + staffSalaries → finance.html#view=salaries), got ${JSON.stringify(repeats[0])}`);
+    // after D-1 the teachers TRIPLE must no longer be a repeat
+    ok(byDest['teachers.html'].length === 1 && byDest['teachers.html'][0] === 'teachers',
+      `route-matrix: D-1 — teachers.html must now be reached by exactly ONE nav item, got ${JSON.stringify(byDest['teachers.html'])}`);
+  }
+
+  // ===== Spec 041 — T-03: the EXACT 50-ROUTE REGISTER (closes gap G-1) =====
+  // The derived matrix above proves each destination EXISTS; it does NOT prove it is the RIGHT one.
+  // Mutation M-2 (repoint a plain route at a real-but-wrong page: staff → library.html) passed the
+  // ENTIRE suite with 0 failures — the 25 plain routes were pinned NOWHERE. That is gap G-1, named in
+  // the Spec-041 plan (§9, T-03) and empirically confirmed before this block was written.
+  // This register pins every one of the 50 nav ids to its EXACT route string, read from the nav.config
+  // SOURCE. Editing any route, adding an item, or removing one now fails. STRICTLY ADDITIVE (R-1):
+  // no existing assertion is deleted, relaxed or rescoped.
+  {
+    const navSrc = await import('../../src/js/nav.config.js');
+    const ROUTES_50 = {
+      home: 'dashboard.html', sessions: 'sessions.html', schedule: 'schedule.html',
+      attendance: 'attendance.html', sessionsAnalysis: 'sessions-analysis.html',
+      messages: 'messages.html', leads: 'leads.html', tasks: 'tasks.html',
+      announcements: 'announcements.html', timeConverter: 'time-converter.html',
+      publicHoliday: 'public-holiday.html', scheduledActions: 'scheduled-actions.html',
+      families: 'families.html', addFamily: 'add-family.html', students: 'students.html',
+      courses: 'courses.html', familyCategories: 'families.html#view=categories',
+      groups: 'groups.html', scheduleSearch: 'schedule-search.html',
+      studentResult: 'students.html#view=results', studentEvaluation: 'students.html#view=evaluation',
+      teachers: 'teachers.html', addTeacher: 'teachers.html#view=add',
+      teacherCategories: 'teachers.html#view=categories', teacherKpi: 'teacher-performance.html',
+      sessionsKpi: 'teacher-performance.html#view=sessions-kpi',
+      monthlyPerf: 'teacher-performance.html#view=monthly',
+      reports: 'reports.html', monthlyReports: 'reports.html#view=monthly',
+      dataAnalysis: 'reports.html#view=analysis', finance: 'finance.html',
+      invoices: 'finance.html#view=invoices', monthlyInvoices: 'finance.html#view=monthly-invoices',
+      salaries: 'finance.html#view=salaries', staffSalaries: 'finance.html#view=salaries',
+      payments: 'finance.html#view=payments',
+      classSalaryReport: null, // the ONE honest lock — route-less by contract
+      banks: 'finance.html#view=banks', staff: 'staff.html',
+      materials: 'library.html#view=materials', books: 'library.html#view=books',
+      certificates: 'certificates.html', certificateRequests: 'certificates.html#view=requests',
+      settings: 'settings.html', settingsGeneral: 'settings.html#view=general',
+      settingsIntegrations: 'settings.html#view=integrations',
+      settingsCustomization: 'settings.html#view=customization',
+      settingsNotifications: 'settings.html#view=notifications',
+      settingsSecurity: 'settings.html#view=security', settingsUsers: 'settings.html#view=users',
+    };
+    const all = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]);
+    const expected = Object.keys(ROUTES_50);
+    ok(expected.length === 50, `route-register: the register itself must hold exactly 50 ids, got ${expected.length}`);
+    const actualIds = all.map((i) => i.id).sort();
+    const added = actualIds.filter((id) => !(id in ROUTES_50));
+    const removed = expected.filter((id) => !actualIds.includes(id));
+    ok(added.length === 0, `route-register: UNREGISTERED nav item(s) ${JSON.stringify(added)} — every nav item must be pinned to an exact route`);
+    ok(removed.length === 0, `route-register: MISSING nav item(s) ${JSON.stringify(removed)} — a registered item disappeared from nav.config`);
+    for (const it of all) {
+      if (!(it.id in ROUTES_50)) continue;
+      const want = ROUTES_50[it.id];
+      const got = it.route === undefined ? null : it.route;
+      ok(got === want,
+        `route-register: ${it.id} must route EXACTLY to ${JSON.stringify(want)}, got ${JSON.stringify(got)} — a real-but-wrong destination is still wrong (gap G-1)`);
+    }
+  }
+
+  // ===== Spec 041 — ALL 24 deep-links, SEEDED (the discrimination fix) =====
+  // Before 041 only 9 of the 22 deep-links were seeded with a conflicting stored view. A regression of
+  // initTabs (enhance.js) from `hash || stored` to `stored || hash` would have passed the other 13 and
+  // been caught only by those 9. Every one of the 24 is now discriminating: the URL hash must BEAT a
+  // pre-seeded, different stored view. AR + EN = 48 executions.
+  {
+    const navSrc = await import('../../src/js/nav.config.js');
+    const all = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]);
+    const GROUPS = {
+      'families.html': 'families', 'students.html': 'students', 'teacher-performance.html': 'perf',
+      'reports.html': 'reports', 'finance.html': 'finance', 'library.html': 'library',
+      'certificates.html': 'certificates', 'settings.html': 'settings', 'teachers.html': 'teachers',
+    };
+    const deep = all.filter((i) => i.status === 'implemented' && i.route.includes('#view='));
+    for (const it of deep) {
+      const [file, frag] = it.route.split('#');
+      const view = frag.replace('view=', '');
+      const group = GROUPS[file];
+      for (const lang of ['ar', 'en']) {
+        const f = lang === 'en' ? file.replace('.html', '.en.html') : file;
+        // pick a DIFFERENT existing tab of the same group to seed as the stored view
+        const html = fs.readFileSync(require('path').join(__dirname, '../../public', f), 'utf8');
+        const tabIds = [...html.matchAll(/data-tabpanel="([a-z0-9-]+)"/g)].map((m) => m[1]);
+        const other = tabIds.find((x) => x !== view);
+        ok(!!other, `deeplink/${it.id}/${lang}: the ${group} group must have >1 tab to make the seed discriminating`);
+        const ctx = await browser.newContext();
+        await ctx.addInitScript(([g, o]) => { try { localStorage.setItem('academy.schedView.' + g, o); } catch (e) { /* ignore */ } }, [group, other]);
+        const p = await ctx.newPage();
+        const ext = [];
+        p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) ext.push(u); });
+        await p.goto(`${BASE}/${f}#view=${view}`, { waitUntil: 'networkidle' });
+        await p.waitForTimeout(200);
+        const vis = await p.evaluate((g) => [...document.querySelectorAll(`[data-tabs="${g}"] [data-tabpanel]`)].filter((x) => !x.hidden).map((x) => x.getAttribute('data-tabpanel')), group);
+        ok(vis.length === 1 && vis[0] === view,
+          `deeplink/${it.id}/${lang}: #view=${view} must open EXACTLY that panel — the URL hash must beat the seeded stored view '${other}'. Got ${JSON.stringify(vis)}`);
+        ok(ext.length === 0, `deeplink/${it.id}/${lang}: triggered external request(s) ${JSON.stringify(ext.slice(0, 2))}`);
+        await ctx.close();
+      }
+    }
+  }
+
+  // ===== Spec 041 — D-1: the DIRECT-SURFACE law + the PAY28 hidden-panel closure =====
+  // A fresh #view=add must show the REAL form — not a button that opens one. And because the moved
+  // forms now live inside [hidden] tab panels, the PROTECTED PAY28 grep (which uses innerText, and so
+  // SKIPS hidden subtrees) can no longer see them. PAY28 stays byte-verbatim; this ADDITIVE panel-scoped
+  // textContent grep closes the hole, so teacher pay-free coverage on teachers.html is strictly LARGER
+  // after 041 than before.
+  for (const lang of ['ar', 'en']) {
+    const f = lang === 'en' ? 'teachers.en.html' : 'teachers.html';
+    const ctx = await browser.newContext();
+    const p = await ctx.newPage();
+    await p.goto(`${BASE}/${f}#view=add`, { waitUntil: 'networkidle' });
+    await p.waitForTimeout(200);
+    const r = await p.evaluate(() => {
+      const add = document.querySelector('[data-tabs="teachers"] [data-tabpanel="add"]');
+      const cat = document.querySelector('[data-tabs="teachers"] [data-tabpanel="categories"]');
+      const vis = [...document.querySelectorAll('[data-tabs="teachers"] [data-tabpanel]')].filter((x) => !x.hidden).map((x) => x.getAttribute('data-tabpanel'));
+      const panels = [...document.querySelectorAll('[data-tabs="teachers"] [data-tabpanel]')];
+      // Reuse the PROTECTED PAY28 regex verbatim — do NOT invent a broader one. A naive /SAR/i (no word
+      // boundary) matches the persona name "Sara"; a bare /\brate\b/ matches ordinary UI copy. The point of
+      // this assert is the SCOPE (hidden panels included), not a stricter pattern.
+      const PAY = /راتب|رواتب|salary|payroll|payout|compensation|أتعاب|جنيه|ريال|\bEGP\b|\bAED\b|\bEUR\b/i;
+      return {
+        active: vis,
+        addFields: add ? add.querySelectorAll('input,select,textarea').length : -1,
+        addPrimary: add ? add.querySelectorAll('.btn-primary[data-disabled-reason]').length : -1,
+        addDrawerBtns: add ? add.querySelectorAll('[data-drawer]').length : -1,
+        addFileInputs: add ? add.querySelectorAll('input[type=file],input[type=password]').length : -1,
+        catFields: cat ? cat.querySelectorAll('input,select,textarea').length : -1,
+        catPrimary: cat ? cat.querySelectorAll('.btn-primary[data-disabled-reason]').length : -1,
+        // hidden panels INCLUDED — this is the point
+        payInAnyPanel: panels.some((el) => PAY.test(el.textContent || '')),
+        editDrawer: !!document.querySelector('template[data-preview="trn-edit"]'),
+        goneDrawers: document.querySelectorAll('[data-drawer="trn-add"],[data-drawer="trn-categories"],template[data-preview="trn-add"],template[data-preview="trn-categories"]').length,
+      };
+    });
+    ok(r.active.length === 1 && r.active[0] === 'add', `teachers/${lang}: #view=add must open exactly the add panel, got ${JSON.stringify(r.active)}`);
+    ok(r.addFields === 13, `teachers/${lang}: the add panel must render the REAL form — 13 field() controls, got ${r.addFields}`);
+    ok(r.addPrimary === 1, `teachers/${lang}: the add panel must end at EXACTLY ONE primary backendRequired Save, got ${r.addPrimary}`);
+    ok(r.addDrawerBtns === 0, `teachers/${lang}: DIRECT-SURFACE LAW — the add panel must contain NO drawer-opening button (no second click), got ${r.addDrawerBtns}`);
+    ok(r.addFileInputs === 0, `teachers/${lang}: the add panel must render 0 type=file / type=password inputs (the CV upload stays a gate)`);
+    ok(r.catFields >= 3 && r.catPrimary === 1, `teachers/${lang}: the categories panel must carry the real create form + exactly one primary Save, got fields=${r.catFields} primary=${r.catPrimary}`);
+    ok(!r.payInAnyPanel, `teachers/${lang}: teacher pay-free — a pay/salary/rate token appears in a teachers tab panel (HIDDEN panels included; this closes the PAY28 innerText hole)`);
+    ok(r.editDrawer, `teachers/${lang}: the trn-edit drawer must be RETAINED (it is opened from the card kebab, not a nav item)`);
+    ok(r.goneDrawers === 0, `teachers/${lang}: the trn-add / trn-categories drawers and templates must be GONE — their forms moved into tabs (got ${r.goneDrawers})`);
+    await ctx.close();
+  }
+
+  // ===== Spec 041 — D-2: the ORPHAN SET is frozen at exactly {gallery.html, gallery.en.html} =====
+  // A NEW orphan fails. LOSING the exception (giving gallery an inbound link) also fails.
+  {
+    const dir = require('path').join(__dirname, '../../public');
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.html'));
+    const linked = new Set();
+    for (const f of files) {
+      const h = fs.readFileSync(require('path').join(dir, f), 'utf8');
+      for (const m of h.matchAll(/href="([^"#]*\.html)(#[^"]*)?"/g)) linked.add(m[1].replace(/^\.\//, ''));
+    }
+    const orphans = files.filter((f) => !linked.has(f) && f !== 'index.html').sort();
+    ok(JSON.stringify(orphans) === JSON.stringify(['gallery.en.html', 'gallery.html']),
+      `orphan-set: the frozen orphan set is exactly {gallery.html, gallery.en.html} — a new orphan, or gallery gaining an inbound link, is a failure. Got ${JSON.stringify(orphans)}`);
+  }
+
+  // ===== Spec 041 — D-3: the TOPBAR language switch must PRESERVE the URL fragment =====
+  // enhance.js `langUrl()` used to build the mirrored URL from location.pathname ALONE, so a language
+  // switch DESTROYED the hash: finance.html#view=banks → finance.en.html, and the page silently fell
+  // back to its baked default tab. The SIDEBAR was never affected (components/sidebar.js langRoute()
+  // has been hash-aware since Spec 035) — this was a topbar-only defect, and it sits inside the route
+  // freeze, so Spec 041 owns it.
+  //
+  // ⚠ SELECTOR TRAP (this is why the test is written the way it is): `settings.html` renders TWO
+  // [data-set-lang] elements — the TOPBAR menu item (built by enhance.js, role="menuitem") and the
+  // Customization tab's REAL language control (settings-section.js, class="tab"). An unscoped
+  // [data-set-lang] click hits the wrong control and silently proves nothing. We therefore open
+  // [data-action="lang-menu"] and click ONLY [role="menuitem"][data-set-lang=…].
+  {
+    const D3 = [
+      // file (start)                       to    expected mirrored URL                       group      expected panel
+      ['finance.html#view=banks',           'en', 'finance.en.html#view=banks',               'finance', 'banks'],
+      ['settings.html#view=security',       'en', 'settings.en.html#view=security',           'settings', 'security'],
+      ['library.en.html#view=books',        'ar', 'library.html#view=books',                  'library', 'books'],
+      ['reports.html#view=analysis',        'en', 'reports.en.html#view=analysis',            'reports', 'analysis'],
+      // the OTHER two fragment families the app uses — neither may be dropped
+      ['add-family.html#step=children',     'en', 'add-family.en.html#step=children',         null, null],
+      ['family-child.html#child=st11',      'en', 'family-child.en.html#child=st11',          null, null],
+      // the CONTROL row: a page with NO fragment must NOT gain one
+      ['dashboard.html',                    'en', 'dashboard.en.html',                        null, null],
+    ];
+    for (const [start, to, want, group, panel] of D3) {
+      const ctx = await browser.newContext();
+      // seed a CONFLICTING stored view: the preserved hash must still win after the switch.
+      if (group) await ctx.addInitScript(([g, o]) => { try { localStorage.setItem('academy.schedView.' + g, o); } catch (e) { /* ignore */ } }, [group, 'overview']);
+      const p = await ctx.newPage();
+      await p.goto(`${BASE}/${start}`, { waitUntil: 'networkidle' });
+      await p.waitForTimeout(200);
+      // open the TOPBAR language popover and assert it really opened
+      await p.click('[data-action="lang-menu"]');
+      await p.waitForTimeout(140);
+      const menuOpen = await p.evaluate(() => !!document.querySelector('[role="menuitem"][data-set-lang]'));
+      ok(menuOpen, `d3/${start}: the topbar language menu did not open — the test would prove nothing`);
+      await p.click(`[role="menuitem"][data-set-lang="${to}"]`);
+      await p.waitForTimeout(500);
+      const r = await p.evaluate((g) => ({
+        href: location.href.split('/').pop(),
+        hashes: (location.href.match(/#/g) || []).length,
+        active: g ? [...document.querySelectorAll(`[data-tabs="${g}"] [data-tabpanel]`)].filter((x) => !x.hidden).map((x) => x.getAttribute('data-tabpanel')) : null,
+      }), group);
+      ok(r.href === want, `d3/${start} → ${to}: the language switch must PRESERVE the fragment — expected ${want}, got ${r.href}`);
+      ok(r.hashes <= 1, `d3/${start}: double hash in the mirrored URL (${r.href})`);
+      if (group) {
+        ok(r.active.length === 1 && r.active[0] === panel,
+          `d3/${start} → ${to}: exactly the '${panel}' panel must be visible after the switch (the preserved hash must beat the seeded stored view), got ${JSON.stringify(r.active)}`);
+      }
+      await ctx.close();
+    }
+    // the topbar language control stays keyboard-reachable
+    const ctx = await browser.newContext();
+    const p = await ctx.newPage();
+    await p.goto(`${BASE}/dashboard.html`, { waitUntil: 'networkidle' });
+    const kb = await p.evaluate(() => {
+      const b = document.querySelector('[data-action="lang-menu"]');
+      return !!b && b.tabIndex >= 0 && b.getAttribute('aria-haspopup') === 'menu';
+    });
+    ok(kb, 'd3: the topbar language control must stay keyboard-accessible (focusable + aria-haspopup=menu)');
     await ctx.close();
   }
 
