@@ -140,19 +140,41 @@ The recommended graph was evaluated against the allocation register and the cros
 
 ```text
 Wave 0 (foundations, parallel):    043 ∥ 044
-Wave 1 (page groups, parallel):    045 · 046 · 047 · 048 · 049 · 050   [after applicable 043/044 RULES are ratified]
+Wave 1 (page groups, parallel):    045 · 046 · 047 · 048 · 049 · 050   [three-gate — see (a): specify/diagnose
+                                   on ratified contracts · implement isolated on frozen interfaces · MERGE only
+                                   on green applicable 043/044 implementations]
 Wave 2 (feature charters):         051 (043,044) · 052 (043 + own integrity contract) · 053 (043,044) · 054 (043,044,053)
 Wave 3 (reconciliation):           055 (after 045–050 land; 053/054 for channel-dependent legs)
 Wave 4 (census):                   056 final field-level census (after 045–050 and 055)
 Wave 5 (freeze):                   057 (after all; owns lock verification, 404 proposal, final re-freeze)
 ```
 
-- **(a) "Foundations stable" is defined as CONTRACTS RATIFIED, not implementations complete.** 043's
-  deliverable for the graph is the ratified role-visibility rule-set (who may see guardian contact data, PII
-  classes per role); 044's is the frozen interaction-system component API (long-form host, sticky action
-  footer, gated-affordance rule, uniquified nested drawer). Page groups 045–050 may *start diagnosis* any
-  time, but may not *merge redesigned pages* before the applicable foundation contracts are frozen. This
-  prevents full serialization without letting a page group bake a PII leak or re-host a broken drawer.
+- **(a) THE THREE DEPENDENCY GATES** *(corrected 2026-07-16 — the original "contracts ratified = merge-ready"
+  rule was rejected as unsafe: a ratified privacy rule does not prove the rendered page obeys it; a frozen
+  modal API does not prove the shared implementation exists; a provider contract does not prove an operational
+  room exists)*:
+  - **Gate 1 — SPECIFY/PLAN START.** A dependent spec may be specified and planned once the relevant
+    foundation **contracts are ratified**. Diagnosis and targeted visual grounding are **ungated** — they may
+    begin immediately.
+  - **Gate 2 — IMPLEMENTATION START.** Implementation may begin **in an isolated branch/worktree** once (i)
+    the applicable interfaces/contracts are **frozen**, (ii) the owned file boundaries are known (the
+    partition), and (iii) single-writer conflicts are prevented (contract 14 §3). Parallel work is expected —
+    but it may **not claim integrated completion**.
+  - **Gate 3 — MERGE/COMPLETION.** A dependent implementation may **not be declared complete or merged** until
+    the applicable foundation **implementation and its tests are available and green**. Contract ratification
+    alone is NEVER sufficient for this gate. Concretely for 045–050: a page handling protected data merges
+    only after the applicable **043 frontend protection is implemented and verified**; a page using the shared
+    modal/drawer/long-form system merges only after the applicable **044 shared implementation** and its
+    focus/keyboard/backdrop/scroll/mobile/RTL-LTR/duplicate-id/required-selector/a11y tests are **green**.
+    A page that does not exercise a given 043/044 capability may proceed only with an **explicit
+    non-applicability proof** in its own plan/tasks; **no page may duplicate a pending 044 component locally**
+    to dodge the dependency. 043 itself: server-side enforcement stays FUTURE_BACKEND, but fixtures and
+    rendered surfaces must already obey the ratified visibility law (protected data not rendered · secrets
+    not rendered · cross-role direct-link claims honestly gated · no wording claiming backend authorization
+    exists). 054: the 053 provider **contract** opens Gates 1–2 only; claiming or merging an **operational**
+    Zoom/Meet room lifecycle requires the 053 provider **seam implemented and verified** — otherwise the
+    feature stays explicitly gated and join surfaces claim nothing. Full per-spec gate rules:
+    `contracts/future-spec-dependency-contract.md` §6.
 - **(b) 056 ownership vs execution split.** 056 owns 82 field-set rows as the *accountable auditor*; the safe
   field sets for a page group's owned surfaces are *delivered inside that group's review* (guided by
   `forms-completeness-ledger.md` + the 044 host system), then **verified by 056's final census**. The

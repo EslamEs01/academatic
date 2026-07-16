@@ -65,9 +65,12 @@ correct"; the T061/G-1 lesson).
 7. **Identify primary vs secondary owners — never co-own.** Your register section's "Secondary deps" column
    names the specs whose contracts you consume (e.g. a 054 row depending on 044 for its drawer host). The
    secondary spec's contract binds you; you do not edit its surfaces, and it does not edit yours
-   (`contracts/future-spec-dependency-contract.md`; wave order in `plan.md` D5). Page groups may start
-   diagnosis any time but may not MERGE redesigned pages before the applicable 043/044 foundation contracts
-   are ratified (D5a).
+   (`contracts/future-spec-dependency-contract.md`; wave order in `plan.md` D5). The THREE GATES apply (D5a,
+   corrected): diagnosis starts any time; specify/plan starts on RATIFIED foundation contracts; isolated
+   implementation starts on FROZEN interfaces; but a redesigned page MERGES only when the applicable 043
+   frontend protection / 044 shared implementation is **implemented, tested and green** — ratification alone
+   never authorizes a merge. Non-applicability requires explicit proof in your own plan/tasks; never duplicate
+   a pending 044 component locally (dependency contract §6).
 
 8. **Declare scope + count impact.** State which files/pages/routes you touch and prove the frozen counts
    hold: 115 files · 57 bases (+`index` = 58 review units, D4) · 50 menu · 24/25/1 · planned 0 · ONE physical
@@ -106,7 +109,9 @@ correct"; the T061/G-1 lesson).
   parent-contact row at all.
 - **Deliverable**: the RATIFIED role-visibility rule-set — who may see guardian contact data, PII classes per
   role, "hiding a link is not authorization" (privacy findings §6) — as binding rules that 045–050 consume
-  (D5a: contracts ratified, not implementations complete).
+  (D5a Gate 1), **plus the frontend protections implemented and verified** (fixtures/rendered surfaces obeying
+  the visibility law: protected data not rendered, secrets not rendered, honest gates, no
+  backend-authorization claims) — the artifact dependent pages need to pass their merge gate (D5a Gate 3).
 - **Enforcement**: FUTURE_BACKEND. 043 ratifies rules and ships honest gates; real RBAC enforcement needs the
   backend (C12-02, C09-19, G-02). Faking enforcement client-side would be REJECTED_NO_FAKE.
 

@@ -11,9 +11,13 @@ under contract 1, not a Phase-0 one). All eight resolutions are documentation de
 
 **Decision**: Adopt the wave graph of plan.md D5 verbatim — Wave 0: 043 ∥ 044 (foundations) · Wave 1:
 045–050 in parallel · Wave 2: 051, 052, 053, 054 · Wave 3: 055 · Wave 4: 056 (final census) · Wave 5: 057 —
-with D5's three formalizations: **(a)** "foundations stable" = 043/044 *contracts ratified*, not
-implementations complete (page groups may diagnose immediately; they may not merge redesigned pages before the
-applicable foundation rules are frozen); **(b)** 056 ownership vs execution split — 056 is the accountable
+with D5's three formalizations: **(a)** the THREE DEPENDENCY GATES *(corrected 2026-07-16)* — **Gate 1**
+specify/plan on ratified foundation contracts (diagnosis ungated, starts immediately); **Gate 2** isolated
+branch/worktree implementation on frozen interfaces + known file boundaries + single-writer discipline;
+**Gate 3** merge/completion ONLY when the applicable foundation implementation and its tests are available and
+green — contract ratification alone never passes Gate 3 (a ratified privacy rule does not prove the rendered
+page obeys it; a frozen modal API does not prove the shared implementation exists); **(b)** 056 ownership vs
+execution split — 056 is the accountable
 auditor of its 82 field-set rows, but the safe field sets for a group's owned surfaces are delivered inside
 that group's review and verified by 056's final census; **(c)** 052 carries no incoming legacy-debt edge yet
 remains chartered (→ R4). Full edge list with per-edge rationale lives in
@@ -23,10 +27,12 @@ remains chartered (→ R4). Full edge list with per-edge rationale lives in
 0·17·5·33·82·6 = 227; FUTURE_BACKEND column 9/0/0/1/0/6/0/2/0/0/8/1/7/6/0 = 40) and its secondary-dependency
 columns, plus `cross-role-propagation-map.md` §8 (owner roll-up). The data forces this shape:
 - 043 rows radiate privacy rules every group consumes (e.g. C02-04 with secondary dep 055; cross-role §8
-  assigns P-20/P-21 authz law to 043) — a page group merging before those rules are ratified can bake a PII
-  leak. 044 hosts the interaction system the groups re-host forms into (register §5; §3 rule 4 keeps 044
-  secondary on the C01-03/04 ↔ C06-01/02 reconciliations). Hence Wave 0 first, but only to *ratification*
-  (formalization a) — full implementation-completeness gating would serialize the program for no safety gain.
+  assigns P-20/P-21 authz law to 043) — a page group merging before those rules are ratified AND implemented
+  on its surfaces can bake a PII leak. 044 hosts the interaction system the groups re-host forms into
+  (register §5; §3 rule 4 keeps 044 secondary on the C01-03/04 ↔ C06-01/02 reconciliations). Hence Wave 0
+  first: ratification opens dependent *start* (Gates 1–2), while *merge* (Gate 3) additionally waits for the
+  applicable foundation implementation + green tests — parallelism is preserved by starting early in
+  isolation, and safety by merging late.
 - 045–050 are a proven partition (`page-review-ownership-map.md` §2; 11+12+12+8+7+7 = 57 + index) with
   disjoint file ownership, so Wave 1 parallelism is safe under the single-writer rule (R7).
 - 055 (33 rows, the cross-role map's primary owner per §8) consumes surfaces the page groups and 053/054
@@ -37,9 +43,15 @@ columns, plus `cross-role-propagation-map.md` §8 (owner roll-up). The data forc
 - Acyclicity: every edge points wave-N → wave-<N; verified in the dependency contract.
 
 **Alternatives considered**:
+- *Ratification-only merge gate (the ORIGINAL D5(a) wording)*: **rejected in the 2026-07-16 correction pass as
+  unsafe** — a ratified privacy rule does not prove the rendered page obeys it, a frozen modal API does not
+  prove the shared modal/drawer implementation exists, and a provider contract does not prove an operational
+  Zoom/Meet integration exists. Replaced by the three-gate model (specify/plan start · implementation start ·
+  merge/completion), which keeps the parallelism ratification-only gating was meant to buy while making merge
+  wait for implemented + verified foundations.
 - *Strict serial order 043→044→045→…→057*: rejected — Wave-1 groups own disjoint page sets (partition proof,
   ownership map §2) and share no files; serializing six independent reviews multiplies calendar time with zero
-  added safety beyond what formalization (a) already provides.
+  added safety beyond what the three gates of formalization (a) already provide.
 - *Fully parallel (no waves)*: rejected — page groups would merge redesigns before 043's audience-scoping and
   044's overlay/host rules exist (a family page could re-host the broken nested drawer or surface guardian
   contact data to a teacher view); 055/056 would audit surfaces that do not exist yet, producing a census that

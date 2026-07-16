@@ -26,6 +26,12 @@ file, ever — handoff is explicit (the writer finishes and records; then the ot
 comment; they do not patch the file under review. Parallelism comes from the page-group partition
 (`../page-review-ownership-map.md` §2) and the D5 waves, never from co-editing.
 
+**Integration gate for parallel work (three-gate model — dependency contract §4a, corrected 2026-07-16).**
+Parallel implementation happens in **isolated branches/worktrees** and may not claim integrated completion.
+Integration/merge passes **Gate 3**: the applicable foundation implementation (043 frontend protections ·
+044 shared components) and its tests must be available and **green** before a dependent surface is declared
+complete or merged. A frozen interface authorizes *starting* in isolation — never *merging*.
+
 ## 4. The MANDATORY browser/screenshot loop (the binding core of this contract)
 **A design is NOT complete because the source looks correct.** For every implemented/redesigned page:
 1. Build, load the page in a real browser context, and **capture screenshots after implementation** (step 9 of

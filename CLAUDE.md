@@ -14,10 +14,17 @@ frontend-planning-deep frames) · 1,723 raw records · 26 lifecycles (all with �
 (26 PARTIAL + 13 MISSING + 9 field-less gates) · 30 pre-existing `f-fbAdd-*` duplicate ids → **owner 044**.
 **Plan** (`plan.md` D1–D14 · `research.md` R1–R8 · `data-model.md` 17 doc-domain entities · `quickstart.md`
 5 worked examples · **15 `contracts/`**; plan adversarial review **15/15 PASS** — the round-1 catch: fix-first
-item 5 owner corrected 049→048 per the binding partition): **wave graph** 043∥044 foundations → 045–050 parallel
-page groups (may merge only after the APPLICABLE 043/044 contracts are RATIFIED — "stable" = contracts, not
-implementations) → 051/052/053/054 → 055 propagation → 056 final field census (page groups DELIVER page-local
-field sets; 056 AUDITS them) → 057 freeze; acyclic by wave numbering. **Rulings**: HONEST_LOCK 5 ledger rows =
+item 5 owner corrected 049→048 per the binding partition; **dependency-gate CORRECTION PASS applied**: the
+original "contracts ratified = merge-ready" rule was rejected as unsafe and replaced by the **THREE-GATE model**
+— Gate 1 specify/plan on RATIFIED contracts (diagnosis ungated) · Gate 2 isolated-branch implementation on
+FROZEN interfaces + single-writer boundaries · Gate 3 merge/completion ONLY when the applicable foundation
+IMPLEMENTATION + tests are GREEN (a ratified privacy rule ≠ an obeying page; a frozen modal API ≠ an existing
+shared component; a 053 provider contract ≠ an operational 054 room — join surfaces claim nothing without a
+real propagated room/link); non-applicability needs explicit proof; no local duplication of pending 044
+components; 043 backend enforcement stays FUTURE_BACKEND but rendered surfaces obey the visibility law NOW):
+**wave graph** 043∥044 foundations → 045–050 parallel page groups → 051/052/053/054 → 055 propagation (verifies
+real legs, not contracts) → 056 final field census (page groups DELIVER page-local field sets; 056 AUDITS them)
+→ 057 freeze (all merge gates satisfied); acyclic by wave numbering. **Rulings**: HONEST_LOCK 5 ledger rows =
 ONE physical `classSalaryReport` lock; 57 bilingual bases + `index.html` = 58 REVIEW UNITS (never "58 bases");
 REJECTED_* = negative requirements, never backlog; INTENTIONALLY_IMPROVED + B-register = preservation law
 (regression = review failure); UNKNOWN_EVIDENCE resolves only by NEW evidence; FUTURE_BACKEND = honest gates,

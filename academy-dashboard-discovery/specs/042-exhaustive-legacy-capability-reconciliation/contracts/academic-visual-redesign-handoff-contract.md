@@ -60,6 +60,15 @@ AR/EN · desktop/mobile · light/dark · empty/loading/error states · open over
 keyboard/focus order · zero console errors (R-3 hard gate) · a11y serious=0/critical=0 (R-2 hard gate).
 Gates R-2/R-3 are inherited per `../protected-test-carryover.md` §2 and may not be relaxed.
 
+**Merge gate (three-gate model — dependency contract §4a/§6, corrected 2026-07-16).** Passing this matrix is
+necessary but NOT sufficient to merge. A redesigned page that handles protected data merges only after the
+applicable **043 frontend protection is implemented and verified**; a page exercising the shared
+modal/drawer/long-form system merges only after the applicable **044 shared implementation** and its
+focus/keyboard/backdrop/scroll/mobile/RTL-LTR/duplicate-id/required-selector/a11y tests are **green**.
+Contract ratification alone never authorizes a merge. A page not exercising a given 043/044 capability
+proceeds only with an explicit **non-applicability proof** in its group's plan/tasks; duplicating a pending
+044 component locally to dodge the dependency is forbidden.
+
 ## 6. The five fix-first items (§11), pre-seeded to owners — first work in each owner's queue
 1. **045** — `pages/teacher-portal.js:33-35`: the 7 false «قريبًا» quick-tiles (V-T1, UK-47, B-register caveat C-1).
 2. **047** — `pages/dashboard.js:116-120`: the UI-states gallery band off the operator home (V-A1 → `gallery.html`).

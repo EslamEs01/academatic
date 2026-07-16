@@ -193,14 +193,21 @@ One chartered consumer spec, 043–057. **15 instances.**
 
 One directed edge of the 043–057 graph (`contracts/future-spec-dependency-contract.md`).
 
-- **Identifier**: ordered pair `from→to` + type (e.g. `043→045 (hard-contract)`).
-- **Required fields**: from-spec · to-spec · type ∈ {**hard-contract** (the target may not MERGE before
-  the source's contract is RATIFIED — D5a: ratified rules, not completed implementation) · **soft-start**
-  (diagnosis may begin any time) · **verification** (the target verifies the source's output, e.g.
-  056's final census over 045–050)} · rationale ref (the contract's edge row).
-- **Invariants**: **acyclic by construction** — every edge points from a lower wave to a higher wave
-  (Wave 0: 043∥044 · Wave 1: 045–050 · Wave 2: 051/052/053/054 · Wave 3: 055 · Wave 4: 056 · Wave 5:
-  057); 052's only incoming edges are 043 + its own integrity contract (no legacy-debt edge, D5c/D6).
+- **Identifier**: ordered pair `from→to` + gate (e.g. `045→043 (gate-3)`).
+- **Required fields**: from-spec · to-spec · **gate** ∈ {**gate-1 specify/plan-start** (the dependent may be
+  specified/planned once the source's contracts are RATIFIED; diagnosis/targeted grounding are ungated) ·
+  **gate-2 implementation-start** (isolated branch/worktree implementation once the source's
+  interfaces/contracts are FROZEN, file boundaries known, single-writer enforced — no integrated-completion
+  claims) · **gate-3 merge/completion** (the dependent may not be declared complete or merged until the
+  source's applicable IMPLEMENTATION **and its tests are available and green** — ratification alone NEVER
+  passes this gate; corrected D5a + contract 4 §4a/§6) · **verification** (the target verifies the source's
+  output, e.g. 056's final census over 045–050)} · rationale ref (the contract's edge row). One `from→to`
+  pair may carry multiple gate records — each gate opens independently.
+- **Invariants**: **acyclic by construction** — every edge points from a strictly greater to a strictly
+  lesser **(wave, spec-number)** pair (Wave 0: 043∥044 · Wave 1: 045–050 · Wave 2: 051/052/053/054, with the
+  intra-wave 054→053 edge resolved by spec number per contract 4 §3 · Wave 3: 055 · Wave 4: 056 · Wave 5:
+  057); 052's only incoming edges are 043 + its own integrity contract (no legacy-debt edge, D5c/D6);
+  a gate-3 record never opens before its matching gate-1/gate-2 records (gates are monotonic).
 - **Relationships**: many-to-one FutureSpec on each end.
 
 ### E11 — PreservationRule
