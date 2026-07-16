@@ -825,4 +825,22 @@ link inventory; the family app carries ZERO currency/pay figures; **the teacher 
 GLOBALLY** (extended token set incl. أتعاب/فلوس/دولار/money/currency, copy AND comments, no route to
 any pay surface — three-layer enforced). Future: 018 student pages · 019 family pages · 020 teacher
 pages · 021–026 admin families per the 016 sidebar inventory · 027 final no-missing QA.
+
+**Ponytail compatibility (binding for Spec 043+)**: Ponytail default mode = **lite** (persisted;
+`ultra` is **FORBIDDEN** in this project). Ponytail is SUBORDINATE to user requirements, the applicable
+Spec + contracts, and evidence — it may simplify HOW a requirement is implemented, never remove,
+reinterpret, defer or shrink an evidenced requirement. **Targeted Visual Grounding runs BEFORE the
+Ponytail ladder**: read the Spec contracts + stable IDs, inspect current source and flow, open the exact
+legacy AND current screenshots as images, read the scoped legacy records/evidence, map capability →
+evidence, preserve current-product improvements — only then climb the ladder; "reuse what exists" never
+preserves an incomplete form, weak modal, dead design or privacy leak. NEVER simplify away: required
+form fields + required/optional/conditional semantics · validation/help/error + empty/loading/error
+states · role-specific visibility · privacy/anti-poaching/secret-handling protections · keyboard/focus/
+backdrop/scroll behavior · RTL/LTR + AR/EN locale parity · responsive/mobile · accessibility · security
+validation · protected tests · mutation proofs · screenshot rows · console-error gates · cross-role
+producer/consumer propagation · any explicitly requested page/workflow/integration/capability. **full**
+mode only when explicitly selected for routine mechanical implementation or deterministic refactoring
+(specify/plan/tasks/privacy/security/RBAC/visual design 045–050/architecture stay lite). `ponytail-review`
+is SUPPLEMENTARY only — it never replaces correctness, clean-code, test, security/privacy, visual
+screenshot, or contract review, or mutation testing.
 <!-- SPECKIT END -->
