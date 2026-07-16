@@ -66,8 +66,8 @@ correct"; the T061/G-1 lesson).
    names the specs whose contracts you consume (e.g. a 054 row depending on 044 for its drawer host). The
    secondary spec's contract binds you; you do not edit its surfaces, and it does not edit yours
    (`contracts/future-spec-dependency-contract.md`; wave order in `plan.md` D5). The THREE GATES apply (D5a,
-   corrected): diagnosis starts any time; specify/plan starts on RATIFIED foundation contracts; isolated
-   implementation starts on FROZEN interfaces; but a redesigned page MERGES only when the applicable 043
+   corrected): diagnosis starts any time; specify/plan starts on RATIFIED foundation contracts (Gate 1);
+   isolated implementation starts on FROZEN interfaces (Gate 2); but a redesigned page MERGES only when the applicable 043
    frontend protection / 044 shared implementation is **implemented, tested and green** — ratification alone
    never authorizes a merge. Non-applicability requires explicit proof in your own plan/tasks; never duplicate
    a pending 044 component locally (dependency contract §6).

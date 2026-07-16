@@ -463,3 +463,65 @@ separation unchanged (24 read-only `[P]` · 4 sequential DOC writers), 0 git-mut
 entries under `academy-dashboard-discovery/app/` and `git diff --stat de8d552..HEAD -- academy-dashboard-discovery/app`
 = EMPTY. The non-blocking cautions above stand as recorded (no verdict impact). The task list is ready for
 `/speckit.implement`.
+
+## Implementation-phase adversarial review (2026-07-17)
+
+**Scope**: independent falsification pass over the `/speckit.implement` run's claims (54/54 tasks ·
+`implementation-status.md` evidence · the new `final-handoff-verification-register.md` · CLAUDE.md marker ·
+zero app change · zero canonical-evidence edit · 0 contradictions/STOPs). The reviewer did NOT execute the
+tasks or author the outputs. Every number below was RE-DERIVED from the bytes with fresh commands;
+`implementation-status.md` was treated as claims, never as truth. 10+ evidence commands were spot re-run
+(requirement: >= 8).
+
+| # | Check | Verdict | Reproduced evidence |
+|---|---|---|---|
+| 1 | T001–T054 genuinely executed | **PASS** | `tasks.md`: 54 task lines T001–T054, **54 `[x]` · 0 `[ ]`**, IDs sequential and unique. `implementation-status.md`: verdict + reproduced evidence for all 10 phases. Spot re-runs (10, all reproduce): T002 **115** HTML / **58** unique bases / no `index.en.html`; T003 `item({`=**50** · deep=**24** · plain=**25** · disabled=**1** (`classSalaryReport`, :93, `nav.reason.finance`, route-less) · planned=**0** · implied implemented=**49** · `FUTURE_ROUTES` body = comments only (**0 keys**); T004 orphan derivation re-executed in Node per `smoke/run.cjs:2752` → exactly `["gallery.en.html","gallery.html"]`; T005 app diff empty; T007 escape-aware ledger parse → **380 rows / 380 unique capIds**, per-cluster **27/34/23/26/18/29/33/17/26/27/34/21/16/29/20**, disposition matrix **96/58/57/40/28/20/19/17/16/13/11/5** exact; T008 allocation register → **227 rows**, per-spec **17/24/8/4/8/7/7/7/2/0/17/5/33/82/6**, split 96+58+40+28+5=227; T009 RJ=**52** · UK=**47** · B=**63** rows; T021/T022 partition set-equality (below); T032 input-scoped grep (below); T044 join (below). |
+| 2 | No pre-fabricated evidence | **PASS** | Every recorded output matched the current bytes on independent re-derivation. Notably: the reviewer's own naive col-13 ledger parse initially misaligned exactly 4 rows (C02-30/C09-01/C13-11/C14-19 — escaped `\|` pipes inside cells); escape-aware re-parse reproduced the status file's 12/12 matrix EXACTLY — the recorded T007 "cell-vs-row parser artifact" investigation is consistent with real execution, not fabrication. T032's recorded "naive token grep = 4" reproduced at exactly `library.html:574,639` + `.en` (`data-type="file"` facet attrs), `type="password"`=0, `<input …type="file"`=0. T010: 26 unique P-IDs (P-01…P-26) in the map. T034: forms ledger §0 = 48/72/26/13/9 intact. |
+| 3 | No application files changed | **PASS** | `git status --porcelain academy-dashboard-discovery/app` → empty; `git diff --stat de8d552..HEAD -- academy-dashboard-discovery/app` → empty. |
+| 4 | No previous spec dir changed | **PASS** | `git log a908fc6..HEAD -- specs/0*` excluding 042 → 0 paths; porcelain over `specs/` excluding 042 → 0 entries. |
+| 5 | Only allowed documentation written | **PASS** | Dirty set = exactly {`CLAUDE.md` (M), `SPEC/quickstart.md` (M), `SPEC/tasks.md` (M)} + untracked {`SPEC/final-handoff-verification-register.md`, `SPEC/implementation-status.md`}. tasks.md diff = checkbox flips ONLY (non-checkbox delta lines = 0). quickstart diff = the two `(Gate 1)`/`(Gate 2)` parenthetical clarifiers + one line rewrap, meaning unchanged. CLAUDE.md diff = **1 hunk**, confined to the `<!-- SPECKIT START -->` marker block. (This review adds the sanctioned `checklists/requirements.md` append — the reviewer's own write.) |
+| 6 | 115 HTML | **PASS** | `ls app/public/*.html \| wc -l` = 115. |
+| 7 | 57 bases + index = 58 | **PASS** | 58 unique names after `.en` folding; `index.en.html` does not exist. |
+| 8 | Admin menu 50 | **PASS** | `grep -c 'item({' nav.config.js` = 50. |
+| 9 | Route split 24/25/1 | **PASS** | 24 `#`-bearing routes · 25 plain routes · 1 route-less disabled item; build-time guard enforces implemented⇔route. |
+| 10 | 49 implemented / 0 planned / 1 disabled | **PASS** | default status = 'implemented' (nav.config.js:16); `'planned'` occurrences = 0; exactly one `status: 'disabled'` (line 93); 50−0−1 = 49. |
+| 11 | FUTURE_ROUTES {} | **PASS** | body (lines 151–158) contains comments only — 0 keys. |
+| 12 | Orphan set exactly two | **PASS** | canonical derivation (`run.cjs:2752`, `f !== 'index.html'`) re-executed → `{gallery.en.html, gallery.html}` exactly. |
+| 13 | Three-gate law 9 sites | **PASS** | Gate 1/2/3 tokens present: plan.md · research.md · quickstart.md (NEW: `(Gate 1)`:69 · `(Gate 2)`:70 · Gate 3:114) · data-model.md (hyphenated E10 enum form `gate-1/gate-2/gate-3`, :196–210, + monotonicity sentence :210) · contract 4 (7/4/7 hits) · checklists/requirements.md · CLAUDE.md — plus the 2 consumers: contract 5 (Merge-gate block §5 + "three-gate model") and contract 14 (Gate-3 citations). 9/9. |
+| 14 | Ratification never opens Gate 3 | **PASS** | Full-corpus scan: every "ratif…" hit is a Gate-1 statement, a "never suffices/alone never authorizes" statement, or sits inside an explicit rejection/supersession note (plan.md:152 "rejected as unsafe" · contract 4:45 · CLAUDE.md:27 · requirements.md:366–368 struck-through FIXED note). 0 unsafe residuals. |
+| 15 | 052 greenfield charter | **PASS** | allocation register §13 (:196–202, explicit 0-row note, "green-field charter", C08-09 = REJECTED_NO_FAKE) · contract 4 §4(c) (:61–62) + §6 item 5 (:124–126) · handoff register §052 (:93–102, GREENFIELD header, G1/G2/G3 + no-client-side-rank stop). |
+| 16 | Visual redesign handoff binding | **PASS** | contract 5: NOT list = **7** items (§2) · IS list = **16** items (§3) · 11-step loop (§4, reopen-legacy step 1, render-after-implementation step 9, "never skippable") · 8-surface matrix (§5, R-2/R-3 inherited non-relaxable) · Merge-gate three-gate block · five fix-first items with owners **[045, 047, 044, 044, 048]** incl. the recorded 049→048 supersession note. Handoff register cites loop+matrix as binding (":the 11-step loop + 8-surface matrix … (contracts 5/14)", :64–65). |
+| 17 | Sol High/Medium/Opus routing | **PASS** | contract 14: Sol High (§1:10) · Sol Medium (:12) · no downward delegation (:14) · Opus independent critic (§2) · single-writer (§3) · never-co-edit (:27) · "NOT complete because the source looks correct" + captured-frames critique (§4:36–43). Handoff register cites it (:66). |
+| 18 | Privacy/modal/form/propagation measurable | **PASS** | contract 6: S/P/G/U/I/A ID families (16 ID refs) + hiding-a-link/meeting-link/audience rules. contract 7: 30 `f-fbAdd` + `21502af` provenance (§1) + missing-selector FORBIDDEN (§2) + focus/Esc/backdrop obligations. contract 8: 26 P-IDs + frozen scoreboard (§2) + NEVER-PROPAGATE N-1…N-7. Handoff register §§043/044/055/056 each carry rows + inputs + G1/G2/G3 + required proof + stop conditions. |
+| 19 | Canonical evidence untouched | **PASS** | For all 18 specify-phase files + `cluster-audits/` + `cluster-evidence-paths/`: `git log 2c35d36..HEAD` = 0 commits AND worktree porcelain = 0 entries, file-by-file. |
+| 20 | No commit/push/merge/destructive git | **PASS** | HEAD = `41891b3` (unchanged); `git log 41891b3..HEAD` = 0; reflog's newest entry IS the 41891b3 commit (2026-07-16 23:18) — no commit/reset/checkout/merge after it. The single stash entry is dated **2026-06-28** (Spec-001 era) — pre-existing, not from this run. Branch in sync with origin at the same baseline commit. |
+
+**Register sanity-check**: `final-handoff-verification-register.md` covers **all 15 specs 043–057**, each unit
+carrying G1/G2/G3 conditions and stop conditions, and the totals line re-derives to
+17+24+(8+4+8+7+7+7)+2+0+17+5+33+82+6 = **227** = the ledger's non-complete count = the allocation register.
+The 227-row exactly-once JOIN was independently re-computed (escape-aware parses of both files): **0
+double-owned · 0 in-ledger-not-allocated · 0 allocated-not-in-ledger**. Partition set-equality independently
+re-computed on BOTH documents: map §4–§9 and contract 3 §1 agree **list-for-list** (11/12/12/8/7/7; union =
+the 57 disk bases exactly; index→050; 0 dups/orphans).
+
+**Non-blocking caveats (recorded honestly, no verdict impact)**:
+1. The register groups 045–050 under one H2 with shared G1/G2/G3 + per-spec bold sub-entries; explicit
+   `Stop:` tokens appear on 045/046 while 047–050 rely on the universal stop block (:12–16, "every spec") +
+   their in-bullet binding laws. The status file's "15 sections" reads as 9 H2 + 6 sub-entries = 15 labeled
+   per-spec units — an imprecision of structure description, not of content.
+2. The B register's 63 rows are tagged with 9 category IDs (B-1…B-9 reused across rows); "B = 63" is the row
+   count and reproduces exactly (63 `| B-n` rows).
+3. data-model.md carries the gate tokens in the hyphenated enum form (`gate-1/gate-2/gate-3`), exactly as the
+   T013/T015 records describe — a naive "Gate N" grep returns 0 there; the tokens are present.
+4. The quickstart "one-word Gate clarifier" is literally two parenthetical tokens + a line rewrap; meaning
+   unchanged, matching the T013 record's allowed write class.
+
+### IMPLEMENTATION READINESS VERDICT: **PASS — 20/20**
+
+Every count, matrix, join, partition, grep and git-integrity claim re-derived independently from the bytes
+matched the recorded evidence. No fabrication indicator found; the recorded probe-artifact investigations
+(C14-28 escaped-pipe parse, partition extractor format, index orphan exclusion) were independently
+reproduced by this reviewer's own first-pass parsers hitting the same artifacts — the canonical artifacts
+were right each time. The run wrote only the sanctioned documentation set, touched no app byte, no canonical
+evidence, no prior spec, and performed no git mutation. Spec 042's implementation claim stands:
+**54/54 · documentation-only · zero-diff · handoff register complete**. Awaiting the watcher commit.

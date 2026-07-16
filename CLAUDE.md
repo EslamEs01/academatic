@@ -1,7 +1,16 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 042 — Exhaustive Legacy Capability & Page Reconciliation is SPECIFIED + PLANNED**
-(documentation-only; **ZERO app bytes change**; committed baseline `ceae9b2`, plan artifacts awaiting the watcher
-commit). **Specify** (adversarial checklist **20/20 PASS**): 15 cluster audits + 15 evidence-path registers ·
+Active feature: **Spec 042 — Exhaustive Legacy Capability & Page Reconciliation is IMPLEMENTED
+(documentation/orchestration layer) — SPECIFIED + PLANNED + TASKED + IMPLEMENTED, all four adversarial reviews
+PASS (20/20 · 15/15 · 10/10 · 17/17)** (documentation-only; **ZERO app bytes change** — proven per-phase:
+`git diff de8d552..HEAD -- app` EMPTY; awaiting the watcher commit of the implementation artifacts).
+**Implementation** = `tasks.md` executed **54/54** (T001–T054: 50 read-only verifications with reproduced
+command evidence + 4 documentation writes), recorded in `implementation-status.md` (per-task evidence; the
+notable probe-artifact investigations — C14-28 cell-vs-row parse, index orphan exclusion per `smoke:2752`,
+`data-type="file"` facet collision — all resolved IN FAVOR of the canonical artifacts; **0 contradictions, 0
+STOPs**) and `final-handoff-verification-register.md` (one section per Spec 043–057: scope · rows · inputs ·
+G1/G2/G3 gates · required proof · stop conditions; totals = 227). 227-row exactly-once ownership join verified
+(ledger × register: 0 missing, 0 double). Partition set-equality re-proven list-for-list on both documents
+(11/12/12/8/7/7 + index→050 = 57+1 disk bases exact). **Specify** (adversarial checklist **20/20 PASS**): 15 cluster audits + 15 evidence-path registers ·
 **380-row** `legacy-current-capability-ledger.md` (reconciles EXACTLY with the audit tables; closed 12-word
 disposition set) · **227 gaps, each with exactly ONE owner** (`future-spec-allocation-register.md`: 043:17 ·
 044:24 · 045–050:41 · 051:2 · **052:0 — greenfield charter, NOT cancelled** · 053:17 · 054:5 · 055:33 · 056:82 ·
