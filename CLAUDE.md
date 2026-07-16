@@ -1,5 +1,33 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 041 — Full Frontend Route & Sidebar Production Freeze is IMPLEMENTED** (awaiting the watcher
+Active feature: **Spec 042 — Exhaustive Legacy Capability & Page Reconciliation is SPECIFIED + PLANNED**
+(documentation-only; **ZERO app bytes change**; committed baseline `ceae9b2`, plan artifacts awaiting the watcher
+commit). **Specify** (adversarial checklist **20/20 PASS**): 15 cluster audits + 15 evidence-path registers ·
+**380-row** `legacy-current-capability-ledger.md` (reconciles EXACTLY with the audit tables; closed 12-word
+disposition set) · **227 gaps, each with exactly ONE owner** (`future-spec-allocation-register.md`: 043:17 ·
+044:24 · 045–050:41 · 051:2 · **052:0 — greenfield charter, NOT cancelled** · 053:17 · 054:5 · 055:33 · 056:82 ·
+057:6) · **52** rejected + **47** unknown registers · **63** preservation findings · the binding 57-base partition
+**045:11 teacher / 046:12 family / 047:12 child-view+sessions / 048:8 back-office+scheduling / 049:7
+reports+courses+content / 050:7+index** (`page-review-ownership-map.md` §2 is canonical; the visual-audit §10
+partition is a superseded draft — precedence rule plan.md D2). Verified corpus: 339 legacy pages (300/26/13) ·
+**1,113 crawler screenshots on disk** (the oft-quoted 1,162 = the reference-imports mirror, +49
+frontend-planning-deep frames) · 1,723 raw records · 26 lifecycles (all with ≥1 broken leg) · 48 legacy forms
+(26 PARTIAL + 13 MISSING + 9 field-less gates) · 30 pre-existing `f-fbAdd-*` duplicate ids → **owner 044**.
+**Plan** (`plan.md` D1–D14 · `research.md` R1–R8 · `data-model.md` 17 doc-domain entities · `quickstart.md`
+5 worked examples · **15 `contracts/`**; plan adversarial review **15/15 PASS** — the round-1 catch: fix-first
+item 5 owner corrected 049→048 per the binding partition): **wave graph** 043∥044 foundations → 045–050 parallel
+page groups (may merge only after the APPLICABLE 043/044 contracts are RATIFIED — "stable" = contracts, not
+implementations) → 051/052/053/054 → 055 propagation → 056 final field census (page groups DELIVER page-local
+field sets; 056 AUDITS them) → 057 freeze; acyclic by wave numbering. **Rulings**: HONEST_LOCK 5 ledger rows =
+ONE physical `classSalaryReport` lock; 57 bilingual bases + `index.html` = 58 REVIEW UNITS (never "58 bases");
+REJECTED_* = negative requirements, never backlog; INTENTIONALLY_IMPROVED + B-register = preservation law
+(regression = review failure); UNKNOWN_EVIDENCE resolves only by NEW evidence; FUTURE_BACKEND = honest gates,
+never fakes. **Execution routing** (045–050): Codex Sol High (visual direction/IA/complex layout/critique) +
+Sol Medium (mechanical/locale/tests); Claude Opus = independent critic; single-writer-per-file; a MANDATORY
+browser/screenshot loop — source-reading is never visual acceptance. Counts frozen **115 · 57 · 50 · 24/25/1 ·
+49/0/1 · `FUTURE_ROUTES {}` · orphan pair · lock 1**; Spec-041 gates (ROUTES_50 · R-2 serious-a11y · R-3
+console-error · 16/16 mutations) inherited untouched; future test changes = additive / strengthening / declared
+supersession with mutation proof. **No commit / no push** — watcher commits. Next: `/speckit.tasks`.
+History: **Spec 041 — Full Frontend Route & Sidebar Production Freeze is IMPLEMENTED** (awaiting the watcher
 commit; 34 artifacts + `plan.md` + `tasks.md` (142 tasks) + `implementation-status.md` at
 `academy-dashboard-discovery/specs/041-route-sidebar-production-freeze/`). Baseline HEAD `21502af` (Spec 040 · PR #13 ·
 merge `13d38af`). **An AUDIT + FREEZE spec that fixed THREE defects** — it is not a redesign.
