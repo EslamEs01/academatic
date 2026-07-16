@@ -95,7 +95,8 @@ Issued certificates surface once more in `components/result-summary.js` (admin s
 
 ## 3. Capability ledger
 
-See the structured ledger returned to the orchestrator (31 rows, `C10-01 … C10-31`). Headlines:
+See the normalized disposition summary below (27 rows, `C10-01 … C10-27`), mirrored 1:1 into the master
+`legacy-current-capability-ledger.md`. Headlines:
 
 - **The legacy "material" is 2 fields and we ship 2 fields** → the subject catalog is genuinely COMPLETE.
 - **The certificate designer is our biggest control-count gap: ~15 legacy controls → 1** (name). This is a
@@ -170,3 +171,44 @@ See the structured ledger returned to the orchestrator (31 rows, `C10-01 … C10
 - Empty/loading/error states: our library/certificates tabs have **no authored empty state** (fixtures are never
   empty) — the legacy's three empty states ("No Material Added" / "No data found") are the states a real academy
   will actually see on day one. **State coverage gap** across the whole cluster (owner 045–050 / 057).
+
+---
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+Derived strictly from the sections above. The table below IS the structured ledger §3 references — 27 rows,
+`C10-01 … C10-27`, mirrored 1:1 into the master `legacy-current-capability-ledger.md`. Owners marked `*` were
+not named in the audit text and are assigned by normalization from the Spec-042 binding future-owner register
+(flagged to the orchestrator).
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C10-01 | Subject/course catalog list + row kebab (Edit·Delete) | COMPLETE_AND_VERIFIED | — | §1(a) + §3 |
+| C10-02 | Subject create/edit form (name · name_ar; field-level 2=2) | COMPLETE_AND_VERIFIED | — | §1(a) + §3 |
+| C10-03 | Subject delete (legacy unconfirmed POST → data-confirm + backendRequired) | INTENTIONALLY_IMPROVED | — | §4.3 |
+| C10-04 | Media library book list (9-col) + labelled type chip + search/type/category filters | INTENTIONALLY_IMPROVED | — | §1(b) + §4.4 |
+| C10-05 | Add Material form (legacy 5 fields → 3 shipped) | PARTIAL | 056* | §1(b) + §2 |
+| C10-06 | Add Material `file` + `thumbnail` upload | FUTURE_BACKEND | 056* | §1(b) + §5 |
+| C10-07 | Category Details modal (legacy create + per-row edit; per-row edit not shipped) | PARTIAL | 056* | §1(b) + §2 |
+| C10-08 | Library item detail sheet (`libShowModal` via View column) | MISSING | 044* | §1(b) + §2 |
+| C10-09 | Certificate templates surface (static designer preview) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 045-050 | §7 |
+| C10-10 | Certificate designer WYSIWYG (~15 controls → 1; sanctioned by Spec-031 gate contract) | PARTIAL | 044* | §1(c) + §3 |
+| C10-11 | Certificate requests queue list (+ labelled STATUS chip legacy lacked) | INTENTIONALLY_IMPROVED | — | §1(c) + §4.5 |
+| C10-12 | Approve modal (7 controls → 0; template/delivery/message at approval time) | PARTIAL | 056* | §1(c) + §3 |
+| C10-13 | Certificate Preview (legacy `window.open` PDF → honest gate) | INTENTIONALLY_IMPROVED | — | §4.2 |
+| C10-14 | Approve/Reject fake `Success!` + optimistic row removal | REJECTED_NO_FAKE | — | §4.1 + §5 |
+| C10-15 | `Send group` WhatsApp delivery in the approve modal | REJECTED_PRIVACY | 043 | §5 |
+| C10-16 | Teacher `Request Certificate` modal (`POST /teacher/certificate-request`) | MISSING | 055* | §1(c) + §3 + §6.1 |
+| C10-17 | Student-profile per-course certificates list (`Certificate Details` modal → Results tab) | PARTIAL | 044* | §1(c) + §2 |
+| C10-18 | Create/Issue certificate (5-field drawer; no delivery control shipped) | PARTIAL | 056* | §1(c) + §3 |
+| C10-19 | Upload certificate (`POST /management/upload-certificate`) | FUTURE_BACKEND | 056* | §1(c) + §5 |
+| C10-20 | Guardian certificate delivery (private, per-guardian, opt-in only) | FUTURE_BACKEND | 053 | §1(c) + §5 |
+| C10-21 | Teacher library page (search + category affordance + content propagation) | PARTIAL | 045-050* | §1(d) + §7 |
+| C10-22 | Student/child-view materials page (legacy search + category select) | PARTIAL | 045-050* | §1(d) + §2 |
+| C10-23 | Family materials grouped by child | INTENTIONALLY_IMPROVED | — | §4.6 |
+| C10-24 | Real legacy PII (designer sample, manager identity, student/teacher names) not ported | REJECTED_PRIVACY | — | §4.7 + §5 |
+| C10-25 | Live CSRF token embedded in legacy HTML | REJECTED_SECURITY | — | §5 |
+| C10-26 | Per-row Actions of the three empty legacy tables (library · pdf · certificate-requests) | UNKNOWN_EVIDENCE | 045-050* | §6.3 |
+| C10-27 | Authored empty/loading/error states across the cluster | MISSING | 045-050 | §7 |
+
+Honest counts: screenshotsOpened=35 · recordsInspected=27 · currentSourceFiles=9

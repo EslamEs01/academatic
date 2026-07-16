@@ -10,7 +10,8 @@ _No legacy page records carry a module tag for this cluster — this cluster cor
 ## Current-app source files
 
 - app/public/index.html
-- app/public/index.en.html
+  _(no `index.en.html` exists — `index.html` is the ONE unmirrored file: 57 bases × 2 + index = 115; a prior
+  revision of this list wrongly included `app/public/index.en.html`, corrected here after disk verification)_
 - app/src/js/components/portal-shell.js
 - app/src/js/components/portal-page.js
 - app/src/js/components/shell-markup.js

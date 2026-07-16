@@ -41,7 +41,9 @@
   language, and the `enhance.js` hook set. Its findings land on **every** page rather than one.
 
 A cluster owning zero bases is a **reporting fact**, not an unowned surface: every one of the 57 bases is still
-claimed exactly once above, and both C13's and C15's *capabilities* are dispositioned in the ledger.
+claimed exactly once above, and both C13's and C15's *capabilities* are dispositioned in their cluster audits —
+`cluster-audits/C13-audit.md` (16 capability rows, C13-01…C13-16) and `cluster-audits/C15-audit.md` (20 rows,
+C15-01…C15-20) — which roll up into the consolidated capability ledger.
 
 ## 2. Current base → cluster → nav → legacy evidence
 
@@ -112,7 +114,9 @@ claimed exactly once above, and both C13's and C15's *capabilities* are disposit
 `gallery.html` / `gallery.en.html` have **no inbound link** and **no nav item** — direct-URL only, by design
 (a design-system reference page). The orphan set is machine-frozen at **exactly these two**: a NEW orphan fails
 (mutation M-11) **and** gallery *gaining* an inbound link also fails (mutation M-12). Owner: the frontend/
-design-system maintainer; it still receives a review owner in `page-review-ownership-map.md`.
+design-system maintainer; it still receives a review owner in the 045–050 partition —
+`visual-quality-and-academic-design-audit.md` §10 (58 review units = 57 mirrored bases + `index.html`;
+gallery → **050**), from which the consolidated `page-review-ownership-map.md` is extracted.
 
 ## 4. Route register (all 50 nav items)
 
@@ -129,6 +133,9 @@ at a *real but wrong* page fails (mutation **M-2**); before that register existe
 ## 5. Legacy routes with no current surface
 
 Resolved at **capability** level, not page level — a legacy route without a same-named page is NOT automatically
-a gap (the legacy inflates its count with per-entity detail routes and modal-as-page patterns). See
-`legacy-current-capability-ledger.md` for the per-capability dispositions and
-`future-spec-allocation-register.md` for the owner of every `PARTIAL` / `MISSING` / `UNKNOWN_EVIDENCE`.
+a gap (the legacy inflates its count with per-entity detail routes and modal-as-page patterns). The
+per-capability dispositions live in the 15 cluster audits' "Disposition summary" tables
+(`cluster-audits/C01-audit.md` … `C15-audit.md` — all 15 written) and the owner roll-up sections of the six
+cross-cutting ledgers; they are consolidated into `legacy-current-capability-ledger.md` (dispositions) and
+`future-spec-allocation-register.md` (the owner of every `PARTIAL` / `MISSING` / `UNKNOWN_EVIDENCE`) in the
+consolidation pass.

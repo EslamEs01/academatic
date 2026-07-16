@@ -15,6 +15,14 @@ Every legacy page record carries `modules: []` (one or more legacy module tags).
 | raw HTML | 300 | 26 | 13 | 339 |
 | sanitized HTML | 300 | 26 | 13 | 339 |
 
+Reconciliation note (sitewide `find output/` vs this per-page-record table): a raw `find output -name '*.html'`
+returns **679** — the 678 page-record HTML above (339 raw + 339 sanitized) **plus `output/combined/report.html`**,
+a crawler summary artifact that is not a page record. Likewise sitewide JSON = **346** (339 page records +
+`combined/academy-system-map.json` + 3 `role-map.json` + 3 `network/endpoints.json`) and sitewide MD = **359**
+(339 page MD + 20 index/summary files). Screenshot note: the `reference-imports` mirror totals **1,162** images =
+the 1,113 crawler screenshots above + the 49 `frontend-planning-deep` frames (which are planning imports, not
+crawler page captures).
+
 ## Per-cluster counts (unique legacy pages; multi-membership noted)
 
 | Cluster | Name | Legacy module tag(s) | Unique pages | Sum of raw module-tag occurrences |

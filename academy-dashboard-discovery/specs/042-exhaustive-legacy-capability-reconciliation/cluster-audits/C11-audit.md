@@ -314,3 +314,46 @@ Opened: `messages` (ar/en/dark/mobile + group drawer), `leads` (ar/en/dark/mobil
 | No computed metric | **Green** — and it costs us the legacy's conversion analytics (correctly). |
 | No engine / websocket | **Green** — and it is what keeps the MQTT design out of our codebase. |
 | Planned = 0 / FUTURE_ROUTES = {} | **Green** — all three routes are plain implemented entries (`nav.config.js:28,29,31`). |
+
+---
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C11-01 | Chat conversation list + Search Contact (+ added read/unread facet) | INTENTIONALLY_IMPROVED | — | §1.3 Field-by-field |
+| C11-02 | Open thread from list (inline pane hard-wired to MESSAGES[0]) | PARTIAL | 044 | §1.3 / §7.1 |
+| C11-03 | Compose + Send (gated shell) | COMPLETE_AND_VERIFIED | — | §1.3 Field-by-field |
+| C11-04 | Attach file (legacy `type=file` → honest gate) | REJECTED_NO_FAKE | — | §1.3 Field-by-field |
+| C11-05 | Voice notes / emoji / delete-message / seen receipts | MISSING | 054 | §1.3 Field-by-field |
+| C11-06 | Create Group form (6 controls) | COMPLETE_AND_VERIFIED | — | §1.3 Field-by-field |
+| C11-07 | Add Member (3 selects) | COMPLETE_AND_VERIFIED | — | §1.3 Field-by-field |
+| C11-08 | Group settings offcanvas + Leave Group (destructive, no surface) | MISSING | 044 | §1.3 / §7.3 |
+| C11-09 | `loadMoreChats` thread pagination | FUTURE_BACKEND | 054 | §1.3 Field-by-field |
+| C11-10 | MQTT transport / topic namespace / clientId-token authz | REJECTED_SECURITY | 043 | §1.4 (054 secondary: transport) |
+| C11-11 | Teacher chat surface (legacy reduced variant; no current consumer) | MISSING | 055 | §1.1 / §1.5 Cross-role |
+| C11-12 | Student-addressed chat delivery (legacy sends to login-less students) | REJECTED_NO_FAKE | 043 | §1.5 Cross-role |
+| C11-13 | Notification routing settings (47/47 fields, channel enum, asymmetry preserved) | COMPLETE_AND_VERIFIED | — | §2.1 |
+| C11-14 | In-app notification bell/popover (legacy live count badge) | PARTIAL | future-backend | §2.2 |
+| C11-15 | Notification inbox list page (destination never crawled) | UNKNOWN_EVIDENCE | future-backend | §2.2 |
+| C11-16 | Message Builder (legacy capture = 504) | UNKNOWN_EVIDENCE | 053 | §2.3 |
+| C11-17 | Announcement compose form (11 controls; 3 stub selects · `hours` mislabel · free-text expire) | PARTIAL | 045–050 | §3.2 / §3.3 / §6 |
+| C11-18 | Announcement recipient selection (teacher/student pick tables + Select All) | MISSING | 056 | §3.3 gap 1 |
+| C11-19 | Announcement edit / delete / duplicate | MISSING | 056 | §3.3 gap 5 |
+| C11-20 | Announcement consumer/render surface (dashboard band, any role) | MISSING | 055 | §3.4 |
+| C11-21 | Real staff/supervisor names in ad category selects (corpus PII) | REJECTED_PRIVACY | — | §3.1 / §8 |
+| C11-22 | Lead create form (19 visible fields, 1:1) | COMPLETE_AND_VERIFIED | — | §4.2 Field-by-field |
+| C11-23 | Lead `country_id` option set (select → free text) | PARTIAL | 056 | §4.2 Field-by-field |
+| C11-24 | Leads list columns + facets (+ added source facet) | INTENTIONALLY_IMPROVED | — | §4.2 Field-by-field |
+| C11-25 | Leads date-range filter (Range / Submit / Reset) | PARTIAL | 056 | §4.2 Field-by-field |
+| C11-26 | Lead detail: 4 stacked modals → 1 coherent drawer | INTENTIONALLY_IMPROVED | — | §4.2 Field-by-field |
+| C11-27 | New-requests statistics board (~24 tiles → 4 authored KPI cards) | PARTIAL | future-backend | §4.2 Field-by-field |
+| C11-28 | Computed conversion analytics (% / MoM growth / averages / Top Performer) | REJECTED_NO_FAKE | — | §4.2 Field-by-field |
+| C11-29 | Scheduled-trials board (legacy captures = HTTP 500) | UNKNOWN_EVIDENCE | 056 | §4.1 / §4.2 |
+| C11-30 | Lead → family conversion workflow (form/destination uncaptured) | UNKNOWN_EVIDENCE | 055 | §4.3 (056 secondary: forms) |
+| C11-31 | Lead contact-detail exposure / role gating (anti-poaching; corpus operator e-mail never ported) | REJECTED_PRIVACY | 043 | §4.4 |
+| C11-32 | Feedback categories create (3/3 fields, `rep-fbcat` drawer) | COMPLETE_AND_VERIFIED | — | §5 |
+| C11-33 | Lead-new long-form-in-drawer UX (section keys exist, never rendered) | PARTIAL | 044 | §7.2 |
+| C11-34 | Gated-primary visual affordance (`aria-disabled` reads as live) | PARTIAL | 044 | §7.4 |
+
+Honest counts: screenshotsOpened=26 · recordsInspected=31 · currentSourceFiles=not stated (the Method line folds current-source inspection into the 31-record count; no separate figure is stated)

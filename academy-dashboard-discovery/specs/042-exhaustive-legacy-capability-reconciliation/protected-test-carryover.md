@@ -67,6 +67,10 @@ the untouched baseline *before* being made gates, so each tightens an already-tr
 **30 pre-existing duplicate ids**: `f-fbAdd-category` · `f-fbAdd-remark` · `f-fbAdd-note`, three on each of **10**
 pages (`attendance`, `course`, `group`, `sessions`, `teacher` × 2 languages), from the **Spec-032 nested `fb-add`
 drawer**. Provenance confirmed at baseline `21502af` — **not introduced by Spec 041 or 042**.
+Counting basis: the **30 = 3 duplicated id NAMES × 10 page files**; per-file *occurrence* counts vary
+(attendance **5** · sessions **3** · course/group/teacher **2** each — see
+`modal-drawer-interaction-ledger.md` Part A.2). The two documents count the same defect on two bases; they do
+not contradict.
 
 `teachers.html` / `.en` have **0** duplicate ids (the D-1 MOVE removed the colliding drawer — see M-14).
 

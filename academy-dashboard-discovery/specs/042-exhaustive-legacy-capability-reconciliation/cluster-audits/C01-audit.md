@@ -141,3 +141,37 @@ an "up next this week" strip · a families/attention chip row · **4 status tile
   not session-scoped → the per-session notification capability has no home (owner: 053 + 055).
 * Legacy role isolation (3 redirect proofs) should be an explicit invariant in **Spec 043**; today we have no auth
   at all, so "isolation" is only a routing convention.
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C01-01 | KPI/status tile drill-down links (8 status-filtered board links → 0; cards/tiles inert) | PARTIAL | 045-050 | §3 The gaps that matter (capability level) |
+| C01-02 | Day-board filter form (legacy 12 inputs: date_range/time-window/teacher/family/student/type vs 3 controls on sessions.html) | PARTIAL | 056 | §3 The gaps that matter (capability level) |
+| C01-03 | Session outcome/write forms with fields (attend 7 → 0 · absent 13 → 0 · cancel 10 → 0 · edit 8 → 0; kebab/drawer finals field-less) | PARTIAL | 056 | §3 The gaps that matter (capability level) |
+| C01-04 | Session teacher-reassignment control (legacy editClass `teacher_id`; no reassignment control anywhere in our product) | MISSING | 056 | §3 The gaps that matter (capability level) |
+| C01-05 | Board display-mode preference (custemize-table modal: Today/Upcoming/Past + group-by-time, persisted per user) | MISSING | 044 | §3 The gaps that matter (capability level) |
+| C01-06 | Excel export of the day board (legacy POST /management/export-aa) | MISSING | 045-050 | §3 The gaps that matter (capability level) |
+| C01-07 | Per-class Send Reminder / Send WA message (session-scoped notification touching teacher AND family) | MISSING | 053 | §3 The gaps that matter (capability level) · §6 Cross-role reality check |
+| C01-08 | Per-class "Running" status transition | MISSING | 055 | §3 The gaps that matter (capability level) |
+| C01-09 | Class Timeline audit trail (status diffs, actor, timestamps) | FUTURE_BACKEND | 055 | §3 The gaps that matter (capability level) |
+| C01-10 | Class Files panel (teacher/student files per class) | FUTURE_BACKEND | 056 | §3 The gaps that matter (capability level) |
+| C01-11 | Per-class queue add with fields (legacy addQueueAction: level + text) | MISSING | 056 | §3 The gaps that matter (capability level) |
+| C01-12 | Topbar unpaid-courses alert (courses?type=no_invoices) | FUTURE_BACKEND | 055 | §3 The gaps that matter (capability level) |
+| C01-13 | User-defined nav shortcuts (POST /management/shortcuts: shortcut_title + shortcut_link) | FUTURE_BACKEND | 056 | §3 The gaps that matter (capability level) |
+| C01-14 | Global search results surface (GET /management/search + Recent Searches modal) | MISSING | 045-050 | §3 The gaps that matter (capability level) |
+| C01-15 | Teacher-home working session controls (date search over own classes · Enter Again/join · End class form · Mark absent · request cancel/reschedule — reduced to a 0-field guidePanel gate) | PARTIAL | 054 | §3 The gaps that matter (capability level) |
+| C01-16 | D-A: teacher quick-tiles falsely badge 7 implemented pages as «قريبًا» (missed Spec 019/020 status-aware fix; escapes the planned/coming-soon census) | PARTIAL | 045-050 | §4 Defects found in OUR product (not legacy gaps) |
+| C01-17 | D-B: sessions-table pager is a silent dead control (no handler, no honest gate) | PARTIAL | 044 | §4 Defects found in OUR product (not legacy gaps) |
+| C01-18 | D-C: "UI states" showcase band ships on the production admin home; the real sessions table has no genuine empty/error state | PARTIAL | 045-050 | §4 Defects found in OUR product (not legacy gaps) |
+| C01-19 | Legacy teacher salary band / per-class fine chip / Delete Fine kebab (POST …/compensations/3) — not ported | REJECTED_PAY_FREE | — | §5 What we do BETTER (preserve — do not "fix" back) |
+| C01-20 | Legacy real PII (profile popover real name + gmail; corpus real family/teacher names) — not ported | REJECTED_PRIVACY | — | §5 What we do BETTER (preserve — do not "fix" back) |
+| C01-21 | Legacy computed vanity metric ("Attended Percentage 0%") — our teacher surfaces carry no computed score/percentage | INTENTIONALLY_IMPROVED | — | §5 What we do BETTER (preserve — do not "fix" back) |
+| C01-22 | Destructive actions require confirmation (legacy Delete Fine fired from the kebab with no confirm) | INTENTIONALLY_IMPROVED | — | §5 What we do BETTER (preserve — do not "fix" back) |
+| C01-23 | Hash-aware language switch preserving #view= (vs legacy plain page swaps) | INTENTIONALLY_IMPROVED | — | §5 What we do BETTER (preserve — do not "fix" back) |
+| C01-24 | Honest backendRequired gates on every write — never a fake success toast | INTENTIONALLY_IMPROVED | — | §5 What we do BETTER (preserve — do not "fix" back) |
+| C01-25 | Portals hub demo role-switch ("no login, fixtures only" note) with student demoted to child-view preview | INTENTIONALLY_IMPROVED | — | §5 What we do BETTER (preserve — do not "fix" back) |
+| C01-26 | Session-outcome cross-role chain (record-outcome creation surface absent; family billing / teacher follow-ups / attendance consumers are fixture-fed display surfaces) | FUTURE_BACKEND | 055 | §6 Cross-role reality check |
+| C01-27 | Role isolation as an explicit invariant (legacy 3 redirect proofs; today no auth — routing convention only) | FUTURE_BACKEND | 043 | §6 Cross-role reality check |
+
+Honest counts: screenshotsOpened=33 · recordsInspected=21 · currentSourceFiles=not stated

@@ -175,3 +175,29 @@ light/dark and a clean 390px column) — a clear improvement on the legacy grey 
 the **Analysis tab is thin** (5 cards on a wide empty canvas — it looks unfinished rather than deliberate), and the
 **Monthly tab has no per-month affordance beyond an Export gate**. Both are candidates for the 045–050 academic
 redesign groups, not for new engines.
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C08-01 | Form/questionnaire builder (N repeatable question rows, 6 field types, per-form colour picker) | PARTIAL | 056 | §3 item 1 |
+| C08-02 | Monthly student progress report authoring (9-input Send Report, admin + teacher producer surface) | MISSING | 056 | §3 item 2 |
+| C08-03 | Reports follow-up tracker (teacher/student/has_report/month board + Student Timetable modal) | MISSING | 056 | §3 item 3 |
+| C08-04 | Form responses viewing | MISSING | 056 | §3 item 4 |
+| C08-05 | Per-teacher-per-month feedback note entry point from the teacher board | PARTIAL | 056 | §3 item 5 |
+| C08-06 | Data-analysis demographic breakdowns (age/language/status/gender/country counts, no charts) | PARTIAL | 045-050 | §3 item 6 |
+| C08-07 | Lead-funnel statistics board (non-computed aggregates beyond the 4 authored KPI cards) | PARTIAL | 045-050 | §3 item 7 |
+| C08-08 | Salary Class Report (admin) — date range + Group By + teacher select | HONEST_LOCK | — | §3 item 8 |
+| C08-09 | Computed Percentage / % of requests / MoM growth / Top Performer ranking (replaced by categorical chips + authored counts) | REJECTED_NO_FAKE | — | §4 |
+| C08-10 | analysis-expenses teacher salary figures + teacher-role Salary / Salary Class Report rail | REJECTED_PAY_FREE | — | §4 |
+| C08-11 | WhatsApp "Names of Null groups" insights (real names, phones, e-mail, live invite URL) | REJECTED_PRIVACY | 043 | §4 |
+| C08-12 | No-confirm real DB backup GET route + silent SMTP redirect with type=password field | REJECTED_SECURITY | — | §4 |
+| C08-13 | Legacy crawl operator PII in profile menus | REJECTED_PRIVACY | — | §4 |
+| C08-14 | nav.monthlyReports label vs legacy capability pairing (legacy = form builder / progress-report workflow) | PARTIAL | 056 | §5 |
+| C08-15 | Forms-table row-level Actions (edit/delete/set-default/toggle-status/duplicate — table empty at crawl) | UNKNOWN_EVIDENCE | 056 | §5 |
+| C08-16 | Reports hub redesign (calm academic 3-tab hub replacing the legacy grey ERP board) | INTENTIONALLY_IMPROVED | — | §6 |
+| C08-17 | Analysis tab density + Monthly tab per-month affordance (visual notes) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 045-050 | §6 |
+
+Honest counts: screenshotsOpened=31 · recordsInspected=17 · currentSourceFiles=14 (counted from the Method list; the Method line states no explicit number for source files)
+
+Normalization notes (Spec 042, no new analysis): owners for C08-02/-03/-04/-05/-14/-15 map to 056 per the binding future-owner register (forms & data capture); the audit itself names 056 explicitly only for C08-01 and "056/057" for C08-14 (primary 056 chosen). C08-06/-07/-17 map to 045-050 per the audit's §6 pointer to the academic redesign groups. C08-12 carries a dual verdict in the audit (REJECTED_NO_FAKE + REJECTED_SECURITY); REJECTED_SECURITY recorded as primary.

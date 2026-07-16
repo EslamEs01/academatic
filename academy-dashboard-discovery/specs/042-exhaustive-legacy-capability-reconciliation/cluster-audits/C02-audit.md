@@ -215,3 +215,44 @@ are a clear improvement on the legacy Bootstrap-ERP look. Three visual items:
 | **056** Forms & data-capture audit | Add/Edit-teacher completion (13 → ~26) · all teacher-portal write forms · own-profile edit |
 | **051** Community/moderation | teacher chat (contacts/groups) |
 | **Never** | salary/compensation/payout/hour-rate figures · zoom + login passwords · impersonation · computed % · live WhatsApp invite URLs |
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C02-01 | Directory sort/scope/pagination | PARTIAL | 045-050 | §0 scope correction · §8 |
+| C02-02 | Add/Edit teacher form (13 vs ~26 safe fields) | PARTIAL | 056 | §1.1 |
+| C02-03 | Teacher settings tab: location + preferences forms | MISSING | 056 | §1.2 |
+| C02-04 | Per-teacher capabilities permission model (can_chat / can_see_library / can_edit_schedule / can_edit_class) | MISSING | 043 | §1.2 |
+| C02-05 | Per-teacher notification matrix (4×2) | MISSING | 043 | §1.2 · §5 |
+| C02-06 | Left/Acquired students attribution tables | MISSING | 043 | §1.2 |
+| C02-07 | End-class outcome capture (5 controls) | PARTIAL | 044 | §1.3 |
+| C02-08 | Mark class absent (video + notes) | MISSING | 056 | §1.3 |
+| C02-09 | Cancel / auto make-up request (11 inputs) | MISSING | 055 | §1.3 · §5 |
+| C02-10 | Edit class (12 inputs, capability-gated) | MISSING | 044 | §1.3 |
+| C02-11 | Monthly student progress report (30 inputs) | PARTIAL | 056 | §1.3 · §5 |
+| C02-12 | Teacher-side certificate request (4 fields) | MISSING | 055 | §1.3 · §5 |
+| C02-13 | Own profile edit + password (7 controls) | PARTIAL | 056 | §1.3 |
+| C02-14 | Library browse search + category filter | PARTIAL | 045-050 | §1.3 · §8 |
+| C02-15 | Teacher chat (contacts/groups) | MISSING | 051 | §1.3 · §8 |
+| C02-16 | Teacher-portal quick tiles falsely stamped «قريبًا» | PARTIAL | 045-050 | §2 |
+| C02-17 | Teacher portal pay-free (vs legacy salary banners/fines) | INTENTIONALLY_IMPROVED | — | §3 I-1 |
+| C02-18 | Categorical chips replace computed Percentage | INTENTIONALLY_IMPROVED | — | §3 I-2 |
+| C02-19 | Task board without donut chart / staff-average table | INTENTIONALLY_IMPROVED | — | §3 I-3 |
+| C02-20 | Star-rating widget left unsurfaced | INTENTIONALLY_IMPROVED | — | §3 I-4 |
+| C02-21 | Login-as impersonation | REJECTED_SECURITY | — | §3 I-5 · §4 |
+| C02-22 | Directory card grid + labeled chips redesign | INTENTIONALLY_IMPROVED | — | §3 I-6 |
+| C02-23 | Three real sidebar destinations (D-1 fix) | INTENTIONALLY_IMPROVED | — | §3 I-7 |
+| C02-24 | All-teachers timetable folded into schedule lens | INTENTIONALLY_IMPROVED | — | §3 I-8 |
+| C02-25 | Salary/compensation/fine/payout fields + salary reports | REJECTED_PAY_FREE | — | §4 |
+| C02-26 | Password + 8-field Zoom credential block + reset + raw PAN | REJECTED_SECURITY | — | §4 |
+| C02-27 | WhatsApp teacher insights PII + teacher-visible staff table | REJECTED_PRIVACY | 043 | §4 |
+| C02-28 | Computed % / Average + _method-spoofed DELETE on report | REJECTED_NO_FAKE | — | §4 |
+| C02-29 | teacher.html banner action-row overflow (14 buttons) | PARTIAL | 044 | §6 |
+| C02-30 | Monthly-plan approval authority (View / Approve) | UNKNOWN_EVIDENCE | 055 | §7 |
+| C02-31 | Live classroom UI (session-class-room redirect) | UNKNOWN_EVIDENCE | 054 | §7 |
+| C02-32 | Send Reminder / Running kebab endpoints | UNKNOWN_EVIDENCE | 055 | §7 |
+| C02-33 | Zoom meeting provisioning (never credentials) | FUTURE_BACKEND | 053 | §8 |
+| C02-34 | teacher-students page depth | PARTIAL | 045-050 | §8 |
+
+Honest counts: screenshotsOpened=56 · recordsInspected=34 · currentSourceFiles=not stated (the Method line names a file set — `pages/teachers.js`, `pages/teacher*.js`, `components/teacher-actions.js`, `fixtures/portal.js`, `nav.config.js` — which enumerates to 14 files on disk; no numeral was stated in the audit itself).

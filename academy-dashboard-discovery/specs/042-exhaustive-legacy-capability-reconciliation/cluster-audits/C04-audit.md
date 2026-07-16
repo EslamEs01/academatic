@@ -165,3 +165,38 @@ Table `# · Name · Description · Status · Count · Settings(kebab)` + **Creat
    academy, not a corporate ERP. No redesign needed; only the *Categories* board (a flat card grid
    with no per-row actions) and the sparse 3-tile summary strip (vs 7 legacy status tiles) deserve a
    second look in the 045–050 visual groups.
+
+---
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+| --- | --- | --- | --- | --- |
+| C04-01 | Families directory board (7 status KPI tiles + 7 status lens routes + 12-column table vs 3 summary cards + hero cards) | PARTIAL | 045-050 | §1.1 + Finding 7 |
+| C04-02 | Advanced filter panel (31 raw fields / 7 facets incl. hour_rate, children_no, cost_type, course_types, payment_methods, 16 currencies) vs search + 2 selects | PARTIAL | 056 | §1.1 + Finding 1 |
+| C04-03 | Directory row kebab actions (legacy Show/Edit/Delete vs current 5-item kebab without Delete) | PARTIAL | 056 | §1.1 + Finding 4 |
+| C04-04 | Update-returning modal (returned_at + note) | MISSING | 056 | §1.1 + Finding 4 |
+| C04-05 | Family detail info panel & tab set (22-row panel / 7 tabs vs banner + 4 KPIs / 5 tabs) | PARTIAL | 056 | §1.2 + Finding 1 |
+| C04-06 | Billing & invoices tab (invoice list, Create Invoice, Deleted Invoices; persistence) | FUTURE_BACKEND | 030 | §1.2 + Finding 5 (Spec 027 row M-Q) |
+| C04-07 | "New Transaction" payment-gateway record-payment form (transaction_id/taxes/total/getway) | REJECTED_NO_FAKE | — | §1.2 + Finding 5 |
+| C04-08 | Invoice Adjustments tab (value/count/type/note + per-row Edit/Delete) | MISSING | 056 | §1.2 |
+| C04-09 | Credits tab (session/student/teacher/duration) | MISSING | 056 | §1.2 |
+| C04-10 | Profile Activity audit timeline (who changed what, when) | FUTURE_BACKEND | 055 | §1.2 |
+| C04-11 | Family Settings tab — Update Location (4) + Preferences (7 incl. stop_after unpaid-invoice threshold) | MISSING | 056 | §1.2 + Finding 2 |
+| C04-12 | Capability toggles Chat / Library (cross-role gates on what the family portal shows) | MISSING | 055 | §1.2 + Finding 2 |
+| C04-13 | Profile Notifications 7 × 2 event/channel matrix (14 checkboxes) | MISSING | 056 | §1.2 + Finding 2 |
+| C04-14 | Lifecycle actions & modals (Suspend/Stop with date + auto-return + mandatory note; Deactivate · Activate · Schedule-Stop-on-Date · Delete; Deleted/Incomplete statuses) | PARTIAL | 056 | §1.2 + Finding 4 |
+| C04-15 | "Login as" impersonation + Send Reset Password | REJECTED_SECURITY | — | §1.2 + Finding 5 (Spec 027 row M-U: future-backend) |
+| C04-16 | Family create/edit contract form (32 user-facing controls; Payment + Courses block vs 12 family-level wizard controls) | PARTIAL | 056 | §1.3 + Findings 1, 6 |
+| C04-17 | password / user_name credential fields on family forms | REJECTED_SECURITY | — | §1.3 + Finding 5 |
+| C04-18 | Long-form host for the 32-control, 4-section create/edit (current fam-edit is a narrow single-column drawer) | PARTIAL | 044 | Finding 6 |
+| C04-19 | Family categories management (create/edit/assign; current Categories tab is a flat card grid with no per-row actions) | PARTIAL | 045-050 | §1.4 + Finding 7 |
+| C04-20 | Parent-meeting feedback pipeline (Parents board, schedule meeting with manager, Add Notes, 4-textarea per-student report, View Report — portal consumer exists with no producer) | PARTIAL | 055 | §1.5 + Finding 3 |
+| C04-21 | Feedback categories CRUD (legacy name/status/description create; current reports.html 3-field create form) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | — | §1.5 + §2 |
+| C04-22 | WhatsApp families insights board (null-group check) | MISSING | 043 | §1.6 |
+| C04-23 | Unmasked real-phone PII porting (01154859653, 441200480244) | REJECTED_PRIVACY | — | §1.3 + §1.6 + Finding 5 |
+| C04-24 | Anti-poaching: no guardian contact on any teacher surface (teacher-students.js:6) | INTENTIONALLY_IMPROVED | — | Finding 5 |
+| C04-25 | Family portal zero-pay, display-only living cockpit (zero forms, zero currency figures) | INTENTIONALLY_IMPROVED | — | §2 + Finding 5 |
+| C04-26 | Families grid + family portal visual identity (warm academy look; no redesign needed) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 045-050 | Finding 7 |
+
+Honest counts: screenshotsOpened=37 · recordsInspected=26 · currentSourceFiles=14

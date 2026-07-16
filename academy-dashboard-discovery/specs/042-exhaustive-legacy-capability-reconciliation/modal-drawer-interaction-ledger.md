@@ -170,7 +170,8 @@ clipped at the inline edge and the icon rail absent**. Root cause is geometry, n
 (`app.css:230`); at 390px viewport ×0.92 = 359px the panel + rail + padding overflow and the RTL
 `.nav-panel` text is cut. Contrast the desktop sheets which fit `min(440px,92vw)` (`app.css:527`).
 **Owner 044** (Spec 041 D-1 and C15 both flag the mobile drawer; the fix is a drawer-width/label-wrap
-rule, not new behaviour). `C15-13 COMPLETE_BUT_VISUAL_REVIEW_REQUIRED → 044`.
+rule, not new behaviour). `C15-15 COMPLETE_BUT_VISUAL_REVIEW_REQUIRED → 044` (the C15 audit's minted row;
+also carried by the empty-state and visual ledgers).
 
 ### C.4 CONFIRMED — direct-linking a drawer is impossible (by design); tabs are hash-addressable
 `langUrl()` preserves `#view=/#step=/#child=` (Spec 041 D-3, `enhance.js:239-249`) and tabs restore
@@ -225,7 +226,7 @@ whose fields are owned by 056 and whose long-form HOST is owned by 044; persiste
 | **Mark as attend (7 + images[])** | same, modal "Mark as attend" | outcome drawer attend = `data-demo-action` toast (`outcome-details.js:72`) | PARTIAL | 044 + 056; upload stays a GATE |
 | **Send Report (24)** teacher/admin monthly report | `teacher/…` "End class"(5)/`admin` "Send Report"(24) | teacher-reports.html = 5 read-only labels; student `#view=evaluation` read-only | MISSING (producer) | 044 (the 2-column long-form) + 056 |
 | **New Transaction (8)** record payment | `modal-inventory.md` "New Transaction" ×28 | finance record-payment = field-less confirm/gate (`finance-actions.js:66-79`) | PARTIAL | 044 + 056 + future billing |
-| **Create parent invoice (16 + line rows)** | C07 audit | "Create invoice" = disabled gate, 0 fields | FUTURE_BACKEND | future billing + 056 + 044 (line-item repeater) |
+| **Create parent invoice (16 + line rows)** | C07 audit (**C07-02** — MISSING, owner 056) | "Create invoice" = disabled gate, 0 fields | FUTURE_BACKEND | future billing + 056 + 044 (line-item repeater) |
 | **Schedule Cancel Classes (8)** | `management-home` kebab | `scheduled-actions.html` create = field-less gate; NOT reachable from a course | PARTIAL | 044 (conditional long-form) + 056 |
 | **Add Lesson Student Timezone (8)** / **Student Timetable (dual-tz)** | course records | Timetable tab is single-timezone; no add-classes entry | PARTIAL | 044 + 055 |
 | **Request Cancel (8)** family/teacher | `teacher`/`family` records | family-requests preview card + gate; teacher: none | PARTIAL | 044 + 055 |
@@ -234,9 +235,10 @@ whose fields are owned by 056 and whose long-form HOST is owned by 044; persiste
 | **Add Feedback (2→3)** | `management-home` "Add Feedback" | `fb-add` formDrawer (3 fields + gate) — the ONE completed one | PARTIAL (+ the dup-id defect, Part A) | 044 |
 | **Group settings / Leave Group** offcanvas | `management-chat.html` #offcanvasRight | NO surface at all in messages.html | MISSING | 044 + FUTURE_BACKEND |
 | **Currency Rates (17)** | `modal-inventory.md` ×7 | none (finance is single authored SAR) | UNKNOWN_EVIDENCE (never opened in crawl; field COUNT only) | future billing |
-| **Recent Searches (1)** / **Add shortcuts (2)** | ×294 / ×315 | topbar command popover — 3 fabricated recents + noop add | PARTIAL / FUTURE_BACKEND | 044 (search UI) / 056 (shortcut form) — C12-24/C15-06/07 |
+| **Recent Searches (1)** / **Add shortcuts (2)** | ×294 / ×315 | topbar command popover — 3 fabricated recents + noop add | PARTIAL / FUTURE_BACKEND | 044 (search UI) / 056 (shortcut form) — **C14-28** (topbar persisted shortcuts, MISSING → 057) + C15 audit §2 (⌘K popover); the fabricated-recents finding itself is carried by this ledger (the published C12/C15 audits mint no matching row) |
 
-**Per-row drawer identity defect (CONFIRMED, C10-31 restated):**
+**Per-row drawer identity defect (CONFIRMED — carried by this ledger as summary row E′; the C10 audit's
+normalized table `C10-01 … C10-27` mints no matching row):**
 `library.js:38` opens the ONE `mat-edit` drawer for all 6 subjects (prefilled `SUBJECTS[0]`);
 `certificates.js:40,70` opens the ONE `cert-tpl` for all 4 templates. Clicking "Edit الرياضيات" shows
 "اللغة العربية". The certificate-request drawers `cr-cr1…` DO carry per-row identity correctly
@@ -265,19 +267,22 @@ switches the pane and the reply box vanishes when you open one. **Owner 044.**
 
 ---
 
-## SUMMARY TABLE — findings, disposition, owner
+## SUMMARY TABLE — findings, status, disposition, owner
 
-| # | finding | evidence | disposition | owner |
-|---|---|---|---|---|
-| A | 30 duplicate `f-fbAdd-*` ids, nested fb-add cloned per attended row, stable since Spec 032 | `outcome-details.js:60-65,81`; grep; `git show 21502af` | CONFIRMED pre-existing | **044** (not 042) |
-| B.1 | staff RBAC (`st-perm`) capture is a byte-identical no-op — never rendered | `capture.cjs:251,504`; md5 `124561b3…` | CONFIRMED silent test failure | **044** + 043/RBAC-spec |
-| B.3 | 57 named drawers (st-cat, st-activity, msg-member, 8 integ-*, task-section, stu-assign/move, trn-assign-group…) never opened in any runner | dedup census script | CONFIRMED coverage gap | **044** / 053 / 045-050 |
-| C.1 | confirm + note modals lack a Tab focus-trap (drawers have one) | `enhance.js:448-498` vs `:408-418` | CONFIRMED a11y defect | **044** |
-| C.2 | no background scroll-lock/inert behind sheet/modal | `enhance.js` openPanel/openConfirm | CONFIRMED minor | **044** |
-| C.3 | mobile sidebar drawer clips labels + drops rail (314px sidebar in a 334px drawer) | `…mobile__drawer.png`; `app.css:16-18,328` | CONFIRMED | **044** |
-| C.4 | drawers not hash-addressable / lost on refresh; tabs are | `enhance.js:239-274,441` | by-design, argues page-vs-drawer | **044** |
-| D | long-form-in-narrow-sheet: no sticky footer, Save below fold on lead-new(19)/trn-edit(11)/form-create(10)/fam-edit(9) | `preview-drawer.js:32-38`; `…sp034-leads-create.png` | CONFIRMED ergonomic | **044** + 056 |
-| D′ | confirmAction has no field slot → Suspend/Stop lost date+note | `confirm-modal.js:8-17` | CONFIRMED | **044** + 056 |
-| E | ~14 heavy legacy modals (Absent 13 / Cancel 10 / Edit 8 / Send-Report 24 / invoice 16 …) have field-less gates or no host | `modal-inventory.md`; `outcome-details.js`, `finance-actions.js` | PARTIAL / MISSING | **044** + 056 (+055/billing) |
-| E′ | per-row drawer identity lost (mat-edit×6, cert-tpl×4) | `library.js:38`; `certificates.js:40,70` | CONFIRMED | **044** |
-| E″ | messages drawer-vs-pinned-pane; reply box disappears on open | `messages.js:57,71` | CONFIRMED | **044** |
+`status` = the verification result (CONFIRMED = re-proven from raw bytes for this ledger; by-design = intended
+behaviour recorded for the 044 ruling). `disposition` uses ONLY the Spec 042 closed vocabulary.
+
+| # | finding | evidence | status | disposition | owner |
+|---|---|---|---|---|---|
+| A | 30 duplicate `f-fbAdd-*` ids, nested fb-add cloned per attended row, stable since Spec 032 | `outcome-details.js:60-65,81`; grep; `git show 21502af` | CONFIRMED (pre-existing) | PARTIAL | **044** (not 042) |
+| B.1 | staff RBAC (`st-perm`) capture is a byte-identical no-op — never rendered | `capture.cjs:251,504`; md5 `124561b3…` | CONFIRMED (silent test failure) | PARTIAL | **044** + 043/RBAC-spec |
+| B.3 | 57 named drawers (st-cat, st-activity, msg-member, 8 integ-*, task-section, stu-assign/move, trn-assign-group…) never opened in any runner | dedup census script | CONFIRMED (coverage gap) | PARTIAL | **044** / 053 / 045-050 |
+| C.1 | confirm + note modals lack a Tab focus-trap (drawers have one) | `enhance.js:448-498` vs `:408-418` | CONFIRMED (a11y defect) | PARTIAL | **044** |
+| C.2 | no background scroll-lock/inert behind sheet/modal | `enhance.js` openPanel/openConfirm | CONFIRMED (minor) | PARTIAL | **044** |
+| C.3 | mobile sidebar drawer clips labels + drops rail (314px sidebar in a 334px drawer) | `…mobile__drawer.png`; `app.css:16-18,328` | CONFIRMED | PARTIAL | **044** |
+| C.4 | drawers not hash-addressable / lost on refresh; tabs are | `enhance.js:239-274,441` | by-design (argues page-vs-drawer) | PARTIAL (044 may re-rule INTENTIONALLY_IMPROVED per surface) | **044** |
+| D | long-form-in-narrow-sheet: no sticky footer, Save below fold on lead-new(19)/trn-edit(11)/form-create(10)/fam-edit(9) | `preview-drawer.js:32-38`; `…sp034-leads-create.png` | CONFIRMED (ergonomic) | PARTIAL | **044** + 056 |
+| D′ | confirmAction has no field slot → Suspend/Stop lost date+note | `confirm-modal.js:8-17` | CONFIRMED | PARTIAL | **044** + 056 |
+| E | ~14 heavy legacy modals (Absent 13 / Cancel 10 / Edit 8 / Send-Report 24 / invoice 16 …) have field-less gates or no host | `modal-inventory.md`; `outcome-details.js`, `finance-actions.js` | CONFIRMED | PARTIAL / MISSING (per Part E row) | **044** + 056 (+055/billing) |
+| E′ | per-row drawer identity lost (mat-edit×6, cert-tpl×4) | `library.js:38`; `certificates.js:40,70` | CONFIRMED | PARTIAL | **044** |
+| E″ | messages drawer-vs-pinned-pane; reply box disappears on open | `messages.js:57,71` | CONFIRMED | PARTIAL | **044** |

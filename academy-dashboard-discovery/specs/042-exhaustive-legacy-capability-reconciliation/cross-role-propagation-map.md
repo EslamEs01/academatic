@@ -50,7 +50,7 @@ no letterbox. See P-15.
 
 ---
 
-## 2. The lifecycle register (P-01 … P-24)
+## 2. The lifecycle register (P-01 … P-26)
 
 ### P-01 — Class outcome ("end class" / "mark attended") → family + child + admin boards
 | Leg | Evidence | Status |
@@ -84,7 +84,7 @@ summary the guardian and the child read is a fixture literal that the teaching w
 |---|---|---|
 | ORIGIN (admin) | `management-home.json` → `markAsabsent` (13 fields incl. `absent_by`, 3 notification radios, custom message, make-up none/auto/reschedule, `add_to_credit`, student-vs-teacher timezone) · `cancelClass` (10 fields) | **BROKEN** — `outcome-details.js` renders these as `data-confirm` dialogs with **0 fields**; a confirm cannot carry a make-up date, an add-to-credit rule or a timezone |
 | ORIGIN (teacher) | `POST /teacher/classes-absent` (`video` file + `notes`) | **MISSING** |
-| TRANSIT | `add_to_credit` → the family credit ledger; make-up → a *new* session on both calendars; notify → 3 channels | **MISSING** — no credit ledger surface exists (C04-13), no make-up generator, no notify bus |
+| TRANSIT | `add_to_credit` → the family credit ledger; make-up → a *new* session on both calendars; notify → 3 channels | **MISSING** — no credit ledger surface exists (C04-09), no make-up generator, no notify bus |
 | CONSUMER | teacher day rail, family schedule, child schedule, admin attendance | authored-only |
 
 **The load-bearing point:** cancelling a class in the legacy is not a status flip — it *emits* a credit, a make-up
@@ -442,11 +442,11 @@ view is a *law*, not a defect — do not drift into "fixing" it; a change requir
 
 | | Count |
 |---|---|
-| Lifecycles mapped | **24** (P-01 … P-24) |
-| Lifecycles with **at least one broken/missing leg** | **24** |
-| Lifecycles where a **CONSUMER exists with NO producer** | **6** — P-01 (outcome), P-02 (homework), P-09 (certificates), P-10 (monthly report), P-12 (parent meetings), P-24 (availability) |
+| Lifecycles mapped | **26** (P-01 … P-26) |
+| Lifecycles with **at least one broken/missing leg** | **26** (P-25: BROKEN origin + MISSING routing; P-26: MISSING at both ends) |
+| Lifecycles where a **CONSUMER exists with NO producer** | **6** — P-01 (outcome), P-02 (homework), P-09 (certificates), P-10 (monthly report), P-12 (parent meetings), P-24 (availability) — P-26 does not add here: neither its producer nor its consumer exists in the current product |
 | Lifecycles where a **PRODUCER exists with NO consumer** | **5** — P-14 (announcements), P-15 (notification routing), P-19 (automation policy), P-21 (RBAC), P-25 (invoice send) |
-| Lifecycles broken at **both ends** | **4** — P-05, P-06, P-07, P-12 |
+| Lifecycles broken at **both ends** | **4** — P-05, P-06, P-07, P-12 (P-26 is *absent* at both ends **by law** — the family `type=file` upload is correctly refused — so it is counted in the broken/missing-leg total, not here) |
 | Field-less "creation" surfaces feeding a cross-role chain | **11** (P-01 admin+teacher, P-03, P-04, P-06, P-09 approve, P-16 suspend/stop, P-16 scheduled-action, P-17 holiday, P-25 invoice) |
 | `UNKNOWN_EVIDENCE` legs (never invent) | **6** (§6) |
 | Legs **refused by law** (must never propagate) | **7** (§5) |

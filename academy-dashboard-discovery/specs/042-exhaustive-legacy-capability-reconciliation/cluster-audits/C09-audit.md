@@ -93,3 +93,36 @@ The 4th card is **mislabelled "Upload families"** in the legacy UI; the raw form
 | Settings visual redesign | **048** (FO-25) |
 | Palette/layout persistence + cross-surface propagation | **055** (FO-19…FO-22) |
 | Real import (validation/dry-run/undo) + real backup execution | backend (FO-10, FO-11) |
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C09-01 | Settings 6-tab hub (six legacy sub-domains folded; 73 controls; theme+language only real writes) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 048 | §2 What we ship today / §3 Visual |
+| C09-02 | Country/city lookup (251 countries + Show-Country-List reference modal w/ Copy) | PARTIAL | not stated | §3 Real remaining gaps |
+| C09-03 | Security import column contract (39 legacy columns → 33 safe rendered exactly 8+12+7+6) | COMPLETE_AND_VERIFIED | — | §1 Import column contract |
+| C09-04 | Customisation → Message Builder | UNKNOWN_EVIDENCE | 053 | §1 (504 Gateway Timeout) / §5 Owners |
+| C09-05 | Provider credential rendering (24 structure-only rows, no value slot by construction) | INTENTIONALLY_IMPROVED | — | §3 Safer #1 |
+| C09-06 | PayPal/Payoneer environment default (Sandbox vs legacy Live) | INTENTIONALLY_IMPROVED | — | §3 Safer #2 |
+| C09-07 | Integration enablement honesty (notConfigured, no enable control vs 11× is_enabled ON) | INTENTIONALLY_IMPROVED | — | §3 Safer #3 |
+| C09-08 | Backup action honesty (destination + gates + scope/permission/audit copy vs no-confirm bare link) | INTENTIONALLY_IMPROVED | — | §3 Safer #4 |
+| C09-09 | Porting of real legacy PII (names/phones/e-mails/live WhatsApp invite URL) | REJECTED_PRIVACY | — | §3 Safer #5 |
+| C09-10 | Colour pickers (swatch + hex text vs 13 legacy input type=color) | PARTIAL | not stated | §3 Real remaining gaps |
+| C09-25 | Email account list management (Default flag / Status / per-row settings / Add Account) | PARTIAL | 053 | §3 Real remaining gaps / §5 Owners |
+| C09-22 | Payment-method instance list + Number-Of-Family assignment count + edit/delete | PARTIAL | 053 | §3 Real remaining gaps |
+| C09-17 | Policy rich-text authoring (legacy prose UNKNOWN — both Quill editors empty on captured tenant) | PARTIAL | not stated | §3 Real remaining gaps |
+| C09-11 | formDrawer sticky action footer (Save below the fold on long Configure drawers) | PARTIAL | 044 | §3 Modal / drawer (FO-23) |
+| C09-12 | formDrawer `.wiz-grid` wrapping composite non-field blocks (structural smell) | PARTIAL | 044 | §3 Modal / drawer (FO-23) |
+| C09-13 | Provider card per-provider identity (11 brand-blind monochrome tiles) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 048 | §3 Visual (FO-25) |
+| C09-14 | Notifications tab visual form (long single-column ~34-toggle stack, no academy warmth) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 048 | §3 Visual (FO-25) |
+| C09-15 | Real provider connections / payments / payouts / WhatsApp pairing / SMTP send | FUTURE_BACKEND | 053 | §5 Owners (FO-01…FO-07) |
+| C09-16 | WhatsApp families/teachers group insights (privacy-safe capability rebuild noted for 045) | REJECTED_PRIVACY | 043 | §1 insights row / §5 Owners (FO-18) |
+| C09-18 | `password` import column | REJECTED_SECURITY | 043 | §1 Import column contract / §5 Owners (FO-12) |
+| C09-19 | RBAC enforcement | FUTURE_BACKEND | 043 | §5 Owners (FO-16) |
+| C09-20 | 2FA / shared admin OTP phone (`tfa` + one OTP text for ALL admins) | REJECTED_SECURITY | 043 | §1 Accessibility tab / §5 Owners (FO-17) |
+| C09-21 | Teacher pay rules · `rate_student_absent` · `hour_rate`/`currency` import columns | REJECTED_PAY_FREE | backend | §1 Teachers tab / §5 Owners (FO-13…FO-15) |
+| C09-23 | classSalaryReport | HONEST_LOCK | backend | §5 Owners (FO-15) |
+| C09-24 | Palette/layout persistence + cross-surface propagation (Apply-for-me / Reset) | PARTIAL | 055 | §1 personalisation row / §5 Owners (FO-19…FO-22) |
+| C09-26 | Real import execution (validation/dry-run/undo) + real backup execution | FUTURE_BACKEND | backend | §5 Owners (FO-10, FO-11) |
+
+Honest counts: screenshotsOpened=47 · recordsInspected=14 · currentSourceFiles=not stated

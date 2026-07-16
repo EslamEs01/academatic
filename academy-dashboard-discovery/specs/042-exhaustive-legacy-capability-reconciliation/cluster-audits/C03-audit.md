@@ -201,3 +201,42 @@ Flag for visual review:
 - `output/roles/family/pages/student-request-trial.json` (10-field wizard)
 - `output/roles/family/screenshots/student-profile-edit-full.png` (password + upload)
 - `output/roles/teacher/screenshots/management-student-1-full.png` (isolation redirect + salary band)
+
+---
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C03-01 | Admin student directory (7 lifecycle KPI tiles · 8-column table · date-range filter · row kebab; timezone + age columns dropped today) | PARTIAL | 045-050 | §1.1 Admin lens / §4 Visual verdict |
+| C03-02 | Admin student detail hub (banner + notice chips · Courses/Siblings tabs · 3-button primary bar · action dropdown; overview thin today) | PARTIAL | 045-050 | §1.1 Admin lens / §4 Visual verdict |
+| C03-03 | Admin per-student session-lifecycle modal suite (~20 modals: Add Lesson · mark attended/absent · cancel class · schedule-cancel-course · timetable) | PARTIAL | 044 | §1.1 Admin lens / §2 gap intro |
+| C03-04 | Admin student create/edit forms (14- and 7-control evidenced sets vs `stu-add` 9 fields) | PARTIAL | 056 | §1.1 Forms / §2 item 3 |
+| C03-05 | Admin suspend / stop / schedule-stop lifecycle actions (evidenced 3/1/4-field modals vs bare confirm today) | PARTIAL | 056 | §1.1 modals / §2 item 3 |
+| C03-06 | Admin student analytics (5 count tiles · 6 charts · world map) — no current-state comparison recorded in this audit | UNKNOWN_EVIDENCE | 045-050 | §1.1 Analytics |
+| C03-07 | Monthly student-progress report cycle (teacher 9-field authoring form + admin `monthly plan` approve/edit/delete queue + `forms/students` has-report index; read view shipped in `evaluation-rubric.js`) | PARTIAL | 055 | §1.1/§1.2 / §2 item 2 / §3 |
+| C03-08 | Student Feedback meeting boards (admin Parents board + `addFeedbackModal` + family `student-feedbacks` end) — no current-state comparison recorded in this audit | UNKNOWN_EVIDENCE | 054 | §1.1 Student Feedback / §1.3 |
+| C03-09 | Public Advertisement audience-targeted broadcast (media file · WhatsApp type · teacher/student recipient pickers) — no current-state comparison recorded in this audit | UNKNOWN_EVIDENCE | 053 | §1.1 Public Advertisement |
+| C03-10 | Trial lifecycle (admin `Add trial` 9-field form · Trials tab with Waiting/history · family 2-step 10-field Request-Trial wizard · previous-trials counter) | MISSING | 055 | §2 item 1 / §3 |
+| C03-11 | Teacher student roster (Country · history · schedule · plans columns + per-student Classes History view) | PARTIAL | 056 | §1.2 Teacher lens |
+| C03-12 | Teacher certificate-request producer modal (admin consumer `certificates.html#view=requests` exists) | PARTIAL | 055 | §1.2 / §3 |
+| C03-13 | Teacher→admin role isolation (legacy redirect proof; real enforcement requires backend auth — hiding a link is not authorization) | FUTURE_BACKEND | 043 | §1.2 isolation redirect |
+| C03-14 | Salary Class Report grouped by student (`teacher/update-result?filter=student`) — stays the sole honest lock `classSalaryReport` | HONEST_LOCK | — | §1.2 / §2 refusals |
+| C03-15 | Money/pay chips on student surfaces (`Active & unpaid` · `Not Paid` · `accounting_statement` · two `Delete Fine` buttons · teacher salary/fines/bonus band) | REJECTED_PAY_FREE | — | §1.2 / §2 refusals |
+| C03-16 | Family child-view pages (home counters · All Account Subscriptions · today-sessions · per-child history filter · library) | PARTIAL | 045-050 | §1.3 Family lens / §4 |
+| C03-17 | Child-view profile edit (legacy 7 non-credential profile controls vs 0 fields today) | PARTIAL | 056 | §1.3 / §2 item 3 |
+| C03-18 | Real PII / channel data (WhatsApp Group column · real parent names/emails · `sendWhatsappMessage` blast) | REJECTED_PRIVACY | 043 | §2 refusals |
+| C03-19 | Credential + upload surfaces (Old/New/Confirm password · `type=file images[]` · photo upload · `pdfcertificat_id` render) | REJECTED_SECURITY | — | §2 refusals |
+| C03-20 | Labeled lifecycle chips replacing numeric `/status/0..6` routes (icon+text, never colour-only) | INTENTIONALLY_IMPROVED | — | §2 improvements |
+| C03-21 | Child-view recognition layer (achievements · group stars · next-step lines; never a leaderboard) | INTENTIONALLY_IMPROVED | 052 | §2 improvements |
+| C03-22 | Homework propagation End-class → child-view homework (both ends exist; propagation not modelled — homework text authored separately) | PARTIAL | 055 | §3 propagation table |
+| C03-23 | Student-timezone framing ("Student date/time" labels on sessions/Add-Lesson; absent everywhere in our app) | MISSING | 055 | §3 / §4 |
+
+Honest counts: screenshotsOpened=47 · recordsInspected=10 · currentSourceFiles=14
+
+Normalization notes (Spec 042 pass, no re-audit): counts are taken verbatim from the Method line
+(40 legacy + 7 current screenshots = 47; 10 raw records; 14 source files = 9 `pages/*` + `fixtures/students.js`
++ 3 components + `enhance.js` studentMenu). Rows C03-06/-08/-09 carry UNKNOWN_EVIDENCE because the audit
+describes the legacy surface but records no current-state comparison; owners for rows the audit did not
+explicitly assign follow the binding Spec-042 future-owner register (044 modal system · 053 integrations ·
+054 meeting lifecycle · 055 propagation/workflow · 056 forms audit · 045-050 visual redesign).

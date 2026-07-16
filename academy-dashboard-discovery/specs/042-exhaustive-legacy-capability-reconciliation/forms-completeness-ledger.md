@@ -62,7 +62,7 @@ and `output/roles/teacher/pages/teacher-home.json` / `teacher-studentslist.json`
 | **Cancel class** | **10**: `cancel_by` (Teacher/Student/**Admin**), `note`, `sendMessage`, `makupclass` (3-button hidden), `add_to_credit`, `cancelTzType` ×2, `date`, `time`+H/M — FORM[11] `cancelClass_form` | **0 fields**; confirm-danger. NOTE: the `sessions.html` row-kebab Cancel is `data-demo-action` with **no confirm** — the one destructive kebab item lacking a confirm | PARTIAL | 056 + 044 |
 | **Edit / reschedule class** | **8**: `date`, `time`+H/M, `sendMessage`, `duration`* (15 opts), **`teacher_id`* (reassign)**, `accounting_statement` (Paid/Paid-if-continue/Free) — FORM[10] `editClass_form`, action `/courseClasses/edit-class` | **0 fields**; dashboard/sessions "Edit" = `data-demo-action` toast. The ONLY session form we ship is CREATE (`sess-new`, 7 fields). **Teacher reassignment exists nowhere in the product.** | PARTIAL | 056 — teacher-reassign is the single biggest missing operator control |
 | **Add quick queue** | **2** visible: `level` (Urgent/Medium/Normal), `text` (ta) — FORM[6] `add_queue_form` | **0 fields**; `components/ops-bands.js:16` "إضافة إلى القائمة" = bare gate | PARTIAL | 056 (give the gate its 2 fields) |
-| **Class feedback** | **3**: `feedback_note` (ta), `feedback_files[]` file, category — FORM[12] `add_feedback` | **3 fields**: category · remark · note in `fb-add` drawer + backendRequired Save (`outcome-details.js`). File attach correctly a gate. | INTENTIONALLY_IMPROVED (superset minus file) | 029 owns; file → FUTURE_BACKEND |
+| **Class feedback** | **3**: `feedback_note` (ta), `feedback_files[]` file, category — FORM[12] `add_feedback` | **3 fields**: category · remark · note in `fb-add` drawer + backendRequired Save (`outcome-details.js`). File attach correctly a gate. | INTENTIONALLY_IMPROVED (superset minus file) | settled (Spec 029); file → FUTURE_BACKEND |
 | **TEACHER end class** | **5**: `remark`*, `summary`*, `homework`*, `notes`, `images[]` file — `teacher-home.json` FORM[3] `/teacher/classes-end` | **0 fields**; `teacher-outcomes.html` renders the 5 as read-only cards + a gateNote (`teacher-outcomes.js:94`) | PARTIAL | 056 + 044 |
 | **TEACHER mark absent** | **2**: `video` file, `notes` — FORM[4] `/teacher/classes-absent` | **0** (no surface) | MISSING | 056 + 044 |
 | **TEACHER request cancel/reschedule** | **8**: `type` radio (Reschedule / Auto Make-up), `date`+Month/Year, `time`+H/M — `teacher-home.json` FORM[2] `cancel_form__request` | **0** (teacher-schedule shows a gateNote only) | MISSING | 055 + 044 |
@@ -101,19 +101,22 @@ correctly rejected (§7). Current `trn-edit` = **12** fields (`teacher.html` tem
 | `send_info` toggle | ❌ (REJECTED_SECURITY-adjacent — credential broadcast; keep out) |
 | CV upload (`cv_file`, `cv_certificates`) | rendered as a GATE (correct) |
 
-**Disp PARTIAL · owner 056.** C02-05/C02-06/C02-15.
+**Disp PARTIAL · owner 056.** C02-02 (the master row's proof column lists exactly this missing-field set).
 
 ### 2.2 Add / Edit Student — `management-student-1-create.json` (14) / `-edit.json` (7)
 
 Current `stu-add` = **9** fields; `stu-edit` = **8**. Missing on add: `teacher_note`, `admin_note`, `hasTrial`
 toggle, trial `date`, trial `time` (the create form's inline first-trial). `accounting_statement` is a finance
-enum to route, not invent. **Disp PARTIAL · owner 056.** C03-03/C03-04 (edit is COMPLETE_AND_VERIFIED per C03).
+enum to route, not invent. **Disp PARTIAL · owner 056.** C03-04 (the audit books create+edit as ONE PARTIAL
+row; the edit side is a field-level superset — all 7 legacy edit controls render among `stu-edit`'s 8, verified
+against `pages/student.js` `stuEditDrawer()` — the deficit is on the create side).
 
 ### 2.3 Create Trial (student) — `management-student-1-trial-create.json` FORM[1] (11)
 
 Legacy: `student_id`*, gender, `studies_ages` r×3, `material_id`, `duration`, `accounting_statement`, `date`,
 `time`, `teacher_id`. Current: **3** fields only (material/teacher/duration inside `stu-add`); no age band, no
-date/time, no trial statement. **Disp PARTIAL · owner 056** (+ C05 sessions for the trial lifecycle actions).
+date/time, no trial statement. **Disp PARTIAL · owner 056** (the wider trial lifecycle — Trials tab, waiting
+queue, family Request-Trial wizard — is C03-10, owner 055).
 
 ### 2.4 Add / Edit Family — `management-families-create.json` FORM[1] (36)
 
@@ -121,41 +124,48 @@ Current `fam-edit` = **9** fields; `add-family.html` 5-step wizard = **21** fiel
 **Payment + Courses contract block** (course_type r×4, hour_rate, total_hours, fees, invoice_day, session_day,
 cost_type, currency, is_recurring, auto_invoice, is_post_payment, payment_method) is present in the legacy but
 only partially in the wizard billing step (planType/hourRate/cycle — `add-family.js:57-59`).
-Legacy `password`* / `user_name`* / `send_info` are **REJECTED_SECURITY** (§7). **Disp PARTIAL · owner 056 (fields) + 044 (long-form host)** — a faithful family edit is a ~28-control multi-section form the narrow `fam-edit` drawer cannot host. C04-04/C04-05.
+Legacy `password`* / `user_name`* / `send_info` are **REJECTED_SECURITY** (§7). **Disp PARTIAL · owner 056 (fields) + 044 (long-form host)** — a faithful family edit is a ~28-control multi-section form the narrow `fam-edit` drawer cannot host. C04-16 (host: C04-18).
 
-### 2.5 Add child (existing family) — `fam-child` (7) vs the C05 student-create (14)
+### 2.5 Add child (existing family) — `fam-child` (7) vs the §2.2 student-create (14)
 
-Current 7 fields vs field parity with the student-create form. **Disp PARTIAL · owner 056.** C04-10.
+Current 7 fields vs field parity with the student-create form. **Disp PARTIAL · owner 056.** C03-04 (the same
+14-control legacy create set is the yardstick).
 
 ### 2.6 Family Settings tab — `management-families-1.json` FORMs 9–12 — **entirely absent**
 
 | Panel | Legacy fields | Current |
 |---|---|---|
-| Location update | 5 (`country_id`*, `city_id`*, timezone*, `timezone_diff`) FORM[9] | ❌ NONE (captured once in the wizard, never editable) — MISSING, owner 056. C04-15 |
-| Preferences | 7 (`language`*, `auto_add_credit_to_invoice`*, `pw_reset_method`*, `whatsapp_private`, `renew_unpaid_courses`, `send_invoice`, `stop_after`) FORM[10] | ❌ NONE on admin; family-profile shows read-only chips — MISSING, owner 056 (+ 043 for `pw_reset_method`=REJECTED_SECURITY). C04-16 |
-| Capabilities | 2 (`can_chat`*, `can_see_library`*) FORM[11] | ❌ NONE — MISSING, owner 043 (Role Isolation). C04-17 |
-| Notifications matrix | 14 checkboxes (7 events × wa/email) FORM[12] | ❌ per-family NONE (settings#notifications is academy-wide) — MISSING, owner 053 + 056. C04-18 |
+| Location update | 5 (`country_id`*, `city_id`*, timezone*, `timezone_diff`) FORM[9] | ❌ NONE (captured once in the wizard, never editable) — MISSING, owner 056. C04-11 |
+| Preferences | 7 (`language`*, `auto_add_credit_to_invoice`*, `pw_reset_method`*, `whatsapp_private`, `renew_unpaid_courses`, `send_invoice`, `stop_after`) FORM[10] | ❌ NONE on admin; family-profile shows read-only chips — MISSING, owner 056 (+ 043 for `pw_reset_method`=REJECTED_SECURITY). C04-11 |
+| Capabilities | 2 (`can_chat`*, `can_see_library`*) FORM[11] | ❌ NONE — MISSING, owner 043 (Role Isolation grant model; the cross-role gate itself is C04-12's 055 register row). C04-12 |
+| Notifications matrix | 14 checkboxes (7 events × wa/email) FORM[12] | ❌ per-family NONE (settings#notifications is academy-wide) — MISSING, owner 056 (+ 053 channels). C04-13 |
 
 ### 2.7 Teacher Settings tab — `management-teachers-1.json` FORMs 11–14 — **entirely absent** (0 of 15)
 
 Location (5) · Preferences (3, incl. `pw_reset_method`=REJECTED_SECURITY) · Capabilities (4:
 `can_chat`/`can_see_library`/`can_edit_schedule`/`can_edit_class`) · Notifications matrix (8; **the
-`salary_by_*` row MUST NOT be ported** — pay-free). **Disp MISSING · owner 043 + 056.** C02-14/16/17.
+`salary_by_*` row MUST NOT be ported** — pay-free). **Disp MISSING · owner 056 (location/preferences:
+C02-03) + 043 (capabilities: C02-04 · notification matrix: C02-05).**
 
 ### 2.8 Create / Edit / Duplicate Staff — `management-admins-create.json` (10)
 
 Current `staff-add`/`staff-edit`/`staff-dup` = **6** fields each (name, username, email, phone, role, status).
 The 4 omissions (`password`, `salary`, `currency`, redundant `enable`) are **law-driven and correct** — 3
-REJECTED_* + 1 redundant. **Disp PARTIAL · owner 056; do NOT restore the omissions.** C12-03/04/05.
+REJECTED_* + 1 redundant. **Disp PARTIAL · owner 056; do NOT restore the omissions.** Audit row: **C12-11**
+(the C12 audit's 9-page cluster corpus lacked the staff-create record and marked the legacy staff fieldset
+UNKNOWN_EVIDENCE; this ledger's 10-field legacy set is grounded directly in
+`output/roles/admin/pages/management-admins-create.json`, which exists in the admin corpus — an evidence
+conflict recorded, not smoothed: the record wins on the fieldset, the audit's UNKNOWN stands only for the
+pages *its* corpus covered).
 
 ### 2.9 Suspend / Stop (family + student) — confirms that lost their fields
 
 | Action | Legacy fields | Current |
 |---|---|---|
-| Suspend family | 3: `date`*, `schedule_return`, `note`* — `management-families-1.json` FORM[13] `/suspend` | 0-field confirm — PARTIAL, owner 044 (confirm-with-fields) + 055. C04-19 |
-| Stop family | 1: `note`* — FORM[15] `/stop` | 0-field confirm — PARTIAL. C04-20 |
-| Suspend student | 3: `date`*, `schedule_return`, `note`* — `management-student-1.json` FORM[15] | 0-field confirm — PARTIAL, owner 044. C03-06 |
-| Stop student | 1: `note`* — FORM[14] `/student/1/stop` | 0 — MISSING, owner 044 + 055. C03-07 |
+| Suspend family | 3: `date`*, `schedule_return`, `note`* — `management-families-1.json` FORM[13] `/suspend` | 0-field confirm — PARTIAL, owner 056 + 044 (confirm-with-fields). C04-14 |
+| Stop family | 1: `note`* — FORM[15] `/stop` | 0-field confirm — PARTIAL, owner 056 + 044. C04-14 |
+| Suspend student | 3: `date`*, `schedule_return`, `note`* — `management-student-1.json` FORM[15] | 0-field confirm — PARTIAL, owner 056 + 044. C03-05 |
+| Stop student | 1: `note`* — FORM[14] `/student/1/stop` | 0 — MISSING (this leg has no confirm at all; the master books the suspend/stop/schedule-stop set as ONE PARTIAL row), owner 056 + 044. C03-05 |
 
 A bodyless `confirmAction()` cannot carry a return date + mandatory note. **Spec 044 must define a
 "confirm-with-fields" pattern** before 056 can complete these.
@@ -170,7 +180,7 @@ Current `crs-add` = **6** fields, `crs-edit` = **7**. Missing (non-pay): **repea
 (legacy `schedule[0..N][value/time/duration]`), the teacher-timezone mirror row, **`student_cancel` /
 `teacher_cancel` cancellation limits** (Off…10), `update_current`/`update_default`. The two rate blocks
 (`family_hour_rate`, `teacher_hour_rate`) are correctly **REJECTED_PAY_FREE** (§7). **Disp PARTIAL · owner
-056 (fields) + 044 (repeatable rows).** C05-05/07/08.
+056 (fields) + 044 (repeatable rows).** C05-02 (rate blocks: C05-04 · dual-timezone mirror: C05-12).
 
 ### 3.2 Create/Edit group — `management-groups-create.json` FORM[1] (44)
 
@@ -179,14 +189,16 @@ Current `grp-add`/`grp-edit` = **8** fields. Legacy is 8 fields **+ a full 7-day
 `teacher` select**. Current ships a single-day, single-select approximation and (per C05) `grp-add` has **no
 teacher field at all** — a group with no teacher contradicts the legacy's own "one teacher, many students".
 Rate fields (`t_hour_rate`, `s_hour_rate`) correctly rejected. **Disp PARTIAL · owner 056 + 044 (multi-select
-+ weekly grid).** C05-21. `grp-edit` field set is **UNKNOWN_EVIDENCE** (no `/groups/{id}/edit` was ever
-crawled — the group list rendered empty); current reuses create — keep grounded, do not harden. C05-22.
++ weekly grid).** C05-11. `grp-edit` field set is **UNKNOWN_EVIDENCE** (no `/groups/{id}/edit` was ever
+crawled — the group list rendered empty); current reuses create — keep grounded, do not harden. Carried by
+this ledger (the C05 normalized table `C05-01 … C05-18` mints no UNKNOWN_EVIDENCE row; nearest anchors
+C05-11/C05-16).
 
 ### 3.3 Add classes to a course — `management-student-1.json` FORM[16] `addClass_form` (6)
 
 `date`, `time`, `duration`, `credit` (from-credit), `teacher` (override), `accounting_statement`. **No
 course-scoped entry point exists** in the product; nearest is the generic `sess-new` (7 fields). **Disp
-PARTIAL · owner C06 + 044.** C05-12.
+PARTIAL · owner 055 (the course-scoped entry point; fields → 056).** C05-03.
 
 ---
 
@@ -197,13 +209,15 @@ PARTIAL · owner C06 + 044.** C05-12.
 No create-class FORM appears in any C06 legacy record; classes are generated from course schedules /
 request-schedule. Our 7-field `sess-new` (course·teacher·date·time·duration·credit·status) may be an
 invention. **Disp UNKNOWN_EVIDENCE · owner 056 — confirm the field set against a real endpoint before
-treating it as complete.** C06-33 / C14-15 (tasks form set likewise unevidenced).
+treating it as complete.** Carried by this ledger (the C06 normalized table `C06-01 … C06-29` mints no
+UNKNOWN_EVIDENCE row; nearest anchor C05-03 — `sess-new` ≈ legacy Add Lesson, wrong entry point) /
+C14-24 (tasks form set likewise unevidenced — UNKNOWN_EVIDENCE, 056).
 
 ### 4.2 Teacher availability windows — `teacher-timetable.html` raw `#availabilityModal` (5 + 3 buttons)
 
 Controls: `avFromDay` (select), `avToDay` (select), `avFromTime`, `avToTime`, `avTypeSelect` + Add/Update/Delete
 buttons. Current: a single `gateNote` line on `teacher-schedule.html` (`teacher-schedule.js:97`). **Disp MISSING
-· owner 056 (form) + future-backend (persistence).** C06-22.
+· owner 056 (form) + future-backend (persistence).** C06-08.
 
 ---
 
@@ -211,13 +225,16 @@ buttons. Current: a single `gateNote` line on `teacher-schedule.html` (`teacher-
 
 | Capability | Legacy fields (record) | Current | Disp | Owner |
 |---|---|---|---|---|
-| **Create parent invoice** | **14** visible: `serial`, `due_date`, add-course select, `price`, `discount`, `fees`, `additional`, `adjustment_type`, `adjustment_value`, `adjustment_count`, `note`, `paymentMethod`, `sendMessage` + repeatable line rows — `management-invoices-create-parent-invoice-1.json` FORM[1] `invoice-form` | **0 fields**; `finance-actions.js:47` `createInvoice` = `disabledAction` gate | FUTURE_BACKEND (engine) + PARTIAL (form) | 056 + 044 + billing backend. C07-03 |
-| **Record payment / transaction** | **8**: `transaction_id`, `date_payment` (date), `basic`, `additional`, `taxes`, `total`, `currancy`, `getway` — `management-invoices.json` FORM[2] `/accountant/store-transaction` | **0 fields**; `finance-actions.js:66` confirm dialog | PARTIAL | 056 + billing backend. C07-05 |
-| **Run teacher salaries** | **5**: `month`, `date_range`, `generateteacher`, `allteachers`, `teachers[]` — `management-salaries.json` FORM[2]. **PAY-FREE by construction** (a selection form, no figures) | **0 fields**; `finance.js:228` gate | PARTIAL — **could ship honestly today with a gated Save** | 056 (form) + payroll backend (the run). C07-09 |
-| **Run staff salaries** | **7**: `month`, `date_range`, `generatestaff`, `allstaff`, `staff_members[]` (×N) — `management-staff-salaries.json` FORM[1]. Also pay-free selection | **0 fields**; same tab gate | PARTIAL | 056 + payroll backend. C07-10 |
-| **Add bank** | **1**: `name`* — `management-banks-create.json` FORM[1] | **1 field** + gated Save (`bank-add`) — the ONE field-complete finance workflow | COMPLETE_AND_VERIFIED | — (import/reconcile → future-backend). C07-22 |
-| **Add expense / income** | **8**: `head_id`, `user_id`, `is_income`, `description`, `reason`, `amount`, `currency`, `date` — `management-expense.json` FORM[1] | **NONE** — no expense surface | MISSING | accounting backend + 056. C07-19 |
-| **Adjustment (per family)** | **4**: `type`*, `amount`*, `count`*, `note` — `management-families-1.json` FORM[8] `adjustmentForm` | NONE | MISSING | 030 / billing backend. C04-12 |
+*(Row-ID note: the C07 audit landed after this section was drafted and minted different row numbers; the
+references below use the audit's ACTUAL IDs from `cluster-audits/C07-audit.md`.)*
+
+| **Create parent invoice** | **14** visible: `serial`, `due_date`, add-course select, `price`, `discount`, `fees`, `additional`, `adjustment_type`, `adjustment_value`, `adjustment_count`, `note`, `paymentMethod`, `sendMessage` + repeatable line rows — `management-invoices-create-parent-invoice-1.json` FORM[1] `invoice-form` | **0 fields**; `finance-actions.js:47` `createInvoice` = `disabledAction` gate | FUTURE_BACKEND (engine) + PARTIAL (form) | 056 + 044 + billing backend. C07-02 |
+| **Record payment / transaction** | **8**: `transaction_id`, `date_payment` (date), `basic`, `additional`, `taxes`, `total`, `currancy`, `getway` — `management-invoices.json` FORM[2] `/accountant/store-transaction` | **0 fields**; `finance-actions.js:66` confirm dialog | PARTIAL | 056 + billing backend. C07-03 |
+| **Run teacher salaries** | **5**: `month`, `date_range`, `generateteacher`, `allteachers`, `teachers[]` — `management-salaries.json` FORM[2]. **PAY-FREE by construction** (a selection form, no figures) | **0 fields**; `finance.js:228` gate | PARTIAL — **could ship honestly today with a gated Save** | 056 (form) + payroll backend (the run). C07-12/C07-13 (the audit ledgers the boards + the 4 payroll gates as C07-12 INTENTIONALLY_IMPROVED and the figures/run as C07-13 REJECTED_PAY_FREE; the figure-free *selection form* itself is this ledger's 056 item) |
+| **Run staff salaries** | **7**: `month`, `date_range`, `generatestaff`, `allstaff`, `staff_members[]` (×N) — `management-staff-salaries.json` FORM[1]. Also pay-free selection | **0 fields**; same tab gate | PARTIAL | 056 + payroll backend. C07-12/C07-13 (same split as the teacher row) |
+| **Add bank** | **1**: `name`* — `management-banks-create.json` FORM[1] | **1 field** + gated Save (`bank-add`) — the ONE field-complete finance workflow | COMPLETE_AND_VERIFIED | — (import/reconcile → future-backend). C07-30 |
+| **Add expense / income** | **8**: `head_id`, `user_id`, `is_income`, `description`, `reason`, `amount`, `currency`, `date` — `management-expense.json` FORM[1] | **NONE** — no expense surface | MISSING | accounting backend + 056. C07-11 |
+| **Adjustment (per family)** | **4**: `type`*, `amount`*, `count`*, `note` — `management-families-1.json` FORM[8] `adjustmentForm` | NONE | MISSING | 056 (the 4-field form) + future billing backend (the persistence). C04-08 |
 
 These five 0-field gates are exactly the "too-early gate" class Spec 032 eliminated across 24 admin drawers —
 **finance was never revisited.**
@@ -232,15 +249,15 @@ evidenced form. They escaped Spec 032's `fieldlessCreateEdit===0` audit because 
 
 | # | Current gate | Legacy form it replaces | Fields | Owner |
 |---|---|---|---|---|
-| 1 | `scheduled-actions.js:88` "إنشاء إجراء مجدول" | `management-scheduled-actions-create.json` FORM[1] | **18** conditional (`action_type`* drives family/student/cancel/activate targets · `criteria[teacher_id/material_id]` · `criteria[cancel_type]` r×3 · reschedule date/time · `add_to_credit` · `returned_at` · `note`) | 044 (conditional long form) + 056. C14-04 |
-| 2 | `public-holiday.js` header gate ×2 | `management-public-holiday.json` FORM[1] | **11** (`from_date`*/`from_time`+H/M, `to_date`*/`to_time`+H/M, `category_selected[]` multiselect, Select-All) | 056 + 055 (bulk-cancel fan-out). C06-30 |
-| 3 | *(no surface)* request-schedule | `management-request-schedule-1-1.json` FORM[1] `/store-request-schedule` | **~52** (`request_type` r, teacher-category multiselect + Select-All, `course_id`, `duration`, `accounting_statement`, date/time, `total_hours`, `start_date`, **7 weekly slot rows** each value/time/H/M/duration) | 056 + 055. C06-25 |
-| 4 | `ops-bands.js:16` "إضافة إلى القائمة" | `add_queue_form` (§1) | 2 | 056. C01-13 |
-| 5 | `finance.js:228` salaries generate | `management-salaries.json` (§5) | 5 | 056. C07-09 |
-| 6 | `finance.js:47`/`:66` invoice/payment (§5) | 14 / 8 | — | 056. C07-03/05 |
-| 7 | `certificates.js:107` "Approve" | `certApproveModal` (§8-adjacent): `cert-student_name`, `cert-teacher_name`, `cert-description`, `cert-date_certificate`, `cert-template`*, `cert-send`, `cert-message` = **7** — `management-certificate-requests.html` raw | 044 (modal) + FUTURE_BACKEND. `cert-create` (a *separate* drawer) does carry 5 fields but omits `teacher_name`. C10-19/24 |
-| 8 | `families.js:84` categories "Create" | `management-categories-families-create.json` FORM[1]: `name`, `status`, `description` = **3** — a bare gate with NO fields, breaking the Spec-032 "render fields first, gate the Save" rule that `rep-fbcat`/`lib-cats`/`trn-categories` all follow | 056 + 044. C04-27 |
-| 9 | `family-requests.html` trial/cancel gates | `student-request-trial.json` FORM[1] (**11**: `request_type` r, name, age, language, gender, `student_id`, date, time, duration, course) · `student-feedback` (**4**) | 056 + 044. C03-20/25 |
+| 1 | `scheduled-actions.js:88` "إنشاء إجراء مجدول" | `management-scheduled-actions-create.json` FORM[1] | **18** conditional (`action_type`* drives family/student/cancel/activate targets · `criteria[teacher_id/material_id]` · `criteria[cancel_type]` r×3 · reschedule date/time · `add_to_credit` · `returned_at` · `note`) | 044 (conditional long form) + 056. C14-11/C06-06 |
+| 2 | `public-holiday.js` header gate ×2 | `management-public-holiday.json` FORM[1] | **11** (`from_date`*/`from_time`+H/M, `to_date`*/`to_time`+H/M, `category_selected[]` multiselect, Select-All) | 056 + 055 (bulk-cancel fan-out). C06-05 |
+| 3 | *(no surface)* request-schedule | `management-request-schedule-1-1.json` FORM[1] `/store-request-schedule` | **~52** (`request_type` r, teacher-category multiselect + Select-All, `course_id`, `duration`, `accounting_statement`, date/time, `total_hours`, `start_date`, **7 weekly slot rows** each value/time/H/M/duration) | 056 + 055. C06-04 |
+| 4 | `ops-bands.js:16` "إضافة إلى القائمة" | `add_queue_form` (§1) | 2 | 056. C01-11 |
+| 5 | `finance.js:228` salaries generate | `management-salaries.json` (§5) | 5 | 056. C07-12/13 |
+| 6 | `finance.js:47`/`:66` invoice/payment (§5) | 14 / 8 | — | 056. C07-02/03 |
+| 7 | `certificates.js:107` "Approve" | `certApproveModal` (§8-adjacent): `cert-student_name`, `cert-teacher_name`, `cert-description`, `cert-date_certificate`, `cert-template`*, `cert-send`, `cert-message` = **7** — `management-certificate-requests.html` raw | 044 (modal) + FUTURE_BACKEND. `cert-create` (a *separate* drawer) does carry 5 fields but omits `teacher_name`. C10-12 (cert-create: C10-18) |
+| 8 | `families.js:84` categories "Create" | `management-categories-families-create.json` FORM[1]: `name`, `status`, `description` = **3** — a bare gate with NO fields, breaking the Spec-032 "render fields first, gate the Save" rule that `rep-fbcat`/`lib-cats`/`trn-categories` all follow | 056 + 044. C04-19 |
+| 9 | `family-requests.html` trial/cancel gates | `student-request-trial.json` FORM[1] (**11**: `request_type` r, name, age, language, gender, `student_id`, date, time, duration, course) · `student-feedback` (**4**) | 056 + 044. C03-10 (trial) / C04-20 (feedback) |
 
 ---
 
@@ -266,7 +283,7 @@ button data-attrs in announcements gates).
 
 **Teacher notification `salary_by_whatsapp`/`salary_by_email`** (`management-teacher/teacher-notifications/1`
 FORM[14]) — the *row* is pay-adjacent; if a per-teacher matrix is ever built the salary row MUST be omitted.
-**Family notification matrix** carries no pay row and is safe. C02-17 / C04-18.
+**Family notification matrix** carries no pay row and is safe. C02-05 / C04-13.
 
 ---
 
@@ -286,7 +303,8 @@ Because fields are **INERT by design** (no persistence, no validation — `compo
 absence of `required`/validation is not a functional bug today. But it is a completeness gap the form spec must
 close: **Spec 056 must define the honest validation/required/help vocabulary**, and **044** must give the drawer
 a section-heading slot + a required-marker convention. Every "5 required markers not rendered" note (leads,
-family, teacher, course country/city) rolls up here. C11-16 / C04-04 / C02-05.
+family, teacher, course country/city) rolls up here. C11-22 (leads) / C04-16 (family) / C02-02 (teacher) /
+C05-02 (course) / C09-02 (country-city option sets).
 
 **Confirmation gap.** Suspend/Stop/Cancel lost their forms to bodyless confirms (§2.9, §1). The `sessions.html`
 row-kebab **Cancel** is a `data-demo-action` toast with **no confirm at all** — the one destructive kebab item
@@ -298,23 +316,23 @@ missing the guard every other kebab (`familyMenu`/`studentMenu`/`teacherMenu`/`s
 
 | Form | Legacy fields | Current | Disp | Owner |
 |---|---|---|---|---|
-| **Custom form builder** | `form_name`*, `day`* (1–29), **repeatable** `fields[N][label]`* / `[type]`* (6 types: Short/Paragraph/Checkboxes/Multiple/Dropdown/Rating) / `[options][]` / `[is_required]` + Add-Question/Add-Option + per-form colour — `management-forms-create.json` FORM[1] | `form-create` drawer = **12** field-labels but **exactly 2 baked question rows** (`reports.html`); no add/remove row, no option repeater, no colour | PARTIAL | 056 + **044 (repeatable-row primitive — blocks the builder)**. C08-03 |
-| **Feedback (fb-create)** | 1 visible (`feedback_note`) + hidden teacher_id/date — `management-teacher-feedback` | 5 fields (superset) but lacks teacher+month binding | PARTIAL | 056. C08-09 |
-| **Feedback categories (rep-fbcat)** | 3 (`name`/`status`/`description`) — `management-family-feedback-categories-create.json` | 3 fields — parity | COMPLETE_AND_VERIFIED | 029. C08-10 |
-| **Announcement compose** | 15: `type[]` (ad/whatsapp), `private`, `message`, `media[]` file, `expire_at` (date), `category_selected[]` + `student_category_selected[]` (Select-All ×2), `country_id` (full list), `hours`, `language` (11) — `management-public-advertisement.json` | 8 field-labels; **3 selects are single-"All" stubs** (`announcements.js:83` `oneOpt`); `expire` is free-TEXT not a date; recipient targeting is **display-only chips** (no Select-All tables); no edit/delete of existing | PARTIAL | 045–050 + 056 + 043 (targeting). `ann.field.hours` label "Timing" is mislabelled — legacy `hours` is a contracted-hours **audience facet**. C11-11/12 |
-| **Certificate designer (cert-tpl)** | ~16: `name`*, `background` file, Font, B/I/U, Size (range), Color (color+text), Alignment r×4, X/Y/W (number ×3), draggable merge boxes — `management-pdf-create.json` FORM[1] `certForm` | `cert-tpl` = **2** fields (name + STATIC preview) + background GATE | PARTIAL (sanctioned by Spec 031 cert-pdf-gate) | FUTURE_BACKEND (render) + 044. C10-16 |
-| **Chat group create (msg-group)** | 6: `name`, `bio`, `image` file, `staff[]`, `teachers[]`, `students[]` — `management-chat.json` FORM[4] | `msg-group` = 6 fields (image = gate) | COMPLETE_AND_VERIFIED | future-backend. C11-04 |
-| **Add member (msg-member)** | 3 multiselects — FORM[5] | 3 fields | COMPLETE_AND_VERIFIED | future-backend. C11-05 |
-| **Lead intake (lead-new)** | 19 visible (21 − 2 hidden H/M) — `management-new-requests-create.json` FORM[1] | `lead-new` = **19** fields — a genuine 1:1 | COMPLETE_AND_VERIFIED (field count); missing required markers + section headings (§8); `country` free-text vs `country_id` select | 056 (polish) + 044. C11-17. **Children repeater + teacher-gender are NOT in this record** → any such claim is UNKNOWN_EVIDENCE (may live in a detail modal not captured). |
-| **Expense heads (head-add)** | 2 (`name`*, `status`) — `management-heads.json` FORM[1] | 2 fields | COMPLETE_AND_VERIFIED (add); the row **edit/delete** (`editHeadForm`) has no counterpart → PARTIAL | 056. C14-06/07 |
-| **Materials add/edit (mat-add/mat-edit)** | 2 (`name`, `name_ar`) — `management-materials-create.json` | 2 fields each | COMPLETE_AND_VERIFIED (per-row identity is a 044 issue) | —. C10-02/03 |
-| **Library item (lib-item)** | 5 (`name`, `type`, `category_id`, `file`, `thumbnail`) — `management-library.json` FORM[3] | 3 fields + 2 upload gates | PARTIAL | FUTURE_BACKEND + 056. C10-07 |
+| **Custom form builder** | `form_name`*, `day`* (1–29), **repeatable** `fields[N][label]`* / `[type]`* (6 types: Short/Paragraph/Checkboxes/Multiple/Dropdown/Rating) / `[options][]` / `[is_required]` + Add-Question/Add-Option + per-form colour — `management-forms-create.json` FORM[1] | `form-create` drawer = **12** field-labels but **exactly 2 baked question rows** (`reports.html`); no add/remove row, no option repeater, no colour | PARTIAL | 056 + **044 (repeatable-row primitive — blocks the builder)**. C08-01 |
+| **Feedback (fb-create)** | 1 visible (`feedback_note`) + hidden teacher_id/date — `management-teacher-feedback` | 5 fields (superset) but lacks teacher+month binding | PARTIAL | 056. C08-05 |
+| **Feedback categories (rep-fbcat)** | 3 (`name`/`status`/`description`) — `management-family-feedback-categories-create.json` | 3 fields — parity | COMPLETE_AND_VERIFIED | settled (Spec 029). C11-32 |
+| **Announcement compose** | 15: `type[]` (ad/whatsapp), `private`, `message`, `media[]` file, `expire_at` (date), `category_selected[]` + `student_category_selected[]` (Select-All ×2), `country_id` (full list), `hours`, `language` (11) — `management-public-advertisement.json` | 8 field-labels; **3 selects are single-"All" stubs** (`announcements.js:83` `oneOpt`); `expire` is free-TEXT not a date; recipient targeting is **display-only chips** (no Select-All tables); no edit/delete of existing | PARTIAL | 045–050 + 056 + 043 (targeting). `ann.field.hours` label "Timing" is mislabelled — legacy `hours` is a contracted-hours **audience facet**. C11-17 (targeting: C11-18 · edit/delete: C11-19) |
+| **Certificate designer (cert-tpl)** | ~16: `name`*, `background` file, Font, B/I/U, Size (range), Color (color+text), Alignment r×4, X/Y/W (number ×3), draggable merge boxes — `management-pdf-create.json` FORM[1] `certForm` | `cert-tpl` = **2** fields (name + STATIC preview) + background GATE | PARTIAL (sanctioned by Spec 031 cert-pdf-gate) | FUTURE_BACKEND (render) + 044. C10-10 |
+| **Chat group create (msg-group)** | 6: `name`, `bio`, `image` file, `staff[]`, `teachers[]`, `students[]` — `management-chat.json` FORM[4] | `msg-group` = 6 fields (image = gate) | COMPLETE_AND_VERIFIED | future-backend. C11-06 |
+| **Add member (msg-member)** | 3 multiselects — FORM[5] | 3 fields | COMPLETE_AND_VERIFIED | future-backend. C11-07 |
+| **Lead intake (lead-new)** | 19 visible (21 − 2 hidden H/M) — `management-new-requests-create.json` FORM[1] | `lead-new` = **19** fields — a genuine 1:1 | COMPLETE_AND_VERIFIED (field count); missing required markers + section headings (§8); `country` free-text vs `country_id` select | 056 (polish) + 044. C11-22 (country option set: C11-23). **Children repeater + teacher-gender are NOT in this record** → any such claim is UNKNOWN_EVIDENCE (may live in a detail modal not captured). |
+| **Expense heads (head-add)** | 2 (`name`*, `status`) — `management-heads.json` FORM[1] | 2 fields | COMPLETE_AND_VERIFIED (add); the row **edit/delete** (`editHeadForm`) has no counterpart → PARTIAL | 056. C14-15/C14-16 |
+| **Materials add/edit (mat-add/mat-edit)** | 2 (`name`, `name_ar`) — `management-materials-create.json` | 2 fields each | COMPLETE_AND_VERIFIED (per-row identity is a 044 issue) | —. C10-02 |
+| **Library item (lib-item)** | 5 (`name`, `type`, `category_id`, `file`, `thumbnail`) — `management-library.json` FORM[3] | 3 fields + 2 upload gates | PARTIAL | FUTURE_BACKEND + 056. C10-05 (uploads: C10-06) |
 | **Settings General identity** | 11 — `management-settings-general.json` FORM[1] | rendered (`settings.html#view=general`) | COMPLETE_AND_VERIFIED | backend. C09-01 |
-| **Settings Notifications matrix** | 47 — `management-settings-notification.json` FORM[1] | 7 accordion sections, ~34 toggles | COMPLETE_AND_VERIFIED | 053 + 055. C09-07 |
+| **Settings Notifications matrix** | 47 — `management-settings-notification.json` FORM[1] | 7 accordion sections, ~34 toggles | COMPLETE_AND_VERIFIED | 053 + 055. C11-13 (visual form: C09-14) |
 | **Settings Customization palette** | 35 (`personalisation`) incl. 13 colour pickers | rendered but **13 hex TEXT fields, 0 `<input type=color>`** | PARTIAL | 055 (FO-19/20). C09-10 |
-| **Settings Security backup** | destination `backup_email` + Save + a bare `<a>` "Send Backup" (fires a real GET DB backup, no confirm) | destination field + Save gate + Send gate + standing scope/audit copy | INTENTIONALLY_IMPROVED (the legacy no-confirm GET backup is REJECTED_NO_FAKE) | backend (FO-11). C09-15/16 |
-| **Data import (×4)** | 4 file uploads + required-column contracts (`teachers/families/childs/invoices.xlsx`) | 4 cards, structure-only column tables + Upload/Download gates (minus `password`/`hour_rate`/`currency` columns) | COMPLETE_AND_VERIFIED | backend + 043. C09-12 |
-| **Provider configure drawers (11)** | safe options + credential fields — `management-settings-integrations-*-configure` | 11 drawers: safe fields rendered, sensitive = structure-only rows | COMPLETE_AND_VERIFIED (safe) / REJECTED_SECURITY (creds) | 053. C09-19/20 |
+| **Settings Security backup** | destination `backup_email` + Save + a bare `<a>` "Send Backup" (fires a real GET DB backup, no confirm) | destination field + Save gate + Send gate + standing scope/audit copy | INTENTIONALLY_IMPROVED (the legacy no-confirm GET backup is refused — C08-12, REJECTED_SECURITY primary) | backend (FO-11). C09-08 (real execution: C09-26) |
+| **Data import (×4)** | 4 file uploads + required-column contracts (`teachers/families/childs/invoices.xlsx`) | 4 cards, structure-only column tables + Upload/Download gates (minus `password`/`hour_rate`/`currency` columns) | COMPLETE_AND_VERIFIED | backend + 043. C09-03 (real execution: C09-26) |
+| **Provider configure drawers (11)** | safe options + credential fields — `management-settings-integrations-*-configure` | 11 drawers: safe fields rendered, sensitive = structure-only rows | COMPLETE_AND_VERIFIED (safe) / REJECTED_SECURITY (creds) | 053. C09-05 (real connections: C09-15) |
 
 ---
 
@@ -324,12 +342,14 @@ missing the guard every other kebab (`familyMenu`/`studentMenu`/`teacherMenu`/`s
 |---|---|---|
 | Teacher profile edit | 4 (`onlineImage`, `image` file, first/last/email) + 3-field password form — `teacher-profile-edit.json` FORM[1]/[2] | `teacher-profile.html` display-only + 3 backendRequired gate cards (`teacher-profile.js:83-85`) — **0 editable fields** |
 | Family profile edit | 4 + 3 password — `student-profile-edit.json` (the /student/* login IS the family) | `family-profile.html` — 3 gates, 0 fields |
-| Student child-view profile | (same family record) | `student-profile.html` — 3 gates incl. a `passwordChange` gate for **a login the child does not have** → REJECTED_PRIVACY (C12-26, owner 043) |
+| Student child-view profile | (same family record) | `student-profile.html` — 3 gates incl. a `passwordChange` gate for **a login the child does not have** → REJECTED_PRIVACY (carried by the privacy register **G-03**, owner 043; nearest C12 audit row C12-09 — the audit mints no child-view-specific row) |
 | **Admin** profile | 5 (name/email/username/`password` type=text/avatar) — `management-profile-edit.json` | **NO admin profile surface at all**; topbar "الحساب" = `data-action=noop` → honest toast |
 
 **Disp PARTIAL · owner 056** (build the inert edit fields behind the gates) + backend for the save + 043 for
-the child-view password gate. The password `type=text` legacy pattern is REJECTED_SECURITY forever. C12-11/12/13,
-C15-04/05.
+the child-view password gate. The password `type=text` legacy pattern is REJECTED_SECURITY forever. Audit rows
+(per `cluster-audits/C12-audit.md` as published): **C12-04** (admin account MISSING) · **C12-05** (password
+`type=text` REJECTED_SECURITY) · **C12-07/C12-08** (teacher/family profile-edit PARTIAL) · **C12-09** (portal
+change-password FUTURE_BACKEND).
 
 ---
 
@@ -342,9 +362,9 @@ C15-04/05.
 | **055 Cross-Role Propagation** | Teacher end-class / monthly-report / cancel-request producers → admin/family consumers; certificate-request teacher origin; scheduled-action & public-holiday fan-out; announcement delivery |
 | **043 Sensitive Data / Role Isolation** | Family + teacher capabilities forms; per-role notification targeting; child-view password gate; anti-poaching on lead contact + audience selects |
 | **053 Integrations** | Provider credential structure-only rows; WhatsApp pairing; per-family/teacher notification channels; message builder (UNKNOWN_EVIDENCE — 504-only) |
-| **030 / future billing backend** | Invoice builder, record-payment, adjustments, expense/income ledger, salary run persistence |
+| **Future billing/payroll backend** (FUTURE_BACKEND; Spec 030 shipped the honest gates — provenance, not an owner) | Invoice builder, record-payment, adjustments, expense/income ledger, salary run persistence — the *forms* stay 056 items |
 | **HONEST_LOCK / permanent rejects** | `classSalaryReport` (sole lock); all pay/secret field families in §7 — never any spec |
-| **UNKNOWN_EVIDENCE** | `sess-new` field set · `grp-edit` field set · tasks create/section field set · lead children-repeater · message builder · `custemize-table` board-preference form (C01-04) — do not harden until re-crawled |
+| **UNKNOWN_EVIDENCE** | `sess-new` field set · `grp-edit` field set · tasks create/section field set · lead children-repeater · message builder · `custemize-table` board-preference form (C01-05 — its 2 controls are evidenced; anything beyond them is what must not be hardened) — do not harden until re-crawled |
 
 ---
 

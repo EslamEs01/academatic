@@ -126,3 +126,35 @@ an academy, not an ERP. Two caveats: (a) `course.html` Overview is thin (two inf
 page whose banner promises 8 tabs; (b) the drawers are plain two-column field stacks — fine, but the pickers look
 like read-only lists, which is exactly why they read as unfinished. Redesign priority: LOW for the lists, MEDIUM for
 `course.html#view=overview` and the drawer/picker system.
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C05-01 | Course model split: legacy per-student enrollment contract → subject offering + student Courses tab + groups/schedule + finance | INTENTIONALLY_IMPROVED | — | §0 THE CENTRAL FINDING |
+| C05-02 | Course (enrollment) create/edit forms — lawful field coverage (legacy 10 allowed create / ~24 allowed edit vs crs-add 6 / crs-edit 7; single schedule row) | PARTIAL | 056 | §1 Legacy control inventory / §2 Our current control inventory |
+| C05-03 | Add Lesson from a course/enrollment (sess-new ≈ legacy Add Lesson but not reachable from course) | PARTIAL | 055 | §2 Our current control inventory |
+| C05-04 | Teacher hour rate on course/group forms + per-class teacher pay exposure | REJECTED_PAY_FREE | — | §3 What we correctly REFUSE |
+| C05-05 | Money on the course object (Price, student hour rate, invoice assignment, unpaid/indebted/free statuses, add_to_credit) | REJECTED_PAY_FREE | — | §3 What we correctly REFUSE |
+| C05-06 | Course-analysis charts (treemap + bar charts) → authored chart-free cards (Spec 037) | INTENTIONALLY_IMPROVED | — | §3 What we correctly REFUSE |
+| C05-07 | Porting of real legacy PII (student/parent/admin names, email) | REJECTED_PRIVACY | — | §3 What we correctly REFUSE |
+| C05-08 | Cross-student enrollment ledger (7 saved working lists, 8 status filters, teacher/date/has-invoice filters, export) | MISSING | 045 | §4.1 |
+| C05-09 | Course lifecycle writes: copy/duplicate, change status, delete (gates never implemented) | MISSING | 044 | §4.2 |
+| C05-10 | Free / trial enrollment creation path (store_free) | MISSING | 056 | §4.3 |
+| C05-11 | Teacher field on the group create form (legacy requires one; grp-add has none) | PARTIAL | 056 | §4.4 |
+| C05-12 | Dual-timezone scheduling (student + teacher weekday/time per schedule row, timezone-difference badge, dual-column timetable) | MISSING | 056 | §4.5 |
+| C05-13 | Bulk "Schedule Cancel on Date" (Auto Makeup / Reschedule / No Makeup + credit + note) | MISSING | 044 | §4.6 |
+| C05-14 | Course timeline / status audit trail | MISSING | 055 | §4.7 |
+| C05-15 | Cross-role drill-downs: teacher per-student class history; family course feedback + per-subscription history | MISSING | 055 | §4.8 |
+| C05-16 | Picker/drawer completeness: crs-enroll / grp-assign lack any selection control; grp-edit opens without current values | PARTIAL | 044 | §4.9 |
+| C05-17 | Courses/course/groups/group visual redesign over the legacy purple-ERP tables (chips, medallions, Learning Path, real empty states) | INTENTIONALLY_IMPROVED | — | §5 Visual verdict |
+| C05-18 | course.html Overview thinness + drawer/picker visual system (redesign priority MEDIUM) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 045 | §5 Visual verdict |
+
+Honest counts: screenshotsOpened=37 · recordsInspected=17 · currentSourceFiles=not stated
+
+Normalization notes (Spec 042, this section is normalization only — no new analysis): the audit's Method line states 37
+screenshots opened as images and 17 raw records inspected; it does not state a count of current-app source files
+inspected, so that count is recorded as "not stated". The audit names an owning spec only for §4.9 ("Spec-044
+material"); owners for the other gap rows were assigned from the binding Spec-042 future-owner register by domain
+(forms/field gaps → 056; modal/drawer/lifecycle-write interactions → 044; cross-role/workflow → 055; missing list
+surface + visual review → 045) and are flagged as normalization-assigned, not audit-stated.

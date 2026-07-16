@@ -292,3 +292,41 @@ account-count column, if it is ever built, is an **admin-only** aggregate and mu
 | **Spec 056** | scheduled-action create form (0 → 16 fields); heads row edit/delete; leads children-rows + teacher-gender; task create/section field sets |
 | **Spec 057** | a real 404/error page; topbar shortcuts; final orphan/route freeze |
 | **Frontend maintainer** | `gallery.html` (Spec 041 D-2 — frozen, unowned by any spec) |
+
+---
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+| --- | --- | --- | --- | --- |
+| C14-01 | Export Course (legacy 500 — zero field-level evidence) | UNKNOWN_EVIDENCE | — | §1 The headline finding |
+| C14-02 | Family Feedback (legacy 500 — zero field-level evidence) | UNKNOWN_EVIDENCE | 029 (C08 evidence) | §1 The headline finding |
+| C14-03 | Teacher Monthly Classes (legacy 500 — zero field-level evidence) | UNKNOWN_EVIDENCE | 036 (C02 evidence) | §1 The headline finding |
+| C14-04 | Scheduled Trials queue (legacy 500 ×2 — zero field-level evidence) | UNKNOWN_EVIDENCE | 034 (C11 evidence) | §1 The headline finding |
+| C14-05 | Student Profile (legacy 500 — zero field-level evidence) | UNKNOWN_EVIDENCE | C12/C02/C03 profile-edit captures (no spec stated) | §1 The headline finding |
+| C14-06 | Teacher Profile (legacy 500 — zero field-level evidence) | UNKNOWN_EVIDENCE | C12/C02/C03 profile-edit captures (no spec stated) | §1 The headline finding |
+| C14-07 | Message Builder (legacy 504 — zero evidence) | UNKNOWN_EVIDENCE | 053 | §1 The headline finding |
+| C14-08 | Time converter — multi-zone comparison board (24h band grid, add/remove ~150 locations, Prev/Today/Next date rail, 6-col DST board) vs our 2-zone point converter + 4-col authored DST table | PARTIAL | 045–050 | §2 Time Converter |
+| C14-09 | DST "Affected Accounts" per-zone live aggregate | FUTURE_BACKEND | 043 | §2 Time Converter |
+| C14-10 | Cross-role DST visibility (teacher portal / family portal / child view surface no DST change) | MISSING | 055 | §2 Time Converter — cross-role gap |
+| C14-11 | Scheduled-action create form (0 fields vs 16 evidenced conditional controls) | MISSING | 056 | §3 Scheduled Actions |
+| C14-12 | Scheduled-actions list (filters, Created-by/Executed-At/Result/Note columns, per-row Settings) | PARTIAL | 056 | §3 Scheduled Actions |
+| C14-13 | Scheduled-action type enum (5 action types, matches legacy exactly) | COMPLETE_AND_VERIFIED | — | §3 Scheduled Actions |
+| C14-14 | Scheduled-action status vocabulary (legacy Pending/Executed/Failed/Cancelled vs ours queued/upcoming/cancelled) | PARTIAL | 056 | §3 Scheduled Actions |
+| C14-15 | Expense heads — Add Head form (2/2 fields, figure-free, gated Save) | COMPLETE_AND_VERIFIED | — | §4 Expense "Heads" |
+| C14-16 | Expense heads — row manage actions (edit / delete / status toggle) | PARTIAL | 056 | §4 Expense "Heads" |
+| C14-17 | Trials pipeline analytics (computed hero/alert/KPI/outcome/insight aggregates) | FUTURE_BACKEND | — | §5 New Requests / Trials |
+| C14-18 | Lead record workflow (19/~21 create fields; missing repeatable Children rows + Teacher-gender; 9-status enum maps 1:1) | PARTIAL | 056 | §5 New Requests / Trials |
+| C14-19 | Dual-timezone (student ↔ teacher) session timetable rendering | MISSING | 055 | §6 Two capabilities we have NOWHERE |
+| C14-20 | Entity activity timeline (audit trail on enrollments/courses/sessions) | FUTURE_BACKEND | 055 | §6 Two capabilities we have NOWHERE |
+| C14-21 | Legacy no-confirmation Delete POST (`/management/courses/1/delete`) | REJECTED_NO_FAKE | — | §6 Two capabilities we have NOWHERE |
+| C14-22 | Course `Price 30` on a teacher-adjacent enrollment row (money figure on a teacher surface) | REJECTED_PAY_FREE | — | §6 Two capabilities we have NOWHERE |
+| C14-23 | Tasks board/KPI/staff-table shell (real content vs zeroed legacy; banned donut chart replaced with honest per-column tallies) | INTENTIONALLY_IMPROVED | — | §7 Tasks |
+| C14-24 | Task create (7 fields) + add-section (1 field) field sets — authored, not evidenced | UNKNOWN_EVIDENCE | 056 | §7 Tasks |
+| C14-25 | Task move (drag / status change) | FUTURE_BACKEND | — | §7 Tasks |
+| C14-26 | Gallery design-system showcase (frozen orphan set, Spec 041 D-2) | INTENTIONALLY_IMPROVED | — (frontend maintainer) | §8 Gallery |
+| C14-27 | Branded 404 / error page (legacy has one; our static build has no 404.html) | MISSING | 057 | §8 Gallery |
+| C14-28 | Topbar personal persisted nav shortcuts (`shortcutsNavModal`) | MISSING | 057 | §9 Shell capabilities |
+| C14-29 | Real legacy PII (admin identity/e-mail, real student/parent/teacher names, actor names, live per-zone account counts) — never port | REJECTED_PRIVACY | 043 | §10 Privacy |
+
+Honest counts: screenshotsOpened=26 · recordsInspected=14 · currentSourceFiles=10

@@ -175,3 +175,39 @@ drawer) · `sessions-analysis.html` (4 helpers + **10** regular + **6** trial au
   name exposure.
 * **045–050** page review / visual redesign → `sessions-analysis` (a flat 20-card grid reads as a generic ERP KPI wall),
   `scheduled-actions` / `public-holiday` (card walls with no filter, no table, no empty state).
+
+## Disposition summary (normalized — Spec 042 ledger source)
+
+| capId | capability | disposition | owner | evidence anchor |
+|---|---|---|---|---|
+| C06-01 | Session lifecycle outcome forms (mark-attended 7 / student-absent 13 / cancel 10 fields — notify, make-up, add-to-credit, timezone, remark, summary, homework) | PARTIAL | 044 | §3 gap 1 |
+| C06-02 | Edit/Reschedule session form (date · time · duration · teacher reassign · accounting statement) | PARTIAL | 044 | §3 gap 2 |
+| C06-03 | Sessions row kebab depth (10 legacy items) + confirm on destructive Cancel | PARTIAL | 044 | §3 gap 3 |
+| C06-04 | Request→response scheduling loop (send schedule/trial request ~35 controls + "Teachers you sent / Accepted teachers" response views) | MISSING | 055 | §3 gap 4 |
+| C06-05 | Public-holiday bulk-cancel form (~9 controls) | PARTIAL | 056 | §3 gap 5 |
+| C06-06 | Scheduled-actions management (2 filters + 10-col table + 18-control create form) | PARTIAL | 056 | §3 gap 5 |
+| C06-07 | Sessions-analysis filter form + full row set (Returned Today, Teacher/Admin Cancel) | PARTIAL | 056 | §3 gap 6 |
+| C06-08 | Teacher availability editor (5 controls, Add/Update/Delete) | MISSING | 056 | §3 gap 7 |
+| C06-09 | Family request-cancel/reschedule form (type radios + date + time) | PARTIAL | 056 | §3 gap 8 |
+| C06-10 | Session files upload + files panels (family `uploadFileModal` incl. voice, teacher `images[]`, class Files panel) | MISSING | 056 | §3 gap 8 |
+| C06-11 | Class-detail depth (event log · timeline audit log · queues panel · files panel) | PARTIAL | 044 | §3 gap 9 |
+| C06-12 | Pay on session surfaces (per-row Fine · Delete Fine kebab · salary/fines/bonus panel · Price column) | REJECTED_PAY_FREE | — | §4 bullet 1 |
+| C06-13 | Class salary report (`classSalaryReport`) | HONEST_LOCK | — | §4 bullet 1 |
+| C06-14 | "Active & unpaid" timetable block tinting | REJECTED_PAY_FREE | — | §4 bullet 2 |
+| C06-15 | Computed percentages (Attended Percentage · Classes-KPI Percentage · feedback Percentage label) | REJECTED_NO_FAKE | — | §4 bullet 3 |
+| C06-16 | Fake live room / recording / direct links (Enter Again · Start · Running · Class Recording) | REJECTED_NO_FAKE | 054 | §4 bullet 4 |
+| C06-17 | Porting real legacy PII (real names · staff email · unmasked identities) | REJECTED_PRIVACY | — | §4 bullet 5 |
+| C06-18 | Send WA Message / Send Reminder messaging channels | FUTURE_BACKEND | 053 | §4 bullet 5 · §6 |
+| C06-19 | Family class-history cross-child exposure + admin board parent+student+teacher name triple | REJECTED_PRIVACY | 043 | §4 bullet 5 · §6 |
+| C06-20 | Confirm-guarded destructive actions (legacy no-confirm Delete Fine refused; confirms kept) | INTENTIONALLY_IMPROVED | — | §4 bullet 6 |
+| C06-21 | Family "Subscription" column on today-classes table | REJECTED_PAY_FREE | — | §4 bullet 7 |
+| C06-22 | Dedicated Attendance & Outcomes review board (`attendance.html`) | INTENTIONALLY_IMPROVED | — | §5 |
+| C06-23 | Schedule Search as a real filterable availability finder with results + drawers | INTENTIONALLY_IMPROVED | — | §5 |
+| C06-24 | Labelled week grid (`schedule.html#view=timetable`) with real block cards + flags | INTENTIONALLY_IMPROVED | — | §5 |
+| C06-25 | Sessions Analysis explicit display-only honesty note, no chart engine | INTENTIONALLY_IMPROVED | — | §5 |
+| C06-26 | Zero-pay family portal + child-view student pages on session surfaces | INTENTIONALLY_IMPROVED | — | §5 |
+| C06-27 | Class-board Filter-Classes form (9 controls vs our 3 filter controls) | PARTIAL | 056 | §1 · §6 |
+| C06-28 | Display-mode table preference (`custemize-table`: timeType + groupByTime) | MISSING | 056 | §1 · §6 |
+| C06-29 | Visual quality of `sessions-analysis` / `scheduled-actions` / `public-holiday` (flat card walls, no filter/table/empty state) | COMPLETE_BUT_VISUAL_REVIEW_REQUIRED | 045-050 | §6 |
+
+Honest counts: screenshotsOpened=34 · recordsInspected=16 · currentSourceFiles=not stated

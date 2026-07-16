@@ -66,8 +66,8 @@ modal/drawer status · empty/loading/error states · sensitive-data exposure · 
 
 | Side | Reality |
 |---|---|
-| **Legacy** | **339 pages** (admin 300 · teacher 26 · family 13) · **19 modules** · **1,162 screenshots** · **1,723 raw records** (679 HTML · 346 JSON · 359 MD · 339 TXT) · **829 skipped actions** · 0 failed pages |
-| **Current** | **115** HTML · **57** bases · **50** admin nav items · 3 role portals (7/8/8) · 408 own screenshots |
+| **Legacy** | **339 pages** (admin 300 · teacher 26 · family 13) · **19 modules** · **1,113 screenshots** (crawler captures on disk under `output/roles/**`: admin 1,019 · teacher 67 · family 27; the oft-quoted **1,162** is the `reference-imports` MIRROR total, which adds the 49 `frontend-planning-deep` frames that are not crawler page captures) · **1,723 raw records** — a sitewide `find output/` count: 679 HTML (339 raw + 339 sanitized page captures + `combined/report.html`) · 346 JSON (339 page records + `combined/academy-system-map.json`, 3 `role-map.json`, 3 `network/endpoints.json`) · 359 MD (339 page MD + 20 index/summary files) · 339 TXT (the page-record corpus itself is 339 per type; 678 page HTML) · **829 skipped actions** · 0 failed pages |
+| **Current** | **115** HTML · **57** bases · **50** admin nav items · 3 role portals (7/8/8) · **402** own screenshots (`app/screenshots/*.png`; +6 archived `before-022/` comparison frames = 408 files under the directory) |
 
 **339/339 legacy pages are assigned to a capability cluster — zero unassigned.** Every referenced path was
 verified to exist on disk (0 broken references). See `exhaustive-evidence-inventory.md` and
@@ -151,7 +151,10 @@ spec is a **STOP**.
 Spec 042's deliverable is not a list of complaints — it is an **allocation**.
 
 - **All 57 page bases** are partitioned across Specs **045–050** for review + academic visual redesign. Every
-  base appears **exactly once**: no overlap, no orphan. The arithmetic is shown.
+  base appears **exactly once**: no overlap, no orphan. The arithmetic is shown. (Unit note: the review
+  partition in `visual-quality-and-academic-design-audit.md` §10 counts **58 review units** = the 57 mirrored
+  bases **+ `index.html`**, which has no `.en` mirror — 57×2+1 = 115 files. "57 bases" and "58 review units"
+  are the same partition stated in two units.)
 - **Teacher and Family dashboards receive explicit priority ownership** — they are the weakest experiences and
   the most-used role surfaces.
 - Every `PARTIAL` / `MISSING` / `UNKNOWN_EVIDENCE` / `FUTURE_BACKEND` capability is allocated to its owning spec
@@ -198,6 +201,18 @@ The redesign specs (045–050) must:
 9. Cross-role propagation gaps are recorded (a creation surface ≠ a working feature).
 10. Current improvements over the legacy are preserved.
 11. **No source, test or public HTML file is modified.**
+
+**Gate-evaluation status note.** Gates 3–6 are evaluated against the consolidation deliverables, some of which
+land in a separate consolidation pass: the per-capability roll-up (`legacy-current-capability-ledger.md`), the
+owner allocation (`future-spec-allocation-register.md`), the 045–050 partition extract
+(`page-review-ownership-map.md`), the federated REJECTED_*/UNKNOWN_EVIDENCE registers
+(`rejected-legacy-behaviour-register.md`, `unknown-and-conflicting-evidence-register.md`) and the adversarial
+checklist (`checklists/requirements.md`) with an explicit PASS/FAIL per gate. Until those land, their content is
+**federated**: dispositions + owners live in the 15 cluster audits' "Disposition summary" tables
+(`cluster-audits/C01–C15-audit.md` — all 15 written), the REJECTED_* rows in the six cross-cutting ledgers
+(privacy §2–§4, forms §7, cross-role §5, better-register §1–§9), the UNKNOWN_EVIDENCE rows in the same ledgers
+(privacy §9, forms §11, cross-role §6), and the partition arithmetic in the visual audit §10. **Spec 042 is not
+declared complete until the consolidated artifacts exist and every §9 gate is explicitly evaluated.**
 
 ## 10. Stop conditions
 

@@ -195,7 +195,8 @@ fall-through both render with a **success** icon. There is no warning/error toas
 ### D-8 · No error page exists
 `app/public/` contains **no `404.html` and no `500.html`** (verified). The legacy ships a branded 404 ("Opps!!!" + Go Back
 to Home, 5 captures) and served 7 real 500s + 1 504. A bad URL on our static host yields the host's default page.
-Already recorded as C14-18 / C15-17.
+Already recorded as **C14-27** (branded 404/error page — MISSING, owner 057, `cluster-audits/C14-audit.md`);
+the C15 audit carries the shell's no-dead-end behaviour in its §2 but mints no separate 404 row.
 **Disposition: MISSING · owner 057** (Final Production Freeze) — design may come from **045–050**.
 
 ---
@@ -225,7 +226,7 @@ Legend: ✅ ships · ⚠️ ships but defective · ❌ absent · — n/a · **DE
 | `staff.html` | ❌ | ❌ | ❌ | ❌ **SILENT VOID (D-4)** | `management-admins` | **MISSING** | **044** · 045–050 |
 | `library.html` | ❌ | ❌ | ❌ | ❌ **SILENT VOID (D-4)** | **"No Material Added"** (`management-library`) | **MISSING** | **044** · 045–050 |
 | `messages.html` | ❌ | ❌ | ❌ | ❌ **SILENT VOID (D-4)** | `management-chat` | **MISSING** | **044** · 045–050 |
-| `certificates.html` (templates + requests) | ❌ | ❌ | ❌ | ❌ (no filter) | **"No data found"** on `management-pdf` AND `management-certificate-requests` | **MISSING** (= C10-30) | 045–050 |
+| `certificates.html` (templates + requests) | ❌ | ❌ | ❌ | ❌ (no filter) | **"No data found"** on `management-pdf` AND `management-certificate-requests` | **MISSING** (= C10-27) | 045–050 |
 | `announcements.html` | **DEAD** (D-5) | ❌ | ❌ | ❌ | — | MISSING | 045–050 |
 | `tasks.html` | ❌ | ❌ | ❌ | ❌ | legacy tickets board captured **completely empty** | MISSING | 045–050 |
 | `scheduled-actions.html` | ❌ | ❌ | ❌ | ❌ (no filter) | `management-scheduled-actions` | MISSING | 056 (filters) · 045–050 |
@@ -243,7 +244,7 @@ Legend: ✅ ships · ⚠️ ships but defective · ❌ absent · — n/a · **DE
 | `family-schedule.html` | ✅ ×6 | ❌ | ❌ | — | INTENTIONALLY_IMPROVED | — |
 | `student-schedule.html` | ✅ ×6 | ❌ | ❌ | — | INTENTIONALLY_IMPROVED | — |
 | `family-child.html` | ✅ ×4 (`prt.child.noToday`) | ❌ | ❌ | — | INTENTIONALLY_IMPROVED | — |
-| `family-requests.html` | ✅ ×2 (`meetingsEmpty`) | ❌ | ❌ | consumer with no producer (C04-29) | INTENTIONALLY_IMPROVED | 055 |
+| `family-requests.html` | ✅ ×2 (`meetingsEmpty`) | ❌ | ❌ | consumer with no producer (C04-20) | INTENTIONALLY_IMPROVED | 055 |
 | `family-materials.html` | **DEAD** | ❌ | ❌ | empty branch unreachable (D-5) | MISSING | 045–050 |
 | `student-materials.html` | **DEAD** | ❌ | ❌ | — | MISSING | 045–050 |
 | `student-homework.html` | **DEAD** | ❌ | ❌ | — | MISSING | 045–050 |
@@ -281,8 +282,8 @@ Legend: ✅ ships · ⚠️ ships but defective · ❌ absent · — n/a · **DE
 | Owner | Items |
 |---|---|
 | **044** Modal/Drawer/Long-Form Interaction System | **D-3** (mis-bound no-results — one-expression fix) · **D-4** (silent-void pattern) · **D-6** (required/invalid/error-summary primitives — **blocking prerequisite for 056**) · **D-7** (toast severity) · S-0 (unify the 4 empty systems) · loading/pending states for drawers |
-| **045–050** Bounded page review + academic redesign | **D-1** (remove the fake-states band from the admin home) · **D-2** (resolves with D-1) · **D-5** (author the *reachable* empty screens — the day-one screen for 20+ admin surfaces and 11 portal pages) · empty-state copy pass · the `prt.stu.weekFriNote` cross-role key · library/certificates/tasks/announcements empties (C10-30) |
-| **055** Cross-Role Propagation | `family-requests` meetings empty = a consumer with no producer (C04-29) |
+| **045–050** Bounded page review + academic redesign | **D-1** (remove the fake-states band from the admin home) · **D-2** (resolves with D-1) · **D-5** (author the *reachable* empty screens — the day-one screen for 20+ admin surfaces and 11 portal pages) · empty-state copy pass · the `prt.stu.weekFriNote` cross-role key · library/certificates/tasks/announcements empties (C10-27) |
+| **055** Cross-Role Propagation | `family-requests` meetings empty = a consumer with no producer (C04-20) |
 | **056** Complete Forms & Data Capture Audit | must **not** author its ~40 forms until 044 ships the validation vocabulary (D-6); filters for scheduled-actions / sessions-analysis |
 | **057** Final Production Freeze | **D-8** (`404.html` / `500.html`) · widen the reduced-motion smoke regex beyond `lv-*` (D-2) · a gate forcing every `X.length ? … : …` empty branch to render once (D-5) |
 | **053** Integrations | settings payment-methods empty state (already good — preserve) |
