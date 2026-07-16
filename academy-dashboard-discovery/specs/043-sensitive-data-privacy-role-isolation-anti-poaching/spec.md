@@ -13,6 +13,23 @@
 > `FUTURE_BACKEND`. No wording anywhere may claim backend authorization exists. Real server-side authorization,
 > authentication and secret persistence are out of scope and are named as backend prerequisites throughout.
 
+> **WAVE-0 FOUNDATION OWNERSHIP (correction, 2026-07-17).** Spec 043 is an *implementable* Wave-0 foundation, not
+> a specify-only ratification. Its frontend-enforceable foundation is implemented and tested **by Spec 043's own
+> `/speckit.implement` phase**, BEFORE any dependent protected-data page (045–056) reaches Gate 3. Work splits
+> into three classes: **(A) SPEC-043-OWNED FRONTEND FOUNDATION** — implemented + tested + mutation-proven during
+> Spec 043's own implement phase (child-view password-gate removal; the parent-contact deny-by-default registry
+> on the existing RBAC host; the global privacy absence guards; the teacher-capability/notification policy
+> preview; the existing-safe-surface freeze assertions). **(B) DOWNSTREAM PAGE-LOCAL COMPLIANCE** — Specs 045–056
+> consume the *already-implemented* 043 foundation, preserve its global guards, and add page-local tests for
+> their own new/changed surfaces; they may never become the primary implementation owner of a 043 closure, and
+> may never weaken or replace a 043 test. **(C) FUTURE_BACKEND ENFORCEMENT** — authentication, sessions, real
+> RBAC, row-level isolation, secret persistence and direct-route denial stay honestly gated, never faked.
+> Ratification alone is Gate 1; a future plan is not implementation; a downstream promise is not a completed
+> foundation. The canonical per-row split is `owned-row-reconciliation.md` §"Implementation-ownership table".
+> **NOTE ON PHASE:** this current `/speckit.specify` phase still writes **0 application bytes** — the class-A
+> implementation is delivered by Spec 043's subsequent plan/tasks/implement phases, which this correction now
+> assigns to Spec 043 itself (no longer to any dependent spec).
+
 **Baseline HEAD**: `ce33a7c` · 115 public HTML · 57 PAGES · admin menu 50 · routes 24 deep / 25 plain / 1
 disabled lock · 49 implemented / 0 planned / 1 disabled · `FUTURE_ROUTES = {}` · sole honest lock
 `classSalaryReport` · gallery orphan pair `{gallery.html, gallery.en.html}`.
@@ -174,9 +191,10 @@ unavailable to any teacher role or teacher-visible surface. The UI describes the
 real enforcement is a backend responsibility.
 
 **Why this priority**: Our own product's biggest policy gap is that `PERM_GROUPS` has **no parent-contact row
-at all** (G-01) — the single most important privacy control in the legacy 170-list is unrepresented. 043 names
-it and freezes its default posture. (P2 because it is a fixture/preview addition consumed by later specs, not a
-day-one anti-poaching leak like P1.)
+at all** (G-01) — the single most important privacy control in the legacy 170-list is unrepresented. **Spec 043
+itself owns** adding the deny-by-default parent-contact rows to the existing RBAC preview host during its own
+implement phase (not a later spec). (P2 because it is a structure-only registry addition on an existing host,
+not a day-one anti-poaching leak like P1 — but it is 043-owned foundation, not deferred.)
 
 **Independent Test**: The staff-management fixture's parent-contact permission rows all render deny-by-default
 and never on a teacher-visible surface. (Falsified by MUT-6 — flipping a privacy grant to default true; MUT-2 —
@@ -278,6 +296,18 @@ group (P-06/N-2), and the preview URL carried `student_name=` in a shareable que
   contact — that is a separate, teacher-unreachable class), and **backend enforcement** (all four are
   `FUTURE_BACKEND` — an authz model, not a form today: P-20 shows 0 of 4 teacher + 0 of 2 family controls
   exist). No capability toggle may imply real enforcement in a static frontend.
+- **FR-008a** (correction — C02-04/C02-05 frontend-now deliverable): C02-04 and C02-05 are Spec-043
+  **primary-owned MISSING** rows, so 043's own implement phase MUST deliver an actual frontend-now outcome, not
+  a vague deferral. **Decision**: a **structure-only teacher-capability + notification POLICY preview** rendered
+  on the **existing** admin teacher surface, reusing the existing display-only row pattern (the `staff.js`
+  `permDrawer` / settings `structRow` precedent) — **no new 044 component**. It (a) separates academic from
+  communication capabilities; (b) implies **no** enforcement (structure-only, like the display-only RBAC
+  matrix); (c) grants **no** guardian contact (parent contact is the separate teacher-unreachable class);
+  (d) renders notification channels as routing rows that **do not claim delivery**, with the `salary_*` row
+  **EXCLUDED** (pay-free); (e) leaves real authorization + delivery to `FUTURE_BACKEND`/053. If evidence during
+  planning proves a new 044 host unavoidable, 043 still **freezes the content/data interface and implements the
+  policy registry + tests**, leaving only host presentation to 044 — the capability outcome is never left
+  unimplemented. Full decision: `rbac-and-capability-model-decision-register.md` §"C02-04/C02-05 deliverable".
 
 ### Functional Requirements — Role isolation & direct fetch
 
@@ -369,6 +399,40 @@ Full split: `frontend-now-vs-future-backend.md`. Summary:
 
 ---
 
+## Mandatory Spec-043-owned implementation outcomes (Wave 0 — for 043's own plan/tasks/implement)
+
+Spec 043's own `/speckit.plan` → `/speckit.tasks` → `/speckit.implement` MUST deliver at least the following.
+None may be deferred to a dependent spec; each ships with its Spec-043-owned executable guard + falsifying
+mutation executed RED→GREEN on an isolated copy, residue 0. This current specify phase writes 0 application
+bytes; these are 043's own downstream phases, not later specs.
+
+1. **Child-view account correction** — remove `passwordChange` from `STUDENT_PAGES.profile.gates`
+   (`portal.js`), **student-profile ONLY** (family-profile + teacher-profile gates untouched); the declared
+   smoke supersession (`student-profile plannedBackend 3→2`; `expPlanned 'student-profile' 3→2`); **MUT-3
+   RED→GREEN**, 0 residue. NOT deferred to Spec 047 (which later reviews the already-correct child-view and must
+   preserve this rule). `child-view-account-boundary.md`.
+2. **Parent-contact deny-by-default foundation** — an actual frontend policy substrate on the **existing** staff
+   RBAC preview host: the parent-contact permission rows (view guardian phone/e-mail, export guardian contacts,
+   approved contact use, reveal-from-masked), all default **DENY**, never "all granted", structurally
+   teacher-unreachable, with honest "backend enforcement does not yet exist" copy; **no new fake permission
+   engine**; reuse the existing RBAC preview/fixture/host (do not wait for 044). **MUT-2 + MUT-6** owned +
+   executed by 043. `parent-contact-default-deny-contract.md`.
+3. **Global privacy absence guards** — the baseline tests that freeze the current safe product (G1–G14:
+   teacher-contact absence, teacher-fixture no-locality, teacher-unreachable grants, family isolation,
+   child-view no-account, portal no-admin-links, sitewide no-real-PII, no live WhatsApp URL, no credential value
+   slot/PAN, deny-by-default privacy rows, no certificate group delivery, no minor-in-query-string, honest
+   backend wording). **Implemented by 043 now — green before any dependent spec begins Gate-3 integration.** Each
+   new guard ships its 043-owned falsifying mutation. `protected-test-and-mutation-register.md`.
+4. **Teacher-capability + notification policy** (FR-008a) — the structure-only teacher policy preview on the
+   existing admin teacher host; academic vs communication separated; no enforcement/delivery claim; `salary_*`
+   excluded; no guardian contact. 043-owned. `rbac-and-capability-model-decision-register.md`.
+5. **Existing-safe-surface freeze** — for frontend-now requirements already true at baseline (connection-health
+   absent, certificate group delivery absent, secrets structure-only, no external host/PII, safe role/link
+   inventories), the *implementation* is the **executable guard + its mutation proof** — "already safe" is not
+   "no implementation." `preservation-and-rejected-behaviour-register.md`.
+
+---
+
 ## Explicit Exclusions
 
 - 043 does NOT build the 044 permission-matrix / modal / long-form host, teacher/family/child page redesigns
@@ -400,8 +464,9 @@ where the corpus cannot decide.
   backend-enforced) as a design decision, not as legacy fact.
 - The current product already introduces zero privacy/security regressions
   (`privacy-and-sensitive-data-findings.md` verdict); 043 freezes that posture and closes the one policy gap
-  (G-01 parent-contact permissions) and the one role-model wart (G-03 child-view password gate) at the
-  specification level. Implementation of the two closures rides the owning later specs' merge gates.
+  (G-01 parent-contact permissions) and the one role-model wart (G-03 child-view password gate). **Both closures
+  are implemented and tested by Spec 043's own implement phase (Wave 0), before any dependent spec reaches Gate
+  3** — they are 043-owned foundation, not deferred to 045–056.
 - Personas stay authored demo fixtures (st1/fam1/sara) until real auth (`FUTURE_BACKEND`).
 
 ---
@@ -489,13 +554,18 @@ page bases. Policy + controls fold into existing tabs/drawers.
 
 ## Downstream Gate-3 Obligations for 045–056
 
-`cross-spec-handoff-register.md` is authoritative. In brief: a 045–050 page that handles protected data MAY NOT
-merge until the applicable 043 frontend protection is implemented and verified on that rendered surface
-(ratification of these rules is Gate 1 only); 051 consumes the `can_chat` model + safe audiences; 052 the
-audience-scoping; 053 the structure-only-secrets + private-certificate-delivery + connection-health-privacy
-contracts; 054 the role/session/time-scoped room-link + presence-of-minors rules; 055 the audit-actor-identity +
-DST-count-scoping rules and must obey N-1…N-7; 056 the omit/structure-only field families. 043's own enforcement
-stays `FUTURE_BACKEND`.
+`cross-spec-handoff-register.md` is authoritative. **The 043 frontend foundation (child-view correction,
+parent-contact registry, global privacy guards, teacher-capability policy, existing-safe freeze) is IMPLEMENTED
+AND TESTED by Spec 043's own implement phase in Wave 0.** Downstream then: a 045–050 page that handles protected
+data consumes that already-implemented foundation, preserves its global guards unchanged, and MAY NOT merge
+until it has proven — with page-local tests — that its own new/changed surface complies (a 043 rule ratified is
+Gate 1; the 043 foundation implemented is what makes Gate 3 reachable; the page's own compliance is the page's
+Gate-3 duty). 051 consumes the `can_chat` model + safe audiences; 052 the audience-scoping; 053 the
+structure-only-secrets + private-certificate-delivery + connection-health-privacy contracts; 054 the
+role/session/time-scoped room-link + presence-of-minors rules; 055 the audit-actor-identity + DST-count-scoping
+rules and must obey N-1…N-7; 056 the omit/structure-only field families. No downstream spec is the primary
+implementation owner of a 043 closure, and none may weaken or replace a 043 test. 043's own real *authorization*
+(class C) stays `FUTURE_BACKEND`.
 
 ---
 

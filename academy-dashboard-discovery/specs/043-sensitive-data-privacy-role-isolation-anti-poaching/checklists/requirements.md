@@ -95,3 +95,49 @@ spot-verified against the live repo (git state, 115 HTML, 57 PAGES, `FUTURE_ROUT
 - Reviewer confirmed: no login field set / staff-category model / impersonation surface / recording player
   invented; no UNKNOWN resolved by inference; no RJ/NEVER re-proposed; no internal contradiction; git state =
   only `.specify/feature.json` (M) + the untracked 043 dir; HEAD `ce33a7c`; no commit; no plan/tasks/impl.
+
+---
+
+# Dependency/Ownership Correction Pass (2026-07-17)
+
+A Gate-3 circular-ownership defect was found after the specify report: several artifacts assigned Spec-043
+frontend closures (child-view removal, parent-contact registry, global guards) to dependent Specs 044/045/047/048.
+Since 045–050 may not merge until the applicable 043 protection is implemented, deferring that implementation TO
+those specs is circular. Corrected so Spec 043's OWN implement phase (Wave 0) owns and tests the frontend
+foundation before any dependent spec's Gate 3.
+
+## Correction-review checklist (non-author Opus)
+
+1. [ ] Spec 043 is an implementable Wave-0 foundation
+2. [ ] No 043 frontend closure depends on 045–050 implementation
+3. [ ] Child password removal owned by 043, not 047 (047 preserves)
+4. [ ] Parent-contact registry/rows owned by 043
+5. [ ] MUT-2, MUT-3, MUT-6 owned by 043
+6. [ ] Global privacy guards implemented by 043
+7. [ ] Downstream specs only preserve/extend page-local compliance
+8. [ ] 044 host ownership does not swallow 043 privacy content
+9. [ ] C02-04/C02-05 have actual frontend-now outcomes (FR-008a policy preview)
+10. [ ] All 17 rows have one implementation disposition (ownership table)
+11. [ ] FUTURE_BACKEND remains honest
+12. [ ] No route/page/count change (115/57/50/24-25-1)
+13. [ ] No application code changed during this correction
+14. [ ] No plan/tasks generated
+15. [ ] No commit/push/merge
+16. [ ] Grep of all 043 files finds no residual live circular-ownership statement
+
+## Correction result
+
+- **Verdict: PASS** — non-author Opus adversarial correction review, all 16 checks pass, 0 blocking failures
+  (2026-07-17). Confirmed: circular defect fully removed; Spec 043's own implement phase (Wave 0) owns +
+  executes MUT-2/MUT-3/MUT-6, the G1–G14 global guards, and the FR-008a teacher-capability policy preview, green
+  before any dependent spec's Gate 3; downstream = preserve/extend page-local only; no residual live circular
+  wording; no new route/page/count/dependency/component; counts 115/57/50/24-25-1 held; HEAD `9694527`
+  unchanged; no commit; no plan/tasks/impl.
+- Files corrected (11): `spec.md`, `frontend-now-vs-future-backend.md`, `owned-row-reconciliation.md` (+ownership
+  table), `child-view-account-boundary.md`, `parent-contact-default-deny-contract.md`,
+  `rbac-and-capability-model-decision-register.md` (+C02-04/05 deliverable), `protected-test-and-mutation-register.md`,
+  `cross-spec-handoff-register.md`, `count-route-and-impact-contract.md`, `current-rendered-data-exposure-inventory.md`.
+- Circular statements removed/superseded: the "rides 047 at its Gate-3", "owned by the RBAC-surface implementer",
+  "implemented by the owning later specs (045/047)", "closes G-01/G-03 at the specification level", and the
+  "later specs at their Gate-3 merge — 043 writes zero application bytes" framings — all reframed to
+  Spec-043-owned Wave-0 implementation with downstream preserve/extend duties.

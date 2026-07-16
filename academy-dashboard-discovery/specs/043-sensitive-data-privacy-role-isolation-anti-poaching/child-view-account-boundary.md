@@ -55,8 +55,16 @@ but the guardian and the teacher are **real account holders** who plausibly chan
 page-scoping, would silently weaken family/teacher protections — a review failure. **The spec names
 `student-profile` ONLY.**
 
-## Ownership note
+## Ownership note (corrected 2026-07-17 — no longer deferred to 047)
 
-043 (specify) writes no application bytes. It directs the removal + the declared supersession; the actual
-`portal.js`/test edit rides the child-view page group (047, `page-review-ownership-map.md` §8) at its Gate-3
-merge — the removal merges only with MUT-3 green. The child-view boundary rule is 043's ratified deliverable.
+**Spec 043 OWNS the child-view password-gate removal — its own implement phase, not Spec 047.** The current
+`/speckit.specify` phase writes 0 application bytes; the actual `portal.js` edit + the declared smoke
+supersession + **MUT-3 (RED→GREEN, residue 0)** are delivered by **Spec 043's own `/speckit.plan` → `tasks` →
+`implement`** in Wave 0, before any dependent spec reaches Gate 3. This is a Class-A (Spec-043-owned frontend
+foundation) outcome (`spec.md` §Mandatory Spec-043-owned implementation outcomes #1).
+
+**Spec 047's role is PRESERVATION only.** When 047 later redesigns/reviews the child-view, the surface is
+already correct (2 gates, no password affordance); 047 MUST preserve this rule and may not reintroduce the gate
+(its MUT-3-equivalent stays green). 047 is not, and may not become, the primary implementation owner of this
+correction. This closes the circular dependency: a dependent page-group spec was never able to *implement* a
+foundation that its own Gate 3 depends on.

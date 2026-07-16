@@ -95,5 +95,7 @@ The mechanical inventory surfaced **no** real-PII leak, **no** working credentia
 room/presence tracker, **no** cross-family/cross-child identity leak, and **no** dishonest authorization
 wording. Two "needs-043-rule" notes are policy/completeness items, not active violations: (1) `PERM_GROUPS` has
 no parent-contact row (G-01 → PC-1/PC-2, `parent-contact-default-deny-contract.md`); (2) the audit log has no
-actor field (visibility ruled in `presence-audit-and-room-link-visibility.md` PR-2; a real trail is 055). 043
-**freezes** this clean posture and closes G-01/G-03 at the specification level; the current app is unchanged.
+actor field (visibility ruled in `presence-audit-and-room-link-visibility.md` PR-2; a real trail is 055). This
+specify pass **freezes** the clean posture as executable guards; **Spec 043's own implement phase CLOSES
+G-01 (parent-contact registry) and G-03 (child-view gate removal)** in Wave 0 — the current app is unchanged
+during specify.

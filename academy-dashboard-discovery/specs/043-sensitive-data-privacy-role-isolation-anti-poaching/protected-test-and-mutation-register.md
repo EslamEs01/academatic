@@ -1,9 +1,14 @@
 # Protected-Test & Mutation Register — Spec 043
 
-Specifies the ADDITIVE tests that later specs will use to PROVE 043's guarantees, maps each to the existing
-protected suite (Agent E, exact line numbers), and pairs every new guarantee with a falsifying mutation run on
-an isolated copy. **043 (specify) modifies no test file.** The classifications (additive / strengthening /
-declared supersession) and the ≥10 mutations are the plan the implementing specs execute at their Gate-3 merge
+Specifies the tests that PROVE 043's guarantees, maps each to the existing protected suite (Agent E, exact line
+numbers), and pairs every new guarantee with a falsifying mutation run on an isolated copy. **The current
+`/speckit.specify` phase modifies no test file.** **CORRECTION (2026-07-17): the foundation guards + their
+mutations (child-view supersession, parent-contact registry guards, and the global privacy absence guards
+G1–G14) are OWNED, IMPLEMENTED and EXECUTED by Spec 043's own `/speckit.implement` phase — NOT by later specs.**
+They are green before any dependent spec (045–056) begins Gate-3 integration. Downstream specs ADD page-local
+coverage for their own new/changed surfaces only; they may never become the primary owner of a 043 foundation
+test, and may never weaken or replace one. The classifications (additive / strengthening / declared supersession)
+and the ≥10 mutations are Spec 043's own plan/tasks/implement deliverable
 (`contracts/protected-test-carryover-contract.md`).
 
 ## 1. Inherited protected gates — MUST stay green, byte-verbatim unless a declared supersession
@@ -70,10 +75,18 @@ The directive's 10 mandated mutations, each named to the guarantee it falsifies:
 mutation is executed one-per-fresh-isolated-copy, never on the primary tree, and restored to residue 0. A
 guarantee whose mutation passes the suite is invalid (the Spec-041 M-2 lesson).
 
-## 4. What 043 (specify) does NOT do
+## 4. Ownership of the guards (corrected 2026-07-17)
 
-- Modifies no test file.
-- Weakens no protected assert.
-- The additive assertions + the G5 declared supersession are IMPLEMENTED by the owning later specs (045/047 for
-  the surface changes; the RBAC-surface implementer for G3/G11) at their Gate-3 merge, each with its mutation
-  green. 043 ratifies the plan and pins the exact insertion points.
+- The current `/speckit.specify` phase modifies no test file and weakens no protected assert; it pins the exact
+  insertion points.
+- **Spec 043's OWN implement phase owns and executes** (Wave 0, before any dependent spec's Gate 3): the G5
+  declared supersession (child-view, student-profile only) with **MUT-3**; the parent-contact registry guards
+  **G3 + G11** with **MUT-2 + MUT-6**; the global privacy absence guards **G1–G14** with their mutations; the
+  teacher-capability policy census (FR-008a) with its mutation. Every one is green before downstream integration.
+- **Downstream specs (045–056) ADD page-local coverage only** for surfaces they newly introduce/change. A
+  downstream spec may NOT: become the primary implementation owner of a 043 foundation guard; weaken, rescope,
+  loosen, skip, or `catch()`-swallow a 043 test; or replace a 043 guard with a weaker one. Where a downstream
+  spec does not exercise a 043 capability it supplies an explicit non-applicability proof — it never silently
+  drops the guard.
+- No 043 guard's implementation is deferred to a spec whose own Gate 3 depends on that guard (the circular
+  defect this correction removes).

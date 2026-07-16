@@ -45,12 +45,17 @@ route impact BEFORE authoring that decision** (directive; spec.md Stop Condition
 fixture-preview row addition and a gate removal on existing pages). The connection-health view is explicitly
 NOT built (contract only). Therefore counts are unchanged and no stop was triggered.
 
-## No application edits during specify
+## No application edits during specify; 043's OWN implement phase owns the class-A changes
 
-`app/**`, tests, public HTML, and package files are **untouched** during the specify phase. The two directed
-changes (G-01 fixture rows, G-03 gate removal + declared test supersession) are implementation work owned by
-later specs at their Gate-3 merge — 043 (specify) ratifies them and writes zero application bytes. The only
-files 043 writes are this feature directory's 22 artifacts + `.specify/feature.json`.
+`app/**`, tests, public HTML, and package files are **untouched** during the `/speckit.specify` phase — the only
+files this phase writes are this feature directory's artifacts + `.specify/feature.json`. **CORRECTION
+(2026-07-17): the Spec-043-owned frontend foundation changes — the G-01 parent-contact registry rows + preview,
+the G-03 child-view gate removal + declared test supersession, the teacher-capability policy preview, and the
+global privacy absence guards — are implemented by Spec 043's OWN `/speckit.implement` phase (Wave 0), NOT by any
+later spec.** That implement phase may edit **existing** sources / tests / locales / styles **only where the plan
+proves necessary** — **0 new page bases**, no new host, no new dependency, no new component when an existing host
+suffices (the staff RBAC preview host for parent-contact; the teacher admin host for the capability policy;
+`portal.js` for the child-view gate). All frozen counts above hold across the implement phase.
 
 ## Any future count impact is DECLARED, never pre-applied
 

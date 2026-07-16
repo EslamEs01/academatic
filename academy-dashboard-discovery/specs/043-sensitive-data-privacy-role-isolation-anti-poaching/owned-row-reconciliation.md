@@ -33,6 +33,41 @@ C04-22, C12-13) · **1 PARTIAL** (C12-01) · **2 UNKNOWN_EVIDENCE** (C12-19, C15
 Full disposition list per row above; the 9 backend-prerequisite rows = C01-27, C03-13, C09-19, C12-02, C12-09,
 C14-09, C15-02, C15-03, C15-18.
 
+## Implementation-ownership table (canonical — corrected 2026-07-17)
+
+Every one of the 17 owned rows appears **exactly once**. This removes the circular defect: no MISSING/PARTIAL
+row is closed by assigning it to a dependent spec — each has ONE of three explicit dispositions: **(1)** a
+Spec-043 frontend implementation; **(2)** an already-safe baseline + a Spec-043-owned executable guard; or
+**(3)** a frontend policy registry implemented by 043 + backend enforcement gated. Columns: **row** ·
+**Spec-043 frontend implementation** (its own implement phase) · **Spec-043 test** · **Spec-043 mutation** ·
+**downstream preservation/additive duty** · **future-backend enforcement** · **Gate-3 condition**.
+
+| Row | Spec-043 frontend implementation | Spec-043 test | Spec-043 mutation | Downstream duty | Future-backend | Gate-3 condition | Disposition |
+|---|---|---|---|---|---|---|---|
+| **C01-27** | (2) already-safe: no-admin-link census + data-absence on portal pages | G6 no-admin-link | MUT-9 | 045–050 preserve; add page-local for new surfaces | real per-role route enforcement | dependent page preserves G6 + proves its own compliance | FB |
+| **C02-04** | (3) structure-only teacher-capability policy preview on existing teacher admin host (FR-008a) | teacher-policy census (0 enforcement claim/pay/contact) | teacher-policy mutation | 045 preserves; 051 consumes `can_chat`; 053 delivery | real capability authz | 045 preserves the policy preview | MISSING |
+| **C02-05** | (3) notification-channel rows inside the same policy preview; `salary_*` EXCLUDED | teacher-policy census (0 pay token) | same mutation | 053 delivers channels | real delivery | preserved by 045; delivery 053 | MISSING |
+| **C02-06** | (2) already-safe: no Left/Acquired, no country column on teacher surfaces | G1 teacher-contact + no-Left/Acquired | MUT-1 | 045 preserves | admin-only attribution needs proven purpose (excluded) | 045 preserves G1 | MISSING |
+| **C03-13** | (2) already-safe: portal→no-admin-link; teacher bodies bake no admin data | G6 | MUT-9 | 045–050 preserve | real route authorization | preserve G6 | FB |
+| **C04-22** | (2) already-safe: no WhatsApp-insights PII/URL; connection-health = contract only, no route | G8 sitewide real-PII | MUT-4 | 053 (if built) obeys CH-1…CH-9 | the integration itself (053) | 053 obeys CH contract | MISSING |
+| **C09-19** | (2) display-only RBAC preview + honest "not enforced" wording (G-02) | G14 wording | MUT-10 | 048 preserves | real RBAC engine | preserve G-02 wording | FB |
+| **C12-01** | (3) parent-contact registry rows added to the existing RBAC preview; model ratified | G3/G11 deny-by-default | MUT-6 | 048 preserves; 044 host quality only | interactive editing + persistence | 048 preserves the registry | PARTIAL |
+| **C12-02** | (2) model decision recorded (named roles + per-member); preview enforces nothing (honest) | G14 | MUT-10 | 048 preserves | enforcement engine | preserve honest wording | FB |
+| **C12-09** | (1) **remove child-view password gate** (student-profile only) | G5 supersession (`plannedBackend 3→2`) | MUT-3 | 047 PRESERVES (never reintroduce) | real password change (teacher/guardian pattern) | 047 preserves the correction | FB |
+| **C12-13** | (1) the 5 parent-contact permissions, deny-by-default, teacher-unreachable | G3/G11 + teacher-unreachable | MUT-2 + MUT-6 | 048 preserves; 056 field audit | field-level authorization | 048 preserves | MISSING |
+| **C12-19** | (2) retained UNKNOWN; any login-as affordance dropped/honest-gated | (no fake impersonation assert) | — (covered by no-fake) | none add impersonation | impersonation-with-audit | no fake surface | UNKNOWN |
+| **C14-09** | (2) already-safe: DST table has no Affected-Accounts column | DST-column-absent census | (part of freeze) | 050/055 preserve; 055 propagates own change | live per-zone count | preserve column-absent | FB |
+| **C15-01** | (2) retained UNKNOWN; no login UI invented; honest boundary only | (no-fake-login assert) | — | none invent a login UI | re-crawl/design + real auth | no invented login | UNKNOWN |
+| **C15-02** | (2) no auth claimed; demo state stated honestly | G14 wording | MUT-10 | none claim auth | the real auth backend (Secure cookie) | preserve honest wording | FB |
+| **C15-03** | (2) recorded as prerequisite; not simulated | (no-fake wording) | MUT-10 | none simulate reCAPTCHA | reCAPTCHA / bot protection | not simulated | FB |
+| **C15-18** | (2) already-safe: data-absence guarantee; no-admin-link census | G6 | MUT-9 | 045–050 preserve | real route authorization | preserve G6 | FB |
+
+**Coverage check**: 17 rows, each once. Dispositions: **2× (1) direct 043 frontend implementation** (C12-09
+child-view, C12-13 parent-contact registry — C12-01 shares the registry as PARTIAL) · **13× (2) already-safe +
+043-owned guard** · **2× (3) 043 policy registry + backend enforcement gated** (C02-04, C02-05; C12-01/C12-13
+also carry a (3) registry facet). **No row is closed by assigning it to a dependent spec.** Every downstream
+column reads "preserve" / "add page-local" — never "implement the 043 foundation."
+
 ## Foreign rows NOT absorbed (scope discipline — `contracts/future-spec-dependency-contract.md`)
 
 Spec 043 touches evidence that also feeds other owners. It **does not absorb** any of the following — each is

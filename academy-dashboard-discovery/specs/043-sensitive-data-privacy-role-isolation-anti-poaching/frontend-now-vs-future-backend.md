@@ -1,22 +1,26 @@
 # Frontend-Now vs Future-Backend — Spec 043
 
-The explicit split the directive mandates. **No frontend behaviour may claim column B exists.** Column A is what
-043 ratifies AND what the rendered surfaces already obey (the artifact dependent pages need for their Gate-3
-merge, `quickstart.md` B1). Column B is honestly gated now and enforced only when a real backend exists
-(`contracts/future-spec-dependency-contract.md` §6.2).
+The explicit split the directive mandates. **No frontend behaviour may claim column B exists.** **CORRECTION
+(2026-07-17): Column A is the SPEC-043-OWNED FRONTEND FOUNDATION — implemented and tested by Spec 043's OWN
+implement phase (Wave 0), before any dependent spec reaches Gate 3.** "Already obeyed at baseline" does not mean
+"no implementation" — the implementation of an already-safe requirement IS its executable guard + falsifying
+mutation, owned and executed by Spec 043. Column B is honestly gated now and enforced only when a real backend
+exists (`contracts/future-spec-dependency-contract.md` §6.2). Per-row implementation ownership:
+`owned-row-reconciliation.md` §"Implementation-ownership table".
 
-## A. Frontend-enforceable NOW (ratified + the surface obeys)
+## A. Frontend-enforceable NOW — implemented + tested by Spec 043 itself (Wave 0)
 
-| A# | Requirement | How it is enforced today | Owned rows / findings |
+| A# | Requirement | Spec-043-owned implementation (its own implement phase) | Owned rows / findings |
 |---|---|---|---|
-| A-1 | Omit protected data from fixtures and DOM (guardian/student contact, locality, lead contact on teacher surfaces; cross-family data on guardian surfaces) | grep = 0 on `teacher-*`/`family-portal-*` bodies + fixtures; DENY = data absence | C02-06, C04-22, anti-poaching AP-1…AP-4/AP-9 |
-| A-2 | Remove unsafe child-view affordances (the password-change gate) | direct the removal of `passwordChange` from `STUDENT_PAGES.profile.gates` (`portal.js:323`); declared supersession at `smoke:1971`/`:2082` | C12-09, G-03 |
-| A-3 | Deny-by-default authored permission states (the 5 parent-contact permissions) | new preview rows ship `granted:false`, teacher-unreachable | C12-13, G-01 |
-| A-4 | Structure-only secret rows (24 provider fields, no value slot) | `settings.js:78-86` `structRow`; already true, frozen | C09-19-adjacent, S-04/RJ-26 |
-| A-5 | Masked admin-only previews where justified (reception contact, presence status) | MASKED cells in the matrix; DENY where no value is due | matrix cells 6/10/11 |
-| A-6 | Role-specific route/link inventories (no cross-role links) | existing M-8 shell-markup guard + a new no-admin-link census on portal pages | C01-27, C03-13, C15-18 |
-| A-7 | Honest backend-required wording (no claim of enforcement) | the `backendRequired` vocabulary (74 occurrences); 0 hits for `authorized`/`logged in` | all FB rows |
-| A-8 | Absence assertions + mutation tests for each new guarantee | `protected-test-and-mutation-register.md` (≥10 mutations) | all |
+| A-1 | Omit protected data from fixtures and DOM (guardian/student contact, locality, lead contact on teacher surfaces; cross-family data on guardian surfaces) | already true at baseline → 043 ships the executable guards (G1/G2/G4) + MUT-1/MUT-8; grep = 0, DENY = data absence | C02-06, C04-22, anti-poaching AP-1…AP-4/AP-9 |
+| A-2 | Remove unsafe child-view affordances (the password-change gate) | **043 removes** `passwordChange` from `STUDENT_PAGES.profile.gates` (`portal.js`), student-profile only; declared supersession at `smoke:1971`/`:2082`; **MUT-3** RED→GREEN | C12-09, G-03 |
+| A-3 | Deny-by-default parent-contact permission states (the 5 permissions) | **043 adds** the deny-by-default rows to the existing RBAC preview fixture/host; teacher-unreachable; **MUT-2 + MUT-6** | C12-13, G-01 |
+| A-3b | Teacher-capability + notification structure-only policy preview (FR-008a) | **043 renders** a structure-only policy preview on the existing teacher admin host (academic/communication split; `salary_*` excluded; no guardian contact; no enforcement/delivery claim) + its census guard + mutation | C02-04, C02-05 |
+| A-4 | Structure-only secret rows (24 provider fields, no value slot) | already true → 043 ships/keeps the executable guard (`settings.js:78-86` `structRow`; SR-1…SR-13) + MUT-5 | C09-19-adjacent, S-04/RJ-26 |
+| A-5 | Masked admin-only previews where justified (reception contact, presence status) | MASKED cells in the matrix; DENY where no value is due; guards preserve the current absence | matrix cells 6/10/11 |
+| A-6 | Role-specific route/link inventories (no cross-role links) | already true → 043 ships the no-admin-link census (G6) alongside the existing M-8 guard + MUT-9 | C01-27, C03-13, C15-18 |
+| A-7 | Honest backend-required wording (no claim of enforcement) | already true → 043 ships the wording census (G14) + MUT-10; 0 hits for `authorized`/`logged in` | all FB rows |
+| A-8 | Absence assertions + mutation tests for each new guarantee | **043 owns and executes** the ≥10 mutations (`protected-test-and-mutation-register.md`); green before downstream integration | all |
 
 ## B. FUTURE_BACKEND (honestly gated now; never claimed to exist)
 

@@ -40,6 +40,34 @@ an authz model not a form (P-20 shows 0 of 4 teacher + 0 of 2 family controls ex
 academic/communication capabilities grants parent-contact visibility — that is a separate, teacher-unreachable
 class. (c) The `salary_*` row is pay-adjacent and never teacher-visible.
 
+### C02-04 / C02-05 deliverable (the Spec-043-OWNED frontend-now outcome — corrected 2026-07-17)
+
+C02-04 (capabilities) and C02-05 (per-teacher notification matrix) are Spec-043 **primary-owned MISSING** rows.
+They MUST have an actual frontend-now outcome delivered by **Spec 043's own implement phase** — not deferred
+vaguely to 045/053/056.
+
+**Chosen host (smallest honest existing-host solution).** The existing admin teacher surface (`teacher.html` /
+`pages/teacher.js`) renders a **structure-only teacher-capability + notification POLICY preview**, reusing the
+existing display-only row pattern already shipped for the staff RBAC matrix (`staff.js` `permDrawer`) and the
+settings structure rows (`settings.js` `structRow`). Inspection confirms the substrate: `fixtures/teacher-
+management.js` is a display-only picker fixture (Spec 028) with **no** capability/notification model today, so
+043 adds a small structure-only `TEACHER_CAPABILITY_POLICY` registry there (academic block: `can_see_library` ·
+`can_edit_schedule` · `can_edit_class`; communication block: `can_chat` + notification channels) — **no new 044
+component, no new page, no new host.**
+
+**Rules the preview obeys** (each an executable guard): (1) academic capabilities are rendered separately from
+communication capabilities; (2) it is structure-only — **implies no enforcement** (like the display-only RBAC
+matrix); (3) it grants **no** guardian contact (parent contact is the separate teacher-unreachable class,
+never on this preview); (4) notification channels render as routing rows that **do not claim delivery**, and the
+`salary_*` row is **EXCLUDED** (pay-free — 0 pay token, PAY28 stays green); (5) honest copy states enforcement +
+delivery are backend responsibilities not yet built. Real authorization and delivery stay `FUTURE_BACKEND`/053.
+
+**If planning proves a new 044 host unavoidable**: 043 still **freezes the content/data interface (the registry)
+and implements the registry + its tests**, leaving only host *presentation* to 044 — the capability outcome is
+never left unimplemented. This is a Class-A outcome (`spec.md` §Mandatory Spec-043-owned implementation outcomes
+#4); its guard (structure-only teacher-policy census: 0 value slot, 0 enforcement claim, 0 pay token, 0
+guardian-contact) ships with a 043-owned falsifying mutation.
+
 ## 3. Open questions with safe defaults (recorded honestly; resolve only if evidence + default materially change
 scope)
 
@@ -65,9 +93,11 @@ P-21). This is correct for a fixtures-only frontend and MUST be stated plainly: 
 is a promise the backend must keep.** No wording claims enforcement (MUT-10). Real RBAC enforcement is
 `FUTURE_BACKEND` (C09-19, C12-02).
 
-## 5. The G-01 closure directive
+## 5. The G-01 closure directive (Spec-043-OWNED — corrected 2026-07-17)
 
-`PERM_GROUPS` (`staff-management.js:34-45`) has no parent-contact row. 043 ratifies adding the two named
-parent-contact rows (PC-1/PC-2 — the legacy `parent-phone`/`parent-email` vocabulary) as deny-by-default preview
-rows. This is a fixture + preview change owned by the RBAC-surface implementer, merging only when MUT-6
-(deny-by-default) is green. 043 (specify) writes no bytes.
+`PERM_GROUPS` (`staff-management.js:34-45`, 10 groups / 22 rows) has no parent-contact row. **Spec 043 OWNS
+adding** the parent-contact rows (headlined by PC-1/PC-2 — the legacy `parent-phone`/`parent-email` vocabulary)
+as deny-by-default preview rows in the **existing** fixture + preview host — its own implement phase, not the
+"RBAC-surface implementer" and not Spec 044. **MUT-6 (deny-by-default) is owned and executed by Spec 043**,
+RED→GREEN. The current specify phase writes 0 bytes; the fixture + preview render + MUT-6 are delivered by
+Spec 043's own plan/tasks/implement in Wave 0 (`parent-contact-default-deny-contract.md` §"Where this lands").

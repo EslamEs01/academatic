@@ -53,13 +53,19 @@ parent-contact rows specifically, a deny-by-default posture. A real RBAC (backen
 per-member overrides. This decision is recorded in `rbac-and-capability-model-decision-register.md` OQ-1 and is
 NOT left ambiguous.
 
-## Where this lands in the fixtures (directive for the implementing spec, not built here)
+## Where this lands in the fixtures (Spec-043-OWNED implementation — corrected 2026-07-17)
 
-The two named parent-contact rows (PC-1 view guardian phone, PC-2 view guardian e-mail — the legacy vocabulary)
-SHOULD be added to the staff RBAC preview fixture as deny-by-default rows, closing G-01. This is a fixture +
-preview-render change owned by the RBAC-surface implementer (the 044 host / a later admin-surface spec), gated
-by 043's Gate 3: it merges only when the parent-contact deny-by-default assert (MUT-6) is green. 043 (specify)
-adds no application bytes; it ratifies the rows and their defaults.
+**Spec 043 OWNS this — its own implement phase, not Spec 044 and not a later admin-surface spec.** The five
+parent-contact permission rows (headlined by PC-1 view guardian phone, PC-2 view guardian e-mail — the legacy
+`parent-phone`/`parent-email` vocabulary) are added to the **existing** staff RBAC preview fixture
+(`fixtures/staff-management.js` `PERM_GROUPS`) as deny-by-default rows, closing G-01, and rendered through the
+**existing** display-only preview host (`staff.js` `permDrawer`) — **reuse the existing RBAC preview; do not wait
+for Spec 044 to invent a new modal or host.** Spec 044 owns shared interaction-host *quality*, never the privacy
+permission *content*. **MUT-2 (grant to a teacher) + MUT-6 (default true) are owned and executed by Spec 043**,
+RED→GREEN, residue 0. The current `/speckit.specify` phase writes 0 application bytes; the fixture + preview
+render + the two mutations are delivered by **Spec 043's own plan/tasks/implement** in Wave 0, before any
+dependent spec reaches Gate 3 (`spec.md` §Mandatory Spec-043-owned implementation outcomes #2). This is a
+structure-only registry on an existing host — **no new fake permission engine**, no new component, no new page.
 
 ## No-fake clause
 
