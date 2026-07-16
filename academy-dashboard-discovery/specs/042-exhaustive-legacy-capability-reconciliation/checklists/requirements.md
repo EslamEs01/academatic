@@ -388,3 +388,78 @@ Checks 1 and 2 flip FAIL → PASS (rows updated above); the line-313 ruling is r
 
 ### CORRECTION VERDICT: **PASS — 10/10** (after the E10 repair; checks 1/2 re-verified PASS, check 10
 re-confirmed; `checklists/requirements.md:313` ruled a non-blocking historical record)
+
+---
+
+## Tasks-phase adversarial review (2026-07-16)
+
+**Scope**: adversarial verification that `tasks.md` (T001–T054) is ready for `/speckit.implement`. Reviewer did
+NOT author tasks.md. Cross-checked against `plan.md` (D1–D14, three-gate D5a), all 15 `contracts/`,
+`future-spec-allocation-register.md`, `page-review-ownership-map.md`, the three PASS verdicts above (20/20 ·
+15/15 · 10/10), the frozen app tree and git. Every count below was re-derived by script/grep — never trusted
+from tasks.md. 17 checks + a format audit; verdict per check; nothing above this section was modified.
+
+| # | Check | Verdict | Reproduced evidence (and, for FAIL, the exact deficiency + target) |
+|---|---|---|---|
+| 1 | Task IDs contiguous + unique (T001–T054) | **PASS** | Parsed 54 `- [ ]` lines; extracted IDs diffed against `seq T001..T054` = ∅ (no gap, no duplicate); `- [x]` count = **0** (none pre-checked). |
+| 2 | Task count justified (45–75, grouped) | **PASS** | 54 ∈ [45,75]. Grouping verified: T007 recounts all 380 ledger rows in ONE scripted task; T008 all 227 allocations; T021 the whole 57-base partition; T025 the full NOT/IS lists; T042 all 15 charters in one register. Scan of tasks.md: **0** per-capability/per-page/per-screenshot/per-allocation task rows. |
+| 3 | `[P]` annotations valid | **PASS** | `[P]` set = T002–T005 · T007–T011 · T022–T023 · T026–T028 · T032–T035 · T038–T040 · T043 · T047–T048 (24 tasks) — every one `(RO)`, none writes a file. The four writers (T042 · T050 · T051 · T053) are non-`[P]`; T050–T054 declared strictly sequential; the three written files (`final-handoff-verification-register.md` · `implementation-status.md` · CLAUDE.md marker) have exactly one writing task each (T050's file updated only by the sequenced T052/T054). T042/T044, which consume T007/T008 outputs, are non-`[P]`. No `[P]` task performs git mutation (T005 = read-only diff/status). |
+| 4 | NO application implementation task | **PASS** | Every task is `(RO)` or a `(DOC)` write inside `specs/042/**` (+ the CLAUDE.md marker, T053). App paths appear only as read subjects (T002–T004 ls/grep `app/public` · T032 grep · T046 spot-read `app/tests` · T049 `git diff -- app/tests`). Zero-diff enforced three times (T005 · T049 · T054). No redesign/RBAC/modal/form/community/leaderboard/integration/room task exists; the SCOPE-LAW header explicitly forbids generating 043–057 tasks. `git diff --stat de8d552..HEAD -- academy-dashboard-discovery/app` re-run = EMPTY. |
+| 5 | Exact paths + governing contracts/stable IDs | **PASS** | 54/54 tasks name exact paths and/or contract+§/stable-ID citations; the contract ordinals (1–15) match plan D13's numbering exactly (headers of all 15 files verified). ~30 §-citations spot-resolved and found: contract 4 §3/§4a–c/§5/§6.1–§6.10 · contract 5 §2–§6 · contract 3 §4–§5 · contract 12 §1–§3 · contract 13 §2–§5 · register §1/§13/§19 · map §1–§9 · forms ledger §0 · quickstart B3/B5 · research R1/R8 · data-model E10. T044 cites via the T007/T008 parses + §4–§18/capId; T049 cites `academy-dashboard-discovery/app/tests`. |
+| 6 | Three-gate law has executable verification tasks | **PASS** | T013–T020. All NINE T013 sites verified to actually carry the three-gate text: plan.md D5a (:152-177) · research.md R1 (:14-18) · quickstart.md step 7 (:68) + B1 (:112-114) · data-model.md E10 (:196-210) · contract 4 §4a+§6 · contract 5 §5 · contract 14 §3 · this checklist's correction review (:340-389) · CLAUDE.md :18-20 inside the `<!-- SPECKIT START/END -->` block (:1/:819). T014's five ratification-never-sufficient sites present ("NEVER sufficient" plan D5a · "never sufficient" contract 4 §4a · "never authorizes a merge" contract 5 §5 · "never *merging*" contract 14 §3 · "ratification alone NEVER passes this gate" data-model:202). T015 monotonicity verbatim at data-model.md:210. T016 re-derives acyclicity incl. the intra-wave 054→053 (contract 4 §3 names it). T017/T018/T019: §6.1/§6.2/§6.3 verified — the 9-test list (focus·keyboard·backdrop·scroll·mobile·RTL/LTR·duplicate-id·required-selector·a11y) appears verbatim in BOTH contract 4 §6.3 and contract 5 §5. T020's six tail rules verified at §3 + §6.4–§6.10 (051 · 052 · 053 · 054 seam · 055 real legs · 056 census · 057 last). |
+| 7 | Page partition protected | **PASS** | T021 scripted set-equality vs `app/public` (independently re-derived today: 115 files, 58 unique stripped bases); T022 arithmetic from extracted lists (11+12+12+8+7+7=57); T023 priority law present in all 3 cited sites (map §1:16-19 · contract 3 §5 · contract 5 §1.3); T024 six-condition supersession protocol verified conjunctive in contract 3 §4 (evidence · dependency justification · arithmetic re-proof · zero overlap · zero orphan · explicit map supersession). |
+| 8 | Visual redesign handoff binding | **PASS** | T025 item-by-item NOT(7)/IS lists — both verified present in contract 5 §2/§3 with review-failure/criterion force; T026 the 11-step loop (steps 1/2/9/10 named; "Steps 9–11 are never skippable") + the 8-surface matrix + captured-frames judgment (contract 14 §4: "final visual critique … on the CAPTURED frames, not on the diff"); T027 preservation is loop step 5 + P-1…P-9 named; T028: map §4–§9 each name their exact `cluster-evidence-paths/` registers (e.g. :86-93 for 045, :112-117 for 046); T030: fix-first owners 045·047·044·044·**048** + the §11 «049»-tag supersession note verified in contract 5 §6. Binding, not aspirational: R-2/R-3 "may not be relaxed" (contract 5 §5). |
+| 9 | Sol High/Medium + Opus-critic + single-writer verified | **PASS** | T029 — every clause located in contract 14: §1 the High/Medium division + "A task on the High list may not be delegated to Medium"; §2 "Claude Opus … independent contract/visual critic … never edits the same file concurrently"; §3 single-writer-per-file (hard rule); §4 "A design is NOT complete because the source looks correct". |
+| 10 | Privacy/modal/form/propagation handoffs measurable | **PASS** *(after the T032 repair — re-verified 2026-07-16)* | T031 (ID map + six rules — present in contract 6) · T033 (30-id set + `21502af`/Spec-032 provenance — present in contract 7 §1 + carryover §5) · T034 (48/26/13/9/~0 — re-derived from forms ledger §0) · T035/T036 (present) are sound. **Round-1 deficiency FIXED and re-verified**: T032 (tasks.md:74) originally stated a naive `type="file"` token grep whose expected 0 was falsified by **4** benign `data-type="file"` facet hits (`library.html:574,639` + `.en` mirror). The repaired T032 now mandates the **INPUT-scoped** pattern (`<input type="file"`), explicitly rejects the naive token grep, documents the 4 facet hits, cites the suite's DOM-scoping (`app/tests/smoke/run.cjs:1404-1408`) and names the PAY28/"Sara" anchoring lesson. Repaired Done re-proven satisfiable on the frozen tree: `<input[^>]*type="file"` = **0** occurrences / 0 files across all 115 public HTML; `type="password"` = 0 files; sampled corpus PII tokens (privacy §1 phones/emails/invite URL) = 0 — all three zero-counts reproduce with the stated pattern. |
+| 11 | Preservation/rejection/unknown laws represented | **PASS** *(after the T038 repair — re-verified 2026-07-16)* | T037 (63 B + 57 II — cross-checked against contract 9 + contract 2 §4) · T039 (47 UK + no-invention rules — present in contract 11) · T040 (six disposition rules — present in contract 2 §2 + plan D3) · T041 (R8 + contracts 3/12/13 — present) are sound. **Round-1 deficiency FIXED and re-verified**: T038 (tasks.md:83) originally named "is_enabled-on-unconfigured" as a contract-10 headline row, which contract 10 §2 never contained. The repaired T038 now verifies the contract's exact **10** headline bullets by RJ id (RJ-27 · RJ-29 · RJ-26 · RJ-11 · RJ-39 · RJ-01/02 · RJ-30 · RJ-10 · RJ-13 · RJ-38) and separately verifies is_enabled-on-unconfigured as register row **RJ-28** — "a register-level negative requirement even though not a contract headline bullet". Repaired Done re-proven satisfiable: contract 10 §2 headline-bullet recount = **10** (`grep -c '^- \*\*RJ-'` over `contracts/rejected-legacy-behaviour-contract.md`) and RJ-28 present in the register (exactly 1 row, `rejected-legacy-behaviour-register.md:62`) — expectation and bytes now agree. |
+| 12 | Spec 052 remains chartered | **PASS** | T043 — all three cited sites verified to exist: register §13 (:196-198 "No non-complete row allocates to 052", explicit zero-allocation note) · contract 4 §4c + §6.5 (greenfield · REAL backend required for computed standing · authored preview never claims computed standing · cannot merge with public-exposure rules unresolved) · quickstart B3 (:138). |
+| 13 | Protected tests inherited + change classification | **PASS** | T046 sites spot-verified in the frozen tree: `ROUTES_50` at `app/tests/smoke/run.cjs:2608` (matches "~2608") · R-2 hard exit at `app/tests/a11y/run.cjs:393-396` (`critical > 0 \|\| serious > 0` ⇒ exit 1) · R-3 at `app/tests/screenshots/capture.cjs:555-558` (console error ⇒ exit 1) · `PAY28` at `run.cjs:748` (word-boundaried `\bEGP\b\|\bAED\b\|\bEUR\b`; Latin SAR deliberately absent — consistent with the "Sara" warning). T047: the three-way classification (additive/strengthening/declared supersession with all six fields) + no-silent-weakening + the T061/G-1 mutation law all present in contract 13 §2–§3. T048: nine invariants + 57-vs-58 + declare-never-pre-apply present in contract 12. T049: `git diff --stat de8d552..HEAD -- academy-dashboard-discovery/app/tests` re-run = EMPTY. |
+| 14 | No ledger/allocation duplication into tasks.md | **PASS** | Scripted scan: **0** `\| Cnn-mm \|` capability table rows and 0 allocation rows in tasks.md — only aggregate totals (380 · per-cluster sums · 227 · per-spec sums · 52/47/63 · 26 P-IDs as counts), each traceable to the ledger's Global-reconciliation section (:562-583) / register §19 (:393-397). |
+| 15 | No completion claims without evidence | **PASS** | 54/54 task lines carry an explicit `Done:` clause naming reproducible evidence (command output, count, set-diff, grep result, or per-item matrix); 0 pre-checked boxes; the header law states verification tasks "are NOT checked off at generation time; each is completed only with its named evidence." |
+| 16 | Implementation-status cannot fabricate results | **PASS** | T050 embeds the anti-fabrication law verbatim ("a result may never be written before its task's command has actually run" — the T061 lesson), requires verbatim embedded command outputs per T001–T049 verdict, and mandates "any FAIL is recorded as FAIL"; T052 requires an explicit 0-contradictions statement or a STOP report; T054 re-proves the final git state. |
+| 17 | No git-mutation action in any task | **PASS** | commit/push/merge/rebase/pull/branch/stash/reset/checkout/clean appear ONLY inside prohibition sentences (header :15-16 + T054); actual git usage across all 54 tasks = `status` · `diff` · `log` · `rev-parse` (read-only, exactly the contract 15 §5 sanctioned set). |
+
+**Format audit**: **PASS** — 54/54 task lines match `- [ ] T\d{3}( [P])?( [LABEL])*( (DOC))? description` with
+the label vocabulary declared in the header (`[GATE] [PART] [VIS] [HO-043/044/055/056] [LAW] [FS] [PT]`);
+0 nonconforming lines; every line carries ≥1 exact path or contract citation.
+
+### Additional blocking finding (outside the 17 checks) — T001 preflight (RESOLVED — re-verified below)
+
+T001 (tasks.md:26) originally required BOTH `git status --porcelain` EMPTY **and** `git rev-parse HEAD`
+starting `a908fc6`. But tasks.md itself is not part of `a908fc6` — at review time it is untracked (porcelain =
+`?? …/042-…/tasks.md`, reproduced). In the watcher-commits-per-phase flow demonstrated by this very feature
+(ef4576f → ceae9b2 → 2c35d36 → a908fc6 are separate per-phase commits), committing tasks.md moves HEAD off
+`a908fc6` → the second clause fails; in the implement-before-commit flow the tree is not porcelain-empty →
+the first clause fails. Either way "Checkpoint 1: any Phase-1 mismatch = STOP" fires on a healthy tree.
+
+**RESOLVED (repair re-verified 2026-07-16)**: the repaired T001 now requires porcelain empty EXCEPT entries
+under `SPEC/**` and `CLAUDE.md` (expected dirt until the watcher commits) **plus**
+`git merge-base --is-ancestor a908fc6 HEAD` (baseline-in-lineage instead of HEAD-pinned) plus the branch
+check — the T054 predicate shape recommended in round 1. Re-proven satisfiable on the current tree: filtered
+porcelain = EMPTY (the only entries are under `SPEC/**`); `git merge-base --is-ancestor a908fc6 HEAD` exits 0
+— and remains true after any watcher doc commit advances HEAD, so the predicate holds in BOTH watcher flows;
+branch = `feature/012-role-portal-foundation` ✓. `merge-base --is-ancestor` is read-only/non-destructive,
+inside contract 15 §5's sanctioned class (alongside the pre-existing `rev-parse`). The blocker is cleared.
+
+### Non-blocking cautions (recorded; no verdict impact)
+
+1. **T051** permits stale-claim fixes "inside `SPEC/**`" without restating contract 15 §1's carve-out
+   (specify-phase ledgers are never edited; factual contradictions route through T052's STOP). An implementer
+   must read T051's write scope as plan/tasks/DOC files only.
+2. **T002** cites "count-route-freeze-contract.md §D4" — the semantics live in that contract's §2 (and
+   plan.md D4); a loose §-label, trivially resolvable.
+
+### TASKS READINESS VERDICT: **PASS — 17/17** *(after the three tasks.md repairs; checks 10/11 re-verified PASS; the T001 preflight blocker re-verified resolved)*
+
+The round-1 verdict was FAIL — 15/17 on exactly three defects, all inside tasks.md. All three repairs were
+independently re-verified against the bytes (never trusted from the repair claim): T001's preflight is now
+satisfiable in both watcher flows (SPEC-scoped dirt allowance + lineage-anchored baseline, both commands
+re-run green); T032's measure reproduces 0/0/0 with the mandated input-scoped pattern (`<input type="file"`
+= 0 occurrences across all 115 files); T038's expectation now matches contract 10 §2's exact 10 bullets
+(recount = 10) with is_enabled routed to register row RJ-28 (present, :62). The full structural scan was
+re-run over the repaired file: 54 tasks T001–T054 in order, 0 format-nonconforming lines, the [P]/writer
+separation unchanged (24 read-only `[P]` · 4 sequential DOC writers), 0 git-mutation instructions, 54/54
+`Done:` clauses, 0 pre-checked boxes, 0 ledger-row duplication. Git hygiene re-confirmed: **0** porcelain
+entries under `academy-dashboard-discovery/app/` and `git diff --stat de8d552..HEAD -- academy-dashboard-discovery/app`
+= EMPTY. The non-blocking cautions above stand as recorded (no verdict impact). The task list is ready for
+`/speckit.implement`.
