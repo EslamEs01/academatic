@@ -62,11 +62,26 @@ Spec-043 frontend implementation; **(2)** an already-safe baseline + a Spec-043-
 | **C15-03** | (2) recorded as prerequisite; not simulated | (no-fake wording) | MUT-10 | none simulate reCAPTCHA | reCAPTCHA / bot protection | not simulated | FB |
 | **C15-18** | (2) already-safe: data-absence guarantee; no-admin-link census | G6 | MUT-9 | 045–050 preserve | real route authorization | preserve G6 | FB |
 
-**Coverage check**: 17 rows, each once. Dispositions: **2× (1) direct 043 frontend implementation** (C12-09
-child-view, C12-13 parent-contact registry — C12-01 shares the registry as PARTIAL) · **13× (2) already-safe +
-043-owned guard** · **2× (3) 043 policy registry + backend enforcement gated** (C02-04, C02-05; C12-01/C12-13
-also carry a (3) registry facet). **No row is closed by assigning it to a dependent spec.** Every downstream
-column reads "preserve" / "add page-local" — never "implement the 043 foundation."
+**Coverage check** (derived mechanically from the 17 table rows above — the canonical tally; do not trust any
+prose paragraph over the table). 17 rows, each capId once: **0 missing · 0 unexpected · 0 duplicate**. Class
+tally = **2 / 12 / 3** (2 + 12 + 3 = 17):
+
+- **Class (1) — direct Spec-043 frontend implementation (2 rows)**: `C12-09` (child-view password-gate removal),
+  `C12-13` (parent-contact deny-by-default rows).
+- **Class (2) — already-safe baseline + Spec-043-owned executable guard (12 rows)**: `C01-27`, `C02-06`,
+  `C03-13`, `C04-22`, `C09-19`, `C12-02`, `C12-19`, `C14-09`, `C15-01`, `C15-02`, `C15-03`, `C15-18`.
+- **Class (3) — Spec-043 policy registry/preview + future-backend enforcement gated (3 rows)**: `C02-04`,
+  `C02-05`, `C12-01`.
+
+**`C12-01` shares the parent-contact registry implementation surface with `C12-13`, but it remains a Class-(3)
+row in this canonical table** — shared implementation never reclassifies, omits, or double-counts either row
+(`C12-13` is Class (1); `C12-01` is Class (3)). **No MISSING/PARTIAL row is closed by assigning it to a dependent
+spec.** Every downstream column reads "preserve" / "add page-local" — never "implement the 043 foundation."
+
+> **Prose-tally correction note (2026-07-17, superseded → corrected):** an earlier version of this paragraph read
+> "2× (1) · **13× (2)** · **2× (3)**", grouping `C12-01` under Class (1)'s parenthetical. That prose was wrong;
+> the canonical table was correct. **The corrected tally is 2 / 12 / 3**, derived mechanically from the rows
+> above. No substantive ownership decision changed.
 
 ## Foreign rows NOT absorbed (scope discipline — `contracts/future-spec-dependency-contract.md`)
 

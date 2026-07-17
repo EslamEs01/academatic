@@ -141,3 +141,30 @@ foundation before any dependent spec's Gate 3.
   "implemented by the owning later specs (045/047)", "closes G-01/G-03 at the specification level", and the
   "later specs at their Gate-3 merge — 043 writes zero application bytes" framings — all reframed to
   Spec-043-owned Wave-0 implementation with downstream preserve/extend duties.
+
+## Post-review tally correction (2026-07-17) — transparent audit note
+
+The 16/16 adversarial correction review above (preserved verbatim as historical audit evidence — **not**
+rewritten) **missed a prose/table tally mismatch** in `owned-row-reconciliation.md`. Full transparency:
+
+- The **canonical implementation-ownership table was correct** all along: 17 rows, 0 missing / 0 unexpected /
+  0 duplicate, Class (1) = 2 · Class (2) = 12 · Class (3) = 3.
+- Only its **"Coverage check" PROSE was wrong** — it read "2× (1) · 13× (2) · 2× (3)", grouping `C12-01` under
+  Class (1)'s parenthetical instead of its canonical Class (3).
+- **Corrected tally: 2 / 12 / 3.** Class membership pinned by exact capId in the corrected prose so it cannot
+  drift again:
+  - Class (1) — direct 043 frontend implementation (2): `C12-09`, `C12-13`.
+  - Class (2) — already-safe baseline + 043-owned guard (12): `C01-27`, `C02-06`, `C03-13`, `C04-22`, `C09-19`,
+    `C12-02`, `C12-19`, `C14-09`, `C15-01`, `C15-02`, `C15-03`, `C15-18`.
+  - Class (3) — 043 policy registry/preview + backend-gated (3): `C02-04`, `C02-05`, `C12-01`.
+  - `C12-01` shares the parent-contact registry surface with `C12-13` but stays Class (3) — shared
+    implementation never reclassifies/omits/double-counts.
+- **No substantive ownership decision changed.** Only the prose tally was corrected; all 17 table rows are
+  byte-verbatim.
+- **A new focused verification PASSED**: a mechanical parser over the 17 table rows re-derived
+  17 rows · 0 missing · 0 unexpected · 0 duplicate · Class (1)=2 · Class (2)=12 · Class (3)=3 · total 17; and a
+  residual grep for `13× (2)` / `2× (3)` / `2/13/2` prose found no LIVE claim (only the labelled
+  superseded→corrected note). The dependency correction (child-view owned by 043 · parent-contact registry owned
+  by 043 · G1–G14 + MUT-2/MUT-3/MUT-6 owned+executed by 043 · C02-04/05 policy-preview outcome · downstream
+  preserve/extend only · FUTURE_BACKEND honest) remains intact.
+- Files changed in this pass (2 only, as scoped): `owned-row-reconciliation.md`, `checklists/requirements.md`.
