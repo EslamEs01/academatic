@@ -1,8 +1,8 @@
 # Quickstart — Implementing Spec 043 (for `/speckit.implement`)
 
 The exact edit list + verify loop for Spec 043's own Wave-0 implement phase. Every step folds into an existing
-host; **0 new page/route/nav-item/dependency/component/hook/storage-key**. Impact: exactly 6 changed bodies
-(`staff`, `teacher`, `student-profile` × AR/EN). All line numbers re-grounded against HEAD `cd56aa0` (zero
+host; **0 new page/route/nav-item/dependency/component/hook/storage-key**. Impact: exactly **3 changed surfaces
+/ 6 localized bodies** (`staff`, `teacher`, `student-profile` × AR/EN). All line numbers re-grounded against HEAD `cd56aa0` (zero
 drift). Do not commit/push — the watcher owns commits.
 
 ## Prerequisites
@@ -61,7 +61,7 @@ drift). Do not commit/push — the watcher owns commits.
 
 ## Verify loop (mandatory, per surface)
 
-For each of the 6 changed bodies: `npm run build` → open the built page in a browser/screenshot → confirm the
+For each of the 6 localized bodies (3 surfaces × AR/EN): `npm run build` → open the built page in a browser/screenshot → confirm the
 rendered surface (AR+EN, light+dark, mobile-390 where layout changes) → run smoke + a11y + screenshots → run the
 paired mutation on an **isolated copy** (RED) → restore (GREEN, residue 0). No design is "done" from source
 reading alone.
@@ -77,5 +77,5 @@ unchanged; the forbidden-file 0-diff list holds. **Never** use `stash`/`reset`/`
 - 6 bodies changed, all else byte-identical; counts 115/57/50/24-25-1/49-0-1; `FUTURE_ROUTES {}`; sole lock;
   gallery pair.
 - smoke PASS; a11y 0/0; screenshots 0 console errors.
-- MUT-1…MUT-10 + MUT-TP each executed RED→GREEN on isolated copies, residue 0.
+- MUT-1…MUT-11 + MUT-TP (12 mutations) each executed RED→GREEN on isolated copies, residue 0.
 - No forbidden-file change; no commit/push (watcher).

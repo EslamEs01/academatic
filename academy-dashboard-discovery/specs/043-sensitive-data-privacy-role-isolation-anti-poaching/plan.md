@@ -128,7 +128,7 @@ Ownership tally reproduced + parsed 2/12/3 (17 rows, 0 missing/unexpected/dup): 
   `classSalaryReport` · gallery pair** — all held.
 - **Build**: byte-identical rebuild (0 changed public files) — committed output matches source.
 - **Smoke**: PASS (114 loads, no raw keys / external requests / dead buttons / unexplained disabled).
-- **a11y**: baseline run (critical=0 serious=0 expected; result recorded in the final report).
+- **a11y**: ran to completion (exit 0) — **critical=0 serious=0** (measured; log tail `[a11y] critical=0 serious=0`).
 - **Impact baseline**: a non-destructive per-page `#page-body` md5 snapshot (115 rows) captured against HEAD in
   the scratchpad (never `stash`/`reset`/`checkout`) — the before/after basis (`contracts/impact-protection-plan.md`).
 
@@ -150,11 +150,11 @@ Research decisions are consolidated in `research.md`.
 4. `teacher-capability-policy-plan.md` — outcome C (registry + drawer + trigger + MUT-TP).
 5. `global-privacy-guards-plan.md` — G1–G14 exact test file, insertion point, scope, tokens, mutation, RED message.
 6. `protected-test-supersession-plan.md` — the ONE declared 2-line supersession (six fields).
-7. `mutation-protocol-plan.md` — MUT-1…MUT-10 + MUT-TP isolated-copy protocol.
+7. `mutation-protocol-plan.md` — MUT-1…MUT-11 + MUT-TP isolated-copy protocol (12 mutations).
 8. `backend-honesty-contract.md` — no-fake authorization / FUTURE_BACKEND boundary.
 9. `privacy-antipoaching-role-law.md` — the anti-poaching/role-visibility law binding the implementation.
 10. `fixtures-and-locales-contract.md` — exact fixture shapes + bilingual locale keys.
-11. `a11y-screenshots-plan.md` — the focused a11y/screenshot matrix for the 6 changed surfaces.
+11. `a11y-screenshots-plan.md` — the focused a11y/screenshot matrix for the **3 changed surfaces / 6 localized bodies**.
 12. `count-route-freeze-plan.md` — the frozen counts + 0-new-page proof.
 13. `impact-protection-plan.md` — the non-destructive before/after method + predicted 6 bodies.
 14. `downstream-preservation-handoff.md` — 044–056 preserve/extend duties.

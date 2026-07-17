@@ -199,3 +199,51 @@ Independent non-author Opus reviewer, 20-point check, live-repo verified.
 - Reviewer explicitly cleared: no forbidden 0-diff file edited; the policy previews are structure-only display
   rows (not incomplete forms); no real PII / `type=password` / value slot / pay token introduced; no mutation
   "complete from inspection"; no internal plan/contract contradiction.
+
+---
+
+# Plan-consistency correction pass (2026-07-17) — transparent note
+
+The plan-phase adversarial review above recorded **20/20 PASS** (preserved as historical evidence — not
+rewritten). This focused pass fixed four documentation-consistency items that the 20/20 review did not flag as
+LIVE stale text (it had noted B-1/B-2 as items to reconcile at implement time; this pass reconciles them in the
+plan docs now):
+
+- **A — canonical mutation register**: the canonical table (`contracts/mutation-protocol-plan.md`) already read
+  **MUT-1…MUT-11 + MUT-TP (12)**; three LIVE completion phrases still said "MUT-1…MUT-10 + MUT-TP" — corrected in
+  `contracts/mutation-protocol-plan.md` (title), `plan.md` (contract-list item 7), `quickstart.md` (done
+  conditions). Mechanically verified: **12 unique IDs · 0 missing · 0 unexpected · 0 duplicate · MUT-11→G13 ·
+  MUT-TP→teacher-policy.** (The specify-phase 30-point checklist item 25's "≥10" is historical and remains
+  satisfied by 12 — left as specify history, not rewritten.)
+- **B — G14 / "signed in"**: `contracts/backend-honesty-contract.md`'s binding rule flatly said `Never … "signed
+  in"`, contradicting the narrow activity-log exception. Rewritten to distinguish **FORBIDDEN** (gate/status/
+  success-toast/current-state/authz copy claiming a real session/operation/enforcement) from the **ALLOWED**
+  narrow baseline exception (the authored past-tense staff activity-log value `login:'signed in'` in `en.adm.js`,
+  shown only in the historical activity-log). The Verification section now explicitly states it does NOT assert a
+  literal sitewide `"signed in" = 0`. G14 stays selector/context-scoped + mutation-proven (MUT-10 flips honest
+  gate/authz copy → RED; the activity-log value stays GREEN). *(Specify-phase mentions of "signed in" —
+  `credentials-secrets-and-auth-refusal-register.md:40`, `frontend-now-vs-future-backend.md:50`,
+  `protected-test-and-mutation-register.md:72` — are contextually about a forbidden CLAIM/DRIFT/the MUT-10
+  mutation, consistent with the new rule; left as specify history.)*
+- **C — surface/body terminology**: the ambiguous "6 changed surfaces" (`plan.md` artifact-index item 11) →
+  **"3 changed surfaces / 6 localized bodies"**; `quickstart.md` headline + verify-loop clarified to "3 surfaces
+  × AR/EN". The actual impact prediction is unchanged (3 surfaces: staff RBAC · teacher policy · student profile;
+  6 localized bodies: each × AR/EN).
+- **D — a11y baseline wording**: `plan.md` said "critical=0 serious=0 **expected**; result in the final report".
+  The a11y runner **genuinely ran to completion** (exit 0, log tail `[a11y] critical=0 serious=0`) — wording
+  replaced with the actual measured result. Not manufactured.
+
+Files changed this pass (5): `plan.md`, `quickstart.md`, `contracts/mutation-protocol-plan.md`,
+`contracts/backend-honesty-contract.md`, `checklists/requirements.md` (this append). No app/test/public/package
+byte changed; no specify-phase ownership decision or the canonical 17-row table touched; HEAD unchanged.
+
+## Focused correction-review result
+
+- **Verdict: PASS** — independent non-author reviewer, 10-point check, live-repo verified (2026-07-17), 0
+  defects. Confirmed: mutation set = 12 unique (MUT-1…MUT-11 + MUT-TP), 0 missing/unexpected/dup, MUT-11→G13,
+  MUT-TP→teacher-policy; all live completion phrases include MUT-11; no flat "signed in" ban remains (FORBIDDEN
+  current-state claim vs ALLOWED narrow activity-log exception, selector/context-scoped + MUT-10 proven); impact
+  terminology = 3 surfaces / 6 localized bodies (prediction unchanged); a11y wording is the measured result;
+  only the 5 allowed doc files changed (0 app/test/public/package bytes); HEAD `48a344b` unmoved; no commit; the
+  20/20 plan-review + 30-point specify-review records preserved; the 17-row ownership table untouched
+  (`owned-row-reconciliation.md` git-clean); requirements.md change append-only (41 insertions, 0 deletions).

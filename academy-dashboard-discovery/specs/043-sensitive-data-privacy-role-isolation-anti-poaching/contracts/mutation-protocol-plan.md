@@ -1,4 +1,4 @@
-# Contract 7 — Mutation Protocol (MUT-1…MUT-10 + MUT-TP) — executable
+# Contract 7 — Mutation Protocol (MUT-1…MUT-11 + MUT-TP; 12 total) — executable
 
 Every new guarantee ships a falsifying mutation. The T061/G-1 law: a test that cannot fail is not a test; a task
 never run is not done. Each mutation is executed one-per-**fresh isolated copy/worktree**, never on the primary
