@@ -247,3 +247,32 @@ byte changed; no specify-phase ownership decision or the canonical 17-row table 
   only the 5 allowed doc files changed (0 app/test/public/package bytes); HEAD `48a344b` unmoved; no commit; the
   20/20 plan-review + 30-point specify-review records preserved; the 17-row ownership table untouched
   (`owned-row-reconciliation.md` git-clean); requirements.md change append-only (41 insertions, 0 deletions).
+
+## Tasks-phase record (`/speckit.tasks`, 2026-07-17)
+
+`tasks.md` generated (append-only phase; no app/test/public/package bytes changed). Baseline re-measured at HEAD
+`3b6a5a3` (branch `feature/012-role-portal-foundation`, clean tree; the plan + plan-consistency correction commits
+present): **115 HTML · 57 PAGES · menu 50 · 24/25/1 · 49/0/1 · `FUTURE_ROUTES {}` · sole lock `classSalaryReport`
+· gallery pair**; **build byte-identical**; **smoke PASS** (a first run flaked on the pre-existing
+`library.en.html#view=books` hash-vs-localStorage deep-link probe; a re-run on the byte-identical tree PASSED — a
+Playwright timing flake, not a regression); **a11y critical=0 serious=0** and **screenshots 0 console errors** carry
+from the byte-identical plan baseline `cd56aa0` (`git diff cd56aa0..HEAD -- app` empty). Ownership machine-parsed
+**17 rows · 17 unique · 0 missing/unexpected/dup · class 2/12/3** (Class-1={C12-09,C12-13}, Class-3={C02-04,C02-05,
+C12-01}); mutations machine-parsed **12 · {MUT-1…MUT-11, MUT-TP} · 0 missing/unexpected/dup**. All current source/
+test line numbers re-grounded at `3b6a5a3` (not copied from history).
+
+**tasks.md shape**: **63 contiguous tasks T001–T063**, 12 phases; **34 `[P]`**; all 6 user stories tagged (US1
+T025–T027 · US2 T020–T022 · US3 T028–T029 · US4 T030–T032 · US5 T023–T024 · US6 T033–T034); all 5 Wave-0 outcomes;
+G1–G14 each mapped to an authoring task; **12 mutation tasks** (T042–T053); the child-view supersession = exactly
+the 2 lines (`smoke:1971`/`:2082`) with family/teacher neighbours (`:2007`/`:2083` · `:2020`/`:2084`) byte-verbatim;
+`smoke/run.cjs` = a **13-writer serial single-writer chain** (no `[P]`); source/test allowlist exact; forbidden
+0-diff list encoded; impact = **3 surfaces / 6 localized bodies**, other 109 byte-identical.
+
+**Adversarial tasks-review result — Verdict: PASS** (independent non-author reviewer, 20-point check, live-repo +
+11 committed sources, 2026-07-17, **0 blocking defects**). Three minor advisory findings, all non-blocking: (M1)
+g32 cited `:1406-1412` (re-grounded at `3b6a5a3`) vs the contract's `cd56aa0` `:1404-1413` — same block, identical
+assertion, reconciled by the re-grounding note; (M2) G5's tie to the child-view supersession was implicit in T021 —
+**applied**: T021 now labels it "(guard G5)"; (M3) mutation `[P]` vs the fixed test port 4178 — **applied**: Phase 11
+now notes `[P]` permits but does not require concurrency (run sequentially or per-copy ports). No STOP condition
+triggered; no plan/spec decision altered; the 17-row table and all prior review records preserved. No
+implementation, no commit, no push (the watcher owns commits). Next: `/speckit.implement` (NOT run here).
