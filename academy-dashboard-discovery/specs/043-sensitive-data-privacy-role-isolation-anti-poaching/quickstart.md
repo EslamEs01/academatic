@@ -17,6 +17,11 @@ drift). Do not commit/push — the watcher owns commits.
    `STUDENT_PAGES.profile.gates`. Leave `FAMILY_PAGES.profile.gates` (line 380) and the inline
    `teacher-profile.js:83-85` gates **byte-verbatim**. (The `prt.stu.pg.prof.gPass.*` locale keys become unused —
    leaving them is harmless; no locale edit required.)
+1b. `src/js/pages/student-profile.js` — **MANDATORY comment-only correction** (part of this outcome): the header
+   comment (`:1-4`) reads "…EXACTLY **three** backendRequired gates (photo upload · profile save · **password
+   change** …)". Correct it to "…EXACTLY **two** backendRequired gates (photo upload · profile save …)" so no
+   `password` token remains in the child header comment. **The functional renderer code (from the first `import` /
+   the render function onward) stays byte-identical** — only the header comment differs.
 2. `tests/smoke/run.cjs` — the DECLARED supersession (two lines only):
    - `:1971` `ok(prt.plannedBackend === 3` → `=== 2`; comment "photo/save/password" → "photo/save".
    - `:2082` `'student-profile': 3` → `'student-profile': 2`.

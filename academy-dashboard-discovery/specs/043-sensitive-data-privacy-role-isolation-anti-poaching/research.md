@@ -45,8 +45,12 @@ page-renderer edit**.
 account the child does not have (G-03). Pixel-verified: the current child-view shows exactly 3 gate cards and a
 guardian block that is name+city only (no contact) — removing the password card is the minimal correct change.
 
-**Alternatives rejected**: (a) editing `student-profile.js` to filter the gate — unnecessary (the fixture is the
-source of truth); (b) removing the `prt.stu.pg.prof.gPass.*` locale keys — harmless-if-left (they become unused);
+**Alternatives rejected**: (a) editing `student-profile.js`'s **functional renderer** to filter the gate —
+REJECTED (unnecessary; the fixture is the source of truth; the render function stays byte-identical). **REQUIRED,
+by contrast**: the `student-profile.js:1-4` **header comment** ("…EXACTLY three backendRequired gates (photo
+upload · profile save · password change…)") is now-false after the removal and **MUST be corrected to two gates
+(photo/save)** — a mandatory **comment-only** source edit (executable code unchanged), part of the child-view
+outcome, not a renderer change; (b) removing the `prt.stu.pg.prof.gPass.*` locale keys — harmless-if-left (they become unused);
 leaving them avoids extra churn (zero-deletion parity). (c) touching family/teacher — REJECTED: `FAMILY_PAGES.profile.gates:380`
 and the inline `teacher-profile.js:83-85` gates belong to real account holders and stay byte-verbatim. The three
 gate sets are **separate arrays** (no shared aliasing) — a shared-array edit cannot accidentally remove all three.
@@ -126,7 +130,9 @@ on the guard being green). 043 owns them now.
 `openSheet` dispatch, `enhance.js:441/589`) for the teacher policy; the fixture-mapped renderers for the
 child-view. **`i18n.js` stays 0-diff** — both previews extend already-registered namespaces (`adm.*`, `trn.*`);
 new keys go inside existing locale files. `nav.config.js`/`enhance.js`/`sidebar.js`/`build-html.mjs`/`package.json`/
-`staff.js`/`student-profile.js`/`family-profile.js`/`teacher-profile.js` = 0-diff.
+`staff.js`/`family-profile.js`/`teacher-profile.js` = 0-diff. **`student-profile.js` is NOT whole-file 0-diff**:
+its executable code (from the first `import` / the render function onward) stays **byte-identical**, but its now-false
+header comment is corrected three→two gates (mandatory, comment-only — see Decision 1).
 
 **Rationale**: Ponytail-lite smallest-honest-solution + the count/route/hook freeze. Every outcome folds into an
 existing host with an existing hook; no new page/route/nav-item/dependency/component/storage-key.

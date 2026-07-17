@@ -16,8 +16,10 @@ The technical approach is the **smallest honest existing-host solution**, ground
 current source (see `research.md` for the evidence trace):
 - **Child-view (C12-09)**: delete ONE fixture line — `passwordChange` from `STUDENT_PAGES.profile.gates`
   (`fixtures/portal.js:323`). `student-profile.js` renders the array generically, so it drops 3→2 gates with
-  **no page-renderer change**. Family (`portal.js:380`) and teacher (`teacher-profile.js:83-85`, inline, no
-  fixture) gates are **untouched**.
+  **no page-renderer change** (its render function stays byte-identical). Its now-false header comment
+  (`student-profile.js:1-4`, "…EXACTLY three backendRequired gates (photo/save/password)…") is corrected to
+  **two gates (photo/save)** — a **mandatory comment-only** source edit, part of this outcome. Family
+  (`portal.js:380`) and teacher (`teacher-profile.js:83-85`, inline, no fixture) gates are **untouched**.
 - **Parent-contact registry (C12-13/C12-01/G-01)**: add ONE group of 5 deny-by-default rows to `PERM_GROUPS`
   (`fixtures/staff-management.js:34-45`) + 6 `adm.staff.perm.*` locale keys. `permDrawer()`
   (`staff.js:42-52`) maps `PERM_GROUPS` generically, so it renders them with **no `staff.js` change** —
@@ -43,7 +45,9 @@ smoke (`tests/smoke/run.cjs`, Playwright), a11y (`tests/a11y/run.cjs`, axe), scr
 AR + LTR EN, light/dark). **Project Type**: static frontend web app. **Constraints**: no new
 dependency/hook/storage-key/page/route; 0 `type=password`/`type=file`/`<canvas>`; no real PII; no fake
 authorization; the closed `data-*` hook set; counts frozen. **Scale/Scope**: 115 built pages; this spec
-changes 6 bodies + 4 locale files + 3 fixtures + 1 page renderer + 3 test files.
+changes 6 bodies + 4 locale files + 3 fixtures + 1 page renderer (`teacher.js`) + 1 page header-comment
+(`student-profile.js`, comment-only, renderer byte-identical) + 3 test files. **Application-source allowlist = 9
+files** (3 fixtures + `teacher.js` + `student-profile.js` + 4 locales).
 
 ## Constitution Check
 
@@ -88,6 +92,7 @@ academy-dashboard-discovery/app/
   src/js/fixtures/staff-management.js  # ADD 1 group (5 deny-by-default rows) to PERM_GROUPS:34-45
   src/js/fixtures/teacher-management.js# ADD TEACHER_CAPABILITY_POLICY structure-only registry
   src/js/pages/teacher.js              # ADD capabilityPolicyDrawer('trn-policy') + a tab-panel trigger
+  src/js/pages/student-profile.js      # HEADER COMMENT ONLY: "three…password" → "two (photo/save)"; renderer byte-identical
   src/locales/ar.adm.js, en.adm.js     # ADD parent-contact keys (adm.staff.perm.g.parents + i.*)
   src/locales/ar.trn.js, en.trn.js     # ADD trn.policy.* block
   tests/smoke/run.cjs                  # child-view supersession (2 lines) + G1–G14 additive asserts
@@ -96,11 +101,12 @@ academy-dashboard-discovery/app/
   screenshots/REVIEW.md                # additive Spec-043 review entry
 ```
 
-**0-diff (confirmed, must not change — `staff.js`/`student-profile.js`/`family-profile.js`/`teacher-profile.js`
-render from fixtures/locales generically)**: `nav.config.js` · `enhance.js` · `components/sidebar.js` · `i18n.js`
-· `scripts/build-html.mjs` · `package.json` · `pages/staff.js` · `pages/student-profile.js` ·
-`pages/family-profile.js` · `pages/teacher-profile.js` · all `components/*` · `app.css` (styles) · every
-unrelated fixture/page/locale.
+**0-diff (confirmed, must not change — `staff.js`/`family-profile.js`/`teacher-profile.js` render from
+fixtures/locales generically)**: `nav.config.js` · `enhance.js` · `components/sidebar.js` · `i18n.js`
+· `scripts/build-html.mjs` · `package.json` · `pages/staff.js` · `pages/family-profile.js` ·
+`pages/teacher-profile.js` · all `components/*` · `app.css` (styles) · every unrelated fixture/page/locale.
+**`pages/student-profile.js` is NOT on this list**: its executable code (imports/render function onward) stays
+byte-identical, but its header comment is corrected three→two gates (mandatory, comment-only — allowlist above).
 
 **Structure Decision**: single static-frontend project; the change surface is a minimal fixture+locale+one-page
 edit set that folds every outcome into existing hosts — no new directories, no new modules.

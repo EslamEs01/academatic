@@ -193,7 +193,10 @@ Independent non-author Opus reviewer, 20-point check, live-repo verified.
     with the activity-log value explicitly excluded (`global-privacy-guards-plan.md` G14, `backend-honesty-contract.md`).
   - **B-3 (accepted, documented)**: `student-profile.js:2`'s "three gates" comment becomes stale after the
     removal but the file stays 0-diff — noted as a harmless comment carry with an optional comment-only exception
-    (`contracts/child-view-account-boundary-plan.md`).
+    (`contracts/child-view-account-boundary-plan.md`). **→ SUPERSEDED 2026-07-17 (see "Stale-comment ownership
+    correction" below): this acceptance was WRONG — a knowingly-false source comment may not be left; the correction
+    is now MANDATORY (comment-only) and `student-profile.js` moved forbidden→allowed. Original finding text kept as
+    history.**
   - **B-4 (no action)**: the specify register cited `capture.cjs:556` for R-3; the plan cites the correct `:555`
     (`if (withErrors > 0)`) — the plan is more correct; the stale specify number needs no plan change.
 - Reviewer explicitly cleared: no forbidden 0-diff file edited; the policy previews are structure-only display
@@ -276,3 +279,41 @@ assertion, reconciled by the re-grounding note; (M2) G5's tie to the child-view 
 now notes `[P]` permits but does not require concurrency (run sequentially or per-copy ports). No STOP condition
 triggered; no plan/spec decision altered; the 17-row table and all prior review records preserved. No
 implementation, no commit, no push (the watcher owns commits). Next: `/speckit.implement` (NOT run here).
+
+## Stale-comment ownership correction (`/speckit.tasks` follow-up, 2026-07-17)
+
+Documentation-only correction pass (baseline HEAD `34f6f6a`, clean tree; tasks commit present; 0 app/test/public/
+package drift). **Defect**: the plan/tasks put `src/js/pages/student-profile.js` on the forbidden/0-diff list while
+acknowledging its header comment ("…EXACTLY **three** backendRequired gates (photo upload · profile save · password
+change …)") would become false after the child-view password-gate removal — a knowingly-stale source comment, which
+is forbidden. The prior tasks reviewer **noticed the stale comment but incorrectly accepted it** (recorded above as
+B-3 "accepted, documented … optional comment-only exception") — that acceptance is hereby superseded.
+
+**Decision (mandatory, not optional)**: Spec 043's implement phase MUST correct **only** the `student-profile.js`
+header comment (`:1-4`) from three gates to **two** (photo/save), leaving **no `password` token** in that child
+header comment; the functional renderer code (from the first `import` / the render function onward) stays
+**byte-identical**. This is part of the child-view outcome — no functional renderer change, no new localized body,
+no new protected-test supersession, no new task ID, no task-count change.
+
+**Consistency edits (8 artifacts)**: `plan.md` (child-view bullet + Technical-Context source count + allowlist
+code-block + 0-diff list → `student-profile.js` moved to ALLOWED comment-only; **source allowlist 8 → 9**);
+`research.md` (Decision 1 now distinguishes rejected functional-renderer edit vs required comment-accuracy
+correction; Decision 5 drops the whole-file 0-diff claim, states executable code byte-identical); `quickstart.md`
+(Step A gains the mandatory comment-only sub-step 1b); `contracts/child-view-account-boundary-plan.md` (removed
+"optional"/"default: leave 0-diff"; mandated the exact header-comment correction; render path unchanged; confirms it
+does NOT broaden the two-line smoke supersession); `contracts/allowed-forbidden-files-and-stops.md` (added to
+ALLOWED "header comment only", removed from FORBIDDEN, comment-scoped done-condition); `contracts/impact-protection-plan.md`
+(removed from forbidden 0-diff, added to the expected `app/src` diff as comment-only, states no additional body/asset,
+**exactly 6 changed bodies preserved**); `tasks.md` (allowlist → 9, single-writer ownership adds student-profile.js
+under the atomic T020, T009 re-grounds 9 files incl. the header comment, **T020 is now the atomic two-file child-view
+edit** with 5 done-conditions, T021 unchanged = exactly the 2 smoke lines, T056 requires a comment-restricted diff
+with executable code byte-identical, T060 requires the comment be accurate and drops the "unless a correction is
+taken" wording); this `requirements.md` (this note + the B-3 superseded pointer).
+
+**Invariants held**: tasks **63** (T001–T063 contiguous), **34 `[P]`**, **12** mutations — no task added/renumbered;
+protected-test amendment budget stays exactly the two smoke lines (`:1971` gate 3→2, `:2082` register 3→2) — the
+source-comment correction is **not** a test supersession; impact stays **3 logical surfaces / 6 localized bodies**
+(staff·teacher·student-profile × AR/EN), 109 other bodies byte-identical. Residual grep: **0** live
+"student-profile.js = whole-file 0-diff / forbidden / stale-comment-stays / optional" claims remain; the remaining
+`student-profile.js` mentions are current-state/rendering descriptions or family/teacher references, not 0-diff
+claims. **Focused review: PASS** (see below). No implementation; no commit/push (the watcher owns commits).

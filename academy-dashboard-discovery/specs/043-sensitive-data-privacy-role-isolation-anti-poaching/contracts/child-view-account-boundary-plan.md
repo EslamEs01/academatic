@@ -2,20 +2,29 @@
 
 Translates `../child-view-account-boundary.md` into the exact edit + supersession + mutation.
 
-## The exact edit (1 fixture line)
+## The exact edits (1 fixture line + 1 header comment)
 
 `src/js/fixtures/portal.js` — `STUDENT_PAGES.profile.gates` (lines 320-324). **Delete line 323**:
 ```
 { id: 'passwordChange', icon: 'help', titleKey: 'prt.stu.pg.prof.gPass.t', descKey: 'prt.stu.pg.prof.gPass.d', availability: 'backendRequired' },
 ```
 Result: the array holds `photoUpload` + `profileSave` (2 gates). `student-profile.js:72` renders
-`STUDENT_PAGES.profile.gates.map(plannedCard)` → 2 cards. **`student-profile.js` = 0-diff.**
+`STUDENT_PAGES.profile.gates.map(plannedCard)` → 2 cards. **`student-profile.js`'s executable code (the render
+function and everything from the first `import` onward) stays byte-identical.**
 
-> **Stale-comment carry (honest note)**: `student-profile.js:2`'s header comment reads "…EXACTLY three
-> backendRequired gates (photo/save/password)". After the removal the rendered count is 2, but `student-profile.js`
-> stays on the forbidden 0-diff list — so the comment is left as-is (a comment, no token/functional impact). The
-> implement phase may optionally correct this ONE comment line if comment accuracy is wanted; if it does, that is
-> a declared, comment-only exception to the 0-diff list (no rendered-body change). Default: leave 0-diff.
+### The mandatory header-comment correction (`src/js/pages/student-profile.js:1-4`)
+
+`student-profile.js`'s header comment currently reads "…EXACTLY **three** backendRequired gates (photo upload ·
+profile save · **password change** — the legacy profile-edit page's exact write surface)". After the fixture
+removal the rendered count is 2, so this comment is **now false**. Leaving a knowingly-stale source comment is
+forbidden. **The implement phase MUST correct it** to describe **two** gates and remove the `password` reference —
+e.g. "…EXACTLY **two** backendRequired gates (photo upload · profile save — the legacy profile-edit page's write
+surface)". This is a **mandatory comment-only** correction (part of the child-view outcome), **not** optional and
+**not** "default: leave 0-diff". Done-conditions: (a) the comment says "two"; (b) it lists only photo/save;
+(c) **no `password` token remains** in that child header comment; (d) the executable code (from the first `import`
+onward) is byte-identical; (e) the rendered body changes only the already-predicted fixture-driven 3→2 cards — the
+comment adds **no** additional body/asset change. **This correction does NOT broaden the two-line smoke
+supersession** below (it is a source comment, not a test change).
 
 ## Invariants (STOP if any cannot hold)
 

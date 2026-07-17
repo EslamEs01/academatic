@@ -26,8 +26,10 @@ Expected shell/sidebar change = **ZERO** (the drawers are page-body content, not
 ## Forbidden-file 0-diff (must be byte-identical after build)
 
 `nav.config.js` · `enhance.js` · `components/sidebar.js` · `i18n.js` · `scripts/build-html.mjs` · `package.json`
-· `pages/staff.js` · `pages/student-profile.js` · `pages/family-profile.js` · `pages/teacher-profile.js` ·
-all `components/*` · `app.css`.
+· `pages/staff.js` · `pages/family-profile.js` · `pages/teacher-profile.js` ·
+all `components/*` · `app.css`. **`pages/student-profile.js` is NOT on this list** — its executable code
+(imports/render onward) is byte-identical, but its header comment is corrected three→two gates (a comment-scoped
+source diff; see the expected source diff below).
 
 ## Generated output
 
@@ -37,6 +39,9 @@ This planning phase leaves `public/` byte-identical (verified: the plan-phase bu
 ## Proof at implement time
 
 `git diff --stat -- app/public` shows exactly the 6 HTML + their built-asset dependencies; `git diff -- app/src`
-shows exactly `portal.js` (−1), `staff-management.js` (+1 group), `teacher-management.js` (+registry),
-`teacher.js` (+drawer+trigger), the 4 locale files; `git diff -- app/tests` shows the additive asserts + the
-2-line supersession. The `#page-body` md5 diff = exactly the 6 rows above.
+shows exactly `portal.js` (−1), `student-profile.js` (**header comment only** — three→two gates; executable code
+byte-identical), `staff-management.js` (+1 group), `teacher-management.js` (+registry), `teacher.js`
+(+drawer+trigger), the 4 locale files; `git diff -- app/tests` shows the additive asserts + the 2-line
+supersession. The `#page-body` md5 diff = **exactly the 6 rows above** — the `student-profile.js` header comment
+is not rendered into any body, so it creates **no additional page body and no asset change** (the child-view body
+still changes only by the fixture-driven 3→2 cards, already counted).

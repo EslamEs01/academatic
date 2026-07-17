@@ -46,16 +46,18 @@ file). Setup/foundational/final-audit/mutation tasks omit `[US#]`; user-story ta
   Body/portal censuses read built HTML from `public/*.html` via `fs`; source censuses read `src/**` via `fs`
   (the ROUTES_50 / route-freeze blocks are the precedent pattern).
 - **`app/src/js/pages/teacher.js`** — one writer (T025).
-- **`app/src/js/fixtures/portal.js`**, **`staff-management.js`**, **`teacher-management.js`**, and each of the four
-  locale files — one writer each.
+- **`app/src/js/fixtures/portal.js`** + **`app/src/js/pages/student-profile.js`** — both written by the single
+  atomic child-view task **T020** (portal.js −1 fixture line; student-profile.js **header comment only**).
+- **`staff-management.js`**, **`teacher-management.js`**, and each of the four locale files — one writer each.
 - **`app/tests/a11y/run.cjs`**, **`app/tests/screenshots/capture.cjs`**, **`app/screenshots/REVIEW.md`** — one
   writer each; `[P]` with each other.
 
 ## Application-source allowlist (implementation tasks may target ONLY these)
 
 `src/js/fixtures/portal.js` · `src/js/fixtures/staff-management.js` · `src/js/fixtures/teacher-management.js` ·
-`src/js/pages/teacher.js` · `src/locales/ar.adm.js` · `src/locales/en.adm.js` · `src/locales/ar.trn.js` ·
-`src/locales/en.trn.js`. **Test/review allowlist**: `tests/smoke/run.cjs` · `tests/a11y/run.cjs` ·
+`src/js/pages/teacher.js` · `src/js/pages/student-profile.js` (**header comment only** — no render logic) ·
+`src/locales/ar.adm.js` · `src/locales/en.adm.js` · `src/locales/ar.trn.js` · `src/locales/en.trn.js`
+(**9 source files**). **Test/review allowlist**: `tests/smoke/run.cjs` · `tests/a11y/run.cjs` ·
 `tests/screenshots/capture.cjs` · `screenshots/REVIEW.md`. **Docs**: `specs/043-…/implementation-status.md` +
 the CLAUDE.md SPECKIT marker "Active feature" line. All paths are under `academy-dashboard-discovery/app/`
 (docs under `academy-dashboard-discovery/specs/043-…/`).
@@ -64,9 +66,11 @@ the CLAUDE.md SPECKIT marker "Active feature" line. All paths are under `academy
 
 `src/js/nav.config.js` · `src/js/enhance.js` · `src/js/components/sidebar.js` · `src/js/i18n.js` ·
 `scripts/build-html.mjs` · `package.json` · `package-lock.json` · `src/js/pages/staff.js` ·
-`src/js/pages/student-profile.js` · `src/js/pages/family-profile.js` · `src/js/pages/teacher-profile.js` ·
+`src/js/pages/family-profile.js` · `src/js/pages/teacher-profile.js` ·
 all `src/js/components/*` · `src/styles/app.css` · Settings/certificates implementation source · every unrelated
-fixture/page/locale · every new backend/API/payment/integration/auth file.
+fixture/page/locale · every new backend/API/payment/integration/auth file. **`src/js/pages/student-profile.js` is
+NOT forbidden** — it is allowlisted for a **header-comment-only** correction; its executable code (imports/render
+onward) must stay byte-identical (guarded by T056).
 
 ---
 
@@ -96,12 +100,13 @@ fixture/page/locale · every new backend/API/payment/integration/auth file.
 - [ ] **T008** [P] Mutation machine-check: `node` parser over `contracts/mutation-protocol-plan.md` table →
   **12 rows · 12 unique IDs · {MUT-1…MUT-11, MUT-TP} · 0 missing/unexpected/duplicate**; MUT-11→G13, MUT-TP→
   teacher-policy. **Done**: exact set; any drift = STOP.
-- [ ] **T009** [P] Re-ground the **8 source files** (`grep -n`): `portal.js` STUDENT vs FAMILY `profile.gates`
-  (passwordChange lines) · `staff-management.js` `PERM_GROUPS` bounds + group shape · `staff.js` `permDrawer` generic
-  map · `teacher-management.js` end + 0 pay tokens · `teacher.js` `availabilityDrawer`/`pickers`/overview panel/the
-  `data-drawer="trn-availability"` button pattern/the `previewTemplate`+`sheetRow` import · `ar/en.adm.js` `perm`
-  block + shared `perm.note` · `ar/en.trn.js` insertion point + 0 pay keys. **Done**: a current line map recorded;
-  do NOT reuse historical numbers blindly.
+- [ ] **T009** [P] Re-ground the **9 source files** (`grep -n`): `portal.js` STUDENT vs FAMILY `profile.gates`
+  (passwordChange lines) · **`student-profile.js` the header comment (`:1-4`) — the exact now-false "three…password
+  change" text + the first `import`/render-function line (the byte-identical boundary)** · `staff-management.js`
+  `PERM_GROUPS` bounds + group shape · `staff.js` `permDrawer` generic map · `teacher-management.js` end + 0 pay
+  tokens · `teacher.js` `availabilityDrawer`/`pickers`/overview panel/the `data-drawer="trn-availability"` button
+  pattern/the `previewTemplate`+`sheetRow` import · `ar/en.adm.js` `perm` block + shared `perm.note` · `ar/en.trn.js`
+  insertion point + 0 pay keys. **Done**: a current line map recorded; do NOT reuse historical numbers blindly.
 - [ ] **T010** [P] Re-ground the **4 test files** (`grep -n`): `smoke:1971`/`:2082` (student-profile) + the
   neighbours `:2007`/`:2020`/`:2083`/`:2084` (family/teacher — MUST NOT touch) · PAY28 `:748` · tchPay/payHit ·
   realPii `:1287` · g32 `:1406-1412` · ROUTES_50 `:2608` · additive insertion region (after `:2899`, before the
@@ -151,12 +156,17 @@ locale **parity** verification runs only after **both** language edits of each n
 
 ## Phase 3 — User Story 2: Child-view is not an adult account  [US2, P1]
 
-- [ ] **T020** [US2] `src/js/fixtures/portal.js` — **delete the `passwordChange` entry** (≈ L323) from
-  `STUDENT_PAGES.profile.gates`, leaving `photoUpload` + `profileSave` (2 gates). **Verify byte-verbatim**:
-  `FAMILY_PAGES.profile.gates` passwordChange (≈ L380) and the inline teacher gates `teacher-profile.js:82-85`
-  (password ≈ L85) are **untouched** (separate arrays — confirmed). `student-profile.js` = **0-diff** (renders the
-  array generically). **Done**: student array = 2 entries; family + teacher gates unchanged; `student-profile.js`
-  0-diff.
+- [ ] **T020** [US2] **Atomic child-view source edit — TWO files** (`src/js/fixtures/portal.js` +
+  `src/js/pages/student-profile.js`): **(a)** in `portal.js`, **delete the `passwordChange` entry** (≈ L323) from
+  `STUDENT_PAGES.profile.gates`, leaving `photoUpload` + `profileSave` (2 gates); **(b)** in `student-profile.js`,
+  correct **only the header comment** (`:1-4`) from "…EXACTLY **three** backendRequired gates (photo upload ·
+  profile save · **password change** …)" to "…EXACTLY **two** backendRequired gates (photo upload · profile save
+  …)"; **(c)** keep `student-profile.js`'s functional renderer code (from the first `import` / the render function
+  onward) **byte-verbatim**; **(d)** keep `FAMILY_PAGES.profile.gates` passwordChange (≈ L380) and the inline teacher
+  gates `teacher-profile.js:82-85` (password ≈ L85) **byte-verbatim** (separate arrays — confirmed). **Done (all
+  must hold)**: student gate array = **2** entries; the `student-profile.js` header comment says **two** / lists
+  only photo/save; **no `password` token remains** in that child header comment; the `student-profile.js` executable
+  code (first `import` onward) is **byte-identical**; family + teacher gates untouched.
 - [ ] **T021** [US2] `tests/smoke/run.cjs` — the **declared two-line supersession** (guard **G5**, SMOKE WRITER #1): `:1971`
   `plannedBackend === 3` → `=== 2` (comment "photo/save/password" → "photo/save"); `:2082` `'student-profile': 3`
   → `'student-profile': 2`. **Do NOT touch** family `:2007`/`:2083` or teacher `:2020`/`:2084` (byte-verbatim).
@@ -360,8 +370,11 @@ sequentially, or give each isolated copy its own port, if concurrent runs would 
   built page.
 - [ ] **T056** [P] Forbidden-file **0-diff**: `git diff` empty for `nav.config.js`, `enhance.js`,
   `components/sidebar.js`, `i18n.js`, `build-html.mjs`, `package.json`, `package-lock.json`, `pages/staff.js`,
-  `pages/student-profile.js`, `pages/family-profile.js`, `pages/teacher-profile.js`, all `components/*`, `app.css`
-  (vs the T012 snapshot). Confirm **0 new hook/storage-key/dependency/component/route/page/nav-item**.
+  `pages/family-profile.js`, `pages/teacher-profile.js`, all `components/*`, `app.css` (vs the T012 snapshot).
+  **`pages/student-profile.js` is NOT whole-file 0-diff** — instead require its `git diff` to be **restricted
+  exactly to the header comment** (`:1-4`): every line from the **first `import` / the render function onward is
+  byte-identical** (verify by diffing that region). Confirm **0 new hook/storage-key/dependency/component/route/
+  page/nav-item**.
 - [ ] **T057** [P] **Impact proof** (non-destructive): re-snapshot all 115 `#page-body` md5s and diff vs the T011
   baseline → **exactly 6 changed bodies** (`staff`, `teacher`, `student-profile` × AR/EN); the other **109 bodies
   byte-identical**; shared sidebar/shell unchanged; `index.html` + gallery pair unchanged. Any shell/sidebar delta =
@@ -371,8 +384,9 @@ sequentially, or give each isolated copy its own port, if concurrent runs would 
 - [ ] **T059** Mutations audit: **12/12** (MUT-1…MUT-11 + MUT-TP) executed **RED→GREEN** on isolated copies, each
   with recorded command + exit code + RED message; residue **0**; primary tree byte-identical.
 - [ ] **T060** [P] Clean-code guard (independent non-author review): minimal diff, no dead/duplicated code, no churn,
-  fixtures structure-only, comment accuracy (the `student-profile.js:2` "three gates" header comment stays 0-diff
-  unless a declared comment-only correction is taken).
+  fixtures structure-only, **comment accuracy — the `student-profile.js` header comment (`:1-4`) MUST read "two"
+  gates (photo/save) and contain no `password` token** (the mandatory comment-only correction from T020; a stale
+  "three gates" comment is a review failure), while its executable code stays byte-identical.
 - [ ] **T061** [P] Adversarial test guard (independent non-author review): no protected assert deleted/rescoped/
   loosened/skipped/`catch()`-swallowed; **only** the declared 2-line child-view supersession; required selectors
   FAIL loudly; R-2/R-3 never relaxed; every new guarantee has a RED-proven mutation.

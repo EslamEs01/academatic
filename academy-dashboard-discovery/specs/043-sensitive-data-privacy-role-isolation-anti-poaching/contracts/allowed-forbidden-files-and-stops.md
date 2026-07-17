@@ -7,6 +7,7 @@ The exact, evidence-derived source allowlist and the 0-diff list. Derived from t
 | File | Change | Outcome |
 |---|---|---|
 | `src/js/fixtures/portal.js` | delete 1 line (`passwordChange` @ `STUDENT_PAGES.profile.gates:323`) | A (C12-09) |
+| `src/js/pages/student-profile.js` | **header comment ONLY** (three→two gates; no `password` token); no executable/render logic changed | A (C12-09) |
 | `src/js/fixtures/staff-management.js` | add 1 `PERM_GROUPS` group (5 deny-by-default rows) | B (C12-13/C12-01) |
 | `src/js/fixtures/teacher-management.js` | add `TEACHER_CAPABILITY_POLICY` registry | C (C02-04/05) |
 | `src/js/pages/teacher.js` | add `capabilityPolicyDrawer('trn-policy')` + a `data-drawer` trigger | C |
@@ -22,9 +23,13 @@ The exact, evidence-derived source allowlist and the 0-diff list. Derived from t
 
 `src/js/nav.config.js` · `src/js/enhance.js` · `src/js/components/sidebar.js` · `src/js/i18n.js` ·
 `scripts/build-html.mjs` · `package.json` · `package-lock.json` · `src/js/pages/staff.js` ·
-`src/js/pages/student-profile.js` · `src/js/pages/family-profile.js` · `src/js/pages/teacher-profile.js` ·
+`src/js/pages/family-profile.js` · `src/js/pages/teacher-profile.js` ·
 all `src/js/components/*` · `src/styles/app.css` (+ built `public/assets/app.css` beyond what the 6 bodies need)
 · every unrelated fixture/page/locale. (All confirmed unnecessary this plan phase.)
+**`src/js/pages/student-profile.js` is NOT forbidden** — it is ALLOWED for a **header-comment-only** correction
+(above). **Done-condition**: the ONLY difference vs baseline is the header comment (three→two gates, no `password`
+token); every line from the first `import` / the render function onward is **byte-identical** (a comment-scoped
+diff, verified by `tasks.md` T056).
 
 ## STOP conditions (report before proceeding; do NOT author around them)
 
