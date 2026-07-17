@@ -168,3 +168,34 @@ rewritten) **missed a prose/table tally mismatch** in `owned-row-reconciliation.
   by 043 · G1–G14 + MUT-2/MUT-3/MUT-6 owned+executed by 043 · C02-04/05 policy-preview outcome · downstream
   preserve/extend only · FUTURE_BACKEND honest) remains intact.
 - Files changed in this pass (2 only, as scoped): `owned-row-reconciliation.md`, `checklists/requirements.md`.
+
+---
+
+# Plan-phase adversarial review (2026-07-17)
+
+Independent non-author Opus reviewer, 20-point check, live-repo verified.
+
+- **Verdict: PASS** — all 20 checks pass, 0 blocking failures. Confirmed: ownership parses 17-unique/2-12-3;
+  043 owns all 5 Wave-0 outcomes in its own implement phase; child removal student-profile-only (family
+  `smoke:2007`/`:2083` + teacher `:2020`/`:2084` neighbours hold value 3, byte-verbatim); parent-contact registry
+  5-rows-DENY on the existing staff RBAC host (`staff.js` 0-diff, `permDrawer:42-52` maps `PERM_GROUPS`); teacher
+  policy structure-only, `salary_*` excluded, `i18n.js` 0-diff (`trn.*` already registered); every line-number
+  claim spot-checked live (portal.js:323/380, staff.js:42-52, teacher.js:131-137, smoke 748/1287/1971/2608/2007/
+  2020/2082/2083/2084, a11y:393, capture:555); counts 115/57/50/24-25-1 held; 6-body impact measurable; only
+  `M CLAUDE.md` (marker) + untracked plan artifacts; HEAD `cd56aa0`; no commit; no tasks/impl.
+- **4 non-blocking defects — 3 corrected in the plan, 1 accepted:**
+  - **B-1 (corrected)**: G13's query-string mutation was described inline but not registered in the canonical
+    mutation table (the "task never run" risk). → Registered as **MUT-11** in `contracts/mutation-protocol-plan.md`
+    (now 12 mutations MUT-1…MUT-11 + MUT-TP), `global-privacy-guards-plan.md` G13 row, `data-model.md`, and
+    `plan.md` outcome-D.
+  - **B-2 (corrected)**: G14's `signed in`/`logged in` token would false-positive against the live activity-log
+    value `en.adm.js login:'signed in'` (rendered in `staff.html`). → G14 rescoped to **gate/authz context only**
+    with the activity-log value explicitly excluded (`global-privacy-guards-plan.md` G14, `backend-honesty-contract.md`).
+  - **B-3 (accepted, documented)**: `student-profile.js:2`'s "three gates" comment becomes stale after the
+    removal but the file stays 0-diff — noted as a harmless comment carry with an optional comment-only exception
+    (`contracts/child-view-account-boundary-plan.md`).
+  - **B-4 (no action)**: the specify register cited `capture.cjs:556` for R-3; the plan cites the correct `:555`
+    (`if (withErrors > 0)`) — the plan is more correct; the stale specify number needs no plan change.
+- Reviewer explicitly cleared: no forbidden 0-diff file edited; the policy previews are structure-only display
+  rows (not incomplete forms); no real PII / `type=password` / value slot / pay token introduced; no mutation
+  "complete from inspection"; no internal plan/contract contradiction.
