@@ -1024,3 +1024,35 @@ missing selector, so they would have captured the teachers **directory** while c
 **What the teacher frames prove**: `#view=add` renders the **real 13-control form directly** on a fresh load — no
 drawer, no "open form" button, no second click — ending at exactly one backendRequired Save, with the CV upload
 still an honest gate (0 `type=file`).
+
+## Spec 043 — Sensitive Data Privacy, Role Isolation & Anti-Poaching (2026-07-17)
+
+**Frames**: 385 captured · **0 console errors** (R-3 gate). **10 sp043 frames** across the 3 changed logical
+surfaces / 6 localized bodies. **a11y** critical=0 serious=0 (R-2 gate), including the open RBAC + policy drawers
+(kebab-driven st-perm opened via a fail-loud step sequence — never a silent closed-page pass).
+
+**Surface 1 — child-view (student-profile), 2-gate state** — `sp043-2gate-en`, `sp043-2gate-dark` (+ the existing
+ar/light, ar/mobile rows re-capture the 3→2 change). Verdict: ✅ PASS — the profile renders **exactly two** gate
+cards ("Change photo" · "Save profile details", both Backend-required); the **password-change card is gone**; the
+guardian block is name + city only (Abu Salman Al-Ghamdi · Riyadh), no contact; header reads «عرض الابن» / "Child
+view — part of the family account". No `type=password`, no input.
+
+**Surface 2 — staff RBAC preview (parent-contact rows)** — `sp043-parents`, `-en`, `-dark`, `-mobile`. Verdict:
+✅ PASS — the «الصلاحيات» / Permissions drawer opens (via the member kebab) and renders the new **«تواصل أولياء
+الأمور» / Parent Contacts** group of **5 deny-by-default rows** — «عرض هاتف وليّ الأمر»/"View guardian phone",
+«عرض بريد وليّ الأمر»/"View guardian e-mail", export-contacts, approved-use, reveal-masked — every one shown ✗
+«غير مسموح» / "Not allowed". Header: «مصفوفة عرض فقط — دون تفعيل حقيقي» / "Display-only matrix — no real
+enforcement". No value slot, no toggle. Bilingual + dark + mobile clean.
+
+**Surface 3 — teacher capability/notification policy** — `sp043-policy`, `-en`, `-dark`, `-mobile`. Verdict:
+✅ PASS — the «سياسة القدرات والإشعارات» / Capability & notification policy drawer opens (direct overview trigger)
+and renders an **Academic capabilities** subhead (Chat with families ✓ · See the library ✓ · Edit the schedule ✗ ·
+Edit a class ✗) + a **Communication & notifications** subhead (Course updates · Class reminders · Class updates,
+each WhatsApp · E-mail) + a trailing «تعديل السياسة» / "Edit policy" backendRequired gate. **No Salary row, no pay
+figure, no guardian/student contact, no country/locality, no value slot** — teacher pay-free upheld (PAY28 green on
+`teacher.html`). Bilingual + dark + mobile clean.
+
+**Anti-poaching / privacy law upheld (visually confirmed against the legacy defects)**: the legacy teacher detail's
+Left/Acquired attribution, Address/Country, Hour Rate, Salary/Compensations tabs, Login-as, live WhatsApp invite and
+phone are all absent; the legacy 170-checkbox "all granted" matrix is a display-only deny-by-default preview; the
+legacy child-profile password card is removed.

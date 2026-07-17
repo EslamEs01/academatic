@@ -341,6 +341,19 @@ const MATRIX = [
   { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations', open: '[data-drawer="integ-paymob"]' },
   { page: 'settings', lang: 'ar', theme: 'light', hash: '#view=integrations', open: '[data-drawer="integ-email"]' },
   { page: 'settings', lang: 'en', theme: 'light', hash: '#view=integrations', open: '[data-drawer="integ-whatsapp"]' },
+  // Spec 043 — the 3 changed privacy surfaces (child-view 2-gate + the two open preview drawers).
+  // student-profile: EN-dark completes the 2-gate matrix (ar/light, ar/dark, en/light already above).
+  { page: 'student-profile', lang: 'en', theme: 'dark' },
+  // staff RBAC preview OPEN (the 5 parent-contact rows) — kebab-driven, opened via the fail-loud step seq.
+  { page: 'staff', lang: 'ar', theme: 'light', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  { page: 'staff', lang: 'en', theme: 'light', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  { page: 'staff', lang: 'ar', theme: 'dark', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  { page: 'staff', lang: 'ar', theme: 'light', viewport: 'mobile', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  // teacher capability/notification policy preview OPEN — direct data-drawer trigger in the overview panel.
+  { page: 'teacher', lang: 'ar', theme: 'light', open: '[data-drawer="trn-policy"]' },
+  { page: 'teacher', lang: 'en', theme: 'light', open: '[data-drawer="trn-policy"]' },
+  { page: 'teacher', lang: 'ar', theme: 'dark', open: '[data-drawer="trn-policy"]' },
+  { page: 'teacher', lang: 'ar', theme: 'light', viewport: 'mobile', open: '[data-drawer="trn-policy"]' },
 ];
 
 // Spec 032 — mobile viewport for the new rows (the pre-032 matrix is desktop-only)
@@ -359,6 +372,12 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
     await p.goto(`${BASE}/${file}${s.hash || ''}`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(250);
     if (s.open) { await p.click(s.open).catch(() => {}); await p.waitForTimeout(420); }
+    // Spec 043 — a row may open a kebab-driven drawer via a click SEQUENCE. Each target is a REQUIRED
+    // selector: waitForSelector throws if it is absent, so an open-drawer scan can never silently pass
+    // on a closed page (no `.catch(() => {})` swallow here — the failure is loud, per the privacy plan).
+    if (s.steps) {
+      for (const sel of s.steps) { await p.waitForSelector(sel, { timeout: 5000, state: 'visible' }); await p.click(sel); await p.waitForTimeout(360); }
+    }
     // Spec 039 — a row may drive the tablist from the KEYBOARD (roving tabindex) before the scan,
     // so the tab reached by ArrowLeft/ArrowRight is audited in its focused, switched state.
     if (s.keys) {
@@ -374,7 +393,7 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
     const crit = violations.filter((v) => v.impact === 'critical');
     const ser = violations.filter((v) => v.impact === 'serious');
     critical += crit.length; serious += ser.length;
-    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}${s.viewport ? ' @' + s.viewport : ''}${s.open ? ' open:' + s.open : ''}${s.keys ? ' keys:' + s.keys.seq.join('+') : ''}`;
+    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}${s.viewport ? ' @' + s.viewport : ''}${s.open ? ' open:' + s.open : ''}${s.steps ? ' steps:' + s.steps.length : ''}${s.keys ? ' keys:' + s.keys.seq.join('+') : ''}`;
     if (crit.length) console.error(`  ✗ ${tag}: ${crit.length} CRITICAL — ${crit.map((v) => v.id).join(', ')}`);
     if (ser.length) console.warn(`  ⚠ ${tag}: ${ser.length} serious — ${ser.map((v) => v.id).join(', ')}`);
     if (!crit.length && !ser.length) console.log(`  ✓ ${tag}: clean`);

@@ -27,8 +27,8 @@ export default {
       perm: {
         title: 'Permissions', open: 'Permissions', save: 'Save permissions', saveReason: 'Saving permissions needs the server — nothing changes now.',
         note: 'Display-only matrix — no real enforcement.', granted: 'Allowed', notGranted: 'Not allowed',
-        g: { dashboard: 'Dashboard', requests: 'New requests', families: 'Families', students: 'Students', teachers: 'Teachers', reports: 'Reports', finance: 'Finance', content: 'Content', certs: 'Certificates', settings: 'Settings' },
-        i: { view: 'View', manage: 'Manage', create: 'Create', export: 'Export' },
+        g: { dashboard: 'Dashboard', requests: 'New requests', families: 'Families', students: 'Students', teachers: 'Teachers', reports: 'Reports', finance: 'Finance', content: 'Content', certs: 'Certificates', settings: 'Settings', parents: 'Parent contacts' },
+        i: { view: 'View', manage: 'Manage', create: 'Create', export: 'Export', viewPhone: 'View guardian phone', viewEmail: 'View guardian e-mail', exportContacts: 'Export guardian contacts', approvedUse: 'Use contact for approved communication', revealMasked: 'Reveal masked contact value' },
       },
       cat: { title: 'Category scope', open: 'Categories', assign: 'Edit scope', assignReason: 'Editing category scope needs the server.', students: 'Student categories', studentsScope: 'Group A, Group B', teachers: 'Teacher categories', teachersScope: 'Languages, Science' },
       activity: { title: 'Activity log', open: 'Activity', e: { course: 'Course', student: 'Student', login: 'Login', class: 'Class' }, a: { created: 'created', updated: 'updated', login: 'signed in' }, d: { today: 'Today', yesterday: 'Yesterday' } },

@@ -1,6 +1,6 @@
 ---
 name: test-guard
-description: "Review generated or changed test code against universal testing rules before it ships. Best used reactively after an agent writes, edits, generates, or refactors tests, before presenting, committing, or merging them. Use for pytest (test_*.py, *_test.py), PHPUnit/Pest (*Test.php), Jest/Vitest (*.test.ts, *.spec.js), Go (*_test.go), files under tests/, __tests__/, or spec/, and review requests like 'write tests for X', 'add tests', 'test this', 'review these tests', or PR diffs containing tests. Can also guide test writing when explicitly invoked before the work. This skill is the quality gate that prevents AI-generated test bloat."
+description: "Review generated or changed test code against universal testing rules before it ships. Best used reactively after an agent writes, edits, generates, or refactors tests, before presenting, committing, or merging them. Use for pytest (test_*.py, *_test.py), PHPUnit/Pest (*Test.php), Jest/Vitest (*.test.ts, *.spec.js), Go (*_test.go), files under tests/, __tests__/, or spec/, and review requests like 'write tests for X', 'add tests', 'test this', 'review these tests', or PR diffs containing tests. Can also guide test writing when explicitly invoked before the work. This skill is the quality gate that prevents AI-generated test bloat. DO NOT USE for production or implementation code review (use clean-code-guard), CI or test-runner configuration, running or debugging tests, or general architecture discussion."
 ---
 
 # Test Guard
@@ -117,3 +117,13 @@ Not all violations are equal. Use judgment:
 - It does not enforce code style — that's the linter's job.
 - It does not decide *what* to test — only *how* to test it.
 - It does not flag pre-existing violations in files you're not touching, unless asked to audit.
+
+## Project evidence gates
+
+- Reject weakened assertions, broad selector catches, skipped failure paths, and
+  tests that can pass without exercising the claimed behavior.
+- Serious accessibility failures and browser console errors are release gates;
+  recording them without failing the check is insufficient.
+- A protected test changes only with a declared supersession tied to the owning
+  contract. Mutation evidence runs one mutation in an isolated copy, proves
+  RED, restores the source, then proves GREEN.

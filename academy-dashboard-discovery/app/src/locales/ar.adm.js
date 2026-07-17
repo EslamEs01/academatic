@@ -27,8 +27,8 @@ export default {
       perm: {
         title: 'الصلاحيات', open: 'الصلاحيات', save: 'حفظ الصلاحيات', saveReason: 'حفظ الصلاحيات يحتاج ربط الخادم — لا يتغيّر شيء الآن.',
         note: 'مصفوفة عرض فقط — دون تفعيل حقيقي.', granted: 'مسموح', notGranted: 'غير مسموح',
-        g: { dashboard: 'لوحة التحكم', requests: 'الطلبات الجديدة', families: 'العائلات', students: 'الطلاب', teachers: 'المعلمون', reports: 'التقارير', finance: 'المالية', content: 'المحتوى', certs: 'الشهادات', settings: 'الإعدادات' },
-        i: { view: 'عرض', manage: 'إدارة', create: 'إضافة', export: 'تصدير' },
+        g: { dashboard: 'لوحة التحكم', requests: 'الطلبات الجديدة', families: 'العائلات', students: 'الطلاب', teachers: 'المعلمون', reports: 'التقارير', finance: 'المالية', content: 'المحتوى', certs: 'الشهادات', settings: 'الإعدادات', parents: 'تواصل أولياء الأمور' },
+        i: { view: 'عرض', manage: 'إدارة', create: 'إضافة', export: 'تصدير', viewPhone: 'عرض هاتف وليّ الأمر', viewEmail: 'عرض بريد وليّ الأمر', exportContacts: 'تصدير جهات اتصال أولياء الأمور', approvedUse: 'استخدام التواصل لغرض معتمد', revealMasked: 'كشف قيمة التواصل المُقنّعة' },
       },
       cat: { title: 'نطاق الفئات', open: 'الفئات', assign: 'تعديل النطاق', assignReason: 'تعديل نطاق الفئات يحتاج ربط الخادم.', students: 'فئات الطلاب', studentsScope: 'المجموعة أ، المجموعة ب', teachers: 'فئات المعلمين', teachersScope: 'اللغات، العلوم' },
       activity: { title: 'سجل النشاط', open: 'النشاط', e: { course: 'دورة', student: 'طالب', login: 'تسجيل دخول', class: 'حصة' }, a: { created: 'أنشأ', updated: 'حدّث', login: 'سجّل الدخول' }, d: { today: 'اليوم', yesterday: 'أمس' } },

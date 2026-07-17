@@ -442,6 +442,20 @@ const MATRIX = [
   // the zero-«قريبًا» proof: the admin sidebar now renders all six settings items as REAL links.
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'settings', variant: 'sp040-sidebar-zero-soon' },
   { page: 'dashboard', lang: 'en', theme: 'light', vp: 'desktop', cat: 'settings', variant: 'sp040-sidebar-zero-soon-en' },
+  // Spec 043 — the 3 changed privacy surfaces (visual acceptance of the 6 localized bodies).
+  // child-view 2-gate state (no password affordance) — AR/EN, light/dark.
+  { page: 'student-profile', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp043-2gate-en' },
+  { page: 'student-profile', lang: 'ar', theme: 'dark',  vp: 'desktop', variant: 'sp043-2gate-dark' },
+  // staff RBAC preview OPEN — the 5 parent-contact deny-by-default rows (kebab-driven via staffKebabDrawer).
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', staffKebabDrawer: 'st-perm', variant: 'sp043-parents' },
+  { page: 'staff', lang: 'en', theme: 'light', vp: 'desktop', staffKebabDrawer: 'st-perm', variant: 'sp043-parents-en' },
+  { page: 'staff', lang: 'ar', theme: 'dark',  vp: 'desktop', staffKebabDrawer: 'st-perm', variant: 'sp043-parents-dark' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'mobile',  staffKebabDrawer: 'st-perm', variant: 'sp043-parents-mobile' },
+  // teacher capability/notification policy preview OPEN — direct data-drawer trigger in the overview panel.
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'trn-policy', variant: 'sp043-policy' },
+  { page: 'teacher', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'trn-policy', variant: 'sp043-policy-en' },
+  { page: 'teacher', lang: 'ar', theme: 'dark',  vp: 'desktop', openDrawer: 'trn-policy', variant: 'sp043-policy-dark' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile',  openDrawer: 'trn-policy', variant: 'sp043-policy-mobile' },
 ];
 
 (async () => {

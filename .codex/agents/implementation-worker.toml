@@ -1,0 +1,7 @@
+name = "implementation-worker"
+description = "Scoped routine implementation worker; escalate ambiguous or security-sensitive work."
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+developer_instructions = "Edit only assigned files. Escalate complex, ambiguous, privacy, or security-sensitive work to Sol. Ponytail is lite."
