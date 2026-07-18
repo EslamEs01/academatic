@@ -345,15 +345,15 @@ const MATRIX = [
   // student-profile: EN-dark completes the 2-gate matrix (ar/light, ar/dark, en/light already above).
   { page: 'student-profile', lang: 'en', theme: 'dark' },
   // staff RBAC preview OPEN (the 5 parent-contact rows) — kebab-driven, opened via the fail-loud step seq.
-  { page: 'staff', lang: 'ar', theme: 'light', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
-  { page: 'staff', lang: 'en', theme: 'light', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
-  { page: 'staff', lang: 'ar', theme: 'dark', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
-  { page: 'staff', lang: 'ar', theme: 'light', viewport: 'mobile', steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  { page: 'staff', lang: 'ar', theme: 'light', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  { page: 'staff', lang: 'en', theme: 'light', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  { page: 'staff', lang: 'ar', theme: 'dark', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  { page: 'staff', lang: 'ar', theme: 'light', viewport: 'mobile', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
   // teacher capability/notification policy preview OPEN — direct data-drawer trigger in the overview panel.
-  { page: 'teacher', lang: 'ar', theme: 'light', open: '[data-drawer="trn-policy"]' },
-  { page: 'teacher', lang: 'en', theme: 'light', open: '[data-drawer="trn-policy"]' },
-  { page: 'teacher', lang: 'ar', theme: 'dark', open: '[data-drawer="trn-policy"]' },
-  { page: 'teacher', lang: 'ar', theme: 'light', viewport: 'mobile', open: '[data-drawer="trn-policy"]' },
+  { page: 'teacher', lang: 'ar', theme: 'light', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
+  { page: 'teacher', lang: 'en', theme: 'light', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
+  { page: 'teacher', lang: 'ar', theme: 'dark', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
+  { page: 'teacher', lang: 'ar', theme: 'light', viewport: 'mobile', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
 ];
 
 // Spec 032 — mobile viewport for the new rows (the pre-032 matrix is desktop-only)
@@ -371,12 +371,20 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
     const file = s.lang === 'en' ? `${s.page}.en.html` : `${s.page}.html`;
     await p.goto(`${BASE}/${file}${s.hash || ''}`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(250);
-    if (s.open) { await p.click(s.open).catch(() => {}); await p.waitForTimeout(420); }
+    if (s.open && s.requiredDrawer) {
+      await p.waitForSelector(s.open, { timeout: 5000, state: 'visible' });
+      await p.click(s.open);
+      await p.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
+      await p.waitForTimeout(420);
+    } else if (s.open) {
+      await p.click(s.open).catch(() => {}); await p.waitForTimeout(420);
+    }
     // Spec 043 — a row may open a kebab-driven drawer via a click SEQUENCE. Each target is a REQUIRED
     // selector: waitForSelector throws if it is absent, so an open-drawer scan can never silently pass
     // on a closed page (no `.catch(() => {})` swallow here — the failure is loud, per the privacy plan).
     if (s.steps) {
       for (const sel of s.steps) { await p.waitForSelector(sel, { timeout: 5000, state: 'visible' }); await p.click(sel); await p.waitForTimeout(360); }
+      if (s.requiredDrawer) await p.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
     }
     // Spec 039 — a row may drive the tablist from the KEYBOARD (roving tabindex) before the scan,
     // so the tab reached by ArrowLeft/ArrowRight is audited in its focused, switched state.

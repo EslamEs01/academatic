@@ -1,5 +1,5 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 043 — Sensitive Data Privacy, Role Isolation & Anti-Poaching is SPECIFIED + PLANNED**
+Active feature: **Spec 043 — Sensitive Data Privacy, Role Isolation & Anti-Poaching is IMPLEMENTED**
 (Wave-0 frontend privacy foundation; plan at
 `academy-dashboard-discovery/specs/043-sensitive-data-privacy-role-isolation-anti-poaching/plan.md` + `research.md`
 + `data-model.md` + `quickstart.md` + **15 execution contracts**). Baseline HEAD `cd56aa0` (re-measured: 115 HTML

@@ -34,6 +34,18 @@
 
 - Items marked incomplete require spec updates before `/speckit.plan`. All items pass.
 
+## Implementation baseline acceptance (2026-07-17)
+
+- Accepted committed lineage: `690186e` (Codex bootstrap + Claude partial Spec-043 implementation) →
+  `3e87c162` (only three-file trailing-whitespace normalization) → `830446ba` (only the corresponding three
+  manifest-hash replacements).
+- The external host/IDE writer is outside this sandbox and not identifiable. This run invoked no Git-writing
+  operation. The accepted branch/HEAD is `feature/012-role-portal-foundation` at
+  `830446ba7a61d4616dbb29124a58730761bac95a`.
+- The tracked `implementation-status.md` is accepted as evidence-only prior work under the narrow T001
+  supersession; it does not establish any other task as complete. No application bytes changed during the two
+  hygiene corrections.
+
 ---
 
 # Adversarial Specification Review Checklist (30 points — directive-mandated)

@@ -2911,8 +2911,10 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
     const srcDir = path.join(__dirname, '../../src');
     const files = fs.readdirSync(pubDir).filter((f) => f.endsWith('.html'));
     const H = {}; for (const f of files) H[f] = fs.readFileSync(path.join(pubDir, f), 'utf8');
-    const readSrc = (rel) => { try { return fs.readFileSync(path.join(srcDir, rel), 'utf8'); } catch (e) { return ''; } };
-    const bodyOf = (h) => { const i = h.indexOf('id="page-body"'); if (i < 0) return ''; const j = h.indexOf('</main>', i); return h.slice(i, j < 0 ? h.length : j); };
+    const readSrc = (rel) => fs.readFileSync(path.join(srcDir, rel), 'utf8');
+    const bodyOf = (h) => { const i = h.indexOf('id="page-body"'); const j = h.indexOf('</main>', i); if (i < 0 || j < 0) throw new Error('Spec 043: required #page-body region is missing'); return h.slice(i, j); };
+    const renderedScope = (f) => f === 'index.html' ? H[f] : bodyOf(H[f]);
+    const elementsWith = (h, attr) => [...h.matchAll(new RegExp(`<([a-z][\\w-]*)\\b(?=[^>]*${attr})[^>]*>[\\s\\S]*?<\\/\\1>`, 'gi'))].map((m) => m[0]);
     const baseOf = (f) => f.replace(/\.en\.html$/, '').replace(/\.html$/, '');
     const PORTAL_BASES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
       'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
@@ -2989,31 +2991,41 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       for (const f of ['certificates.html', 'certificates.en.html']) if (H[f] && /value="group"|send\s*group|group\s*delivery|إرسال\s*لمجموعة|تسليم\s*جماعي/i.test(H[f])) bad.push(f);
       ok(bad.length === 0, `G12: a certificate group-delivery option is present: ${bad.join(', ')}`); }
 
-    // ---- G14: honest wording never claims a real enforced session (current-state authz claim). The staff
-    // activity-log VALUE «سجّل الدخول» / 'signed in' (past-tense audit entry, en.adm.js) is a DIFFERENT
-    // string and intentionally NOT banned — G14 targets the current-state claim, never a naive "signed in" ban.
+    // ---- G14: current auth/enforcement claims are forbidden only in structured gate/authz contexts.
+    // The historical staff activity value “signed in” is deliberately outside these selectors.
     { const FORBID = /\bauthorized\b|\bverified\b|محمي|مسجّل الدخول|\blogged in\b/i;
-      const bad = files.filter((f) => FORBID.test(H[f]));
-      ok(bad.length === 0, `G14: fake current-auth claim wording (authorized/verified/محمي/مسجّل الدخول/logged in) in: ${bad.join(', ')}`); }
+      const authzContext = (h) => [
+        ...elementsWith(h, 'data-disabled-reason|data-reason-key'),
+        ...elementsWith(h, 'data-toast|data-(?:authz|enforce)'),
+        ...elementsWith(h, 'role=["\\\'](?:status|alert)["\\\']'),
+        ...elementsWith(h, 'class=["\\\'][^"\\\']*(?:chip|status)[^"\\\']*["\\\']'),
+      ].join('\n');
+      const bad = files.filter((f) => FORBID.test(authzContext(renderedScope(f))));
+      ok(bad.length === 0, `G14: fake current-auth claim in gate/authz context (authorized/verified/محمي/مسجّل الدخول/logged in): ${bad.join(', ')}`); }
 
     // ---- Teacher capability/notification policy census (C02-04/C02-05, MUT-TP): structure-only, pay-free ----
     { for (const f of ['teacher.html', 'teacher.en.html']) if (H[f]) {
         const b = bodyOf(H[f]);
         const tmpl = (b.match(/<template[^>]*data-preview="trn-policy"[\s\S]*?<\/template>/) || [''])[0];
         ok(tmpl.length > 0, `${f}: the trn-policy policy drawer template must be baked in the body`);
-        ok(/data-drawer="trn-policy"/.test(b), `${f}: the trn-policy trigger button must exist in the body`);
-        ok((tmpl.match(/class="sheet-row"/g) || []).length >= 7, `${f}: trn-policy must render the 4 capability + 3 notification rows (>=7 sheet-rows)`);
-        ok((tmpl.match(/class="ic-title"/g) || []).length >= 2, `${f}: trn-policy must render the academic + communication subheads`);
+        ok((b.match(/data-drawer="trn-policy"/g) || []).length === 1, `${f}: trn-policy must have exactly one overview trigger`);
+        ok((tmpl.match(/class="sheet-row"/g) || []).length === 7, `${f}: trn-policy must render exactly 4 capability + 3 notification rows`);
+        ok((tmpl.match(/class="ic-title"/g) || []).length === 2, `${f}: trn-policy must render exactly academic + communication subheads`);
+        ok((tmpl.match(/data-disabled-reason/g) || []).length === 1, `${f}: trn-policy must end in exactly one honest backend gate`);
         ok(!/\bsalary\b|\bsalaries\b|راتب|رواتب|\bpayout\b|hour[ -]?rate|student[ -]?rate|teacher[ -]?rate|\bEGP\b|\bSAR\b|currency/i.test(tmpl), `${f}: trn-policy must contain 0 pay/salary/rate token`);
         ok(!/<input|type="checkbox"|role="switch"|data-toggle/i.test(tmpl), `${f}: trn-policy must contain 0 input/value slot/toggle`);
         ok(!/parent phone|guardian|هاتف|بريد ولي|\bcountry\b|locality/i.test(tmpl), `${f}: trn-policy must contain 0 guardian-contact/locality token`);
       } }
 
-    // ---- Class-(2) existing-safe freeze (C14-09 DST column absent; C15-01 no invented login UI) ----
+    // ---- Class-(2) existing-safe freeze (C14-09 DST column absent; C15-01/18 no invented identity controls) ----
     { const tc = (H['time-converter.html'] || '') + (H['time-converter.en.html'] || '');
       ok(!/Affected Accounts|الحسابات المتأثرة/i.test(tc), 'freeze (C14-09): time-converter must not add an Affected-Accounts column'); }
     { const bad = files.filter((f) => /<form[^>]*action=["'][^"']*(login|signin|sign-in)/i.test(H[f]));
       ok(bad.length === 0, `freeze (C15-01): an invented login <form action> appeared: ${bad.join(', ')}`); }
+    { const controls = (h) => [...h.matchAll(/<(?:a|button)\b[\s\S]*?<\/(?:a|button)>|<input\b[^>]*>/gi)].map((m) => m[0]).join('\n');
+      const fakeImpersonation = /\b(?:login|sign)\s+as\b|\bimpersonat(?:e|ion)\b|تسجيل\s*الدخول\s*باسم|انتحال/i;
+      const bad = files.filter((f) => fakeImpersonation.test(controls(renderedScope(f))));
+      ok(bad.length === 0, `freeze (C12-19): a fake login-as/impersonation control appeared: ${bad.join(', ')}`); }
   }
 
   if (fails.length) { console.error('SMOKE FAILED:\n - ' + fails.join('\n - ')); process.exit(1); }

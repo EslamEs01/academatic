@@ -1,11 +1,28 @@
 # Implementation Status — Spec 043 (Sensitive Data Privacy, Role Isolation & Anti-Poaching)
 
-**Branch**: `feature/012-role-portal-foundation` · **Baseline HEAD**: `e474ad8` (watcher committed the stale-comment
-correction). **Ponytail**: lite. **Executor**: root coordinator (ultracode/xhigh) + bounded agents (visual-grounding
-pre-screen, final independent guard reviews). One writer per file; `tests/smoke/run.cjs` + `teacher.js` root-owned.
-**No commit/push** — the watcher owns commits.
+**Branch**: `feature/012-role-portal-foundation` · **Accepted baseline HEAD**:
+`830446ba7a61d4616dbb29124a58730761bac95a`. **Ponytail**: lite. **Executor**: root coordinator. One writer per
+file; `tests/smoke/run.cjs` + `teacher.js` root-owned. **No commit/push** — an external host/IDE writer exists
+outside this sandbox, is not identifiable here, and is not invoked by this run.
 
 Per-task evidence (command · exit code · measured result) is recorded below as tasks complete.
+
+## T001 — accepted committed lineage and narrow status-file supersession
+
+- `feature/012-role-portal-foundation` at
+  `830446ba7a61d4616dbb29124a58730761bac95a`; `git status --porcelain` was empty and `git diff --check` passed.
+- Required ancestry is linear: `e474ad8ca70c` → `690186eef42c` →
+  `3e87c162fcca2d7be4d1fc0b16f62bd48b9bd4c3` → `830446ba7a61d4616dbb29124a58730761bac95a`.
+- `690186e` committed the Codex bootstrap and Claude partial Spec-043 implementation. `3e87c162` committed only
+  trailing-whitespace normalization in the three SpecKit skill files. `830446ba` committed only the matching
+  three-hash manifest-integrity update; all nine manifest hashes match their current files.
+- No application bytes changed during either hygiene correction. The external writer is outside the sandbox and
+  not identifiable; no Git-writing operation was invoked here.
+- The five required historical commits (`9694527`, `a185494`, `cd56aa0`, `48a344b`, `3b6a5a3`) are ancestors.
+  The original T001 premise barring a pre-existing `implementation-status.md` is narrowly superseded because that
+  tracked status file arrived in `690186e`; its prior notes remain evidence only, not task-completion evidence.
+- Baseline validation: `npm run build` exit 0 with 115 HTML and no tracked change; baseline smoke exit 0 (114
+  page loads); baseline a11y exit 0 (`critical=0 serious=0`).
 
 ---
 

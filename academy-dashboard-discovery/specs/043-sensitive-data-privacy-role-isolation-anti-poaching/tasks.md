@@ -76,11 +76,17 @@ onward) must stay byte-identical (guarded by T056).
 
 ## Phase 1 — Preflight & grounding  (BLOCKS all implementation; no app edit until every Phase-1 task is green)
 
-- [ ] **T001** [P] Resolve + record the actual branch and full HEAD (`git rev-parse --abbrev-ref HEAD` /
+- [X] **T001** [P] Resolve + record the actual branch and full HEAD (`git rev-parse --abbrev-ref HEAD` /
   `git rev-parse HEAD`) and prove a clean committed tree (`git status --porcelain` empty). Confirm the five required
   commits are present: spec suite `9694527`, dependency/ownership correction `a185494`, tally correction `cd56aa0`,
   plan `48a344b`, plan-consistency correction `3b6a5a3`. Confirm **no** `tasks.md` conflict-target/`implementation-status.md`
   pre-exists beyond this file. **Done**: branch/HEAD echoed; porcelain empty; 5 commits found.
+
+  **Narrow supersession (2026-07-17)**: `implementation-status.md` was already tracked by the accepted
+  `690186e` bootstrap/partial-implementation commit. Its pre-existing visual-grounding notes are retained as
+  evidence only; they do not mark implementation work complete. The original “no … implementation-status.md
+  pre-exists” premise is superseded solely to permit this evidence record. The accepted committed lineage and
+  clean-tree proof are recorded in `implementation-status.md` and the requirements checklist.
 - [ ] **T002** [P] Verify frozen counts from source (no build needed): PAGES = **57** (`scripts/build-html.mjs`),
   admin menu = **50** `item({…})` (`src/js/nav.config.js`), route split = **24 deep / 25 plain / 1 disabled**,
   status = **49 impl / 0 planned / 1 disabled**, `FUTURE_ROUTES` = **{}**, `classSalaryReport` = sole `disabled`
