@@ -446,15 +446,19 @@ const MATRIX = [
   // child-view 2-gate state (no password affordance) — AR/EN, light/dark.
   { page: 'student-profile', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp043-2gate-en' },
   { page: 'student-profile', lang: 'ar', theme: 'dark',  vp: 'desktop', variant: 'sp043-2gate-dark' },
+  { page: 'student-profile', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp043-2gate' },
+  { page: 'student-profile', lang: 'en', theme: 'dark',  vp: 'desktop', variant: 'sp043-2gate-en-dark' },
   // staff RBAC preview OPEN — the 5 parent-contact deny-by-default rows (kebab-driven via staffKebabDrawer).
   { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents' },
   { page: 'staff', lang: 'en', theme: 'light', vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-en' },
   { page: 'staff', lang: 'ar', theme: 'dark',  vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-dark' },
+  { page: 'staff', lang: 'en', theme: 'dark',  vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-en-dark' },
   { page: 'staff', lang: 'ar', theme: 'light', vp: 'mobile',  requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-mobile' },
   // teacher capability/notification policy preview OPEN — direct data-drawer trigger in the overview panel.
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy' },
   { page: 'teacher', lang: 'en', theme: 'light', vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-en' },
   { page: 'teacher', lang: 'ar', theme: 'dark',  vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-dark' },
+  { page: 'teacher', lang: 'en', theme: 'dark',  vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-en-dark' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile',  requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-mobile' },
 ];
 

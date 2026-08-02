@@ -348,11 +348,15 @@ const MATRIX = [
   { page: 'staff', lang: 'ar', theme: 'light', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
   { page: 'staff', lang: 'en', theme: 'light', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
   { page: 'staff', lang: 'ar', theme: 'dark', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
+  // EN dark completes the staff RBAC 2×2 (same fail-loud two-step st-perm sequence as the other staff rows).
+  { page: 'staff', lang: 'en', theme: 'dark', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
   { page: 'staff', lang: 'ar', theme: 'light', viewport: 'mobile', requiredDrawer: true, steps: ['#staff-grid [data-row-menu][data-row-menu-kind="staff"]', '.popover [data-drawer="st-perm"]'] },
   // teacher capability/notification policy preview OPEN — direct data-drawer trigger in the overview panel.
   { page: 'teacher', lang: 'ar', theme: 'light', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
   { page: 'teacher', lang: 'en', theme: 'light', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
   { page: 'teacher', lang: 'ar', theme: 'dark', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
+  // EN dark completes the teacher policy 2×2 (same direct trn-policy drawer trigger as the other teacher rows).
+  { page: 'teacher', lang: 'en', theme: 'dark', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
   { page: 'teacher', lang: 'ar', theme: 'light', viewport: 'mobile', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
 ];
 
