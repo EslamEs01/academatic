@@ -2,7 +2,7 @@
 
 # Project rules
 
-Read [CLAUDE.md](CLAUDE.md), the [active Spec 044 plan](academy-dashboard-discovery/specs/044-modal-drawer-long-form-interaction-system/plan.md), and the preserved [Spec 043 contracts](academy-dashboard-discovery/specs/043-sensitive-data-privacy-role-isolation-anti-poaching/contracts/) before acting.
+Read [CLAUDE.md](CLAUDE.md), the [active Spec 045 plan](academy-dashboard-discovery/specs/045-teacher-portal-teacher-admin/plan.md), the preserved [Spec 044 interaction plan](academy-dashboard-discovery/specs/044-modal-drawer-long-form-interaction-system/plan.md), and the preserved [Spec 043 contracts](academy-dashboard-discovery/specs/043-sensitive-data-privacy-role-isolation-anti-poaching/contracts/) before acting.
 Evidence beats inference; contradictions trigger STOP. Preserve authored and
 current-product improvements. Never commit, push, merge, stash, reset,
 checkout, clean, or auto-commit without explicit user authorization.
