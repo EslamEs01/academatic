@@ -19,7 +19,7 @@ import { avatar, chip, medallion, button } from '../components/ui.js';
 import { profileBanner } from '../components/profile-banner.js';
 import { tabs } from '../components/tabs.js';
 import { previewTemplate, sheetRow } from '../components/preview-drawer.js';
-import { ASSIGN_COURSES, ASSIGN_GROUPS, AVAILABILITY_WINDOWS } from '../fixtures/teacher-management.js';
+import { ASSIGN_COURSES, ASSIGN_GROUPS, AVAILABILITY_WINDOWS, TEACHER_CAPABILITY_POLICY } from '../fixtures/teacher-management.js';
 import { teacherStatusChip } from '../components/teacher-status.js';
 import { workloadChip, signalChip, needsFollowUp } from '../components/teacher-signals.js';
 import { teacherActions, teacherEditDrawer, teacherNoteDrawer } from '../components/teacher-actions.js';
@@ -98,7 +98,8 @@ function overviewPanel(teacher, counts) {
       <a href="${attHref()}" class="link-more">${t('trn.act.viewAttendance')} ${icon('arrow-left', 'ico ico-sm')}</a>
     </div>
   </div>`;
-  return `<div class="grid gap-4 sm:grid-cols-2">${snapshot}${absence}</div>`;
+  return `<div class="grid gap-4 sm:grid-cols-2">${snapshot}${absence}</div>
+    <div class="flex flex-wrap gap-2 mt-4">${button({ labelKey: 'trn.policy.open', variant: 'secondary', size: 'sm', icon: 'lock', attrs: 'data-drawer="trn-policy"' })}</div>`;
 }
 
 /* ---- Follow-up tab ---- */
@@ -134,6 +135,25 @@ function availabilityDrawer() {
     ${rows}
     <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="trn.availEdit.reason" aria-disabled="true" title="${esc(t('trn.availEdit.reason'))}">${icon('plus', 'ico ico-sm')}<span>${t('trn.availEdit.add')}</span></button>`;
   return previewTemplate('trn-availability', { titleKey: 'trn.availEdit.title', headIcon: 'schedule', tone: 'primary', bodyHTML: body });
+}
+/* Spec 043 — teacher capability/notification POLICY preview (C02-04/C02-05): a structure-only drawer
+ * mirroring availabilityDrawer(). Academic capabilities + non-pay notification channels, display-only
+ * (no toggle, no value slot, no enforcement/delivery claim). The legacy salary_* row is EXCLUDED
+ * (teacher pay-free); no guardian/student contact, no locality. Real capability authorization and
+ * channel delivery stay FUTURE_BACKEND. */
+function capabilityPolicyDrawer() {
+  const cap = TEACHER_CAPABILITY_POLICY.academic.map((c) => {
+    const on = c.status === 'on';
+    return sheetRow(t('trn.policy.cap.' + c.k), `<span class="perm-item">${icon(on ? 'check-circle' : 'x-circle', 'ico ico-sm')}<span>${t(on ? 'trn.policy.granted' : 'trn.policy.notGranted')}</span></span>`);
+  }).join('');
+  const comm = TEACHER_CAPABILITY_POLICY.comm.map((e) => sheetRow(t('trn.policy.ev.' + e.k), e.channels.map((ch) => t('trn.policy.ch.' + ch)).join(' · '))).join('');
+  const body = `<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('trn.policy.note')}</p>
+    <div class="ic-title" style="margin-top:4px">${icon('trainers', 'ico')}<span>${t('trn.policy.academicTitle')}</span></div>
+    ${cap}
+    <div class="ic-title" style="margin-top:12px">${icon('bell', 'ico')}<span>${t('trn.policy.commTitle')}</span></div>
+    ${comm}
+    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="trn.policy.reason" aria-disabled="true" title="${esc(t('trn.policy.reason'))}">${icon('lock', 'ico ico-sm')}<span>${t('trn.policy.edit')}</span></button>`;
+  return previewTemplate('trn-policy', { titleKey: 'trn.policy.title', headIcon: 'lock', tone: 'violet', bodyHTML: body });
 }
 
 export function renderTeacher() {
@@ -193,7 +213,8 @@ export function renderTeacher() {
   const pickers =
     pickerDrawer('trn-assign-course', { titleKey: 'trn.assignC.title', hintKey: 'trn.assignC.hint', candidates: ASSIGN_COURSES, ctaKey: 'trn.assignC.cta', reasonKey: 'trn.reason.assign', headIcon: 'curricula' })
     + pickerDrawer('trn-assign-group', { titleKey: 'trn.assignG.title', hintKey: 'trn.assignG.hint', candidates: ASSIGN_GROUPS, ctaKey: 'trn.assignG.cta', reasonKey: 'trn.reason.assign', headIcon: 'students' })
-    + availabilityDrawer();
+    + availabilityDrawer()
+    + capabilityPolicyDrawer();
 
   /* Spec 032 — form drawers for the banner Edit/Add-note triggers (baked once per page) */
   const forms = teacherEditDrawer() + teacherNoteDrawer();

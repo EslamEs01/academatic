@@ -42,6 +42,10 @@ export const PERM_GROUPS = [
   { labelKey: 'adm.staff.perm.g.content',    items: [{ k: 'view', granted: true }, { k: 'manage', granted: true }] },
   { labelKey: 'adm.staff.perm.g.certs',      items: [{ k: 'view', granted: true }, { k: 'create', granted: true }] },
   { labelKey: 'adm.staff.perm.g.settings',   items: [{ k: 'view', granted: true }, { k: 'manage', granted: false }] },
+  // Spec 043 — parent-contact permissions (C12-13/C12-01): the 5 guardian-contact grants, ALL deny-by-default,
+  // teacher-unreachable (rendered ONLY by permDrawer on staff.html; no teacher surface imports PERM_GROUPS).
+  // Structure-only preview — no value slot, no toggle; real field-level authorization is FUTURE_BACKEND.
+  { labelKey: 'adm.staff.perm.g.parents',    items: [{ k: 'viewPhone', granted: false }, { k: 'viewEmail', granted: false }, { k: 'exportContacts', granted: false }, { k: 'approvedUse', granted: false }, { k: 'revealMasked', granted: false }] },
 ];
 
 /* category-scope (student/teacher visibility) — read-only drawer content. */

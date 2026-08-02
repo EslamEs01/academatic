@@ -63,6 +63,18 @@ export default {
     /* availability-window editor (Timetable tab) — day/time only, no recurrence */
     availEdit: { open: 'Availability', title: 'Teacher availability', hint: 'Weekly availability windows — saved once the server is connected.', add: 'Add window', reason: 'Editing availability requires the backend (out of current scope).' },
 
+    /* Spec 043 — capability/notification POLICY preview (structure-only; salary_* excluded; pay-free) */
+    policy: {
+      open: 'Capability policy', title: 'Capability & notification policy', edit: 'Edit policy',
+      reason: 'Editing capabilities and notifications requires the backend (out of current scope).',
+      note: 'Display-only policy preview — capabilities and notification delivery are enforced once the server is connected.',
+      academicTitle: 'Academic capabilities', commTitle: 'Communication & notifications',
+      granted: 'Allowed', notGranted: 'Not allowed',
+      cap: { chat: 'Chat with families', library: 'See the library', editSchedule: 'Edit the schedule', editClass: 'Edit a class' },
+      ev: { coursesUpdate: 'Course updates', classReminders: 'Class reminders', classUpdates: 'Class updates' },
+      ch: { whatsapp: 'WhatsApp', email: 'E-mail' },
+    },
+
     /* Spec 032 — teacher form drawers (trn-edit / trn-add / trn-note / category create).
      * INERT demo fields; every Save is a backendRequired gate. The excluded legacy
      * fieldset (see must-omit contract) is omitted; upload stays a gate. */

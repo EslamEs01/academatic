@@ -1,7 +1,8 @@
 /* Spec 019 — STUDENT PROFILE (st1). Compact: identity card, academic rows, a safe
- * guardian line, preference chips, and EXACTLY three backendRequired gates (photo
- * upload · profile save · password change — the legacy profile-edit page's exact write
- * surface). Display-only: zero forms, zero inputs, zero fake save; zero body anchors. */
+ * guardian line, preference chips, and EXACTLY two backendRequired gates (photo
+ * upload · profile save — the legacy profile-edit page's write surface). Display-only:
+ * zero forms, zero inputs, zero fake save; zero body anchors. (Spec 043 — the child-view
+ * account/login gate is removed: a child is not an account holder.) */
 import { t } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';

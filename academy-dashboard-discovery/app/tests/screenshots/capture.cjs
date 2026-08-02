@@ -442,6 +442,24 @@ const MATRIX = [
   // the zero-«قريبًا» proof: the admin sidebar now renders all six settings items as REAL links.
   { page: 'dashboard', lang: 'ar', theme: 'light', vp: 'desktop', cat: 'settings', variant: 'sp040-sidebar-zero-soon' },
   { page: 'dashboard', lang: 'en', theme: 'light', vp: 'desktop', cat: 'settings', variant: 'sp040-sidebar-zero-soon-en' },
+  // Spec 043 — the 3 changed privacy surfaces (visual acceptance of the 6 localized bodies).
+  // child-view 2-gate state (no password affordance) — AR/EN, light/dark.
+  { page: 'student-profile', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp043-2gate-en' },
+  { page: 'student-profile', lang: 'ar', theme: 'dark',  vp: 'desktop', variant: 'sp043-2gate-dark' },
+  { page: 'student-profile', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp043-2gate' },
+  { page: 'student-profile', lang: 'en', theme: 'dark',  vp: 'desktop', variant: 'sp043-2gate-en-dark' },
+  // staff RBAC preview OPEN — the 5 parent-contact deny-by-default rows (kebab-driven via staffKebabDrawer).
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents' },
+  { page: 'staff', lang: 'en', theme: 'light', vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-en' },
+  { page: 'staff', lang: 'ar', theme: 'dark',  vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-dark' },
+  { page: 'staff', lang: 'en', theme: 'dark',  vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-en-dark' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'mobile',  requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp043-parents-mobile' },
+  // teacher capability/notification policy preview OPEN — direct data-drawer trigger in the overview panel.
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy' },
+  { page: 'teacher', lang: 'en', theme: 'light', vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-en' },
+  { page: 'teacher', lang: 'ar', theme: 'dark',  vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-dark' },
+  { page: 'teacher', lang: 'en', theme: 'dark',  vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-en-dark' },
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile',  requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-mobile' },
 ];
 
 (async () => {
@@ -501,7 +519,15 @@ const MATRIX = [
     // Spec 027 — deep-management surfaces (view/hash flags above position the trigger's tab first)
     if (s.studentKebab) { await page.click('#students-table [data-row-menu][data-row-menu-kind="student"]').catch(() => {}); await page.waitForTimeout(320); }
     if (s.teacherKebab) { await page.click('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]').catch(() => {}); await page.waitForTimeout(320); }
-    if (s.openDrawer) { await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440); }
+    if (s.openDrawer && s.requiredDrawer) {
+      const selector = `[data-drawer="${s.openDrawer}"]`;
+      await page.waitForSelector(selector, { timeout: 5000, state: 'visible' });
+      await page.click(selector);
+      await page.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
+      await page.waitForTimeout(440);
+    } else if (s.openDrawer) {
+      await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440);
+    }
     // Spec 035 — schedule-search: drive a no-match filter combo to capture the empty state
     if (s.ssEmpty) {
       await page.selectOption('select[data-filter="availability"]', 'booked').catch(() => {});
@@ -510,7 +536,15 @@ const MATRIX = [
     }
     // Spec 032 — staff kebab → form drawer; the fb-add form nested in the open outcome sheet;
     // the add-family wizard native child-disclosure
-    if (s.staffKebabDrawer) {
+    if (s.staffKebabDrawer && s.requiredDrawer) {
+      await page.waitForSelector('#staff-grid [data-row-menu][data-row-menu-kind="staff"]', { timeout: 5000, state: 'visible' });
+      await page.click('#staff-grid [data-row-menu][data-row-menu-kind="staff"]'); await page.waitForTimeout(280);
+      const selector = `.popover [data-drawer="${s.staffKebabDrawer}"]`;
+      await page.waitForSelector(selector, { timeout: 5000, state: 'visible' });
+      await page.click(selector);
+      await page.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
+      await page.waitForTimeout(440);
+    } else if (s.staffKebabDrawer) {
       await page.click('#staff-grid [data-row-menu][data-row-menu-kind="staff"]').catch(() => {}); await page.waitForTimeout(280);
       await page.click(`.popover [data-drawer="${s.staffKebabDrawer}"]`).catch(() => {}); await page.waitForTimeout(440);
     }

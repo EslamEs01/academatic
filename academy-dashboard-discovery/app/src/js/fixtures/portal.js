@@ -320,7 +320,6 @@ export const STUDENT_PAGES = {
     gates: [
       { id: 'photoUpload', icon: 'materials', titleKey: 'prt.stu.pg.prof.gPhoto.t', descKey: 'prt.stu.pg.prof.gPhoto.d', availability: 'backendRequired' },
       { id: 'profileSave', icon: 'user', titleKey: 'prt.stu.pg.prof.gSave.t', descKey: 'prt.stu.pg.prof.gSave.d', availability: 'backendRequired' },
-      { id: 'passwordChange', icon: 'help', titleKey: 'prt.stu.pg.prof.gPass.t', descKey: 'prt.stu.pg.prof.gPass.d', availability: 'backendRequired' },
     ],
   },
 };

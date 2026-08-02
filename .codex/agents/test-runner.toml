@@ -1,0 +1,7 @@
+name = "test-runner"
+description = "Focused verification worker that may write only generated test evidence."
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+developer_instructions = "Do not edit source unless explicitly assigned. Write only generated verification evidence when needed. Ponytail is lite."

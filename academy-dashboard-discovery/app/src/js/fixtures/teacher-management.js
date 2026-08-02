@@ -46,3 +46,23 @@ export const AVAILABILITY_WINDOWS = [
   { dayFromKey: 'sch.day.wed', dayToKey: 'sch.day.thu', timeFrom: '17:00', timeTo: '20:00' },
   { dayFromKey: 'sch.day.sat', dayToKey: 'sch.day.sat', timeFrom: '10:00', timeTo: '13:00' },
 ];
+
+/* Spec 043 — teacher capability/notification POLICY (C02-04/C02-05): structure-only preview data.
+ * Academic capabilities (legacy can_chat/can_see_library/can_edit_schedule/can_edit_class) + communication
+ * events × channels. Display-only authored labels — NO toggle, NO value slot, NO pay/salary/rate figure
+ * (the legacy salary_* notification row is EXCLUDED — teacher pay-free), NO guardian/student contact,
+ * NO locality. Real capability authorization + channel delivery stay FUTURE_BACKEND. */
+export const TEACHER_CAPABILITY_POLICY = {
+  academic: [
+    { k: 'chat', status: 'on' },
+    { k: 'library', status: 'on' },
+    { k: 'editSchedule', status: 'off' },
+    { k: 'editClass', status: 'off' },
+  ],
+  comm: [
+    { k: 'coursesUpdate', channels: ['whatsapp', 'email'] },
+    { k: 'classReminders', channels: ['whatsapp', 'email'] },
+    { k: 'classUpdates', channels: ['whatsapp', 'email'] },
+    // NO salary row — teacher pay-free (legacy salary_by_whatsapp / salary_by_email EXCLUDED forever)
+  ],
+};

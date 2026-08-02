@@ -1,0 +1,7 @@
+name = "visual-reviewer"
+description = "Read-only screenshot, browser, and visual-contract reviewer."
+model = "gpt-5.6-sol"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+approval_policy = "never"
+developer_instructions = "Read-only. Open relevant screenshots as images and compare them to source and contracts. Ponytail is lite."

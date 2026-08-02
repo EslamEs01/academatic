@@ -1968,7 +1968,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           ok(prt.formControls === 0, `${page}/${lang}: student internal page must contain zero form controls, got ${prt.formControls}`);
           const cards = await p.$$eval('#page-body .pt-card', (els) => els.length);
           ok(cards >= 3, `${page}/${lang}: expected a real content floor (≥3 cards), got ${cards}`);
-          if (page === 'student-profile') ok(prt.plannedBackend === 3, `${page}/${lang}: the profile must show exactly 3 backendRequired gates (photo/save/password), got ${prt.plannedBackend}`);
+          if (page === 'student-profile') ok(prt.plannedBackend === 2, `${page}/${lang}: the profile must show exactly 2 backendRequired gates (photo/save), got ${prt.plannedBackend}`);
         }
         // Spec 024 B-01 — child-view surfaces must never carry pre-021 Student-primary framing
         // (the demoted child-view is «عرض الابن», owned by the family; F-00-1 correction).
@@ -2079,7 +2079,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         }
         if (lang === 'ar') ok(prt.gaugeAscii === 0, `${page}/ar: ${prt.gaugeAscii} portal counter(s) show ASCII digits — must be Arabic-Indic on Arabic pages`);
         const expPlanned = { 'student-portal': 2, 'family-portal': 2, 'teacher-portal': 1, portals: 0, 'family-child': 0,
-          'student-schedule': 0, 'student-homework': 1, 'student-materials': 1, 'student-progress': 0, 'student-history': 0, 'student-profile': 3,
+          'student-schedule': 0, 'student-homework': 1, 'student-materials': 1, 'student-progress': 0, 'student-history': 0, 'student-profile': 2,
           'family-children': 0, 'family-schedule': 0, 'family-progress': 0, 'family-billing': 1, 'family-requests': 1, 'family-materials': 1, 'family-profile': 3,
           'teacher-schedule': 0, 'teacher-students': 0, 'teacher-outcomes': 1, 'teacher-tasks': 0, 'teacher-reports': 0, 'teacher-profile': 3, 'teacher-library': 0 }[page];
         ok(prt.plannedCount === expPlanned, `${page}/${lang}: expected ${expPlanned} planned cards, got ${prt.plannedCount}`);
@@ -2896,6 +2896,136 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
     for (const b of PAGES) {
       ok(pub.includes(`${b}.html`) && pub.includes(`${b}.en.html`), `route freeze: ${b} is missing a language mirror`);
     }
+  }
+
+  // ============================================================================================
+  // ===== Spec 043 — Sensitive Data Privacy, Role Isolation & Anti-Poaching: G1–G14 + freeze =====
+  // Additive privacy guards (G5 = the declared 2-line child-view supersession above; G9/G10 are the
+  // existing per-page external-host + g32 credential censuses, unchanged). Each census reads the BUILT
+  // public/*.html (+ src where noted) and accumulates into fails[] via ok(); body-scoped censuses read
+  // the #page-body region so the shared shell/sidebar is excluded. Every guarantee ships a paired
+  // falsifying mutation (contracts/mutation-protocol-plan.md). A required target FAILS loudly.
+  // ============================================================================================
+  {
+    const pubDir = path.join(__dirname, '../../public');
+    const srcDir = path.join(__dirname, '../../src');
+    const files = fs.readdirSync(pubDir).filter((f) => f.endsWith('.html'));
+    const H = {}; for (const f of files) H[f] = fs.readFileSync(path.join(pubDir, f), 'utf8');
+    const readSrc = (rel) => fs.readFileSync(path.join(srcDir, rel), 'utf8');
+    const bodyOf = (h) => { const i = h.indexOf('id="page-body"'); const j = h.indexOf('</main>', i); if (i < 0 || j < 0) throw new Error('Spec 043: required #page-body region is missing'); return h.slice(i, j); };
+    const renderedScope = (f) => f === 'index.html' ? H[f] : bodyOf(H[f]);
+    const elementsWith = (h, attr) => [...h.matchAll(new RegExp(`<([a-z][\\w-]*)\\b(?=[^>]*${attr})[^>]*>[\\s\\S]*?<\\/\\1>`, 'gi'))].map((m) => m[0]);
+    const baseOf = (f) => f.replace(/\.en\.html$/, '').replace(/\.html$/, '');
+    const PORTAL_BASES = new Set(['portals', 'student-portal', 'family-portal', 'teacher-portal', 'family-child',
+      'student-schedule', 'student-homework', 'student-materials', 'student-progress', 'student-history', 'student-profile',
+      'family-children', 'family-schedule', 'family-progress', 'family-billing', 'family-requests', 'family-materials', 'family-profile',
+      'teacher-schedule', 'teacher-students', 'teacher-outcomes', 'teacher-tasks', 'teacher-reports', 'teacher-profile', 'teacher-library']);
+    const ADMIN_BASES = new Set(PAGES.filter((b) => !PORTAL_BASES.has(b)));
+    const isPortal = (f) => PORTAL_BASES.has(baseOf(f));
+    const isTeacherBody = (f) => { const b = baseOf(f); return b === 'teacher' || (b.startsWith('teacher-') && PORTAL_BASES.has(b)); };
+    const isFamilyBody = (f) => { const b = baseOf(f); return b === 'family-portal' || (b.startsWith('family-') && PORTAL_BASES.has(b)); };
+
+    // ---- G7/G8 (strengthening): sitewide real-PII + live WhatsApp-invite census (broadens smoke:1287) ----
+    const PII_RE = /01015264856|أحمد محمد|chat\.whatsapp\.com|201508604112|afaaqonline1|01154859653|441200480244|201278910727|eslammekky|ui-avatars|abod11|msadeqx9|aboda155502|alaashapan1996/;
+    { const hit = files.filter((f) => PII_RE.test(H[f]));
+      ok(hit.length === 0, `G7/G8: real crawl PII / live WhatsApp invite token in built page(s): ${hit.join(', ')}`); }
+
+    // ---- G10 (additive, strengthening): no raw PAN / card number (13–19 consecutive digits, or 4-4-4-4
+    // format) sitewide. The existing per-page g32 census (smoke:1406-1412, pw/file/canvas===0, byte-verbatim
+    // and unrelaxed) stays the primary credential guard; this is an additive card-number census. ----
+    { const bad = files.filter((f) => /\b\d{13,19}\b|\b\d{4}[ -]\d{4}[ -]\d{4}[ -]\d{4}\b/.test(H[f]));
+      ok(bad.length === 0, `G10: a raw PAN / card-number pattern appears in built page(s): ${bad.join(', ')}`); }
+
+    // ---- G1: teacher bodies carry no guardian/student contact VALUE (the teacher's own e-mail excluded) ----
+    const OWN_TEACHER_EMAILS = new Set(['sara@academy.example', 'name@example.com']);
+    { const bad = [];
+      for (const f of files) if (isTeacherBody(f)) {
+        const b = bodyOf(H[f]);
+        const phones = (b.match(/\b\d{9,}\b/g) || []);
+        const emails = (b.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g) || []).filter((e) => !OWN_TEACHER_EMAILS.has(e));
+        const guardian = /parent phone|parent e-?mail|guardian phone|guardian e-?mail|هاتف\s*ولي|بريد\s*ولي/i.test(b);
+        if (phones.length || emails.length || guardian) bad.push(`${f}(phone:${phones.length},email:${emails.length},guardian:${guardian})`);
+      }
+      ok(bad.length === 0, `G1: a teacher body contains guardian/student contact value: ${bad.join(', ')}`); }
+
+    // ---- G2: teacher fixtures carry no phone/e-mail/address/country/locality, no Left/Acquired ----
+    { const src = readSrc('js/fixtures/teachers.js') + readSrc('js/fixtures/teacher-management.js');
+      const contactField = /\b(phone|email|address|country|locality|city)\s*:/i.test(src);
+      const leftAcq = /left\s*students|acquired\s*students/i.test(src);
+      ok(!contactField && !leftAcq, `G2: teacher fixture carries a contact/locality/Left-Acquired field (contact:${contactField}, leftAcq:${leftAcq})`); }
+
+    // ---- G3: teacher-unreachable — no teacher-facing file references the parent-contact keys; not on any teacher body ----
+    { const teacherSrc = readSrc('js/pages/teacher.js') + readSrc('js/pages/teacher-profile.js') + readSrc('js/fixtures/teacher-management.js') + readSrc('js/fixtures/teachers.js');
+      const srcLeak = /adm\.staff\.perm\.g\.parents|adm\.staff\.perm\.i\.(viewPhone|viewEmail|exportContacts|approvedUse|revealMasked)|\bPERM_GROUPS\b/.test(teacherSrc);
+      const bodyLeak = files.filter((f) => isTeacherBody(f) && /تواصل أولياء الأمور|Parent contacts|عرض هاتف وليّ الأمر|View guardian phone/.test(bodyOf(H[f])));
+      ok(!srcLeak && bodyLeak.length === 0, `G3: parent-contact registry reachable by a teacher surface (srcLeak:${srcLeak}, body:${bodyLeak.join(',')})`); }
+
+    // ---- G11: parent-contact rows deny-by-default (exactly 5, all granted:false) ----
+    { const src = readSrc('js/fixtures/staff-management.js');
+      const grp = (src.match(/adm\.staff\.perm\.g\.parents[\s\S]*?\]\s*\}/) || [''])[0];
+      const flags = [...grp.matchAll(/granted:\s*(true|false)/g)].map((m) => m[1]);
+      ok(flags.length === 5 && flags.every((v) => v === 'false'), `G11: parent-contact group must be exactly 5 deny-by-default rows, got ${flags.length} [${flags.join(',')}]`); }
+
+    // ---- G4: family portal bodies carry only the active authored family (no non-fam1 guardian) ----
+    { const OTHER_GUARDIANS = ['أم جوري', 'أم سارة', 'أم لمى', 'أبو خالد', 'أبو عبدالرحمن', 'أبو فيصل', 'أبو ياسر'];
+      const bad = [];
+      for (const f of files) if (isFamilyBody(f)) { const b = bodyOf(H[f]);
+        for (const g of OTHER_GUARDIANS) if (b.includes(g)) bad.push(`${f}:${g}`); }
+      ok(bad.length === 0, `G4: a family portal body shows a non-fam1 guardian identity: ${bad.join(', ')}`); }
+
+    // ---- G6: portal bodies contain no admin-base link (sanctioned exception: portals.html -> dashboard.html) ----
+    { const bad = [];
+      for (const f of files) if (isPortal(f)) { const b = bodyOf(H[f]);
+        const hrefs = [...b.matchAll(/href="([a-z][a-z0-9-]*)\.html/g)].map((m) => m[1]);
+        for (const h of hrefs) { if (!ADMIN_BASES.has(h)) continue; if (baseOf(f) === 'portals' && h === 'dashboard') continue; bad.push(`${f}->${h}`); } }
+      ok(bad.length === 0, `G6: a portal body links to an admin base: ${bad.join(', ')}`); }
+
+    // ---- G13: no minor-identifying query param in any built href (#view=/#child= hashes allowed) ----
+    { const bad = [];
+      for (const f of files) { const hrefs = [...H[f].matchAll(/href="([^"]*\?[^"]*)"/g)].map((m) => m[1]);
+        for (const h of hrefs) if (/student_name=|student_id=|child_name=|child_id=|[?&](student|child)=/i.test(h)) bad.push(`${f}:${h}`); }
+      ok(bad.length === 0, `G13: minor-identifying query param in href: ${bad.join(', ')}`); }
+
+    // ---- G12: no certificate group-delivery option / recipient picker implying real delivery ----
+    { const bad = [];
+      for (const f of ['certificates.html', 'certificates.en.html']) if (H[f] && /value="group"|send\s*group|group\s*delivery|إرسال\s*لمجموعة|تسليم\s*جماعي/i.test(H[f])) bad.push(f);
+      ok(bad.length === 0, `G12: a certificate group-delivery option is present: ${bad.join(', ')}`); }
+
+    // ---- G14: current auth/enforcement claims are forbidden only in structured gate/authz contexts.
+    // The historical staff activity value “signed in” is deliberately outside these selectors.
+    { const FORBID = /\bauthorized\b|\bverified\b|محمي|مسجّل الدخول|\blogged in\b/i;
+      const authzContext = (h) => [
+        ...elementsWith(h, 'data-disabled-reason|data-reason-key'),
+        ...elementsWith(h, 'data-toast|data-(?:authz|enforce)'),
+        ...elementsWith(h, 'role=["\\\'](?:status|alert)["\\\']'),
+        ...elementsWith(h, 'class=["\\\'][^"\\\']*(?:chip|status)[^"\\\']*["\\\']'),
+      ].join('\n');
+      const bad = files.filter((f) => FORBID.test(authzContext(renderedScope(f))));
+      ok(bad.length === 0, `G14: fake current-auth claim in gate/authz context (authorized/verified/محمي/مسجّل الدخول/logged in): ${bad.join(', ')}`); }
+
+    // ---- Teacher capability/notification policy census (C02-04/C02-05, MUT-TP): structure-only, pay-free ----
+    { for (const f of ['teacher.html', 'teacher.en.html']) if (H[f]) {
+        const b = bodyOf(H[f]);
+        const tmpl = (b.match(/<template[^>]*data-preview="trn-policy"[\s\S]*?<\/template>/) || [''])[0];
+        ok(tmpl.length > 0, `${f}: the trn-policy policy drawer template must be baked in the body`);
+        ok((b.match(/data-drawer="trn-policy"/g) || []).length === 1, `${f}: trn-policy must have exactly one overview trigger`);
+        ok((tmpl.match(/class="sheet-row"/g) || []).length === 7, `${f}: trn-policy must render exactly 4 capability + 3 notification rows`);
+        ok((tmpl.match(/class="ic-title"/g) || []).length === 2, `${f}: trn-policy must render exactly academic + communication subheads`);
+        ok((tmpl.match(/data-disabled-reason/g) || []).length === 1, `${f}: trn-policy must end in exactly one honest backend gate`);
+        ok(!/\bsalary\b|\bsalaries\b|راتب|رواتب|\bpayout\b|hour[ -]?rate|student[ -]?rate|teacher[ -]?rate|\bEGP\b|\bSAR\b|currency/i.test(tmpl), `${f}: trn-policy must contain 0 pay/salary/rate token`);
+        ok(!/<input|type="checkbox"|role="switch"|data-toggle/i.test(tmpl), `${f}: trn-policy must contain 0 input/value slot/toggle`);
+        ok(!/parent phone|guardian|هاتف|بريد ولي|\bcountry\b|locality/i.test(tmpl), `${f}: trn-policy must contain 0 guardian-contact/locality token`);
+      } }
+
+    // ---- Class-(2) existing-safe freeze (C14-09 DST column absent; C15-01/18 no invented identity controls) ----
+    { const tc = (H['time-converter.html'] || '') + (H['time-converter.en.html'] || '');
+      ok(!/Affected Accounts|الحسابات المتأثرة/i.test(tc), 'freeze (C14-09): time-converter must not add an Affected-Accounts column'); }
+    { const bad = files.filter((f) => /<form[^>]*action=["'][^"']*(login|signin|sign-in)/i.test(H[f]));
+      ok(bad.length === 0, `freeze (C15-01): an invented login <form action> appeared: ${bad.join(', ')}`); }
+    { const controls = (h) => [...h.matchAll(/<(?:a|button)\b[\s\S]*?<\/(?:a|button)>|<input\b[^>]*>/gi)].map((m) => m[0]).join('\n');
+      const fakeImpersonation = /\b(?:login|sign)\s+as\b|\bimpersonat(?:e|ion)\b|تسجيل\s*الدخول\s*باسم|انتحال/i;
+      const bad = files.filter((f) => fakeImpersonation.test(controls(renderedScope(f))));
+      ok(bad.length === 0, `freeze (C12-19): a fake login-as/impersonation control appeared: ${bad.join(', ')}`); }
   }
 
   if (fails.length) { console.error('SMOKE FAILED:\n - ' + fails.join('\n - ')); process.exit(1); }

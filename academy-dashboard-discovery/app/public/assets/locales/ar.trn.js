@@ -74,6 +74,18 @@ export default {
     /* availability-window editor (Timetable tab) — day/time only, no recurrence */
     availEdit: { open: 'أوقات التوفّر', title: 'أوقات توفّر المعلّم', hint: 'أوقات التوفّر الأسبوعية — يتم الحفظ بعد ربط الخادم.', add: 'إضافة وقت', reason: 'تعديل أوقات التوفّر يتطلب ربط الخادم (خارج النطاق الحالي).' },
 
+    /* Spec 043 — capability/notification POLICY preview (structure-only; salary_* excluded; pay-free) */
+    policy: {
+      open: 'سياسة القدرات', title: 'سياسة القدرات والإشعارات', edit: 'تعديل السياسة',
+      reason: 'تعديل القدرات والإشعارات يتطلب ربط الخادم (خارج النطاق الحالي).',
+      note: 'معاينة عرض فقط — تُفعَّل القدرات ويُفعَّل تسليم الإشعارات بعد ربط الخادم.',
+      academicTitle: 'القدرات الأكاديمية', commTitle: 'التواصل والإشعارات',
+      granted: 'مسموح', notGranted: 'غير مسموح',
+      cap: { chat: 'محادثة العائلات', library: 'الاطّلاع على المكتبة', editSchedule: 'تعديل الجدول', editClass: 'تعديل حصة' },
+      ev: { coursesUpdate: 'تحديثات الدورات', classReminders: 'تذكيرات الحصص', classUpdates: 'تحديثات الحصص' },
+      ch: { whatsapp: 'واتساب', email: 'البريد الإلكتروني' },
+    },
+
     /* Spec 032 — teacher form drawers (trn-edit / trn-add / trn-note / category create).
      * INERT demo fields; every Save is a backendRequired gate. The excluded legacy
      * fieldset (see must-omit contract) is omitted; upload stays a gate. */

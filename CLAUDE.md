@@ -1,5 +1,69 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 041 — Full Frontend Route & Sidebar Production Freeze is IMPLEMENTED** (awaiting the watcher
+Active feature: **Spec 043 — Sensitive Data Privacy, Role Isolation & Anti-Poaching is IMPLEMENTED**
+(Wave-0 frontend privacy foundation; plan at
+`academy-dashboard-discovery/specs/043-sensitive-data-privacy-role-isolation-anti-poaching/plan.md` + `research.md`
++ `data-model.md` + `quickstart.md` + **15 execution contracts**). Baseline HEAD `cd56aa0` (re-measured: 115 HTML
+· 57 PAGES · menu 50 · 24/25/1 · 49/0/1 · `FUTURE_ROUTES {}` · sole lock `classSalaryReport` · gallery pair);
+build byte-identical · smoke PASS · a11y 0/0. **17 owned rows, ownership tally 2/12/3** (2 direct impl · 12
+already-safe+guard · 3 registry+backend-gated; C12-01 shares the parent-contact surface with C12-13 but stays
+Class-3). **Spec 043's OWN implement phase (Wave 0) delivers 5 outcomes BEFORE any dependent Gate 3**: (A)
+child-view password-gate removal — delete 1 fixture line `portal.js:323`, student-profile only (family/teacher
+gates untouched); declared smoke supersession `:1971`/`:2082` (3→2) + MUT-3; (B) parent-contact deny-by-default
+registry — 1 new `PERM_GROUPS` group of 5 rows on the existing staff RBAC host (`staff.js` 0-diff) + `adm.staff.perm.*`
+keys + MUT-2/MUT-6; (C) teacher capability/notification structure-only policy preview — `capabilityPolicyDrawer('trn-policy')`
+on `teacher.js` mirroring `availabilityDrawer` + `TEACHER_CAPABILITY_POLICY` + `trn.policy.*`, `salary_*` EXCLUDED,
++ MUT-TP; (D) global privacy guards **G1–G14** in smoke (additive + the one G5 supersession + G7/G8 strengthening);
+(E) existing-safe executable freeze (the 12 Class-2 rows). **Impact: exactly 6 changed bodies** (staff·teacher·
+student-profile ×AR/EN); 0 new page/route/nav-item/dependency/component/hook/storage-key; `i18n.js`/`nav.config.js`/
+`enhance.js`/`sidebar.js`/`build-html.mjs`/`package.json` 0-diff. Downstream 044 = host quality only; 047 PRESERVES
+the child-view correction; 048 PRESERVES the registry; 045–056 preserve/add page-local only. Real auth/RBAC/
+sessions/secrets = FUTURE_BACKEND (never faked). No plan-phase app/test/public/package change; watcher commits.
+Next: `/speckit.tasks`.
+History: **Spec 042 — Exhaustive Legacy Capability & Page Reconciliation is IMPLEMENTED
+(documentation/orchestration layer) — SPECIFIED + PLANNED + TASKED + IMPLEMENTED, all four adversarial reviews
+PASS (20/20 · 15/15 · 10/10 · 17/17)** (documentation-only; **ZERO app bytes change** — proven per-phase:
+`git diff de8d552..HEAD -- app` EMPTY; awaiting the watcher commit of the implementation artifacts).
+**Implementation** = `tasks.md` executed **54/54** (T001–T054: 50 read-only verifications with reproduced
+command evidence + 4 documentation writes), recorded in `implementation-status.md` (per-task evidence; the
+notable probe-artifact investigations — C14-28 cell-vs-row parse, index orphan exclusion per `smoke:2752`,
+`data-type="file"` facet collision — all resolved IN FAVOR of the canonical artifacts; **0 contradictions, 0
+STOPs**) and `final-handoff-verification-register.md` (one section per Spec 043–057: scope · rows · inputs ·
+G1/G2/G3 gates · required proof · stop conditions; totals = 227). 227-row exactly-once ownership join verified
+(ledger × register: 0 missing, 0 double). Partition set-equality re-proven list-for-list on both documents
+(11/12/12/8/7/7 + index→050 = 57+1 disk bases exact). **Specify** (adversarial checklist **20/20 PASS**): 15 cluster audits + 15 evidence-path registers ·
+**380-row** `legacy-current-capability-ledger.md` (reconciles EXACTLY with the audit tables; closed 12-word
+disposition set) · **227 gaps, each with exactly ONE owner** (`future-spec-allocation-register.md`: 043:17 ·
+044:24 · 045–050:41 · 051:2 · **052:0 — greenfield charter, NOT cancelled** · 053:17 · 054:5 · 055:33 · 056:82 ·
+057:6) · **52** rejected + **47** unknown registers · **63** preservation findings · the binding 57-base partition
+**045:11 teacher / 046:12 family / 047:12 child-view+sessions / 048:8 back-office+scheduling / 049:7
+reports+courses+content / 050:7+index** (`page-review-ownership-map.md` §2 is canonical; the visual-audit §10
+partition is a superseded draft — precedence rule plan.md D2). Verified corpus: 339 legacy pages (300/26/13) ·
+**1,113 crawler screenshots on disk** (the oft-quoted 1,162 = the reference-imports mirror, +49
+frontend-planning-deep frames) · 1,723 raw records · 26 lifecycles (all with ≥1 broken leg) · 48 legacy forms
+(26 PARTIAL + 13 MISSING + 9 field-less gates) · 30 pre-existing `f-fbAdd-*` duplicate ids → **owner 044**.
+**Plan** (`plan.md` D1–D14 · `research.md` R1–R8 · `data-model.md` 17 doc-domain entities · `quickstart.md`
+5 worked examples · **15 `contracts/`**; plan adversarial review **15/15 PASS** — the round-1 catch: fix-first
+item 5 owner corrected 049→048 per the binding partition; **dependency-gate CORRECTION PASS applied**: the
+original "contracts ratified = merge-ready" rule was rejected as unsafe and replaced by the **THREE-GATE model**
+— Gate 1 specify/plan on RATIFIED contracts (diagnosis ungated) · Gate 2 isolated-branch implementation on
+FROZEN interfaces + single-writer boundaries · Gate 3 merge/completion ONLY when the applicable foundation
+IMPLEMENTATION + tests are GREEN (a ratified privacy rule ≠ an obeying page; a frozen modal API ≠ an existing
+shared component; a 053 provider contract ≠ an operational 054 room — join surfaces claim nothing without a
+real propagated room/link); non-applicability needs explicit proof; no local duplication of pending 044
+components; 043 backend enforcement stays FUTURE_BACKEND but rendered surfaces obey the visibility law NOW):
+**wave graph** 043∥044 foundations → 045–050 parallel page groups → 051/052/053/054 → 055 propagation (verifies
+real legs, not contracts) → 056 final field census (page groups DELIVER page-local field sets; 056 AUDITS them)
+→ 057 freeze (all merge gates satisfied); acyclic by wave numbering. **Rulings**: HONEST_LOCK 5 ledger rows =
+ONE physical `classSalaryReport` lock; 57 bilingual bases + `index.html` = 58 REVIEW UNITS (never "58 bases");
+REJECTED_* = negative requirements, never backlog; INTENTIONALLY_IMPROVED + B-register = preservation law
+(regression = review failure); UNKNOWN_EVIDENCE resolves only by NEW evidence; FUTURE_BACKEND = honest gates,
+never fakes. **Execution routing** (045–050): Codex Sol High (visual direction/IA/complex layout/critique) +
+Sol Medium (mechanical/locale/tests); Claude Opus = independent critic; single-writer-per-file; a MANDATORY
+browser/screenshot loop — source-reading is never visual acceptance. Counts frozen **115 · 57 · 50 · 24/25/1 ·
+49/0/1 · `FUTURE_ROUTES {}` · orphan pair · lock 1**; Spec-041 gates (ROUTES_50 · R-2 serious-a11y · R-3
+console-error · 16/16 mutations) inherited untouched; future test changes = additive / strengthening / declared
+supersession with mutation proof. **No commit / no push** — watcher commits. Next: `/speckit.tasks`.
+History: **Spec 041 — Full Frontend Route & Sidebar Production Freeze is IMPLEMENTED** (awaiting the watcher
 commit; 34 artifacts + `plan.md` + `tasks.md` (142 tasks) + `implementation-status.md` at
 `academy-dashboard-discovery/specs/041-route-sidebar-production-freeze/`). Baseline HEAD `21502af` (Spec 040 · PR #13 ·
 merge `13d38af`). **An AUDIT + FREEZE spec that fixed THREE defects** — it is not a redesign.
@@ -781,4 +845,22 @@ link inventory; the family app carries ZERO currency/pay figures; **the teacher 
 GLOBALLY** (extended token set incl. أتعاب/فلوس/دولار/money/currency, copy AND comments, no route to
 any pay surface — three-layer enforced). Future: 018 student pages · 019 family pages · 020 teacher
 pages · 021–026 admin families per the 016 sidebar inventory · 027 final no-missing QA.
+
+**Ponytail compatibility (binding for Spec 043+)**: Ponytail default mode = **lite** (persisted;
+`ultra` is **FORBIDDEN** in this project). Ponytail is SUBORDINATE to user requirements, the applicable
+Spec + contracts, and evidence — it may simplify HOW a requirement is implemented, never remove,
+reinterpret, defer or shrink an evidenced requirement. **Targeted Visual Grounding runs BEFORE the
+Ponytail ladder**: read the Spec contracts + stable IDs, inspect current source and flow, open the exact
+legacy AND current screenshots as images, read the scoped legacy records/evidence, map capability →
+evidence, preserve current-product improvements — only then climb the ladder; "reuse what exists" never
+preserves an incomplete form, weak modal, dead design or privacy leak. NEVER simplify away: required
+form fields + required/optional/conditional semantics · validation/help/error + empty/loading/error
+states · role-specific visibility · privacy/anti-poaching/secret-handling protections · keyboard/focus/
+backdrop/scroll behavior · RTL/LTR + AR/EN locale parity · responsive/mobile · accessibility · security
+validation · protected tests · mutation proofs · screenshot rows · console-error gates · cross-role
+producer/consumer propagation · any explicitly requested page/workflow/integration/capability. **full**
+mode only when explicitly selected for routine mechanical implementation or deterministic refactoring
+(specify/plan/tasks/privacy/security/RBAC/visual design 045–050/architecture stay lite). `ponytail-review`
+is SUPPLEMENTARY only — it never replaces correctness, clean-code, test, security/privacy, visual
+screenshot, or contract review, or mutation testing.
 <!-- SPECKIT END -->

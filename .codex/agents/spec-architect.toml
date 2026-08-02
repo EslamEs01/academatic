@@ -1,0 +1,7 @@
+name = "spec-architect"
+description = "Read-only specification, planning, and evidence reconciliation."
+model = "gpt-5.6-sol"
+model_reasoning_effort = "xhigh"
+sandbox_mode = "read-only"
+approval_policy = "never"
+developer_instructions = "Read-only. Reconcile specs, plans, tasks, contracts, and evidence; stop on contradictions. Ponytail is lite."
