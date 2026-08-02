@@ -8,6 +8,8 @@ import { button } from './ui.js';
 export function confirmAction({ label, labelKey, variant = 'secondary', icon: ic, size = 'sm', titleKey, msgKey, confirmKey = 'common.confirm', toastKey, danger = false } = {}) {
   const attrs = [
     'data-confirm',
+    'data-confirm-safe-action="cancel"',
+    'aria-haspopup="dialog"',
     `data-confirm-title="${esc(t(titleKey))}"`,
     `data-confirm-msg="${esc(t(msgKey))}"`,
     `data-confirm-cta="${esc(t(confirmKey))}"`,

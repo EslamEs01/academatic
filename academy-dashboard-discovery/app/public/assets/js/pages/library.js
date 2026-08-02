@@ -3,7 +3,7 @@
  * views/downloads are authored count LITERALS. Download/Publish/Delete are backendRequired
  * gates — no real upload control (upload stays a gate), NO download link, NO fake
  * publish/delete. Spec 032 (FC-36/37/38): Add/Edit subject + Add library item are form
- * drawers (INERT fields + ONE backendRequired final each); the categories drawer gains a
+ * drawers (editable fields + one truthful backend-required terminal state each); the categories drawer gains a
  * real inline create form. Reuses the closed data-* hook set. */
 import { t, num } from '../i18n.js';
 import { icon } from '../icons.js';
@@ -40,8 +40,8 @@ function subjectRow(s) {
     </div></td>
   </tr>`;
 }
-/* Spec 032 (FC-36/37) — the subject form drawers: Add (blank) + Edit (prefilled
- * with the first authored subject). INERT fields + ONE backendRequired final each. */
+/* Spec 032/044 (FC-36/37) — subject forms: Add (blank) + Edit (prefilled
+ * with the first authored subject). Editable frontend-only fields + one truthful terminal each. */
 function matFormDrawer(id, prefix, titleKey, s) {
   const fields = field({ labelKey: 'adm.lib.matName', name: `${prefix}-name`, valueKey: s ? s.nameKey : undefined, full: true })
     + field({ labelKey: 'adm.lib.matNameAr', name: `${prefix}-nameAr`, valueKey: s ? s.nameArKey : undefined, full: true });
@@ -75,9 +75,9 @@ function bookRow(b) {
     </div></td>
   </tr>`;
 }
-/* Spec 032 (FC-38, lib-cats part) — the categories drawer keeps its read-only
- * list and gains a REAL inline create form (name + status) whose final is the
- * ONE backendRequired btn-primary gate in this template. */
+/* Spec 032/044 (FC-38) — the categories surface keeps its read-only list and a
+ * real inline create form whose shared terminal action validates before showing
+ * the truthful backend-required state. */
 function categoryDrawer() {
   const rows = BOOK_CATEGORIES.map((c) => `<div class="sheet-row"><span class="k">${t(c.nameKey)}</span><span class="v tabular">${num(c.count)}</span></div>`).join('');
   const form = `<div class="mt-4">
@@ -86,12 +86,10 @@ function categoryDrawer() {
       ${field({ labelKey: 'adm.lib.catName', name: 'libCats-name', full: true })}
       ${field({ labelKey: 'adm.lib.catStatus', name: 'libCats-status', type: 'select', options: FORM_STATUS_OPTS, full: true })}
     </div>
-    <div class="flex items-center justify-end mt-3">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="${esc(t('common.backendRequiredNote'))}">${icon('plus', 'ico ico-sm')}<span>${t('adm.lib.catAdd')}</span></button>
-    </div>
   </div>`;
   const body = `<div class="sheet-rows">${rows}</div>${form}`;
-  return previewTemplate('lib-cats', { titleKey: 'adm.lib.catDrawerTitle', headIcon: 'filter', tone: 'teal', bodyHTML: body });
+  const footerHTML = `<button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="${esc(t('common.backendRequiredNote'))}">${icon('plus', 'ico ico-sm')}<span>${t('adm.lib.catAdd')}</span></button>`;
+  return previewTemplate('lib-cats', { titleKey: 'adm.lib.catDrawerTitle', headIcon: 'filter', tone: 'teal', bodyHTML: body, footerHTML });
 }
 /* Spec 032 (FC-38) — the Add-library-item form drawer: title + fixture-derived
  * type/category selects; the item source + thumbnail affordances stay inline

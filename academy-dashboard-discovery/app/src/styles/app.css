@@ -532,6 +532,95 @@
   .sheet-row:first-of-type { border-top: 0; }
   .sheet-row .k { color: var(--c-ink-3); }
   .sheet-row .v { @apply font-medium text-ink; }
+
+  /* ---- Spec 044: one modal-grade interaction host ------------------- */
+  html[data-interaction-locked], body[data-interaction-locked] { overflow: hidden; overscroll-behavior: none; }
+  body[data-interaction-locked] { padding-inline-end: var(--interaction-scrollbar-compensation, 0); }
+  body[data-interaction-locked] #shell { contain: layout; overflow: hidden; }
+  body[data-interaction-locked] .page-scroll { overflow: hidden; }
+  .interaction-overlay {
+    position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+    padding: 20px; background: rgba(20, 18, 32, .56); opacity: 0; pointer-events: none;
+    transition: opacity .2s var(--ease); overflow: hidden;
+  }
+  .interaction-overlay.is-open { opacity: 1; pointer-events: auto; }
+  .interaction-surface {
+    position: relative; inset: auto; width: min(640px, calc(100vw - 40px));
+    max-height: min(100vh, var(--interaction-viewport-height, 100dvh));
+    background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-card);
+    box-shadow: var(--shadow-hi); overflow: hidden; outline: 0; opacity: 0;
+    transform: translateY(12px) scale(.985); transition: opacity .2s var(--ease), transform .22s var(--ease);
+  }
+  .interaction-surface.is-open { opacity: 1; transform: none; }
+  .interaction-surface.interaction-drawer,
+  .interaction-surface.interaction-sidebar {
+    position: absolute; inset-block: 0; inset-inline-end: 0; width: min(560px, calc(100vw - 24px));
+    height: min(100vh, var(--interaction-viewport-height, 100dvh)); max-height: none; border-radius: 0;
+    transform: translateX(calc(102% * var(--interaction-slide-sign, 1)));
+  }
+  [dir="rtl"] .interaction-surface.interaction-drawer,
+  [dir="rtl"] .interaction-surface.interaction-sidebar { --interaction-slide-sign: -1; }
+  .interaction-surface.interaction-sidebar { width: min(360px, calc(100vw - 24px)); }
+  .interaction-surface[data-interaction-family="confirmation"] { width: min(460px, calc(100vw - 32px)); }
+  .interaction-card {
+    display: grid; grid-template-rows: auto minmax(0, 1fr) auto; width: 100%; height: 100%;
+    min-height: 0; max-height: inherit; background: var(--c-surface); overflow: hidden;
+  }
+  .interaction-modal .interaction-card { max-height: min(760px, calc(var(--interaction-viewport-height, 100dvh) - 40px)); }
+  .interaction-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    min-height: 64px; padding: calc(14px + env(safe-area-inset-top, 0px)) 20px 14px;
+    border-bottom: 1px solid var(--c-line); background: var(--c-surface); z-index: 2;
+  }
+  .interaction-title { color: var(--c-ink); font-weight: 700; }
+  .interaction-content { min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; padding: 18px 20px; }
+  .interaction-footer {
+    display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px;
+    min-height: 62px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--c-line); background: var(--c-surface); z-index: 2;
+  }
+  .interaction-content > .flex.flex-wrap.gap-2.mt-5 {
+    position: sticky; bottom: calc(-18px - env(safe-area-inset-bottom, 0px)); z-index: 1;
+    margin-inline: -20px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--c-line); background: var(--c-surface);
+  }
+  .interaction-error-summary { margin-block-end: 14px; padding: 10px 12px; border: 1px solid var(--c-coral); border-radius: 10px; color: var(--c-coral); background: color-mix(in srgb, var(--c-coral) 8%, transparent); }
+  .field-error { margin-block-start: 6px; font-size: 12px; font-weight: 600; color: var(--c-coral); }
+  [aria-invalid="true"] { border-color: var(--c-coral) !important; box-shadow: 0 0 0 2px color-mix(in srgb, var(--c-coral) 22%, transparent); }
+  .interaction-operation { margin-block-start: 12px; }
+  .interaction-operation-note { padding: 10px 12px; border: 1px solid var(--c-amber); border-radius: 10px; background: color-mix(in srgb, var(--c-amber) 10%, transparent); color: var(--c-ink); font-size: 13px; }
+  .interaction-discard {
+    position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; justify-content: center;
+    gap: 12px; padding: 24px; background: var(--c-surface); overflow-y: auto;
+  }
+  .interaction-discard-title { font-size: 18px; font-weight: 800; color: var(--c-ink); }
+  .interaction-discard-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-block-start: 8px; }
+  .page-interaction-discard {
+    margin: 16px; padding: 16px; border: 1px solid var(--c-coral); border-radius: 12px;
+    background: color-mix(in srgb, var(--c-coral) 7%, var(--c-surface)); color: var(--c-ink);
+  }
+  .interaction-sidebar-card .interaction-content { padding: 0; }
+  .interaction-sidebar-card .sidebar { position: static; display: flex; width: 100%; height: 100%; }
+  .interaction-surface :focus-visible { outline: 3px solid color-mix(in srgb, var(--c-primary) 72%, white); outline-offset: 2px; }
+
+  @media (max-width: 640px) {
+    .interaction-overlay { padding: 0; align-items: stretch; }
+    .interaction-surface:not([data-interaction-family="confirmation"]) {
+      position: absolute; inset: 0; width: 100vw; max-width: none;
+      height: min(100vh, var(--interaction-viewport-height, 100dvh)); max-height: none;
+      border: 0; border-radius: 0; transform: translateY(12px);
+    }
+    .interaction-surface[data-interaction-family="confirmation"] { max-height: calc(var(--interaction-viewport-height, 100dvh) - 24px); }
+    .interaction-modal .interaction-card { max-height: none; }
+    .interaction-header { padding-inline: 16px; }
+    .interaction-content { padding-inline: 16px; scroll-padding-block-end: 96px; }
+    .interaction-footer { padding-inline: 16px; }
+    .interaction-footer .btn { min-height: 44px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .interaction-overlay, .interaction-surface { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  }
 }
 
 /* schedule + directory reflow on small screens */

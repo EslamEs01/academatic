@@ -1,5 +1,5 @@
-/* Accessibility tests via axe-core. Fails on any CRITICAL violation; reports
- * SERIOUS as warnings. Runs each page in AR (light + dark) and EN. */
+/* Accessibility tests via axe-core. Fails on every CRITICAL or SERIOUS violation
+ * across the localized/theme/viewport/state matrix. */
 const { chromium } = require('playwright');
 const { AxeBuilder } = require('@axe-core/playwright');
 const { PORT } = require('../../scripts/serve.cjs');
@@ -214,8 +214,8 @@ const MATRIX = [
   { page: 'staff', lang: 'ar', theme: 'light', open: '[data-drawer="staff-add"]' },
   { page: 'family', lang: 'ar', theme: 'light', open: '[data-drawer="fam-edit"]' },
   // Spec 041 — D-1 RELOCATION: the trn-add DRAWER no longer exists; the form is the #view=add TAB panel.
-  // Left as-is this row would have SILENTLY PASSED (the runner .catch()es a missing selector) while
-  // auditing the directory instead of the form.
+  // The prior optional-open behavior could silently audit the directory instead of the form;
+  // all state selectors are now required by openRequiredInteraction().
   { page: 'teachers', lang: 'ar', theme: 'light', hash: '#view=add' },
   { page: 'teachers', lang: 'en', theme: 'light', hash: '#view=add' },
   // The categories surface had ZERO a11y rows before 041 (only screenshots covered it) — a GAP, not a
@@ -358,10 +358,32 @@ const MATRIX = [
   // EN dark completes the teacher policy 2×2 (same direct trn-policy drawer trigger as the other teacher rows).
   { page: 'teacher', lang: 'en', theme: 'dark', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
   { page: 'teacher', lang: 'ar', theme: 'light', viewport: 'mobile', requiredDrawer: true, open: '[data-drawer="trn-policy"]' },
+  // Spec 044 — shared-system state coverage. Every setup selector is mandatory and fail-loud.
+  { page: 'teacher', lang: 'en', theme: 'dark', open: '[data-confirm]' },
+  { page: 'reports', lang: 'ar', theme: 'light', open: '[data-drawer="fb-create"]', spec044State: 'dirty-warning' },
+  { page: 'reports', lang: 'en', theme: 'dark', open: '[data-drawer="fb-create"]', spec044State: 'validation-error' },
+  { page: 'reports', lang: 'ar', theme: 'dark', open: '[data-drawer="fb-create"]', spec044State: 'backend-required' },
+  { page: 'dashboard', lang: 'ar', theme: 'light', viewport: 'mobile', spec044State: 'mobile-sidebar' },
+  { page: 'dashboard', lang: 'en', theme: 'dark', spec044State: 'dropdown' },
+  { page: 'add-family', lang: 'ar', theme: 'light', spec044State: 'wizard-dirty-warning' },
 ];
 
 // Spec 032 — mobile viewport for the new rows (the pre-032 matrix is desktop-only)
 const VIEWPORTS = { mobile: { width: 390, height: 844 } };
+
+async function openRequiredInteraction(page, selector) {
+  await page.waitForSelector(selector, { timeout: 5000, state: 'visible' });
+  const trigger = page.locator(`${selector}:visible`).first();
+  const target = await trigger.getAttribute('data-drawer');
+  const confirmation = await trigger.getAttribute('data-confirm') !== null;
+  await trigger.click();
+  if (target) {
+    await page.waitForSelector(`.interaction-surface[role="dialog"][aria-modal="true"][data-interaction-target="${target}"]`, { timeout: 5000, state: 'visible' });
+  } else if (confirmation) {
+    await page.waitForSelector('.interaction-surface[role="dialog"][aria-modal="true"][data-interaction-family="confirmation"]', { timeout: 5000, state: 'visible' });
+  }
+  return target;
+}
 
 (async () => {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
@@ -375,27 +397,54 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
     const file = s.lang === 'en' ? `${s.page}.en.html` : `${s.page}.html`;
     await p.goto(`${BASE}/${file}${s.hash || ''}`, { waitUntil: 'networkidle' });
     await p.waitForTimeout(250);
-    if (s.open && s.requiredDrawer) {
-      await p.waitForSelector(s.open, { timeout: 5000, state: 'visible' });
-      await p.click(s.open);
-      await p.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
-      await p.waitForTimeout(420);
-    } else if (s.open) {
-      await p.click(s.open).catch(() => {}); await p.waitForTimeout(420);
-    }
+    if (s.open) { await openRequiredInteraction(p, s.open); await p.waitForTimeout(420); }
     // Spec 043 — a row may open a kebab-driven drawer via a click SEQUENCE. Each target is a REQUIRED
     // selector: waitForSelector throws if it is absent, so an open-drawer scan can never silently pass
     // on a closed page (no `.catch(() => {})` swallow here — the failure is loud, per the privacy plan).
     if (s.steps) {
-      for (const sel of s.steps) { await p.waitForSelector(sel, { timeout: 5000, state: 'visible' }); await p.click(sel); await p.waitForTimeout(360); }
-      if (s.requiredDrawer) await p.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
+      let finalTarget = null;
+      for (const sel of s.steps) { finalTarget = await openRequiredInteraction(p, sel) || finalTarget; await p.waitForTimeout(360); }
+      if (s.requiredDrawer) {
+        if (!finalTarget) throw new Error(`required drawer sequence has no data-drawer target: ${s.steps.join(' -> ')}`);
+        await p.waitForSelector(`.interaction-surface[role="dialog"][aria-modal="true"][data-interaction-target="${finalTarget}"]`, { timeout: 5000, state: 'visible' });
+      }
     }
     // Spec 039 — a row may drive the tablist from the KEYBOARD (roving tabindex) before the scan,
     // so the tab reached by ArrowLeft/ArrowRight is audited in its focused, switched state.
     if (s.keys) {
-      await p.focus(s.keys.focus).catch(() => {});
-      for (const k of s.keys.seq) { await p.keyboard.press(k).catch(() => {}); await p.waitForTimeout(200); }
+      await p.waitForSelector(s.keys.focus, { timeout: 5000, state: 'visible' });
+      await p.focus(s.keys.focus);
+      for (const k of s.keys.seq) { await p.keyboard.press(k); await p.waitForTimeout(200); }
       await p.waitForTimeout(300);
+    }
+    if (s.spec044State === 'dirty-warning') {
+      const input = p.locator('.interaction-surface input:not([type="hidden"]), .interaction-surface textarea').first();
+      if (await input.count() !== 1) throw new Error('Spec 044 dirty-state probe field is missing');
+      await input.fill(`${await input.inputValue()} changed`);
+      await p.keyboard.press('Escape');
+      await p.waitForSelector('.interaction-surface [data-interaction-discard-state]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'validation-error') {
+      const input = p.locator('.interaction-surface input:not([type="hidden"]), .interaction-surface textarea').first();
+      if (await input.count() !== 1) throw new Error('Spec 044 validation probe field is missing');
+      await input.evaluate((node) => node.setCustomValidity('Spec 044 validation probe'));
+      await p.locator('.interaction-surface [data-interaction-submit]').click();
+      await p.waitForSelector('.interaction-surface [data-interaction-error-summary]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'backend-required') {
+      await p.locator('.interaction-surface [data-interaction-submit]').click();
+      await p.waitForSelector('.interaction-surface [data-interaction-backend-state]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'mobile-sidebar') {
+      await openRequiredInteraction(p, '[data-action="open-drawer"]');
+      await p.waitForSelector('.interaction-surface[data-interaction-family="sidebar"]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'dropdown') {
+      await p.waitForSelector('[data-action="profile-menu"]', { timeout: 5000, state: 'visible' });
+      await p.click('[data-action="profile-menu"]');
+      await p.waitForSelector('[role="menu"]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'wizard-dirty-warning') {
+      const input = p.locator('[data-wizard] input, [data-wizard] textarea, [data-wizard] select').first();
+      if (await input.count() !== 1) throw new Error('Spec 044 wizard probe field is missing');
+      await input.fill(`${await input.inputValue()} changed`);
+      await p.click('.sidebar a[href="families.html"]');
+      await p.waitForSelector('[data-page-discard-state]', { timeout: 5000, state: 'visible' });
     }
 
     const { violations } = await new AxeBuilder({ page: p })
@@ -405,7 +454,7 @@ const VIEWPORTS = { mobile: { width: 390, height: 844 } };
     const crit = violations.filter((v) => v.impact === 'critical');
     const ser = violations.filter((v) => v.impact === 'serious');
     critical += crit.length; serious += ser.length;
-    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}${s.viewport ? ' @' + s.viewport : ''}${s.open ? ' open:' + s.open : ''}${s.steps ? ' steps:' + s.steps.length : ''}${s.keys ? ' keys:' + s.keys.seq.join('+') : ''}`;
+    const tag = `${s.page}/${s.lang}/${s.theme}${s.hash ? ' ' + s.hash : ''}${s.viewport ? ' @' + s.viewport : ''}${s.open ? ' open:' + s.open : ''}${s.steps ? ' steps:' + s.steps.length : ''}${s.keys ? ' keys:' + s.keys.seq.join('+') : ''}${s.spec044State ? ' state:' + s.spec044State : ''}`;
     if (crit.length) console.error(`  ✗ ${tag}: ${crit.length} CRITICAL — ${crit.map((v) => v.id).join(', ')}`);
     if (ser.length) console.warn(`  ⚠ ${tag}: ${ser.length} serious — ${ser.map((v) => v.id).join(', ')}`);
     if (!crit.length && !ser.length) console.log(`  ✓ ${tag}: clean`);

@@ -4,7 +4,10 @@ let openEl = null;
 let cleanup = null;
 
 function closeOpen() {
-  if (openEl) { openEl.remove(); openEl = null; }
+  if (openEl) {
+    if (openEl._trigger) openEl._trigger.setAttribute('aria-expanded', 'false');
+    openEl.remove(); openEl = null;
+  }
   if (cleanup) { cleanup(); cleanup = null; }
 }
 
@@ -22,8 +25,10 @@ export function openPopover(trigger, html, { align = 'end' } = {}) {
   pop.className = 'popover';
   pop.setAttribute('role', 'menu');
   pop.innerHTML = html;
-  document.body.appendChild(pop);
+  (trigger.closest('.interaction-surface') || document.body).appendChild(pop);
   openEl = pop;
+  trigger.setAttribute('aria-haspopup', 'menu');
+  trigger.setAttribute('aria-expanded', 'true');
 
   const r = trigger.getBoundingClientRect();
   const dir = document.documentElement.getAttribute('dir') || 'rtl';
@@ -39,10 +44,27 @@ export function openPopover(trigger, html, { align = 'end' } = {}) {
   requestAnimationFrame(() => pop.classList.add('is-open'));
 
   const onDoc = (e) => { if (!pop.contains(e.target) && !trigger.contains(e.target)) closeOpen(); };
-  const onKey = (e) => { if (e.key === 'Escape') { closeOpen(); trigger.focus(); } };
-  setTimeout(() => document.addEventListener('click', onDoc), 0);
+  const onKey = (e) => {
+    if (e.key === 'Escape') { e.preventDefault(); closeOpen(); trigger.focus(); return; }
+    if (!pop.contains(e.target)) return;
+    const items = Array.from(pop.querySelectorAll('[role="menuitem"], button:not([disabled]), a[href]'))
+      .filter((item) => item.getClientRects().length > 0 && item.getAttribute('aria-disabled') !== 'true');
+    if (!items.length) return;
+    const index = Math.max(0, items.indexOf(document.activeElement));
+    let next = -1;
+    if (e.key === 'ArrowDown') next = (index + 1) % items.length;
+    else if (e.key === 'ArrowUp') next = (index - 1 + items.length) % items.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = items.length - 1;
+    if (next >= 0) { e.preventDefault(); items[next].focus(); }
+  };
+  const outsideListenerTimer = setTimeout(() => document.addEventListener('click', onDoc), 0);
   document.addEventListener('keydown', onKey);
-  cleanup = () => { document.removeEventListener('click', onDoc); document.removeEventListener('keydown', onKey); };
+  cleanup = () => {
+    clearTimeout(outsideListenerTimer);
+    document.removeEventListener('click', onDoc);
+    document.removeEventListener('keydown', onKey);
+  };
 
   const first = pop.querySelector('[role="menuitem"], button, a');
   if (first) first.focus();

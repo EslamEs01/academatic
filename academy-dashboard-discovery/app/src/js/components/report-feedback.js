@@ -4,9 +4,9 @@
  * primitives (filterBar · previewTemplate/sheetRow · card-grid · confirmAction · chip):
  *   - feedbackSection(): authored FEEDBACK rows (teacher/class/family/student) with a real
  *     static type/status filter, a read-only detail drawer per row (Approve/Delete = confirm
- *     backendRequired finals), a Create-feedback FORM drawer (Spec 032 FC-27: real inert
- *     fields, Save = backendRequired gate), and a Manage-categories drawer with an inline
- *     create form (FC-26).
+ *     backendRequired finals), a Create-feedback form (Spec 032/044 FC-27: editable
+ *     frontend-only fields, Save = truthful backend-required state), and a Manage-categories drawer with an inline
+ *     create form (FC-26) with a shared validation/backend-required terminal state.
  *   - formsSection(): authored FORMS list (question/response counts are literals — NO
  *     aggregation), a Create-form FORM drawer (FC-28: name/day + two baked field-builder
  *     rows, Save = backendRequired gate), a read-only detail drawer per form, and a real
@@ -92,8 +92,8 @@ function feedbackDrawer(f) {
 
 /* Manage-categories drawer — list + a REAL inline create form (Spec 032, FC-26) + the
  * assign-members backendRequired gate. Mirrors teachers.js categoriesDrawer(); the nav item
- * stays planned/folded (no page). The inline create's Save uses the btn-SECONDARY gate
- * pattern so the assign button stays this drawer's ONLY btn-primary[data-disabled-reason]. */
+ * stays planned/folded (no page). The inline create uses the shared active terminal action;
+ * member assignment remains a separate honest unavailable operation. */
 function categoriesDrawer() {
   const rows = FEEDBACK_CATEGORIES
     .map((c) => sheetRow(t(c.nameKey), `${t('rep.fbcat.members', { n: num(c.count) })}`))
@@ -110,14 +110,14 @@ function categoriesDrawer() {
     ${rows}
     ${createForm}
     <div class="flex flex-wrap gap-2 mt-4">
-      <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="rep.fbcat.createReason" title="${esc(t('rep.fbcat.createReason'))}">${icon('check', 'ico ico-sm')}<span>${t('common.save')}</span></button>
-      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="rep.fbcat.assignReason" aria-disabled="true" title="${esc(t('rep.fbcat.assignReason'))}">${icon('user-check', 'ico ico-sm')}<span>${t('rep.fbcat.assign')}</span></button>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="rep.fbcat.assignReason" aria-disabled="true" title="${esc(t('rep.fbcat.assignReason'))}">${icon('user-check', 'ico ico-sm')}<span>${t('rep.fbcat.assign')}</span></button>
     </div>`;
-  return previewTemplate('rep-fbcat', { titleKey: 'rep.fbcat.title', headIcon: 'filter', tone: 'primary', bodyHTML: body });
+  const footerHTML = `<button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="rep.fbcat.createReason" title="${esc(t('rep.fbcat.createReason'))}">${icon('check', 'ico ico-sm')}<span>${t('common.save')}</span></button>`;
+  return previewTemplate('rep-fbcat', { titleKey: 'rep.fbcat.title', headIcon: 'filter', tone: 'primary', bodyHTML: body, footerHTML });
 }
 
-/* Spec 032 (FC-27) — Create-feedback FORM drawer: real INERT fields (type/subject/
- * category/remark/note) + the ONE clickable backendRequired final (formDrawer). */
+/* Spec 032/044 (FC-27) — Create-feedback form: editable frontend-only fields
+ * (type/subject/category/remark/note) plus one shared backend-required terminal action. */
 function fbCreateDrawer() {
   const fields = field({ labelKey: 'rep.fb.filterType', name: 'fbCreate-type', type: 'select', options: FB_TYPE_OPTS })
     + field({ labelKey: 'rep.fb.lbl.subject', name: 'fbCreate-subject', type: 'select', options: FB_SUBJ_OPTS })
@@ -188,9 +188,9 @@ function formDetailDrawer(fm) {
   return previewTemplate('rep-form-' + fm.id, { titleKey: 'rep.form.detailTitle', headIcon: 'clipboard-check', tone: 'primary', bodyHTML: body });
 }
 
-/* Spec 032 (FC-28) — Create-form FORM drawer: name/day + TWO baked repeatable
- * field-builder rows (label · type · options · required). Authored INERT controls
- * only — question/response counts stay literals, NO aggregation, no response math. */
+/* Spec 032/044 (FC-28) — Create-form surface: name/day + two baked repeatable
+ * field-builder rows (label · type · options · required). Controls stay frontend-only;
+ * question/response counts remain literals with no aggregation or response math. */
 function builderRow(n) {
   const p = `formCreate-field${n}`;
   return `<div class="field field-full" style="border-top:1px solid var(--c-line);margin-top:4px;padding-top:12px">

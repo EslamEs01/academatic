@@ -13,6 +13,7 @@ const VIEWPORTS = {
   desktop: { width: 1440, height: 900 },
   tablet: { width: 834, height: 1112 },
   mobile: { width: 390, height: 844 },
+  mobileKeyboard: { width: 390, height: 480 },
 };
 
 const MATRIX = [
@@ -248,14 +249,14 @@ const MATRIX = [
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'mobile', view: 'salaries', variant: 'sp030-mobile' },
   // Spec 031 — admin management/content/certificates/settings deep management
   { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-staff' },
-  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'st-perm', variant: 'sp031-staff-rbac' },
+  { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', requiredDrawer: true, staffKebabDrawer: 'st-perm', variant: 'sp031-staff-rbac' },
   { page: 'library', lang: 'en', theme: 'light', vp: 'desktop', view: 'books', variant: 'sp031-library-en' },
   { page: 'library', lang: 'ar', theme: 'light', vp: 'desktop', view: 'books', openDrawer: 'lib-cats', variant: 'sp031-library-cats' },
   { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-certificates' },
   { page: 'certificates', lang: 'ar', theme: 'light', vp: 'desktop', view: 'requests', variant: 'sp031-cert-requests' },
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', variant: 'sp031-settings' },
   { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'integrations', variant: 'sp031-integrations' },
-  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', mgmtModal: 'adm.set.heads.addTitle', variant: 'sp031-add-head-modal' },
+  { page: 'settings', lang: 'ar', theme: 'light', vp: 'desktop', view: 'general', openDrawer: 'head-add', variant: 'sp031-add-head-modal' },
   { page: 'settings', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'security', variant: 'sp031-settings-dark' },
   { page: 'staff', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp031-mobile' },
   // Spec 027 — admin deep management: honest modals / drawer-pickers / row-kebab / gates
@@ -275,12 +276,12 @@ const MATRIX = [
   { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-edit', variant: 'sp032-fam-edit' },
   { page: 'family', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'fam-edit', variant: 'sp032-fam-edit-dark' },
   { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-child', variant: 'sp032-fam-child' },
-  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fam-note', variant: 'sp032-fam-note' },
+  { page: 'family', lang: 'ar', theme: 'light', vp: 'desktop', view: 'notes', openDrawer: 'fam-note', variant: 'sp032-fam-note' },
   { page: 'add-family', lang: 'ar', theme: 'light', vp: 'desktop', step: 'children', disclose: true, variant: 'sp032-wizard-child3' },
   { page: 'students', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'stu-add', variant: 'sp032-stu-add' },
   { page: 'students', lang: 'ar', theme: 'light', vp: 'mobile', openDrawer: 'stu-add', variant: 'sp032-stu-add-mobile' },
   { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'stu-edit', variant: 'sp032-stu-edit' },
-  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'stu-note', variant: 'sp032-stu-note' },
+  { page: 'student', lang: 'ar', theme: 'light', vp: 'desktop', view: 'notes', openDrawer: 'stu-note', variant: 'sp032-stu-note' },
   { page: 'courses', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-add', variant: 'sp032-crs-add' },
   { page: 'courses', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'crs-add', variant: 'sp032-crs-add-en' },
   { page: 'course', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'crs-edit', variant: 'sp032-crs-edit' },
@@ -295,7 +296,7 @@ const MATRIX = [
   { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fb-create', variant: 'sp032-fb-create' },
   { page: 'reports', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'form-create', variant: 'sp032-form-create-en' },
   { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'rep-fbcat', variant: 'sp032-fbcat-form' },
-  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', outcomeDrawer: true, nestedDrawer: 'fb-add', variant: 'sp032-fb-add' },
+  { page: 'attendance', lang: 'ar', theme: 'light', vp: 'desktop', outcomeDrawer: true, nestedDrawer: 'fb-add-out1', variant: 'sp032-fb-add' },
   { page: 'finance', lang: 'ar', theme: 'light', vp: 'desktop', view: 'banks', openDrawer: 'bank-add', variant: 'sp032-bank-add' },
   { page: 'finance', lang: 'ar', theme: 'dark', vp: 'desktop', view: 'banks', openDrawer: 'bank-add', variant: 'sp032-bank-add-dark' },
   { page: 'staff', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'staff-add', variant: 'sp032-staff-add' },
@@ -460,7 +461,56 @@ const MATRIX = [
   { page: 'teacher', lang: 'ar', theme: 'dark',  vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-dark' },
   { page: 'teacher', lang: 'en', theme: 'dark',  vp: 'desktop', requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-en-dark' },
   { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile',  requiredDrawer: true, openDrawer: 'trn-policy', variant: 'sp043-policy-mobile' },
+  // Spec 044 — representative shared-interaction states. Every selector below is fail-loud.
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'desktop', confirmSel: '.profile-banner [data-confirm]', variant: 'sp044-confirm' },
+  { page: 'teacher', lang: 'en', theme: 'dark', vp: 'desktop', confirmSel: '.profile-banner [data-confirm]', variant: 'sp044-confirm-en-dark' },
+  { page: 'reports', lang: 'ar', theme: 'light', vp: 'desktop', openDrawer: 'fb-create', spec044State: 'dirty-warning', variant: 'sp044-dirty' },
+  { page: 'reports', lang: 'en', theme: 'dark', vp: 'desktop', openDrawer: 'fb-create', spec044State: 'validation-error', variant: 'sp044-validation-en-dark' },
+  { page: 'reports', lang: 'ar', theme: 'dark', vp: 'desktop', openDrawer: 'fb-create', spec044State: 'backend-required', variant: 'sp044-backend-dark' },
+  { page: 'students', lang: 'ar', theme: 'light', vp: 'mobile', openDrawer: 'stu-add', variant: 'sp044-simple-mobile' },
+  { page: 'students', lang: 'en', theme: 'dark', vp: 'mobileKeyboard', openDrawer: 'stu-add', variant: 'sp044-keyboard-viewport-en-dark' },
+  { page: 'leads', lang: 'en', theme: 'light', vp: 'desktop', openDrawer: 'lead-new', variant: 'sp044-long-form-en' },
+  { page: 'leads', lang: 'ar', theme: 'dark', vp: 'mobile', openDrawer: 'lead-new', variant: 'sp044-long-form-mobile-dark' },
+  { page: 'attendance', lang: 'en', theme: 'dark', vp: 'desktop', outcomeDrawer: true, variant: 'sp044-details-en-dark' },
+  { page: 'add-family', lang: 'ar', theme: 'light', vp: 'desktop', spec044State: 'wizard-dirty-warning', variant: 'sp044-wizard-dirty' },
+  { page: 'dashboard', lang: 'en', theme: 'dark', vp: 'mobile', drawer: true, variant: 'sp044-sidebar-en-dark' },
+  { page: 'dashboard', lang: 'ar', theme: 'dark', vp: 'desktop', spec044State: 'dropdown', variant: 'sp044-dropdown-dark' },
 ];
+
+async function requiredClick(page, selector) {
+  await page.waitForSelector(selector, { timeout: 5000, state: 'visible' });
+  await page.locator(`${selector}:visible`).first().click();
+}
+
+async function requiredPopoverItem(page, triggerSelector, itemSelector) {
+  await page.waitForSelector(triggerSelector, { timeout: 5000, state: 'visible' });
+  const trigger = page.locator(`${triggerSelector}:visible`).first();
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    await trigger.click();
+    if (await trigger.getAttribute('aria-expanded') === 'true') {
+      await page.waitForSelector(itemSelector, { timeout: 5000, state: 'visible' });
+      return;
+    }
+    await page.waitForTimeout(100);
+  }
+  throw new Error(`required popover did not open: ${triggerSelector}`);
+}
+
+async function requiredDrawer(page, selector) {
+  await page.waitForSelector(selector, { timeout: 5000, state: 'visible' });
+  const trigger = page.locator(`${selector}:visible`).first();
+  const target = await trigger.getAttribute('data-drawer');
+  if (!target) throw new Error(`required drawer trigger has no data-drawer target: ${selector}`);
+  await trigger.click();
+  await page.waitForSelector(`.interaction-surface[role="dialog"][aria-modal="true"][data-interaction-target="${target}"]`, { timeout: 5000, state: 'visible' });
+  return target;
+}
+
+async function requiredConfirm(page, selector) {
+  await requiredClick(page, selector);
+  await page.waitForSelector('.interaction-surface[role="dialog"][aria-modal="true"][data-interaction-family="confirmation"]', { timeout: 5000, state: 'visible' });
+}
 
 (async () => {
   const filter = process.argv[2];
@@ -471,7 +521,7 @@ const MATRIX = [
   for (const s of jobs) {
     const ctx = await browser.newContext({
       viewport: VIEWPORTS[s.vp],
-      deviceScaleFactor: s.vp === 'mobile' ? 2 : 1.5,
+      deviceScaleFactor: s.vp.startsWith('mobile') ? 2 : 1.5,
     });
     await ctx.addInitScript(({ theme, rail }) => { localStorage.setItem('academy.theme', theme); if (rail) localStorage.setItem('academy.rail', rail); }, { theme: s.theme, rail: s.rail });
 
@@ -486,89 +536,109 @@ const MATRIX = [
     await page.waitForFunction(() => {
       const b = document.querySelector('#page-body');
       return b && b.children.length > 0;
-    }, { timeout: 8000 }).catch(() => {});
-    await page.evaluate(() => document.fonts && document.fonts.ready).catch(() => {});
+    }, { timeout: 8000 });
+    await page.evaluate(async () => { if (document.fonts) await document.fonts.ready; });
     await page.waitForTimeout(350);
-    if (s.drawer) { await page.click('[data-action="open-drawer"]').catch(() => {}); await page.waitForTimeout(380); }
-    if (s.cat) { await page.click(`[data-nav-category="${s.cat}"]`).catch(() => {}); await page.waitForTimeout(260); }
+    if (s.drawer) { await requiredClick(page, '[data-action="open-drawer"]'); await page.waitForSelector('.interaction-surface[data-interaction-family="sidebar"]', { timeout: 5000, state: 'visible' }); await page.waitForTimeout(380); }
+    if (s.cat) { await requiredClick(page, `[data-nav-category="${s.cat}"]`); await page.waitForTimeout(260); }
     // Spec 003 content tabs / teacher lens / appointment drawer
-    if (s.tab) { await page.click(`[data-tab="${s.tab}"]`).catch(() => {}); await page.waitForTimeout(220); }
-    if (s.teacher != null) { await page.selectOption('select[data-filter="teacher"]', { index: s.teacher }).catch(() => {}); await page.waitForTimeout(220); }
-    if (s.sheet) { await page.click('[data-tabpanel="timetable"]:not([hidden]) .tt-block[data-drawer]').catch(() => {}); await page.waitForTimeout(420); }
+    if (s.tab) { await requiredClick(page, `[data-tab="${s.tab}"]`); await page.waitForTimeout(220); }
+    if (s.teacher != null) { await page.waitForSelector('select[data-filter="teacher"]', { timeout: 5000, state: 'visible' }); await page.selectOption('select[data-filter="teacher"]', { index: s.teacher }); await page.waitForTimeout(220); }
+    if (s.sheet) { await requiredDrawer(page, '[data-tabpanel="timetable"]:not([hidden]) .tt-block[data-drawer]'); await page.waitForTimeout(420); }
     // Spec 005 — open the canonical outcome drawer (kebab → view), optionally a confirm modal
     if (s.outcomeDrawer || s.confirm) {
       const rowSel = s.confirm ? '#attendance-list .outcome-row:nth-child(8) [data-row-menu]' : '#attendance-list .outcome-row:not([hidden]) [data-row-menu]';
-      await page.click(rowSel).catch(() => {}); await page.waitForTimeout(240);
-      await page.click('.popover [data-drawer]').catch(() => {}); await page.waitForTimeout(460);
-      if (s.confirm) { await page.click('.drawer.sheet [data-confirm]').catch(() => {}); await page.waitForTimeout(340); }
+      await requiredClick(page, rowSel); await page.waitForTimeout(240);
+      await requiredDrawer(page, '.popover [data-drawer]'); await page.waitForTimeout(460);
+      if (s.confirm) { await requiredConfirm(page, '.interaction-surface [data-confirm]'); await page.waitForTimeout(340); }
     }
     // Spec 007 — open the teacher banner Notify-family confirm modal
-    if (s.teacherConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(380); }
+    if (s.teacherConfirm) { await requiredConfirm(page, '.profile-banner [data-confirm]'); await page.waitForTimeout(380); }
     // Spec 008 — reports: Schedule confirm modal (demo) / category-card filter narrowed
-    if (s.reportAction) { await page.click('.report-actions [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
-    if (s.reportFilter) { await page.selectOption('select[data-filter="area"]', 'attendance').catch(() => {}); await page.waitForTimeout(220); }
+    if (s.reportAction) { await requiredConfirm(page, '.report-actions [data-confirm]'); await page.waitForTimeout(360); }
+    if (s.reportFilter) { await page.waitForSelector('select[data-filter="area"]', { timeout: 5000, state: 'visible' }); await page.selectOption('select[data-filter="area"]', 'attendance'); await page.waitForTimeout(220); }
     // Spec 009 — finance: invoice drawer / record-payment confirm / overdue-tile filter
-    if (s.financeDrawer) { await page.click('#invoice-list [data-drawer]').catch(() => {}); await page.waitForTimeout(380); }
-    if (s.financeConfirm) { await page.click('#invoice-list [data-confirm]').catch(() => {}); await page.waitForTimeout(380); }
-    if (s.financeFilter) { await page.click('[data-filter-set="status:overdue"]').catch(() => {}); await page.waitForTimeout(250); }
+    if (s.financeDrawer) { await requiredDrawer(page, '#invoice-list [data-drawer]'); await page.waitForTimeout(380); }
+    if (s.financeConfirm) { await requiredConfirm(page, '#invoice-list [data-confirm]'); await page.waitForTimeout(380); }
+    if (s.financeFilter) { await requiredClick(page, '[data-filter-set="status:overdue"]'); await page.waitForTimeout(250); }
     // Spec 010 — attendance status-tile filter narrowing proof
-    if (s.attnFilter) { await page.click('.outcome-tile[data-filter-set="outcome:studentAbsent"]').catch(() => {}); await page.waitForTimeout(280); }
+    if (s.attnFilter) { await requiredClick(page, '.outcome-tile[data-filter-set="outcome:studentAbsent"]'); await page.waitForTimeout(280); }
     // Spec 017 — open the role-nav native disclosure (mobile)
-    if (s.roleDrawer) { await page.click('.pt-nav-drawer > summary').catch(() => {}); await page.waitForTimeout(260); }
-    if (s.sessCreateModal) { await page.click('[data-modal-trigger]').catch(() => {}); await page.waitForTimeout(340); }
+    if (s.roleDrawer) { await requiredClick(page, '.pt-nav-drawer > summary'); await page.waitForTimeout(260); }
+    if (s.sessCreateModal) { await requiredClick(page, '[data-modal-trigger]'); await page.waitForSelector('.interaction-surface[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' }); await page.waitForTimeout(340); }
     // Spec 027 — deep-management surfaces (view/hash flags above position the trigger's tab first)
-    if (s.studentKebab) { await page.click('#students-table [data-row-menu][data-row-menu-kind="student"]').catch(() => {}); await page.waitForTimeout(320); }
-    if (s.teacherKebab) { await page.click('#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]').catch(() => {}); await page.waitForTimeout(320); }
-    if (s.openDrawer && s.requiredDrawer) {
-      const selector = `[data-drawer="${s.openDrawer}"]`;
-      await page.waitForSelector(selector, { timeout: 5000, state: 'visible' });
-      await page.click(selector);
-      await page.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
-      await page.waitForTimeout(440);
-    } else if (s.openDrawer) {
-      await page.click(`[data-drawer="${s.openDrawer}"]`).catch(() => {}); await page.waitForTimeout(440);
-    }
+    if (s.studentKebab) { await requiredClick(page, '#students-table [data-row-menu][data-row-menu-kind="student"]'); await page.waitForTimeout(320); }
+    if (s.teacherKebab) { await requiredClick(page, '#teachers-grid [data-row-menu][data-row-menu-kind="teacher"]'); await page.waitForTimeout(320); }
+    if (s.openDrawer) { await requiredDrawer(page, `[data-drawer="${s.openDrawer}"]`); await page.waitForTimeout(440); }
     // Spec 035 — schedule-search: drive a no-match filter combo to capture the empty state
     if (s.ssEmpty) {
-      await page.selectOption('select[data-filter="availability"]', 'booked').catch(() => {});
-      await page.selectOption('select[data-filter="teacher"]', 't6').catch(() => {});
+      await page.waitForSelector('select[data-filter="availability"]', { timeout: 5000, state: 'visible' });
+      await page.waitForSelector('select[data-filter="teacher"]', { timeout: 5000, state: 'visible' });
+      await page.selectOption('select[data-filter="availability"]', 'booked');
+      await page.selectOption('select[data-filter="teacher"]', 't6');
       await page.waitForTimeout(280);
     }
     // Spec 032 — staff kebab → form drawer; the fb-add form nested in the open outcome sheet;
     // the add-family wizard native child-disclosure
     if (s.staffKebabDrawer && s.requiredDrawer) {
-      await page.waitForSelector('#staff-grid [data-row-menu][data-row-menu-kind="staff"]', { timeout: 5000, state: 'visible' });
-      await page.click('#staff-grid [data-row-menu][data-row-menu-kind="staff"]'); await page.waitForTimeout(280);
       const selector = `.popover [data-drawer="${s.staffKebabDrawer}"]`;
-      await page.waitForSelector(selector, { timeout: 5000, state: 'visible' });
-      await page.click(selector);
-      await page.waitForSelector('.drawer.sheet[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' });
+      await requiredPopoverItem(page, '#staff-grid [data-row-menu][data-row-menu-kind="staff"]', selector);
+      await requiredDrawer(page, selector);
       await page.waitForTimeout(440);
     } else if (s.staffKebabDrawer) {
-      await page.click('#staff-grid [data-row-menu][data-row-menu-kind="staff"]').catch(() => {}); await page.waitForTimeout(280);
-      await page.click(`.popover [data-drawer="${s.staffKebabDrawer}"]`).catch(() => {}); await page.waitForTimeout(440);
+      await requiredClick(page, '#staff-grid [data-row-menu][data-row-menu-kind="staff"]'); await page.waitForTimeout(280);
+      await requiredDrawer(page, `.popover [data-drawer="${s.staffKebabDrawer}"]`); await page.waitForTimeout(440);
     }
-    if (s.nestedDrawer) { await page.click(`.drawer.sheet [data-drawer="${s.nestedDrawer}"]`).catch(() => {}); await page.waitForTimeout(460); }
-    if (s.disclose) { await page.click('[data-wizard] details > summary').catch(() => {}); await page.waitForTimeout(260); }
+    if (s.nestedDrawer) { await requiredDrawer(page, `.interaction-surface [data-drawer="${s.nestedDrawer}"]`); await page.waitForTimeout(460); }
+    if (s.disclose) { await requiredClick(page, '[data-wizard] details > summary'); await page.waitForTimeout(260); }
     // Spec 034 — drive the time converter so the screenshot shows a real computed result
     if (s.tcConvert) {
-      await page.selectOption('[data-tc-source]', 'Africa/Cairo').catch(() => {});
-      await page.selectOption('[data-tc-target]', 'America/New_York').catch(() => {});
-      await page.fill('[data-tc-date]', '2026-06-20').catch(() => {});
-      await page.fill('[data-tc-time]', '15:00').catch(() => {});
+      await page.waitForSelector('[data-tc-source]', { timeout: 5000, state: 'visible' });
+      await page.waitForSelector('[data-tc-target]', { timeout: 5000, state: 'visible' });
+      await page.waitForSelector('[data-tc-date]', { timeout: 5000, state: 'visible' });
+      await page.waitForSelector('[data-tc-time]', { timeout: 5000, state: 'visible' });
+      await page.selectOption('[data-tc-source]', 'Africa/Cairo');
+      await page.selectOption('[data-tc-target]', 'America/New_York');
+      await page.fill('[data-tc-date]', '2026-06-20');
+      await page.fill('[data-tc-time]', '15:00');
       await page.waitForTimeout(200);
     }
-    if (s.mgmtModal) { await page.click(`[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`).catch(() => {}); await page.waitForTimeout(340); }
-    if (s.mgmtConfirm) { await page.click('.profile-banner [data-confirm]').catch(() => {}); await page.waitForTimeout(360); }
+    if (s.mgmtModal) { await requiredClick(page, `[data-modal-trigger][data-modal-title-key="${s.mgmtModal}"]`); await page.waitForSelector('.interaction-surface[role="dialog"][aria-modal="true"]', { timeout: 5000, state: 'visible' }); await page.waitForTimeout(340); }
+    if (s.mgmtConfirm) { await requiredConfirm(page, '.profile-banner [data-confirm]'); await page.waitForTimeout(360); }
     // Spec 039 — open an arbitrary confirm gate by selector (materials row delete)
-    if (s.confirmSel) { await page.click(s.confirmSel).catch(() => {}); await page.waitForTimeout(380); }
+    if (s.confirmSel) { await requiredConfirm(page, s.confirmSel); await page.waitForTimeout(380); }
+
+    if (s.spec044State === 'dirty-warning') {
+      const input = page.locator('.interaction-surface input:not([type="hidden"]), .interaction-surface textarea').first();
+      if (await input.count() !== 1) throw new Error('Spec 044 dirty-state screenshot field is missing');
+      await input.fill(`${await input.inputValue()} changed`);
+      await page.keyboard.press('Escape');
+      await page.waitForSelector('.interaction-surface [data-interaction-discard-state]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'validation-error') {
+      const input = page.locator('.interaction-surface input:not([type="hidden"]), .interaction-surface textarea').first();
+      if (await input.count() !== 1) throw new Error('Spec 044 validation screenshot field is missing');
+      await input.evaluate((node) => node.setCustomValidity('Spec 044 validation probe'));
+      await page.locator('.interaction-surface [data-interaction-submit]').click();
+      await page.waitForSelector('.interaction-surface [data-interaction-error-summary]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'backend-required') {
+      await page.locator('.interaction-surface [data-interaction-submit]').click();
+      await page.waitForSelector('.interaction-surface [data-interaction-backend-state]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'wizard-dirty-warning') {
+      const input = page.locator('[data-wizard] input, [data-wizard] textarea, [data-wizard] select').first();
+      if (await input.count() !== 1) throw new Error('Spec 044 wizard screenshot field is missing');
+      await input.fill(`${await input.inputValue()} changed`);
+      await requiredClick(page, '.sidebar a[href="families.html"]');
+      await page.waitForSelector('[data-page-discard-state]', { timeout: 5000, state: 'visible' });
+    } else if (s.spec044State === 'dropdown') {
+      await requiredClick(page, '[data-action="profile-menu"]');
+      await page.waitForSelector('[role="menu"]', { timeout: 5000, state: 'visible' });
+    }
 
     const name = `${s.page}__${s.lang}__${s.theme}__${s.vp}${s.variant ? '__' + s.variant : ''}${s.rail ? '__rail' : ''}${s.drawer ? '__drawer' : ''}${s.cat ? '__cat-' + s.cat : ''}.png`;
     // Spec 013 — area close-ups are element-scoped (Playwright auto-scrolls the element into view)
     if (s.area) {
-      const el = await page.$(s.area);
-      if (el) await el.screenshot({ path: path.join(OUT, name) });
-      else await page.screenshot({ path: path.join(OUT, name), fullPage: true });
+      await page.waitForSelector(s.area, { timeout: 5000, state: 'visible' });
+      await page.locator(s.area).first().screenshot({ path: path.join(OUT, name) });
     } else {
       await page.screenshot({ path: path.join(OUT, name), fullPage: !s.drawer && !s.sheet && !s.outcomeDrawer && !s.confirm && !s.teacherConfirm && !s.reportAction && !s.financeDrawer && !s.financeConfirm && !s.sessCreateModal && !s.studentKebab && !s.teacherKebab && !s.openDrawer && !s.mgmtModal && !s.mgmtConfirm && !s.staffKebabDrawer && !s.nestedDrawer && !s.confirmSel });
     }

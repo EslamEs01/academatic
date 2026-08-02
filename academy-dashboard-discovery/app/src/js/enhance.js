@@ -9,6 +9,16 @@ import { openPopover, closeMenu } from './components/dropdown.js';
 import { toast } from './components/toast.js';
 import { icon } from './icons.js';
 import { esc } from './dom.js';
+import {
+  closeInteraction,
+  guardInteractionNavigation,
+  openConfirmation,
+  openInformational,
+  openSidebarInteraction,
+  openTemplateInteraction,
+  registerPageFormSession,
+  reportInteractionError,
+} from './components/interaction-system.js';
 
 const RAIL_KEY = 'academy.rail';
 const CAT_KEY = 'academy.navCategory';
@@ -327,6 +337,7 @@ function stepNeighbor(wrap, dir) {
   if (!wrap) return;
   const want = (location.hash.match(/step=([a-z0-9-]+)/i) || [])[1];
   if (want) selectStep(wrap, want);
+  registerPageFormSession(wrap);
 })();
 
 /* ---- Spec 034 — Time Converter (page-scoped; only runs where [data-time-converter]
@@ -394,84 +405,31 @@ document.addEventListener('keydown', (e) => {
   selectStep(wrap, dots[j].getAttribute('data-step-go'), { focus: true });
 });
 
-/* ---- generic right-side panel (focus trap, scrim, Esc, return focus) ---- */
-let panel, scrim, lastFocus, keyHandler;
-function openPanel(node, { wide = false } = {}, trigger) {
-  if (panel) closePanel();
-  lastFocus = trigger || document.activeElement;
-  scrim = document.createElement('div'); scrim.className = 'scrim'; scrim.addEventListener('click', closePanel);
-  panel = document.createElement('div'); panel.className = 'drawer' + (wide ? ' sheet' : '');
-  panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
-  panel.appendChild(node);
-  document.body.append(scrim, panel);
-  requestAnimationFrame(() => { scrim.classList.add('is-open'); panel.classList.add('is-open'); });
-  const f = () => Array.from(panel.querySelectorAll('a,button,select,input,[tabindex]:not([tabindex="-1"])')).filter((e) => !e.disabled);
-  keyHandler = (e) => {
-    if (e.key === 'Escape') return closePanel();
-    if (e.key === 'Tab') {
-      const els = f(); if (!els.length) return;
-      const first = els[0], last = els[els.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  };
-  document.addEventListener('keydown', keyHandler);
-  const els = f(); if (els[0]) els[0].focus();
-}
-function closePanel() {
-  if (!panel) return;
-  document.removeEventListener('keydown', keyHandler);
-  panel.classList.remove('is-open'); scrim.classList.remove('is-open');
-  const p = panel, s = scrim; setTimeout(() => { p.remove(); s.remove(); }, 260);
-  panel = null; scrim = null;
-  if (lastFocus && lastFocus.focus) lastFocus.focus();
-}
-
 /* sidebar drawer (mobile) clones the static sidebar */
 function openDrawer(trigger) {
   const side = document.querySelector('#shell > .sidebar');
-  if (!side) return;
+  if (!side) return reportInteractionError('missing-sidebar', 'mobile-sidebar', 'Required mobile sidebar source is missing');
   const clone = side.cloneNode(true);
   // avoid duplicate ids + dangling aria refs once the sidebar is cloned into the drawer
   clone.querySelectorAll('[id]').forEach((n) => n.removeAttribute('id'));
   clone.querySelectorAll('[aria-controls],[aria-labelledby]').forEach((n) => { n.removeAttribute('aria-controls'); n.removeAttribute('aria-labelledby'); });
-  openPanel(clone, { wide: false }, trigger);
+  return openSidebarInteraction(clone, trigger);
 }
 /* entity preview sheet clones the matching <template data-preview="id"> */
 function openSheet(id, trigger) {
   const tpl = document.querySelector(`template[data-preview="${CSS.escape(id)}"]`);
-  if (!tpl) { toast(acknowledge(trigger)); return; }
-  openPanel(tpl.content.cloneNode(true), { wide: true }, trigger);
+  if (!tpl) return reportInteractionError('missing-target', id, `Required interaction target ${id} is missing`);
+  return openTemplateInteraction(tpl, trigger);
 }
 
-/* ---- confirmation modal (built from data-confirm-* attrs; demo only) ---- */
-function openConfirm(el) {
+/* ---- shared confirmation state (demo action only; no persistence) ---- */
+function openConfirm(el, focusTrigger = el) {
   const title = el.getAttribute('data-confirm-title') || '';
   const msg = el.getAttribute('data-confirm-msg') || '';
   const cta = el.getAttribute('data-confirm-cta') || t('common.confirm');
   const toastMsg = el.getAttribute('data-confirm-toast') || '';
-  const danger = el.hasAttribute('data-confirm-danger');
-  const scrimEl = document.createElement('div');
-  scrimEl.className = 'modal-scrim';
-  scrimEl.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}">
-    <div class="flex items-center gap-3 mb-3">
-      <span class="medallion m-soft ${danger ? 'tone-coral' : 'tone-primary'}">${icon(danger ? 'alert-triangle' : 'check-circle', 'ico')}</span>
-      <h3 class="text-[16px] font-bold text-ink">${esc(title)}</h3></div>
-    <p class="text-[13px] mb-5" style="color:var(--c-ink-3)">${esc(msg)}</p>
-    <div class="flex justify-end gap-2.5">
-      <button class="btn btn-secondary btn-sm" data-close="1"><span>${esc(t('common.cancel'))}</span></button>
-      <button class="btn ${danger ? 'btn-danger' : 'btn-primary'} btn-sm" data-confirm-go="1"><span>${esc(cta)}</span></button>
-    </div></div>`;
-  const close = () => { scrimEl.remove(); document.removeEventListener('keydown', onKey); if (lastFocus2) lastFocus2.focus(); };
-  const lastFocus2 = document.activeElement;
-  const onKey = (e) => { if (e.key === 'Escape') close(); };
-  scrimEl.addEventListener('click', (e) => {
-    if (e.target === scrimEl || e.target.closest('[data-close]')) return close();
-    if (e.target.closest('[data-confirm-go]')) { close(); if (toastMsg) toast(toastMsg); }
-  });
-  document.addEventListener('keydown', onKey);
-  document.body.appendChild(scrimEl);
-  scrimEl.querySelector('[data-confirm-go]').focus();
+  const danger = el.hasAttribute('data-confirm-danger') || el.classList.contains('btn-danger') || el.classList.contains('btn-ghost');
+  return openConfirmation({ trigger: focusTrigger, title, message: msg, confirmLabel: cta, danger, onConfirm: () => { if (toastMsg) toast(toastMsg); } });
 }
 
 /* generic modal (gallery + data-modal-trigger). Spec 026: a Create/Edit trigger may carry
@@ -483,19 +441,7 @@ function openModal(trigger) {
   const noteKey = trigger && trigger.getAttribute && trigger.getAttribute('data-modal-note-key');
   const title = titleKey ? t(titleKey) : t('gallery.title');
   const note = noteKey ? t(noteKey) : t('gallery.subtitle');
-  const scrimEl = document.createElement('div');
-  scrimEl.className = 'modal-scrim';
-  scrimEl.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-label="${esc(title)}">
-    <div class="flex items-center gap-3 mb-3"><span class="medallion m-soft tone-primary">${icon(titleKey ? 'clock' : 'sparkles', 'ico')}</span>
-      <h3 class="text-[16px] font-bold text-ink">${esc(title)}</h3></div>
-    <p class="text-[13px] mb-5" style="color:var(--c-ink-3)">${esc(note)}</p>
-    <div class="flex justify-end gap-2.5"><button class="btn btn-primary btn-sm" data-close="1"><span>${t('common.close')}</span></button></div></div>`;
-  const close = () => { scrimEl.remove(); document.removeEventListener('keydown', esc2); };
-  const esc2 = (e) => { if (e.key === 'Escape') close(); };
-  scrimEl.addEventListener('click', (e) => { if (e.target === scrimEl || e.target.closest('[data-close]')) close(); });
-  document.addEventListener('keydown', esc2);
-  document.body.appendChild(scrimEl);
-  scrimEl.querySelector('button').focus();
+  return openInformational({ trigger, title, message: note });
 }
 
 /* ---- client-side filtering of pre-rendered rows ---- */
@@ -559,7 +505,7 @@ document.addEventListener('click', (e) => {
   const th = e.target.closest('[data-set-theme]');
   if (th) { setTheme(th.getAttribute('data-set-theme')); updateThemeIcon(); return closeMenu(); }
   const lg = e.target.closest('[data-set-lang]');
-  if (lg) { const l = lg.getAttribute('data-set-lang'); closeMenu(); if (l !== getLang()) location.href = langUrl(l); return; }
+  if (lg) { const l = lg.getAttribute('data-set-lang'); closeMenu(); if (l !== getLang()) guardInteractionNavigation(() => { location.href = langUrl(l); }); return; }
 
   // content / profile tabs — switch the visible baked panel
   const tabBtn = e.target.closest('[data-tab]');
@@ -588,9 +534,9 @@ document.addEventListener('click', (e) => {
   // entity preview / overlays
   const drw = e.target.closest('[data-drawer]');
   if (drw) { closeMenu(); return openSheet(drw.getAttribute('data-drawer'), drw); }
-  if (e.target.closest('[data-sheet-close]')) return closePanel();
+  if (e.target.closest('[data-sheet-close]')) return closeInteraction();
   const cf = e.target.closest('[data-confirm]');
-  if (cf) { closeMenu(); return openConfirm(cf); }
+  if (cf) { const focusTrigger = cf.closest('.popover')?._trigger || cf; closeMenu(); return openConfirm(cf, focusTrigger); }
 
   // full-IA nav: planned items → "قريبًا" toast; disabled items → their reason (never dead)
   const cs = e.target.closest('[data-coming-soon]');

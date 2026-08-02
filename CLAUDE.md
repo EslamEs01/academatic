@@ -1,24 +1,24 @@
 <!-- SPECKIT START -->
-Active feature: **Spec 043 — Sensitive Data Privacy, Role Isolation & Anti-Poaching is IMPLEMENTED**
-(Wave-0 frontend privacy foundation; plan at
-`academy-dashboard-discovery/specs/043-sensitive-data-privacy-role-isolation-anti-poaching/plan.md` + `research.md`
-+ `data-model.md` + `quickstart.md` + **15 execution contracts**). Baseline HEAD `cd56aa0` (re-measured: 115 HTML
-· 57 PAGES · menu 50 · 24/25/1 · 49/0/1 · `FUTURE_ROUTES {}` · sole lock `classSalaryReport` · gallery pair);
-build byte-identical · smoke PASS · a11y 0/0. **17 owned rows, ownership tally 2/12/3** (2 direct impl · 12
-already-safe+guard · 3 registry+backend-gated; C12-01 shares the parent-contact surface with C12-13 but stays
-Class-3). **Spec 043's OWN implement phase (Wave 0) delivers 5 outcomes BEFORE any dependent Gate 3**: (A)
-child-view password-gate removal — delete 1 fixture line `portal.js:323`, student-profile only (family/teacher
-gates untouched); declared smoke supersession `:1971`/`:2082` (3→2) + MUT-3; (B) parent-contact deny-by-default
-registry — 1 new `PERM_GROUPS` group of 5 rows on the existing staff RBAC host (`staff.js` 0-diff) + `adm.staff.perm.*`
-keys + MUT-2/MUT-6; (C) teacher capability/notification structure-only policy preview — `capabilityPolicyDrawer('trn-policy')`
-on `teacher.js` mirroring `availabilityDrawer` + `TEACHER_CAPABILITY_POLICY` + `trn.policy.*`, `salary_*` EXCLUDED,
-+ MUT-TP; (D) global privacy guards **G1–G14** in smoke (additive + the one G5 supersession + G7/G8 strengthening);
-(E) existing-safe executable freeze (the 12 Class-2 rows). **Impact: exactly 6 changed bodies** (staff·teacher·
-student-profile ×AR/EN); 0 new page/route/nav-item/dependency/component/hook/storage-key; `i18n.js`/`nav.config.js`/
-`enhance.js`/`sidebar.js`/`build-html.mjs`/`package.json` 0-diff. Downstream 044 = host quality only; 047 PRESERVES
-the child-view correction; 048 PRESERVES the registry; 045–056 preserve/add page-local only. Real auth/RBAC/
-sessions/secrets = FUTURE_BACKEND (never faked). No plan-phase app/test/public/package change; watcher commits.
-Next: `/speckit.tasks`.
+Active feature: **Spec 044 — Modal, Drawer & Long-Form Interaction System is IMPLEMENTED and independently verified**
+(`academy-dashboard-discovery/specs/044-modal-drawer-long-form-interaction-system/`). Tasks **100/100**. One shared
+modal-grade controller now owns confirmations, generic dialogs, simple-form modals, long/detail drawers, mobile
+sidebar, and same-surface discard states; dropdowns remain non-modal and the existing add-family wizard remains the
+only dedicated large-form page. Per locale inventory: **160 confirmations · 13 generic dialogs · 54 simple-form
+modals · 18 long-form drawers · 162 detail drawers · 405 menus · 32 sidebars · 1 wizard**; recursive targets
+**234 = 72 forms + 162 details**. Global backend-note reach is **7 authored consumers · 40 generated pages
+(20/20) · 94 instances (47/47)** and truthfully states that server connection is required and nothing is saved yet.
+The 30 localized nested feedback field-ID collisions and 10 duplicate targets are now zero. Final impact from
+accepted HEAD `7d2397b`: **115 HTML · 114 bodies · 48 changed / 66 unchanged · 0 added/removed · 0 unrelated drift**;
+12 authored app files + 60 generated files. Verification: build PASS; interaction **22/22**; smoke **114/114**;
+a11y **300 scenarios, critical=0 serious=0**; screenshots **402, console errors=0**; mutations **15/15 exact RED →
+GREEN, residue=0**; generated copied-asset parity exact; `git diff --check` PASS. Spec-043 privacy/RBAC and Spec-041
+routes/IA remain preserved. Kimi timed out before delivery and Claude could not start because required host `socat`
+is absent; both wrote zero files, so Codex completed the documented unavailable-executor fallback and final review.
+No commit/push/merge or other forbidden Git operation was performed; user owns publication.
+History: **Spec 043 — Sensitive Data Privacy, Role Isolation & Anti-Poaching is IMPLEMENTED** — 63/63 tasks;
+exactly six localized page bodies (`staff`, `teacher`, `student-profile` × AR/EN); child two-gate correction,
+parent-contact deny registry, teacher pay-free capability policy, G1–G14 protected guards, 12/12 mutation RED,
+smoke 114/114, a11y 0/0, screenshots 389/0. Real authorization/persistence remains future backend work.
 History: **Spec 042 — Exhaustive Legacy Capability & Page Reconciliation is IMPLEMENTED
 (documentation/orchestration layer) — SPECIFIED + PLANNED + TASKED + IMPLEMENTED, all four adversarial reviews
 PASS (20/20 · 15/15 · 10/10 · 17/17)** (documentation-only; **ZERO app bytes change** — proven per-phase:

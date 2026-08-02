@@ -632,16 +632,18 @@
   </tr></tbody>
     </table></div></section>
   </section>
-    <template data-preview="task-new">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="task-new" data-interaction-family="long-form" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tasks"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Task</h2>
+          <h2 id="interaction-title-task-new" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Task</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-task-name">Task title</label><input id="f-task-name" name="task-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-task-desc">Description</label><textarea id="f-task-desc" name="task-desc" class="input" rows="3" placeholder=""></textarea></div><div class="field"><label class="field-label" for="f-task-assignee">Assignee</label><span class="select-wrap"><select id="f-task-assignee" name="task-assignee" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-task-new" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-task-name">Task title</label><input id="f-task-name" name="task-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-task-desc">Description</label><textarea id="f-task-desc" name="task-desc" class="input" rows="3" placeholder=""></textarea></div><div class="field"><label class="field-label" for="f-task-assignee">Assignee</label><span class="select-wrap"><select id="f-task-assignee" name="task-assignee" class="select-input">
       <option value="task.asg.reception" selected>Reception</option><option value="task.asg.advisor">Advisor</option><option value="task.asg.supervisor">Supervisor</option><option value="task.asg.content">Content</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-task-status">Status</label><span class="select-wrap"><select id="f-task-status" name="task-status" class="select-input">
       <option value="pending" selected>Pending</option><option value="inprogress">In progress</option><option value="completed">Completed</option><option value="overdue">Overdue</option>
@@ -650,25 +652,27 @@
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-task-due">Due date</label><input id="f-task-due" name="task-due" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-task-section">Section</label><span class="select-wrap"><select id="f-task-section" name="task-section" class="select-input">
       <option value="onboarding" selected>Onboarding</option><option value="followup">Follow-up</option><option value="scheduling">Scheduling</option><option value="content">Content</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="task.reason.backend" title="This action is available once the server is connected — no task is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save task</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="task.reason.backend" title="This action is available once the server is connected — no task is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save task</span></button></footer>
+     </div>
   </template>
-    <template data-preview="task-section">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="task-section" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-layers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Add section</h2>
+          <h2 id="interaction-title-task-section" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Add section</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-task-section" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-task-section-name">Section name</label><input id="f-task-section-name" name="task-section-name" type="text" class="input" placeholder="" value="" /></div></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
       </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-task-section-name">Section name</label><input id="f-task-section-name" name="task-section-name" type="text" class="input" placeholder="" value="" /></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="task.reason.backend" title="This action is available once the server is connected — no task is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
-    </div></div>
-    </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="task.reason.backend" title="This action is available once the server is connected — no task is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button></footer>
+     </div>
   </template>
   </div>
       </main>

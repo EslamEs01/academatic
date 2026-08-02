@@ -2,6 +2,14 @@
  * content; no legacy/private wording. */
 export default {
   common: { close: 'إغلاق', confirm: 'تأكيد', cancel: 'إلغاء', save: 'حفظ', add: 'إضافة', view: 'عرض', edit: 'تعديل', backendRequiredNote: 'هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن.' },
+  interaction: {
+    discardTitle: 'توجد تغييرات غير محفوظة',
+    discardMessage: 'هل تريد متابعة التعديل أم تجاهل التغييرات؟ لم يتم حفظ المعلومات بعد.',
+    continueEditing: 'متابعة التعديل',
+    discardChanges: 'تجاهل التغييرات',
+    validationSummary: 'راجع الحقول المعلَّمة وصحّحها قبل المتابعة.',
+    validationError: 'تحقق من هذه القيمة.',
+  },
 
   /* ---- Spec 032 — shared form-drawer option labels (fixtures/form-options.js) ---- */
   fopt: {

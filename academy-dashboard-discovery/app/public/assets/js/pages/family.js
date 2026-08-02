@@ -147,9 +147,9 @@ function notesPanel(fam) {
 }
 
 /* Family-category reassignment (Spec 027, M-K / Spec 032, FC-05) — a display-only
- * assignment PREVIEW: an INERT category select (Spec 032) over the category list
- * with the family's current tier marked + member counts; the "Save category"
- * final is a backendRequired gate (no reassignment persists). Exported so the
+ * assignment preview: a category select over the category list with the family's
+ * current tier marked + member counts; the shared terminal action validates, then
+ * shows the truthful backend-required state (no reassignment persists). Exported so the
  * families.html kebab host bakes the same drawer (once per page). */
 export function famCatDrawer(fam) {
   const catOpts = FAMILY_CATEGORIES.map((c) => ({ value: c.id, labelKey: c.nameKey, selected: c.id === fam.categoryId }));
@@ -160,14 +160,14 @@ export function famCatDrawer(fam) {
   }).join('');
   const body = `<div class="wiz-grid" style="margin-bottom:12px">${field({ labelKey: 'fam.ov.category', name: 'famCat-category', type: 'select', options: catOpts, full: true })}</div>
     <p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">${t('fam.cat.reclassHint')}</p>
-    ${rows}
-    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="fam.cat.reclassReason" aria-disabled="true" title="${esc(t('fam.cat.reclassReason'))}">${icon('check', 'ico ico-sm')}<span>${t('fam.cat.save')}</span></button>`;
-  return previewTemplate('fam-cat', { titleKey: 'fam.cat.reclassTitle', headIcon: 'filter', tone: 'primary', bodyHTML: body });
+    ${rows}`;
+  const footerHTML = `<button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="fam.cat.reclassReason" title="${esc(t('fam.cat.reclassReason'))}">${icon('check', 'ico ico-sm')}<span>${t('fam.cat.save')}</span></button>`;
+  return previewTemplate('fam-cat', { titleKey: 'fam.cat.reclassTitle', headIcon: 'filter', tone: 'primary', bodyHTML: body, footerHTML });
 }
 
-/* Spec 032 (FC-04/FC-06) — the shared Edit-family form drawer: INERT field()
+/* Spec 032/044 (FC-04/FC-06) — the shared Edit-family form: editable frontend-only
  * controls (the excluded legacy fieldset stays out — see the must-omit contract)
- * + the ONE formDrawer backendRequired Save final. Exported so the families.html
+ * plus one truthful formDrawer terminal action. Exported so the families.html
  * kebab host bakes the same drawer; triggers open it via data-drawer="fam-edit". */
 export function famEditDrawer() {
   const statusOpts = optsFrom(Object.keys(FAMILY_STATUS), 'famStatus');
@@ -186,8 +186,8 @@ export function famEditDrawer() {
   return formDrawer('fam-edit', { titleKey: 'fam.form.editTitle', headIcon: 'edit', fields });
 }
 
-/* Spec 032 (FC-07/FC-08) — the Add-child form drawer (both Add-child triggers on
- * this page open it). INERT fields + the formDrawer backendRequired final. */
+/* Spec 032/044 (FC-07/FC-08) — both Add-child triggers open this shared form.
+ * Editable frontend-only fields lead to the truthful backend-required terminal state. */
 function famChildDrawer() {
   const fields = [
     field({ labelKey: 'fam.wiz.f.childName', name: 'famChild-name', placeholderKey: 'fam.wiz.ph.childName' }),

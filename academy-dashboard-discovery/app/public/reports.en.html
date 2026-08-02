@@ -473,7 +473,7 @@
     </div>
     <section class="tabpanel" role="tabpanel" id="tabpanel-reports-overview" data-tabpanel="overview" aria-labelledby="tab-reports-overview">
     <div class="report-actions flex items-center flex-wrap gap-2" role="group" aria-label="Report actions">
-    <button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="Export needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-printer"></use></svg><span>Print report</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="Export needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>Export CSV</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="Export needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Export PDF</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.share" title="Sharing needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-share"></use></svg><span>Share report</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="Schedule this report" data-confirm-msg="This will be available once the server is connected — nothing is scheduled or sent yet." data-confirm-cta="Confirm schedule" data-confirm-toast="Scheduling the report will be available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>Schedule report</span></button>
+    <button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="Export needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-printer"></use></svg><span>Print report</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="Export needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>Export CSV</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.export" title="Export needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Export PDF</span></button><button type="button" class="btn btn-ghost btn-sm"   aria-disabled="true" data-disabled-reason data-reason-key="rep.reason.share" title="Sharing needs the backend module — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-share"></use></svg><span>Share report</span></button><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Schedule this report" data-confirm-msg="This will be available once the server is connected — nothing is scheduled or sent yet." data-confirm-cta="Confirm schedule" data-confirm-toast="Scheduling the report will be available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-calendar-clock"></use></svg><span>Schedule report</span></button>
   </div>
     <section class="mt-6" id="ops-overview">
     <div class="mb-3">
@@ -854,17 +854,18 @@
     </div>
     
   </div></div>
-    <template data-preview="rep-fb-fb1">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="rep-fb-fb1" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb1" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Ms. Sara</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb1" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Ms. Sara</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Teaching quality</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>Excellent</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>Reviewed</span></span></span></div>
@@ -873,19 +874,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Excellent rapport with students and well-organised lesson prep.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb2">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb2" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb2" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Mr. Mohammed</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb2" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Mr. Mohammed</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Communication</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Good</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Open</span></span></span></div>
@@ -894,19 +898,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Good communication with families; a shorter weekly update is suggested.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb3">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb3" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb3" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Ms. Layan</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb3" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Ms. Layan</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Teaching quality</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Good</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Resolved</span></span></span></div>
@@ -915,19 +922,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Clear lesson plan and consistent follow-up.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb4">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb4" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb4" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Math group</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb4" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Math group</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Session</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>Excellent</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>Reviewed</span></span></span></div>
@@ -936,19 +946,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">The session ran smoothly with high participation.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb5">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb5" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb5" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Programming group</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb5" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Programming group</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Session</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Needs follow-up</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Open</span></span></span></div>
@@ -957,19 +970,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Attendance is uneven; needs follow-up with the family.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb6">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb6" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb6" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">English group</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb6" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">English group</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Session</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Good</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>Reviewed</span></span></span></div>
@@ -978,19 +994,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Good engagement and the session objectives were met.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb7">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb7" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb7" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Al-Otaibi family</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb7" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Al-Otaibi family</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Communication</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Good</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Resolved</span></span></span></div>
@@ -999,19 +1018,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Friendly meeting; the family is happy with the progress.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb8">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb8" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb8" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Al-Shammari family</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb8" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Al-Shammari family</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Family meeting</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Needs follow-up</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Open</span></span></span></div>
@@ -1020,19 +1042,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Asked to clarify the timetable; awaiting follow-up.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb9">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb9" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb9" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Al-Qahtani family</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb9" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Al-Qahtani family</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Family meeting</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-rarely"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-alert-triangle"></use></svg><span>Needs attention</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Open</span></span></span></div>
@@ -1041,19 +1066,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Concern about attendance consistency — a meeting will be set.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb10">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb10" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb10" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Salman</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb10" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Salman</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Student progress</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-excellent"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-sparkles"></use></svg><span>Excellent</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>Reviewed</span></span></span></div>
@@ -1062,19 +1090,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Noticeable growth in skills this month.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb11">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb11" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb11" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Lina</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb11" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Lina</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Student progress</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-good"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Good</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Resolved</span></span></span></div>
@@ -1083,19 +1114,22 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Steady performance with good homework commitment.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
-  </template><template data-preview="rep-fb-fb12">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-fb-fb12" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-inbox"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback details</h2>
+          <h2 id="interaction-title-rep-fb-fb12" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Subject</span><span class="v">Yousef</span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fb-fb12" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Subject</span><span class="v">Yousef</span></div>
     <div class="sheet-row"><span class="k">Category</span><span class="v">Student progress</span></div>
     <div class="sheet-row"><span class="k">Remark</span><span class="v"><span class="rating-pill tone-sometimes"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Needs follow-up</span></span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Open</span></span></span></div>
@@ -1104,19 +1138,23 @@
       <div class="ic-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-message-square"></use></svg><span>Note</span></div>
       <p class="narrative">Needs extra support on a few concepts.</p>
     </div>
-    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div></div>
-    </div>
+    <div class="flex flex-wrap items-center gap-2 mt-4"><button type="button" class="btn btn-primary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Approve this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Approve" data-confirm-toast="Approving feedback becomes available once the server is connected." ><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Approve</span></button><button type="button" class="btn btn-danger btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="Delete this feedback" data-confirm-msg="This action needs the server connection to complete — nothing is saved yet." data-confirm-cta="Delete" data-confirm-toast="Deleting feedback becomes available once the server is connected." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
   </template>
-    <template data-preview="rep-fbcat">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="rep-fbcat" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Feedback categories</h2>
+          <h2 id="interaction-title-rep-fbcat" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Feedback categories</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">Predefined categories to group feedback — display-only.</p>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-fbcat" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">Predefined categories to group feedback — display-only.</p>
     <div class="sheet-row"><span class="k">Teaching quality</span><span class="v">5 items</span></div><div class="sheet-row"><span class="k">Communication</span><span class="v">3 items</span></div><div class="sheet-row"><span class="k">Session</span><span class="v">4 items</span></div><div class="sheet-row"><span class="k">Family meeting</span><span class="v">2 items</span></div><div class="sheet-row"><span class="k">Student progress</span><span class="v">3 items</span></div>
     <div style="border-top:1px solid var(--c-line);margin-top:16px;padding-top:12px">
       <div class="font-bold text-ink text-[13.5px] mb-3"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg> Add category</div>
@@ -1129,21 +1167,25 @@
       </div>
     </div>
     <div class="flex flex-wrap gap-2 mt-4">
-      <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="rep.fbcat.createReason" title="Creating the category needs the server connection — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
-      <button type="button" class="btn btn-primary btn-sm" data-disabled-reason data-reason-key="rep.fbcat.assignReason" aria-disabled="true" title="Assigning members needs the server connection — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>Assign members</span></button>
-    </div></div>
+      <button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="rep.fbcat.assignReason" aria-disabled="true" title="Assigning members needs the server connection — out of current scope."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-user-check"></use></svg><span>Assign members</span></button>
     </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="rep.fbcat.createReason" title="Creating the category needs the server connection — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button></footer>
+     </div>
   </template>
-    <template data-preview="fb-create">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="fb-create" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Add feedback</h2>
+          <h2 id="interaction-title-fb-create" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Add feedback</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-fbCreate-type">Type</label><span class="select-wrap"><select id="f-fbCreate-type" name="fbCreate-type" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-fb-create" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field"><label class="field-label" for="f-fbCreate-type">Type</label><span class="select-wrap"><select id="f-fbCreate-type" name="fbCreate-type" class="select-input">
       <option value="teacher" selected>Teacher</option><option value="class">Session</option><option value="family">Family</option><option value="student">Student</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-fbCreate-subject">Subject</label><span class="select-wrap"><select id="f-fbCreate-subject" name="fbCreate-subject" class="select-input">
       <option value="sara" selected>Ms. Sara</option><option value="mohammed">Mr. Mohammed</option><option value="layan">Ms. Layan</option><option value="mathGrp">Math group</option><option value="progGrp">Programming group</option><option value="engGrp">English group</option><option value="fam1">Al-Otaibi family</option><option value="fam2">Al-Shammari family</option><option value="fam3">Al-Qahtani family</option><option value="st1">Salman</option><option value="st6">Lina</option><option value="st11">Yousef</option>
@@ -1152,10 +1194,10 @@
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-fbCreate-remark">Remark</label><span class="select-wrap"><select id="f-fbCreate-remark" name="fbCreate-remark" class="select-input">
       <option value="excellent" selected>Excellent</option><option value="good">Good</option><option value="watch">Needs follow-up</option><option value="concern">Needs attention</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-fbCreate-note">Note</label><textarea id="f-fbCreate-note" name="fbCreate-note" class="input" rows="3" placeholder="Write the note here…"></textarea></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button></footer>
+     </div>
   </template>
   </section>
     <section class="mt-8" id="reports-forms">
@@ -1236,98 +1278,111 @@
     <span>The monthly student progress form is filled from the Evaluation tab on the student profile.</span>
     <a href="student.en.html#view=evaluation" class="link-more">Open student evaluation <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a>
   </div>
-    <template data-preview="rep-form-frm1">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="rep-form-frm1" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Form details</h2>
+          <h2 id="interaction-title-rep-form-frm1" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Form details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">6</span></span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-form-frm1" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">6</span></span></div>
     <div class="sheet-row"><span class="k">Responses</span><span class="v"><span class="tabular">42</span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></span></div>
     <div class="sheet-row"><span class="k">Created</span><span class="v">This month</span></div>
     <p class="text-[12.5px] mt-3" style="color:var(--c-ink-3)">The monthly student progress form is filled from the Evaluation tab on the student profile.</p>
-      <a href="student.en.html#view=evaluation" class="link-more mt-1 inline-flex">Open student evaluation <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a></div>
-    </div>
-  </template><template data-preview="rep-form-frm2">
-    <div class="sheet-card">
-      <div class="sheet-head">
+      <a href="student.en.html#view=evaluation" class="link-more mt-1 inline-flex">Open student evaluation <svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-arrow-left"></use></svg></a>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-form-frm2" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Form details</h2>
+          <h2 id="interaction-title-rep-form-frm2" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Form details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">4</span></span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-form-frm2" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">4</span></span></div>
     <div class="sheet-row"><span class="k">Responses</span><span class="v"><span class="tabular">18</span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></span></div>
     <div class="sheet-row"><span class="k">Created</span><span class="v">Last month</span></div>
-    </div>
-    </div>
-  </template><template data-preview="rep-form-frm3">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-form-frm3" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Form details</h2>
+          <h2 id="interaction-title-rep-form-frm3" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Form details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">8</span></span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-form-frm3" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">8</span></span></div>
     <div class="sheet-row"><span class="k">Responses</span><span class="v"><span class="tabular">31</span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></span></div>
     <div class="sheet-row"><span class="k">Created</span><span class="v">This month</span></div>
-    </div>
-    </div>
-  </template><template data-preview="rep-form-frm4">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-form-frm4" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Form details</h2>
+          <h2 id="interaction-title-rep-form-frm4" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Form details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">5</span></span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-form-frm4" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">5</span></span></div>
     <div class="sheet-row"><span class="k">Responses</span><span class="v"><span class="tabular">0</span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg><span>Draft</span></span></span></div>
     <div class="sheet-row"><span class="k">Created</span><span class="v">This week</span></div>
-    </div>
-    </div>
-  </template><template data-preview="rep-form-frm5">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="rep-form-frm5" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Form details</h2>
+          <h2 id="interaction-title-rep-form-frm5" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Form details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">3</span></span></div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-rep-form-frm5" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-row"><span class="k">Questions</span><span class="v"><span class="tabular">3</span></span></div>
     <div class="sheet-row"><span class="k">Responses</span><span class="v"><span class="tabular">12</span></span></div>
     <div class="sheet-row"><span class="k">Status</span><span class="v"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Closed</span></span></span></div>
     <div class="sheet-row"><span class="k">Created</span><span class="v">2 months ago</span></div>
-    </div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
   </template>
-    <template data-preview="form-create">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="form-create" data-interaction-family="long-form" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clipboard-check"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Create form</h2>
+          <h2 id="interaction-title-form-create" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Create form</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-formCreate-name">Form name</label><input id="f-formCreate-name" name="formCreate-name" type="text" class="input" placeholder="e.g. End-of-month survey" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-day">Day</label><span class="select-wrap"><select id="f-formCreate-day" name="formCreate-day" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-form-create" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field"><label class="field-label" for="f-formCreate-name">Form name</label><input id="f-formCreate-name" name="formCreate-name" type="text" class="input" placeholder="e.g. End-of-month survey" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-day">Day</label><span class="select-wrap"><select id="f-formCreate-day" name="formCreate-day" class="select-input">
       <option value="sat" selected>Saturday</option><option value="sun">Sunday</option><option value="mon">Monday</option><option value="tue">Tuesday</option><option value="wed">Wednesday</option><option value="thu">Thursday</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full" style="border-top:1px solid var(--c-line);margin-top:4px;padding-top:12px">
       <span class="field-label">Field 1</span>
@@ -1342,10 +1397,10 @@
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-formCreate-field2Options">Options</label><input id="f-formCreate-field2Options" name="formCreate-field2Options" type="text" class="input" placeholder="Comma-separated options" value="" /></div><div class="field"><label class="field-label" for="f-formCreate-field2Required">Required?</label><span class="select-wrap"><select id="f-formCreate-field2Required" name="formCreate-field2Required" class="select-input">
       <option value="yes" selected>Yes</option><option value="no">No</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button></footer>
+     </div>
   </template>
   </section>
   </section>

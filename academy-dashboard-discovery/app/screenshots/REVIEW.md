@@ -1061,3 +1061,23 @@ figure, no guardian/student contact, no country/locality, no value slot** — te
 Left/Acquired attribution, Address/Country, Hour Rate, Salary/Compensations tabs, Login-as, live WhatsApp invite and
 phone are all absent; the legacy 170-checkbox "all granted" matrix is a display-only deny-by-default preview; the
 legacy child-profile password card is removed.
+
+## Spec 044 — Modal, Drawer & Long-Form Interaction System (2026-08-02)
+
+**Frames:** **402 captured · 0 console errors**, including 13 `sp044-*` frames reopened by Codex at
+original detail after the final build. Coverage spans AR/RTL and EN/LTR, light/dark, desktop,
+mobile 390px, keyboard-height 390px, confirmation, dirty warning, validation error,
+backend-required, simple form, long form, details, wizard, mobile sidebar, and dropdown.
+
+Accepted frames: `sp044-confirm`, `sp044-confirm-en-dark`, `sp044-dirty`,
+`sp044-validation-en-dark`, `sp044-backend-dark`, `sp044-simple-mobile`,
+`sp044-keyboard-viewport-en-dark`, `sp044-long-form-en`, `sp044-long-form-mobile-dark`,
+`sp044-details-en-dark`, `sp044-wizard-dirty`, `sp044-sidebar-en-dark`, and
+`sp044-dropdown-dark`.
+
+The first `students/ar/light/390px` capture exposed an RTL background table widening the root
+canvas and clipping the open drawer. It was rejected. The accepted replacement uses the full
+390px width, preserves the sticky header/footer and scrollable form, and is permanently guarded by
+M44-10 (`documentElement.scrollWidth <= innerWidth`). No clipped surface, off-screen action,
+unexpected nested overlay, light/dark regression, or AR/EN layout regression remains in the final
+matrix.

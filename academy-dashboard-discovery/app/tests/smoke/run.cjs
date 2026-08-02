@@ -36,6 +36,28 @@ const TEACHER_INTERNAL = new Set(['teacher-schedule', 'teacher-students', 'teach
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
+async function waitForOnlyPanel(page, group, panel) {
+  await page.waitForFunction(([expectedGroup, expectedPanel]) => {
+    const visible = [...document.querySelectorAll(`[data-tabs="${expectedGroup}"] [data-tabpanel]`)]
+      .filter((candidate) => !candidate.hidden)
+      .map((candidate) => candidate.getAttribute('data-tabpanel'));
+    return visible.length === 1 && visible[0] === expectedPanel;
+  }, [group, panel], { timeout: 5000 });
+}
+
+async function openRequiredMenu(page, selector) {
+  const trigger = page.locator(selector);
+  if (await trigger.count() !== 1) throw new Error(`required menu trigger must exist exactly once: ${selector}`);
+  await trigger.waitFor({ state: 'visible', timeout: 5000 });
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    await trigger.click();
+    if (await trigger.getAttribute('aria-expanded') === 'true') return;
+    await page.waitForTimeout(100);
+  }
+  throw new Error(`required menu did not open after its enhancement listener became available: ${selector}`);
+}
+
 // Spec 010 — the set of built page files, for the link-integrity crawl (a link must
 // target one of these, an in-page hash, or be a documented hash-view).
 const VALID_FILES = new Set();
@@ -73,8 +95,8 @@ const FILTER_SPEC = {
 
 // ===== Spec 032 — Create-Edit Forms Completion freeze (FC-01…FC-40). Every Add/Create/
 // Edit/Duplicate action now opens a form-bearing drawer: a baked <template data-preview>
-// whose body holds ≥1 INERT input/select/textarea + a clickable data-disabled-reason
-// backendRequired final (no fake save, no persistence, no mutation). This map pins every
+// whose body holds ≥1 input/select/textarea + exactly one active data-interaction-submit
+// backendRequired final (validation + no fake save, no persistence, no mutation). This map pins every
 // rebuilt form drawer to its host page(s); the block below audits each template body,
 // re-pins the candidate-list pickers + the 3 hybrid category-create drawers, and enforces
 // the MUST-OMIT / MUST-GATE contracts on every form body. ADDITIVE ONLY — every protected
@@ -462,10 +484,11 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           edit: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.edit"]'),
           addChild: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.addChild"]'),
           reclassDrawer: !!document.querySelector('[data-drawer="fam-cat"]'),
-          reclassTpl: !!(document.querySelector('template[data-preview="fam-cat"]') || {}).content?.querySelector?.('[data-disabled-reason]'),
+          reclassTerminals: (document.querySelector('template[data-preview="fam-cat"]') || {}).content
+            ?.querySelectorAll?.('.btn-primary[data-interaction-submit][data-reason-key]').length || 0,
         }));
         ok(fm.edit && fm.addChild, `${page}/${lang}: family banner missing edit/add-child modal triggers`);
-        ok(fm.reclassDrawer && fm.reclassTpl, `${page}/${lang}: family category reclassify drawer/template (w/ backendRequired gate) missing`);
+        ok(fm.reclassDrawer && fm.reclassTerminals === 1, `${page}/${lang}: family category reclassify drawer/template must have exactly one active backendRequired terminal (got ${fm.reclassTerminals})`);
       }
 
       // Spec 004 — add-family wizard: 5 baked steps · labeled fields · Next/Back · Save toasts
@@ -1332,8 +1355,8 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const OMIT = /pass|secret|api[-_]?key|token|webhook|otp|salary|hour[-_]?rate|fine|payout|iban|cvv/i;
           const audit = (content, id) => {
             const ctrls = content.querySelectorAll('input,select,textarea').length;
-            const gates = content.querySelectorAll('[data-disabled-reason],[data-confirm]').length;
-            const primaries = content.querySelectorAll('.btn-primary[data-disabled-reason]').length;
+            const gates = content.querySelectorAll('button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])').length;
+            const primaries = gates;
             if (ctrls === 0) out.fieldless.push(id);
             if (gates === 0) out.noGate.push(id);
             if (primaries > 1) out.multiPrimary.push(id);
@@ -1351,14 +1374,20 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           // the nested fb-add form (FC-25) lives inside the attended outcome templates
           if (expectNestedFb) {
             document.querySelectorAll('template[data-preview]').forEach((tpl) => {
-              const inner = tpl.content.querySelector('template[data-preview="fb-add"]');
-              if (inner) { out.nestedFbAdd++; audit(inner.content, 'fb-add'); }
+              const inner = tpl.content.querySelector('template[data-preview^="fb-add-"]');
+              if (inner) {
+                const target = inner.getAttribute('data-preview');
+                const opener = tpl.content.querySelector(`[data-drawer="${target}"]`);
+                if (!opener) out.missing.push(target);
+                out.nestedFbAdd++;
+                audit(inner.content, target);
+              }
             });
           }
           // picker re-pin: each candidate-list drawer still renders content + an honest final
           for (const id of pickerIds) {
             const tpl = document.querySelector(`template[data-preview="${id}"]`);
-            if (!tpl || !tpl.content.querySelector('[data-disabled-reason]')
+            if (!tpl || !tpl.content.querySelector('[data-disabled-reason], button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])')
               || (tpl.content.textContent || '').trim().length < 40) out.pickerBad.push(id);
           }
           // the 3 hybrid category drawers now carry a REAL create form (≥2 controls)
@@ -1389,11 +1418,12 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         if (openable32) {
           await p.click(`[data-drawer="${openable32}"]`);
           await p.waitForTimeout(280);
-          const sheet32 = await p.evaluate(() => {
-            const d = document.querySelector('.drawer.sheet');
+          const sheet32 = await p.evaluate((target) => {
+            const d = document.querySelector(`.interaction-surface[role="dialog"][aria-modal="true"][data-interaction-target="${target}"]`);
             if (!d) return { open: false };
-            return { open: true, ctrls: d.querySelectorAll('input,select,textarea').length, gate: !!d.querySelector('[data-disabled-reason]') };
-          });
+            const gate = d.querySelectorAll('button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])').length;
+            return { open: true, ctrls: d.querySelectorAll('input,select,textarea').length, gate };
+          }, openable32);
           ok(sheet32.open && sheet32.ctrls >= 1 && sheet32.gate,
             `${page}/${lang}: form drawer "${openable32}" did not open with visible controls + a backendRequired final (${JSON.stringify(sheet32)})`);
           await p.keyboard.press('Escape');
@@ -1429,7 +1459,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const bq = (s) => body.querySelectorAll(s).length;
           const tpl = (id) => document.querySelector(`template[data-preview="${id}"]`);
           const tplCtrls = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('input,select,textarea').length : 0; };
-          const tplGate = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('[data-disabled-reason]').length : 0; };
+          const tplGate = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])').length : 0; };
           // an honest final gate = clickable data-disabled-reason OR an inert disabled button (both carry a reason, enforced elsewhere)
           const bodyGates = bq('[data-disabled-reason]') + bq('button[disabled]');
           const o = { fileInputs: q('input[type="file"]'), pwInputs: q('input[type="password"]'), canvas: q('canvas'), demo: bq('[data-demo-action]'), bodyGates };
@@ -2282,7 +2312,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'student', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="student"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2309,7 +2339,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'perf', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="perf"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2345,7 +2375,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         const dext = [];
         p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
         await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-        await p.waitForTimeout(220);
+        await waitForOnlyPanel(p, s.group, view);
         const r = await p.evaluate((group) => {
           const vis = [...document.querySelectorAll(`[data-tabs="${group}"] [data-tabpanel]`)].filter((x) => !x.hidden);
           const body = document.getElementById('page-body');
@@ -2373,7 +2403,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'finance', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="finance"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2449,7 +2479,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         const dext = [];
         p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
         await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-        await p.waitForTimeout(220);
+        await waitForOnlyPanel(p, s.group, view);
         const r = await p.evaluate((group) => {
           const vis = [...document.querySelectorAll(`[data-tabs="${group}"] [data-tabpanel]`)].filter((x) => !x.hidden);
           const body = document.getElementById('page-body');
@@ -2483,7 +2513,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${sfile}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'settings', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="settings"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2682,7 +2712,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         const ext = [];
         p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) ext.push(u); });
         await p.goto(`${BASE}/${f}#view=${view}`, { waitUntil: 'networkidle' });
-        await p.waitForTimeout(200);
+        await waitForOnlyPanel(p, group, view);
         const vis = await p.evaluate((g) => [...document.querySelectorAll(`[data-tabs="${g}"] [data-tabpanel]`)].filter((x) => !x.hidden).map((x) => x.getAttribute('data-tabpanel')), group);
         ok(vis.length === 1 && vis[0] === view,
           `deeplink/${it.id}/${lang}: #view=${view} must open EXACTLY that panel — the URL hash must beat the seeded stored view '${other}'. Got ${JSON.stringify(vis)}`);
@@ -2703,7 +2733,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
     const ctx = await browser.newContext();
     const p = await ctx.newPage();
     await p.goto(`${BASE}/${f}#view=add`, { waitUntil: 'networkidle' });
-    await p.waitForTimeout(200);
+    await waitForOnlyPanel(p, 'teachers', 'add');
     const r = await p.evaluate(() => {
       const add = document.querySelector('[data-tabs="teachers"] [data-tabpanel="add"]');
       const cat = document.querySelector('[data-tabs="teachers"] [data-tabpanel="categories"]');
@@ -2785,14 +2815,17 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       if (group) await ctx.addInitScript(([g, o]) => { try { localStorage.setItem('academy.schedView.' + g, o); } catch (e) { /* ignore */ } }, [group, 'overview']);
       const p = await ctx.newPage();
       await p.goto(`${BASE}/${start}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(200);
       // open the TOPBAR language popover and assert it really opened
-      await p.click('[data-action="lang-menu"]');
-      await p.waitForTimeout(140);
-      const menuOpen = await p.evaluate(() => !!document.querySelector('[role="menuitem"][data-set-lang]'));
-      ok(menuOpen, `d3/${start}: the topbar language menu did not open — the test would prove nothing`);
-      await p.click(`[role="menuitem"][data-set-lang="${to}"]`);
-      await p.waitForTimeout(500);
+      await openRequiredMenu(p, '[data-action="lang-menu"]');
+      const languageItem = p.locator(`[role="menuitem"][data-set-lang="${to}"]:visible`);
+      await languageItem.waitFor({ timeout: 5000, state: 'visible' });
+      const menuCount = await p.locator('[role="menuitem"][data-set-lang]:visible').count();
+      if (menuCount !== 2) throw new Error(`d3/${start}: expected exactly two visible topbar language items, got ${menuCount}`);
+      await Promise.all([
+        p.waitForURL((url) => url.href.endsWith(`/${want}`), { waitUntil: 'networkidle', timeout: 5000 }),
+        languageItem.click(),
+      ]);
+      if (group) await waitForOnlyPanel(p, group, panel);
       const r = await p.evaluate((g) => ({
         href: location.href.split('/').pop(),
         hashes: (location.href.match(/#/g) || []).length,

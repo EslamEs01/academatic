@@ -515,35 +515,39 @@
     </div></td>
   </tr></tbody>
     </table></div></section>
-    <template data-preview="mat-add">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="mat-add" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Add subject</h2>
+          <h2 id="interaction-title-mat-add" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Add subject</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-mat-add" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matAdd-name">Name</label><input id="f-matAdd-name" name="matAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-matAdd-nameAr">Arabic name</label><input id="f-matAdd-nameAr" name="matAdd-nameAr" type="text" class="input" placeholder="" value="" /></div></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
       </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matAdd-name">Name</label><input id="f-matAdd-name" name="matAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-matAdd-nameAr">Arabic name</label><input id="f-matAdd-nameAr" name="matAdd-nameAr" type="text" class="input" placeholder="" value="" /></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
-    </div></div>
-    </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button></footer>
+     </div>
   </template>
-    <template data-preview="mat-edit">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="mat-edit" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Edit subject</h2>
+          <h2 id="interaction-title-mat-edit" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Edit subject</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-mat-edit" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matEdit-name">Name</label><input id="f-matEdit-name" name="matEdit-name" type="text" class="input" placeholder="" value="Arabic" /></div><div class="field field-full"><label class="field-label" for="f-matEdit-nameAr">Arabic name</label><input id="f-matEdit-nameAr" name="matEdit-nameAr" type="text" class="input" placeholder="" value="اللغة العربية" /></div></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
       </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matEdit-name">Name</label><input id="f-matEdit-name" name="matEdit-name" type="text" class="input" placeholder="" value="Arabic" /></div><div class="field field-full"><label class="field-label" for="f-matEdit-nameAr">Arabic name</label><input id="f-matEdit-nameAr" name="matEdit-nameAr" type="text" class="input" placeholder="" value="اللغة العربية" /></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
-    </div></div>
-    </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button></footer>
+     </div>
   </template></section>
     <section class="tabpanel" role="tabpanel" id="tabpanel-library-books" data-tabpanel="books" aria-labelledby="tab-library-books" hidden><div class="flex items-center flex-wrap gap-2 mb-3">
     <button type="button" class="btn btn-primary btn-sm"   data-drawer="lib-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add content</span></button>
@@ -650,16 +654,18 @@
       <button type="button" class="btn btn-ghost btn-sm" data-confirm data-confirm-danger data-confirm-title="Delete item?" data-confirm-msg="Deletion needs the server — nothing is deleted now." data-confirm-cta="Delete" data-confirm-toast="Deletion is available once the server is connected."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>Delete</span></button>
     </div></td>
   </tr></tbody>
-  </table></div></section><template data-preview="lib-cats">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </table></div></section><template data-preview="lib-cats" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Library categories</h2>
+          <h2 id="interaction-title-lib-cats" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Library categories</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="sheet-rows"><div class="sheet-row"><span class="k">Arabic</span><span class="v tabular">6</span></div><div class="sheet-row"><span class="k">English</span><span class="v tabular">4</span></div><div class="sheet-row"><span class="k">Math</span><span class="v tabular">3</span></div><div class="sheet-row"><span class="k">Science</span><span class="v tabular">5</span></div><div class="sheet-row"><span class="k">Quran</span><span class="v tabular">8</span></div><div class="sheet-row"><span class="k">Coding</span><span class="v tabular">2</span></div></div><div class="mt-4">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-lib-cats" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-rows"><div class="sheet-row"><span class="k">Arabic</span><span class="v tabular">6</span></div><div class="sheet-row"><span class="k">English</span><span class="v tabular">4</span></div><div class="sheet-row"><span class="k">Math</span><span class="v tabular">3</span></div><div class="sheet-row"><span class="k">Science</span><span class="v tabular">5</span></div><div class="sheet-row"><span class="k">Quran</span><span class="v tabular">8</span></div><div class="sheet-row"><span class="k">Coding</span><span class="v tabular">2</span></div></div><div class="mt-4">
     <div class="font-bold text-[12.5px] text-ink mb-1.5">Add category</div>
     <div class="wiz-grid">
       <div class="field field-full"><label class="field-label" for="f-libCats-name">Category name</label><input id="f-libCats-name" name="libCats-name" type="text" class="input" placeholder="" value="" /></div>
@@ -667,29 +673,31 @@
       <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
     </div>
-    <div class="flex items-center justify-end mt-3">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add category</span></button>
-    </div>
-  </div></div>
-    </div>
-  </template><template data-preview="lib-item">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>Add category</span></button></footer>
+     </div>
+  </template><template data-preview="lib-item" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Add library item</h2>
+          <h2 id="interaction-title-lib-item" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Add library item</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-libItem-name">Title</label><input id="f-libItem-name" name="libItem-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-libItem-type">Type</label><span class="select-wrap"><select id="f-libItem-type" name="libItem-type" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-lib-item" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-libItem-name">Title</label><input id="f-libItem-name" name="libItem-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-libItem-type">Type</label><span class="select-wrap"><select id="f-libItem-type" name="libItem-type" class="select-input">
       <option value="file" selected>File</option><option value="video">Video</option><option value="image">Image</option><option value="audio">Audio</option><option value="link">Link</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-libItem-category">Category</label><span class="select-wrap"><select id="f-libItem-category" name="libItem-category" class="select-input">
       <option value="lc1" selected>Arabic</option><option value="lc2">English</option><option value="lc3">Math</option><option value="lc4">Science</option><option value="lc5">Quran</option><option value="lc6">Coding</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><div class="flex flex-wrap gap-2"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.lib.uploadReason" aria-disabled="true" title="Upload needs the server — no real upload."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Upload</span></button><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.lib.thumbReason" aria-disabled="true" title="The thumbnail is uploaded on the server — no real upload here."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-award"></use></svg><span>Thumbnail</span></button></div></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Add</span></button></footer>
+     </div>
   </template></section>
   </div></div>
       </main>

@@ -546,22 +546,24 @@
       <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wallet"></use></svg></span>
       <div><h2 class="text-[15px] font-bold text-ink">بنود المصروفات</h2>
       <p class="text-[12px]" style="color:var(--c-ink-3)">قائمة تصنيف — الاسم والحالة فقط، دون أي مبالغ.</p></div>
-    </div><div class="set-row"><div class="min-w-0"><div class="set-label">الإيجار</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">المرافق</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">اللوازم</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">التسويق</div></div><div class="shrink-0"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>غير نشط</span></span></div></div><div class="mt-2"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="head-add"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة بند</span></button></div></section><template data-preview="head-add">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    </div><div class="set-row"><div class="min-w-0"><div class="set-label">الإيجار</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">المرافق</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">اللوازم</div></div><div class="shrink-0"><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>نشط</span></span></div></div><div class="set-row"><div class="min-w-0"><div class="set-label">التسويق</div></div><div class="shrink-0"><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>غير نشط</span></span></div></div><div class="mt-2"><button type="button" class="btn btn-secondary btn-sm"   data-drawer="head-add"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة بند</span></button></div></section><template data-preview="head-add" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-amber medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">إضافة بند مصروف</h2>
+          <h2 id="interaction-title-head-add" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">إضافة بند مصروف</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-headAdd-name">الاسم</label><input id="f-headAdd-name" name="headAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-headAdd-status">الحالة</label><span class="select-wrap"><select id="f-headAdd-status" name="headAdd-status" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-head-add" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-headAdd-name">الاسم</label><input id="f-headAdd-name" name="headAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-headAdd-status">الحالة</label><span class="select-wrap"><select id="f-headAdd-status" name="headAdd-status" class="select-input">
       <option value="active" selected>نشط</option><option value="trial">تجريبي</option><option value="suspended">موقوف مؤقتًا</option><option value="inactive">غير نشط</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button></footer>
+     </div>
   </template></section>
     <section class="tabpanel" role="tabpanel" id="tabpanel-settings-notifications" data-tabpanel="notifications" aria-labelledby="tab-settings-notifications" hidden><section class="set-section" id="set-notif-system">
     <div class="flex items-center gap-3 mb-2">
@@ -887,7 +889,7 @@
       <div class="set-label">إعادة ضبط البيانات التجريبية</div>
       
     </div>
-    <div class="shrink-0"><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-title="إعادة ضبط البيانات التجريبية؟" data-confirm-msg="سيعيد هذا ضبط القيم التجريبية في الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إعادة الضبط" data-confirm-toast="سيتوفّر إعادة الضبط بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>إعادة ضبط البيانات التجريبية</span></button></div>
+    <div class="shrink-0"><button type="button" class="btn btn-secondary btn-sm"   data-confirm data-confirm-safe-action="cancel" aria-haspopup="dialog" data-confirm-title="إعادة ضبط البيانات التجريبية؟" data-confirm-msg="سيعيد هذا ضبط القيم التجريبية في الواجهة فقط — لا يؤثّر على أي بيانات حقيقية." data-confirm-cta="إعادة الضبط" data-confirm-toast="سيتوفّر إعادة الضبط بعد ربط الخادم." data-confirm-danger="1"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>إعادة ضبط البيانات التجريبية</span></button></div>
   </div>
     
   </section><section class="set-section" id="set-imp-teachers">
@@ -1119,16 +1121,18 @@
       <div><h2 class="text-[15px] font-bold text-ink">طرق الدفع</h2>
       <p class="text-[12px]" style="color:var(--c-ink-3)">طرق الدفع المتاحة للعائلات — تُدار عبر التكاملات.</p></div>
     </div><div class="empty-state"><div class="font-bold text-[13px] text-ink">لا توجد طريقة دفع مُهيَّأة</div>
-      <p class="text-[12.5px] mt-1" style="color:var(--c-ink-3)">تُتاح طرق الدفع بعد ربط الخادم.</p></div></section><template data-preview="integ-stripe">
-    <div class="sheet-card">
-      <div class="sheet-head">
+      <p class="text-[12.5px] mt-1" style="color:var(--c-ink-3)">تُتاح طرق الدفع بعد ربط الخادم.</p></div></section><template data-preview="integ-stripe" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Stripe</h2>
+          <h2 id="interaction-title-integ-stripe" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Stripe</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-stripe-name">الاسم الظاهر</label><input id="f-integ-stripe-name" name="integ-stripe-name" type="text" class="input" placeholder="" value="" /></div></div><div class="mt-3"><div class="font-bold text-[13px] text-ink mb-1">بيانات حساسة</div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-stripe" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-stripe-name">الاسم الظاهر</label><input id="f-integ-stripe-name" name="integ-stripe-name" type="text" class="input" placeholder="" value="" /></div></div><div class="mt-3"><div class="font-bold text-[13px] text-ink mb-1">بيانات حساسة</div>
        <p class="set-help mb-2">هذه القيم لا تُدخَل ولا تُعرَض هنا مطلقًا؛ تُهيَّأ بأمان على الخادم.</p>
        <div class="set-struct">
   <div class="min-w-0">
@@ -1143,20 +1147,22 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-paypal">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-paypal" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">PayPal</h2>
+          <h2 id="interaction-title-integ-paypal" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">PayPal</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-paypal-name">الاسم الظاهر</label><input id="f-integ-paypal-name" name="integ-paypal-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-paypal-env">البيئة</label><span class="select-wrap"><select id="f-integ-paypal-env" name="integ-paypal-env" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-paypal" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-paypal-name">الاسم الظاهر</label><input id="f-integ-paypal-name" name="integ-paypal-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-paypal-env">البيئة</label><span class="select-wrap"><select id="f-integ-paypal-env" name="integ-paypal-env" class="select-input">
       <option value="sandbox" selected>تجريبي (Sandbox)</option><option value="live">إنتاج (Live)</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div><p class="set-help" style="margin-top:-6px;margin-bottom:6px">ابدأ بالبيئة التجريبية (Sandbox)؛ بيئة الإنتاج (Live) تُحرّك أموالًا حقيقية.</p><div class="mt-3"><div class="font-bold text-[13px] text-ink mb-1">بيانات حساسة</div>
        <p class="set-help mb-2">هذه القيم لا تُدخَل ولا تُعرَض هنا مطلقًا؛ تُهيَّأ بأمان على الخادم.</p>
@@ -1173,20 +1179,22 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-mollie">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-mollie" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Mollie</h2>
+          <h2 id="interaction-title-integ-mollie" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Mollie</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-mollie-name">الاسم الظاهر</label><input id="f-integ-mollie-name" name="integ-mollie-name" type="text" class="input" placeholder="" value="" /></div></div><div class="mt-3"><div class="font-bold text-[13px] text-ink mb-1">بيانات حساسة</div>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-mollie" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-mollie-name">الاسم الظاهر</label><input id="f-integ-mollie-name" name="integ-mollie-name" type="text" class="input" placeholder="" value="" /></div></div><div class="mt-3"><div class="font-bold text-[13px] text-ink mb-1">بيانات حساسة</div>
        <p class="set-help mb-2">هذه القيم لا تُدخَل ولا تُعرَض هنا مطلقًا؛ تُهيَّأ بأمان على الخادم.</p>
        <div class="set-struct">
   <div class="min-w-0">
@@ -1195,20 +1203,22 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-xpay">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-xpay" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">XPay</h2>
+          <h2 id="interaction-title-integ-xpay" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">XPay</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-xpay-name">الاسم الظاهر</label><input id="f-integ-xpay-name" name="integ-xpay-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-xpay-url">رابط XPay</label><span class="select-wrap"><select id="f-integ-xpay-url" name="integ-xpay-url" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-xpay" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-xpay-name">الاسم الظاهر</label><input id="f-integ-xpay-name" name="integ-xpay-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-xpay-url">رابط XPay</label><span class="select-wrap"><select id="f-integ-xpay-url" name="integ-xpay-url" class="select-input">
       <option value="staging" selected>تجريبي (Staging)</option><option value="community">المجتمع (Community)</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div><div class="set-row">
     <div class="min-w-0"><div class="set-label">بطاقة</div></div>
@@ -1243,20 +1253,22 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-payoneer">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-payoneer" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Payoneer</h2>
+          <h2 id="interaction-title-integ-payoneer" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Payoneer</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-payoneer-name">الاسم الظاهر</label><input id="f-integ-payoneer-name" name="integ-payoneer-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-payoneer-env">البيئة</label><span class="select-wrap"><select id="f-integ-payoneer-env" name="integ-payoneer-env" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-payoneer" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-payoneer-name">الاسم الظاهر</label><input id="f-integ-payoneer-name" name="integ-payoneer-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-payoneer-env">البيئة</label><span class="select-wrap"><select id="f-integ-payoneer-env" name="integ-payoneer-env" class="select-input">
       <option value="sandbox" selected>تجريبي (Sandbox)</option><option value="live">إنتاج (Live)</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div><div class="mt-3"><div class="font-bold text-[13px] text-ink mb-1">بيانات حساسة</div>
        <p class="set-help mb-2">هذه القيم لا تُدخَل ولا تُعرَض هنا مطلقًا؛ تُهيَّأ بأمان على الخادم.</p>
@@ -1273,20 +1285,22 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-paymob">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-paymob" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Paymob</h2>
+          <h2 id="interaction-title-integ-paymob" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Paymob</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-paymob-name">الاسم الظاهر</label><input id="f-integ-paymob-name" name="integ-paymob-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-paymob-region">منطقة Paymob</label><span class="select-wrap"><select id="f-integ-paymob-region" name="integ-paymob-region" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-paymob" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-paymob-name">الاسم الظاهر</label><input id="f-integ-paymob-name" name="integ-paymob-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-paymob-region">منطقة Paymob</label><span class="select-wrap"><select id="f-integ-paymob-region" name="integ-paymob-region" class="select-input">
       <option value="eg" selected>مصر</option><option value="om">عمان</option><option value="sa">السعودية</option><option value="ae">الإمارات</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div><p class="set-help" style="margin-top:-6px;margin-bottom:6px">المنطقة التي أُنشئ فيها حساب Paymob.</p><div class="mt-3"><div class="font-bold text-[13px] text-ink mb-1">بيانات حساسة</div>
        <p class="set-help mb-2">هذه القيم لا تُدخَل ولا تُعرَض هنا مطلقًا؛ تُهيَّأ بأمان على الخادم.</p>
@@ -1321,34 +1335,38 @@
   </div>
   <div class="shrink-0"><span class="ss-req">اختياري</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-custom">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-custom" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">مزوّد مخصّص</h2>
+          <h2 id="interaction-title-integ-custom" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">مزوّد مخصّص</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-custom" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-custom-name">الاسم الظاهر</label><input id="f-integ-custom-name" name="integ-custom-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-integ-custom-details">تفاصيل مخصّصة</label><textarea id="f-integ-custom-details" name="integ-custom-details" class="input" rows="3" placeholder=""></textarea></div></div><p class="set-help" style="margin-top:-6px;margin-bottom:6px">ملاحظات إضافية خاصة بإعداد هذا المزوّد — تُدار على الخادم.</p><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
       </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-custom-name">الاسم الظاهر</label><input id="f-integ-custom-name" name="integ-custom-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-integ-custom-details">تفاصيل مخصّصة</label><textarea id="f-integ-custom-details" name="integ-custom-details" class="input" rows="3" placeholder=""></textarea></div></div><p class="set-help" style="margin-top:-6px;margin-bottom:6px">ملاحظات إضافية خاصة بإعداد هذا المزوّد — تُدار على الخادم.</p><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-paymob-payout">
-    <div class="sheet-card">
-      <div class="sheet-head">
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-paymob-payout" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Paymob Payout</h2>
+          <h2 id="interaction-title-integ-paymob-payout" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Paymob Payout</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-pmb-out-mode">الوضع</label><span class="select-wrap"><select id="f-integ-pmb-out-mode" name="integ-pmb-out-mode" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-paymob-payout" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-pmb-out-mode">الوضع</label><span class="select-wrap"><select id="f-integ-pmb-out-mode" name="integ-pmb-out-mode" class="select-input">
       <option value="sandbox" selected>تجريبي (Sandbox)</option><option value="live">إنتاج (Live)</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div><div class="set-row">
     <div class="min-w-0"><div class="set-label">مُفعّل</div></div>
@@ -1380,20 +1398,22 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-payoneer-payout">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-payoneer-payout" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Payoneer Payout</h2>
+          <h2 id="interaction-title-integ-payoneer-payout" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Payoneer Payout</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-pyn-out-mode">الوضع</label><span class="select-wrap"><select id="f-integ-pyn-out-mode" name="integ-pyn-out-mode" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-payoneer-payout" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-pyn-out-mode">الوضع</label><span class="select-wrap"><select id="f-integ-pyn-out-mode" name="integ-pyn-out-mode" class="select-input">
       <option value="sandbox" selected>تجريبي (Sandbox)</option><option value="live">إنتاج (Live)</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div><div class="set-row">
     <div class="min-w-0"><div class="set-label">مُفعّل</div></div>
@@ -1419,36 +1439,40 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-whatsapp">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-whatsapp" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">واتساب (مجاني)</h2>
+          <h2 id="interaction-title-integ-whatsapp" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">واتساب (مجاني)</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-wa-phone">رقم واتساب</label><input id="f-integ-wa-phone" name="integ-wa-phone" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-wa-target">وجهة الإرسال</label><span class="select-wrap"><select id="f-integ-wa-target" name="integ-wa-target" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-whatsapp" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-wa-phone">رقم واتساب</label><input id="f-integ-wa-phone" name="integ-wa-phone" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-wa-target">وجهة الإرسال</label><span class="select-wrap"><select id="f-integ-wa-target" name="integ-wa-target" class="select-input">
       <option value="private" selected>خاص</option><option value="group">المجموعة</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-integ-wa-group">اسم المجموعة</label><input id="f-integ-wa-group" name="integ-wa-group" type="text" class="input" placeholder="" value="" /></div></div><p class="set-help" style="margin-top:-6px;margin-bottom:6px">الرقم المستخدم للاقتران مع واتساب — يتم الاقتران عبر الخادم.</p><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.pairReason" aria-disabled="true" title="الاقتران يتم عبر الخادم برمز استجابة سريعة — لا يظهر هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>اقتران واتساب</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
-  </template><template data-preview="integ-email">
-    <div class="sheet-card">
-      <div class="sheet-head">
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
+  </template><template data-preview="integ-email" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-grid"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">البريد / SMTP</h2>
+          <h2 id="interaction-title-integ-email" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">البريد / SMTP</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-email-address">عنوان البريد</label><input id="f-integ-email-address" name="integ-email-address" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-email-host">مضيف SMTP</label><input id="f-integ-email-host" name="integ-email-host" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-email-port">منفذ SMTP</label><input id="f-integ-email-port" name="integ-email-port" type="number" class="input" placeholder="" value="587" /></div><div class="field"><label class="field-label" for="f-integ-email-enc">تشفير SMTP</label><span class="select-wrap"><select id="f-integ-email-enc" name="integ-email-enc" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-integ-email" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-integ-email-address">عنوان البريد</label><input id="f-integ-email-address" name="integ-email-address" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-email-host">مضيف SMTP</label><input id="f-integ-email-host" name="integ-email-host" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-integ-email-port">منفذ SMTP</label><input id="f-integ-email-port" name="integ-email-port" type="number" class="input" placeholder="" value="587" /></div><div class="field"><label class="field-label" for="f-integ-email-enc">تشفير SMTP</label><span class="select-wrap"><select id="f-integ-email-enc" name="integ-email-enc" class="select-input">
       <option value="none">بدون</option><option value="ssl">SSL</option><option value="tls" selected>TLS</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div><div class="set-row">
     <div class="min-w-0"><div class="set-label">مُفعّل</div></div>
@@ -1471,10 +1495,10 @@
   </div>
   <div class="shrink-0"><span class="ss-req">مطلوب</span></div>
 </div></div><p class="text-[12px] mt-2" style="color:var(--c-ink-3)">معاينة فقط — لا يُخزَّن أي تغيير قبل ربط الخادم.</p><div class="flex flex-wrap gap-2 mt-3"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.set.integ.testReason" aria-disabled="true" title="اختبار الاتصال يتم عبر الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-retry"></use></svg><span>اختبار الاتصال</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.set.integ.saveConfigReason" title="الحفظ يتم عبر الخادم — لا يُخزَّن أي تغيير الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ الإعدادات</span></button></footer>
+     </div>
   </template></section>
   </div></div>
   </div>
