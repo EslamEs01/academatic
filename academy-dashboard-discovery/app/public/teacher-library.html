@@ -278,12 +278,24 @@
     <p class="pt-home-status">ملفات ومواد التدريس الخاصة بحصصك — للعرض فقط.</p>
   </div>
 
-    <section class="pt-section">
+    <section class="pt-section td-focus">
       <div class="pt-sec-head">
     <h2 class="pt-sec-title"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg>مكتبتي</h2>
     <span class="pt-sec-hint">المواد ونوعها وحالة نشرها والمقرر المرتبط بها.</span>
   </div>
-      <div class="pt-cards"><div class="pt-card">
+      <form class="filterbar" data-filter-form data-target="#library-resources">
+    <div class="input-wrap" style="flex:1 1 220px;min-width:180px">
+      <svg class="lead-ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg>
+      <input class="input" type="search" data-filter="search" placeholder="ابحث في موادك…" aria-label="ابحث في موادك…" />
+    </div>
+
+    <div class="flex items-center gap-2 ms-auto">
+      <button type="button" class="btn btn-ghost btn-sm"   data-filter-reset><span>إعادة ضبط</span></button>
+      <button type="button" class="btn btn-dark btn-sm"   data-filter-apply><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg><span>تطبيق</span></button>
+    </div>
+    <span class="w-full text-[12px]" style="color:var(--c-ink-3)" data-filter-count></span>
+  </form>
+      <div id="library-resources" class="pt-cards"><div class="pt-card" data-row data-search="ورقة عمل الكسور (pdf) مستند">
     <div class="pt-card-row">
       <span class="pt-time"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg></span>
       <div style="flex:1;min-width:0">
@@ -295,7 +307,7 @@
     <div class="pt-tags">
       <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>مستند</span></span>
     </div>
-  </div><div class="pt-card">
+  </div><div class="pt-card" data-row data-search="فيديو: شرح المعادلات فيديو">
     <div class="pt-card-row">
       <span class="pt-time"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg></span>
       <div style="flex:1;min-width:0">
@@ -307,7 +319,7 @@
     <div class="pt-tags">
       <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg><span>فيديو</span></span>
     </div>
-  </div><div class="pt-card">
+  </div><div class="pt-card" data-row data-search="أمثلة تدريبية للحصة شرائح">
     <div class="pt-card-row">
       <span class="pt-time"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg></span>
       <div style="flex:1;min-width:0">
@@ -320,13 +332,23 @@
       <span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>شرائح</span></span>
     </div>
   </div></div>
+      <div class="hidden" data-no-results><div class="card p-8 text-center flex flex-col items-center gap-3" >
+    <span class="medallion m-soft tone-muted medallion-lg"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg></span>
+    <div>
+      <h3 class="text-[15px] font-bold text-ink mb-1">لا توجد نتائج مطابقة</h3>
+      <p class="text-[13px] leading-relaxed max-w-xs mx-auto" style="color:var(--c-ink-3)">جرّب تعديل البحث أو إعادة ضبط عوامل التصفية.</p>
+    </div>
+
+  </div></div>
     </section>
 
-    <div class="pt-note" style="padding:10px 12px"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span><span>إضافة مادة جديدة إلى المكتبة ستتاح عند ربط الخادم.</span></div>
-    <div class="pt-note" style="padding:10px 12px"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span><span>تنزيل الملفات سيكون متاحًا بعد ربط الخادم.</span></div>
+    <div class="td-gates">
+      <div class="pt-note" style="padding:10px 12px"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span><span>إضافة مادة جديدة إلى المكتبة ستتاح عند ربط الخادم.</span></div>
+      <div class="pt-note" style="padding:10px 12px"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-lock"></use></svg><span>يتطلب الخادم</span></span><span>تنزيل الملفات سيكون متاحًا بعد ربط الخادم.</span></div>
+    </div>
 
     <div class="pt-note"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span><strong>لوحة المعلم — النسخة الأولى</strong> — لوحة مدمجة: أهم عملك اليوم هنا، والتفاصيل الكاملة في صفحاتك تباعًا.</span></div>
-  </div>
+</div>
     </main>
     </div>
     <footer class="pt-foot"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-help"></use></svg><span>معاينة تجريبية بالبيانات الثابتة — بدون تسجيل دخول أو حفظ.</span></footer>

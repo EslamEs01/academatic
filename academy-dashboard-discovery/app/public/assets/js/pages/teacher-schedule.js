@@ -72,7 +72,7 @@ export function renderTeacherSchedule() {
   return `
     ${pageHead('prt.tch.pg.sched.title', 'prt.tch.pg.sched.sub')}
 
-    <section class="pt-section">
+    <section class="pt-section td-focus">
       ${secHead('schedule', 'prt.tch.todayTitle', 'prt.tch.todayHint')}
       ${dayRail(railStops(today))}
       ${next ? `<div class="pt-card" style="border-color:var(--pt-accent)">
@@ -93,8 +93,10 @@ export function renderTeacherSchedule() {
       <div class="pt-week">${myWeek().map(weekDay).join('')}</div>
     </section>
 
-    ${gateNote('prt.tch.pg.sched.liveGate')}
-    ${gateNote('prt.tch.pg.sched.availGate')}
+    <div class="td-gates">
+      ${gateNote('prt.tch.pg.sched.liveGate')}
+      ${gateNote('prt.tch.pg.sched.availGate')}
+    </div>
 
     <div class="pt-note">${icon('help', 'ico ico-sm')}<span><strong>${esc(t('prt.tch.noteT'))}</strong> — ${esc(t('prt.band.noteTch'))}</span></div>
   `;

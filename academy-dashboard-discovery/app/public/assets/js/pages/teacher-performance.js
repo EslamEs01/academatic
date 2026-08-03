@@ -113,6 +113,11 @@ function overviewPanel() {
 /* ---- Sessions KPI tab (Spec 036, display-only) — per-teacher authored session COUNTS +
  * a categorical quality label. NO computed percentage/score/rank, NO chart, NO pay. ---- */
 const qualityChip = (id) => { const q = KPI_QUALITY[id] || KPI_QUALITY.onTrack; return chip({ labelKey: q.labelKey, tone: q.tone, icon: q.icon }); };
+/* Spec 045 — T052 (FR-039 / US8-3): the single categorical quality chip moves INTO the identity
+ * block instead of occupying its own full-width band. At 390px that removes one stacked row from
+ * every repeated record — the exact "cards become very tall" density defect EG-045-11 records —
+ * while hiding nothing: same labelled chip, same tone, same icon+text (never colour-only), same
+ * authored value. No score/rank/percentage is introduced; the four count tiles are untouched. */
 function kpiRow(tr) {
   const c = teacherCounts(tr.id);
   const qid = SESSIONS_KPI_LABELS[tr.id] || 'onTrack';
@@ -126,9 +131,9 @@ function kpiRow(tr) {
       <div class="min-w-0 flex-1">
         <div class="flex items-center gap-2"><h3 class="font-bold text-ink text-[14px] truncate">${t(tr.nameKey)}</h3>${teacherStatusChip(tr.statusId)}</div>
         <p class="text-[12px] truncate" style="color:var(--c-ink-3)">${tr.subjectsKeys.map((k) => t(k)).join(' · ')}</p>
+        <div class="flex flex-wrap gap-1.5 mt-1.5">${qualityChip(qid)}</div>
       </div>
     </div>
-    <div class="flex flex-wrap gap-1.5">${qualityChip(qid)}</div>
     <div class="grid grid-cols-4 gap-2">${stats}</div>
     <a href="${teacherHref()}" class="btn btn-secondary btn-sm w-full">${icon('user', 'ico ico-sm')}<span>${t('trn.viewProfile')}</span></a>
   </div>`;

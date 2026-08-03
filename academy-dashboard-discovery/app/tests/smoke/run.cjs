@@ -1938,6 +1938,10 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const railStops = document.querySelectorAll('#page-body .pt-rail .pt-stop').length;
           const flowSteps = document.querySelectorAll('#page-body .pt-flow-step').length;
           const storyRows = document.querySelectorAll('#page-body .pt-story').length;
+          // Spec 045 — quick-tile truthfulness: a tile that targets an implemented destination is
+          // a REAL anchor; a "soon" badge on such a tile is the FR-012 defect.
+          const qtileLinks = document.querySelectorAll('#page-body a.pt-qtile').length;
+          const qtileSoon = document.querySelectorAll('#page-body .pt-qtile-soon').length;
           const childViewLinks = [...document.querySelectorAll('#page-body a[href]')]
             .filter((a) => /(^|\/)student-portal\.(en\.)?html$/.test(a.getAttribute('href') || '')).length;
           const childPanelCount = document.querySelectorAll('#page-body .pt-child-panel').length;
@@ -1962,7 +1966,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const shellAnchors = [...document.querySelectorAll('a[href]')]
             .filter((a) => !a.closest('#page-body') && !(a.getAttribute('href') || '').startsWith('#'))
             .map((a) => a.getAttribute('href'));
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible, idHero, railStops, flowSteps, storyRows, childViewLinks };
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible, idHero, railStops, flowSteps, storyRows, qtileLinks, qtileSoon, childViewLinks };
         });
         const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : STUDENT_INTERNAL.has(page) ? 'student' : FAMILY_INTERNAL.has(page) ? 'family' : TEACHER_INTERNAL.has(page) ? 'teacher' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
@@ -2041,7 +2045,58 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         // a non-anchor backendRequired gate), and — the teacher hard rule — ZERO pay vocabulary (the
         // payHit lineage, byte-verbatim). teacher-profile carries exactly the three write gates.
         if (TEACHER_INTERNAL.has(page)) {
-          ok(prt.formControls === 0, `${page}/${lang}: teacher internal page must contain zero form controls, got ${prt.formControls}`);
+          /* ── Spec 045 · DECLARED SUPERSESSION S45-2 (T033 / FR-024–FR-025) ────────────────────
+           * Superseded assertion (Spec 025 lineage), verbatim:
+           *   ok(prt.formControls === 0, '… teacher internal page must contain zero form controls …');
+           *
+           * WHY it must change for ONE page: FR-024/FR-025 require `teacher-library` to provide
+           * evidence-backed deterministic resource search (the reference platform's `search_form`
+           * with its `query` input). A search field IS a form control, so the blanket rule and the
+           * requirement cannot both hold. The blanket rule existed to stop teacher internal pages
+           * carrying DATA-ENTRY forms that imply persistence — a client-side filter over content
+           * already rendered on the page is not that, and claims nothing.
+           *
+           * WHY this is NOT a weakening: the rule stays byte-identical (`=== 0`) for the other seven
+           * teacher internal pages. The single exception is pinned far more tightly than "some form
+           * controls are allowed": exactly one form and exactly one input, that input must be
+           * type=search carrying data-filter="search", and select/textarea must remain zero — so a
+           * data-entry field, a dropdown, or a second input on teacher-library now FAILS where the
+           * old blanket rule would merely have counted them. The discovery contract is additionally
+           * enforced (reset control present, exactly one no-results state).
+           * Falsifying mutation: M45-12 (swallowed selector) and M45-13 (false saved wording). */
+          if (page === 'teacher-library') {
+            const lib = await p.evaluate(() => ({
+              forms: document.querySelectorAll('#page-body form').length,
+              inputs: document.querySelectorAll('#page-body input').length,
+              selects: document.querySelectorAll('#page-body select').length,
+              textareas: document.querySelectorAll('#page-body textarea').length,
+              searchInputs: document.querySelectorAll('#page-body input[type="search"][data-filter="search"]').length,
+              reset: document.querySelectorAll('#page-body [data-filter-reset]').length,
+              noResults: document.querySelectorAll('#page-body [data-no-results]').length,
+              targets: document.querySelectorAll('#page-body #library-resources').length,
+            }));
+            ok(lib.forms === 1 && lib.inputs === 1 && lib.selects === 0 && lib.textareas === 0,
+              `${page}/${lang}: teacher-library may carry ONLY the sanctioned discovery control (1 form, 1 input, 0 select, 0 textarea), got ${JSON.stringify(lib)}`);
+            ok(lib.searchInputs === 1,
+              `${page}/${lang}: the one permitted control must be input[type=search][data-filter=search], got ${lib.searchInputs}`);
+            ok(lib.reset === 1 && lib.noResults === 1 && lib.targets === 1,
+              `${page}/${lang}: library discovery contract incomplete (reset=${lib.reset}, no-results=${lib.noResults}, target=${lib.targets}; each must be exactly 1)`);
+            /* the filter must really narrow, and clearing must really restore everything */
+            const before = await p.$$eval('#library-resources .pt-card', (els) => els.filter((e) => !e.hidden).length);
+            await p.fill('#page-body input[data-filter="search"]', 'zzzznomatch');
+            await p.waitForTimeout(200);
+            const narrowed = await p.$$eval('#library-resources .pt-card', (els) => els.filter((e) => !e.hidden).length);
+            const emptyShown = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && !n.hidden; });
+            await p.click('#page-body [data-filter-reset]');
+            await p.waitForTimeout(200);
+            const restored = await p.$$eval('#library-resources .pt-card', (els) => els.filter((e) => !e.hidden).length);
+            ok(before >= 3 && narrowed === 0 && emptyShown,
+              `${page}/${lang}: library search did not narrow to an accessible empty state (before=${before}, narrowed=${narrowed}, empty=${emptyShown})`);
+            ok(restored === before,
+              `${page}/${lang}: clearing the library search did not restore every resource (${restored}/${before})`);
+          } else {
+            ok(prt.formControls === 0, `${page}/${lang}: teacher internal page must contain zero form controls, got ${prt.formControls}`);
+          }
           const tcards = await p.$$eval('#page-body .pt-card', (els) => els.length);
           ok(tcards >= 3, `${page}/${lang}: expected a real content floor (≥3 cards), got ${tcards}`);
           ok(prt.bodyAnchors === 0, `${page}/${lang}: teacher internal page body must contribute zero anchors, got ${prt.bodyAnchors}`);
@@ -2139,9 +2194,40 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           ok(prt.railStops >= 1, `${page}/${lang}: expected a living day rail with ≥1 stop, got ${prt.railStops}`);
           ok(prt.flowSteps === 4, `${page}/${lang}: expected the 4-step outcome flow strip (prepare→attend→record→review), got ${prt.flowSteps}`);
           ok(prt.storyRows === 0, `${page}/${lang}: the teacher home carries no family status stories, got ${prt.storyRows}`);
-          ok(prt.bodyAnchors === 1, `${page}/${lang}: the teacher page body must contribute exactly ONE anchor (the performance link), got ${prt.bodyAnchors}`);
-          ok(prt.anchorTargets.every((h) => /(^|\/)teacher-reports\.(en\.)?html$/.test(h)),
-            `${page}/${lang}: the teacher body anchor must target the teacher-reports page (Spec 025 repoint), got ${JSON.stringify(prt.anchorTargets)}`);
+          /* ── Spec 045 · DECLARED SUPERSESSION S45-1 (T016 / FR-012) ───────────────────────────
+           * Superseded assertions (Spec 025 / Spec 022 lineage), verbatim:
+           *   ok(prt.bodyAnchors === 1, '… must contribute exactly ONE anchor (the performance link) …');
+           *   ok(prt.anchorTargets.every((h) => /(^|\/)teacher-reports\.(en\.)?html$/.test(h)), '… Spec 025 repoint …');
+           *
+           * WHY it must change: those lines were written when the seven Teacher internal pages were
+           * NOT reachable from the home — the quick tiles rendered as `is-planned` divs carrying a
+           * "soon" badge. Spec 045 FR-012 requires every IMPLEMENTED Teacher destination to be a
+           * working localized affordance rather than a false planned state, and all eight
+           * ROLE_NAV.teacher entries are `status: 'implemented'` with all eight pages built. So the
+           * body necessarily contributes 1 + 7 = 8 anchors. Keeping `=== 1` would mandate the defect.
+           *
+           * WHY this is a STRENGTHENING, not a weakening: the old pair pinned ONE destination and
+           * left the other seven unconstrained (they did not exist as anchors). The replacement pins
+           * the EXACT localized target of all eight, requires the quick-tile set to equal the
+           * implemented ROLE_NAV set exactly, and adds a zero-"soon" guard that did not exist.
+           * A regression to the old rendering now fails on three independent assertions.
+           * Falsifying mutation: M45-04 / M45-07. */
+          const TCH_QTILE_PAGES = ['teacher-schedule', 'teacher-students', 'teacher-outcomes',
+            'teacher-tasks', 'teacher-reports', 'teacher-library', 'teacher-profile'];
+          const suffix = lang === 'en' ? '.en.html' : '.html';
+          const expectedTargets = ['teacher-reports' + suffix, ...TCH_QTILE_PAGES.map((b) => b + suffix)];
+          ok(prt.bodyAnchors === 8,
+            `${page}/${lang}: the teacher home body must contribute exactly 8 anchors (1 reports link + 7 implemented quick tiles), got ${prt.bodyAnchors}`);
+          ok(prt.qtileLinks === 7,
+            `${page}/${lang}: expected 7 REAL quick-tile links for the 7 implemented Teacher destinations, got ${prt.qtileLinks}`);
+          ok(prt.qtileSoon === 0,
+            `${page}/${lang}: an implemented Teacher destination is still labelled "soon" (${prt.qtileSoon} badge(s)) — FR-012 violation`);
+          ok(expectedTargets.every((want) => prt.anchorTargets.some((h) => h === want || h.endsWith('/' + want))),
+            `${page}/${lang}: teacher home is missing an exact localized destination. want=${JSON.stringify(expectedTargets)} got=${JSON.stringify(prt.anchorTargets)}`);
+          ok(prt.anchorTargets.every((h) => expectedTargets.some((want) => h === want || h.endsWith('/' + want))),
+            `${page}/${lang}: teacher home emitted an unexpected body anchor. allowed=${JSON.stringify(expectedTargets)} got=${JSON.stringify(prt.anchorTargets)}`);
+          ok(!prt.anchorTargets.some((h) => /teacher-performance/.test(h)),
+            `${page}/${lang}: the teacher portal must never link the admin-only performance board (FR-013/FR-041), got ${JSON.stringify(prt.anchorTargets)}`);
           ok(prt.formControls === 0, `${page}/${lang}: the teacher page must contain zero form controls, got ${prt.formControls}`);
           ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (outcome save), got ${prt.plannedBackend}`);
           ok(prt.plannedPlanned === 0, `${page}/${lang}: expected 0 planned teacher gates on the compact home, got ${prt.plannedPlanned}`);
@@ -2869,6 +2955,40 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
     // the honest finance lock is untouched by Spec 039
     const csr = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]).find((i) => i.id === 'classSalaryReport');
     ok(csr.status === 'disabled' && csr.reasonKey === 'nav.reason.finance' && !csr.route, 'nav.config: classSalaryReport must stay an honest disabled lock with no route');
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-1: teacherAbsent / studentAbsent must stay DISTINCT
+     * at the SOURCE, in every locale (FR-020, SC-005).
+     *
+     * This guard exists because mutation M45-06 proved the DOM-level check insufficient. Asserting
+     * only that "a teacher-absence label and a student-absence label both appear on the page" passes
+     * even when one has been rewritten to the other's wording, because a sibling block elsewhere on
+     * the page still supplies the missing phrasing. Conflation is precisely FR-020's forbidden state,
+     * so the guarantee has to be checked where the two values sit side by side: the locale source.
+     *
+     * Every object literal that defines BOTH keys must give them different values, in both locales.
+     * Falsifying mutation: M45-06. */
+    {
+      const absSrcs = ['ar.trn.js', 'en.trn.js', 'ar.js', 'en.js']
+        .map((f) => ({ f, p: require('path').join(__dirname, '../../src/locales', f) }))
+        .filter((x) => fs.existsSync(x.p))
+        .map((x) => ({ f: x.f, s: fs.readFileSync(x.p, 'utf8') }));
+      let pairsChecked = 0;
+      for (const { f, s } of absSrcs) {
+        /* pair them up in emission order: the Nth teacherAbsent value belongs to the Nth
+         * studentAbsent value, since every block that defines one defines the other. */
+        const tVals = [...s.matchAll(/teacherAbsent:\s*'([^']*)'/g)].map((m) => m[1]);
+        const sVals = [...s.matchAll(/studentAbsent:\s*'([^']*)'/g)].map((m) => m[1]);
+        ok(tVals.length === sVals.length,
+          `locale ${f}: teacherAbsent/studentAbsent are defined an unequal number of times (${tVals.length} vs ${sVals.length}) — one absence concept lost its counterpart`);
+        for (let i = 0; i < Math.min(tVals.length, sVals.length); i += 1) {
+          ok(tVals[i] !== sVals[i],
+            `locale ${f}: teacherAbsent and studentAbsent share the identical label "${tVals[i]}" — the two absence concepts have been conflated (FR-020)`);
+          pairsChecked += 1;
+        }
+      }
+      ok(pairsChecked >= 4,
+        `Spec 045: expected at least 4 teacherAbsent/studentAbsent label pairs across the locales, checked ${pairsChecked} — the guard would pass vacuously`);
+    }
 
     // ===== Spec 040 — nav.config SOURCE audit (the one thing the DOM-only tests cannot reach) =====
     // The six settings items are the LAST planned items in the product. Assert against the SOURCE that
