@@ -7,7 +7,36 @@
 - Teacher source page modules: 11.
 - Expected added/removed pages: 0/0.
 
-## Accounting as of the resumed run 2026-08-03 (NOT final — Spec 045 is incomplete)
+## Accounting after session 4 — all eleven Teacher scopes implemented
+
+Measured by `impact.cjs` against the committed feature baseline `32e51e5`.
+
+| Count | Value |
+|---|---|
+| HTML files | **115** (baseline 115) |
+| Pages added / removed | **0 / 0** |
+| Page bodies changed | **26** |
+| Page bodies unchanged | **88** |
+
+**Teacher-scope bodies changed: 22 — all eleven scopes × AR/EN**, i.e. the complete Spec-045 surface:
+`teacher-portal` · `teacher-schedule` · `teacher-students` · `teacher-outcomes` · `teacher-tasks` ·
+`teacher-reports` · `teacher-library` · `teacher-profile` · `teachers` · `teacher` · `teacher-performance`.
+
+**Non-Teacher bodies changed: 4** — `student-portal(.en)` and `family-portal(.en)`, still the single
+shared-key `prt.band.quickHint` correction, one line each. No further non-Teacher body drifted as the
+remaining five pages landed. **Unrelated page-body drift remains 0.**
+
+### Changed authored files after session 4 (14)
+
+`styles/app.css` · `pages/teacher-portal.js` · `pages/teacher-schedule.js` · `pages/teacher-students.js` ·
+`pages/teacher-outcomes.js` · `pages/teacher-tasks.js` · `pages/teacher-reports.js` ·
+`pages/teacher-library.js` · `pages/teacher-profile.js` · `pages/teachers.js` ·
+`components/teacher-actions.js` · `pages/teacher-performance.js` · `locales/ar.prt.js` +
+`locales/en.prt.js` + `locales/ar.trn.js` + `locales/en.trn.js` · `tests/smoke/run.cjs`.
+
+---
+
+## Earlier accounting (session 2/3 — superseded by the table above)
 
 Measured by `impact.cjs`, which extracts each page's `#page-body` from the working tree and from the
 **committed baseline read through `git show`**, and fails loud on a missing or duplicate body or a

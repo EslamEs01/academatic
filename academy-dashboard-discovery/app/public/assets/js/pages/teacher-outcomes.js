@@ -88,7 +88,7 @@ export function renderTeacherOutcomes() {
       <div class="pt-cards">${TEACHER_PREVIEW.history.map(recentCard).join('')}</div>
     </section>
 
-    <section class="pt-section">
+    <section class="pt-section td-focus">
       ${secHead('help', 'prt.tch.pg.outcomes.saveTitle', 'prt.tch.pg.outcomes.saveHint')}
       <div class="pt-cards">${guidePanel(planned('outcomeSave'))}</div>
       ${gateNote('prt.tch.pg.outcomes.saveGate')}

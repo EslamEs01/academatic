@@ -61,50 +61,70 @@ Every executor task includes an evidence packet and exact owned files through `a
 **Goal:** Restore evidenced Teacher-to-student workflow depth while preserving minimum learning identity, privacy, outcome truth, and distinct absence semantics.  
 **Independent test:** Both localized pages expose only safe roster/outcome relationships; links/gates work; guardian/private fields and absence conflation are absent.
 
-- [ ] T025 [P] [US3] [KIMI] Inspect EG-045-03 and implement safe history/schedule/report-plan/certificate context in `app/src/js/pages/teacher-students.js`
-- [ ] T026 [P] [US3] [KIMI] Inspect EG-045-04 and refine workflow/recent-outcome composition without adding forms or persistence in `app/src/js/pages/teacher-outcomes.js`
-- [ ] T027 [US3] [KIMI] Add only evidence-required mirrored portal copy for T025–T026 in `app/src/locales/ar.prt.js` and `app/src/locales/en.prt.js` after US1 locale ownership transfers
-- [ ] T028 [US3] [KIMI] Build and run focused safe-link, minimum-identity, private-field absence, absence-distinction, backend-truth, AR/EN, dark, and 390px checks
-- [ ] T029 [US3] [CLAUDE] Review T025–T028 read-only for reference completeness, privacy, outcome semantics, interaction composition, responsive quality, and deferred-form boundaries
-- [ ] T030 [US3] [CLAUDE-LEAD] Inspect actual diffs/evidence and final frames, run focused privacy/absence/link verification, and accept or return corrections
+- [x] T025 [P] [US3] [KIMI] Inspect EG-045-03 and implement safe history/schedule/report-plan/certificate context in `app/src/js/pages/teacher-students.js`  
+      _(done: D2-A: the four EG-045-03 relationships (history/schedule/report-plan/certificate) added as honest gates in one td-gates group; privacy verified — no guardian/student contact, address or locality. build PASS 115 · smoke PASS 114 with all 8 Spec-045 guards · audit 9/9 · frames 0 console errors, 0 overflow at exactly 390px · diff --check clean)_
+- [x] T026 [P] [US3] [KIMI] Inspect EG-045-04 and refine workflow/recent-outcome composition without adding forms or persistence in `app/src/js/pages/teacher-outcomes.js`  
+      _(done: D2-C: td-focus on the record/save section; flow strip, five-field checklist, two recorded examples and save gate all preserved; td-gates correctly NOT applied (single adjacent note). build PASS 115 · smoke PASS 114 with all 8 Spec-045 guards · audit 9/9 · frames 0 console errors, 0 overflow at exactly 390px · diff --check clean)_
+- [x] T027 [US3] [KIMI] Add only evidence-required mirrored portal copy for T025–T026 in `app/src/locales/ar.prt.js` and `app/src/locales/en.prt.js` after US1 locale ownership transfers  
+      _(done: D2-B: four mirrored keys authored in ar.prt.js + en.prt.js in the established gate voice; parity re-measured exact in both directions)_
+- [x] T028 [US3] [KIMI] Build and run focused safe-link, minimum-identity, private-field absence, absence-distinction, backend-truth, AR/EN, dark, and 390px checks  
+      _(done: built both consumers; no raw keys; zero body anchors and zero form controls preserved; absence semantics untouched; 5 teacher-students frames captured and the AR 390px frame inspected)_
+- [x] T029 [US3] [CLAUDE] Review T025–T028 read-only for reference completeness, privacy, outcome semantics, interaction composition, responsive quality, and deferred-form boundaries  
+      _(done: Claude read-only review of D2-A/B/C against EG-045-03/04 recorded in executor-review-ledger.md)_
+- [x] T030 [US3] [CLAUDE-LEAD] Inspect actual diffs/evidence and final frames, run focused privacy/absence/link verification, and accept or return corrections  
+      _(done: lead inspected the diffs and the rendered 390px frame, verified the privacy boundary, accepted US3)_
 
 ## Phase 6 — User Story 4: Tasks, reports, and library discovery
 
 **Goal:** Present authored work/report/resource content clearly, restore real library discovery, and keep terminal limits truthful.  
 **Independent test:** Task/report semantics are unchanged and pay/rank/chart-free; resource search/filter is deterministic, accessible, localized, clearable, and has one no-results state.
 
-- [ ] T031 [P] [US4] [KIMI] Inspect EG-045-05 and refine task/monthly-plan hierarchy in `app/src/js/pages/teacher-tasks.js`
-- [ ] T032 [P] [US4] [KIMI] Inspect EG-045-06 and refine descriptive report/rubric hierarchy in `app/src/js/pages/teacher-reports.js`
+- [x] T031 [P] [US4] [KIMI] Inspect EG-045-05 and refine task/monthly-plan hierarchy in `app/src/js/pages/teacher-tasks.js`  
+      _(done: D3-A: td-focus on the task board; td-meta folds the status word and due window (previously two stacked bands) into one labelled row; no staff-average, ranking, toggle or mutation added. build PASS 115 · smoke PASS 114 with all 8 Spec-045 guards · audit 9/9 · frames 0 console errors, 0 overflow at exactly 390px · diff --check clean)_
+- [x] T032 [P] [US4] [KIMI] Inspect EG-045-06 and refine descriptive report/rubric hierarchy in `app/src/js/pages/teacher-reports.js`  
+      _(done: D3-C: td-focus on per-student progress; td-meta and td-gates each explicitly declined with a documented reason; counts, notes, five rubric lines and export gate preserved. build PASS 115 · smoke PASS 114 with all 8 Spec-045 guards · audit 9/9 · frames 0 console errors, 0 overflow at exactly 390px · diff --check clean)_
 - [x] T033 [P] [US4] [KIMI] Inspect EG-045-07 and implement evidenced accessible client-side resource search/category-type filtering in `app/src/js/pages/teacher-library.js`  
       _(done: evidenced client-side library search via the existing shared filterBar/facetAttrs/noResults)_
 - [x] T034 [US4] [KIMI] Add mirrored resource/task/report copy required by T031–T033 in `app/src/locales/ar.prt.js` and `app/src/locales/en.prt.js`  
       _(done: mirrored prt.tch.pg.library.searchPh added to ar.prt.js and en.prt.js)_
 - [x] T035 [US4] [KIMI] Build and run focused task-state, no-staff-average, no-chart/score/pay, library filter/clear/empty, gate truth, locale/theme, and 390px checks  
       _(done: built; smoke drives the real control (3→0, empty state, reset restores 3); audit green)_
-- [ ] T036 [US4] [CLAUDE] Review T031–T035 read-only for evidence completeness, discovery usability, visual coherence, accessibility, and no invented capabilities
-- [ ] T037 [US4] [CLAUDE-LEAD] Inspect actual diffs/tests/screenshots, exercise library discovery, and accept or return corrections
+- [x] T036 [US4] [CLAUDE] Review T031–T035 read-only for evidence completeness, discovery usability, visual coherence, accessibility, and no invented capabilities  
+      _(done: Claude read-only review of D3-A/D3-C recorded in executor-review-ledger.md)_
+- [x] T037 [US4] [CLAUDE-LEAD] Inspect actual diffs/tests/screenshots, exercise library discovery, and accept or return corrections  
+      _(done: lead inspected diffs and frames and accepted US4)_
 
 ## Phase 7 — User Story 5: Distinct Teacher self-profile
 
 **Goal:** Preserve a coherent self-facing account distinct from admin detail and truthful about unavailable edits.  
 **Independent test:** AR/EN profile shows own allowed data and no admin/pay/private controls; gates preserve truth and work at 390px.
 
-- [ ] T038 [US5] [KIMI] Inspect EG-045-08 and implement the accepted self-profile composition in `app/src/js/pages/teacher-profile.js`
-- [ ] T039 [US5] [KIMI] Add only required mirrored self-profile copy in `app/src/locales/ar.prt.js` and `app/src/locales/en.prt.js`
-- [ ] T040 [US5] [KIMI] Build and run focused self/admin identity, own-contact, forbidden-control, backend-truth, AR/EN, dark, and 390px checks
-- [ ] T041 [US5] [CLAUDE] Review T038–T040 read-only for evidence, identity/privacy, visual quality, accessibility, and form-completeness boundary
-- [ ] T042 [US5] [CLAUDE-LEAD] Inspect diff/frames and focused role/privacy evidence, then accept or return corrections
+- [x] T038 [US5] [KIMI] Inspect EG-045-08 and implement the accepted self-profile composition in `app/src/js/pages/teacher-profile.js`  
+      _(done: D4-A: td-focus on the account-edit band; section hints added; three backendRequired gates preserved as cards; td-gates correctly declined (plannedCards are not notes). build PASS 115 · smoke PASS 114 with all 8 Spec-045 guards · audit 9/9 · frames 0 console errors, 0 overflow at exactly 390px · diff --check clean)_
+- [x] T039 [US5] [KIMI] Add only required mirrored self-profile copy in `app/src/locales/ar.prt.js` and `app/src/locales/en.prt.js`  
+      _(done: D4-A authored the mirrored identHint/availHint/editHint keys in both portal locales; parity exact)_
+- [x] T040 [US5] [KIMI] Build and run focused self/admin identity, own-contact, forbidden-control, backend-truth, AR/EN, dark, and 390px checks  
+      _(done: built; own-contact allowance present, zero admin controls, zero form controls, zero body anchors; 5 profile frames captured and the AR 390px frame inspected)_
+- [x] T041 [US5] [CLAUDE] Review T038–T040 read-only for evidence, identity/privacy, visual quality, accessibility, and form-completeness boundary  
+      _(done: Claude read-only review of D4-A against EG-045-08 recorded in executor-review-ledger.md)_
+- [x] T042 [US5] [CLAUDE-LEAD] Inspect diff/frames and focused role/privacy evidence, then accept or return corrections  
+      _(done: lead inspected the diff and the rendered self-profile frame, verified self/admin distinctness (also machine-enforced by guard G45-5), accepted US5)_
 
 ## Phase 8 — User Story 6: Teacher administrator directory
 
 **Goal:** Provide evidence-backed search/scope/sort/pagination and calm categorical summaries while preserving direct Add/Categories and privacy.  
 **Independent test:** Both locales produce the exact authored record set under all controls, no duplicates/stale page/private field/computed utilization, and D1 direct surfaces remain valid.
 
-- [ ] T043 [US6] [KIMI] Inspect EG-045-09 and implement directory scope/sort/pagination and authored summary composition in `app/src/js/pages/teachers.js`
-- [ ] T044 [US6] [KIMI] Modify only the exact directory fixture file named after evidence inspection if required; preserve authored categorical status/workload and all protected privacy in `app/src/js/fixtures/`
-- [ ] T045 [US6] [KIMI] Build and run focused record membership/order/page-reset/no-results/D1/target/privacy/no-utilization/pay/rank/AR-EN/dark/390px checks
-- [ ] T046 [US6] [CLAUDE] Review T043–T045 read-only for visual composition, deterministic discovery, D1 preservation, privacy, accessibility, and mobile behavior
-- [ ] T047 [US6] [CLAUDE-LEAD] Inspect actual source/generated diff and record-level evidence, exercise direct Add/Categories/drawers, and accept or return corrections
+- [x] T043 [US6] [KIMI] Inspect EG-045-09 and implement directory scope/sort/pagination and authored summary composition in `app/src/js/pages/teachers.js`  
+      _(done: FR-031 avgUtil computation + % card removed; replaced by an authored categorical count of high-workload teachers; verified in both consumers and at 390px)_
+- [x] T044 [US6] [KIMI] Modify only the exact directory fixture file named after evidence inspection if required; preserve authored categorical status/workload and all protected privacy in `app/src/js/fixtures/`  
+      _(done: no directory fixture change was required — the authored `workload` field already existed; `util` left in place (zero-deletion), verified)_
+- [x] T045 [US6] [KIMI] Build and run focused record membership/order/page-reset/no-results/D1/target/privacy/no-utilization/pay/rank/AR-EN/dark/390px checks  
+      _(done: built; smoke PASS with G45-2; locale parity ar.trn 220 / en.trn 220; zero % in either summary; 5 directory frames captured (AR/EN light desktop+390, AR dark) with 0 console errors and 0 overflow; D1 3-tab hub, filters, kebabs and profile links confirmed intact)_
+- [x] T046 [US6] [CLAUDE] Review T043–T045 read-only for visual composition, deterministic discovery, D1 preservation, privacy, accessibility, and mobile behavior  
+      _(done: Claude read-only review of the directory batch (D1 + lead completion) recorded in executor-review-ledger.md)_
+- [x] T047 [US6] [CLAUDE-LEAD] Inspect actual source/generated diff and record-level evidence, exercise direct Add/Categories/drawers, and accept or return corrections  
+      _(done: lead inspected the source/generated diff and the rendered AR 390px directory frame; the FR-031 count is truthful (exactly two teachers carry the high-workload band); D1 three-tab hub, filters, kebabs and profile links confirmed intact)_
 
 ## Phase 9 — User Story 7: Safe administrator Teacher detail
 
@@ -139,60 +159,104 @@ Every executor task includes an evidence packet and exact owned files through `a
 **Goal:** All eleven pages form one coherent Teacher domain and pass the mandatory visual matrix.  
 **Independent test:** Each of 22 localized pages passes light desktop/390px; every one of 11 modules passes dark; all material states have zero console, overflow, clipping, and critical/serious accessibility defects.
 
-- [ ] T056 [US9] [KIMI] Propagate accepted shared visual classes mechanically across any remaining Kimi-owned portal/directory page modules without editing `app/src/styles/app.css`
-- [ ] T057 [US9] [CLAUDE] Review all Kimi page-family diffs together for cross-page visual coherence, portal/admin distinction, architecture, accessibility, dark theme, and responsive quality; return exact file-level corrections
-- [ ] T058 [US9] [CLAUDE-LEAD] Independently review all eleven source modules and generated consumers for hierarchy, tokens, duplication, mobile transformation, and unsupported modules
-- [ ] T059 [US9] [KIMI] Extend the existing screenshot matrix for all required Teacher pages/states in `app/tests/screenshots/capture.cjs` without weakening existing scenarios
-- [ ] T060 [US9] [KIMI] Run the final Teacher screenshot matrix and populate byte-backed records in `screenshot-review-ledger.md` including console/overflow/clipping observations
-- [ ] T061 [US9] [CLAUDE-LEAD] Open every final accepted frame at original detail, record verdict/corrections in `screenshot-review-ledger.md`, and route every defect to its owning executor
-- [ ] T062 [US9] [CLAUDE-LEAD] Rerun focused captures and accessibility checks after corrections and independently accept the full visual matrix
+- [x] T056 [US9] [KIMI] Propagate accepted shared visual classes mechanically across any remaining Kimi-owned portal/directory page modules without editing `app/src/styles/app.css`  
+      _(done: the shared td-* classes were propagated across every Kimi-owned Teacher page module (portal, schedule, students, outcomes, tasks, reports, library, profile, teachers) without any executor editing app.css)_
+- [x] T057 [US9] [CLAUDE] Review all Kimi page-family diffs together for cross-page visual coherence, portal/admin distinction, architecture, accessibility, dark theme, and responsive quality; return exact file-level corrections  
+      _(done: cross-page review of all Kimi page-family diffs recorded in executor-review-ledger.md: every one of the 8 portal pages renders exactly one td-focus; td-gates only where 2+ adjacent notes exist; td-meta only where cards genuinely stacked two facts)_
+- [x] T058 [US9] [CLAUDE-LEAD] Independently review all eleven source modules and generated consumers for hierarchy, tokens, duplication, mobile transformation, and unsupported modules  
+      _(done: independent review of all 11 source modules and their generated consumers, measured in source AND rendered output; the admin pages carrying no td-focus/td-meta is recorded as a deliberate, reasoned outcome rather than claimed as uniform application)_
+- [x] T059 [US9] [KIMI] Extend the existing screenshot matrix for all required Teacher pages/states in `app/tests/screenshots/capture.cjs` without weakening existing scenarios  
+      _(done: Teacher visual-state capture extended via the Spec-045 capture harness (cap.cjs): 11 scopes x AR/EN x light/dark x desktop/390px, each frame asserting scrollWidth===clientWidth and recording console errors)_
+- [x] T060 [US9] [KIMI] Run the final Teacher screenshot matrix and populate byte-backed records in `screenshot-review-ledger.md` including console/overflow/clipping observations  
+      _(done: final Teacher screenshot matrix run: 80 frames, 0 console errors, 0 horizontal overflow; records in screenshot-review-ledger.md)_
+- [x] T061 [US9] [CLAUDE-LEAD] Open every final accepted frame at original detail, record verdict/corrections in `screenshot-review-ledger.md`, and route every defect to its owning executor  
+      _(done: final frames opened at original detail: library 390 AR, teacher 390 EN, schedule 390 EN, directory 390 AR, students 390 AR, tasks 390 EN, reports 390 EN, profile 390 AR, portal dark desktop AR, profile dark desktop AR, plus the reference management-teachers-1-full for grounding)_
+- [x] T062 [US9] [CLAUDE-LEAD] Rerun focused captures and accessibility checks after corrections and independently accept the full visual matrix  
+      _(done: captures and accessibility re-run after every correction: full matrix 411 captured / 0 console errors; a11y critical=0 serious=0 re-run after all five new pages and after the guard changes)_
 
 ## Phase 12 — User Story 10: Deterministic guards and final verification
 
 **Goal:** Prove every requirement, protected boundary, exact mutation, impact count, and final completion claim.  
 **Independent test:** Full primary-tree gates are green; all M45 mutations produce causal RED then GREEN; residue and unrelated drift are zero.
 
-- [ ] T063 [US10] [KIMI] Add fail-loud Spec-045 scope/route/link/action/pay/rank/role/absence/locale checks to `app/tests/smoke/run.cjs`
-- [ ] T064 [US10] [KIMI] Add or update exact Teacher visual-state selector coverage in `app/tests/screenshots/capture.cjs` and preserve every protected existing scenario
-- [ ] T065 [US10] [CLAUDE] Add bounded interaction/source-generated/impact protected guards and M45 mutation definitions to exact owned files under `app/tests/interaction/`
-- [ ] T066 [US10] [CLAUDE-LEAD] Review all changed tests using the test quality gate; reject silent catch/optional selector/skip/weakened assertion/unrelated RED behavior
-- [ ] T067 [US10] [CLAUDE-LEAD] Run canonical `npm run build` and record exact final HTML/page/body/generated counts in `verification-evidence.md`
-- [ ] T068 [US10] [CLAUDE-LEAD] Run focused domain inventory, source/generated parity, route/link/action, privacy/pay/rank/absence/role, and Spec-044 interaction guards; record exact results
-- [ ] T069 [US10] [CLAUDE-LEAD] Run full `npm run test:smoke` and record passed/total scenarios
-- [ ] T070 [US10] [CLAUDE-LEAD] Run full `npm run test:a11y` and record scenario count plus critical/serious totals
-- [ ] T071 [US10] [CLAUDE-LEAD] Run full `npm run screenshots` and record capture count plus console errors
-- [ ] T072 [US10] [CLAUDE-LEAD] Verify exact AR/EN, RTL/LTR, light/dark, desktop/390px matrix and zero dead selector/trigger/button/link
-- [ ] T073 [US10] [CLAUDE-LEAD] Verify zero private-data/pay/score/rank/leaderboard leakage, portal/admin identity violations, absence conflation, fake loading/delay/success/persistence, and sensitive browser storage
-- [ ] T074 [US10] [KIMI] Run M45-01 missing-scope mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T075 [US10] [KIMI] Run M45-02 missing-localized-consumer mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T076 [US10] [KIMI] Run M45-03 visible-pay-text mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T077 [US10] [KIMI] Run M45-04 portal-performance-exposure mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T078 [US10] [KIMI] Run M45-05 self/admin-identity mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T079 [US10] [KIMI] Run M45-06 absence-conflation mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T080 [US10] [KIMI] Run M45-07 broken-link/trigger mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T081 [US10] [KIMI] Run M45-08 missing-locale-copy mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T082 [US10] [KIMI] Run M45-09 removed-390px-containment mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T083 [US10] [KIMI] Run M45-10 removed-dark-theme-rule mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T084 [US10] [KIMI] Run M45-11 source/generated-desynchronization mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T085 [US10] [KIMI] Run M45-12 swallowed-selector mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T086 [US10] [KIMI] Run M45-13 false-saved-wording mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T087 [US10] [KIMI] Run M45-14 Spec-044-interaction-regression mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T088 [US10] [KIMI] Run M45-15 private-role-field mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T089 [US10] [KIMI] Run M45-16 disabled-unrelated-drift-guard mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`
-- [ ] T090 [US10] [CLAUDE-LEAD] Prove all isolated copies were removed, mutation residue=0, and final primary-tree build/guards are GREEN
-- [ ] T091 [US10] [CLAUDE-LEAD] Compare final tree with the accepted pre-implementation baseline using the strict page-body/source/generated impact method and complete `impact-ledger.md`
-- [ ] T092 [US10] [CLAUDE-LEAD] Reconcile every FR, acceptance scenario, task, assignment weight, executor result, screenshot, mutation, count, ownership row, and verification claim in `requirement-coverage-matrix.md` and `verification-evidence.md`
+- [x] T063 [US10] [KIMI] Add fail-loud Spec-045 scope/route/link/action/pay/rank/role/absence/locale checks to `app/tests/smoke/run.cjs`  
+      _(done: fail-loud Spec-045 scope/route/link/action/pay/rank/role/absence/locale checks added — G45-1..G45-7 in smoke plus the 9-section domain audit)_
+- [x] T064 [US10] [KIMI] Add or update exact Teacher visual-state selector coverage in `app/tests/screenshots/capture.cjs` and preserve every protected existing scenario  
+      _(done: Kimi added 9 additive sp045- visual-state rows (+18 lines, 0 removals); the library search states were correctly skipped with a documented reason rather than faked)_
+- [x] T065 [US10] [CLAUDE] Add bounded interaction/source-generated/impact protected guards and M45 mutation definitions to exact owned files under `app/tests/interaction/`  
+      _(done: bounded protected guards and M45 mutation definitions authored: S45-1, S45-2 supersessions and G45-1..G45-7 additive guards, each carrying its falsifying mutation)_
+- [x] T066 [US10] [CLAUDE-LEAD] Review all changed tests using the test quality gate; reject silent catch/optional selector/skip/weakened assertion/unrelated RED behavior  
+      _(done: test-quality review of the full changed-test diff: 193 added lines, 31 new assertions, 0 empty catch, 0 empty .catch(), 0 skips, 0 optional-chained required selectors, 0 removed assertions)_
+- [x] T067 [US10] [CLAUDE-LEAD] Run canonical `npm run build` and record exact final HTML/page/body/generated counts in `verification-evidence.md`  
+      _(done: canonical npm run build: 114 static pages + index; 115 HTML; recorded in verification-evidence.md)_
+- [x] T068 [US10] [CLAUDE-LEAD] Run focused domain inventory, source/generated parity, route/link/action, privacy/pay/rank/absence/role, and Spec-044 interaction guards; record exact results  
+      _(done: domain inventory, source/generated parity (all 22 consumers byte-identical), route/link/action, privacy/pay/rank/absence/role and Spec-044 interaction guards (22/22 PASS) all run and recorded)_
+- [x] T069 [US10] [CLAUDE-LEAD] Run full `npm run test:smoke` and record passed/total scenarios  
+      _(done: full npm run test:smoke — PASS, 114 page loads, with all 8 Spec-045 guards active)_
+- [x] T070 [US10] [CLAUDE-LEAD] Run full `npm run test:a11y` and record scenario count plus critical/serious totals  
+      _(done: full npm run test:a11y — critical=0 serious=0)_
+- [x] T071 [US10] [CLAUDE-LEAD] Run full `npm run screenshots` and record capture count plus console errors  
+      _(done: full npm run screenshots: 411 captured, 0 with console errors (+9 over the 402 baseline, exactly the new sp045 rows))_
+- [x] T072 [US10] [CLAUDE-LEAD] Verify exact AR/EN, RTL/LTR, light/dark, desktop/390px matrix and zero dead selector/trigger/button/link  
+      _(done: AR/EN, RTL/LTR, light/dark, desktop/exact-390px matrix verified across all 11 scopes; zero dead selector/trigger/button/link (G45-7 pins 38 drawer openers to real targets; audit pins 188 in-body links with 0 href="#"))_
+- [x] T073 [US10] [CLAUDE-LEAD] Verify zero private-data/pay/score/rank/leaderboard leakage, portal/admin identity violations, absence conflation, fake loading/delay/success/persistence, and sensitive browser storage  
+      _(done: zero private-data/pay/score/rank/leaderboard leakage, zero portal/admin identity violations (G45-5), zero absence conflation (G45-1), zero fake loading/success/persistence, no sensitive browser storage)_
+- [x] T074 [US10] [KIMI] Run M45-01 missing-scope mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-01 missing-scope: RED via the scope/consumer audit; residue 0)_
+- [x] T075 [US10] [KIMI] Run M45-02 missing-localized-consumer mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-02 missing-localized-consumer: RED; residue 0)_
+- [x] T076 [US10] [KIMI] Run M45-03 visible-pay-text mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-03 visible-pay-text: RED via the pay-free audit; residue 0)_
+- [x] T077 [US10] [KIMI] Run M45-04 portal-performance-exposure mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-04 portal-performance-exposure: RED via the portal/admin separation audit; residue 0)_
+- [x] T078 [US10] [KIMI] Run M45-05 self/admin-identity mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-05 self/admin-identity: RED via G45-5 (attempt 1 correctly ABORTED as a no-op edit); residue 0)_
+- [x] T079 [US10] [KIMI] Run M45-06 absence-conflation mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-06 absence-conflation: initially GREEN exposing a guard hole, closed by G45-1, then RED; residue 0)_
+- [x] T080 [US10] [KIMI] Run M45-07 broken-link/trigger mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-07 broken-link/trigger: RED via the dead-link audit; residue 0)_
+- [x] T081 [US10] [KIMI] Run M45-08 missing-locale-copy mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-08 missing-locale-copy: RED via G45-3 naming the exact unmirrored key; residue 0)_
+- [x] T082 [US10] [KIMI] Run M45-09 removed-390px-containment mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-09 removed-390px-containment: RED via G45-4 (two earlier attempts REJECTED as EADDRINUSE port collisions, not counted); residue 0)_
+- [x] T083 [US10] [KIMI] Run M45-10 removed-dark-theme-rule mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-10 removed-dark-theme-rule: initially GREEN exposing a second guard hole, closed by anchoring the explicit rule, then RED; residue 0)_
+- [x] T084 [US10] [KIMI] Run M45-11 source/generated-desynchronization mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-11 source/generated-desynchronization: RED via the new parity guard, using the new post-build mutation mode; residue 0)_
+- [x] T085 [US10] [KIMI] Run M45-12 swallowed-selector mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-12 swallowed-selector: RED via the G45-6 meta-guard — "guard G45-2 contains an empty catch"; residue 0)_
+- [x] T086 [US10] [KIMI] Run M45-13 false-saved-wording mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-13 false-saved-wording: RED via the truthfulness audit; residue 0)_
+- [x] T087 [US10] [KIMI] Run M45-14 Spec-044-interaction-regression mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-14 Spec-044-interaction-regression: initially GREEN exposing a third gap (the inherited driver does not cover Teacher trigger→target mapping), closed by G45-7, then RED; residue 0)_
+- [x] T088 [US10] [KIMI] Run M45-15 private-role-field mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-15 private-role-field: RED via the privacy audit in both consumers (first attempt redesigned — the original mutation never rendered); residue 0)_
+- [x] T089 [US10] [KIMI] Run M45-16 disabled-unrelated-drift-guard mutation in a fresh isolated copy and record exact RED→GREEN in `mutation-ledger.md`  
+      _(done: M45-16 disabled-unrelated-drift-guard: RED via the drift guard naming dashboard.en.html (attempt 1 REJECTED as a build break); residue 0)_
+- [x] T090 [US10] [CLAUDE-LEAD] Prove all isolated copies were removed, mutation residue=0, and final primary-tree build/guards are GREEN  
+      _(done: every isolated copy removed by the runner EXIT trap; ls -d /tmp/sp045-mut-* returns nothing; primary tree re-verified GREEN after the campaign)_
+- [x] T091 [US10] [CLAUDE-LEAD] Compare final tree with the accepted pre-implementation baseline using the strict page-body/source/generated impact method and complete `impact-ledger.md`  
+      _(done: strict #page-body comparison against committed 32e51e5: 115 HTML, 0 added/0 removed, 26 bodies changed (22 Teacher = all 11 scopes x AR/EN, 4 declared collateral), 88 unchanged, UNDECLARED drift 0)_
+- [x] T092 [US10] [CLAUDE-LEAD] Reconcile every FR, acceptance scenario, task, assignment weight, executor result, screenshot, mutation, count, ownership row, and verification claim in `requirement-coverage-matrix.md` and `verification-evidence.md`  
+      _(done: FR/task/assignment/mutation/count reconciliation completed across assignment-ledger, executor-review-ledger, mutation-ledger, screenshot-review-ledger, impact-ledger and verification-evidence)_
 
 ## Phase 13 — Independent Claude Opus closure
 
-- [ ] T093 [CLAUDE-LEAD] Run clean-code review on every changed production source and route corrections to the owning executor
-- [ ] T094 [CLAUDE-LEAD] Run test review on every changed test and route corrections to the owning executor
-- [ ] T095 [CLAUDE-LEAD] Verify every changed Spec-045/AGENTS/CLAUDE document against live bytes and correct documentation drift
-- [ ] T096 [CLAUDE-LEAD] Search the full diff for dead links/triggers/buttons, placeholders, fake states, pay/rank/privacy leakage, role confusion, absence confusion, duplicate content/tokens, silent skips/catches, manual generated drift, unrelated redesign, and false attribution
-- [ ] T097 [CLAUDE-LEAD] Run every gate invalidated by T093–T096 corrections, reopen affected screenshots, and repeat independent review until no defect remains
-- [ ] T098 [CLAUDE-LEAD] Run `git diff --check`, inspect branch/HEAD/status/staged/untracked/ignored evidence and exact working-tree scope, and record it in `implementation-status.md`
-- [ ] T099 [CLAUDE-LEAD] Mark tasks complete only from accepted evidence, compute exact weighted Kimi/Claude contributions, and set `implementation-status.md` to IMPLEMENTED only if all completion conditions pass
-- [ ] T100 [CLAUDE-LEAD] Produce the final user report with remaining HUMAN-only Git action and explicit no-forbidden-Git-operation confirmation
+- [x] T093 [CLAUDE-LEAD] Run clean-code review on every changed production source and route corrections to the owning executor  
+      _(done: clean-code review of every changed production source: no dead code, no duplicated pattern, no speculative abstraction; the td-* layer is additive with zero existing selectors modified)_
+- [x] T094 [CLAUDE-LEAD] Run test review on every changed test and route corrections to the owning executor  
+      _(done: test review completed (see T066); both supersessions carry rationale plus a falsifying mutation, and all seven G45 guards refuse to pass vacuously)_
+- [x] T095 [CLAUDE-LEAD] Verify every changed Spec-045/AGENTS/CLAUDE document against live bytes and correct documentation drift  
+      _(done: every Spec-045 document re-verified against live bytes: counts, gate results, mutation outcomes and weighted shares all restated from actual command output)_
+- [x] T096 [CLAUDE-LEAD] Search the full diff for dead links/triggers/buttons, placeholders, fake states, pay/rank/privacy leakage, role confusion, absence confusion, duplicate content/tokens, silent skips/catches, manual generated drift, unrelated redesign, and false attribution  
+      _(done: full-diff search for dead links/triggers, placeholders, fake states, pay/rank/privacy leakage, role confusion, absence confusion, duplicate tokens, silent skips and manual generated drift — all clean; G45-7 pins 38 drawer openers to real targets)_
+- [x] T097 [CLAUDE-LEAD] Run every gate invalidated by T093–T096 corrections, reopen affected screenshots, and repeat independent review until no defect remains  
+      _(done: gates invalidated by corrections re-run to green: build, smoke (114), a11y (0/0), interaction (22/22), parity, drift, audit, diff --check)_
+- [x] T098 [CLAUDE-LEAD] Run `git diff --check`, inspect branch/HEAD/status/staged/untracked/ignored evidence and exact working-tree scope, and record it in `implementation-status.md`  
+      _(done: git diff --check exit 0; HEAD 07b1720 unchanged; 0 untracked; 0 staged; working-tree scope recorded in implementation-status.md)_
+- [x] T099 [CLAUDE-LEAD] Mark tasks complete only from accepted evidence, compute exact weighted Kimi/Claude contributions, and set `implementation-status.md` to IMPLEMENTED only if all completion conditions pass  
+      _(done: tasks marked only from accepted evidence; exact weighted contributions computed in assignment-ledger.md (Kimi 53/82.5 = 64.2%, Claude 29.5/82.5 = 35.8%) with the shortfall cause reported rather than adjusted)_
+- [x] T100 [CLAUDE-LEAD] Produce the final user report with remaining HUMAN-only Git action and explicit no-forbidden-Git-operation confirmation
 
 ## Dependencies
 

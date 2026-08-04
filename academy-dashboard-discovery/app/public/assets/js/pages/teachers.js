@@ -88,11 +88,17 @@ function categoriesPanel() {
 export function renderTeachers() {
   const rows = TEACHERS.rows;
   const available = rows.filter((r) => r.avail === 'available').length;
-  const avgUtil = Math.round(rows.reduce((a, r) => a + r.util, 0) / rows.length);
+  /* Spec 045 — FR-031 / EG-045-09: directory summaries must be AUTHORED categorical info.
+   * The previous third card computed an average-utilization percentage over the numeric
+   * `util` fixture field — a forbidden calculated performance measure. It is replaced by a
+   * plain COUNT of teachers in the authored 'high' workload band (WG-045 workloadChip /
+   * WORKLOAD_ORDER vocabulary). A count over an authored categorical value is not a rate,
+   * average, percentage, score, rank, or index. `r.util` is no longer read anywhere here. */
+  const highLoad = rows.filter((r) => r.workload === 'high').length;
   const summary = summaryCards([
     { icon: 'trainers', tone: 'primary', value: num(rows.length), labelKey: 'trn.sum.total' },
     { icon: 'check-circle', tone: 'success', value: num(available), labelKey: 'trn.sum.available' },
-    { icon: 'trending-up', tone: 'teal', value: `${num(avgUtil)}%`, labelKey: 'trn.sum.util' },
+    { icon: 'trending-up', tone: 'teal', value: num(highLoad), labelKey: 'trn.sum.highWorkload' },
   ], { cols: 'grid-cols-1 sm:grid-cols-3' });
   const filters = filterBar({
     targetId: 'teachers-grid', searchKey: 'trn.searchPh',

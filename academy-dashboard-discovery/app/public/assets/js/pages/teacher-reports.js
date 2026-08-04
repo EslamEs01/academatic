@@ -3,10 +3,13 @@
  * summary (sessions completed · students followed · on-track — literal counts, never
  * derived) · per-student progress summaries (the REAL authored learning notes) · the
  * monthly student-report DIMENSION lines (display-only labels — NO answer scale, NO
- * result value). Any export is an honest backendRequired gate. Display-only; no
- * computed grading/ordering, no graph engine, no derivation — and, the standing teacher
- * hard rule, ZERO figure-bearing or flagged vocabulary anywhere (copy AND comments). The
- * page body contributes ZERO anchors (every unavailable action is a labeled gate). */
+ * result value). Any export is an honest backendRequired gate (gateNote, the page's ONE
+ * gate, so no td-gates wrap). The per-student progress section carries the page's single
+ * td-focus marker; no card here stacks two separate one-fact lines, so td-meta is not
+ * used. Display-only; no computed grading/ordering, no graph engine, no derivation —
+ * and, the standing teacher hard rule, ZERO figure-bearing or flagged vocabulary
+ * anywhere (copy AND comments). The page body contributes ZERO anchors (every
+ * unavailable action is a labeled gate). */
 import { t } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
@@ -66,7 +69,7 @@ export function renderTeacherReports() {
       ${kpiRow(REPORT_KPIS, 'teal')}
     </section>
 
-    <section class="pt-section">
+    <section class="pt-section td-focus">
       ${secHead('students', 'prt.tch.pg.reports.progTitle', 'prt.tch.pg.reports.progHint')}
       <div class="pt-cards">${NOTE_ORDER.map(progressCard).join('')}</div>
     </section>

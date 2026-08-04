@@ -26,6 +26,15 @@ export default {
     workload: { light: 'حِمل خفيف', balanced: 'حِمل متوازن', high: 'حِمل مرتفع' },
     signal: { strongDelivery: 'أداء قوي', stable: 'مستقر', needsFollowUp: 'يحتاج متابعة', attentionRisk: 'بحاجة انتباه' },
 
+    /* Spec 045 — FR-031 (lead completion of Batch D1): the directory's third summary card is a
+     * plain COUNT of teachers in the authored 'high' workload band, replacing the forbidden
+     * average-utilization percentage. deepMerge folds this into the shared `trn.sum` namespace
+     * beside the total/available counts from *.extra.js (i18n.js merges *.trn.js AFTER *.extra.js
+     * and recurses into nested objects, so this EXTENDS `trn.sum` rather than clobbering it).
+     * The old `trn.sum.util` key stays authored in *.extra.js (zero-deletion) though now unused.
+     * Wording mirrors the existing authored workload vocabulary «حِمل مرتفع» above. */
+    sum: { highWorkload: 'معلّمون بحِمل مرتفع' },
+
     /* teachers page enrichment */
     fStatus: 'الحالة', fWorkload: 'الحِمل', fSignal: 'مؤشّر المتابعة',
     counts: { courses: 'دورات', groups: 'مجموعات', students: 'طلاب نشطون' },

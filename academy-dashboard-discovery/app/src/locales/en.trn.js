@@ -19,6 +19,12 @@ export default {
     workload: { light: 'Light load', balanced: 'Balanced', high: 'High load' },
     signal: { strongDelivery: 'Strong delivery', stable: 'Stable', needsFollowUp: 'Needs follow-up', attentionRisk: 'Attention risk' },
 
+    /* Spec 045 — FR-031: the directory's third summary card is a plain COUNT of teachers in the
+     * authored 'high' workload band (not the old average-utilization %). deepMerge folds this into
+     * the shared `trn.sum` namespace alongside the total/available counts from *.extra.js. The old
+     * `trn.sum.util` key stays authored there (zero-deletion) even though it is now unused. */
+    sum: { highWorkload: 'High-load teachers' },
+
     fStatus: 'Status', fWorkload: 'Workload', fSignal: 'Follow-up signal',
     counts: { courses: 'Courses', groups: 'Groups', students: 'Active students' },
     upcomingHint: '{n} upcoming sessions', noSessions: 'No recent sessions',

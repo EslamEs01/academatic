@@ -2,15 +2,19 @@
  * roster card per student sara teaches (st1/st6/st11/st13) carrying the child's
  * name, a course/group label, an authored learning-signal line, and a calm subject
  * tag — followed by a follow-up story row built from REAL outcome rows (out15 st11
- * absence · out4 st7 make-up). Display-only throughout: no data table, no messaging
- * composer, no edit/save, no private guardian contact, no computed risk value, and —
+ * absence · out4 st7 make-up) as the page's single focused band, then ONE td-gates
+ * wrap holding four honest backendRequired gateNote rows (history · schedule ·
+ * monthly report/plan · certificate context per student — the proven reference
+ * roster relationships; placeholder locale keys pending the locale micro-batch).
+ * Display-only throughout: no data table, no messaging composer, no edit/save, no
+ * private guardian contact, no computed risk value, and —
  * the standing hard rule — ZERO figure-bearing or flagged vocabulary anywhere (copy
  * AND comments). The page body contributes ZERO anchors. */
 import { t } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
 import { avatar } from '../components/ui.js';
-import { pageHead, secHead, storyRow } from '../components/portal-page.js';
+import { pageHead, secHead, gateNote, storyRow } from '../components/portal-page.js';
 import { STUDENT_BY_ID } from '../fixtures/students.js';
 import { OUTCOME_BY_ID } from '../fixtures/attendance.js';
 import { TEACHER_PREVIEW } from '../fixtures/portal.js';
@@ -52,10 +56,17 @@ export function renderTeacherStudents() {
       <div class="pt-cards">${ROSTER.map(rosterCard).join('')}</div>
     </section>
 
-    <section class="pt-section">
+    <section class="pt-section td-focus">
       ${secHead('alert-triangle', 'prt.tch.pg.students.followTitle', 'prt.tch.pg.students.followHint')}
       ${storyRow(followStories())}
     </section>
+
+    <div class="td-gates">
+      ${gateNote('prt.tch.pg.students.gateHistory')}
+      ${gateNote('prt.tch.pg.students.gateSchedule')}
+      ${gateNote('prt.tch.pg.students.gateReport')}
+      ${gateNote('prt.tch.pg.students.gateCertificate')}
+    </div>
 
     <div class="pt-note">${icon('help', 'ico ico-sm')}<span><strong>${esc(t('prt.tch.noteT'))}</strong> — ${esc(t('prt.band.noteTch'))}</span></div>
   `;

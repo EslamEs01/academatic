@@ -475,6 +475,68 @@ const MATRIX = [
   { page: 'add-family', lang: 'ar', theme: 'light', vp: 'desktop', spec044State: 'wizard-dirty-warning', variant: 'sp044-wizard-dirty' },
   { page: 'dashboard', lang: 'en', theme: 'dark', vp: 'mobile', drawer: true, variant: 'sp044-sidebar-en-dark' },
   { page: 'dashboard', lang: 'ar', theme: 'dark', vp: 'desktop', spec044State: 'dropdown', variant: 'sp044-dropdown-dark' },
+  // Spec 045 — Teacher visual-state coverage (additive rows only; existing fields only).
+  // NOTE: the requested teacher-library search match / no-match / single-empty-state frames are
+  // INTENTIONALLY OMITTED — no existing row field types a text query into `input[data-filter="search"]`
+  // and applies it (the library's filterBar). `ssEmpty`/`reportFilter`/`teacher` drive <select> dropdowns,
+  // not a free-text search. Per the no-invention rule these states are skipped, not faked.
+  // teachers admin directory, deep-linked non-default tabs (#view=):
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'add', variant: 'sp045-teachers-add' },
+  { page: 'teachers', lang: 'ar', theme: 'light', vp: 'desktop', view: 'categories', variant: 'sp045-teachers-categories' },
+  // teacher admin detail at 390px (mobile vp) — default Overview view shows the profileBanner action cluster:
+  { page: 'teacher', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp045-teacher-detail-mobile' },
+  // teacher-performance at 390px on the two non-default tabs (#view= ):
+  { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'mobile', view: 'sessions-kpi', variant: 'sp045-perf-sessions-kpi-mobile' },
+  { page: 'teacher-performance', lang: 'ar', theme: 'light', vp: 'mobile', view: 'monthly', variant: 'sp045-perf-monthly-mobile' },
+  // dark rows for the four teacher pages currently light-only in the committed matrix:
+  { page: 'teacher-students', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp045-teacher-students-dark' },
+  { page: 'teacher-tasks', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp045-teacher-tasks-dark' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp045-teacher-reports-dark' },
+  { page: 'teacher-profile', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp045-teacher-profile-dark' },
+  // Spec 045 — T064 (this batch): EN/LTR light frames for the six teacher pages that had AR-only
+  // desktop coverage, the two missing dark frames (outcomes/library), and the 390px frames that
+  // close the per-row AR+EN desktop+390px + dark parity required by responsive-matrix.md.
+  // (teacher-portal/teacher-schedule AR-390px and every en/ar light-desktop frame already exist as
+  // non-variant rows above; they are not duplicated.) Every `mobile` row below renders at exactly
+  // 390px (VIEWPORTS.mobile) and numerically proves scrollWidth === clientWidth via the exhaustive
+  // per-page/per-lang 390px equality gate in tests/smoke/run.cjs (documentElement.scrollWidth <= 391
+  // at a 390px viewport) — capture.cjs itself asserts zero console errors and carries no other
+  // assertion style to mirror.
+  { page: 'teacher-schedule', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp045-schedule-en' },
+  { page: 'teacher-students', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp045-students-en' },
+  { page: 'teacher-outcomes', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp045-outcomes-en' },
+  { page: 'teacher-tasks', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp045-tasks-en' },
+  { page: 'teacher-library', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp045-library-en' },
+  { page: 'teacher-profile', lang: 'en', theme: 'light', vp: 'desktop', variant: 'sp045-profile-en' },
+  { page: 'teacher-outcomes', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp045-outcomes-dark' },
+  { page: 'teacher-reports', lang: 'en', theme: 'dark', vp: 'desktop', variant: 'sp045-reports-en-dark' },
+  { page: 'teacher-library', lang: 'ar', theme: 'dark', vp: 'desktop', variant: 'sp045-library-dark' },
+  // 390px — the seven teacher portal pages, AR and EN each (schedule AR-390 exists above):
+  { page: 'teacher-schedule', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-schedule-mobile-en' },
+  { page: 'teacher-students', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp045-students-mobile' },
+  { page: 'teacher-students', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-students-mobile-en' },
+  { page: 'teacher-outcomes', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp045-outcomes-mobile' },
+  { page: 'teacher-outcomes', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-outcomes-mobile-en' },
+  { page: 'teacher-tasks', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp045-tasks-mobile' },
+  { page: 'teacher-tasks', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-tasks-mobile-en' },
+  { page: 'teacher-reports', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp045-reports-mobile' },
+  { page: 'teacher-reports', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-reports-mobile-en' },
+  { page: 'teacher-library', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp045-library-mobile' },
+  { page: 'teacher-library', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-library-mobile-en' },
+  { page: 'teacher-profile', lang: 'ar', theme: 'light', vp: 'mobile', variant: 'sp045-profile-mobile' },
+  { page: 'teacher-profile', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-profile-mobile-en' },
+  // 390px EN for the three admin teacher surfaces (their AR-390 frames exist above):
+  { page: 'teachers', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-teachers-mobile-en' },
+  { page: 'teacher', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-detail-mobile-en' },
+  { page: 'teacher-performance', lang: 'en', theme: 'light', vp: 'mobile', variant: 'sp045-perf-mobile-en' },
+  // BLOCKED-ON-HARNESS (documented, not faked): teacher-library search-match / no-match / empty
+  // frames need a driver that types into `input[data-filter="search"]` and applies the form — no
+  // existing MATRIX field does that (`ssEmpty`/`reportFilter`/`teacher` drive <select> facets only;
+  // `spec044State: 'validation-error'` hard-requires exactly one `.interaction-surface` input and a
+  // `[data-interaction-submit]`, neither of which the portal-shell library page has). The teacher
+  // pages carry no editable form (validation state), no drawer/modal trigger other than the mobile
+  // nav disclosure (already covered by the Spec 017 roleDrawer row), and no deterministic empty/long-
+  // content switches (fixtures always populate) — so those page-state-matrix states stay untriggered.
 ];
 
 async function requiredClick(page, selector) {

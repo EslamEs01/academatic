@@ -35,10 +35,189 @@ equal number of times, and requires at least four pairs so the guard cannot pass
 exact causal RED. This is the clearest evidence in the run that the mutation campaign is doing real
 work rather than confirming what was already believed.
 
-### Outstanding mutations
+### Session-3 additions
 
-M45-01, 02, 05, 08, 09, 10, 11, 12, 13, 14, 15, 16 have **not** been run. They are outstanding work,
-not passes.
+| Mutation | One byte-level intent | Guard | Observed RED cause | Copy removed | Verdict |
+|---|---|---|---|---|---|
+| **M45-01** missing scope | `build-html.mjs`: delete the `teacher-tasks` PAGES entry | scope/consumer audit | `FAIL missing localized consumer teacher-tasks.html` + `.en.html` | yes | **RED (causal)** |
+| **M45-02** missing localized consumer | `build-html.mjs`: skip writing only `teacher-library.en.html` | scope/consumer audit | `FAIL missing localized consumer teacher-library.en.html` | yes | **RED (causal)** |
+| **M45-13** false saved wording | `en.prt.js`: library upload gate → "Your resource has been saved to the library." | truthfulness audit | `FAIL fake-success wording on teacher-library.en.html → "has been saved"` | yes | **RED (causal)** |
+| **M45-15** private role field | `teacher-students.js`: render a guardian phone into the roster card markup | privacy audit | `FAIL contact-shaped value on teacher-students.html → "+966 55 123 4567"` (+ `.en`) | yes | **RED (causal)** |
+| **M45-17** FR-031 regression *(new, added with G45-2)* | `teachers.js`: reintroduce `avgUtil = Math.round(reduce(...)/rows.length)` | **G45-2**, via full smoke | three causal failures: reintroduced `avgUtil`; reads the numeric `util` field again; computes an arithmetic mean over the records | yes | **RED (causal)** |
+
+**Running total: 9 of the 16 contract mutations plus the new M45-17 are proven. Residue 0.**
+
+### A mutation-design correction worth recording
+
+The first M45-15 attempt came back **GREEN**. Investigation showed the fault was in the *mutation*,
+not the guard: it added an unused `const GUARDIAN_PHONE` that never rendered, so there was no leak on
+the page for a rendered-output guard to find. A mutation that applies textually but produces no
+observable defect is not evidence of a working guard. It was redesigned to inject the phone into the
+roster card's actual markup, and then produced causal RED in **both** localized consumers.
+The same discipline rejected a malformed M45-02 attempt: it broke the isolated build, and the runner
+reported `RESULT=REJECTED` rather than counting a build break as RED.
+
+### Outstanding mutations — RESOLVED
+
+The list below is superseded. All Spec-045 mutations have now been run to a causal RED (or REJECTED
+with cause). Proven: **M45-01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, and G45-2's
+M45-17.** The final three (M45-10, M45-12, M45-14) landed in session 6; see "Session-6" below.
+Historical note: this table originally read "M45-05, 08, 09, 10, 11, 12, 14, 16 have NOT been run" —
+that was true at end-of-session-5 only and is corrected here.
+
+| Mutation | Guard it needs before it can produce a causal RED | Guard status |
+|---|---|---|
+| M45-05 self/admin identity | identity-separation assertion distinguishing `teacher.html` from `teacher-profile.html` | **G45-5 authored** |
+| M45-08 missing locale copy | AR/EN key-parity check promoted into the suite | **G45-3 authored** |
+| M45-09 removed 390px containment | numeric geometry assertion (`scrollWidth === clientWidth` at 390px) | **partly covered**: `cap.cjs` asserts it numerically per frame and exits 1; G45-4 additionally pins the 390px CSS block's presence |
+| M45-10 removed dark-theme rule | dark-theme rule-presence assertion over the **compiled** CSS | **G45-4 authored** |
+| M45-11 source/generated desync | rebuild-and-compare parity assertion | still outstanding |
+| M45-12 swallowed selector | fail-loud meta-guard scanning test source for silent catch / optional selectors | **G45-6 authored** |
+| M45-14 Spec-044 interaction regression | the inherited interaction driver wired into the Spec-045 gate set | still outstanding |
+| M45-16 unrelated drift | page-body drift comparison promoted from `impact.cjs` into the suite | still outstanding |
+
+### Guards authored in session 4
+
+| Guard | Protects | Falsified by | Notes |
+|---|---|---|---|
+| **G45-3** | AR/EN key parity for the `prt` and `trn` namespaces (FR-052) | M45-08 | Compares flattened key **sets** in both directions, and refuses to pass on an empty set. Catches a missing key structurally, where a DOM raw-key sweep only catches it if the affected page/state happens to be visited. |
+| **G45-4** | The Teacher layer's dark-theme and 390px rules surviving into the **compiled** stylesheet (FR-053, FR-054) | M45-10 | Checks the built artifact, not the source, because Tailwind purges what it believes unused. Also pins all four `td-*` primitives. |
+| **G45-5** | `teacher-profile` (portal self) and `teacher` (admin detail) never becoming the same surface (FR-040) | M45-05 | Asserts shell identity in both directions and that four admin-only controls never appear on the self page. |
+| **G45-6** | The Spec-045 guards themselves failing loudly (FR-061) | M45-12 | A meta-guard: reads its own file, extracts every `G45-*` block, and rejects an empty `catch`/`catch(e)`, an empty `.catch(() => {})`, or a block containing no assertion. Refuses to pass if fewer than five guard blocks are found. **Strengthened in session 6** (see M45-12 below): the catch-regex originally required a parameter list, so a bare ES2019 `catch {}` (optional catch-binding) slipped through; it now matches both forms and skips its own block (its source necessarily names the pattern, which would otherwise self-flag). |
+
+**A guard-accuracy correction (same class as the earlier audit-regex bugs):** G45-4's first version
+asserted `\[data-theme="dark"\]` and went RED against a perfectly intact stylesheet — the minifier
+strips attribute-selector quotes, emitting `[data-theme=dark]`. The rule was present all along. The
+regex was made quote-agnostic. Recorded because a guard that reports a false RED is itself a defect.
+
+### Session-4 mutation results
+
+| Mutation | Intent | Guard | Outcome |
+|---|---|---|---|
+| **M45-08** | delete `gateCertificate` from `en.prt.js` only | G45-3 | **RED (causal)** — `ar.prt.js has 1 key(s) with no EN mirror → ["prt.tch.pg.students.gateCertificate"]`. Residue 0 |
+| **M45-10** (attempt 1) | remove the explicit dark `.td-gates` rule | G45-4 | **REJECTED — unrelated cause.** The isolated copy was taken while Kimi's D4-A batch had `teacher-profile.js` referencing three not-yet-authored keys, so the RED was `raw i18n keys [...profile.identHint ...]`, nothing to do with the dark rule. Not counted; re-run after the tree was consistent |
+| **M45-10** (attempt 2) | same | G45-4 | **GREEN — second genuine guard hole found** (see below) |
+| **M45-10** (attempt 3) | same, against the tightened guard | G45-4 | re-run in progress at session end |
+
+### M45-10 — the second guard hole this campaign found
+
+Attempt 2 returned GREEN against a stylesheet whose explicit dark rule had genuinely been deleted.
+Cause: the Teacher layer carries **two** dark rules — the explicit
+`[data-theme=dark] .td-gates { … }` and the system fallback
+`:root:not([data-theme=light]):not([data-theme=dark]) .td-gates { … }` inside
+`@media (prefers-color-scheme: dark)`. The original assertion
+`\[data-theme=dark\][^{]*\.td-gates` **also matches the fallback**, because the fallback contains
+`[data-theme=dark])` before its ` .td-gates`. Deleting the explicit rule therefore left the guard
+satisfied by the survivor.
+
+Fix: the explicit rule is now anchored to the **start of a rule** — preceded by `}`, `;`, `,` or the
+file start — which the `:not(...)` form can never satisfy because its bracket is preceded by `)`. A
+third assertion pins the fallback separately, so removing **either** rule now fails.
+
+This is the second time a mutation exposed a hole in a guard rather than confirming one (M45-06 was
+the first). Both are recorded rather than quietly repaired, because a campaign that only ever
+confirms what its author already believed is not doing any work.
+
+### Session-5 mutation results
+
+| Mutation | Intent | Guard | Outcome |
+|---|---|---|---|
+| **M45-05** (attempt 1) | `build-html.mjs`: `{ base: 'teacher', shell: 'admin'` → portal | G45-5 | **ABORTED by the runner** — that text does not exist (admin is the *default* shell, not a written key). The runner refused to proceed rather than produce a false GREEN from a no-op edit |
+| **M45-05** (attempt 2) | add `shell: 'portal', role: 'teacher'` to the real `teacher` PAGES entry | G45-5 / smoke | **RED (causal)** — `teacher/ar: missing static shell/content`, `missing slim icon rail (.nav-rail)`, `missing light nav panel (.nav-panel)`, `expected 1 active nav item, got 0`. The admin surface rendered as a portal was caught exactly. Residue 0 |
+| **M45-11** | hand-edit the generated `public/teacher-library.html` **after** the build | **parity** | **RED (causal)** — `DIVERGED — 1 generated Teacher page(s) were not in sync with their authored source`. Required a new post-build mutation mode, because a pre-build edit to a generated file is erased by the build itself |
+| **M45-14** (attempt 1) | rename the `trn-policy` drawer template so its opener dangles | inherited Spec-044 driver | **GREEN — third genuine guard gap found** (see below) |
+| **M45-14** (attempt 2) | same, against the new G45-7 | smoke | re-run in progress |
+
+### M45-14 — the third gap: the inherited suite does not cover Teacher trigger→target mapping
+
+Renaming a Teacher drawer template so that its opener pointed at a non-existent target produced a
+**dangling trigger** — a control that looks live and does nothing — and **all 22 inherited Spec-044
+interaction guards still passed**. The inherited driver validates the shared interaction *system*
+(focus, scroll, dismissal, single-overlay, backend-required truthfulness); it does not enumerate
+Teacher-domain opener/target pairs.
+
+FR-047 requires exactly that mapping to be exercised and to fail loudly when absent, so assuming the
+inherited suite covered it was wrong. **G45-7** now asserts, for each of the 22 localized Teacher
+consumers, that every `data-drawer="X"` has a matching `<template data-preview="X">` on the same
+page. Measured on the clean tree: **38 openers, 0 dangling** — the invariant already held, but until
+now nothing enforced it.
+
+### Session-5 completion
+
+| Mutation | Intent | Guard | Outcome |
+|---|---|---|---|
+| **M45-16** (attempt 1) | rewrite `dashboard.js` to append markup | drift | **REJECTED** — the edit broke the isolated build; a build break is never a causal RED |
+| **M45-16** (attempt 2) | change one dashboard-body string in `en.extra.js` (a locale edit cannot break the build, so any RED is necessarily the drift guard) | **drift** | **RED (causal)** — `UNDECLARED drift: 1 ["dashboard.en.html"]` |
+| **M45-09** (attempts 1–2) | remove the exact-390px containment block | smoke | **REJECTED — port collision.** Both runs exited non-zero on `EADDRINUSE :4178` because a concurrent mutation held the fixed smoke port. Investigated rather than counted; an infrastructure crash is not a causal RED |
+| **M45-09** (attempt 3, unique port) | same | **G45-4** | **RED (causal)** — `G45-4: the exact-390px containment block for the Teacher layer is gone from the compiled stylesheet (FR-054)` |
+
+### The port-collision near-miss
+
+Two M45-09 runs returned non-zero and *looked* like passes. They were not: the smoke process died on
+`EADDRINUSE` binding port 4178, because `mutate.sh` used a fixed port and another mutation was
+running concurrently. The exit code was right for the wrong reason.
+
+It was caught by insisting on reading the actual failure text instead of trusting the exit status —
+the log had no `SMOKE FAILED:` line at all, which is what exposed it. `mutate.sh` now allocates a
+unique port per run (`PORT=$((4300 + RANDOM % 400))`) so concurrent runs cannot collide, and both
+attempts are recorded as REJECTED rather than quietly replaced by the passing third attempt.
+
+### New infrastructure this session
+
+- `mutate.sh` gained a **`post`** mode (apply the mutation *after* the build) so generated-file
+  mutations survive to the guard, and **`interaction`** / **`parity`** guard modes.
+- `parity.cjs` — snapshots all 22 generated Teacher consumers, re-runs the canonical generator, and
+  requires byte-identical output; refuses to pass unless it snapshotted exactly 22 files.
+  On the clean primary tree: **all 22 reproduce byte-identically**.
+
+### Session-6 — the final three (M45-10, M45-12, M45-14)
+
+| Mutation | Intent | Guard | Outcome |
+|---|---|---|---|
+| **M45-12** (attempt 1) | inject a bare ES2019 `catch {}` (optional catch-binding) into the G45-5 block of `run.cjs`, file kept loadable | G45-6 | **GREEN — third genuine guard hole found.** The meta-guard regex `/catch\s*\(\s*\w*\s*\)\s*\{\s*\}/` requires a parameter list, so a bare `catch {}` — the canonical swallowed selector — slipped through. Not a false RED (file parsed; the guard simply did not see it). |
+| **M45-12** (attempt 2) | same mutation, against the **strengthened** G45-6 | G45-6 | **RED (causal)** — `SMOKE FAILED: G45-6: guard G45-5 contains an empty catch — a swallowed failure (FR-061)`. `SMOKE_EXIT=1`, no browser crash. Copy removed; residue 0. |
+| **M45-10** | remove the explicit `[data-theme="dark"] .td-gates { … }` rule from `src/styles/app.css` (dark theme) | G45-4 | **RED (causal)** — `SMOKE FAILED: G45-4: the EXPLICIT [data-theme=dark] .td-gates rule is gone from the compiled stylesheet (FR-053)`. Confirms the session-4 anchored fix (`(^|[};,])\[data-theme=…dark…\]\s+\.td-gates\{`) catches the removal; no further repair needed. `SMOKE_EXIT=1`, no crash. Copy removed; residue 0. |
+| **M45-14** | break one inherited Spec-044 Teacher interaction — proven in BOTH shapes FR-061/FR-047 forbid | M44-14 + G45-7 | **RED (causal), two independent halves** — see below |
+
+### M45-14 — both halves went RED with the exact cause
+
+**(a) swallowed selector (the M45-12-class failure, in the Spec-044 driver).** Removed
+`reportInteractionError('missing-target', …)` from `openSheet` in `enhance.js` so a missing drawer
+target silently returned. The inherited interaction driver went **RED**:
+`FAIL M44-14 inventory.fail-loud: missing required target was swallowed instead of emitting exact
+interaction:error`, `INTERACTION_EXIT=1`.
+
+**(b) dangling trigger (the FR-047 shape G45-7 was authored for).** Renamed the `trn-policy` drawer
+*template* while leaving its `data-drawer="trn-policy"` opener in place → the opener dangled. Smoke
+went **RED**: `G45-7: teacher.html has a dangling drawer opener data-drawer="trn-policy" with no
+<template data-preview="trn-policy"> on the page (FR-047)` (and `teacher.en.html`), plus the page's
+trn-policy structural pins. Copy removed, residue 0, primary tree green.
+
+### M45-12 — the third(real) guard hole: bare `catch {}` vs `catch (e) {}`
+
+The fail-loud meta-guard G45-6 scanned for empty catches with `/catch\s*\(\s*\w*\s*\)\s*\{\s*\}/` —
+a pattern that demands a **parenthesised parameter** (`catch (e) {}`). A bare ES2019
+**`catch {}`** (optional catch-binding) is a perfectly valid swallowed selector and parsed the test
+file fine, yet the regex never matched it. The mutation went GREEN — the meta-guard passed while a
+swallowed failure sat in the suite. That is precisely the failure mode FR-061 forbids.
+
+Minimal primary fix (in `run.cjs`, in place): the regex became
+`new RegExp('cat' + 'ch(\\s*\\(\\s*\\w*\\s*\\))?\\s*\\{' + '\\s*\\}')` — parameter list now optional
+(`(...)?`), so both forms match; and the loop `continue`s on its own `G45-6` block, because this
+guard's own source must *name* the pattern it rejects and would otherwise flag itself. Re-run against
+the identical mutation produced the causal RED above. (Self-flag risk was caught and fixed in the
+same edit; the primary self-scan now reports 0 flagged blocks.)
+
+### Runner durability fix this session (infrastructure, recorded like the port collision)
+
+The smoke suite loads all 114 pages × 2 locales in one long-lived headless browser. On this host the
+renderer was OOM-killed mid-crawl at a *moving* page (`family-profile.en.html`, then `library.html`),
+yielding `Target page/context/browser has been closed` with **no** `SMOKE FAILED:` line — an
+infrastructure crash that exits non-zero and looks like a pass. This is the same environment trap as
+the M45-09 `EADDRINUSE`. Minimal fix in `run.cjs`: relaunch chromium **per base page**
+(`await relaunch()` at the top of the 114-page loop), bounding peak memory at a single fresh browser.
+Primary baseline then ran clean: `[smoke] PASS — 114 page loads`, `SMOKE_EXIT=0`. Without this, none
+of the session-6 mutations could produce a trustworthy causal RED.
 
 No mutation has run before implementation. Syntax/load/fixture/unrelated failures will be rejected rather than counted.
 

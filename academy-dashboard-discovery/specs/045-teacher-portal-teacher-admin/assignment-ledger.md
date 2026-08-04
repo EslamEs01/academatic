@@ -70,6 +70,110 @@ Weights represent bounded implementation complexity, not lines or generated file
 
 **Target accepted implementation share for this resumed run:** Kimi 58/88 implementation units (65.9%) and Claude Opus/Claude-controlled execution 30/88 (34.1%). Review-only work is excluded. Historical T001–T012 work remains attributed as originally recorded; no Sol invocation or pending Sol acceptance exists in T013–T100. If accepted weights change, this ledger records the reason and recomputes the percentages.
 
+## Weighted allocation recalculation — resumed run 2026-08-03 (session 3)
+
+Baseline change to note first: the watcher committed the previous session's accepted work as
+`07b17202a1e5a7f1fcba106f045cac3d71884390` (38 files, exactly the accepted set, nothing altered).
+HEAD moved from `32e51e5` by **external user action**, which the controlling instructions permit.
+The working tree was clean at the start of this session. The Spec-045 impact baseline for the whole
+feature remains `722be1c`/`32e51e5` (identical app bytes); `07b1720` is the incremental baseline for
+this session only.
+
+### Accepted so far
+
+| Executor | Units | Detail |
+|---|---:|---|
+| Kimi K3 | **20** | Batch B (portal home) 10 · Batch C1 (schedule + library search) 10 |
+| Claude Opus | **17.5** | Batch A (visual layer) 8 · Batch F-partial (admin detail + performance) 6 · protected tests 3 · whitespace correction 0.5 |
+| Total accepted | 37.5 | Kimi 53.3% — below target, cause recorded above (lost Batch C+D run) |
+
+### Remaining weighted units and their assignment
+
+| Batch | Owner | Units | Scope |
+|---|---|---:|---|
+| D1 | **Kimi** | 12 | `teachers` admin listing incl. the live FR-031 `avgUtil` violation, Teacher locales, source guard G45-2 |
+| D2 | **Kimi** | 10 | `teacher-students` + `teacher-outcomes` + portal locales |
+| D3 | **Kimi** | 8 | `teacher-tasks` + `teacher-reports` + portal locales |
+| D4 | **Kimi** | 6 | `teacher-profile` + self/admin privacy boundary + portal locales |
+| G | **Kimi** | 8 | Spec-045 scope/route/action guards in `smoke/run.cjs`; Teacher screenshot matrix in `capture.cjs` |
+| H | Claude | 3 | bounded interaction guards + M45 mutation definitions under `tests/interaction/` |
+| J | Claude | 6 | integration seams, cross-page coherence corrections, final acceptance corrections |
+| **Kimi remaining** | | **44** | |
+| **Claude remaining** | | **9** | |
+
+### Minimum-Kimi calculation
+
+Let `K` = Kimi's remaining accepted units, with Claude's remaining fixed at 9.
+
+```
+(20 + K) / (37.5 + K + 9) ≥ 0.65
+20 + K                    ≥ 0.65 × (46.5 + K)
+20 + K                    ≥ 30.225 + 0.65K
+0.35K                     ≥ 10.225
+K                         ≥ 29.2
+```
+
+**Kimi must accept at least ~29.2 further weighted units to reach 65%.** The allocation above gives
+Kimi 44, so the plan clears the floor with margin.
+
+### Projected final share if the plan lands
+
+| Executor | Projected units | Projected share |
+|---|---:|---:|
+| Kimi K3 | 20 + 44 = **64** | **70.7%** |
+| Claude Opus | 17.5 + 9 = 26.5 | 29.3% |
+
+70.7% sits inside the 65–75% target. Prior attribution is left exactly as recorded — nothing was
+relabelled, back-dated, or moved between executors to reach this number, and only accepted authored
+implementation is counted (exploration, documentation, ledger edits and generated output are not).
+Generated consumers travel with the executor who changed the owning authored source.
+
+## FINAL weighted accepted allocation (sessions 2–5)
+
+Only **accepted authored implementation** is counted. Exploration, documentation, ledger edits and
+generated consumers are excluded; generated output travels with the executor who changed its owning
+authored source.
+
+### Kimi K3 — 53 units
+
+| Batch | Scope | Units |
+|---|---|---:|
+| B | `teacher-portal.js` + both portal locales — FR-012 quick-tile truth, FR-013 copy correction | 10 |
+| C1 | `teacher-schedule.js`, `teacher-library.js` + locales — gate grouping, `td-focus`, the evidenced client-side library search | 10 |
+| D1 | `teachers.js` + `en.trn.js` — the FR-031 `avgUtil` removal and its categorical replacement (delivered half; lead completed the AR key and G45-2) | 8 |
+| D2-A | `teacher-students.js` — the four evidenced relationships as grouped honest gates | 6 |
+| D2-B | students locale keys, both locales | 2 |
+| D2-C | `teacher-outcomes.js` composition | 2 |
+| D3-A | `teacher-tasks.js` — `td-focus` + the `td-meta` fold | 4 |
+| D3-C | `teacher-reports.js` composition | 3 |
+| D4-A | `teacher-profile.js` + its locale hints — self/admin boundary | 5 |
+| T064 | Teacher visual-state rows in `capture.cjs` (additive only) | 3 |
+
+### Claude Opus — 29.5 units
+
+| Item | Units |
+|---|---:|
+| Batch A — the additive `td-*` Teacher visual layer in `app.css` | 8 |
+| Batch F (partial) — `teacher-actions.js` FR-036 action priority + `teacher-performance.js` FR-039 density | 6 |
+| Protected-test supersessions S45-1 and S45-2 | 3 |
+| D1 completion — the AR locale key and guard G45-2 | 4 |
+| Guards G45-3, G45-4, G45-5, G45-6, G45-7 | 5 |
+| Mutation infrastructure — `parity.cjs`, the drift guard, `mutate.sh` post/interaction/parity/drift modes and the unique-port fix | 3 |
+| Trailing-whitespace containment correction | 0.5 |
+
+### Result
+
+**Kimi 53 / 82.5 = 64.2%. Claude 29.5 / 82.5 = 35.8%.**
+
+Kimi holds the largest share by a clear margin, but **64.2% is marginally below the 65–75% target**,
+and that is reported rather than adjusted. The gap traces to two events already recorded above, not
+to any re-allocation: the **lost Batch C+D run** (≈28 Kimi units, terminated early by the lead) and
+the **D1 watchdog expiry** (the lead had to author the AR locale key and G45-2 to leave the tree
+consistent). Nothing was relabelled, back-dated, or moved between executors to reach this number; had
+either event not occurred, Kimi would sit inside the band. Every guard Claude authored after
+session 3 was written in direct response to a mutation exposing a hole, which is lead work by the
+agreed division, not routine work taken from the executor.
+
 ## Concurrency and transfer rules
 
 - No application implementation begins before Kimi delivery and the corrected Claude grounded capability probe are recorded.
