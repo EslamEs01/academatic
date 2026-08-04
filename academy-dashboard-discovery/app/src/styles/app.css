@@ -532,6 +532,95 @@
   .sheet-row:first-of-type { border-top: 0; }
   .sheet-row .k { color: var(--c-ink-3); }
   .sheet-row .v { @apply font-medium text-ink; }
+
+  /* ---- Spec 044: one modal-grade interaction host ------------------- */
+  html[data-interaction-locked], body[data-interaction-locked] { overflow: hidden; overscroll-behavior: none; }
+  body[data-interaction-locked] { padding-inline-end: var(--interaction-scrollbar-compensation, 0); }
+  body[data-interaction-locked] #shell { contain: layout; overflow: hidden; }
+  body[data-interaction-locked] .page-scroll { overflow: hidden; }
+  .interaction-overlay {
+    position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center;
+    padding: 20px; background: rgba(20, 18, 32, .56); opacity: 0; pointer-events: none;
+    transition: opacity .2s var(--ease); overflow: hidden;
+  }
+  .interaction-overlay.is-open { opacity: 1; pointer-events: auto; }
+  .interaction-surface {
+    position: relative; inset: auto; width: min(640px, calc(100vw - 40px));
+    max-height: min(100vh, var(--interaction-viewport-height, 100dvh));
+    background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-card);
+    box-shadow: var(--shadow-hi); overflow: hidden; outline: 0; opacity: 0;
+    transform: translateY(12px) scale(.985); transition: opacity .2s var(--ease), transform .22s var(--ease);
+  }
+  .interaction-surface.is-open { opacity: 1; transform: none; }
+  .interaction-surface.interaction-drawer,
+  .interaction-surface.interaction-sidebar {
+    position: absolute; inset-block: 0; inset-inline-end: 0; width: min(560px, calc(100vw - 24px));
+    height: min(100vh, var(--interaction-viewport-height, 100dvh)); max-height: none; border-radius: 0;
+    transform: translateX(calc(102% * var(--interaction-slide-sign, 1)));
+  }
+  [dir="rtl"] .interaction-surface.interaction-drawer,
+  [dir="rtl"] .interaction-surface.interaction-sidebar { --interaction-slide-sign: -1; }
+  .interaction-surface.interaction-sidebar { width: min(360px, calc(100vw - 24px)); }
+  .interaction-surface[data-interaction-family="confirmation"] { width: min(460px, calc(100vw - 32px)); }
+  .interaction-card {
+    display: grid; grid-template-rows: auto minmax(0, 1fr) auto; width: 100%; height: 100%;
+    min-height: 0; max-height: inherit; background: var(--c-surface); overflow: hidden;
+  }
+  .interaction-modal .interaction-card { max-height: min(760px, calc(var(--interaction-viewport-height, 100dvh) - 40px)); }
+  .interaction-header {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    min-height: 64px; padding: calc(14px + env(safe-area-inset-top, 0px)) 20px 14px;
+    border-bottom: 1px solid var(--c-line); background: var(--c-surface); z-index: 2;
+  }
+  .interaction-title { color: var(--c-ink); font-weight: 700; }
+  .interaction-content { min-height: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; padding: 18px 20px; }
+  .interaction-footer {
+    display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px;
+    min-height: 62px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--c-line); background: var(--c-surface); z-index: 2;
+  }
+  .interaction-content > .flex.flex-wrap.gap-2.mt-5 {
+    position: sticky; bottom: calc(-18px - env(safe-area-inset-bottom, 0px)); z-index: 1;
+    margin-inline: -20px; padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+    border-top: 1px solid var(--c-line); background: var(--c-surface);
+  }
+  .interaction-error-summary { margin-block-end: 14px; padding: 10px 12px; border: 1px solid var(--c-coral); border-radius: 10px; color: var(--c-coral); background: color-mix(in srgb, var(--c-coral) 8%, transparent); }
+  .field-error { margin-block-start: 6px; font-size: 12px; font-weight: 600; color: var(--c-coral); }
+  [aria-invalid="true"] { border-color: var(--c-coral) !important; box-shadow: 0 0 0 2px color-mix(in srgb, var(--c-coral) 22%, transparent); }
+  .interaction-operation { margin-block-start: 12px; }
+  .interaction-operation-note { padding: 10px 12px; border: 1px solid var(--c-amber); border-radius: 10px; background: color-mix(in srgb, var(--c-amber) 10%, transparent); color: var(--c-ink); font-size: 13px; }
+  .interaction-discard {
+    position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; justify-content: center;
+    gap: 12px; padding: 24px; background: var(--c-surface); overflow-y: auto;
+  }
+  .interaction-discard-title { font-size: 18px; font-weight: 800; color: var(--c-ink); }
+  .interaction-discard-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; margin-block-start: 8px; }
+  .page-interaction-discard {
+    margin: 16px; padding: 16px; border: 1px solid var(--c-coral); border-radius: 12px;
+    background: color-mix(in srgb, var(--c-coral) 7%, var(--c-surface)); color: var(--c-ink);
+  }
+  .interaction-sidebar-card .interaction-content { padding: 0; }
+  .interaction-sidebar-card .sidebar { position: static; display: flex; width: 100%; height: 100%; }
+  .interaction-surface :focus-visible { outline: 3px solid color-mix(in srgb, var(--c-primary) 72%, white); outline-offset: 2px; }
+
+  @media (max-width: 640px) {
+    .interaction-overlay { padding: 0; align-items: stretch; }
+    .interaction-surface:not([data-interaction-family="confirmation"]) {
+      position: absolute; inset: 0; width: 100vw; max-width: none;
+      height: min(100vh, var(--interaction-viewport-height, 100dvh)); max-height: none;
+      border: 0; border-radius: 0; transform: translateY(12px);
+    }
+    .interaction-surface[data-interaction-family="confirmation"] { max-height: calc(var(--interaction-viewport-height, 100dvh) - 24px); }
+    .interaction-modal .interaction-card { max-height: none; }
+    .interaction-header { padding-inline: 16px; }
+    .interaction-content { padding-inline: 16px; scroll-padding-block-end: 96px; }
+    .interaction-footer { padding-inline: 16px; }
+    .interaction-footer .btn { min-height: 44px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .interaction-overlay, .interaction-surface { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  }
 }
 
 /* schedule + directory reflow on small screens */
@@ -1189,3 +1278,97 @@
 .finm-row .finm-serial { flex: 0 0 auto; color: var(--c-ink-3); font-size: 12px; }
 .finm-row .finm-family { flex: 1 1 140px; font-size: 13px; }
 .finm-row .finm-amount { flex: 0 0 auto; font-size: 13px; color: var(--c-ink-2); }
+
+/* ============================================================================
+ * Spec 045 — TEACHER DOMAIN composition layer (additive; `td-*` namespace ONLY).
+ *
+ * Purpose (visual-system-contract rules 1/3/4/6 · FR-006–FR-010 · FR-036 · FR-054/055):
+ * the eleven Teacher surfaces already share components but not enough DOMAIN RHYTHM —
+ * the portal internals read as flat card walls with stacked full-width gate banners,
+ * while the admin detail action region waterfalls at 390px. This layer adds exactly
+ * FOUR opt-in primitives that the page modules apply; it MODIFIES NO EXISTING SELECTOR
+ * and introduces NO new token, hook, storage key, dependency, or component.
+ *
+ * Non-Teacher regression proof: every selector below is a NEW `td-*` class name, so the
+ * set of consumers is exactly the set of Teacher modules that opt in. No page outside
+ * the Teacher domain can be reached by these rules.
+ *
+ * Placement: OUTSIDE `@layer components`, matching the established `.cc-*` / `.mr-*` /
+ * `.finm-*` additive blocks above, so Tailwind's layer purge cannot strip a primitive
+ * before its consuming batch lands.
+ *
+ * Shell-neutral accent: `--td-accent` resolves to the portal role accent inside
+ * `.portal-shell` and to the admin primary elsewhere, so one layer serves both shells
+ * while their role identities stay visibly distinct (FR-009).
+ * ========================================================================== */
+.td-focus, .td-meta, .td-gates, .td-actions {
+  --td-accent: var(--pt-accent, var(--c-primary));
+  --td-accent-ink: var(--pt-accent-ink, var(--c-primary));
+}
+
+/* 1 — section priority marker. Gives a page ONE "this is the work" section so the
+ * stack stops reading as N identical bands. Head-only: a logical inline-start accent
+ * rule (RTL-correct via border-inline-start), never a tinted block. */
+.td-focus > .pt-sec-head {
+  border-inline-start: 3px solid var(--td-accent);
+  padding-inline-start: 10px;
+}
+.td-focus > .pt-sec-head .pt-sec-title { color: var(--c-ink); }
+
+/* 2 — compact metadata row for repeated records. Replaces stacked one-fact sub-lines
+ * with one wrapping row of labeled icon+text facts (contract rule 4). Never color-only:
+ * each fact carries its own text. Wraps at any width; long Arabic labels cannot clip. */
+.td-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; margin-top: 2px; }
+.td-meta > span {
+  display: inline-flex; align-items: center; gap: 5px; min-width: 0;
+  font-size: 12px; line-height: 1.5; color: var(--c-ink-2); overflow-wrap: anywhere;
+}
+.td-meta > span .ico { color: var(--c-ink-3); flex-shrink: 0; }
+
+/* 3 — grouped terminal limits. Several honest backend-required gates on one page were
+ * rendering as several full-width filled banners, which reads louder than the page's
+ * real content. Grouping them keeps EVERY gate visible and individually labeled while
+ * costing one calm bordered block. The nested `.pt-note` markup is unchanged — only its
+ * presentation inside a group — so the availability chip and its text stay intact. */
+.td-gates {
+  border: 1px solid var(--c-border); border-radius: 16px;
+  background: var(--c-surface); padding: 2px 14px;
+}
+.td-gates > .pt-note {
+  background: transparent; border-radius: 0; padding: 12px 0;
+  border-top: 1px solid var(--c-line); overflow-wrap: anywhere;
+}
+.td-gates > .pt-note:first-child { border-top: 0; }
+
+/* 4 — dense admin action region (FR-036). Desktop keeps the existing wrap behavior.
+ * At 560px and below the 14-action Teacher-detail cluster becomes a two-column grid so
+ * every action stays visible, reachable, and unclipped instead of waterfalling; each
+ * button fills its cell and its label wraps rather than overflowing. */
+.td-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 560px) {
+  .td-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .td-actions > * { width: 100%; min-width: 0; }
+  .td-actions .btn { width: 100%; justify-content: center; text-align: center; white-space: normal; }
+  .td-actions .btn > span { min-width: 0; overflow-wrap: anywhere; }
+}
+
+/* 390px containment guard — the four primitives may never produce horizontal overflow
+ * at the exact mandated width (responsive-accessibility-contract). */
+@media (max-width: 390px) {
+  .td-meta, .td-gates, .td-actions, .td-focus > .pt-sec-head { max-width: 100%; }
+  .td-meta { gap: 4px 10px; }
+  .td-gates { padding-inline: 12px; }
+}
+
+/* Dark theme — `--pt-accent-weak` reads near-charcoal in dark (the Spec-024 D-06
+ * finding), so the group surface is derived from the accent itself rather than from the
+ * weak tint, and the focus rule keeps its contrast. Explicit [data-theme] plus the
+ * system-dark fallback, matching the established pattern. */
+[data-theme="dark"] .td-gates { background: color-mix(in srgb, var(--c-surface) 88%, var(--td-accent)); }
+[data-theme="dark"] .td-focus > .pt-sec-head { border-inline-start-color: var(--td-accent-ink); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .td-gates {
+    background: color-mix(in srgb, var(--c-surface) 88%, var(--td-accent)); }
+  :root:not([data-theme="light"]):not([data-theme="dark"]) .td-focus > .pt-sec-head {
+    border-inline-start-color: var(--td-accent-ink); }
+}

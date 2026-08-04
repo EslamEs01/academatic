@@ -591,16 +591,18 @@
     </div>
     
   </div></div>
-    <template data-preview="grp-add">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="grp-add" data-interaction-family="long-form" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">مجموعة جديدة</h2>
+          <h2 id="interaction-title-grp-add" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">مجموعة جديدة</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-grpAdd-name">اسم المجموعة</label><input id="f-grpAdd-name" name="grpAdd-name" type="text" class="input" placeholder="مثال: مجموعة الرياضيات ب" value="" /></div><div class="field"><label class="field-label" for="f-grpAdd-startDate">تاريخ البدء</label><input id="f-grpAdd-startDate" name="grpAdd-startDate" type="text" class="input" placeholder="مثال: 2026-09-01" value="" /></div><div class="field"><label class="field-label" for="f-grpAdd-course">الدورة</label><span class="select-wrap"><select id="f-grpAdd-course" name="grpAdd-course" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-grp-add" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field"><label class="field-label" for="f-grpAdd-name">اسم المجموعة</label><input id="f-grpAdd-name" name="grpAdd-name" type="text" class="input" placeholder="مثال: مجموعة الرياضيات ب" value="" /></div><div class="field"><label class="field-label" for="f-grpAdd-startDate">تاريخ البدء</label><input id="f-grpAdd-startDate" name="grpAdd-startDate" type="text" class="input" placeholder="مثال: 2026-09-01" value="" /></div><div class="field"><label class="field-label" for="f-grpAdd-course">الدورة</label><span class="select-wrap"><select id="f-grpAdd-course" name="grpAdd-course" class="select-input">
       <option value="c1" selected>الرياضيات</option><option value="c2">اللغة العربية</option><option value="c3">مقدمة في البرمجة</option><option value="c5">الإنجليزية</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-grpAdd-students">الطلاب المرشّحون</label><span class="select-wrap"><select id="f-grpAdd-students" name="grpAdd-students" class="select-input">
       <option value="st1" selected>سلمان الغامدي</option><option value="st2">جوري القحطاني</option><option value="st3">ياسر الدوسري</option><option value="st4">لمى العتيبي</option><option value="st5">فيصل الشهري</option>
@@ -609,10 +611,10 @@
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-grpAdd-scheduleTime">وقت الجلسة</label><input id="f-grpAdd-scheduleTime" name="grpAdd-scheduleTime" type="text" class="input" placeholder="مثال: 16:30" value="" /></div><div class="field"><label class="field-label" for="f-grpAdd-scheduleDuration">مدة الجلسة</label><span class="select-wrap"><select id="f-grpAdd-scheduleDuration" name="grpAdd-scheduleDuration" class="select-input">
       <option value="m30" selected>٣٠ دقيقة</option><option value="m45">٤٥ دقيقة</option><option value="m60">٦٠ دقيقة</option><option value="m90">٩٠ دقيقة</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-grpAdd-suggestedHours">عدد الساعات المقترَح</label><input id="f-grpAdd-suggestedHours" name="grpAdd-suggestedHours" type="number" class="input" placeholder="مثال: 24" value="" /></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button></footer>
+     </div>
   </template>
   </div>
       </main>

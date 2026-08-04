@@ -690,41 +690,47 @@
   </div></div>
   </section></section>
   </div>
-    <template data-preview="fam-edit">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="fam-edit" data-interaction-family="long-form" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Edit family details</h2>
+          <h2 id="interaction-title-fam-edit" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Edit family details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-famEdit-firstName">First name</label><input id="f-famEdit-firstName" name="famEdit-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-lastName">Family name</label><input id="f-famEdit-lastName" name="famEdit-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-firstNameAr">First name (Arabic)</label><input id="f-famEdit-firstNameAr" name="famEdit-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-lastNameAr">Family name (Arabic)</label><input id="f-famEdit-lastNameAr" name="famEdit-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-email">Email</label><input id="f-famEdit-email" name="famEdit-email" type="text" class="input" placeholder="name@example.edu" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-phone">Phone</label><input id="f-famEdit-phone" name="famEdit-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-status">Status</label><span class="select-wrap"><select id="f-famEdit-status" name="famEdit-status" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-fam-edit" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field"><label class="field-label" for="f-famEdit-firstName">First name</label><input id="f-famEdit-firstName" name="famEdit-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-lastName">Family name</label><input id="f-famEdit-lastName" name="famEdit-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-firstNameAr">First name (Arabic)</label><input id="f-famEdit-firstNameAr" name="famEdit-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-lastNameAr">Family name (Arabic)</label><input id="f-famEdit-lastNameAr" name="famEdit-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-email">Email</label><input id="f-famEdit-email" name="famEdit-email" type="text" class="input" placeholder="name@example.edu" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-phone">Phone</label><input id="f-famEdit-phone" name="famEdit-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-famEdit-status">Status</label><span class="select-wrap"><select id="f-famEdit-status" name="famEdit-status" class="select-input">
       <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="stopped">Stopped</option><option value="inactive">Inactive</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-famEdit-category">Category</label><span class="select-wrap"><select id="f-famEdit-category" name="famEdit-category" class="select-input">
       <option value="premium" selected>Premium</option><option value="standard">Standard</option><option value="trial">Trial</option><option value="scholarship">Scholarship</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-famEdit-notes">Notes</label><textarea id="f-famEdit-notes" name="famEdit-notes" class="input" rows="3" placeholder="Add a note about the family…"></textarea></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button></footer>
+     </div>
   </template>
-    <template data-preview="fam-cat">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="fam-cat" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Reclassify category</h2>
+          <h2 id="interaction-title-fam-cat" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Reclassify category</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid" style="margin-bottom:12px"><div class="field field-full"><label class="field-label" for="f-famCat-category">Category</label><span class="select-wrap"><select id="f-famCat-category" name="famCat-category" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-fam-cat" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid" style="margin-bottom:12px"><div class="field field-full"><label class="field-label" for="f-famCat-category">Category</label><span class="select-wrap"><select id="f-famCat-category" name="famCat-category" class="select-input">
       <option value="premium" selected>Premium</option><option value="standard">Standard</option><option value="trial">Trial</option><option value="scholarship">Scholarship</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
     <p class="text-[12.5px] mb-3" style="color:var(--c-ink-3)">Review the categories and reassign this family — saved once the server is connected.</p>
     <div class="sheet-row"><span class="k">Premium <span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Current category</span></span></span><span class="v">2 families</span></div><div class="sheet-row"><span class="k">Standard</span><span class="v">4 families</span></div><div class="sheet-row"><span class="k">Trial</span><span class="v">1 families</span></div><div class="sheet-row"><span class="k">Scholarship</span><span class="v">1 families</span></div>
-    <button type="button" class="btn btn-primary btn-sm w-full" style="margin-top:14px" data-disabled-reason data-reason-key="fam.cat.reclassReason" aria-disabled="true" title="Changing the category will be available once the server is connected — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save category</span></button></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="fam.cat.reclassReason" title="Changing the category will be available once the server is connected — nothing is saved yet."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save category</span></button></footer>
+     </div>
   </template>
   </div>
       </main>

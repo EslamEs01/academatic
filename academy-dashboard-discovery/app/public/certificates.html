@@ -524,22 +524,24 @@
       <p class="text-[12px]" style="color:var(--c-ink-3)">معاينة ثابتة لتوزيع الحقول — دون سحب أو رفع أو توليد ملف. التصميم الفعلي يتم عبر الخادم.</p></div></div>
     <div class="cert-stage" role="img" aria-label="معاينة مصمّم القالب"><span class="cert-field" style="left:50%;top:42%">اسم الطالب</span><span class="cert-field" style="left:50%;top:58%">اسم الدورة</span><span class="cert-field" style="left:30%;top:78%">اسم المعلم</span><span class="cert-field" style="left:70%;top:78%">التاريخ</span></div>
   </section>
-    <template data-preview="cert-tpl">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="cert-tpl" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-violet medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">قالب الشهادة</h2>
+          <h2 id="interaction-title-cert-tpl" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">قالب الشهادة</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-certTpl-name">الاسم</label><input id="f-certTpl-name" name="certTpl-name" type="text" class="input" placeholder="" value="شهادة إتمام" /></div><div class="field field-full"><span class="field-label">معاينة مصمّم القالب</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-cert-tpl" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-certTpl-name">الاسم</label><input id="f-certTpl-name" name="certTpl-name" type="text" class="input" placeholder="" value="شهادة إتمام" /></div><div class="field field-full"><span class="field-label">معاينة مصمّم القالب</span>
         <div class="cert-stage" style="height:150px" role="img" aria-label="معاينة مصمّم القالب"><span class="cert-field" style="left:50%;top:42%">اسم الطالب</span><span class="cert-field" style="left:50%;top:58%">اسم الدورة</span><span class="cert-field" style="left:30%;top:78%">اسم المعلم</span><span class="cert-field" style="left:70%;top:78%">التاريخ</span></div>
         <p class="text-[12px] mt-1.5" style="color:var(--c-ink-3)">معاينة ثابتة لتوزيع الحقول — دون سحب أو رفع أو توليد ملف. التصميم الفعلي يتم عبر الخادم.</p></div><div class="field field-full"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.cert.tplBgReason" aria-disabled="true" title="تغيير خلفية القالب يتم عبر الخادم — لا يوجد رفع فعلي هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-materials"></use></svg><span>صورة الخلفية</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button></footer>
+     </div>
   </template></section>
     <section class="tabpanel" role="tabpanel" id="tabpanel-certificates-requests" data-tabpanel="requests" aria-labelledby="tab-certificates-requests" hidden><div class="flex items-center flex-wrap gap-2 mb-3">
     <button type="button" class="btn btn-primary btn-sm"   data-drawer="cert-create"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إصدار شهادة</span></button>
@@ -611,16 +613,18 @@
       <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.rejectReason" aria-disabled="true" title="الرفض يحتاج ربط الخادم — لا تتغيّر الحالة الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>رفض</span></button>
     </div></td>
   </tr></tbody>
-  </table></div></section><template data-preview="cr-cr1">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </table></div></section><template data-preview="cr-cr1" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الطلب</h2>
+          <h2 id="interaction-title-cr-cr1" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">تفاصيل الطلب</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="sheet-rows">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-cr-cr1" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-rows">
     <div class="sheet-row"><span class="k">الطالب</span><span class="v">سلمان أحمد</span></div>
     <div class="sheet-row"><span class="k">الدورة</span><span class="v">العربية</span></div>
     <div class="sheet-row"><span class="k">المعلم</span><span class="v">أ. سارة</span></div>
@@ -633,18 +637,22 @@
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.previewReason" aria-disabled="true" title="المعاينة تحتاج ربط الخادم — لا يُفتح ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>معاينة</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.downloadReason" aria-disabled="true" title="التنزيل يحتاج ربط الخادم — لا يُنشأ ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>تنزيل</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.sendReason" aria-disabled="true" title="الإرسال يتم عبر الخادم — لا يُرسَل شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span>إرسال</span></button>
-  </div></div>
-    </div>
-  </template><template data-preview="cr-cr2">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="cr-cr2" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الطلب</h2>
+          <h2 id="interaction-title-cr-cr2" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">تفاصيل الطلب</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="sheet-rows">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-cr-cr2" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-rows">
     <div class="sheet-row"><span class="k">الطالب</span><span class="v">مريم خالد</span></div>
     <div class="sheet-row"><span class="k">الدورة</span><span class="v">الرياضيات</span></div>
     <div class="sheet-row"><span class="k">المعلم</span><span class="v">أ. محمد</span></div>
@@ -657,18 +665,22 @@
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.previewReason" aria-disabled="true" title="المعاينة تحتاج ربط الخادم — لا يُفتح ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>معاينة</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.downloadReason" aria-disabled="true" title="التنزيل يحتاج ربط الخادم — لا يُنشأ ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>تنزيل</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.sendReason" aria-disabled="true" title="الإرسال يتم عبر الخادم — لا يُرسَل شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span>إرسال</span></button>
-  </div></div>
-    </div>
-  </template><template data-preview="cr-cr3">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="cr-cr3" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الطلب</h2>
+          <h2 id="interaction-title-cr-cr3" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">تفاصيل الطلب</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="sheet-rows">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-cr-cr3" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-rows">
     <div class="sheet-row"><span class="k">الطالب</span><span class="v">يوسف علي</span></div>
     <div class="sheet-row"><span class="k">الدورة</span><span class="v">القرآن</span></div>
     <div class="sheet-row"><span class="k">المعلم</span><span class="v">أ. ريم</span></div>
@@ -681,18 +693,22 @@
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.previewReason" aria-disabled="true" title="المعاينة تحتاج ربط الخادم — لا يُفتح ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>معاينة</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.downloadReason" aria-disabled="true" title="التنزيل يحتاج ربط الخادم — لا يُنشأ ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>تنزيل</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.sendReason" aria-disabled="true" title="الإرسال يتم عبر الخادم — لا يُرسَل شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span>إرسال</span></button>
-  </div></div>
-    </div>
-  </template><template data-preview="cr-cr4">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="cr-cr4" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الطلب</h2>
+          <h2 id="interaction-title-cr-cr4" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">تفاصيل الطلب</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="sheet-rows">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-cr-cr4" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-rows">
     <div class="sheet-row"><span class="k">الطالب</span><span class="v">لمى فهد</span></div>
     <div class="sheet-row"><span class="k">الدورة</span><span class="v">العلوم</span></div>
     <div class="sheet-row"><span class="k">المعلم</span><span class="v">أ. سارة</span></div>
@@ -705,18 +721,22 @@
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.previewReason" aria-disabled="true" title="المعاينة تحتاج ربط الخادم — لا يُفتح ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>معاينة</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.downloadReason" aria-disabled="true" title="التنزيل يحتاج ربط الخادم — لا يُنشأ ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>تنزيل</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.sendReason" aria-disabled="true" title="الإرسال يتم عبر الخادم — لا يُرسَل شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span>إرسال</span></button>
-  </div></div>
-    </div>
-  </template><template data-preview="cr-cr5">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="cr-cr5" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تفاصيل الطلب</h2>
+          <h2 id="interaction-title-cr-cr5" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">تفاصيل الطلب</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="sheet-rows">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-cr-cr5" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-rows">
     <div class="sheet-row"><span class="k">الطالب</span><span class="v">عمر ناصر</span></div>
     <div class="sheet-row"><span class="k">الدورة</span><span class="v">الإنجليزية</span></div>
     <div class="sheet-row"><span class="k">المعلم</span><span class="v">أ. محمد</span></div>
@@ -729,28 +749,32 @@
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.previewReason" aria-disabled="true" title="المعاينة تحتاج ربط الخادم — لا يُفتح ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>معاينة</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.downloadReason" aria-disabled="true" title="التنزيل يحتاج ربط الخادم — لا يُنشأ ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-download"></use></svg><span>تنزيل</span></button>
     <button type="button" class="btn btn-ghost btn-sm" data-disabled-reason data-reason-key="adm.cert.sendReason" aria-disabled="true" title="الإرسال يتم عبر الخادم — لا يُرسَل شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-mail"></use></svg><span>إرسال</span></button>
-  </div></div>
-    </div>
-  </template><template data-preview="cert-create">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="cert-create" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-certificates"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">إصدار شهادة</h2>
+          <h2 id="interaction-title-cert-create" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">إصدار شهادة</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-certCreate-student">الطالب</label><span class="select-wrap"><select id="f-certCreate-student" name="certCreate-student" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-cert-create" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field"><label class="field-label" for="f-certCreate-student">الطالب</label><span class="select-wrap"><select id="f-certCreate-student" name="certCreate-student" class="select-input">
       <option value="cr1" selected>سلمان أحمد</option><option value="cr2">مريم خالد</option><option value="cr3">يوسف علي</option><option value="cr4">لمى فهد</option><option value="cr5">عمر ناصر</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-certCreate-course">الدورة</label><span class="select-wrap"><select id="f-certCreate-course" name="certCreate-course" class="select-input">
       <option value="arabic" selected>العربية</option><option value="math">الرياضيات</option><option value="quran">القرآن</option><option value="science">العلوم</option><option value="english">الإنجليزية</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-certCreate-template">القالب</label><span class="select-wrap"><select id="f-certCreate-template" name="certCreate-template" class="select-input">
       <option value="tpl1" selected>شهادة إتمام</option><option value="tpl2">شهادة تفوّق</option><option value="tpl3">شهادة مواظبة</option><option value="tpl4">شهادة حفظ القرآن</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-certCreate-date">التاريخ</label><input id="f-certCreate-date" name="certCreate-date" type="text" class="input" placeholder="مثال: 2026-08-01" value="" /></div><div class="field field-full"><label class="field-label" for="f-certCreate-message">رسالة الشهادة</label><textarea id="f-certCreate-message" name="certCreate-message" class="input" rows="3" placeholder="نص يظهر على الشهادة…"></textarea></div><div class="field field-full"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.cert.previewReason" aria-disabled="true" title="المعاينة تحتاج ربط الخادم — لا يُفتح ملف."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-search"></use></svg><span>معاينة</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="adm.cert.createReason" title="إصدار الشهادة يتم عبر الخادم بعد ربطه."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إصدار شهادة</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="adm.cert.createReason" title="إصدار الشهادة يتم عبر الخادم بعد ربطه."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إصدار شهادة</span></button></footer>
+     </div>
   </template></section>
   </div></div>
       </main>

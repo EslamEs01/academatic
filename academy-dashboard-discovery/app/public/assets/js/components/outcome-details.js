@@ -48,50 +48,48 @@ export function outcomeSection(i) {
 const demoBtn = (labelKey, ic, toastKey) => button({ labelKey, variant: 'secondary', size: 'sm', icon: ic, attrs: `data-demo-action data-toast="${esc(t(toastKey))}"` });
 const confirmBtn = (labelKey, ic, base, danger = true) => confirmAction({ labelKey, variant: danger ? 'danger' : 'secondary', icon: ic, danger, titleKey: `${base}Title`, msgKey: `${base}Msg`, confirmKey: `${base}Cta`, toastKey: `${base}Toast` });
 
-/* Spec 032 (FC-25) — the "Add feedback" FORM drawer: real INERT fields + the ONE
- * clickable backendRequired final (formDrawer). Options derive from the authored
- * Spec-029 feedback fixtures — categorical remarks only, never a number. The
- * template is baked NESTED inside the attended outcome template's action cluster:
- * inert while baked, it enters the live document with the open outcome sheet, so
- * enhance.js resolves it right when the trigger is clickable (the lookup happens
- * before the panel swap). No new hook — the existing data-drawer → openSheet path. */
+/* Feedback options remain fixture-backed and categorical. Outcome-scoped target
+ * and field IDs keep each baked nested form unique while the shared host replaces
+ * the current detail content instead of stacking another overlay. */
 const FB_CAT_OPTS = FEEDBACK_CATEGORIES.map((c, i) => ({ value: c.id, labelKey: c.nameKey, selected: i === 0 }));
 const FB_REMARK_OPTS = optsFrom(Object.keys(FB_REMARK_TONE), 'rep.fb.rmk');
-function fbAddDrawer() {
-  const fields = field({ labelKey: 'rep.fb.lbl.category', name: 'fbAdd-category', type: 'select', options: FB_CAT_OPTS })
-    + field({ labelKey: 'rep.fb.lbl.remark', name: 'fbAdd-remark', type: 'select', options: FB_REMARK_OPTS })
-    + field({ labelKey: 'rep.fb.lbl.note', name: 'fbAdd-note', type: 'textarea', placeholderKey: 'rep.fb.f.notePh', full: true });
-  return formDrawer('fb-add', { titleKey: 'rep.fb.createTitle', headIcon: 'file-text', fields });
+function fbAddDrawer(outcomeId) {
+  const scope = `fbAdd-${outcomeId}`;
+  const fields = field({ labelKey: 'rep.fb.lbl.category', name: `${scope}-category`, type: 'select', options: FB_CAT_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.remark', name: `${scope}-remark`, type: 'select', options: FB_REMARK_OPTS })
+    + field({ labelKey: 'rep.fb.lbl.note', name: `${scope}-note`, type: 'textarea', placeholderKey: 'rep.fb.f.notePh', full: true });
+  return formDrawer(`fb-add-${outcomeId}`, { titleKey: 'rep.fb.createTitle', headIcon: 'file-text', fields });
 }
 
 /** the status-gated, DEMO-only action cluster (per outcome-actions-contract) */
 export function gatedActions(i) {
   const o = i.outcomeId;
-  const A = [];
+  const actions = [];
   if (o === 'upcoming' || o === 'live') {
-    A.push(demoBtn('att.act.attend', 'check-circle', 'att.act.attendToast'));
-    A.push(confirmBtn('att.act.studentAbsent', 'user-x', 'att.act.studentAbsent'));
-    A.push(confirmBtn('att.act.teacherAbsent', 'user-x', 'att.act.teacherAbsent'));
-    A.push(confirmBtn('att.act.cancel', 'x-circle', 'att.act.cancel'));
-    A.push(confirmBtn('att.act.reschedule', 'calendar-clock', 'att.act.reschedule', false));
+    actions.push(demoBtn('att.act.attend', 'check-circle', 'att.act.attendToast'));
+    actions.push(confirmBtn('att.act.studentAbsent', 'user-x', 'att.act.studentAbsent'));
+    actions.push(confirmBtn('att.act.teacherAbsent', 'user-x', 'att.act.teacherAbsent'));
+    actions.push(confirmBtn('att.act.cancel', 'x-circle', 'att.act.cancel'));
+    actions.push(confirmBtn('att.act.reschedule', 'calendar-clock', 'att.act.reschedule', false));
   } else if (o === 'attended') {
     // Spec 029 (R-E) → Spec 032 (FC-25) — "Add feedback" is a Create action; the field-less
     // modal became a real form drawer (category/remark/note) whose Save is the honest
     // backendRequired final. The fb-add template rides inside this cluster. No persistence.
-    A.push(button({ labelKey: 'att.act.feedback', variant: 'secondary', size: 'sm', icon: 'file-text', attrs: 'data-drawer="fb-add"' }) + fbAddDrawer());
-    A.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
-    A.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
+    const feedbackTarget = `fb-add-${i.id}`;
+    actions.push(button({ labelKey: 'att.act.feedback', variant: 'secondary', size: 'sm', icon: 'file-text', attrs: `data-drawer="${esc(feedbackTarget)}"` }) + fbAddDrawer(i.id));
+    actions.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
+    actions.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
   } else if (o === 'studentAbsent' || o === 'teacherAbsent' || o === 'cancelled') {
-    A.push(confirmBtn('att.act.reschedule', 'calendar-clock', 'att.act.reschedule', false));
-    A.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
-    A.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
-    A.push(button({ labelKey: 'att.act.addToCredit', variant: 'secondary', size: 'sm', icon: 'wallet', disabled: true, reasonKey: 'att.reason.finance' }));
+    actions.push(confirmBtn('att.act.reschedule', 'calendar-clock', 'att.act.reschedule', false));
+    actions.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
+    actions.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
+    actions.push(button({ labelKey: 'att.act.addToCredit', variant: 'secondary', size: 'sm', icon: 'wallet', disabled: true, reasonKey: 'att.reason.finance' }));
   } else if (o === 'rescheduled') {
-    A.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
-    A.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
+    actions.push(demoBtn('att.act.notify', 'bell', 'att.act.notifyToast'));
+    actions.push(demoBtn('att.act.reverse', 'rotate-cw', 'att.act.reverseToast'));
   }
-  A.push(`<a href="${schedHref()}" class="btn btn-secondary btn-sm">${icon('schedule', 'ico ico-sm')}<span>${t('att.viewInSchedule')}</span></a>`);
-  return `<div class="flex flex-wrap gap-2 mt-5">${A.join('')}</div>`;
+  actions.push(`<a href="${schedHref()}" class="btn btn-secondary btn-sm">${icon('schedule', 'ico ico-sm')}<span>${t('att.viewInSchedule')}</span></a>`);
+  return `<div class="flex flex-wrap gap-2 mt-5">${actions.join('')}</div>`;
 }
 
 /** the canonical outcome drawer — superset of appointmentRows + outcome section + actions */

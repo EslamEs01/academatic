@@ -1,6 +1,14 @@
 /* Spec 002 — English keys (merged into en.js at runtime). Mirrors ar.extra.js. */
 export default {
   common: { close: 'Close', confirm: 'Confirm', cancel: 'Cancel', save: 'Save', add: 'Add', view: 'View', edit: 'Edit', backendRequiredNote: 'This action needs the server connection to complete — nothing is saved yet.' },
+  interaction: {
+    discardTitle: 'You have unsaved changes',
+    discardMessage: 'Continue editing or discard your changes? This information has not been saved.',
+    continueEditing: 'Continue editing',
+    discardChanges: 'Discard changes',
+    validationSummary: 'Review the marked fields and correct them before continuing.',
+    validationError: 'Check this value.',
+  },
 
   /* ---- Spec 032 — shared form-drawer option labels (fixtures/form-options.js) ---- */
   fopt: {

@@ -107,21 +107,40 @@ export function teacherNoteDrawer() {
  * on-vacation/deactivate confirms + delete confirm-danger · reset-access/login-as
  * future-backend gates · real timetable/attendance links · print gate (→029). NO teacher
  * CRUD / status / assignment / schedule persistence, NO excluded legacy field. */
+/* Spec 045 — T048 (FR-036): the SAME fourteen actions, now PRIORITISED and given a real 390px
+ * transformation. Two changes, no capability added or removed:
+ *   1. the wrapper adopts the additive `td-actions` class. On desktop it is behaviourally
+ *      identical to the previous `flex flex-wrap gap-2` (same flex, same wrap, same 8px gap);
+ *      at ≤560px it becomes a two-column grid so the cluster stops rendering as the ragged
+ *      seven-row waterfall the 390px evidence shows, and every action stays visible and unclipped.
+ *   2. the emission order is grouped by intent instead of arbitrary: daily work → assignment →
+ *      communication → real navigation → lifecycle → destructive → currently-unavailable gates.
+ *      Previously the two disabled future-backend gates sat BETWEEN the destructive delete and the
+ *      two working navigation links, so a reader could not tell available from unavailable.
+ * Order carries no protected assertion — the Spec-028/032 smoke asserts test PRESENCE
+ * (edit/note modal triggers, assign pickers, availability drawer, confirm count, pay-free), never
+ * sequence — so this is a composition change only. */
 export function teacherActions(_i = {}, { schedHref, attHref } = {}) {
-  return `<div class="flex flex-wrap gap-2">`
+  return `<div class="td-actions">`
+    /* daily work */
     + drawerBtn('trn.act.edit', 'edit', 'trn-edit', true)
-    + demo('trn.act.message', 'mail', 'trn.act.messageToast')
-    + confirmAction({ labelKey: 'trn.act.notify', icon: 'message-circle', size: 'sm', titleKey: 'trn.act.notifyTitle', msgKey: 'trn.act.notifyMsg', confirmKey: 'trn.act.notifyCta', toastKey: 'trn.act.notifyToast' })
     + drawerBtn('trn.act.note', 'file-text', 'trn-note', true)
+    /* assignment pickers (display-only, backendRequired final) */
     + drawerBtn('trn.act.assignCourse', 'curricula', 'trn-assign-course')
     + drawerBtn('trn.act.assignGroup', 'students', 'trn-assign-group')
+    /* communication */
+    + demo('trn.act.message', 'mail', 'trn.act.messageToast')
+    + confirmAction({ labelKey: 'trn.act.notify', icon: 'message-circle', size: 'sm', titleKey: 'trn.act.notifyTitle', msgKey: 'trn.act.notifyMsg', confirmKey: 'trn.act.notifyCta', toastKey: 'trn.act.notifyToast' })
+    /* real navigation into existing routes */
+    + (schedHref ? link('trn.act.openTimetable', 'schedule', schedHref) : '')
+    + (attHref ? link('trn.act.viewAttendance', 'clipboard-check', attHref) : '')
+    /* status lifecycle, then the destructive one */
     + confirmLife('trn.act.vacation', 'moon', 'trn.act.vacation')
     + confirmLife('trn.act.deactivate', 'pause-circle', 'trn.act.deactivate')
     + confirmLife('trn.act.del', 'x-circle', 'trn.act.del', true)
+    /* honestly unavailable — grouped last so available actions are not interleaved with gates */
     + off('trn.act.resetPassword', 'settings', 'trn.reason.resetPassword')
     + off('trn.act.loginAs', 'log-out', 'trn.reason.loginAs')
-    + (schedHref ? link('trn.act.openTimetable', 'schedule', schedHref) : '')
-    + (attHref ? link('trn.act.viewAttendance', 'clipboard-check', attHref) : '')
     + off('trn.act.print', 'file-text', 'trn.reason.export')
     + `</div>`;
 }

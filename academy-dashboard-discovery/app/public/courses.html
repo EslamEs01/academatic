@@ -582,16 +582,18 @@
     </div>
     
   </div></div>
-    <template data-preview="crs-add">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="crs-add" data-interaction-family="long-form" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">دورة جديدة</h2>
+          <h2 id="interaction-title-crs-add" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">دورة جديدة</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-crsAdd-material">المادة</label><span class="select-wrap"><select id="f-crsAdd-material" name="crsAdd-material" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-crs-add" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field"><label class="field-label" for="f-crsAdd-material">المادة</label><span class="select-wrap"><select id="f-crsAdd-material" name="crsAdd-material" class="select-input">
       <option value="math" selected>الرياضيات</option><option value="arabic">اللغة العربية</option><option value="programming">البرمجة</option><option value="physics">الفيزياء</option><option value="english">الإنجليزية</option><option value="science">العلوم</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-crsAdd-teacher">المعلم</label><span class="select-wrap"><select id="f-crsAdd-teacher" name="crsAdd-teacher" class="select-input">
       <option value="sara" selected>سارة القحطاني</option><option value="mohammed">محمد الدوسري</option><option value="layan">ليان الشمري</option><option value="reem">ريم المطيري</option><option value="nora">نورة الزهراني</option><option value="khalid">خالد العنزي</option>
@@ -600,10 +602,10 @@
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-crsAdd-scheduleTime">وقت الجلسة</label><input id="f-crsAdd-scheduleTime" name="crsAdd-scheduleTime" type="text" class="input" placeholder="مثال: 16:30" value="" /></div><div class="field"><label class="field-label" for="f-crsAdd-scheduleDuration">مدة الجلسة</label><span class="select-wrap"><select id="f-crsAdd-scheduleDuration" name="crsAdd-scheduleDuration" class="select-input">
       <option value="m30" selected>٣٠ دقيقة</option><option value="m45">٤٥ دقيقة</option><option value="m60">٦٠ دقيقة</option><option value="m90">٩٠ دقيقة</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button></footer>
+     </div>
   </template>
   </div>
       </main>

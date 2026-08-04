@@ -1,11 +1,13 @@
 /* Spec 025 — TEACHER TASKS (the teacher's prep / review board). A display-only board
  * drawn from TEACHER_PREVIEW.tasks (tk1/tk2/tk3): each card carries the authored
- * title + context line + an authored due chip + an authored priority/status tag
+ * title + context line + the authored status word and due window, now joined as one
+ * compact td-meta fact row (icon + own text each, never colour-only) on every card
  * (NO computed ordering, NO ticket pie, NO "average"). A monthly-plan preview row
- * (T11) sits below. The only capability — mark complete / assign a task — is an
- * honest backendRequired gate (gateNote), never a fake toggle. Zero body anchors.
- * Display-only; NO engine; and — the standing teacher hard rule — ZERO
- * figure-bearing or flagged vocabulary anywhere (copy AND comments). */
+ * (T11) sits below; the task-board section carries the page's single td-focus marker.
+ * The only capability — mark complete / assign a task — is an honest backendRequired
+ * gate (gateNote, the page's ONE gate, so no td-gates wrap), never a fake toggle.
+ * Zero body anchors. Display-only; NO engine; and — the standing teacher hard rule —
+ * ZERO figure-bearing or flagged vocabulary anywhere (copy AND comments). */
 import { t } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
@@ -28,11 +30,11 @@ function taskCard(tk) {
       <div style="flex:1;min-width:0">
         <div class="pt-card-title">${esc(t(tk.titleKey))}</div>
         <div class="pt-card-sub">${esc(t(tk.subKey))}</div>
+        <div class="td-meta">
+          <span>${icon('clipboard-check', 'ico ico-sm')}${esc(t(statusKey))}</span>
+          <span>${icon('calendar', 'ico ico-sm')}${esc(t(tk.dueKey))}</span>
+        </div>
       </div>
-      <span class="pt-tag">${esc(t(statusKey))}</span>
-    </div>
-    <div class="pt-tags">
-      <span class="pt-tag is-accent">${icon('calendar', 'ico ico-sm')}${esc(t(tk.dueKey))}</span>
     </div>
   </div>`;
 }
@@ -53,7 +55,7 @@ export function renderTeacherTasks() {
   return `
     ${pageHead('prt.tch.pg.tasks.title', 'prt.tch.pg.tasks.sub')}
 
-    <section class="pt-section">
+    <section class="pt-section td-focus">
       ${secHead('tasks', 'prt.tch.pg.tasks.title', 'prt.tch.pg.tasks.boardHint')}
       <div class="pt-cards">${TEACHER_PREVIEW.tasks.map(taskCard).join('')}</div>
     </section>

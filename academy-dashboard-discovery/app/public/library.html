@@ -515,35 +515,39 @@
     </div></td>
   </tr></tbody>
     </table></div></section>
-    <template data-preview="mat-add">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="mat-add" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">إضافة مادة دراسية</h2>
+          <h2 id="interaction-title-mat-add" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">إضافة مادة دراسية</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-mat-add" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matAdd-name">الاسم</label><input id="f-matAdd-name" name="matAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-matAdd-nameAr">الاسم بالعربية</label><input id="f-matAdd-nameAr" name="matAdd-nameAr" type="text" class="input" placeholder="" value="" /></div></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
       </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matAdd-name">الاسم</label><input id="f-matAdd-name" name="matAdd-name" type="text" class="input" placeholder="" value="" /></div><div class="field field-full"><label class="field-label" for="f-matAdd-nameAr">الاسم بالعربية</label><input id="f-matAdd-nameAr" name="matAdd-nameAr" type="text" class="input" placeholder="" value="" /></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
-    </div></div>
-    </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button></footer>
+     </div>
   </template>
-    <template data-preview="mat-edit">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="mat-edit" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">تعديل المادة</h2>
+          <h2 id="interaction-title-mat-edit" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">تعديل المادة</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-mat-edit" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matEdit-name">الاسم</label><input id="f-matEdit-name" name="matEdit-name" type="text" class="input" placeholder="" value="اللغة العربية" /></div><div class="field field-full"><label class="field-label" for="f-matEdit-nameAr">الاسم بالعربية</label><input id="f-matEdit-nameAr" name="matEdit-nameAr" type="text" class="input" placeholder="" value="اللغة العربية" /></div></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
       </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-matEdit-name">الاسم</label><input id="f-matEdit-name" name="matEdit-name" type="text" class="input" placeholder="" value="اللغة العربية" /></div><div class="field field-full"><label class="field-label" for="f-matEdit-nameAr">الاسم بالعربية</label><input id="f-matEdit-nameAr" name="matEdit-nameAr" type="text" class="input" placeholder="" value="اللغة العربية" /></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button>
-    </div></div>
-    </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>حفظ</span></button></footer>
+     </div>
   </template></section>
     <section class="tabpanel" role="tabpanel" id="tabpanel-library-books" data-tabpanel="books" aria-labelledby="tab-library-books" hidden><div class="flex items-center flex-wrap gap-2 mb-3">
     <button type="button" class="btn btn-primary btn-sm"   data-drawer="lib-item"><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة محتوى</span></button>
@@ -650,16 +654,18 @@
       <button type="button" class="btn btn-ghost btn-sm" data-confirm data-confirm-danger data-confirm-title="حذف العنصر؟" data-confirm-msg="الحذف يحتاج ربط الخادم — لا يُحذف شيء الآن." data-confirm-cta="حذف" data-confirm-toast="يُتاح الحذف بعد ربط الخادم."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-x-circle"></use></svg><span>حذف</span></button>
     </div></td>
   </tr></tbody>
-  </table></div></section><template data-preview="lib-cats">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </table></div></section><template data-preview="lib-cats" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-teal medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-filter"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">فئات المكتبة</h2>
+          <h2 id="interaction-title-lib-cats" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">فئات المكتبة</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="sheet-rows"><div class="sheet-row"><span class="k">العربية</span><span class="v tabular">٦</span></div><div class="sheet-row"><span class="k">الإنجليزية</span><span class="v tabular">٤</span></div><div class="sheet-row"><span class="k">الرياضيات</span><span class="v tabular">٣</span></div><div class="sheet-row"><span class="k">العلوم</span><span class="v tabular">٥</span></div><div class="sheet-row"><span class="k">القرآن</span><span class="v tabular">٨</span></div><div class="sheet-row"><span class="k">البرمجة</span><span class="v tabular">٢</span></div></div><div class="mt-4">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-lib-cats" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="sheet-rows"><div class="sheet-row"><span class="k">العربية</span><span class="v tabular">٦</span></div><div class="sheet-row"><span class="k">الإنجليزية</span><span class="v tabular">٤</span></div><div class="sheet-row"><span class="k">الرياضيات</span><span class="v tabular">٣</span></div><div class="sheet-row"><span class="k">العلوم</span><span class="v tabular">٥</span></div><div class="sheet-row"><span class="k">القرآن</span><span class="v tabular">٨</span></div><div class="sheet-row"><span class="k">البرمجة</span><span class="v tabular">٢</span></div></div><div class="mt-4">
     <div class="font-bold text-[12.5px] text-ink mb-1.5">إضافة فئة</div>
     <div class="wiz-grid">
       <div class="field field-full"><label class="field-label" for="f-libCats-name">اسم الفئة</label><input id="f-libCats-name" name="libCats-name" type="text" class="input" placeholder="" value="" /></div>
@@ -667,29 +673,31 @@
       <option value="active" selected>نشط</option><option value="trial">تجريبي</option><option value="suspended">موقوف مؤقتًا</option><option value="inactive">غير نشط</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div>
     </div>
-    <div class="flex items-center justify-end mt-3">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة فئة</span></button>
-    </div>
-  </div></div>
-    </div>
-  </template><template data-preview="lib-item">
-    <div class="sheet-card">
-      <div class="sheet-head">
+  </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg><span>إضافة فئة</span></button></footer>
+     </div>
+  </template><template data-preview="lib-item" data-interaction-family="simple-form" data-interaction-presentation="modal">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-curricula"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">إضافة عنصر للمكتبة</h2>
+          <h2 id="interaction-title-lib-item" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">إضافة عنصر للمكتبة</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-libItem-name">العنوان</label><input id="f-libItem-name" name="libItem-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-libItem-type">النوع</label><span class="select-wrap"><select id="f-libItem-type" name="libItem-type" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="إغلاق"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-lib-item" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field field-full"><label class="field-label" for="f-libItem-name">العنوان</label><input id="f-libItem-name" name="libItem-name" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-libItem-type">النوع</label><span class="select-wrap"><select id="f-libItem-type" name="libItem-type" class="select-input">
       <option value="file" selected>ملف</option><option value="video">فيديو</option><option value="image">صورة</option><option value="audio">صوت</option><option value="link">رابط</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-libItem-category">الفئة</label><span class="select-wrap"><select id="f-libItem-category" name="libItem-category" class="select-input">
       <option value="lc1" selected>العربية</option><option value="lc2">الإنجليزية</option><option value="lc3">الرياضيات</option><option value="lc4">العلوم</option><option value="lc5">القرآن</option><option value="lc6">البرمجة</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><div class="flex flex-wrap gap-2"><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.lib.uploadReason" aria-disabled="true" title="الرفع يحتاج ربط الخادم — لا يوجد رفع فعلي."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>رفع</span></button><button type="button" class="btn btn-secondary btn-sm" data-disabled-reason data-reason-key="adm.lib.thumbReason" aria-disabled="true" title="الصورة المصغرة تُرفَع عبر الخادم — لا يوجد رفع فعلي هنا."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-award"></use></svg><span>الصورة المصغرة</span></button></div></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="هذا الإجراء يحتاج اتصال الخادم لإتمامه — لا يُحفَظ شيء الآن."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>إضافة</span></button></footer>
+     </div>
   </template></section>
   </div></div>
       </main>

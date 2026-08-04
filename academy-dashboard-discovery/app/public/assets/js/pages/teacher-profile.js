@@ -4,9 +4,13 @@
  * teaching preference chips (interface language · theme · contact channel). The only
  * write surface is EXACTLY three honest backendRequired gates — photo change ·
  * profile save · password change — each a labeled non-anchor note (no forms, no
- * inputs, no fake save, no body anchors). Display-only throughout; and — the standing
- * teacher hard rule — ZERO figure-bearing or flagged vocabulary anywhere (copy AND
- * comments; the extended token set). */
+ * inputs, no fake save, no body anchors). Spec 045 D4 (EG-045-08): one td-focus
+ * section marker on the account-edit stack (the evidence's single work area) with
+ * per-section hints; the three gates stay plannedCard notes, NOT a td-gates group
+ * (td-gates restyles nested .pt-note only — wrapping cards would change nothing).
+ * Display-only throughout; TD-IDENT distinct from the admin teacher.html detail;
+ * and — the standing teacher hard rule — ZERO figure-bearing or flagged vocabulary
+ * anywhere (copy AND comments; the extended token set). */
 import { t } from '../i18n.js';
 import { icon } from '../icons.js';
 import { esc } from '../dom.js';
@@ -42,7 +46,7 @@ export function renderTeacherProfile() {
     ${pageHead(`${P}.title`, `${P}.sub`)}
 
     <section class="pt-section">
-      ${secHead('user', `${P}.identTitle`)}
+      ${secHead('user', `${P}.identTitle`, `${P}.identHint`)}
       <div class="pt-card">
         <div class="pt-card-row">
           ${avatar({ nameKey: tr.nameKey, accent: 'teal' })}
@@ -64,7 +68,7 @@ export function renderTeacherProfile() {
     </section>
 
     <section class="pt-section">
-      ${secHead('calendar', `${P}.availTitle`)}
+      ${secHead('calendar', `${P}.availTitle`, `${P}.availHint`)}
       <div class="pt-card">${availKeys.map(availLine).join('')}</div>
     </section>
 
@@ -77,8 +81,8 @@ export function renderTeacherProfile() {
       </div>
     </section>
 
-    <section class="pt-section">
-      ${secHead('lock', `${P}.editTitle`)}
+    <section class="pt-section td-focus">
+      ${secHead('lock', `${P}.editTitle`, `${P}.editHint`)}
       <div class="pt-cards">
         ${plannedCard({ icon: 'materials', titleKey: `${P}.gPhotoT`, descKey: `${P}.gPhoto`, availability: 'backendRequired' })}
         ${plannedCard({ icon: 'user', titleKey: `${P}.gSaveT`, descKey: `${P}.gSave`, availability: 'backendRequired' })}

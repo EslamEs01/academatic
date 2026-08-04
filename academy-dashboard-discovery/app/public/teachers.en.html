@@ -477,8 +477,8 @@
     </div>
     <div class="card p-4 flex items-center gap-3">
       <span class="medallion m-soft tone-teal"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg></span>
-      <div><div class="text-[22px] font-bold tabular text-ink" style="line-height:1">63%</div>
-        <div class="text-[12px] mt-1" style="color:var(--c-ink-3)">Avg utilization</div></div>
+      <div><div class="text-[22px] font-bold tabular text-ink" style="line-height:1">2</div>
+        <div class="text-[12px] mt-1" style="color:var(--c-ink-3)">High-load teachers</div></div>
     </div></div></div>
     <div class="tabs-wrap" data-tabs="teachers">
     <div class="tabs" role="tablist" aria-label="Teachers page sections">
@@ -639,17 +639,18 @@
     </div>
     
   </div></div>
-    <template data-preview="sara">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="sara" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-sara" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-violet" aria-hidden="true">S</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-sara" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-violet" aria-hidden="true">S</span>
       <div><div class="font-bold text-ink">Sara Al-Qahtani</div><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">A mathematics teacher with 8+ years of interactive teaching experience.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-live"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-target"></use></svg><span>Balanced</span></span></span></div>
@@ -658,19 +659,22 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">4</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">24</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">18</span></span></div></div>
-    </div>
-  </template><template data-preview="mohammed">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">18</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="mohammed" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-mohammed" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-amber" aria-hidden="true">M</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-mohammed" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-amber" aria-hidden="true">M</span>
       <div><div class="font-bold text-ink">Mohammed Al-Dosari</div><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">An Arabic-language teacher focused on grammar and clear expression.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>High load</span></span></span></div>
@@ -679,19 +683,22 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">2</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">19</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">15</span></span></div></div>
-    </div>
-  </template><template data-preview="layan">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">15</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="layan" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-layan" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-teal" aria-hidden="true">L</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-layan" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-teal" aria-hidden="true">L</span>
       <div><div class="font-bold text-ink">Layan Al-Shamri</div><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">A programming instructor who builds practical skills through small projects.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-live"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-target"></use></svg><span>Balanced</span></span></span></div>
@@ -700,19 +707,22 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">3</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">16</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">12</span></span></div></div>
-    </div>
-  </template><template data-preview="abdullah">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">12</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="abdullah" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-abdullah" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-success" aria-hidden="true">A</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-abdullah" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-success" aria-hidden="true">A</span>
       <div><div class="font-bold text-ink">Abdullah Al-Harbi</div><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pause-circle"></use></svg><span>Paused</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">A physics teacher who connects concepts to experiments and daily life.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Light load</span></span></span></div>
@@ -721,19 +731,22 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">0</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">0</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">9</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">8</span></span></div></div>
-    </div>
-  </template><template data-preview="reem">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">8</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="reem" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-reem" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-sky" aria-hidden="true">R</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-reem" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-sky" aria-hidden="true">R</span>
       <div><div class="font-bold text-ink">Reem Al-Mutairi</div><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">An Arabic-language teacher focused on grammar and clear expression.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-live"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-target"></use></svg><span>Balanced</span></span></span></div>
@@ -742,19 +755,22 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">21</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">16</span></span></div></div>
-    </div>
-  </template><template data-preview="nora">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">16</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="nora" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-nora" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-coral" aria-hidden="true">N</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-nora" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-coral" aria-hidden="true">N</span>
       <div><div class="font-bold text-ink">Noura Al-Zahrani</div><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">An English teacher focused on conversation and confident expression.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-amber"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trending-up"></use></svg><span>High load</span></span></span></div>
@@ -763,19 +779,22 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">4</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">17</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">14</span></span></div></div>
-    </div>
-  </template><template data-preview="khalid">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">14</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="khalid" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-khalid" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-sky" aria-hidden="true">K</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-khalid" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-sky" aria-hidden="true">K</span>
       <div><div class="font-bold text-ink">Khalid Al-Anazi</div><span class="chip tone-completed"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check-circle"></use></svg><span>Active</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">A science teacher who encourages exploration and scientific thinking.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Light load</span></span></span></div>
@@ -784,19 +803,22 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">2</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">14</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">11</span></span></div></div>
-    </div>
-  </template><template data-preview="huda">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">11</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
+  </template><template data-preview="huda" data-interaction-family="details" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-trainers"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Teacher profile</h2>
+          <h2 id="interaction-title-huda" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Teacher profile</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body">
-    <div class="flex items-center gap-3 mb-4"><span class="avatar  av-violet" aria-hidden="true">H</span>
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-huda" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="flex items-center gap-3 mb-4"><span class="avatar  av-violet" aria-hidden="true">H</span>
       <div><div class="font-bold text-ink">Huda Al-Maliki</div><span class="chip tone-neutral"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user-x"></use></svg><span>Inactive</span></span></div></div>
     <p class="text-[13px] mb-4" style="color:var(--c-ink-2)">A mathematics teacher with 8+ years of interactive teaching experience.</p>
     <div class="sheet-row"><span class="k">Workload</span><span class="v"><span class="chip tone-upcoming"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg><span>Light load</span></span></span></div>
@@ -805,19 +827,23 @@
     <div class="sheet-row"><span class="k">Groups</span><span class="v"><span class="tabular">1</span></span></div>
     <div class="sheet-row"><span class="k">Active students</span><span class="v"><span class="tabular">2</span></span></div>
     <div class="sheet-row"><span class="k">Sessions</span><span class="v"><span class="tabular">7</span></span></div>
-    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">6</span></span></div></div>
-    </div>
+    <div class="sheet-row"><span class="k">Hours</span><span class="v"><span class="tabular">6</span></span></div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+     </div>
   </template>
-    <template data-preview="trn-edit">
-    <div class="sheet-card">
-      <div class="sheet-head">
+    <template data-preview="trn-edit" data-interaction-family="long-form" data-interaction-presentation="drawer">
+    <div class="interaction-card sheet-card">
+      <header class="interaction-header sheet-head">
         <div class="flex items-center gap-2.5">
           <span class="medallion m-soft tone-primary medallion-sm"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-edit"></use></svg></span>
-          <h2 class="text-[15px] font-bold text-ink">Edit teacher details</h2>
+          <h2 id="interaction-title-trn-edit" class="interaction-title text-[15px] font-bold text-ink" data-interaction-heading tabindex="-1">Edit teacher details</h2>
         </div>
-        <button type="button" class="icon-btn" data-sheet-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
-      </div>
-      <div class="sheet-body"><div class="wiz-grid"><div class="field"><label class="field-label" for="f-trnEdit-firstName">First name (English)</label><input id="f-trnEdit-firstName" name="trnEdit-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-lastName">Last name (English)</label><input id="f-trnEdit-lastName" name="trnEdit-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-firstNameAr">First name (Arabic)</label><input id="f-trnEdit-firstNameAr" name="trnEdit-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-lastNameAr">Last name (Arabic)</label><input id="f-trnEdit-lastNameAr" name="trnEdit-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-email">Email</label><input id="f-trnEdit-email" name="trnEdit-email" type="text" class="input" placeholder="name@example.com" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-phone">Mobile number</label><input id="f-trnEdit-phone" name="trnEdit-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-status">Status</label><span class="select-wrap"><select id="f-trnEdit-status" name="trnEdit-status" class="select-input">
+        <button type="button" class="icon-btn" data-sheet-close data-interaction-close aria-label="Close"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-x"></use></svg></button>
+      </header>
+      <div class="interaction-content sheet-body">
+        <div id="interaction-errors-trn-edit" class="interaction-error-summary" data-interaction-error-summary role="alert" tabindex="-1" hidden></div>
+<div class="wiz-grid"><div class="field"><label class="field-label" for="f-trnEdit-firstName">First name (English)</label><input id="f-trnEdit-firstName" name="trnEdit-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-lastName">Last name (English)</label><input id="f-trnEdit-lastName" name="trnEdit-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-firstNameAr">First name (Arabic)</label><input id="f-trnEdit-firstNameAr" name="trnEdit-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-lastNameAr">Last name (Arabic)</label><input id="f-trnEdit-lastNameAr" name="trnEdit-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-email">Email</label><input id="f-trnEdit-email" name="trnEdit-email" type="text" class="input" placeholder="name@example.com" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-phone">Mobile number</label><input id="f-trnEdit-phone" name="trnEdit-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-trnEdit-status">Status</label><span class="select-wrap"><select id="f-trnEdit-status" name="trnEdit-status" class="select-input">
       <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field"><label class="field-label" for="f-trnEdit-subjects">Subjects</label><span class="select-wrap"><select id="f-trnEdit-subjects" name="trnEdit-subjects" class="select-input">
       <option value="math" selected>Mathematics</option><option value="arabic">Arabic</option><option value="programming">Programming</option><option value="physics">Physics</option><option value="english">English</option><option value="science">Science</option>
@@ -827,10 +853,10 @@
       <option value="c1" selected>Mathematics</option><option value="c2">Arabic Language</option><option value="c3">Intro to Programming</option><option value="c5">English</option>
     </select><svg class="sel-chev ico" aria-hidden="true" focusable="false"><use href="#i-chevron-down"></use></svg></span></div><div class="field field-full"><label class="field-label" for="f-trnEdit-notes">Notes</label><textarea id="f-trnEdit-notes" name="trnEdit-notes" class="input" rows="3" placeholder="Write a short note…"></textarea></div><div class="field field-full"><span class="field-label">CV & certificates</span>
     <button type="button" class="btn btn-secondary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="trn.form.cvReason" title="Uploading files requires the backend (out of current scope)."><svg class="ico ico-sm" aria-hidden="true" focusable="false"><use href="#i-file-text"></use></svg><span>Upload files</span></button></div></div>
-    <div class="flex items-center justify-end gap-2.5 mt-4">
-      <button type="button" class="btn btn-primary btn-sm" aria-disabled="true" data-disabled-reason data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button>
-    </div></div>
-    </div>
+        <div class="interaction-operation" data-interaction-operation-region></div>
+      </div>
+       <footer class="interaction-footer"><button type="button" class="btn btn-primary btn-sm" data-interaction-submit data-reason-key="common.backendRequiredNote" title="This action needs the server connection to complete — nothing is saved yet."><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-check"></use></svg><span>Save</span></button></footer>
+     </div>
   </template></section>
     <section class="tabpanel" role="tabpanel" id="tabpanel-teachers-add" data-tabpanel="add" aria-labelledby="tab-teachers-add" hidden><div class="wiz-grid"><div class="field"><label class="field-label" for="f-trnAdd-firstName">First name (English)</label><input id="f-trnAdd-firstName" name="trnAdd-firstName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastName">Last name (English)</label><input id="f-trnAdd-lastName" name="trnAdd-lastName" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-firstNameAr">First name (Arabic)</label><input id="f-trnAdd-firstNameAr" name="trnAdd-firstNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-lastNameAr">Last name (Arabic)</label><input id="f-trnAdd-lastNameAr" name="trnAdd-lastNameAr" type="text" class="input" placeholder="" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-email">Email</label><input id="f-trnAdd-email" name="trnAdd-email" type="text" class="input" placeholder="name@example.com" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-phone">Mobile number</label><input id="f-trnAdd-phone" name="trnAdd-phone" type="text" class="input" placeholder="05xxxxxxxx" value="" /></div><div class="field"><label class="field-label" for="f-trnAdd-status">Status</label><span class="select-wrap"><select id="f-trnAdd-status" name="trnAdd-status" class="select-input">
       <option value="active" selected>Active</option><option value="trial">Trial</option><option value="suspended">Suspended</option><option value="inactive">Inactive</option>

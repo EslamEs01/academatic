@@ -36,6 +36,28 @@ const TEACHER_INTERNAL = new Set(['teacher-schedule', 'teacher-students', 'teach
 const fails = [];
 const ok = (c, m) => { if (!c) fails.push(m); };
 
+async function waitForOnlyPanel(page, group, panel) {
+  await page.waitForFunction(([expectedGroup, expectedPanel]) => {
+    const visible = [...document.querySelectorAll(`[data-tabs="${expectedGroup}"] [data-tabpanel]`)]
+      .filter((candidate) => !candidate.hidden)
+      .map((candidate) => candidate.getAttribute('data-tabpanel'));
+    return visible.length === 1 && visible[0] === expectedPanel;
+  }, [group, panel], { timeout: 5000 });
+}
+
+async function openRequiredMenu(page, selector) {
+  const trigger = page.locator(selector);
+  if (await trigger.count() !== 1) throw new Error(`required menu trigger must exist exactly once: ${selector}`);
+  await trigger.waitFor({ state: 'visible', timeout: 5000 });
+  const deadline = Date.now() + 5000;
+  while (Date.now() < deadline) {
+    await trigger.click();
+    if (await trigger.getAttribute('aria-expanded') === 'true') return;
+    await page.waitForTimeout(100);
+  }
+  throw new Error(`required menu did not open after its enhancement listener became available: ${selector}`);
+}
+
 // Spec 010 — the set of built page files, for the link-integrity crawl (a link must
 // target one of these, an in-page hash, or be a documented hash-view).
 const VALID_FILES = new Set();
@@ -73,8 +95,8 @@ const FILTER_SPEC = {
 
 // ===== Spec 032 — Create-Edit Forms Completion freeze (FC-01…FC-40). Every Add/Create/
 // Edit/Duplicate action now opens a form-bearing drawer: a baked <template data-preview>
-// whose body holds ≥1 INERT input/select/textarea + a clickable data-disabled-reason
-// backendRequired final (no fake save, no persistence, no mutation). This map pins every
+// whose body holds ≥1 input/select/textarea + exactly one active data-interaction-submit
+// backendRequired final (validation + no fake save, no persistence, no mutation). This map pins every
 // rebuilt form drawer to its host page(s); the block below audits each template body,
 // re-pins the candidate-list pickers + the 3 hybrid category-create drawers, and enforces
 // the MUST-OMIT / MUST-GATE contracts on every form body. ADDITIVE ONLY — every protected
@@ -125,9 +147,16 @@ const PICKERS_032 = {
 const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
 
 (async () => {
-  const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+  const LAUNCH = () => chromium.launch({ headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'] });
+  let browser = await LAUNCH();
+  const relaunch = async () => { await browser.close().catch(() => {}); browser = await LAUNCH(); };
 
   for (const page of PAGES) {
+    // Fresh browser per base page: rolling one browser across all 114 pages×2 locales
+    // accumulates renderer state and the host OOM-kills it mid-crawl (crash at a moving page,
+    // "Target page ... has been closed", no SMOKE FAILED line — an infrastructure failure).
+    // A fresh browser per page bounds peak memory at a single clean browser.
+    await relaunch();
     for (const lang of ['ar', 'en']) {
       const ctx = await browser.newContext();
       const p = await ctx.newPage();
@@ -462,10 +491,11 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           edit: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.edit"]'),
           addChild: !!document.querySelector('[data-modal-trigger][data-modal-title-key="fam.act.addChild"]'),
           reclassDrawer: !!document.querySelector('[data-drawer="fam-cat"]'),
-          reclassTpl: !!(document.querySelector('template[data-preview="fam-cat"]') || {}).content?.querySelector?.('[data-disabled-reason]'),
+          reclassTerminals: (document.querySelector('template[data-preview="fam-cat"]') || {}).content
+            ?.querySelectorAll?.('.btn-primary[data-interaction-submit][data-reason-key]').length || 0,
         }));
         ok(fm.edit && fm.addChild, `${page}/${lang}: family banner missing edit/add-child modal triggers`);
-        ok(fm.reclassDrawer && fm.reclassTpl, `${page}/${lang}: family category reclassify drawer/template (w/ backendRequired gate) missing`);
+        ok(fm.reclassDrawer && fm.reclassTerminals === 1, `${page}/${lang}: family category reclassify drawer/template must have exactly one active backendRequired terminal (got ${fm.reclassTerminals})`);
       }
 
       // Spec 004 — add-family wizard: 5 baked steps · labeled fields · Next/Back · Save toasts
@@ -1332,8 +1362,8 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const OMIT = /pass|secret|api[-_]?key|token|webhook|otp|salary|hour[-_]?rate|fine|payout|iban|cvv/i;
           const audit = (content, id) => {
             const ctrls = content.querySelectorAll('input,select,textarea').length;
-            const gates = content.querySelectorAll('[data-disabled-reason],[data-confirm]').length;
-            const primaries = content.querySelectorAll('.btn-primary[data-disabled-reason]').length;
+            const gates = content.querySelectorAll('button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])').length;
+            const primaries = gates;
             if (ctrls === 0) out.fieldless.push(id);
             if (gates === 0) out.noGate.push(id);
             if (primaries > 1) out.multiPrimary.push(id);
@@ -1351,14 +1381,20 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           // the nested fb-add form (FC-25) lives inside the attended outcome templates
           if (expectNestedFb) {
             document.querySelectorAll('template[data-preview]').forEach((tpl) => {
-              const inner = tpl.content.querySelector('template[data-preview="fb-add"]');
-              if (inner) { out.nestedFbAdd++; audit(inner.content, 'fb-add'); }
+              const inner = tpl.content.querySelector('template[data-preview^="fb-add-"]');
+              if (inner) {
+                const target = inner.getAttribute('data-preview');
+                const opener = tpl.content.querySelector(`[data-drawer="${target}"]`);
+                if (!opener) out.missing.push(target);
+                out.nestedFbAdd++;
+                audit(inner.content, target);
+              }
             });
           }
           // picker re-pin: each candidate-list drawer still renders content + an honest final
           for (const id of pickerIds) {
             const tpl = document.querySelector(`template[data-preview="${id}"]`);
-            if (!tpl || !tpl.content.querySelector('[data-disabled-reason]')
+            if (!tpl || !tpl.content.querySelector('[data-disabled-reason], button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])')
               || (tpl.content.textContent || '').trim().length < 40) out.pickerBad.push(id);
           }
           // the 3 hybrid category drawers now carry a REAL create form (≥2 controls)
@@ -1389,11 +1425,12 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         if (openable32) {
           await p.click(`[data-drawer="${openable32}"]`);
           await p.waitForTimeout(280);
-          const sheet32 = await p.evaluate(() => {
-            const d = document.querySelector('.drawer.sheet');
+          const sheet32 = await p.evaluate((target) => {
+            const d = document.querySelector(`.interaction-surface[role="dialog"][aria-modal="true"][data-interaction-target="${target}"]`);
             if (!d) return { open: false };
-            return { open: true, ctrls: d.querySelectorAll('input,select,textarea').length, gate: !!d.querySelector('[data-disabled-reason]') };
-          });
+            const gate = d.querySelectorAll('button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])').length;
+            return { open: true, ctrls: d.querySelectorAll('input,select,textarea').length, gate };
+          }, openable32);
           ok(sheet32.open && sheet32.ctrls >= 1 && sheet32.gate,
             `${page}/${lang}: form drawer "${openable32}" did not open with visible controls + a backendRequired final (${JSON.stringify(sheet32)})`);
           await p.keyboard.press('Escape');
@@ -1429,7 +1466,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const bq = (s) => body.querySelectorAll(s).length;
           const tpl = (id) => document.querySelector(`template[data-preview="${id}"]`);
           const tplCtrls = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('input,select,textarea').length : 0; };
-          const tplGate = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('[data-disabled-reason]').length : 0; };
+          const tplGate = (id) => { const x = tpl(id); return x ? x.content.querySelectorAll('button.btn-primary[data-interaction-submit][data-reason-key]:not([disabled]):not([aria-disabled="true"])').length : 0; };
           // an honest final gate = clickable data-disabled-reason OR an inert disabled button (both carry a reason, enforced elsewhere)
           const bodyGates = bq('[data-disabled-reason]') + bq('button[disabled]');
           const o = { fileInputs: q('input[type="file"]'), pwInputs: q('input[type="password"]'), canvas: q('canvas'), demo: bq('[data-demo-action]'), bodyGates };
@@ -1908,6 +1945,10 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const railStops = document.querySelectorAll('#page-body .pt-rail .pt-stop').length;
           const flowSteps = document.querySelectorAll('#page-body .pt-flow-step').length;
           const storyRows = document.querySelectorAll('#page-body .pt-story').length;
+          // Spec 045 — quick-tile truthfulness: a tile that targets an implemented destination is
+          // a REAL anchor; a "soon" badge on such a tile is the FR-012 defect.
+          const qtileLinks = document.querySelectorAll('#page-body a.pt-qtile').length;
+          const qtileSoon = document.querySelectorAll('#page-body .pt-qtile-soon').length;
           const childViewLinks = [...document.querySelectorAll('#page-body a[href]')]
             .filter((a) => /(^|\/)student-portal\.(en\.)?html$/.test(a.getAttribute('href') || '')).length;
           const childPanelCount = document.querySelectorAll('#page-body .pt-child-panel').length;
@@ -1932,7 +1973,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           const shellAnchors = [...document.querySelectorAll('a[href]')]
             .filter((a) => !a.closest('#page-body') && !(a.getAttribute('href') || '').startsWith('#'))
             .map((a) => a.getAttribute('href'));
-          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible, idHero, railStops, flowSteps, storyRows, childViewLinks };
+          return { hasShell: !!shell, role, adminMarkup, switchLink, bodyText, gaugeCount, gaugeAscii, plannedCount: planned.length, plannedBad, hubRoleTargets, hubAdminLink, sectionCount, emptyCount, bodyAnchors, plannedBackend, plannedPlanned, progressBars, formControls, anchorTargets, avatars, sidenavs, navAside, navDrawer, drawerSummary, navCurrentHrefs, plannedNavAnchors, navListAnchors, shellAnchors, kpiCards, childPanelCount, childDefaultVisible, idHero, railStops, flowSteps, storyRows, qtileLinks, qtileSoon, childViewLinks };
         });
         const expRole = page === 'portals' ? 'hub' : page === 'family-child' ? 'family' : STUDENT_INTERNAL.has(page) ? 'student' : FAMILY_INTERNAL.has(page) ? 'family' : TEACHER_INTERNAL.has(page) ? 'teacher' : page.replace('-portal', '');
         ok(prt.hasShell && prt.role === expRole, `${page}/${lang}: expected .portal-shell[data-role="${expRole}"], got "${prt.role}"`);
@@ -2011,7 +2052,69 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         // a non-anchor backendRequired gate), and — the teacher hard rule — ZERO pay vocabulary (the
         // payHit lineage, byte-verbatim). teacher-profile carries exactly the three write gates.
         if (TEACHER_INTERNAL.has(page)) {
-          ok(prt.formControls === 0, `${page}/${lang}: teacher internal page must contain zero form controls, got ${prt.formControls}`);
+          /* ── Spec 045 · DECLARED SUPERSESSION S45-2 (T033 / FR-024–FR-025) ────────────────────
+           * Superseded assertion (Spec 025 lineage), verbatim:
+           *   ok(prt.formControls === 0, '… teacher internal page must contain zero form controls …');
+           *
+           * WHY it must change for ONE page: FR-024/FR-025 require `teacher-library` to provide
+           * evidence-backed deterministic resource search (the reference platform's `search_form`
+           * with its `query` input). A search field IS a form control, so the blanket rule and the
+           * requirement cannot both hold. The blanket rule existed to stop teacher internal pages
+           * carrying DATA-ENTRY forms that imply persistence — a client-side filter over content
+           * already rendered on the page is not that, and claims nothing.
+           *
+           * WHY this is NOT a weakening: the rule stays byte-identical (`=== 0`) for the other seven
+           * teacher internal pages. The single exception is pinned far more tightly than "some form
+           * controls are allowed": exactly one form and exactly one input, that input must be
+           * type=search carrying data-filter="search", and select/textarea must remain zero — so a
+           * data-entry field, a dropdown, or a second input on teacher-library now FAILS where the
+           * old blanket rule would merely have counted them. The discovery contract is additionally
+           * enforced (reset control present, exactly one no-results state).
+           * Falsifying mutation: M45-12 (swallowed selector) and M45-13 (false saved wording). */
+          if (page === 'teacher-library') {
+            const lib = await p.evaluate(() => ({
+              forms: document.querySelectorAll('#page-body form').length,
+              inputs: document.querySelectorAll('#page-body input').length,
+              selects: document.querySelectorAll('#page-body select').length,
+              textareas: document.querySelectorAll('#page-body textarea').length,
+              searchInputs: document.querySelectorAll('#page-body input[type="search"][data-filter="search"]').length,
+              reset: document.querySelectorAll('#page-body [data-filter-reset]').length,
+              noResults: document.querySelectorAll('#page-body [data-no-results]').length,
+              targets: document.querySelectorAll('#page-body #library-resources').length,
+            }));
+            ok(lib.forms === 1 && lib.inputs === 1 && lib.selects === 0 && lib.textareas === 0,
+              `${page}/${lang}: teacher-library may carry ONLY the sanctioned discovery control (1 form, 1 input, 0 select, 0 textarea), got ${JSON.stringify(lib)}`);
+            ok(lib.searchInputs === 1,
+              `${page}/${lang}: the one permitted control must be input[type=search][data-filter=search], got ${lib.searchInputs}`);
+            ok(lib.reset === 1 && lib.noResults === 1 && lib.targets === 1,
+              `${page}/${lang}: library discovery contract incomplete (reset=${lib.reset}, no-results=${lib.noResults}, target=${lib.targets}; each must be exactly 1)`);
+            /* the filter must really narrow, and clearing must really restore everything.
+             * Visibility is measured from COMPUTED STYLE, not the `hidden` property: the shared
+             * filterBar/noResults mechanism toggles the empty state with CSS `display`, and never
+             * sets the `hidden` attribute. `!n.hidden` was therefore true whenever the node merely
+             * EXISTED, so the old `emptyShown` term could not fail — a partly vacuous assertion.
+             * Corrected 2026-08-04 during the Spec-045 evidence reconciliation; the shape of the
+             * guarantee is unchanged, it is simply now actually enforced. */
+            const vis = (els) => els.filter((e) => !e.hidden && getComputedStyle(e).display !== 'none').length;
+            const before = await p.$$eval('#library-resources .pt-card', vis);
+            const emptyHiddenAtStart = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && getComputedStyle(n).display === 'none'; });
+            await p.fill('#page-body input[data-filter="search"]', 'zzzznomatch');
+            await p.waitForTimeout(200);
+            const narrowed = await p.$$eval('#library-resources .pt-card', vis);
+            const emptyShown = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && getComputedStyle(n).display !== 'none'; });
+            await p.click('#page-body [data-filter-reset]');
+            await p.waitForTimeout(200);
+            const restored = await p.$$eval('#library-resources .pt-card', vis);
+            const emptyHiddenAgain = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && getComputedStyle(n).display === 'none'; });
+            ok(before >= 3 && narrowed === 0 && emptyShown,
+              `${page}/${lang}: library search did not narrow to an accessible empty state (before=${before}, narrowed=${narrowed}, empty=${emptyShown})`);
+            ok(emptyHiddenAtStart && emptyHiddenAgain,
+              `${page}/${lang}: the no-results state must be HIDDEN while results exist (atStart=${emptyHiddenAtStart}, afterReset=${emptyHiddenAgain}) — an always-visible empty state is not a state`);
+            ok(restored === before,
+              `${page}/${lang}: clearing the library search did not restore every resource (${restored}/${before})`);
+          } else {
+            ok(prt.formControls === 0, `${page}/${lang}: teacher internal page must contain zero form controls, got ${prt.formControls}`);
+          }
           const tcards = await p.$$eval('#page-body .pt-card', (els) => els.length);
           ok(tcards >= 3, `${page}/${lang}: expected a real content floor (≥3 cards), got ${tcards}`);
           ok(prt.bodyAnchors === 0, `${page}/${lang}: teacher internal page body must contribute zero anchors, got ${prt.bodyAnchors}`);
@@ -2109,9 +2212,40 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
           ok(prt.railStops >= 1, `${page}/${lang}: expected a living day rail with ≥1 stop, got ${prt.railStops}`);
           ok(prt.flowSteps === 4, `${page}/${lang}: expected the 4-step outcome flow strip (prepare→attend→record→review), got ${prt.flowSteps}`);
           ok(prt.storyRows === 0, `${page}/${lang}: the teacher home carries no family status stories, got ${prt.storyRows}`);
-          ok(prt.bodyAnchors === 1, `${page}/${lang}: the teacher page body must contribute exactly ONE anchor (the performance link), got ${prt.bodyAnchors}`);
-          ok(prt.anchorTargets.every((h) => /(^|\/)teacher-reports\.(en\.)?html$/.test(h)),
-            `${page}/${lang}: the teacher body anchor must target the teacher-reports page (Spec 025 repoint), got ${JSON.stringify(prt.anchorTargets)}`);
+          /* ── Spec 045 · DECLARED SUPERSESSION S45-1 (T016 / FR-012) ───────────────────────────
+           * Superseded assertions (Spec 025 / Spec 022 lineage), verbatim:
+           *   ok(prt.bodyAnchors === 1, '… must contribute exactly ONE anchor (the performance link) …');
+           *   ok(prt.anchorTargets.every((h) => /(^|\/)teacher-reports\.(en\.)?html$/.test(h)), '… Spec 025 repoint …');
+           *
+           * WHY it must change: those lines were written when the seven Teacher internal pages were
+           * NOT reachable from the home — the quick tiles rendered as `is-planned` divs carrying a
+           * "soon" badge. Spec 045 FR-012 requires every IMPLEMENTED Teacher destination to be a
+           * working localized affordance rather than a false planned state, and all eight
+           * ROLE_NAV.teacher entries are `status: 'implemented'` with all eight pages built. So the
+           * body necessarily contributes 1 + 7 = 8 anchors. Keeping `=== 1` would mandate the defect.
+           *
+           * WHY this is a STRENGTHENING, not a weakening: the old pair pinned ONE destination and
+           * left the other seven unconstrained (they did not exist as anchors). The replacement pins
+           * the EXACT localized target of all eight, requires the quick-tile set to equal the
+           * implemented ROLE_NAV set exactly, and adds a zero-"soon" guard that did not exist.
+           * A regression to the old rendering now fails on three independent assertions.
+           * Falsifying mutation: M45-04 / M45-07. */
+          const TCH_QTILE_PAGES = ['teacher-schedule', 'teacher-students', 'teacher-outcomes',
+            'teacher-tasks', 'teacher-reports', 'teacher-library', 'teacher-profile'];
+          const suffix = lang === 'en' ? '.en.html' : '.html';
+          const expectedTargets = ['teacher-reports' + suffix, ...TCH_QTILE_PAGES.map((b) => b + suffix)];
+          ok(prt.bodyAnchors === 8,
+            `${page}/${lang}: the teacher home body must contribute exactly 8 anchors (1 reports link + 7 implemented quick tiles), got ${prt.bodyAnchors}`);
+          ok(prt.qtileLinks === 7,
+            `${page}/${lang}: expected 7 REAL quick-tile links for the 7 implemented Teacher destinations, got ${prt.qtileLinks}`);
+          ok(prt.qtileSoon === 0,
+            `${page}/${lang}: an implemented Teacher destination is still labelled "soon" (${prt.qtileSoon} badge(s)) — FR-012 violation`);
+          ok(expectedTargets.every((want) => prt.anchorTargets.some((h) => h === want || h.endsWith('/' + want))),
+            `${page}/${lang}: teacher home is missing an exact localized destination. want=${JSON.stringify(expectedTargets)} got=${JSON.stringify(prt.anchorTargets)}`);
+          ok(prt.anchorTargets.every((h) => expectedTargets.some((want) => h === want || h.endsWith('/' + want))),
+            `${page}/${lang}: teacher home emitted an unexpected body anchor. allowed=${JSON.stringify(expectedTargets)} got=${JSON.stringify(prt.anchorTargets)}`);
+          ok(!prt.anchorTargets.some((h) => /teacher-performance/.test(h)),
+            `${page}/${lang}: the teacher portal must never link the admin-only performance board (FR-013/FR-041), got ${JSON.stringify(prt.anchorTargets)}`);
           ok(prt.formControls === 0, `${page}/${lang}: the teacher page must contain zero form controls, got ${prt.formControls}`);
           ok(prt.plannedBackend === 1, `${page}/${lang}: expected 1 backendRequired gate (outcome save), got ${prt.plannedBackend}`);
           ok(prt.plannedPlanned === 0, `${page}/${lang}: expected 0 planned teacher gates on the compact home, got ${prt.plannedPlanned}`);
@@ -2282,7 +2416,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'student', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="student"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2309,7 +2443,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'perf', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="perf"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2345,7 +2479,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         const dext = [];
         p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
         await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-        await p.waitForTimeout(220);
+        await waitForOnlyPanel(p, s.group, view);
         const r = await p.evaluate((group) => {
           const vis = [...document.querySelectorAll(`[data-tabs="${group}"] [data-tabpanel]`)].filter((x) => !x.hidden);
           const body = document.getElementById('page-body');
@@ -2373,7 +2507,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'finance', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="finance"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2449,7 +2583,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         const dext = [];
         p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
         await p.goto(`${BASE}/${file}#view=${view}`, { waitUntil: 'networkidle' });
-        await p.waitForTimeout(220);
+        await waitForOnlyPanel(p, s.group, view);
         const r = await p.evaluate((group) => {
           const vis = [...document.querySelectorAll(`[data-tabs="${group}"] [data-tabpanel]`)].filter((x) => !x.hidden);
           const body = document.getElementById('page-body');
@@ -2483,7 +2617,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       const dext = [];
       p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) dext.push(u); });
       await p.goto(`${BASE}/${sfile}#view=${view}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(220);
+      await waitForOnlyPanel(p, 'settings', view);
       const r = await p.evaluate(() => {
         const vis = [...document.querySelectorAll('[data-tabs="settings"] [data-tabpanel]')].filter((x) => !x.hidden);
         const body = document.getElementById('page-body');
@@ -2682,7 +2816,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
         const ext = [];
         p.on('request', (r) => { const u = r.url(); if (!u.startsWith(BASE) && !u.startsWith('data:')) ext.push(u); });
         await p.goto(`${BASE}/${f}#view=${view}`, { waitUntil: 'networkidle' });
-        await p.waitForTimeout(200);
+        await waitForOnlyPanel(p, group, view);
         const vis = await p.evaluate((g) => [...document.querySelectorAll(`[data-tabs="${g}"] [data-tabpanel]`)].filter((x) => !x.hidden).map((x) => x.getAttribute('data-tabpanel')), group);
         ok(vis.length === 1 && vis[0] === view,
           `deeplink/${it.id}/${lang}: #view=${view} must open EXACTLY that panel — the URL hash must beat the seeded stored view '${other}'. Got ${JSON.stringify(vis)}`);
@@ -2703,7 +2837,7 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
     const ctx = await browser.newContext();
     const p = await ctx.newPage();
     await p.goto(`${BASE}/${f}#view=add`, { waitUntil: 'networkidle' });
-    await p.waitForTimeout(200);
+    await waitForOnlyPanel(p, 'teachers', 'add');
     const r = await p.evaluate(() => {
       const add = document.querySelector('[data-tabs="teachers"] [data-tabpanel="add"]');
       const cat = document.querySelector('[data-tabs="teachers"] [data-tabpanel="categories"]');
@@ -2785,14 +2919,17 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
       if (group) await ctx.addInitScript(([g, o]) => { try { localStorage.setItem('academy.schedView.' + g, o); } catch (e) { /* ignore */ } }, [group, 'overview']);
       const p = await ctx.newPage();
       await p.goto(`${BASE}/${start}`, { waitUntil: 'networkidle' });
-      await p.waitForTimeout(200);
       // open the TOPBAR language popover and assert it really opened
-      await p.click('[data-action="lang-menu"]');
-      await p.waitForTimeout(140);
-      const menuOpen = await p.evaluate(() => !!document.querySelector('[role="menuitem"][data-set-lang]'));
-      ok(menuOpen, `d3/${start}: the topbar language menu did not open — the test would prove nothing`);
-      await p.click(`[role="menuitem"][data-set-lang="${to}"]`);
-      await p.waitForTimeout(500);
+      await openRequiredMenu(p, '[data-action="lang-menu"]');
+      const languageItem = p.locator(`[role="menuitem"][data-set-lang="${to}"]:visible`);
+      await languageItem.waitFor({ timeout: 5000, state: 'visible' });
+      const menuCount = await p.locator('[role="menuitem"][data-set-lang]:visible').count();
+      if (menuCount !== 2) throw new Error(`d3/${start}: expected exactly two visible topbar language items, got ${menuCount}`);
+      await Promise.all([
+        p.waitForURL((url) => url.href.endsWith(`/${want}`), { waitUntil: 'networkidle', timeout: 5000 }),
+        languageItem.click(),
+      ]);
+      if (group) await waitForOnlyPanel(p, group, panel);
       const r = await p.evaluate((g) => ({
         href: location.href.split('/').pop(),
         hashes: (location.href.match(/#/g) || []).length,
@@ -2836,6 +2973,431 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
     // the honest finance lock is untouched by Spec 039
     const csr = navSrc.NAV_CATEGORIES.flatMap((c) => [...c.items, ...(c.sections || []).flatMap((s) => s.items)]).find((i) => i.id === 'classSalaryReport');
     ok(csr.status === 'disabled' && csr.reasonKey === 'nav.reason.finance' && !csr.route, 'nav.config: classSalaryReport must stay an honest disabled lock with no route');
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-1: teacherAbsent / studentAbsent must stay DISTINCT
+     * at the SOURCE, in every locale (FR-020, SC-005).
+     *
+     * This guard exists because mutation M45-06 proved the DOM-level check insufficient. Asserting
+     * only that "a teacher-absence label and a student-absence label both appear on the page" passes
+     * even when one has been rewritten to the other's wording, because a sibling block elsewhere on
+     * the page still supplies the missing phrasing. Conflation is precisely FR-020's forbidden state,
+     * so the guarantee has to be checked where the two values sit side by side: the locale source.
+     *
+     * Every object literal that defines BOTH keys must give them different values, in both locales.
+     * Falsifying mutation: M45-06. */
+    {
+      const absSrcs = ['ar.trn.js', 'en.trn.js', 'ar.js', 'en.js']
+        .map((f) => ({ f, p: require('path').join(__dirname, '../../src/locales', f) }))
+        .filter((x) => fs.existsSync(x.p))
+        .map((x) => ({ f: x.f, s: fs.readFileSync(x.p, 'utf8') }));
+      let pairsChecked = 0;
+      for (const { f, s } of absSrcs) {
+        /* pair them up in emission order: the Nth teacherAbsent value belongs to the Nth
+         * studentAbsent value, since every block that defines one defines the other. */
+        const tVals = [...s.matchAll(/teacherAbsent:\s*'([^']*)'/g)].map((m) => m[1]);
+        const sVals = [...s.matchAll(/studentAbsent:\s*'([^']*)'/g)].map((m) => m[1]);
+        ok(tVals.length === sVals.length,
+          `locale ${f}: teacherAbsent/studentAbsent are defined an unequal number of times (${tVals.length} vs ${sVals.length}) — one absence concept lost its counterpart`);
+        for (let i = 0; i < Math.min(tVals.length, sVals.length); i += 1) {
+          ok(tVals[i] !== sVals[i],
+            `locale ${f}: teacherAbsent and studentAbsent share the identical label "${tVals[i]}" — the two absence concepts have been conflated (FR-020)`);
+          pairsChecked += 1;
+        }
+      }
+      ok(pairsChecked >= 4,
+        `Spec 045: expected at least 4 teacherAbsent/studentAbsent label pairs across the locales, checked ${pairsChecked} — the guard would pass vacuously`);
+    }
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-7: every Teacher drawer opener must resolve to a real
+     * target (FR-047, FR-034).
+     *
+     * This guard exists because mutation M45-14 proved the inherited Spec-044 driver does not cover
+     * it. Renaming a Teacher drawer template so its opener pointed at a target that no longer exists
+     * produced a dangling trigger — a control that looks live and does nothing — and all 22
+     * inherited interaction guards still passed. FR-047 requires every trigger-to-target mapping in
+     * changed Teacher interactions to be exercised and to fail loudly when absent, so the Teacher
+     * domain needs its own assertion rather than assuming the inherited suite covers it.
+     *
+     * For each of the 22 localized Teacher consumers: every `data-drawer="X"` must have a matching
+     * `<template data-preview="X">` on that same page.
+     * Falsifying mutation: M45-14. */
+    {
+      const pubDir7 = require('path').join(__dirname, '../../public');
+      const SCOPES7 = ['teacher-portal', 'teacher-schedule', 'teacher-students', 'teacher-outcomes',
+        'teacher-tasks', 'teacher-reports', 'teacher-library', 'teacher-profile',
+        'teachers', 'teacher', 'teacher-performance'];
+      let openers7 = 0, pages7 = 0;
+      for (const b of SCOPES7) for (const s of ['', '.en']) {
+        const f = require('path').join(pubDir7, `${b}${s}.html`);
+        ok(fs.existsSync(f), `G45-7: generated consumer ${b}${s}.html is missing`);
+        const h = fs.readFileSync(f, 'utf8');
+        pages7 += 1;
+        const targets = new Set([...h.matchAll(/<template[^>]*data-preview="([^"]+)"/g)].map((m) => m[1]));
+        for (const m of h.matchAll(/data-drawer="([^"]+)"/g)) {
+          openers7 += 1;
+          ok(targets.has(m[1]),
+            `G45-7: ${b}${s}.html has a dangling drawer opener data-drawer="${m[1]}" with no <template data-preview="${m[1]}"> on the page (FR-047)`);
+        }
+      }
+      ok(pages7 === 22, `G45-7: expected 22 localized Teacher consumers, inspected ${pages7}`);
+      ok(openers7 >= 30, `G45-7: expected the Teacher domain to carry its known drawer openers, found only ${openers7} — the guard would pass vacuously`);
+    }
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-3: AR/EN locale key parity for the Teacher namespaces
+     * (FR-052, SC-001). A missing key renders its raw dotted name to the user in one locale only,
+     * which the DOM raw-key sweep can miss if the affected page/state is not visited. Comparing the
+     * flattened key SETS of each mirrored pair catches it structurally.
+     * Falsifying mutation: M45-08. */
+    {
+      const flat = (o, p = '') => Object.entries(o).flatMap(([k, v]) =>
+        (v && typeof v === 'object' && !Array.isArray(v)) ? flat(v, p + k + '.') : [p + k]);
+      for (const ns of ['prt', 'trn']) {
+        const a = (await import(`../../src/locales/ar.${ns}.js`)).default;
+        const e = (await import(`../../src/locales/en.${ns}.js`)).default;
+        const A = new Set(flat(a)); const B = new Set(flat(e));
+        const onlyAr = [...A].filter((k) => !B.has(k));
+        const onlyEn = [...B].filter((k) => !A.has(k));
+        ok(A.size > 0 && B.size > 0, `G45-3: locale namespace ${ns} loaded no keys — the guard must not pass vacuously`);
+        ok(onlyAr.length === 0, `G45-3: ar.${ns}.js has ${onlyAr.length} key(s) with no EN mirror → ${JSON.stringify(onlyAr.slice(0, 6))} (FR-052)`);
+        ok(onlyEn.length === 0, `G45-3: en.${ns}.js has ${onlyEn.length} key(s) with no AR mirror → ${JSON.stringify(onlyEn.slice(0, 6))} (FR-052)`);
+      }
+    }
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-4: the Teacher-domain dark-theme rules must survive in the
+     * COMPILED stylesheet (FR-053). `--pt-accent-weak` reads near-charcoal in dark (the documented
+     * Spec-024 D-06 hazard), so the Teacher layer carries explicit dark overrides. Tailwind purges
+     * anything it believes unused, so their presence in the built artifact — not the source — is
+     * what actually protects the dark theme.
+     * Falsifying mutation: M45-10. */
+    {
+      const cssPath = require('path').join(__dirname, '../../public/assets/app.css');
+      ok(fs.existsSync(cssPath), 'G45-4: compiled public/assets/app.css is missing — the guard has no target');
+      const css = fs.readFileSync(cssPath, 'utf8');
+      for (const sel of ['.td-focus', '.td-meta', '.td-gates', '.td-actions']) {
+        ok(css.includes(sel), `G45-4: Teacher-domain primitive ${sel} is absent from the compiled stylesheet — it was purged or deleted`);
+      }
+      /* Two separate dark rules protect this layer and BOTH must survive:
+       *   (a) the explicit  [data-theme=dark] .td-gates { … }
+       *   (b) the system fallback :root:not([data-theme=light]):not([data-theme=dark]) .td-gates { … }
+       *       inside an @media (prefers-color-scheme: dark) block.
+       * Mutation M45-10 proved a naive regex is not enough: `[data-theme=dark][^{]*\.td-gates`
+       * ALSO matches (b), because (b) contains `[data-theme=dark])` before its ` .td-gates`. So
+       * deleting (a) outright still satisfied the guard and M45-10 came back GREEN. The explicit
+       * rule is therefore anchored to the START of a rule — preceded by `}`, `,` or the file start —
+       * which the `:not(...)` form can never satisfy, since its bracket is preceded by `)`.
+       * The stylesheet is minified, so attribute-selector quotes may be stripped; accept either form. */
+      ok(/(^|[};,])\s*\[data-theme=["']?dark["']?\]\s+\.td-gates\s*\{/.test(css),
+        'G45-4: the EXPLICIT [data-theme=dark] .td-gates rule is gone from the compiled stylesheet (FR-053)');
+      ok(/prefers-color-scheme:\s*dark/.test(css),
+        'G45-4: the system-dark fallback block is gone from the compiled stylesheet (FR-053)');
+      ok(/:not\(\[data-theme=["']?dark["']?\]\)\s+\.td-gates/.test(css),
+        'G45-4: the system-dark fallback rule for .td-gates is gone from the compiled stylesheet (FR-053)');
+      ok(/@media[^{]*max-width:\s*390px/.test(css),
+        'G45-4: the exact-390px containment block for the Teacher layer is gone from the compiled stylesheet (FR-054)');
+    }
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-5: the Teacher self-profile and the admin Teacher detail
+     * are never the same surface (FR-040, SC-005). `teacher-profile` is the teacher's own account
+     * page; `teacher` is the administrator's record of that teacher. Confusing them either leaks
+     * admin capability into the portal or self-identity into the admin console.
+     * Falsifying mutation: M45-05. */
+    {
+      const pub = require('path').join(__dirname, '../../public');
+      const read = (f) => fs.readFileSync(require('path').join(pub, f), 'utf8');
+      for (const lang of ['', '.en']) {
+        const self = read(`teacher-profile${lang}.html`);
+        const admin = read(`teacher${lang}.html`);
+        ok(/class="portal-shell/.test(self), `G45-5: teacher-profile${lang}.html is not rendered in the portal shell — self/admin identity confusion`);
+        ok(!/class="portal-shell/.test(admin), `G45-5: teacher${lang}.html is rendered in the PORTAL shell — it is an administrator surface`);
+        ok(/data-tabs="teacher"/.test(admin), `G45-5: teacher${lang}.html lost its admin eight-tab structure`);
+        ok(!/data-tabs="teacher"/.test(self), `G45-5: teacher-profile${lang}.html adopted the admin detail tab structure — the two surfaces must stay distinct`);
+        /* the admin action cluster must never appear on the self page */
+        for (const admOnly of ['trn-assign-course', 'trn-assign-group', 'trn-policy', 'trn-availability']) {
+          ok(!self.includes(admOnly), `G45-5: teacher-profile${lang}.html exposes the admin-only control "${admOnly}" (FR-040)`);
+        }
+      }
+    }
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-6: the Spec-045 guards must themselves fail loudly
+     * (FR-061). A guard wrapped in a silent catch, or one whose selector is optional, passes while
+     * proving nothing — the exact failure mode this Spec forbids in its own test code. This
+     * meta-guard reads THIS file and rejects those shapes inside the Spec-045 blocks.
+     * Falsifying mutation: M45-12. */
+    {
+      const selfSrc = fs.readFileSync(__filename, 'utf8');
+      const blocks = [...selfSrc.matchAll(/ADDITIVE GUARD G45-\d[\s\S]{0,4200}?\n    \}/g)].map((m) => m[0]);
+      ok(blocks.length >= 5, `G45-6: expected at least 5 Spec-045 guard blocks to inspect, found ${blocks.length} — the meta-guard must not pass vacuously`);
+      for (const b of blocks) {
+        const name = (b.match(/G45-\d/) || ['G45-?'])[0];
+        /* M45-12 proved the first form missed bare ES2019 optional-catch-binding `catch {}`
+         * (no param list) — a canonical swallowed selector. Match BOTH `catch (e) {}` and `catch {}`.
+         * This guard scans OTHER guards' source, so it must not test its own block: its source
+         * necessarily names the pattern it rejects, which the widened regex would otherwise flag. */
+        if (name === 'G45-6') continue;
+        const emptyCatch = new RegExp('cat' + 'ch(\\s*\\(\\s*\\w*\\s*\\))?\\s*\\{' + '\\s*\\}');
+        ok(!emptyCatch.test(b), `G45-6: guard ${name} contains an empty catch — a swallowed failure (FR-061)`);
+        const emptyDotCatch = new RegExp('\\.cat' + 'ch\\(\\s*\\(\\)\\s*=>\\s*\\{?\\s*\\}?\\s*\\)');
+        ok(!emptyDotCatch.test(b), `G45-6: guard ${name} swallows a rejection with an empty .catch() (FR-061)`);
+        ok(/\bok\(/.test(b), `G45-6: guard ${name} contains no assertion at all (FR-061)`);
+      }
+    }
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-2: the Teacher directory summary may never present a
+     * computed performance measure (FR-031, EG-045-09).
+     *
+     * The directory shipped a third summary card computing `Math.round(rows.reduce((a,r)=>a+r.util,0)
+     * / rows.length)` and rendering it as a percentage — an average-utilization metric across
+     * teachers. FR-031 forbids computing or displaying average utilization, scores, ranks or
+     * percentages there; only authored categorical status/workload information is allowed.
+     *
+     * A DOM-only check is insufficient: a future refactor could compute the mean and render it
+     * without a literal '%' (a ratio, an index, a "load score"), and the page would look clean while
+     * the prohibited calculation was back. So this guard reads the AUTHORED SOURCE and rejects the
+     * arithmetic itself, then separately confirms the rendered summary carries no percentage.
+     * A plain COUNT of records matching an authored categorical value stays allowed — that is what
+     * the three cards legitimately do.
+     * Falsifying mutation: M45-17 (reintroduce the avgUtil mean). */
+    {
+      const tsrcPath = require('path').join(__dirname, '../../src/js/pages/teachers.js');
+      ok(fs.existsSync(tsrcPath), 'G45-2: pages/teachers.js is missing — the guard has no target');
+      const tsrc = fs.readFileSync(tsrcPath, 'utf8');
+      ok(!/\bavgUtil\b/.test(tsrc),
+        'G45-2: pages/teachers.js reintroduced `avgUtil` — a computed average utilization is forbidden (FR-031)');
+      ok(!/\.\s*util\b/.test(tsrc.replace(/\/\*[\s\S]*?\*\//g, '')),
+        'G45-2: pages/teachers.js reads the numeric `util` fixture field again — the directory must use authored categorical information only (FR-031)');
+      /* reject a mean in any spelling: reduce(...) divided by a length */
+      ok(!/reduce\([\s\S]{0,200}?\)\s*\/\s*\w+\.length/.test(tsrc),
+        'G45-2: pages/teachers.js computes an arithmetic mean over the records — forbidden performance measure (FR-031)');
+
+      const dirPub = require('path').join(__dirname, '../../public');
+      let summariesChecked = 0;
+      for (const f of ['teachers.html', 'teachers.en.html']) {
+        const p = require('path').join(dirPub, f);
+        ok(fs.existsSync(p), `G45-2: generated consumer ${f} is missing`);
+        const h = fs.readFileSync(p, 'utf8');
+        /* Anchor on the exact grid `teachers.js` emits for its three summary cards
+         * (summaryCards({cols:'grid-cols-1 sm:grid-cols-3'})). If that markup ever moves, this
+         * assertion fails rather than silently checking nothing. */
+        const m = h.match(/<div class="grid gap-4 grid-cols-1 sm:grid-cols-3">[\s\S]*?(?=<div class="tabs|<div class="filter|$)/);
+        ok(!!m, `G45-2: could not locate the directory summary row in ${f} — the guard must not pass vacuously`);
+        const seg = m[0].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+        ok(!/[%٪]/.test(seg),
+          `G45-2: the Teacher directory summary in ${f} renders a percentage — forbidden computed measure (FR-031). Segment: ${seg.slice(0, 160)}`);
+        ok(/\d|[٠-٩]/.test(seg),
+          `G45-2: the directory summary in ${f} rendered no counts at all — the guard must not pass on an empty region`);
+        summariesChecked += 1;
+      }
+      ok(summariesChecked === 2, `G45-2: expected to check 2 localized directory summaries, checked ${summariesChecked}`);
+    }
+
+    /* ===== Spec 045 — ADDITIVE GUARD G45-8: consolidated fail-loud Teacher-domain census
+     * (FR-060): one auditable roll-up of the scope / consumer / route / link / action / pay /
+     * rank / role / absence / locale guarantees across all ELEVEN Teacher scopes — the eight
+     * portal scopes (teacher-portal, teacher-schedule, teacher-students, teacher-outcomes,
+     * teacher-tasks, teacher-reports, teacher-library, teacher-profile) plus the three admin
+     * scopes (teachers, teacher, teacher-performance) — ×2 locales = 22 localized consumers.
+     *
+     * Everything asserted here is additive: no existing Spec 000–043 assertion is weakened,
+     * stubbed, skipped, or silenced. The per-page live loop above keeps its browser-level
+     * guarantees; this census independently re-pins them against the generated bytes so a
+     * failing run names the exact scope and file. Scope audiences: PORTAL_SCOPES render the
+     * portal shell (teacher-facing), ADMIN_SCOPES render the admin shell, and the pay-free
+     * hard line extends to every page the teacher role can ever reach.
+     *
+     * Digits are deliberately NOT censused in this positive form: Arabic pages render authored
+     * numerals in Arabic-Indic form by design, and the teacher-schedule list honestly renders a
+     * student-count noun phrase for each session (counting attendees is not ranking them).
+     * The failing shape this block forbids is the leaderboard/ranked-list/score vocabulary and
+     * the chart machinery — both word-bounded below. */
+    {
+      const pubDir8 = require('path').join(__dirname, '../../public');
+      const srcPages8 = require('path').join(__dirname, '../../src/js/pages');
+      const read8 = (base, suffix) => fs.readFileSync(require('path').join(pubDir8, `${base}${suffix}.html`), 'utf8');
+      const stripTags8 = (h) => h.replace(/<[^>]+>/g, ' ');
+      const stripComments8 = (s) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+      const bodyOfFile8 = (file) => {
+        const h = read8(file.base, file.suffix);
+        const i = h.indexOf('id="page-body"');
+        const j = h.indexOf('</main>', i);
+        ok(i >= 0 && j > i, `G45-8: §scope ${file.base}${file.suffix}.html has no #page-body…</main> content region — the link census has no region to audit`);
+        return i >= 0 && j > i ? h.slice(i, j) : '';
+      };
+      const PORTAL_SCOPES_8 = ['teacher-portal', 'teacher-schedule', 'teacher-students', 'teacher-outcomes',
+        'teacher-tasks', 'teacher-reports', 'teacher-library', 'teacher-profile'];
+      const ADMIN_SCOPES_8 = ['teachers', 'teacher', 'teacher-performance'];
+      const TCH_SCOPES_8 = [...PORTAL_SCOPES_8, ...ADMIN_SCOPES_8];
+      // the pages the teacher ROLE can reach (portal scope only) — the strictest pay-free surface
+      const TCH_FACING_8 = PORTAL_SCOPES_8;
+
+      /* §1 scope/consumer presence (falsifying mutation: M45-01 drop-scope, M45-02 drop-consumer).
+       * Each of the 22 localized consumers must exist, be non-trivial, and carry the #page-body
+       * region it is authored around. */
+      let consumers8 = 0;
+      for (const b of TCH_SCOPES_8) for (const suffix of ['', '.en']) {
+        const f = require('path').join(pubDir8, `${b}${suffix}.html`);
+        ok(fs.existsSync(f), `G45-8: §1 missing localized consumer ${b}${suffix}.html (scope ${b})`);
+        if (fs.existsSync(f)) {
+          const h = fs.readFileSync(f, 'utf8');
+          ok(h.length > 3000, `G45-8: §1 consumer ${b}${suffix}.html is suspiciously small (${h.length} bytes) — the guard must not pass on a near-empty shell`);
+          ok(h.includes('id="page-body"'), `G45-8: §1 consumer ${b}${suffix}.html has no #page-body region`);
+          consumers8 += 1;
+        }
+      }
+      ok(consumers8 === TCH_SCOPES_8.length * 2,
+        `G45-8: §1 expected exactly ${TCH_SCOPES_8.length * 2} Teacher localized consumers (11 scopes × AR/EN), found ${consumers8}`);
+
+      /* §2 route & link truth (falsifying mutation: M45-07 broken deep link). Every navigable
+       * anchor and every form action reachable from a Teacher scope must carry a real href, never
+       * a dead `href="#"`, never a bare `javascript:`, and must target a page that actually ships
+       * (one of the 115 generated files), an in-page/state hash, or a hash-view on a real file. */
+      const FILES_SET_8 = new Set(fs.readdirSync(pubDir8).filter((f) => f.endsWith('.html')));
+      let linksChecked8 = 0, deadLinks8 = 0;
+      for (const b of TCH_SCOPES_8) for (const suffix of ['', '.en']) {
+        const h = read8(b, suffix);
+        const body = bodyOfFile8({ base: b, suffix });
+        const hrefs = [...body.matchAll(/\bhref="([^"]*)"/g)].map((m) => m[1]);
+        const actions = [...body.matchAll(/<form[^>]*\baction="([^"]*)"/g)].map((m) => m[1]);
+        for (const href of [...hrefs, ...actions]) {
+          linksChecked8 += 1;
+          const bare = href === '' || href === '#';
+          const deadHash = href === '#' || /^#+$/.test(href);
+          const jsProto = /^\s*javascript:/i.test(href);
+          if (bare || deadHash || jsProto) { deadLinks8 += 1; ok(false, `G45-8: §2 dead control href="${href}" on Teacher scope ${b}${suffix}.html`); }
+          const noHash = href.split('#')[0];
+          if (noHash && !FILES_SET_8.has(noHash)) {
+            ok(false, `G45-8: §2 Teacher scope ${b}${suffix}.html links to a non-existent route "${noHash}" (FR-012)`);
+          }
+        }
+        // every Teacher scope must actually CONTAIN navigable routes — an empty census proves nothing
+        ok(linksChecked8 > 0, `G45-8: §2 scope ${b}${suffix}.html exposed no links/actions to audit — the guard would pass vacuously`);
+      }
+      ok(deadLinks8 === 0, `G45-8: §2 ${deadLinks8} dead link(s)/href="#"/javascript: action(s) across the Teacher scopes`);
+      ok(linksChecked8 >= 60,
+        `G45-8: §2 expected at least 60 Teacher navigable links/actions to audit, found ${linksChecked8} — the census would pass vacuously`);
+
+      /* §3 pay-free hard line on every teacher-facing (portal) page, both locales — word-bounded
+       * EN so "payment" can't hide inside another word, and a substring AR set for the authored
+       * vocabulary (راتب/رواتب/أجر/مستحقات/غرامة/مكافأة). The teacher portal domain is the
+       * strictest surface: no salary/payroll/compensation token may ever render. */
+      const PAY_TOKENS_EN_8 = /\b(salary|salaries|payroll|payouts?|compensation|earnings?|remuneration|wages?)\b/i;
+      const PAY_TOKENS_AR_8 = /راتب|رواتب|أجر|أجور|مستحقات|مكافأة|مكافآت|غرامة|غرامات/;
+      let payScopesChecked8 = 0;
+      for (const b of TCH_FACING_8) for (const suffix of ['', '.en']) {
+        const raw = read8(b, suffix);
+        const bodyText8 = stripTags8(bodyOfFile8({ base: b, suffix }));
+        const enHit = raw.match(PAY_TOKENS_EN_8);
+        const arHit = raw.match(PAY_TOKENS_AR_8);
+        const enBody = bodyText8.match(PAY_TOKENS_EN_8);
+        const arBody = bodyText8.match(PAY_TOKENS_AR_8);
+        ok(!enHit && !arHit, `G45-8: §3 pay/salary/payroll/compensation token on teacher-facing page ${b}${suffix}.html → "${(enHit || arHit || [])[0]}" (FR-006)`);
+        ok(!enBody && !arBody, `G45-8: §3 pay vocabulary rendered in the #page-body of ${b}${suffix}.html → "${(enBody || arBody || [])[0]}" (FR-006)`);
+        payScopesChecked8 += 1;
+      }
+      ok(payScopesChecked8 === TCH_FACING_8.length * 2,
+        `G45-8: §3 expected to sweep ${TCH_FACING_8.length * 2} teacher-facing localized consumers, swept ${payScopesChecked8}`);
+
+      /* §4 no rank/score/leaderboard vocabulary or chart machinery on any teacher-facing page —
+       * the display-only rule. Negated/honest statements ("no computed rating", "دون أي ترتيب
+       * محسوب") are legitimate and stay allowed; the census forbids the leaderboard/ranked-list
+       * shape and the score tokens only where they would present a measure. */
+      const RANK_EN_8 = /\b(leaderboard|leaderboards|percentile|percentiles|ranked|ranking|top[- ]?rated|high[- ]?score|outperform(?:s|ed|ing)?|gpa)\b/i;
+      const RANK_AR_8 = /لوحة المتصدرين|المتصدرين|ترتيب المعلمين|أفضل المعلمين/;
+      const CHART_8 = /<canvas|chart\.js|data-chart/i;
+      let rankScopesChecked8 = 0;
+      for (const b of TCH_FACING_8) for (const suffix of ['', '.en']) {
+        const raw = read8(b, suffix);
+        const body8 = bodyOfFile8({ base: b, suffix });
+        const enHit = raw.match(RANK_EN_8);
+        const arHit = raw.match(RANK_AR_8);
+        const chartHit = body8.match(CHART_8);
+        ok(!enHit && !arHit, `G45-8: §4 rank/score/leaderboard vocabulary on teacher-facing page ${b}${suffix}.html → "${(enHit || arHit || [])[0]}" (FR-031)`);
+        ok(!chartHit, `G45-8: §4 chart/canvas machinery on teacher-facing page ${b}${suffix}.html (FR-031)`);
+        rankScopesChecked8 += 1;
+      }
+      ok(rankScopesChecked8 === TCH_FACING_8.length * 2,
+        `G45-8: §4 expected to sweep ${TCH_FACING_8.length * 2} teacher-facing localized consumers, swept ${rankScopesChecked8}`);
+
+      /* §5 portal/admin role separation (falsifying mutation: M45-04 retarget a portal link to
+       * teacher-performance). The admin performance board must never be referenced from a
+       * teacher-portal page, an admin page must never render the portal shell, and a portal page
+       * must never render the admin nav rail. */
+      let roleScopesChecked8 = 0;
+      for (const b of PORTAL_SCOPES_8) for (const suffix of ['', '.en']) {
+        const h = read8(b, suffix);
+        ok(!/teacher-performance/.test(h),
+          `G45-8: §5 teacher-portal page ${b}${suffix}.html references the admin-only teacher-performance board (FR-041)`);
+        ok(!/class="app-shell|nav-rail|nav-panel/.test(h),
+          `G45-8: §5 teacher-portal page ${b}${suffix}.html carries ADMIN shell markup (.app-shell/.nav-rail/.nav-panel) — role leak`);
+        roleScopesChecked8 += 1;
+      }
+      for (const b of ADMIN_SCOPES_8) for (const suffix of ['', '.en']) {
+        const h = read8(b, suffix);
+        ok(!/class="portal-shell/.test(h),
+          `G45-8: §5 admin Teacher scope ${b}${suffix}.html is rendered in the portal shell — self/admin identity confusion (FR-040)`);
+        roleScopesChecked8 += 1;
+      }
+      ok(roleScopesChecked8 === TCH_SCOPES_8.length * 2,
+        `G45-8: §5 expected to census ${TCH_SCOPES_8.length * 2} Teacher localized consumers for role separation, censused ${roleScopesChecked8}`);
+
+      /* §6 absence-integrity (FR-020): teacherAbsent and studentAbsent labels must stay distinct
+       * at the AUTHORED source. G45-1 already pairs the trn sources across ar/en; this section
+       * re-asserts the same invariant inside this consolidated census so a G45-8 failure names the
+       * concept (teacher vs student absence), the locale, and the exact shared label in one line —
+       * the labels only legitimately exist in the trn namespace (the prt namespace has no absence
+       * strings: teacher absence is masked roster privacy on the roster page, not a label). The
+       * non-zero count guard keeps the check from passing vacuously should the keys be renamed. */
+      let absencePairsChecked8 = 0;
+      for (const f of ['ar.trn.js', 'en.trn.js']) {
+        const p = require('path').join(__dirname, '../../src/locales', f);
+        ok(fs.existsSync(p), `G45-8: §6 locale source ${f} is missing — the absence census has no target`);
+        const s = fs.readFileSync(p, 'utf8');
+        const tVals = [...s.matchAll(/teacherAbsent:\s*'([^']*)'/g)].map((m) => m[1]);
+        const sVals = [...s.matchAll(/studentAbsent:\s*'([^']*)'/g)].map((m) => m[1]);
+        ok(tVals.length === sVals.length && tVals.length >= 3,
+          `G45-8: §6 ${f} teacherAbsent/studentAbsent are defined an unequal or too-few number of times (${tVals.length} vs ${sVals.length}) — the absence census must never pass vacuously`);
+        for (let i = 0; i < Math.min(tVals.length, sVals.length); i += 1) {
+          ok(tVals[i] !== sVals[i],
+            `G45-8: §6 ${f} teacherAbsent ("${tVals[i]}") and studentAbsent ("${sVals[i]}") share the identical label — the two absence concepts are conflated (FR-020)`);
+          absencePairsChecked8 += 1;
+        }
+      }
+
+      /* §7 locale key stub/parity — no raw dotted i18n key may reach the generated markup, and
+       * every Teacher-namespace key present in one locale must resolve to a real string in the
+       * other. G45-3 compares the two namespace SETS; this section additionally rejects empty
+       * stubs and placeholder values so a mirrored `""` cannot masquerade as parity. */
+      const flat8 = (o, p = '') => Object.entries(o).flatMap(([k, v]) =>
+        (v && typeof v === 'object' && !Array.isArray(v)) ? flat8(v, p + k + '.') : [[p + k, v]]);
+      for (const ns of ['prt', 'trn']) {
+        const ar8 = (await import(`../../src/locales/ar.${ns}.js`)).default;
+        const en8 = (await import(`../../src/locales/en.${ns}.js`)).default;
+        const arFlat8 = new Map(flat8(ar8));
+        const enFlat8 = new Map(flat8(en8));
+        ok(arFlat8.size > 0 && enFlat8.size > 0, `G45-8: §7 locale namespace ${ns} loaded no keys — the census must not pass vacuously`);
+        for (const [k, v] of arFlat8) {
+          const mirror = enFlat8.get(k);
+          ok(typeof mirror === 'string' && mirror.trim() !== '' && String(v).trim() !== '',
+            `G45-8: §7 stub/empty i18n value at "${k}" — ar="${String(v).slice(0, 24)}" en="${String(mirror).slice(0, 24)}" (a mirrored stub is not parity)`);
+        }
+        for (const [k] of enFlat8) {
+          ok(arFlat8.has(k), `G45-8: §7 en.${ns}.js key "${k}" has no AR counterpart — raw-key risk`);
+        }
+      }
+      // rendered-DOM raw-key sweep across every Teacher consumer in both locales — visible text
+      // only (innerText-style): attribute-carried key handles such as data-reason-key="trn.reason.assign"
+      // are resolved by enhance.js at runtime and are legitimate; a raw key is a defect only when it
+      // reaches the user as a visible string. The sweep anchors on the prt/trn/adm namespaces, which
+      // never legitimately appear as visible prose.
+      let rawKeyConsumers8 = 0;
+      for (const b of TCH_SCOPES_8) for (const suffix of ['', '.en']) {
+        const bodyText8 = stripTags8(bodyOfFile8({ base: b, suffix }));
+        const rawKey = bodyText8.match(/\b(?:prt|trn|adm)\.[a-z]\w*(?:\.[a-z]\w*)+\b/);
+        ok(!rawKey, `G45-8: §7 raw i18n key "${rawKey && rawKey[0]}" rendered as visible text on Teacher consumer ${b}${suffix}.html (FR-052)`);
+        rawKeyConsumers8 += 1;
+      }
+      ok(rawKeyConsumers8 === TCH_SCOPES_8.length * 2,
+        `G45-8: §7 expected to sweep ${TCH_SCOPES_8.length * 2} Teacher consumers for raw keys, swept ${rawKeyConsumers8}`);
+    }
 
     // ===== Spec 040 — nav.config SOURCE audit (the one thing the DOM-only tests cannot reach) =====
     // The six settings items are the LAST planned items in the product. Assert against the SOURCE that
