@@ -70,7 +70,7 @@ Nine owned files / seven evidence packets. Kimi spent the entire run inspecting 
 | Why the replacement is compliant | A **count of records matching an authored categorical value** is exactly what the other two cards already do (`rows.length`, and the count of `avail === 'available'`). It is not a rate, average, percentage, score, rank or index. It reuses the existing authored `workload` vocabulary (`WORKLOAD_ORDER` / `workloadChip`), so no new metric or fixture field was invented. |
 | Verified | `r.util` is no longer read anywhere in `teachers.js`; the `util` field remains in `fixtures/teachers.js` (zero-deletion); `trn.sum.util` remains authored in `*.extra.js` (zero-deletion) though now unused; **no `%` or `٪` renders in either localized summary row**; the new label renders correctly as «معلّمون بحِمل مرتفع» / "High-load teachers". |
 | Risk the lead checked before accepting | Kimi added `sum: { highWorkload }` to `*.trn.js` while `trn.sum.total` / `.available` live in `*.extra.js`. If the locale merge replaced nested objects, the other two cards would have lost their labels. Verified in `i18n.js`: `deepMerge` **recurses** into nested objects (lines 33–35) and `*.trn.js` merges **after** `*.extra.js` (lines 46–47 then 52–53), so the block extends rather than clobbers. Confirmed empirically — all three cards render their labels. |
-| Lead completion 1 | Added the mirrored `sum: { highWorkload: 'معلّمون بحِمل مرتفع' }` to `ar.trn.js`, wording matched to the existing authored «حِمل مرتفع» workload vocabulary. Parity restored and re-measured: **ar.trn 220 / en.trn 220, zero divergence** (portal locales also re-measured at 663/663). |
+| Lead completion 1 | Added the mirrored `sum: { highWorkload: 'معلّمون بحِمل مرتفع' }` to `ar.trn.js`, wording matched to the existing authored «حِمل مرتفع» workload vocabulary. Parity restored and re-measured: **ar.trn 220 / en.trn 220, zero divergence** (portal locales also re-measured at 663/663 **as of session 3** — the final measured figure after the session-4 keys landed is **`prt` 670/670**; see `verification-evidence.md` §1). |
 | Lead completion 2 | Authored the **G45-2** additive guard. It rejects the violation at the **source** (`avgUtil`, any read of `.util`, and any `reduce(...) / *.length` mean) *and* at the **rendered output** (no `%`/`٪` in either localized summary row), and fails loudly if its own anchor or target is missing. A first draft anchored on a `sum-card` class that does not exist; the guard correctly reported a vacuous match, and the anchor was corrected to the exact grid `teachers.js` emits. |
 | Focused verification | Build PASS 114 pages; smoke **PASS** 114 loads with G45-2 active; locale parity exact; no `%` in either consumer. |
 | Claude verdict | **ACCEPTED** — Kimi's delivered half is correct and well-reasoned, and its inline rationale is accurate. The batch is credited to Kimi at reduced weight (see the assignment ledger) because the lead authored the AR locale and the guard. |
@@ -218,10 +218,53 @@ and no consumer was regenerated** for this audit.
   being free, so re-running buys no signal and risks a false `EADDRINUSE` collision. Recorded as skip, not pass.
 - `npm run test:a11y` — **not re-run** (300-state matrix; previously recorded critical=0/serious=0 on the
   committed matrix per T062). I changed zero `app/` source bytes by hand → no new a11y exposure to re-measure.
-- `npm run screenshots` — **not re-run** (no visual change; matrix already accepted at 80-frame + 411-capture
-  coverage per T060/T062).
+- `npm run screenshots` — **not re-run** (no visual change; matrix accepted at the then-recorded 80-frame +
+  411-capture coverage per T060/T062). **Both figures were later found unsupported** — see the correction
+  block at the end of this file; the verified figures are **64** Teacher frames and **436** project captures.
 
 **Flagged upward to the lead:** T058-05 (dead import; a one-word cleanup they may batch with the next
 `teachers.js` touch) and T058-01/T058-02 (naming/semantics calls that belong to the locale/spec owners, not to a
 minimal review batch). No defect rises above LOW; none blocks the spec. **Verdict: audit complete, acceptance
 recommended — no corrections ordered.**
+
+---
+
+## LEAD RULING on the flagged T058 findings (2026-08-04 evidence-reconciliation correction)
+
+The T058 audit flagged three findings upward and no ruling was ever recorded. Ruled now, from live
+bytes on the pushed branch HEAD `7e30474`.
+
+### T058-05 — the dead `button` import in `pages/teachers.js` — **CONFIRMED, PRE-EXISTING, NOT FIXED**
+
+| Question | Evidence (command output, this run) |
+|---|---|
+| Is the import genuinely unused? | **Yes.** `grep -n "button(" src/js/pages/teachers.js` → **0 matches**. The 3 `button` hits in the file are the literal HTML string `<button …>` and one comment. `import { avatar, button } from '../components/ui.js';` sits at `teachers.js:14`. |
+| Did Spec 045 introduce it? | **No.** `git show 722be1c:…/teachers.js \| grep -c "button("` → **0** — already dead at the accepted Spec-044 baseline. |
+| When did it enter? | `git log -L14,14:…/teachers.js` → commit **`4be3e87`** ("teacher performance dashboard requirements and UI enhancements", Spec-036 lineage) changed `import { avatar }` → `import { avatar, button }`. |
+| Did Spec 045 touch that line? | **No.** `git diff 722be1c..HEAD -- …/teachers.js` is a **single hunk at lines 88-98** (the FR-031 `avgUtil` removal). Line 14 is untouched by this Spec. |
+
+**Ruling: flag, do not fix — and correct the claim instead.** Removing it would be a cross-spec
+servicing edit to a file whose Spec-045 diff is deliberately one hunk; the source/generated impact
+contract exists to keep exactly that kind of unrelated edit out. The finding is **real, LOW, and
+non-blocking**: zero runtime effect (there is no bundler; `build-html.mjs` imports the module
+server-side and emits HTML, so an unused named import emits no byte).
+
+**The T093 note claiming "no dead code" was wrong and is corrected.** The truthful claim is:
+*Spec 045 introduced no dead code; one pre-existing dead import (`button` in `teachers.js:14`, from
+`4be3e87`) survives in a file Spec 045 touched elsewhere, and is left in place deliberately.*
+Ownership: the next spec that services `teachers.js` imports.
+
+### T058-01 / T058-02 — **ACKNOWLEDGED, no action**
+
+Both are naming/semantics observations on pre-existing surfaces (student-key re-borrows on the
+teacher schedule page; `REPORT_KPIS` authored literals). Neither is a Spec-045 regression and neither
+has an evidenced requirement behind it. Recorded as LOW, owner = the locale/spec owners, no
+correction ordered.
+
+### Correction to the T058 gate-results block above
+
+That block cited "matrix already accepted at 80-frame + 411-capture coverage per T060/T062". Neither
+number survived verification in this correction run — see `screenshot-review-ledger.md` and
+`verification-evidence.md` for the byte-backed replacements. The block's substantive point (this
+read-only audit changed zero `app/` source bytes by hand, so it created no new visual or a11y
+exposure) is unaffected and stands.

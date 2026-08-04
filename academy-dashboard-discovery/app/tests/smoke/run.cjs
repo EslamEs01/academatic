@@ -2088,17 +2088,28 @@ const HYBRID_032 = { reports: ['rep-fbcat'], library: ['lib-cats'] };
               `${page}/${lang}: the one permitted control must be input[type=search][data-filter=search], got ${lib.searchInputs}`);
             ok(lib.reset === 1 && lib.noResults === 1 && lib.targets === 1,
               `${page}/${lang}: library discovery contract incomplete (reset=${lib.reset}, no-results=${lib.noResults}, target=${lib.targets}; each must be exactly 1)`);
-            /* the filter must really narrow, and clearing must really restore everything */
-            const before = await p.$$eval('#library-resources .pt-card', (els) => els.filter((e) => !e.hidden).length);
+            /* the filter must really narrow, and clearing must really restore everything.
+             * Visibility is measured from COMPUTED STYLE, not the `hidden` property: the shared
+             * filterBar/noResults mechanism toggles the empty state with CSS `display`, and never
+             * sets the `hidden` attribute. `!n.hidden` was therefore true whenever the node merely
+             * EXISTED, so the old `emptyShown` term could not fail — a partly vacuous assertion.
+             * Corrected 2026-08-04 during the Spec-045 evidence reconciliation; the shape of the
+             * guarantee is unchanged, it is simply now actually enforced. */
+            const vis = (els) => els.filter((e) => !e.hidden && getComputedStyle(e).display !== 'none').length;
+            const before = await p.$$eval('#library-resources .pt-card', vis);
+            const emptyHiddenAtStart = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && getComputedStyle(n).display === 'none'; });
             await p.fill('#page-body input[data-filter="search"]', 'zzzznomatch');
             await p.waitForTimeout(200);
-            const narrowed = await p.$$eval('#library-resources .pt-card', (els) => els.filter((e) => !e.hidden).length);
-            const emptyShown = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && !n.hidden; });
+            const narrowed = await p.$$eval('#library-resources .pt-card', vis);
+            const emptyShown = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && getComputedStyle(n).display !== 'none'; });
             await p.click('#page-body [data-filter-reset]');
             await p.waitForTimeout(200);
-            const restored = await p.$$eval('#library-resources .pt-card', (els) => els.filter((e) => !e.hidden).length);
+            const restored = await p.$$eval('#library-resources .pt-card', vis);
+            const emptyHiddenAgain = await p.evaluate(() => { const n = document.querySelector('#page-body [data-no-results]'); return !!n && getComputedStyle(n).display === 'none'; });
             ok(before >= 3 && narrowed === 0 && emptyShown,
               `${page}/${lang}: library search did not narrow to an accessible empty state (before=${before}, narrowed=${narrowed}, empty=${emptyShown})`);
+            ok(emptyHiddenAtStart && emptyHiddenAgain,
+              `${page}/${lang}: the no-results state must be HIDDEN while results exist (atStart=${emptyHiddenAtStart}, afterReset=${emptyHiddenAgain}) — an always-visible empty state is not a state`);
             ok(restored === before,
               `${page}/${lang}: clearing the library search did not restore every resource (${restored}/${before})`);
           } else {

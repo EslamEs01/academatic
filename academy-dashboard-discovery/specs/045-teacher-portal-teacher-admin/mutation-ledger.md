@@ -57,24 +57,27 @@ roster card's actual markup, and then produced causal RED in **both** localized 
 The same discipline rejected a malformed M45-02 attempt: it broke the isolated build, and the runner
 reported `RESULT=REJECTED` rather than counting a build break as RED.
 
-### Outstanding mutations — RESOLVED
+### HISTORICAL / SUPERSEDED — the mid-run "outstanding mutations" worklist
 
-The list below is superseded. All Spec-045 mutations have now been run to a causal RED (or REJECTED
-with cause). Proven: **M45-01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, and G45-2's
+> **NOT CURRENT STATE.** This subsection is retained only as a record of how the campaign was
+> sequenced. The authoritative statement is **"CANONICAL FINAL MUTATION STATE"** at the end of this
+> file: **17/17 proven, residue 0**. Nothing below is an open item. The "Guard status" column
+> preserves what was true *at the moment the row was written* and is not a current status.
+
+Proven at closure: **M45-01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, and G45-2's
 M45-17.** The final three (M45-10, M45-12, M45-14) landed in session 6; see "Session-6" below.
 Historical note: this table originally read "M45-05, 08, 09, 10, 11, 12, 14, 16 have NOT been run" —
-that was true at end-of-session-5 only and is corrected here.
+that was true at end-of-session-5 only.
 
-| Mutation | Guard it needs before it can produce a causal RED | Guard status |
-|---|---|---|
-| M45-05 self/admin identity | identity-separation assertion distinguishing `teacher.html` from `teacher-profile.html` | **G45-5 authored** |
-| M45-08 missing locale copy | AR/EN key-parity check promoted into the suite | **G45-3 authored** |
-| M45-09 removed 390px containment | numeric geometry assertion (`scrollWidth === clientWidth` at 390px) | **partly covered**: `cap.cjs` asserts it numerically per frame and exits 1; G45-4 additionally pins the 390px CSS block's presence |
-| M45-10 removed dark-theme rule | dark-theme rule-presence assertion over the **compiled** CSS | **G45-4 authored** |
-| M45-11 source/generated desync | rebuild-and-compare parity assertion | still outstanding |
-| M45-12 swallowed selector | fail-loud meta-guard scanning test source for silent catch / optional selectors | **G45-6 authored** |
-| M45-14 Spec-044 interaction regression | the inherited interaction driver wired into the Spec-045 gate set | still outstanding |
-| M45-16 unrelated drift | page-body drift comparison promoted from `impact.cjs` into the suite | still outstanding |
+| Mutation | Guard it needed before it could produce a causal RED | Guard status *when this row was written* | Final |
+|---|---|---|---|
+| M45-05 self/admin identity | identity-separation assertion distinguishing `teacher.html` from `teacher-profile.html` | G45-5 authored | **PROVEN RED** |
+| M45-08 missing locale copy | AR/EN key-parity check promoted into the suite | G45-3 authored | **PROVEN RED** |
+| M45-09 removed 390px containment | numeric geometry assertion (`scrollWidth === clientWidth` at 390px) | partly covered: `cap.cjs` asserts it numerically per frame and exits 1; G45-4 additionally pins the 390px CSS block's presence | **PROVEN RED** (G45-4) |
+| M45-11 source/generated desync | rebuild-and-compare parity assertion | not yet authored | **PROVEN RED** (`parity.cjs`) |
+| M45-12 swallowed selector | fail-loud meta-guard scanning test source for silent catch / optional selectors | G45-6 authored | **PROVEN RED** |
+| M45-14 Spec-044 interaction regression | the inherited interaction driver wired into the Spec-045 gate set | not yet authored | **PROVEN RED** (M44-14 + G45-7) |
+| M45-16 unrelated drift | page-body drift comparison promoted from `impact.cjs` into the suite | not yet authored | **PROVEN RED** (`impact.cjs` drift guard) |
 
 ### Guards authored in session 4
 
@@ -174,8 +177,8 @@ attempts are recorded as REJECTED rather than quietly replaced by the passing th
 
 | Mutation | Intent | Guard | Outcome |
 |---|---|---|---|
-| **M45-12** (attempt 1) | inject a bare ES2019 `catch {}` (optional catch-binding) into the G45-5 block of `run.cjs`, file kept loadable | G45-6 | **GREEN — third genuine guard hole found.** The meta-guard regex `/catch\s*\(\s*\w*\s*\)\s*\{\s*\}/` requires a parameter list, so a bare `catch {}` — the canonical swallowed selector — slipped through. Not a false RED (file parsed; the guard simply did not see it). |
-| **M45-12** (attempt 2) | same mutation, against the **strengthened** G45-6 | G45-6 | **RED (causal)** — `SMOKE FAILED: G45-6: guard G45-5 contains an empty catch — a swallowed failure (FR-061)`. `SMOKE_EXIT=1`, no browser crash. Copy removed; residue 0. |
+| **M45-12** (attempt 1) | inject a bare ES2019 `catch {}` (optional catch-binding) into the **G45-2** block of `run.cjs`, file kept loadable | G45-6 | **GREEN — third genuine guard hole found.** The meta-guard regex `/catch\s*\(\s*\w*\s*\)\s*\{\s*\}/` requires a parameter list, so a bare `catch {}` — the canonical swallowed selector — slipped through. Not a false RED (file parsed; the guard simply did not see it). |
+| **M45-12** (attempt 2) | same mutation, against the **strengthened** G45-6 | G45-6 | **RED (causal)** — `SMOKE FAILED: G45-6: guard G45-2 contains an empty catch — a swallowed failure (FR-061)`. `SMOKE_EXIT=1`, no browser crash. Copy removed; residue 0. |
 | **M45-10** | remove the explicit `[data-theme="dark"] .td-gates { … }` rule from `src/styles/app.css` (dark theme) | G45-4 | **RED (causal)** — `SMOKE FAILED: G45-4: the EXPLICIT [data-theme=dark] .td-gates rule is gone from the compiled stylesheet (FR-053)`. Confirms the session-4 anchored fix (`(^|[};,])\[data-theme=…dark…\]\s+\.td-gates\{`) catches the removal; no further repair needed. `SMOKE_EXIT=1`, no crash. Copy removed; residue 0. |
 | **M45-14** | break one inherited Spec-044 Teacher interaction — proven in BOTH shapes FR-061/FR-047 forbid | M44-14 + G45-7 | **RED (causal), two independent halves** — see below |
 
@@ -239,5 +242,78 @@ Every change to an existing protected assertion is recorded here with owner, the
 | Replacement | Six assertions: exact `bodyAnchors === 8`; `qtileLinks === 7`; `qtileSoon === 0`; every expected localized target present; no unexpected target emitted; and no `teacher-performance` target ever. |
 | Why this is a STRENGTHENING | The old pair constrained **one** destination and left the other seven entirely unconstrained (they were not anchors at all). The replacement pins the **exact localized target of all eight**, requires the quick-tile set to equal the implemented `ROLE_NAV` set exactly in both directions (missing **and** unexpected), and adds a zero-"soon" guard plus an admin-board-exposure guard that did not previously exist. A regression to the pre-045 rendering now fails **three independent assertions** instead of one. Zero assertions were deleted or relaxed. |
 | Falsifying mutations | **M45-04** (expose `teacher-performance` in portal navigation → the new no-performance-target assertion goes RED) and **M45-07** (break one required deep link/trigger → the exact-target assertions go RED). |
-| Status | Applied; RED→GREEN proof pending the M45 runs. |
+| Status | **Applied and PROVEN.** M45-04 and M45-07 both produced causal RED (see the tables above); the primary tree is GREEN. |
 
+### S45-2 — teacher internal-page zero-form-controls rule, narrowed to one page
+
+Recovered verbatim from the live bytes at `app/tests/smoke/run.cjs:2055-2106` during the 2026-08-04
+evidence-reconciliation correction. This entry was **missing** from the register while the
+supersession itself was correctly declared, argued and enforced in the test source — an FR-062
+documentation gap, not an undeclared supersession.
+
+| Field | Value |
+|---|---|
+| Owner | Claude Opus (lead) |
+| File | `app/tests/smoke/run.cjs` (teacher internal-page branch) |
+| Superseded (verbatim) | `ok(prt.formControls === 0, '… teacher internal page must contain zero form controls …');` |
+| Lineage | Spec 025 teacher internal pages |
+| Why it must change | FR-024/FR-025 require `teacher-library` to provide evidence-backed deterministic resource search (the reference platform's `search_form` with its `query` input). A search field **is** a form control, so the blanket rule and the requirement cannot both hold. The blanket rule existed to stop teacher internal pages carrying **data-entry** forms that imply persistence; a client-side filter over content already rendered on the page is not that and claims nothing. |
+| Replacement | The rule stays **byte-identical (`=== 0`) for the other seven** teacher internal pages. `teacher-library` alone is pinned far more tightly: exactly 1 form, exactly 1 input, 0 select, 0 textarea; that input must be `input[type="search"][data-filter="search"]`; plus exactly 1 reset control, exactly 1 `[data-no-results]` state and exactly 1 filter target. The guard then **drives the real control**: types a non-matching query, asserts visible cards go ≥3 → 0 **and** the empty state becomes visible, clicks reset, and asserts every resource returns. |
+| Why this is a STRENGTHENING | A data-entry field, a `<select>`, a `<textarea>`, or a second input on `teacher-library` now **fails**, where the old blanket rule would merely have counted them and failed with no diagnosis. Behaviour is proven, not assumed. Zero assertions were deleted or relaxed for the other seven pages. |
+| Falsifying mutations | **M45-12** (swallowed selector) and **M45-13** (false saved wording), both proven causal RED. |
+| Status | **Applied and PROVEN.** |
+
+### Additive guard register (no supersession required)
+
+| Guard | Protects | Falsified by | Status |
+|---|---|---|---|
+| **G45-1** | `teacherAbsent`/`studentAbsent` pair distinctness at the locale source | M45-06 | proven RED |
+| **G45-2** | FR-031 — no `avgUtil`, no `.util` read, no arithmetic mean, no `%`/`٪` in the directory summary | M45-17 | proven RED |
+| **G45-3** | AR/EN key parity for the `prt` and `trn` namespaces (FR-052) | M45-08 | proven RED |
+| **G45-4** | The Teacher layer's dark-theme and exact-390px rules surviving into the **compiled** stylesheet (FR-053/FR-054) | M45-10, M45-09 | proven RED (both) |
+| **G45-5** | `teacher-profile` (portal self) and `teacher` (admin detail) never becoming the same surface (FR-040) | M45-05 | proven RED |
+| **G45-6** | The Spec-045 guards themselves failing loudly (FR-061) | M45-12 | proven RED |
+| **G45-7** | Every Teacher `data-drawer="X"` opener has a matching `<template data-preview="X">` on the same page (FR-047). Measured on the clean tree: **38 openers, 0 dangling** | M45-14(b) | proven RED |
+| **G45-8** | Consolidated fail-loud Teacher-domain census (FR-060), 7 sections: §1 scope/consumer completeness · §2 dead links/routes · §3 pay-free · §4 rank/score/chart · §5 portal-vs-admin shell separation · §6 absence distinction · §7 locale parity + raw-key sweep. Each section refuses to pass vacuously. | the same mutations that falsify §1–§7 (M45-01/02/03/04/07/08/13/15) | proven RED |
+
+**G45-8 was undocumented until this correction.** It exists in the pushed bytes at
+`app/tests/smoke/run.cjs:3182+` and is the artifact that actually satisfies T063; the earlier
+ledgers recorded only G45-1…G45-7. Recorded here from live bytes.
+
+---
+
+## CANONICAL FINAL MUTATION STATE
+
+**All 16 contract mutations (M45-01…M45-16) plus the guard-driven M45-17 are proven causal RED and
+then GREEN on the primary tree. Total 17/17. Mutation residue 0** — re-verified on 2026-08-04:
+`ls -d /tmp/sp045-mut-*` returns nothing.
+
+| # | Mutation | Owning guard | Outcome | Recorded in |
+|---|---|---|---|---|
+| 1 | M45-01 missing scope | G45-8 §1 / audit | RED (causal) | session 3 |
+| 2 | M45-02 missing localized consumer | G45-8 §1 / audit | RED (causal); one attempt REJECTED as a build break | session 3 |
+| 3 | M45-03 visible pay text | G45-8 §3 / audit | RED (causal) | early |
+| 4 | M45-04 portal performance exposure | G45-8 §5 / S45-1 | RED (causal) | early |
+| 5 | M45-05 self/admin identity | G45-5 | RED (causal); attempt 1 correctly ABORTED as a no-op edit | session 5 |
+| 6 | M45-06 absence conflation | G45-1 | GREEN → **guard hole found** → RED after G45-1 | early |
+| 7 | M45-07 broken deep link | G45-8 §2 / audit | RED (causal) | early |
+| 8 | M45-08 missing locale copy | G45-3 | RED (causal) | session 4 |
+| 9 | M45-09 removed 390px containment | G45-4 | RED (causal); attempts 1–2 REJECTED as `EADDRINUSE` | session 5 |
+| 10 | M45-10 removed dark-theme rule | G45-4 | GREEN → **second guard hole** → RED after anchoring | sessions 4/6 |
+| 11 | M45-11 source/generated desync | `parity.cjs` | RED (causal), required the new post-build mutation mode | session 5 |
+| 12 | M45-12 swallowed selector | G45-6 | GREEN → **third guard hole** → RED after the regex fix | session 6 |
+| 13 | M45-13 false saved wording | audit §6 truthfulness sweep | RED (causal) | session 3 |
+| 14 | M45-14 Spec-044 interaction regression | M44-14 + G45-7 | GREEN → **fourth gap** → RED in **both** halves | sessions 5/6 |
+| 15 | M45-15 private role field | audit privacy sweep | RED (causal); first attempt redesigned (never rendered) | session 3 |
+| 16 | M45-16 unrelated drift | `impact.cjs` drift guard | RED (causal); attempt 1 REJECTED as a build break | session 5 |
+| 17 | M45-17 FR-031 regression | G45-2 | RED (causal), three independent failures | session 3 |
+
+**Four genuine guard holes/gaps were found by this campaign and closed** (M45-06 → G45-1;
+M45-10 → anchored rule; M45-12 → optional-catch-binding regex; M45-14 → G45-7). Every REJECTED
+attempt is recorded above rather than replaced by its passing successor.
+
+**Correction applied 2026-08-04:** the session-6 M45-12 rows previously named the mutated block and
+the RED text as `G45-5`. The retained runner log (`m12.log`) reads
+`G45-6: guard G45-2 contains an empty catch — a swallowed failure (FR-061)`; `tasks.md` T085 already
+said `G45-2`. Corrected here to match the actual output. The correction changes the guard *named in
+the message*, not the outcome: M45-12 remains a proven causal RED via G45-6.

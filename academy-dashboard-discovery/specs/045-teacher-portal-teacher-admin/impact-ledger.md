@@ -7,36 +7,61 @@
 - Teacher source page modules: 11.
 - Expected added/removed pages: 0/0.
 
-## Accounting after session 4 — all eleven Teacher scopes implemented
+## FINAL accounting — re-measured 2026-08-04 on the pushed tree
 
-Measured by `impact.cjs` against the committed feature baseline `32e51e5`.
+**Baselines are distinct and are never interchanged.** Impact is measured **against** the
+implementation-run baseline `32e51e5` (the artifact-only commit, app-byte-equivalent to `722be1c`).
+It is measured **on** the current pushed branch HEAD `7e30474`. Both baselines were run and return
+identical numbers, which is itself the proof that `32e51e5` changed no application byte.
 
-| Count | Value |
-|---|---|
-| HTML files | **115** (baseline 115) |
-| Pages added / removed | **0 / 0** |
-| Page bodies changed | **26** |
-| Page bodies unchanged | **88** |
+| Count | vs `32e51e5` | vs `722be1c` |
+|---|---|---|
+| HTML files | **115** (baseline 115) | **115** |
+| Pages added / removed | **0 / 0** | **0 / 0** |
+| Page bodies changed | **26** | **26** |
+| Page bodies unchanged | **88** | **88** |
+| Declared collateral matched | **4 / 4** | **4 / 4** |
+| **UNDECLARED drift** | **0** | **0** |
+| Parse errors | 0 | 0 |
+
+`impact.cjs` exit 0 on both runs.
 
 **Teacher-scope bodies changed: 22 — all eleven scopes × AR/EN**, i.e. the complete Spec-045 surface:
 `teacher-portal` · `teacher-schedule` · `teacher-students` · `teacher-outcomes` · `teacher-tasks` ·
 `teacher-reports` · `teacher-library` · `teacher-profile` · `teachers` · `teacher` · `teacher-performance`.
 
-**Non-Teacher bodies changed: 4** — `student-portal(.en)` and `family-portal(.en)`, still the single
-shared-key `prt.band.quickHint` correction, one line each. No further non-Teacher body drifted as the
-remaining five pages landed. **Unrelated page-body drift remains 0.**
+**Non-Teacher bodies changed: 4** — `student-portal(.en)` and `family-portal(.en)`, the single
+shared-key `prt.band.quickHint` correction, one line each. **Unrelated page-body drift: 0.**
 
-### Changed authored files after session 4 (14)
+### Changed file footprint — measured, not estimated
 
-`styles/app.css` · `pages/teacher-portal.js` · `pages/teacher-schedule.js` · `pages/teacher-students.js` ·
-`pages/teacher-outcomes.js` · `pages/teacher-tasks.js` · `pages/teacher-reports.js` ·
-`pages/teacher-library.js` · `pages/teacher-profile.js` · `pages/teachers.js` ·
-`components/teacher-actions.js` · `pages/teacher-performance.js` · `locales/ar.prt.js` +
-`locales/en.prt.js` + `locales/ar.trn.js` + `locales/en.trn.js` · `tests/smoke/run.cjs`.
+`git diff --name-only 722be1c..HEAD`:
+
+| Group | Count | Files |
+|---|---:|---|
+| Authored source | **16** | `styles/app.css` · `components/teacher-actions.js` · `pages/{teacher-portal, teacher-schedule, teacher-students, teacher-outcomes, teacher-tasks, teacher-reports, teacher-library, teacher-profile, teachers, teacher-performance}.js` (10) · `locales/{ar,en}.{prt,trn}.js` (4) |
+| Tests | **2** | `tests/smoke/run.cjs` · `tests/screenshots/capture.cjs` |
+| **Authored total** | **18** | |
+| Generated | **42** | 26 localized HTML + 16 copied assets (`public/assets/app.css` + 11 copied JS modules + 4 copied locales) |
+
+**Correction (2026-08-04):** the previous heading read "Changed authored files after session 4 (14)"
+while listing more than 14 entries and omitting `tests/screenshots/capture.cjs`. The measured figure
+is **18** (16 source + 2 tests). Note `pages/teacher.js` is **not** in the diff — the FR-036 admin
+action work lives in `components/teacher-actions.js`, which is why the admin detail page's body
+changes without its page module changing.
+
+**Generated-from-source proof:** the 26 changed HTML files equal exactly the 26 changed page bodies,
+and `parity.cjs` re-runs the canonical generator and confirms all 22 localized Teacher consumers
+reproduce **byte-identically**. A full rebuild leaves `git status --porcelain` at **0 lines**, so no
+generated file was hand-edited.
 
 ---
 
-## Earlier accounting (session 2/3 — superseded by the table above)
+# HISTORICAL / SUPERSEDED — NOT CURRENT STATE
+
+> Retained for provenance only. The current accounting is the section above.
+
+## Superseded: earlier accounting (sessions 2/3)
 
 Measured by `impact.cjs`, which extracts each page's `#page-body` from the working tree and from the
 **committed baseline read through `git show`**, and fails loud on a missing or duplicate body or a
